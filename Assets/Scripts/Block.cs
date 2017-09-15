@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, [your name here]
+﻿// Author(s): Paul Calande, Yixiang Xu(Eric)
 
 using System.Collections;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ public class Block
 
     Block(int newWidth, int newHeight)
     {
-
+        tiles = new Tile[newWidth, newHeight];
     }
 
     public int GetWidth()
@@ -34,6 +34,6 @@ public class Block
 
     public void SetTile(int x, int y, Tile newTile)
     {
-
+        tiles[x, y] = newTile;
     }
 }
