@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, [your name here]
+﻿// Author(s): Paul Calande, Yixiang Xu
 
 using System.Collections;
 using System.Collections.Generic;
@@ -21,16 +21,23 @@ public class GridBlock
         block = myBlock;
     }
 
+    //Return the x index of the gridblock
     public int GetX()
     {
         return x;
     }
 
+    //Return the y index of the gridblock
     public int GetY()
     {
         return y;
     }
 
+    /*Enable gridblocks to move according to their directions.
+     Gridblock moves if it can fit into the next position.The 
+     moving process is not physical. Instead, it duplicates
+     all the tiles to the next position and erases the original
+     ones.*/
     public void Move(Enums.Direction direction)
     {
         int tempX = x;
