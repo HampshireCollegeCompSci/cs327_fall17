@@ -10,7 +10,7 @@ public class GridBlock
 
     int y;
 
-    GridBlock(int xStart, int yStart, Block myBlock)
+    public GridBlock(int xStart, int yStart, Block myBlock)
     {
 
     }
