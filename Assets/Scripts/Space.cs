@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class Space : MonoBehaviour
 {
+    public void Init(int mx, int my, Grid mgrid)
+    {
+
+    }
+
     public void TryPlaceBlock(Block block)
     {
 
