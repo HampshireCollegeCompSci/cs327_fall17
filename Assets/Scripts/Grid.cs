@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, [your name here]
+﻿// Author(s): Paul Calande, Yifeng Shi
 
 using System.Collections;
 using System.Collections.Generic;
@@ -7,10 +7,17 @@ using UnityEngine;
 public class Grid : MonoBehaviour
 {
     int width;
-
     int height;
 
     Tile[,] tiles;
+    Space[,] spaces;
+
+    GameObject prefabTile;
+    GameObject prefabSpace;
+
+    BlockSpawner blockSpawner;
+
+    List<GridBlock> girdBlocks;
 
     private void Start()
     {
