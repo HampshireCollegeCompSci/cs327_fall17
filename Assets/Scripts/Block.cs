@@ -12,7 +12,7 @@ public class Block
 
     Tile[,] tiles;
 
-    Block(int newWidth, int newHeight)
+    public Block(int newWidth, int newHeight)
     {
         tiles = new Tile[newWidth, newHeight];
     }
