@@ -47,9 +47,6 @@ public class GridBlock
         switch (direction)
         {
             case Enums.Direction.Right:
-                if (x + block.GetWidth() + 1 > grid.GetWidth())
-                    movable = false;
-
                 if (movable)
                 {
                     for (int i = 0; i < block.GetHeight(); i++)
@@ -58,13 +55,16 @@ public class GridBlock
                         for (int j = 0; j < block.GetWidth(); j++)
                         {
                             if (blockTiles[j, i].GetIsOccupied())
+                            {
                                 maxX = j;
-                        }
-
-                        if (blockTiles[maxX + 1, i].GetIsOccupied())
-                        {
-                            movable = false;
-                            break;
+                                if (x + maxX + 1 > grid.GetWidth() || (maxX + 1 < block.GetWidth() &&
+                                !blockTiles[maxX + 1, i].GetIsOccupied() && gridTiles[x + maxX + 1, i].GetIsOccupied())
+                                || (maxX + 1 == block.GetWidth() && gridTiles[x + maxX + 1, i].GetIsOccupied()))
+                                {
+                                    movable = false;
+                                    break;
+                                }
+                            }
                         }
 
                         if (maxX != -1)
@@ -91,9 +91,6 @@ public class GridBlock
 
                 break;
             case Enums.Direction.Down:
-                if (y + block.GetHeight() + 1 > grid.GetHeight())
-                    movable = false;
-
                 if (movable)
                 {
                     for (int i = 0; i < block.GetWidth(); i++)
@@ -101,14 +98,17 @@ public class GridBlock
                         int maxY = -1;
                         for (int j = 0; j < block.GetHeight(); j++)
                         {
-                            if (blockTiles[i, j].GetIsOccupied())
+                            if (blockTiles[j, i].GetIsOccupied())
+                            {
                                 maxY = j;
-                        }
-
-                        if (blockTiles[i, maxY + 1].GetIsOccupied())
-                        {
-                            movable = false;
-                            break;
+                                if (y + maxY + 1 > grid.GetHeight() || (maxY + 1 < block.GetHeight() &&
+                                !blockTiles[j, maxY + 1].GetIsOccupied() && gridTiles[j, y + maxY + 1].GetIsOccupied())
+                                || (maxY + 1 == block.GetHeight() && gridTiles[j, y + maxY + 1].GetIsOccupied()))
+                                {
+                                    movable = false;
+                                    break;
+                                }
+                            }
                         }
 
                         if (maxY != -1)
@@ -135,9 +135,6 @@ public class GridBlock
 
                 break;
             case Enums.Direction.Left:
-                if (x - 1 < 0)
-                    movable = false;
-
                 if (movable)
                 {
                     for (int i = 0; i < block.GetHeight(); i++)
@@ -146,13 +143,16 @@ public class GridBlock
                         for (int j = block.GetWidth() - 1; j >= 0; j--)
                         {
                             if (blockTiles[j, i].GetIsOccupied())
+                            {
                                 minX = j;
-                        }
-
-                        if (blockTiles[minX - 1, i].GetIsOccupied())
-                        {
-                            movable = false;
-                            break;
+                                if (x + minX - 1 < 0 || (minX - 1 >= 0 &&
+                                !blockTiles[minX - 1, i].GetIsOccupied() && gridTiles[x + minX - 1, i].GetIsOccupied())
+                                || (minX - 1 == -1 && gridTiles[x + minX - 1, i].GetIsOccupied()))
+                                {
+                                    movable = false;
+                                    break;
+                                }
+                            }
                         }
 
                         if (minX != -1)
@@ -180,9 +180,6 @@ public class GridBlock
                 break;
 
             case Enums.Direction.Up:
-                if (y - 1 < 0)
-                    movable = false;
-
                 if (movable)
                 {
                     for (int i = 0; i < block.GetWidth(); i++)
@@ -191,13 +188,17 @@ public class GridBlock
                         for (int j = block.GetHeight() - 1; j >= 0; j--)
                         {
                             if (blockTiles[i, j].GetIsOccupied())
+                            {
                                 minY = j;
-                        }
-
-                        if (blockTiles[i, minY - 1].GetIsOccupied())
-                        {
-                            movable = false;
-                            break;
+                                if (y + minY - 1 < 0 || (minY - 1 >= 0 &&
+                                !blockTiles[j, minY - 1].GetIsOccupied() && gridTiles[j, y + minY - 1].GetIsOccupied())
+                                || (minY - 1 == -1 && gridTiles[j, y + minY - 1].GetIsOccupied()))
+                                {
+                                    movable = false;
+                                    break;
+                                }
+                            }
+                                
                         }
 
                         if (minY != -1)
@@ -223,7 +224,7 @@ public class GridBlock
                 }
 
                 break;
-            
         }
     }
 }
+ 
