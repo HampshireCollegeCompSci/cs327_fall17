@@ -37,7 +37,7 @@ public class Tile : MonoBehaviour
 
     }
 
-    public void SetType(Type newType)
+    public void SetType(TileType newType)
     {
 
     }
