@@ -10,7 +10,9 @@ public class Tile : MonoBehaviour
 
     public enum Type
     {
-
+        Regular,
+        Vacant,
+        Vestige
     }
 
     Type type;
