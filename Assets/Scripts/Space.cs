@@ -11,6 +11,11 @@ public class Space : MonoBehaviour
 
     }
 
+    public bool CanBlockFit(Block block)
+    {
+        return false; // Replace this with an actual implementation!
+    }
+
     public void TryPlaceBlock(Block block)
     {
 
