@@ -20,6 +20,12 @@ public class Grid : MonoBehaviour
 
     List<GridBlock> gridBlocks;
 
+    //Four lists storing lists of four direction of L-shapes respectively.
+    List<LShape> topLeft;
+    List<LShape> topRight;
+    List<LShape> bottomLeft;
+    List<LShape> bottomRight;
+
     private void Start()
     {
         //Instantiate tiles array
@@ -99,7 +105,36 @@ public class Grid : MonoBehaviour
 
     public void CheckForMatches()
     {
+        /*
+         * To best minimize the amount of calculation, we will firstly
+         * check if there are L-Shaped formations (all squares consist of
+         * four L-shaped formations with different directions). At each time
+         * player inserting a block, we check the L-shaped formations consist
+         * of new inserted regualar tiles and put these formations (if there is)
+         * into corresponding lists. Then we could just loop either one of the
+         * four list and check if specific L-shapes exist or not in other 3 lists
+         * so we could know if there's potential squares. After this step we 
+         * check 4 edges of the potential squares, remove them if all
+         * 4 edges are filled, do nothing otherwise.
+         * 
+         * Note: not yet considering vestiges.
+         */
+
+        //The LShapeCheck() is intended to be called only after insertion,
+        //just put here for now to inidicate workflow
+        LShapeCheck();
+
+        //Do potential squares check.
+        PotentialSquareCheck();
+
+        //Do edges check for potential squares
+        EdgeCheck(new Tile(), new Tile(), new Tile(), new Tile());
+
+        //Do removal if there's qualified square
+        SquareRemoval();
+
         //Clear columns:
+        /*
         for (int c = 0; c < width; c++)
         {
             bool isFilled = true;
@@ -134,7 +169,55 @@ public class Grid : MonoBehaviour
 				}
 			}
 		}
+        */
     }
+
+    private class LShape
+    {
+        //Simple Data structure used to facilitize CheckForMatches().
+        Tile center;     //The tile at the center of L.
+        Tile[] wings;    //The two non-center tiles of L.
+
+        public LShape(Tile ctr, Tile wing1, Tile wing2)
+        {
+            wings = new Tile[2];
+            center = ctr;
+            wings[0] = wing1;
+            wings[1] = wing2;
+        }
+
+        public Tile GetCenter()
+        {
+            return center;
+        }
+
+        public Tile[] GetWings()
+        {
+            return wings;
+        }
+    }
+
+    private void LShapeCheck()
+    {
+        //Check L-shaped formations
+
+    }
+
+    private Tile[] PotentialSquareCheck()
+    {
+        return new Tile[4];
+    }
+
+    private void EdgeCheck(Tile tl, Tile tr, Tile bl, Tile br)
+    {
+        //Check if 4 edges of the potential square are filled.
+    }
+
+    private void SquareRemoval()
+    {
+
+    }
+
 
     public void MoveAllBlocks(Enums.Direction direction)
     {   	
