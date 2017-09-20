@@ -6,8 +6,15 @@ using UnityEngine;
 
 public class DraggableBlock : MonoBehaviour
 {
+    Block block;
+
     public void SetBlock(Block copiedBlock)
     {
 
+    }
+
+    public Block GetBlock()
+    {
+        return block;
     }
 }
