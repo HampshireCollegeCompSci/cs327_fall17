@@ -219,9 +219,9 @@ public class GridBlock
     //Runs the Move method with the given direction over and over until Move returns false
     public void MoveRepeatedly(Enums.Direction direction)
     {
-        while (Move(direction)){
+        while (Move(direction))
+        {
 
         }
     }
 }
- 
