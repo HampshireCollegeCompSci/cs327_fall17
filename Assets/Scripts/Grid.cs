@@ -32,8 +32,10 @@ public class Grid : MonoBehaviour
     {
         //Instantiate tiles array
         tiles = new Tile[width, height];
-        for (int c = 0; c < width; c++){
-            for (int r = 0; r < height; r++){
+        for (int c = 0; c < width; c++)
+        {
+            for (int r = 0; r < height; r++)
+            {
                 //Need to be changed after knowing specific positions
                 GameObject currentPrefabTile = Instantiate(prefabTile);
                 tiles[r, c] = currentPrefabTile.GetComponent<Tile>();
@@ -42,17 +44,17 @@ public class Grid : MonoBehaviour
 
         //Instantiate spaces array
         spaces = new Space[width, height];
-		for (int c = 0; c < width; c++)
-		{
-			for (int r = 0; r < height; r++)
-			{
-				//Need to be changed after knowing specific positions
-				GameObject currentPrefabSpace = Instantiate(prefabSpace);
+        for (int c = 0; c < width; c++)
+        {
+            for (int r = 0; r < height; r++)
+            {
+                //Need to be changed after knowing specific positions
+                GameObject currentPrefabSpace = Instantiate(prefabSpace);
                 spaces[r, c] = currentPrefabSpace.GetComponent<Space>();
                 //Need to be changed after knowing specific positions.
                 spaces[r, c].Init(0, 0, this);
-			}
-		}
+            }
+        }
 
         //Instantiate BlockSpawner
         blockSpawner.Init(spaces);
@@ -80,8 +82,10 @@ public class Grid : MonoBehaviour
     public bool CanBlockFit(int x, int y, Block block)
     {
         //Assume each tile is 1x1 size.
-        for (int c = 0; c < block.GetWidth(); c++){
-            for (int r = 0; r < block.GetHeight(); r++){
+        for (int c = 0; c < block.GetWidth(); c++)
+        {
+            for (int r = 0; r < block.GetHeight(); r++)
+            {
                 if (tiles[y + r, x + c].GetIsOccupied() &&
                     block.GetTiles()[r, c].GetIsOccupied())
                     return false;
@@ -114,24 +118,26 @@ public class Grid : MonoBehaviour
     public void WriteBlock(int x, int y, Block block)
     {
         //List<Coordinate> coords = new List<Coordinate>();
-		for (int c = 0; c < block.GetWidth(); c++)
-		{
-			for (int r = 0; r < block.GetHeight(); r++)
-			{
-                if (block.GetTiles()[r, c].GetIsOccupied()){
+        for (int c = 0; c < block.GetWidth(); c++)
+        {
+            for (int r = 0; r < block.GetHeight(); r++)
+            {
+                if (block.GetTiles()[r, c].GetIsOccupied())
+                {
                     tiles[y + r, x + c].Fill();
                     //Note x is col and y is row
                     //coords.Add(new Coordinate(x + c, y + r));
                 }
-			}
-		}
+            }
+        }
         gridBlocks.Add(new GridBlock(x, y, block));
 
         //call LShapeCheck after each insertion
         //LShapeCheck(coords);
     }
 
-    public void CheckForMatches(){
+    public void CheckForMatches()
+    {
 
         //List keeping all tiles that are going to be removed.
         //We do remove after calculation because it's possible to remove
@@ -145,7 +151,7 @@ public class Grid : MonoBehaviour
             for (int c = 0; c < width; c++)
             {
                 //Only if the tile is regular black tile
-                if(tiles[r, c].GetTileType() == Tile.TileType.Regular)
+                if (tiles[r, c].GetTileType() == Tile.TileType.Regular)
                 {
                     //Check for squares from length 3 to 8
                     for (int length = 3; length <= 8; length++)
@@ -233,7 +239,7 @@ public class Grid : MonoBehaviour
          */
 
 
-        //Clear columns:
+    //Clear columns:
     /*
         for (int c = 0; c < width; c++)
         {
@@ -251,7 +257,6 @@ public class Grid : MonoBehaviour
 				}
             }
         }
-
 		//Clear rows:
 		for (int r = 0; r < height; r++)
 		{
@@ -269,43 +274,34 @@ public class Grid : MonoBehaviour
 				}
 			}
 		}
-
     }
-
-
     private class LShape
     {
         //Simple Data structure used to facilitize CheckForMatches().
         Tile center;     //The tile at the center of L (the elbow).
         int direction;   // Indicate direction. 1 = topLeft, 2 = topRight, 3 = bottomLeft, 4 = bottomRight
         Coordinate coordinate;
-
         public LShape(Tile ctr, int dir, Coordinate cod)
         {
             center = ctr;
             direction = dir;
             coordinate = cod;
         }
-
         public Tile GetCenter()
         {
             return center;
         }
-
         public int GetDirection()
         {
             return direction;
         }
-
         public Coordinate GetCoordinate()
         {
             return coordinate;
         }
     }
-
     private void LShapeCheck(List<Coordinate> inserted)
     {
-
         //Check new L-shaped formations consist of
         //newly inserted tiles
         foreach(Coordinate c in inserted)
@@ -330,22 +326,17 @@ public class Grid : MonoBehaviour
                 && tiles[c.GetY(), c.GetX() - 1].GetTileType() == Tile.TileType.Regular)
                     topLeft.Add(new LShape(tiles[c.GetY(), c.GetX()], 4, c));
         }
-
     }
-
     private void PotentialSquareCheck()
     {
         //Check if potential squares (with 4 direction L-shapes) exist.
-
         //Start from the topLeft list
         foreach(LShape i in topLeft)
         {
             //Record possible square with specific length for current LShape
             List<int> potentialSquareLength = new List<int>();
-
             int ix = i.GetCoordinate().GetX();
             int iy = i.GetCoordinate().GetY();
-
             //Process diagonal LShapes to get the first version of potential lengths
             foreach (LShape j in bottomRight)
             {
@@ -356,7 +347,6 @@ public class Grid : MonoBehaviour
                     potentialSquareLength.Add(j.GetCoordinate().GetX() - ix);
                 }
             }
-
             //Process topRight and bottomLeft to cut unqualified length
             int index = 0;
             while(true)
@@ -378,12 +368,10 @@ public class Grid : MonoBehaviour
                     index++;
                 }
             }
-
             //Do edge checking for each topLeft LShapes
             EdgeCheck(i, potentialSquareLength);
         }
     }
-
     private void EdgeCheck(LShape tl, List<int> lens)
     {
         //Check if 4 edges of the potential square are filled.
@@ -403,7 +391,6 @@ public class Grid : MonoBehaviour
             SingleEdgeCheck(tl.GetCoordinate().GetY() + 2, len - 1, len, true);
         }
     }
-
     private bool SingleEdgeCheck(int start, int end, int other, bool direction)
     {
         //other: when horizontal, other = y value; otherwhise x value.
@@ -421,26 +408,23 @@ public class Grid : MonoBehaviour
                 //When vertical:
                 if (tiles[i, other].GetTileType() != Tile.TileType.Regular)
                     return false;
-
             }
         }
         return true;
     }
-
     private void MarkToRemove()
     {
         
     }
-
     private void SquareRemoval()
     {
-
     }
     */
 
     public void MoveAllBlocks(Enums.Direction direction)
-    {   	
-        switch(direction){
+    {
+        switch (direction)
+        {
             case Enums.Direction.Right:
                 int[] pushRightStatus = new int[height];
                 //Loop column from last to 2nd. 1st column does not need to
@@ -452,114 +436,150 @@ public class Grid : MonoBehaviour
                     {
                         //Assign the state of tiles in this column.
                         //1 = occupied, 0 = empty
-                        if(tiles[r, c].GetIsOccupied())
+                        if (tiles[r, c].GetIsOccupied())
                             pushRightStatus[r] = 1;
                         else
                             pushRightStatus[r] = 0;
                     }
-					//Move c-1 th column to cth column.
-					//After this step the c-1 th column is up to date
-					//and is ready for the next loop
-					for (int r = 0; r < height; r++)
-					{
-                        if(tiles[r, c-1].GetIsOccupied() && pushRightStatus[r] == 0)
+                    //Move c-1 th column to cth column.
+                    //After this step the c-1 th column is up to date
+                    //and is ready for the next loop
+                    for (int r = 0; r < height; r++)
+                    {
+                        if (tiles[r, c - 1].GetIsOccupied() && pushRightStatus[r] == 0)
                         {
                             tiles[r, c].Fill();
                             tiles[r, c - 1].Clear();
                         }
-					}
+                    }
                 }
                 break;
             case Enums.Direction.Down:
                 int[] pushDownStatus = new int[width];
-				//Loop row from last to 2nd. 1st row does not need to
-				//be checked because no further row with be moved into that
-				//row
-				for (int r = height - 1; r > 0; r--)
-				{
+                //Loop row from last to 2nd. 1st row does not need to
+                //be checked because no further row with be moved into that
+                //row
+                for (int r = height - 1; r > 0; r--)
+                {
                     for (int c = 0; c < width; c++)
-					{
-						//Assign the state of tiles in this column.
-						//1 = occupied, 0 = empty
-						if (tiles[r, c].GetIsOccupied())
-							pushDownStatus[c] = 1;
-						else
-							pushDownStatus[c] = 0;
-					}
-					//Move r-1 th row to rth row.
-					//After this step the r-1 th row is up to date
-					//and is ready for the next loop
-					for (int c = 0; c < width; c++)
-					{
-						if (tiles[r - 1, c].GetIsOccupied() && pushDownStatus[c] == 0)
-						{
-							tiles[r, c].Fill();
-							tiles[r - 1, c].Clear();
-						}
-					}
-				}
+                    {
+                        //Assign the state of tiles in this column.
+                        //1 = occupied, 0 = empty
+                        if (tiles[r, c].GetIsOccupied())
+                            pushDownStatus[c] = 1;
+                        else
+                            pushDownStatus[c] = 0;
+                    }
+                    //Move r-1 th row to rth row.
+                    //After this step the r-1 th row is up to date
+                    //and is ready for the next loop
+                    for (int c = 0; c < width; c++)
+                    {
+                        if (tiles[r - 1, c].GetIsOccupied() && pushDownStatus[c] == 0)
+                        {
+                            tiles[r, c].Fill();
+                            tiles[r - 1, c].Clear();
+                        }
+                    }
+                }
                 break;
             case Enums.Direction.Left:
-				int[] pushLeftStatus = new int[height];
-				//Loop column from 1st to width-1 th. last column does not need to
-				//be checked because no further column with be moved into that
-				//column
-				for (int c = 0; c < width - 1; c++)
-				{
-					for (int r = 0; r < height; r++)
-					{
-						//Assign the state of tiles in this column.
-						//1 = occupied, 0 = empty
-						if (tiles[r, c].GetIsOccupied())
-							pushLeftStatus[r] = 1;
-						else
-							pushLeftStatus[r] = 0;
-					}
-					//Move c+1 th column to cth column.
-					//After this step the c+1 th column is up to date
-					//and is ready for the next loop
-					for (int r = 0; r < height; r++)
-					{
-						if (tiles[r, c + 1].GetIsOccupied() && pushLeftStatus[r] == 0)
-						{
-							tiles[r, c].Fill();
-							tiles[r, c + 1].Clear();
-						}
-					}
-				}
+                int[] pushLeftStatus = new int[height];
+                //Loop column from 1st to width-1 th. last column does not need to
+                //be checked because no further column with be moved into that
+                //column
+                for (int c = 0; c < width - 1; c++)
+                {
+                    for (int r = 0; r < height; r++)
+                    {
+                        //Assign the state of tiles in this column.
+                        //1 = occupied, 0 = empty
+                        if (tiles[r, c].GetIsOccupied())
+                            pushLeftStatus[r] = 1;
+                        else
+                            pushLeftStatus[r] = 0;
+                    }
+                    //Move c+1 th column to cth column.
+                    //After this step the c+1 th column is up to date
+                    //and is ready for the next loop
+                    for (int r = 0; r < height; r++)
+                    {
+                        if (tiles[r, c + 1].GetIsOccupied() && pushLeftStatus[r] == 0)
+                        {
+                            tiles[r, c].Fill();
+                            tiles[r, c + 1].Clear();
+                        }
+                    }
+                }
                 break;
             case Enums.Direction.Up:
-				int[] pushUpStatus = new int[width];
+                int[] pushUpStatus = new int[width];
                 //Loop row from 1st to height-1 th. last row does not need to
                 //be checked because no further row with be moved into that
                 //row
                 for (int r = 0; r < height - 1; r++)
-				{
-					for (int c = 0; c < width; c++)
-					{
-						//Assign the state of tiles in this column.
-						//1 = occupied, 0 = empty
-						if (tiles[r, c].GetIsOccupied())
-							pushUpStatus[c] = 1;
-						else
-							pushUpStatus[c] = 0;
-					}
-					//Move r+1 th row to rth row.
-					//After this step the r+1 th row is up to date
-					//and is ready for the next loop
-					for (int c = 0; c < width; c++)
-					{
-						if (tiles[r + 1, c].GetIsOccupied() && pushUpStatus[c] == 0)
-						{
-							tiles[r, c].Fill();
-							tiles[r + 1, c].Clear();
-						}
-					}
-				}
+                {
+                    for (int c = 0; c < width; c++)
+                    {
+                        //Assign the state of tiles in this column.
+                        //1 = occupied, 0 = empty
+                        if (tiles[r, c].GetIsOccupied())
+                            pushUpStatus[c] = 1;
+                        else
+                            pushUpStatus[c] = 0;
+                    }
+                    //Move r+1 th row to rth row.
+                    //After this step the r+1 th row is up to date
+                    //and is ready for the next loop
+                    for (int c = 0; c < width; c++)
+                    {
+                        if (tiles[r + 1, c].GetIsOccupied() && pushUpStatus[c] == 0)
+                        {
+                            tiles[r, c].Fill();
+                            tiles[r + 1, c].Clear();
+                        }
+                    }
+                }
                 break;
         }
 
         CheckForMatches();
         blockSpawner.SpawnRandomBlock();
+    }
+
+    //Instantiates all Spaces on the Grid
+    void InstantiateSpaces()
+    {
+        spaces = new Dictionary<Vector2, List<Space>>();
+
+        InstantiateCertainSpaces(1, 1);
+        InstantiateCertainSpaces(1, 2);
+        InstantiateCertainSpaces(2, 1);
+        InstantiateCertainSpaces(2, 2);
+    }
+
+    //Instantiates spaces with certain dimension
+    void InstantiateCertainSpaces(int w, int h)
+    {
+        List<Space> ts = new List<Space>();
+
+        for (int i = 0; i < width; i += w)
+        {
+            for (int j = 0; j < height; j += h)
+            {
+                Space s = new Space();
+                s.Init(i, j, w, h, this);
+                ts.Add(s);
+            }
+        }
+
+        spaces.Add(new Vector2(w, h), ts);
+    }
+
+
+    // Returns a List of all of the Spaces of a certain width and height by fetching from the “spaces” Dictionary
+    public List<Space> GetSpaces(int width, int height)
+    {
+        return spaces[new Vector2(width, height)];
     }
 }
