@@ -8,12 +8,14 @@ public class Tile : MonoBehaviour
 {
     bool isOccupied = false;
 
-    public enum Type
+    public enum TileType
     {
-
+        Regular,
+        Vacant,
+        Vestige
     }
 
-    Type type;
+    TileType type;
 
     public bool GetIsOccupied()
     {
@@ -35,8 +37,13 @@ public class Tile : MonoBehaviour
 
     }
 
-    public void SetType(Type newType)
+    public void SetType(TileType newType)
     {
 
+    }
+
+    public TileType GetTileType()
+    {
+        return type;
     }
 }
