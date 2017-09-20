@@ -11,7 +11,7 @@ public class Grid : MonoBehaviour
     int height;
 
     Tile[,] tiles;
-    Space[,] spaces;
+    Dictionary<Vector2, List<Space>> spaces;
 
     GameObject prefabTile;
     GameObject prefabSpace;
@@ -32,7 +32,9 @@ public class Grid : MonoBehaviour
             }
         }
 
-        //Instantiate spaces array
+        //Instantiate spaces
+        InstantiateSpaces();
+        /*
         spaces = new Space[width, height];
 		for (int c = 0; c < width; c++)
 		{
@@ -45,13 +47,13 @@ public class Grid : MonoBehaviour
                 spaces[r, c].Init(0, 0, this);
 			}
 		}
+        */
 
         //Instantiate BlockSpawner
-        blockSpawner.Init(spaces);
+        blockSpawner.Init(this);
 
         //Instantiate GridBlocks
         gridBlocks = new List<GridBlock>();
-
     }
 
     public int GetWidth()
@@ -258,6 +260,16 @@ public class Grid : MonoBehaviour
         }
 
         CheckForMatches();
-        blockSpawner.SpawnRandomBlock();
+        //blockSpawner.SpawnRandomBlock();
+    }
+
+    void InstantiateSpaces()
+    {
+
+    }
+
+    public List<Space> GetSpaces(int width, int height)
+    {
+        return null; // Replace this with an actual implementation!
     }
 }

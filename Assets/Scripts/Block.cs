@@ -41,7 +41,7 @@ public class Block
         tiles[x, y] = newTile;
     }
 
-    public void Rotate()
+    public void Rotate(bool clockwise)
     {
 
     }

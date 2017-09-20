@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
-    public void Init(Space[,] newSpaces)
+    public void Init(Grid newGrid)
     {
 
     }
