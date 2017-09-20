@@ -132,7 +132,86 @@ public class Grid : MonoBehaviour
     }
 
     public void CheckForMatches(){
-        
+
+        //List keeping all tiles that are going to be removed.
+        //We do remove after calculation because it's possible to remove
+        //multiple squares together
+        List<Tile> toRemove = new List<Tile>();
+
+        //Loop through all blocks from topLeft.
+        //Consider only the case that the current tile is the top-lefr corner
+        for (int r = 0; r < height; r++)
+        {
+            for (int c = 0; c < width; c++)
+            {
+                //Only if the tile is regular black tile
+                if(tiles[r, c].GetTileType() == Tile.TileType.Regular)
+                {
+                    //Check for squares from length 3 to 8
+                    for (int length = 3; length <= 8; length++)
+                    {
+                        toRemove.AddRange(CheckForSquares(r, c, length));
+                    }
+                }
+            }
+        }
+
+        //Remove all tiles that form squares
+        toRemove.ForEach(t => t.Clear());
+
+        //For vestiges, leave it for now
+    }
+
+    private List<Tile> CheckForSquares(int r, int c, int length)
+    {
+        List<Tile> processed = new List<Tile>();
+        //Do not check if the square is not possible
+        //to be formed at this tile
+        if (r + length - 1 < height && c + length - 1 < width)
+        {
+            int count = 0;
+            int tR = r;
+            bool isLegal = true;
+            //The max number of tiles to be checked
+            while (count < length * length - (length - 2) * (length - 2) - 1)
+            {
+                //For first and last rows check the whole line
+                if (tR == r || tR == r + length - 1)
+                {
+                    for (int i = c; i < c + length; i++)
+                    {
+                        if (tiles[tR, i].GetTileType() != Tile.TileType.Regular)
+                        {
+                            isLegal = false;
+                            processed.Clear();
+                            break;  //exit for loop
+                        }
+                        //Check to avoid repeated tiles
+                        if (processed.Find(t => t == tiles[tR, i]) == null)
+                            processed.Add(tiles[tR, i]);
+                        count++;
+                    }
+                    if (!isLegal)
+                        break;  //exit while loop
+                }
+                else //Rest of rows just check two tiles
+                {
+                    if (tiles[tR, c].GetTileType() != Tile.TileType.Regular
+                       && tiles[tR, c + length - 1].GetTileType() != Tile.TileType.Regular)
+                    {
+                        isLegal = false;
+                        processed.Clear();
+                        break;  //exit while loop
+                    }
+                    if (processed.Find(t => t == tiles[tR, c]) == null)
+                        processed.Add(tiles[tR, c]);
+                    if (processed.Find(t => t == tiles[tR, c + length - 1]) == null)
+                        processed.Add(tiles[tR, c + length - 1]);
+                    count += 2;
+                }
+            }
+        }
+        return processed;
     }
 
     /*
