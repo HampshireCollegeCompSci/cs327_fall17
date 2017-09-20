@@ -1,8 +1,10 @@
 ﻿// Author(s): Paul Calande, Yifeng Shi
 // A 2-dimensional collections of tiles
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Grid : MonoBehaviour
@@ -89,18 +91,44 @@ public class Grid : MonoBehaviour
         return true;
     }
 
+    private class Coordinate
+    {
+        int x, y;
+        public Coordinate(int x, int y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+
+        public int GetX()
+        {
+            return x;
+        }
+
+        public int GetY()
+        {
+            return y;
+        }
+    }
+
     public void WriteBlock(int x, int y, Block block)
     {
+        List<Coordinate> coords = new List<Coordinate>();
 		for (int c = 0; c < block.GetWidth(); c++)
 		{
 			for (int r = 0; r < block.GetHeight(); r++)
 			{
                 if (block.GetTiles()[r, c].GetIsOccupied()){
                     tiles[y + r, x + c].Fill();
+                    //Note x is col and y is row
+                    coords.Add(new Coordinate(x + c, y + r));
                 }
 			}
 		}
         gridBlocks.Add(new GridBlock(x, y, block));
+
+        //call LShapeCheck after each insertion
+        LShapeCheck(coords);
     }
 
     public void CheckForMatches()
@@ -120,12 +148,10 @@ public class Grid : MonoBehaviour
          * Note: not yet considering vestiges.
          */
 
-        //The LShapeCheck() is intended to be called only after insertion,
-        //just put here for now to inidicate workflow
-        LShapeCheck();
+        //LShapeCheck should have been called at this point
 
         //Do potential squares check.
-        PotentialSquareCheck();
+        List<int> potentialSquaresLengths = PotentialSquareCheck();
 
         //Do edges check for potential squares
         EdgeCheck(new Tile(), new Tile(), new Tile(), new Tile());
@@ -175,15 +201,15 @@ public class Grid : MonoBehaviour
     private class LShape
     {
         //Simple Data structure used to facilitize CheckForMatches().
-        Tile center;     //The tile at the center of L.
-        Tile[] wings;    //The two non-center tiles of L.
+        Tile center;     //The tile at the center of L (the elbow).
+        int direction;   // Indicate direction. 1 = topLeft, 2 = topRight, 3 = bottomLeft, 4 = bottomRight
+        Coordinate coordinate;
 
-        public LShape(Tile ctr, Tile wing1, Tile wing2)
+        public LShape(Tile ctr, int dir, Coordinate cod)
         {
-            wings = new Tile[2];
             center = ctr;
-            wings[0] = wing1;
-            wings[1] = wing2;
+            direction = dir;
+            coordinate = cod;
         }
 
         public Tile GetCenter()
@@ -191,21 +217,95 @@ public class Grid : MonoBehaviour
             return center;
         }
 
-        public Tile[] GetWings()
+        public int GetDirection()
         {
-            return wings;
+            return direction;
+        }
+
+        public Coordinate GetCoordinate()
+        {
+            return coordinate;
         }
     }
 
-    private void LShapeCheck()
+    private void LShapeCheck(List<Coordinate> inserted)
     {
-        //Check L-shaped formations
+
+        //Check new L-shaped formations consist of
+        //newly inserted tiles
+        foreach(Coordinate c in inserted)
+        {
+            //Top-left
+            if (tiles[c.GetY() + 1, c.GetX()].GetTileType() == Tile.TileType.Regular
+                && tiles[c.GetY(), c.GetX() + 1].GetTileType() == Tile.TileType.Regular)
+                topLeft.Add(new LShape(tiles[c.GetY(), c.GetX()], 1, c));
+            //Top-right
+            if(c.GetX() - 1 >= 0)
+                if (tiles[c.GetY() + 1, c.GetX()].GetTileType() == Tile.TileType.Regular
+                    && tiles[c.GetY(), c.GetX() - 1].GetTileType() == Tile.TileType.Regular)
+                    topRight.Add(new LShape(tiles[c.GetY(), c.GetX()], 2, c));
+            //Bottom-left
+            if (c.GetY() - 1 >= 0)
+                if (tiles[c.GetY() - 1, c.GetX()].GetTileType() == Tile.TileType.Regular
+                && tiles[c.GetY(), c.GetX() + 1].GetTileType() == Tile.TileType.Regular)
+                    topLeft.Add(new LShape(tiles[c.GetY(), c.GetX()], 3, c));
+            //Bottom-right
+            if (c.GetX() - 1 >= 0 && c.GetY() - 1 >= 0)
+                if (tiles[c.GetY() - 1, c.GetX()].GetTileType() == Tile.TileType.Regular
+                && tiles[c.GetY(), c.GetX() - 1].GetTileType() == Tile.TileType.Regular)
+                    topLeft.Add(new LShape(tiles[c.GetY(), c.GetX()], 4, c));
+        }
 
     }
 
-    private Tile[] PotentialSquareCheck()
+    private List<int> PotentialSquareCheck()
     {
-        return new Tile[4];
+        //Check if potential squares (with 4 direction L-shapes) exist.
+        
+        //Record possible square with specific length
+        List<int> potentialSquareLength = new List<int>();
+
+        //Start from the topLeft list
+        foreach(LShape i in topLeft)
+        {
+            int ix = i.GetCoordinate().GetX();
+            int iy = i.GetCoordinate().GetY();
+
+            //Process diagonal LShapes to get the first version of potential lengths
+            foreach (LShape j in bottomRight)
+            {
+                if(j.GetCoordinate().GetX() - ix == j.GetCoordinate().GetY() - iy)
+                {
+                    //Not plus 1 because we will only use the difference between those two 
+                    //coordinate but not the actual length
+                    potentialSquareLength.Add(j.GetCoordinate().GetX() - ix);
+                }
+            }
+
+            //Process topRight and bottomLeft to cut unqualified length
+            int index = 0;
+            while(true)
+            {
+                //Stop processing when index has already pointed to the last one
+                if (potentialSquareLength.Count == 0 || index >= potentialSquareLength.Count)
+                    break;
+                //If any of them does not have a qualified LShape remove this one from the list.
+                //Not increment index here because removing the current one actually make it point 
+                //to the next one.
+                //Otherwise, by increament index to process the next one.
+                if(topRight.Find(ls => ls.GetCoordinate().GetX() - ix == potentialSquareLength[index]) == null
+                    || bottomLeft.Find(ls => ls.GetCoordinate().GetX() - ix == potentialSquareLength[index]) == null)
+                {
+                    potentialSquareLength.RemoveAt(index);
+                }
+                else
+                {
+                    index++;
+                }
+            }
+        }
+
+        return potentialSquareLength;
     }
 
     private void EdgeCheck(Tile tl, Tile tr, Tile bl, Tile br)
