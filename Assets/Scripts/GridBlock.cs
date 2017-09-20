@@ -53,22 +53,22 @@ public class GridBlock
                     int maxX = -1; //Record the x index for right-most extremtile
                     for (int j = 0; j < block.GetWidth(); j++)
                     {
-                        if (blockTiles[j, i].GetIsOccupied())
+                        if (blockTiles[i, j].GetIsOccupied())
                         {
                             maxX = j;
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
                             if (x + maxX + 1 > grid.GetWidth() || (maxX + 1 < block.GetWidth() &&
-                            !blockTiles[maxX + 1, i].GetIsOccupied() && gridTiles[x + maxX + 1, i].GetIsOccupied())
-                            || (maxX + 1 == block.GetWidth() && gridTiles[x + maxX + 1, i].GetIsOccupied()))
+                            !blockTiles[i, maxX + 1].GetIsOccupied() && gridTiles[i, x + maxX + 1].GetIsOccupied())
+                            || (maxX + 1 == block.GetWidth() && gridTiles[i, x + maxX + 1].GetIsOccupied()))
                                 return false;
                         }
                     }
 
                     //If max equals to -1, then the row is empty
                     if (maxX != -1)
-                        exTilesIndex.Add(new Vector2(maxX, i));
+                        exTilesIndex.Add(new Vector2(i, maxX));
                 }
 
                 //From right to left, duplicate each tile and then clear, move the block one tile to the right side
@@ -77,10 +77,10 @@ public class GridBlock
                     int exTileX = (int)exTilesIndex[i].x;
                     int exTileY = (int)exTilesIndex[i].y;
 
-                    for (int j = exTileX; j >= 0; j--)
+                    for (int j = exTileY; j >= 0; j--)
                     {
-                        gridTiles[j + x + 1, y + exTileY].Duplicate(blockTiles[j, exTileY]);
-                        gridTiles[j + x, y + exTileY].Clear();
+                        gridTiles[y + exTileX, j + x + 1].Duplicate(blockTiles[exTileX, j]);
+                        gridTiles[y + exTileX, j + x].Clear();
                     }
                 }
 
@@ -94,22 +94,22 @@ public class GridBlock
                     int maxY = -1; //Record the y index for bottom-most extremtile
                     for (int j = 0; j < block.GetHeight(); j++)
                     {
-                        if (blockTiles[i, j].GetIsOccupied())
+                        if (blockTiles[j, i].GetIsOccupied())
                         {
                             maxY = j;
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
                             if (y + maxY + 1 > grid.GetHeight() || (maxY + 1 < block.GetHeight() &&
-                            !blockTiles[i, maxY + 1].GetIsOccupied() && gridTiles[i, y + maxY + 1].GetIsOccupied())
-                            || (maxY + 1 == block.GetHeight() && gridTiles[i, y + maxY + 1].GetIsOccupied()))
+                            !blockTiles[maxY + 1, i].GetIsOccupied() && gridTiles[y + maxY + 1, i].GetIsOccupied())
+                            || (maxY + 1 == block.GetHeight() && gridTiles[y + maxY + 1, i].GetIsOccupied()))
                                 return false;
                         }
                     }
 
                     //If max equals to -1, then the column is empty
                     if (maxY != -1)
-                        exTilesIndex.Add(new Vector2(i, maxY));
+                        exTilesIndex.Add(new Vector2(maxY, i));
                 }
 
                 //From bottom to top, duplicate each tile and then clear, move the block one tile to the down side
@@ -118,10 +118,10 @@ public class GridBlock
                     int exTileX = (int)exTilesIndex[i].x;
                     int exTileY = (int)exTilesIndex[i].y;
 
-                    for (int j = exTileY; j >= 0; j--)
+                    for (int j = exTileX; j >= 0; j--)
                     {
-                        gridTiles[x + exTileX, y + j + 1].Duplicate(blockTiles[exTileX, j]);
-                        gridTiles[x + exTileX, y + j].Clear();
+                        gridTiles[y + j + 1, x + exTileY].Duplicate(blockTiles[j, exTileY]);
+                        gridTiles[y + j, x + exTileY].Clear();
                     }
                 }
 
@@ -135,22 +135,22 @@ public class GridBlock
                     int minX = -1; //Record the x index for left-most extremtile
                     for (int j = block.GetWidth() - 1; j >= 0; j--)
                     {
-                        if (blockTiles[j, i].GetIsOccupied())
+                        if (blockTiles[i, j].GetIsOccupied())
                         {
                             minX = j;
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
                             if (x + minX - 1 < 0 || (minX - 1 >= 0 &&
-                            !blockTiles[minX - 1, i].GetIsOccupied() && gridTiles[x + minX - 1, i].GetIsOccupied())
-                            || (minX - 1 == -1 && gridTiles[x + minX - 1, i].GetIsOccupied()))
+                            !blockTiles[i, minX - 1].GetIsOccupied() && gridTiles[i, x + minX - 1].GetIsOccupied())
+                            || (minX - 1 == -1 && gridTiles[i, x + minX - 1].GetIsOccupied()))
                                 return false;
                         }
                     }
 
                     //If max equals to -1, then the row is empty
                     if (minX != -1)
-                        exTilesIndex.Add(new Vector2(minX, i));
+                        exTilesIndex.Add(new Vector2(i, minX));
                 }
 
                 //From left to right, duplicate each tile and then clear, move the block one tile to the left side
@@ -159,10 +159,10 @@ public class GridBlock
                     int exTileX = (int)exTilesIndex[i].x;
                     int exTileY = (int)exTilesIndex[i].y;
 
-                    for (int j = 0; j < exTileX; j++)
+                    for (int j = 0; j < exTileY; j++)
                     {
-                        gridTiles[j + x - 1, y + exTileY].Duplicate(blockTiles[j, exTileY]);
-                        gridTiles[j + x, y + exTileY].Clear();
+                        gridTiles[y + exTileX, j + x - 1].Duplicate(blockTiles[exTileX, j]);
+                        gridTiles[y + exTileX, j + x].Clear();
                     }
                 }
 
@@ -177,22 +177,22 @@ public class GridBlock
                     int minY = -1; //Record the x index for top-most extremtile
                     for (int j = block.GetHeight() - 1; j >= 0; j--)
                     {
-                        if (blockTiles[i, j].GetIsOccupied())
+                        if (blockTiles[j, i].GetIsOccupied())
                         {
                             minY = j;
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
                             if (y + minY - 1 < 0 || (minY - 1 >= 0 &&
-                            !blockTiles[i, minY - 1].GetIsOccupied() && gridTiles[i, y + minY - 1].GetIsOccupied())
-                            || (minY - 1 == -1 && gridTiles[i, y + minY - 1].GetIsOccupied()))
+                            !blockTiles[minY - 1, i].GetIsOccupied() && gridTiles[y + minY - 1, i].GetIsOccupied())
+                            || (minY - 1 == -1 && gridTiles[y + minY - 1, i].GetIsOccupied()))
                                 return false;
                         }
                     }
 
                     //If max equals to -1, then the column is empty
                     if (minY != -1)
-                        exTilesIndex.Add(new Vector2(i, minY));
+                        exTilesIndex.Add(new Vector2(minY, i));
                 }
 
                 //From top to bottom, duplicate each tile and then clear, move the block one tile to the up side
@@ -201,10 +201,10 @@ public class GridBlock
                     int exTileX = (int)exTilesIndex[i].x;
                     int exTileY = (int)exTilesIndex[i].y;
 
-                    for (int j = 0; j < exTileY; j++)
+                    for (int j = 0; j < exTileX; j++)
                     {
-                        gridTiles[x + exTileX, y + j - 1].Duplicate(blockTiles[exTileX, j]);
-                        gridTiles[x + exTileX, y + j].Clear();
+                        gridTiles[y + j - 1, x + exTileY].Duplicate(blockTiles[j, exTileY]);
+                        gridTiles[y + j, x + exTileY].Clear();
                     }
                 }
 
