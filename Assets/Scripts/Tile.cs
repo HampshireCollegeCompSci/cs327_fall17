@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour
     bool isOccupied = false;
 
 	Sprite spriteFilled;
-	Sprite empty;
+	Sprite spriteEmpty;
 	SpriteRenderer spriteRenderer;
 	TileData data;
 
@@ -37,7 +37,9 @@ public class Tile : MonoBehaviour
     {
 		this.isOccupied = other.isOccupied;
 		this.spriteRenderer.sprite = other.spriteRenderer.sprite;
-		data.type = data.type;
+		this.spriteFilled = other.spriteFilled;
+		this.spriteEmpty = other.spriteEmpty;
+		data.type = other.data.type;
     }
 
 	public void SetType(TileData.TileType newType)
