@@ -9,19 +9,10 @@ public class Tile : MonoBehaviour
 {
     bool isOccupied = false;
 
-
-    public enum TileType
-    {
-        Regular,
-        Vacant,
-        Vestige
-    }
-
-	TileType type;
 	Sprite spriteFilled;
-	Sprite empty;
+	Sprite spriteEmpty;
 	SpriteRenderer spriteRenderer;
-
+	TileData data;
 
     public bool GetIsOccupied()
     {
@@ -46,17 +37,19 @@ public class Tile : MonoBehaviour
     {
 		this.isOccupied = other.isOccupied;
 		this.spriteRenderer.sprite = other.spriteRenderer.sprite;
-		this.type = other.type;
+		this.spriteFilled = other.spriteFilled;
+		this.spriteEmpty = other.spriteEmpty;
+		data.type = other.data.type;
     }
 
-    public void SetType(TileType newType)
+	public void SetType(TileData.TileType newType)
     {
-		this.type = newType;
+		data.type = newType;
 
     }
 
-    public TileType GetTileType()
+	public TileData.TileType GetTileType()
     {
-        return type;
+        return data.type;
     }
 }
