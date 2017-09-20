@@ -23,10 +23,10 @@ public class Grid : MonoBehaviour
     List<GridBlock> gridBlocks;
 
     //Four lists storing lists of four direction of L-shapes respectively.
-    List<LShape> topLeft;
-    List<LShape> topRight;
-    List<LShape> bottomLeft;
-    List<LShape> bottomRight;
+    //List<LShape> topLeft;
+    //List<LShape> topRight;
+    //List<LShape> bottomLeft;
+    //List<LShape> bottomRight;
 
     private void Start()
     {
@@ -113,7 +113,7 @@ public class Grid : MonoBehaviour
 
     public void WriteBlock(int x, int y, Block block)
     {
-        List<Coordinate> coords = new List<Coordinate>();
+        //List<Coordinate> coords = new List<Coordinate>();
 		for (int c = 0; c < block.GetWidth(); c++)
 		{
 			for (int r = 0; r < block.GetHeight(); r++)
@@ -121,16 +121,21 @@ public class Grid : MonoBehaviour
                 if (block.GetTiles()[r, c].GetIsOccupied()){
                     tiles[y + r, x + c].Fill();
                     //Note x is col and y is row
-                    coords.Add(new Coordinate(x + c, y + r));
+                    //coords.Add(new Coordinate(x + c, y + r));
                 }
 			}
 		}
         gridBlocks.Add(new GridBlock(x, y, block));
 
         //call LShapeCheck after each insertion
-        LShapeCheck(coords);
+        //LShapeCheck(coords);
     }
 
+    public void CheckForMatches(){
+        
+    }
+
+    /*
     public void CheckForMatches()
     {
         /*
@@ -148,19 +153,9 @@ public class Grid : MonoBehaviour
          * Note: not yet considering vestiges.
          */
 
-        //LShapeCheck should have been called at this point
-
-        //Do potential squares check.
-        List<int> potentialSquaresLengths = PotentialSquareCheck();
-
-        //Do edges check for potential squares
-        EdgeCheck(new Tile(), new Tile(), new Tile(), new Tile());
-
-        //Do removal if there's qualified square
-        SquareRemoval();
 
         //Clear columns:
-        /*
+    /*
         for (int c = 0; c < width; c++)
         {
             bool isFilled = true;
@@ -195,8 +190,9 @@ public class Grid : MonoBehaviour
 				}
 			}
 		}
-        */
+
     }
+
 
     private class LShape
     {
@@ -258,16 +254,16 @@ public class Grid : MonoBehaviour
 
     }
 
-    private List<int> PotentialSquareCheck()
+    private void PotentialSquareCheck()
     {
         //Check if potential squares (with 4 direction L-shapes) exist.
-        
-        //Record possible square with specific length
-        List<int> potentialSquareLength = new List<int>();
 
         //Start from the topLeft list
         foreach(LShape i in topLeft)
         {
+            //Record possible square with specific length for current LShape
+            List<int> potentialSquareLength = new List<int>();
+
             int ix = i.GetCoordinate().GetX();
             int iy = i.GetCoordinate().GetY();
 
@@ -303,21 +299,65 @@ public class Grid : MonoBehaviour
                     index++;
                 }
             }
-        }
 
-        return potentialSquareLength;
+            //Do edge checking for each topLeft LShapes
+            EdgeCheck(i, potentialSquareLength);
+        }
     }
 
-    private void EdgeCheck(Tile tl, Tile tr, Tile bl, Tile br)
+    private void EdgeCheck(LShape tl, List<int> lens)
     {
         //Check if 4 edges of the potential square are filled.
+        if (lens.Count == 0)
+            return;
+        foreach(int len in lens)
+        {
+            if (len <= 3) //For square length 2 to 4 there is no need to check
+                MarkToRemove();
+            //Check top edge
+            SingleEdgeCheck(tl.GetCoordinate().GetX() + 2, len - 1, 0, false);
+            //Check bottom edge
+            SingleEdgeCheck(tl.GetCoordinate().GetX() + 2, len - 1, len, false);
+            //Check left edge
+            SingleEdgeCheck(tl.GetCoordinate().GetY() + 2, len - 1, 0, true);
+            //Check right edge
+            SingleEdgeCheck(tl.GetCoordinate().GetY() + 2, len - 1, len, true);
+        }
+    }
+
+    private bool SingleEdgeCheck(int start, int end, int other, bool direction)
+    {
+        //other: when horizontal, other = y value; otherwhise x value.
+        //direction: false = horizontal, true = vertical
+        for (int i = start; i < end; i++)
+        {
+            if (!direction)
+            {
+                //When horizontal:
+                if (tiles[other, i].GetTileType() != Tile.TileType.Regular)
+                    return false;
+            }
+            else
+            {
+                //When vertical:
+                if (tiles[i, other].GetTileType() != Tile.TileType.Regular)
+                    return false;
+
+            }
+        }
+        return true;
+    }
+
+    private void MarkToRemove()
+    {
+        
     }
 
     private void SquareRemoval()
     {
 
     }
-
+    */
 
     public void MoveAllBlocks(Enums.Direction direction)
     {   	
