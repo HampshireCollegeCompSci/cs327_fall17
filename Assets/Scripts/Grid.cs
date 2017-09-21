@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, Yifeng Shi
+﻿// Author(s): Paul Calande, Yifeng Shi, Yixiang Xu
 // A 2-dimensional collections of tiles
 
 using System;
@@ -12,17 +12,20 @@ public class Grid : MonoBehaviour
     public delegate void SquareFormedHandler(int size);
     public event SquareFormedHandler SquareFormed;
 
+    [SerializeField]
     int width;
+    [SerializeField]
     int height;
+    [SerializeField]
+    GameObject prefabTile;
+    [SerializeField]
+    GameObject prefabSpace;
+    [SerializeField]
+    BlockSpawner blockSpawner;
 
     Tile[,] tiles;
 
     Dictionary<Vector2, List<Space>> spaces;
-
-    GameObject prefabTile;
-    GameObject prefabSpace;
-
-    BlockSpawner blockSpawner;
 
     List<GridBlock> gridBlocks;
 
@@ -35,16 +38,7 @@ public class Grid : MonoBehaviour
     private void Start()
     {
         //Instantiate tiles array
-        tiles = new Tile[width, height];
-        for (int c = 0; c < width; c++)
-        {
-            for (int r = 0; r < height; r++)
-            {
-                //Need to be changed after knowing specific positions
-                GameObject currentPrefabTile = Instantiate(prefabTile);
-                tiles[r, c] = currentPrefabTile.GetComponent<Tile>();
-            }
-        }
+        tiles = TileUtil.CreateTileArray(prefabTile, transform.position, width, height);
 
         //Instantiate spaces
         InstantiateSpaces();
