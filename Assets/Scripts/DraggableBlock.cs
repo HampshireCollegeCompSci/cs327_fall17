@@ -26,4 +26,14 @@ public class DraggableBlock : MonoBehaviour
     {
         isDraggable = true;
     }
+
+    void UpdateAvailableSpaces()
+    {
+
+    }
+
+    public void Rotate(bool clockwise)
+    {
+
+    }
 }
