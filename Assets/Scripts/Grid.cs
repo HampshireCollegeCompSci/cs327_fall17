@@ -16,6 +16,7 @@ public class Grid : MonoBehaviour
     int height;
 
     Tile[,] tiles;
+
     Dictionary<Vector2, List<Space>> spaces;
 
     GameObject prefabTile;
@@ -35,8 +36,10 @@ public class Grid : MonoBehaviour
     {
         //Instantiate tiles array
         tiles = new Tile[width, height];
-        for (int c = 0; c < width; c++){
-            for (int r = 0; r < height; r++){
+        for (int c = 0; c < width; c++)
+        {
+            for (int r = 0; r < height; r++)
+            {
                 //Need to be changed after knowing specific positions
                 GameObject currentPrefabTile = Instantiate(prefabTile);
                 tiles[r, c] = currentPrefabTile.GetComponent<Tile>();
@@ -274,7 +277,7 @@ public class Grid : MonoBehaviour
          */
 
 
-        //Clear columns:
+    //Clear columns:
     /*
         for (int c = 0; c < width; c++)
         {
@@ -312,7 +315,6 @@ public class Grid : MonoBehaviour
 		}
 
     }
-
 
     private class LShape
     {
@@ -462,7 +464,6 @@ public class Grid : MonoBehaviour
                 //When vertical:
                 if (tiles[i, other].GetTileType() != Tile.TileType.Regular)
                     return false;
-
             }
         }
         return true;
@@ -493,26 +494,27 @@ public class Grid : MonoBehaviour
                     {
                         //Assign the state of tiles in this column.
                         //1 = occupied, 0 = empty
-                        if(tiles[r, c].GetIsOccupied())
+                        if (tiles[r, c].GetIsOccupied())
                             pushRightStatus[r] = 1;
                         else
                             pushRightStatus[r] = 0;
                     }
-					//Move c-1 th column to cth column.
-					//After this step the c-1 th column is up to date
-					//and is ready for the next loop
-					for (int r = 0; r < height; r++)
-					{
-                        if(tiles[r, c-1].GetIsOccupied() && pushRightStatus[r] == 0)
+                    //Move c-1 th column to cth column.
+                    //After this step the c-1 th column is up to date
+                    //and is ready for the next loop
+                    for (int r = 0; r < height; r++)
+                    {
+                        if (tiles[r, c - 1].GetIsOccupied() && pushRightStatus[r] == 0)
                         {
                             tiles[r, c].Fill();
                             tiles[r, c - 1].Clear();
                         }
-					}
+                    }
                 }
                 break;
             case Enums.Direction.Down:
                 int[] pushDownStatus = new int[width];
+
 				//Loop row from last to 2nd. 1st row does not need to
 				//be checked because no further row with be moved into that
 				//row
@@ -601,17 +603,42 @@ public class Grid : MonoBehaviour
         }
 
         CheckForMatches();
-        //blockSpawner.SpawnRandomBlock();
     }
 
+    //Instantiates all Spaces on the Grid
     void InstantiateSpaces()
     {
+        spaces = new Dictionary<Vector2, List<Space>>();
 
+        InstantiateCertainSpaces(1, 1);
+        InstantiateCertainSpaces(1, 2);
+        InstantiateCertainSpaces(2, 1);
+        InstantiateCertainSpaces(2, 2);
     }
 
+    //Instantiates spaces with certain dimension
+    void InstantiateCertainSpaces(int w, int h)
+    {
+        List<Space> ts = new List<Space>();
+
+        for (int i = 0; i < width; i += w)
+        {
+            for (int j = 0; j < height; j += h)
+            {
+                Space s = new Space();
+                s.Init(i, j, w, h, this);
+                ts.Add(s);
+            }
+        }
+
+        spaces.Add(new Vector2(w, h), ts);
+    }
+
+
+    // Returns a List of all of the Spaces of a certain width and height by fetching from the “spaces” Dictionary
     public List<Space> GetSpaces(int width, int height)
     {
-        return null; // Replace this with an actual implementation!
+        return spaces[new Vector2(width, height)];
     }
 
     public bool CheckIfSpacesFilled(Block block)
