@@ -640,9 +640,27 @@ public class Grid : MonoBehaviour
         return null; // Replace this with an actual implementation!
     }
 
+    //Check if the Block can't fit into any of the Spaces, including block after rotation
     public bool CheckIfSpacesFilled(Block block)
     {
-        return false; // Replace this with an actual implementation!
+        List<Space> spaces;
+
+        //After four rotation, the block turns back to the beginning state
+        for (int rotate = 0; rotate < 4; rotate++)
+        {
+            block.Rotate(true);
+            spaces = GetSpaces(block.GetWidth(), block.GetHeight());
+
+            for (int i = 0; i < spaces.Count; i++)
+            {
+                if (spaces[i].CanBlockFit(block))
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
