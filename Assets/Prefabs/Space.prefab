@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4479565528500086}
   - component: {fileID: 114810337044490816}
+  - component: {fileID: 114053431234703086}
   m_Layer: 0
   m_Name: Space
   m_TagString: Untagged
@@ -40,6 +41,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114053431234703086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1842248367832416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49499a50037047c4f9c6aa33e76d1091, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114810337044490816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,3 +63,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c58403074bf1bac4980c59defa23aff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  snapLocation: {fileID: 114053431234703086}
