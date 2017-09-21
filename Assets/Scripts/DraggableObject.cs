@@ -53,7 +53,8 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         Vector2 position = transform.localPosition;
         bool validSpotFound = false;
-        Vector2 blockToGoTo = Vector2.zero;
+        //Vector2 blockToGoTo = Vector2.zero;
+        SnapLocation locationToGoTo = null;
 
         foreach (var solution in snapToAreas)
         {
@@ -67,7 +68,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
             if (validSpotFound)
             {
-                blockToGoTo = solution.transform.position;
+                locationToGoTo = solution;
                 break;
             }
         }
@@ -75,7 +76,8 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         if (validSpotFound)
         {
             //Do something here when at tile
-            transform.localPosition = blockToGoTo;
+            transform.localPosition = locationToGoTo.transform.position;
+            locationToGoTo.Snap(gameObject);
         }
         else
         {
