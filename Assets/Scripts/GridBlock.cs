@@ -287,8 +287,29 @@ public class GridBlock
         }
     }
 
+    //Check all the tiles of the gridblock
+    //If a tile is the type of Vacant, then it will be cleared
+    //If a tile is the type of Vestige, then a 1x1 gridblock will be created
+    //and the new gridblock will fall to the bottom of the grid or be obstructed
+    //by other tiles and stop right there
     public void ActivateVestiges()
     {
-
+        for (int r = y; r < y + block.GetHeight(); r++)
+        {
+            for (int c = x; c < x + block.GetWidth(); c++)
+            {
+                if (GetTileType(r, c) == TileData.TileType.Vacant)
+                {
+                    Clear(r, c);
+                }
+                else if (GetTileType(r, c) == TileData.TileType.Regular)
+                {
+                    Block b = new Block(1, 1);
+                    b.SetTileType(0, 0, TileData.TileType.Vestige);
+                    GridBlock gb = grid.WriteBlock(r, c, b);
+                    gb.MoveRepeatedly(Enums.Direction.Down);
+                }
+            }
+        }
     }
 }
