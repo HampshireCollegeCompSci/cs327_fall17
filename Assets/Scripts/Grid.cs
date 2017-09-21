@@ -641,9 +641,27 @@ public class Grid : MonoBehaviour
         return spaces[new Vector2(width, height)];
     }
 
+    //Check if the Block can fit into any of the Spaces, including block after rotation
     public bool CheckIfSpacesFilled(Block block)
     {
-        return false; // Replace this with an actual implementation!
+        List<Space> spaces;
+
+        //After four rotation, the block turns back to the beginning state
+        for (int rotate = 0; rotate < 4; rotate++)
+        {
+            block.Rotate(true);
+            spaces = GetSpaces(block.GetWidth(), block.GetHeight());
+
+            for (int i = 0; i < spaces.Count; i++)
+            {
+                if (spaces[i].CanBlockFit(block))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     private void OnSquareFormed(int size)
