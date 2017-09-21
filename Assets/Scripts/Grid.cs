@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, Yifeng Shi
+﻿// Author(s): Paul Calande, Yifeng Shi, Yixiang Xu
 // A 2-dimensional collections of tiles
 
 using System;
@@ -12,17 +12,20 @@ public class Grid : MonoBehaviour
     public delegate void SquareFormedHandler(int size);
     public event SquareFormedHandler SquareFormed;
 
+    [SerializeField]
     int width;
+    [SerializeField]
     int height;
+    [SerializeField]
+    GameObject prefabTile;
+    [SerializeField]
+    GameObject prefabSpace;
+    [SerializeField]
+    BlockSpawner blockSpawner;
 
     Tile[,] tiles;
 
     Dictionary<Vector2, List<Space>> spaces;
-
-    GameObject prefabTile;
-    GameObject prefabSpace;
-
-    BlockSpawner blockSpawner;
 
     List<GridBlock> gridBlocks;
 
@@ -35,16 +38,7 @@ public class Grid : MonoBehaviour
     private void Start()
     {
         //Instantiate tiles array
-        tiles = new Tile[width, height];
-        for (int c = 0; c < width; c++)
-        {
-            for (int r = 0; r < height; r++)
-            {
-                //Need to be changed after knowing specific positions
-                GameObject currentPrefabTile = Instantiate(prefabTile);
-                tiles[r, c] = currentPrefabTile.GetComponent<Tile>();
-            }
-        }
+        tiles = TileUtil.CreateTileArray(prefabTile, transform.position, width, height);
 
         //Instantiate spaces
         InstantiateSpaces();
@@ -625,7 +619,7 @@ public class Grid : MonoBehaviour
         {
             for (int j = 0; j < height; j += h)
             {
-                Space s = new Space();
+                Space s = GameObject.Instantiate(prefabSpace).GetComponent<Space>();
                 s.Init(i, j, w, h, this);
                 ts.Add(s);
             }
@@ -641,9 +635,20 @@ public class Grid : MonoBehaviour
         return spaces[new Vector2(width, height)];
     }
 
+    public List<Space> GetSpacesFree(int width, int height, Block block)
+    {
+        return null; // Replace this with an actual implementation!
+    }
+
     public bool CheckIfSpacesFilled(Block block)
     {
         return false; // Replace this with an actual implementation!
+    }
+
+    // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
+    public void PlacedDraggableBlock()
+    {
+        blockSpawner.ProgressQueue();
     }
 
     private void OnSquareFormed(int size)

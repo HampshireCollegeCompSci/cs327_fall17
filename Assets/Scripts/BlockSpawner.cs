@@ -30,4 +30,19 @@ public class BlockSpawner : MonoBehaviour
     {
 
     }
+
+    void EnableFrontBlock()
+    {
+
+    }
+
+    void PositionBlocks()
+    {
+
+    }
+
+    public void RotateCurrentBlock(bool clockwise)
+    {
+
+    }
 }
