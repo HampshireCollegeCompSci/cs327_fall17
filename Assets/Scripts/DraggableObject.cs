@@ -1,4 +1,4 @@
-﻿// Author(s): Joel Esquilin
+﻿// Author(s): Joel Esquilin, Paul Calande
 
 using System;
 using System.Collections;
@@ -13,7 +13,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     public Action<DraggableObject> BeginDragEvent;
     public Action<DraggableObject> EndDragEvent;
 
-    public List<Vector2> snapToAreas; // Change to list of blocks with position to include other properties 
+    public List<SnapLocation> snapToAreas; // Change to list of blocks with position to include other properties 
     public Vector2 defaultPosition;
     public static Vector2 PiecePlacementOffset = new Vector2(100, 100);
 
@@ -57,15 +57,17 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
         foreach (var solution in snapToAreas)
         {
-            if (((position.x > solution.x - PiecePlacementOffset.x) && (position.x < solution.x + PiecePlacementOffset.x))
-                && ((position.y > solution.y - PiecePlacementOffset.y) && (position.y < solution.y + PiecePlacementOffset.y)))
+            float solutionX = solution.transform.position.x;
+            float solutionY = solution.transform.position.y;
+            if (((position.x > solutionX - PiecePlacementOffset.x) && (position.x < solutionX + PiecePlacementOffset.x))
+                && ((position.y > solutionY - PiecePlacementOffset.y) && (position.y < solutionY + PiecePlacementOffset.y)))
             {
                 validSpotFound = true;
             }
 
             if (validSpotFound)
             {
-                blockToGoTo = solution;
+                blockToGoTo = solution.transform.position;
                 break;
             }
         }
@@ -90,5 +92,10 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         BeginDragEvent = null;
         EndDragEvent = null;
+    }
+
+    public void SetSnapToAreas(List<SnapLocation> snapLocations)
+    {
+        snapToAreas = snapLocations;
     }
 }

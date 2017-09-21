@@ -619,7 +619,7 @@ public class Grid : MonoBehaviour
         {
             for (int j = 0; j < height; j += h)
             {
-                Space s = new Space();
+                Space s = GameObject.Instantiate(prefabSpace).GetComponent<Space>();
                 s.Init(i, j, w, h, this);
                 ts.Add(s);
             }
@@ -635,9 +635,20 @@ public class Grid : MonoBehaviour
         return spaces[new Vector2(width, height)];
     }
 
+    public List<Space> GetSpacesFree(int width, int height, Block block)
+    {
+        return null; // Replace this with an actual implementation!
+    }
+
     public bool CheckIfSpacesFilled(Block block)
     {
         return false; // Replace this with an actual implementation!
+    }
+
+    // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
+    public void PlacedDraggableBlock()
+    {
+        blockSpawner.ProgressQueue();
     }
 
     private void OnSquareFormed(int size)

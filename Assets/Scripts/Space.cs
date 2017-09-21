@@ -12,7 +12,16 @@ public class Space : MonoBehaviour
 	private int height; //height of this space
 	private Grid grid; //which grid this space is on
 
-	public void Init (int mx, int my, int mwidth, int mheight, Grid mgrid)
+    [SerializeField]
+    SnapLocation snapLocation;
+
+    private void Start()
+    {
+        //snapLocation = GetComponent<SnapLocation>();
+        snapLocation.SnappedTo += SnapLocation_SnappedTo;
+    }
+
+    public void Init (int mx, int my, int mwidth, int mheight, Grid mgrid)
 	{
         x = mx;
         y = my;
@@ -39,6 +48,12 @@ public class Space : MonoBehaviour
 	public void PlaceBlock(DraggableBlock block)
 	{
         grid.WriteBlock(x, y, block.GetBlock()); //We're placing this block. Apparently it's the external responsibility to make sure this will work
+        grid.PlacedDraggableBlock(); // Notify the Grid that we just placed a DraggableBlock.
         Destroy(block.gameObject); //And now we're done with this GameObject - it's on the grid
+    }
+
+    private void SnapLocation_SnappedTo(GameObject snapper)
+    {
+        PlaceBlock(snapper.GetComponent<DraggableBlock>());
     }
 }
