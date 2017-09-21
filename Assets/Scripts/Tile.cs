@@ -13,10 +13,16 @@ public class Tile : MonoBehaviour
     //static Dictionary<TileData.TileType, Sprite> sprites = new Dictionary<TileData.TileType, Sprite>();
 
 	TileData data;
+
+    [SerializeField]
 	SpriteRenderer spriteRenderer;
+    [SerializeField]
     Sprite spriteUnoccupied;
+    [SerializeField]
     Sprite spriteRegular;
+    [SerializeField]
     Sprite spriteVacant;
+    [SerializeField]
     Sprite spriteVestige;
 
     public bool GetIsOccupied()
