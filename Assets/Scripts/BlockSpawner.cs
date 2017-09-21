@@ -6,7 +6,17 @@ using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
-    public void Init(Space[,] newSpaces)
+    public void Init(Grid newGrid)
+    {
+
+    }
+
+    private void Update()
+    {
+
+    }
+
+    public void ResetBlockTimer()
     {
 
     }
@@ -16,7 +26,7 @@ public class BlockSpawner : MonoBehaviour
 
     }
 
-    public void CheckIfSpacesFilled()
+    public void ProgressQueue()
     {
 
     }

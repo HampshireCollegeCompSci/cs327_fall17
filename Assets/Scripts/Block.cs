@@ -10,11 +10,11 @@ public class Block
 
     int height;
 
-    Tile[,] tiles;
+    TileData[,] tiles;
 
     public Block(int newWidth, int newHeight)
     {
-        tiles = new Tile[newWidth, newHeight];
+        tiles = new TileData[newWidth, newHeight];
     }
 
     //Return the width of the block
@@ -29,19 +29,45 @@ public class Block
         return height;
     }
 
+    /*
     //Return the collections of Tiles of the block
-    public Tile[,] GetTiles()
+    public TileData[,] GetTiles()
     {
         return tiles;
     }
+    */
 
-    //Set the Tile of given indexes x and y to new Tile
-    public void SetTile(int x, int y, Tile newTile)
+    public void Fill(int x, int y)
     {
-        tiles[x, y] = newTile;
+        tiles[x, y].Fill();
     }
 
-    public void Rotate()
+    public void Clear(int x, int y)
+    {
+        tiles[x, y].Clear();
+    }
+
+    public TileData.TileType GetTileType(int x, int y)
+    {
+        return tiles[x, y].GetTileType();
+    }
+
+    public void SetTileType(int x, int y, TileData.TileType type)
+    {
+        tiles[x, y].SetTileType(type);
+    }
+
+    public bool GetIsOccupied(int x, int y)
+    {
+        return tiles[x, y].GetIsOccupied();
+    }
+
+    public Tile.ChangedHandler GetCallbackTileDataSetTileType(int x, int y)
+    {
+        return tiles[x, y].SetTileType;
+    }
+
+    public void Rotate(bool clockwise)
     {
 
     }
