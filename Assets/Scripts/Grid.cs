@@ -656,12 +656,12 @@ public class Grid : MonoBehaviour
             {
                 if (spaces[i].CanBlockFit(block))
                 {
-                    return true;
+                    return false;
                 }
             }
         }
 
-        return false;
+        return true;
     }
 
     private void OnSquareFormed(int size)
