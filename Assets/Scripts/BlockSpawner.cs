@@ -11,12 +11,22 @@ public class BlockSpawner : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+
+    }
+
+    public void ResetBlockTimer()
+    {
+
+    }
+
     public void SpawnRandomBlock()
     {
 
     }
 
-    public void CheckIfSpacesFilled()
+    public void ProgressQueue()
     {
 
     }

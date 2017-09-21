@@ -74,10 +74,43 @@ public class Grid : MonoBehaviour
         return height;
     }
 
+    public bool GetIsOccupied(int x, int y)
+    {
+        return tiles[x, y].GetIsOccupied();
+    }
+
+    public Tile GetTileAt(int x, int y)
+    {
+        return tiles[x, y];
+    }
+
+    public void Fill(int x, int y)
+    {
+        tiles[x, y].Fill();
+    }
+
+    public void Clear(int x, int y)
+    {
+        tiles[x, y].Clear();
+    }
+
+    public TileData.TileType GetTileType(int x, int y)
+    {
+        return tiles[x, y].GetTileType();
+    }
+
+    public void SetTileType(int x, int y, TileData.TileType type)
+    {
+        tiles[x, y].SetTileType(type);
+    }
+
+
+    /*
     public Tile[,] GetTiles()
     {
         return tiles;
     }
+    */
 
     public bool CanBlockFit(int x, int y, Block block)
     {
@@ -85,7 +118,7 @@ public class Grid : MonoBehaviour
         for (int c = 0; c < block.GetWidth(); c++){
             for (int r = 0; r < block.GetHeight(); r++){
                 if (tiles[y + r, x + c].GetIsOccupied() &&
-                    block.GetTiles()[r, c].GetIsOccupied())
+                    block.GetIsOccupied(r, c))
                     return false;
             }
         }
@@ -113,24 +146,27 @@ public class Grid : MonoBehaviour
         }
     }
 
-    public void WriteBlock(int x, int y, Block block)
+    public GridBlock WriteBlock(int x, int y, Block block)
     {
         //List<Coordinate> coords = new List<Coordinate>();
 		for (int c = 0; c < block.GetWidth(); c++)
 		{
 			for (int r = 0; r < block.GetHeight(); r++)
 			{
-                if (block.GetTiles()[r, c].GetIsOccupied()){
+                if (block.GetIsOccupied(r, c)){
                     tiles[y + r, x + c].Fill();
                     //Note x is col and y is row
                     //coords.Add(new Coordinate(x + c, y + r));
                 }
 			}
 		}
-        gridBlocks.Add(new GridBlock(x, y, block));
+        GridBlock gb = new GridBlock(x, y, block, this);
+        gridBlocks.Add(gb);
 
         //call LShapeCheck after each insertion
         //LShapeCheck(coords);
+
+        return gb;
     }
 
     public void CheckForMatches(){
@@ -147,7 +183,7 @@ public class Grid : MonoBehaviour
             for (int c = 0; c < width; c++)
             {
                 //Only if the tile is regular black tile
-                if(tiles[r, c].GetTileType() == Tile.TileType.Regular)
+                if(tiles[r, c].GetTileType() == TileData.TileType.Regular)
                 {
                     //Check for squares from length 3 to 8
                     for (int length = 3; length <= 8; length++)
@@ -182,7 +218,7 @@ public class Grid : MonoBehaviour
                 {
                     for (int i = c; i < c + length; i++)
                     {
-                        if (tiles[tR, i].GetTileType() != Tile.TileType.Regular)
+                        if (tiles[tR, i].GetTileType() != TileData.TileType.Regular)
                         {
                             isLegal = false;
                             processed.Clear();
@@ -198,8 +234,8 @@ public class Grid : MonoBehaviour
                 }
                 else //Rest of rows just check two tiles
                 {
-                    if (tiles[tR, c].GetTileType() != Tile.TileType.Regular
-                       && tiles[tR, c + length - 1].GetTileType() != Tile.TileType.Regular)
+                    if (tiles[tR, c].GetTileType() != TileData.TileType.Regular
+                       && tiles[tR, c + length - 1].GetTileType() != TileData.TileType.Regular)
                     {
                         isLegal = false;
                         processed.Clear();
@@ -573,5 +609,10 @@ public class Grid : MonoBehaviour
     public List<Space> GetSpaces(int width, int height)
     {
         return null; // Replace this with an actual implementation!
+    }
+
+    public bool CheckIfSpacesFilled(Block block)
+    {
+        return false; // Replace this with an actual implementation!
     }
 }

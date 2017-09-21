@@ -7,49 +7,71 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    bool isOccupied = false;
+    public delegate void ChangedHandler(TileData.TileType type);
+    public event ChangedHandler Changed;
 
-	Sprite spriteFilled;
-	Sprite spriteEmpty;
-	SpriteRenderer spriteRenderer;
+    //static Dictionary<TileData.TileType, Sprite> sprites = new Dictionary<TileData.TileType, Sprite>();
+
 	TileData data;
+	SpriteRenderer spriteRenderer;
+    Sprite spriteUnoccupied;
+    Sprite spriteRegular;
+    Sprite spriteVacant;
+    Sprite spriteVestige;
 
     public bool GetIsOccupied()
     {
-        return isOccupied;
+        return data.GetIsOccupied();
     }
-		
-    public void Fill()
+
+    public void SetTileType(TileData.TileType newType)
     {
-		//this.type = TileType.Regular;
-		this.spriteRenderer.sprite = spriteFilled;
-		this.isOccupied = true;
+        data.SetTileType(newType);
+        // Set the sprite based on the new tile type.
+        switch (newType)
+        {
+            case TileData.TileType.Unoccupied:
+                spriteRenderer.sprite = spriteUnoccupied;
+                break;
+            case TileData.TileType.Regular:
+                spriteRenderer.sprite = spriteRegular;
+                break;
+            case TileData.TileType.Vacant:
+                spriteRenderer.sprite = spriteVacant;
+                break;
+            case TileData.TileType.Vestige:
+                spriteRenderer.sprite = spriteVestige;
+                break;
+        }
+        OnChanged(newType);
+    }
+
+    public TileData.TileType GetTileType()
+    {
+        return data.GetTileType();
     }
 
     public void Clear()
     {
-		//Tile.Destroy;
-		this.spriteRenderer.sprite = empty;
-		this.isOccupied = false;
+        SetTileType(TileData.TileType.Unoccupied);
     }
 
+    public void Fill()
+    {
+        SetTileType(TileData.TileType.Regular);
+    }
+
+    // Helper function.
     public void Duplicate(Tile other)
     {
-		this.isOccupied = other.isOccupied;
-		this.spriteRenderer.sprite = other.spriteRenderer.sprite;
-		this.spriteFilled = other.spriteFilled;
-		this.spriteEmpty = other.spriteEmpty;
-		data.type = other.data.type;
+        SetTileType(other.GetTileType());
     }
 
-	public void SetType(TileData.TileType newType)
+    void OnChanged(TileData.TileType newType)
     {
-		data.type = newType;
-
-    }
-
-	public TileData.TileType GetTileType()
-    {
-        return data.type;
+        if (Changed != null)
+        {
+            Changed(newType);
+        }
     }
 }
