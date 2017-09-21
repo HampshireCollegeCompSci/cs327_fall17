@@ -9,6 +9,9 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
+    public delegate void SquareFormedHandler(int size);
+    public event SquareFormedHandler SquareFormed;
+
     int width;
     int height;
 
@@ -614,5 +617,13 @@ public class Grid : MonoBehaviour
     public bool CheckIfSpacesFilled(Block block)
     {
         return false; // Replace this with an actual implementation!
+    }
+
+    private void OnSquareFormed(int size)
+    {
+        if (SquareFormed != null)
+        {
+            SquareFormed(size);
+        }
     }
 }
