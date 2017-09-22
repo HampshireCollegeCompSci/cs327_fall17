@@ -294,9 +294,9 @@ public class GridBlock
     //by other tiles and stop right there
     public void ActivateVestiges()
     {
-        for (int r = y; r <block.GetHeight(); r++)
+        for (int r = 0; r <block.GetHeight(); r++)
         {
-            for (int c = x; c <block.GetWidth(); c++)
+            for (int c = 0; c <block.GetWidth(); c++)
             {
                 if (GetTileType(r, c) == TileData.TileType.Vacant)
                 {
