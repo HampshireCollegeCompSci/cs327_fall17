@@ -30,9 +30,9 @@ public class Tile : MonoBehaviour
         return data.GetIsOccupied();
     }
 
-    public void SetTileType(TileData.TileType newType)
+    public void Fill(TileData.TileType newType)
     {
-        data.SetTileType(newType);
+        data.Fill(newType);
         // Set the sprite based on the new tile type.
         switch (newType)
         {
@@ -59,18 +59,13 @@ public class Tile : MonoBehaviour
 
     public void Clear()
     {
-        SetTileType(TileData.TileType.Unoccupied);
-    }
-
-    public void Fill()
-    {
-        SetTileType(TileData.TileType.Regular);
+        Fill(TileData.TileType.Unoccupied);
     }
 
     // Helper function.
     public void Duplicate(Tile other)
     {
-        SetTileType(other.GetTileType());
+        Fill(other.GetTileType());
     }
 
     void OnChanged(TileData.TileType newType)

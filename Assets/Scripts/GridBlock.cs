@@ -59,9 +59,9 @@ public class GridBlock
         tiles[row, col].Changed += block.GetCallbackTileDataSetTileType(row, col);
     }
 
-    public void Fill(int row, int col)
+    public void Fill(int row, int col, TileData.TileType newType)
     {
-        tiles[row, col].Fill();
+        tiles[row, col].Fill(newType);
     }
 
     public void Clear(int row, int col)
@@ -77,11 +77,6 @@ public class GridBlock
     public TileData.TileType GetTileType(int row, int col)
     {
         return block.GetTileType(row, col);
-    }
-
-    public void SetTileType(int row, int col, TileData.TileType type)
-    {
-        tiles[row, col].SetTileType(type);
     }
 
     public bool BelongsToBlock(int row, int col)
@@ -136,7 +131,7 @@ public class GridBlock
                     for (int j = exTileY; j >= 0; j--)
                     {
                         //gridTiles[y + exTileX, j + x + 1].Duplicate(blockTiles[exTileX, j]);
-                        grid.SetTileType(row + exTileX, j + col + 1, block.GetTileType(exTileX, j));
+                        grid.Fill(row + exTileX, j + col + 1, block.GetTileType(exTileX, j));
                         SetTile(row + exTileX, j + col + 1, grid.GetTileAt(row + exTileX, j + col + 1));
                         grid.Clear(row + exTileX, j + col);
                     }
@@ -179,7 +174,7 @@ public class GridBlock
                     for (int j = exTileX; j >= 0; j--)
                     {
                         //gridTiles[y + j + 1, x + exTileY].Duplicate(blockTiles[j, exTileY]);
-                        grid.SetTileType(row + j + 1, col + exTileY, block.GetTileType(j, exTileY));
+                        grid.Fill(row + j + 1, col + exTileY, block.GetTileType(j, exTileY));
                         SetTile(row + j + 1, col + exTileY, grid.GetTileAt(row + j + 1, col + exTileY));
                         grid.Clear(row + j, col + exTileY);
                     }
@@ -222,7 +217,7 @@ public class GridBlock
                     for (int j = 0; j < exTileY; j++)
                     {
                         //gridTiles[y + exTileX, j + x - 1].Duplicate(blockTiles[exTileX, j]);
-                        grid.SetTileType(row + exTileX, j + col - 1, block.GetTileType(exTileX, j));
+                        grid.Fill(row + exTileX, j + col - 1, block.GetTileType(exTileX, j));
                         SetTile(row + exTileX, j + col - 1, grid.GetTileAt(row + exTileX, j + col - 1));
                         grid.Clear(row + exTileX, j + col);
                     }
@@ -266,7 +261,7 @@ public class GridBlock
                     for (int j = 0; j < exTileX; j++)
                     {
                         //gridTiles[y + j - 1, x + exTileY].Duplicate(blockTiles[j, exTileY]);
-                        grid.SetTileType(row + j - 1, col + exTileY, block.GetTileType(j, exTileY));
+                        grid.Fill(row + j - 1, col + exTileY, block.GetTileType(j, exTileY));
                         SetTile(row + j - 1, col + exTileY, grid.GetTileAt(row + j - 1, col + exTileY));
                         grid.Clear(row + j, col + exTileY);
                     }
@@ -307,7 +302,7 @@ public class GridBlock
                 else if (GetTileType(r, c) == TileData.TileType.Regular)
                 {
                     Block b = new Block(1, 1);
-                    b.SetTileType(0, 0, TileData.TileType.Vestige);
+                    b.Fill(0, 0, TileData.TileType.Vestige);
                     GridBlock gb = grid.WriteBlock(row + r, col + c, b);
                     gb.MoveRepeatedly(Enums.Direction.Down);
                 }

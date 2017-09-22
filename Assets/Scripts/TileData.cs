@@ -21,19 +21,14 @@ public class TileData
         type = TileType.Unoccupied;
     }
 
-    public void Fill()
+    public void Fill(TileType newType)
     {
-        type = TileType.Regular;
+        type = newType;
     }
 
     public bool GetIsOccupied()
     {
         return type != TileType.Unoccupied;
-    }
-
-    public void SetTileType(TileType newType)
-    {
-        type = newType;
     }
 
     public TileType GetTileType()
