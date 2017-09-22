@@ -72,18 +72,28 @@ public class Block
 
     public void Rotate(bool clockwise)
     {
-		if (clockwise = true) {
-			//rotates blocks to the right
-			tiles [0, 0].SetTileType (tiles[1,0].GetTileType);
-			tiles [0, 1].SetTileType (tiles[0,0].GetTileType);
-			tiles [1, 1].SetTileType (tiles[0,1].GetTileType);
-			tiles [1, 0].SetTileType (tiles[1,1].GetTileType);
-		}  else {
-			//rotates blocks to the left
-			tiles [0, 0].SetTileType (tiles[0,1].GetTileType);
-			tiles [0, 1].SetTileType (tiles[1,1].GetTileType);
-			tiles [1, 1].SetTileType (tiles[1,0].GetTileType);
-			tiles [1, 0].SetTileType (tiles[0,0].GetTileType);
-		}
+        int newWidth = height;
+        int newHeight = width;
+        width = newWidth;
+        height = newHeight;
+        TileData[,] tempTiles = new TileData[width, height];
+
+        if (clockwise == true)
+        {
+            //rotates blocks to the right
+            tempTiles[0, 0].SetTileType(tiles[1, 0].GetTileType());
+            tempTiles[0, 1].SetTileType(tiles[0, 0].GetTileType());
+            tempTiles[1, 1].SetTileType(tiles[0, 1].GetTileType());
+            tempTiles[1, 0].SetTileType(tiles[1, 1].GetTileType());
+        }
+        else
+        {
+            //rotates blocks to the left
+            tempTiles[0, 0].SetTileType(tiles[0, 1].GetTileType());
+            tempTiles[0, 1].SetTileType(tiles[1, 1].GetTileType());
+            tempTiles[1, 1].SetTileType(tiles[1, 0].GetTileType());
+            tempTiles[1, 0].SetTileType(tiles[0, 0].GetTileType());
+        }
+        tiles = tempTiles;
     }
 }
