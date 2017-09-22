@@ -70,60 +70,64 @@ public class Block
         return tiles[row, col].SetTileType;
     }
 
+    // Rotates the Block.
+    // TODO: Support counterclockwise rotation.
     public void Rotate(bool clockwise)
     {
-        int newWidth = height;
-        int newHeight = width;
-        width = newWidth;
-        height = newHeight;
-        //TileData[,] tempTiles = new TileData[width, height];
+        // Height and width are swapped when rotating 90 degrees.
+        TileData[,] tilesTemp = new TileData[height, width];
 
-		/*
-		for (int column = 0; column < width; ++column) {
-			for (int row = 0; row < height; ++row) {
-				TileData.TileType newType = tiles[].GetTileType();
-				tempTiles [row, column].SetTileType (newType);
-			}
-		}
-		*/
+        // Rotation algorithm adapted from:
+        // https://www.codeproject.com/Questions/854268/Rotate-a-matrix-degrees-cloclwise
 
-		// Rotation code from:
-		// https://www.codeproject.com/Questions/854268/Rotate-a-matrix-degrees-cloclwise
-		for (int i = 0; i < height; ++i) {
-			for (int j = i + 1; j < width; ++j) {
-				TileData temp = tiles [i, j];
-				tiles [i, j] = tiles [j, i];
-				tiles [j, i] = temp;
-			}
-		}
-		for (int i = 0; i < height; ++i) {
-			for (int j = 0; j < width / 2; ++j) {
-				TileData temp = tiles [i, j];
-				tiles [i, j] = tiles [i, width - 1 - j];
-				tiles [i, width - 1 - j] = temp;
-			}
-		}
-
-
-		/*
-        if (clockwise == true)
+        // Transpose.
+        for (int i = 0; i < height; ++i)
         {
-            //rotates blocks to the right
-            tempTiles[0, 0].SetTileType(tiles[1, 0].GetTileType());
-            tempTiles[0, 1].SetTileType(tiles[0, 0].GetTileType());
-            tempTiles[1, 1].SetTileType(tiles[0, 1].GetTileType());
-            tempTiles[1, 0].SetTileType(tiles[1, 1].GetTileType());
+            for (int j = i + 1; j < width; ++j)
+            {
+                tilesTemp[i, j] = tiles[j, i];
+                tilesTemp[j, i] = tiles[i, j];
+            }
+        }
+        if (clockwise)
+        {
+            // Reverse each row.
+            for (int i = 0; i < height; ++i)
+            {
+                for (int j = 0; j < width / 2; ++j)
+                {
+                    tilesTemp[i, j] = tiles[i, width - 1 - j];
+                    tilesTemp[i, width - 1 - j] = tiles[i, j];
+                }
+            }
         }
         else
         {
-            //rotates blocks to the left
-            tempTiles[0, 0].SetTileType(tiles[0, 1].GetTileType());
-            tempTiles[0, 1].SetTileType(tiles[1, 1].GetTileType());
-            tempTiles[1, 1].SetTileType(tiles[1, 0].GetTileType());
-            tempTiles[1, 0].SetTileType(tiles[0, 0].GetTileType());
+            // Reverse each column.
+            for (int i = 0; i < height; ++i)
+            {
+                for (int j = 0; j < width / 2; ++j)
+                {
+                    tilesTemp[i, j] = tiles[height - 1 - i, j];
+                    tilesTemp[height - 1 - i, j] = tiles[i, j];
+                }
+            }
+        }
+
+        // Update the tiles array with the new Tiles.
+        tiles = tilesTemp;
+        // Swap width and height.
+        int temp = width;
+        width = height;
+        height = temp;
+
+        /*
+        if (!clockwise)
+        {
+            // Rotate clockwise two additional times to create a counterclockwise rotation.
+            Rotate(true);
+            Rotate(true);
         }
         */
-
-        //tiles = tempTiles;
     }
 }

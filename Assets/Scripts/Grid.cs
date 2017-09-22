@@ -57,8 +57,8 @@ public class Grid : MonoBehaviour
 		}
         */
 
-        //Instantiate BlockSpawner
-        blockSpawner.Init(this);
+        // Initialize BlockSpawner.
+        //blockSpawner.Init(this);
 
         //Instantiate GridBlocks
         gridBlocks = new List<GridBlock>();
