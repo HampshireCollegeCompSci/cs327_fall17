@@ -94,7 +94,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1083398636612014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4810290867857570}
@@ -167,3 +167,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ea0be4e0154e9489cd13363db2cc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenBlocks: 5
+  maxBlocksInQueue: 0
+  blockPositions:
+  - {fileID: 1861485758057634}
+  - {fileID: 1978265206769888}
+  - {fileID: 1595560154707428}
+  - {fileID: 1343179390919268}
+  gameFlow: {fileID: 0}
+  prefabDraggableBlock: {fileID: 1274260059464758, guid: d5b9c14df8255d8498eba274462873e5,
+    type: 2}

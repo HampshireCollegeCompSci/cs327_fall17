@@ -9,33 +9,34 @@ using UnityEngine;
 
 public class BlockSpawner : MonoBehaviour
 {
-
-    List<Block> possibleBlocks;
-
-    Queue<DraggableBlock> blocksQueue;
-
+    [SerializeField]
     float timeBetweenBlocks;
-
+    [SerializeField]
     int maxBlocksInQueue;
-
+    [SerializeField]
     GameObject[] blockPositions;
+    [SerializeField]
+    GameFlow gameFlow;
+    [SerializeField]
+    Grid grid;
+    [SerializeField]
+    GameObject prefabDraggableBlock;
+    //File blockData;
+
+    List<Block> possibleBlocks = new List<Block>();
+
+    Queue<DraggableBlock> blocksQueue = new Queue<DraggableBlock>();
 
     float timeBeforeNextBlock;
 
-    GameObject prefabDraggableBlock;
-
-    //File blockData;
-
-    GameFlow gameFlow;
-
-    Grid grid;
+    private void Start()
+    {
+        //leave for now about the File reading
+    }
 
     public void Init(Grid newGrid)
     {
         grid = newGrid;
-
-        //leave for now about the File reading
-        possibleBlocks = new List<Block>();
     }
 
     private void Update()
