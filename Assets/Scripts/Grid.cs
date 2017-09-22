@@ -236,7 +236,7 @@ public class Grid : MonoBehaviour
                 else //Rest of rows just check two tiles
                 {
                     if (tiles[tR, c].GetTileType() != TileData.TileType.Regular
-                       && tiles[tR, c + length - 1].GetTileType() != TileData.TileType.Regular)
+                       && tiles[tR, c + length  - 1].GetTileType() != TileData.TileType.Regular)
                     {
                         isLegal = false;
                         processed.Clear();
@@ -249,6 +249,8 @@ public class Grid : MonoBehaviour
                     count += 2;
                 }
             }
+            if (isLegal)
+                OnSquareFormed(length);
         }
         return processed;
     }
