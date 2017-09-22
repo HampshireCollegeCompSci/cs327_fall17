@@ -23,28 +23,29 @@ public class LerpTo : MonoBehaviour
 
     public void LerpToAtSpeed(Vector3 destination, float speed)
     {
+    	MovingSetup();
+	movingDestination = destination;
         lerpingAtSpeed = true;
         movingSpeed = speed;
-        movingSetup();
     }
 
 	//When this method is called, the GameObject moves towards the destination
     //and reaches it in the given amount of time (in seconds).
 	public void LerpToInTime(Vector3 destination, float time)
     {
-        movingSetup();
+        MovingSetup();
+	movingDestination = destination;
         lerpingInTime = true;
         movingTime = time;
-        t = 0;
-
+        t = 0.0f;
     }
 
     //This method sets all the variables up to start moving
-    private void movingSetup() 
+    private void MovingSetup() 
     {
-		startTime = Time.time;
-		startPosition = transform.position;
-		journeyLength = Vector3.Distance(gameObject.transform.position, movingDestination);
+	startTime = Time.time;
+	startPosition = transform.position;
+	journeyLength = Vector3.Distance(gameObject.transform.position, movingDestination);
     }
 
     private void Update()
