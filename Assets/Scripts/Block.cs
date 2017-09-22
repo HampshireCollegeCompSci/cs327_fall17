@@ -76,8 +76,36 @@ public class Block
         int newHeight = width;
         width = newWidth;
         height = newHeight;
-        TileData[,] tempTiles = new TileData[width, height];
+        //TileData[,] tempTiles = new TileData[width, height];
 
+		/*
+		for (int column = 0; column < width; ++column) {
+			for (int row = 0; row < height; ++row) {
+				TileData.TileType newType = tiles[].GetTileType();
+				tempTiles [row, column].SetTileType (newType);
+			}
+		}
+		*/
+
+		// Rotation code from:
+		// https://www.codeproject.com/Questions/854268/Rotate-a-matrix-degrees-cloclwise
+		for (int i = 0; i < height; ++i) {
+			for (int j = i + 1; j < width; ++j) {
+				TileData temp = tiles [i, j];
+				tiles [i, j] = tiles [j, i];
+				tiles [j, i] = temp;
+			}
+		}
+		for (int i = 0; i < height; ++i) {
+			for (int j = 0; j < width / 2; ++j) {
+				TileData temp = tiles [i, j];
+				tiles [i, j] = tiles [i, width - 1 - j];
+				tiles [i, width - 1 - j] = temp;
+			}
+		}
+
+
+		/*
         if (clockwise == true)
         {
             //rotates blocks to the right
@@ -94,6 +122,8 @@ public class Block
             tempTiles[1, 1].SetTileType(tiles[1, 0].GetTileType());
             tempTiles[1, 0].SetTileType(tiles[0, 0].GetTileType());
         }
-        tiles = tempTiles;
+        */
+
+        //tiles = tempTiles;
     }
 }
