@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class UIButton : MonoBehaviour {
-    public BlockSpawner Spawner;
+    public BlockSpawner spawner;
     public GameFlow gameFlow;
 
     public bool resetButton;
@@ -24,12 +24,12 @@ public class UIButton : MonoBehaviour {
 
     public void RotateClockwise()
     {
-        Spawner.RotateCurrentBlock(false);  
+        spawner.RotateCurrentBlock(true);  
     }
 
     public void RotateCounter()
     {
-        Spawner.RotateCurrentBlock(true);
+        spawner.RotateCurrentBlock(false);
     }
 
     public void Reset()
