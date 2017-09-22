@@ -25,7 +25,7 @@ public class Grid : MonoBehaviour
 
     Tile[,] tiles;
 
-    Dictionary<Vector2, List<Space>> spaces;
+    Dictionary<Vector2, List<Space>> spaces = new Dictionary<Vector2, List<Space>>();
 
     List<GridBlock> gridBlocks;
 
@@ -607,8 +607,6 @@ public class Grid : MonoBehaviour
     //Instantiates all Spaces on the Grid
     void InstantiateSpaces()
     {
-        spaces = new Dictionary<Vector2, List<Space>>();
-
         InstantiateCertainSpaces(1, 1);
         InstantiateCertainSpaces(1, 2);
         InstantiateCertainSpaces(2, 1);
@@ -642,7 +640,14 @@ public class Grid : MonoBehaviour
 
     public List<Space> GetSpacesFree(int width, int height, Block block)
     {
-        return null; // Replace this with an actual implementation!
+        List<Space> potentialSpaces = spaces[new Vector2(width, height)];
+        List<Space> freeSpaces = new List<Space>();
+        foreach(Space s in potentialSpaces)
+        {
+            if (s.CanBlockFit(block))
+                freeSpaces.Add(s);
+        }
+        return freeSpaces;
     }
 
     //Check if the Block can't fit into any of the Spaces, including block after rotation
