@@ -308,7 +308,7 @@ public class GridBlock
                 {
                     Block b = new Block(1, 1);
                     b.SetTileType(0, 0, TileData.TileType.Vestige);
-                    GridBlock gb = grid.WriteBlock(y + r, x + c, b);
+                    GridBlock gb = grid.WriteBlock(row + r, col + c, b);
                     gb.MoveRepeatedly(Enums.Direction.Down);
                 }
             }

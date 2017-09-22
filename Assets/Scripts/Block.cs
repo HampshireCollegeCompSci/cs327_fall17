@@ -6,15 +6,18 @@ using UnityEngine;
 
 public class Block
 {
+    [SerializeField]
     int width;
-
+    [SerializeField]
     int height;
 
     TileData[,] tiles;
 
     public Block(int newWidth, int newHeight)
     {
-        tiles = new TileData[newWidth, newHeight];
+        width = newWidth;
+        height = newHeight;
+        tiles = new TileData[width, height];
     }
 
     //Return the width of the block

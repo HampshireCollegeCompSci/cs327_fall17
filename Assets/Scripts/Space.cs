@@ -7,9 +7,9 @@ using UnityEngine;
 public class Space : MonoBehaviour
 {
     [SerializeField]
-	private int x; //the x-coordinate of this space
+	private int col; //the column of this space
     [SerializeField]
-	private int y; //the y-coordinate of this space
+	private int row; //the row of this space
     [SerializeField]
     private int width; //width of this space
     [SerializeField]
@@ -26,21 +26,21 @@ public class Space : MonoBehaviour
         snapLocation.SnappedTo += SnapLocation_SnappedTo;
     }
 
-    public void Init (int mx, int my, int mwidth, int mheight, Grid mgrid)
+    public void Init (int mcol, int mrow, int mwidth, int mheight, Grid mgrid)
 	{
-        x = mx;
-        y = my;
+        col = mcol;
+        row = mrow;
         width = mwidth;
         height = mheight;
         grid = mgrid;
 
         // Center the Space in the middle of all of the Tiles it occupies.
-        Vector3 tilePosTopLeft = grid.GetTilePosition(x, y);
-        Vector3 tilePosBottomRight = grid.GetTilePosition(x + width - 1, y + height - 1);
+        Vector3 tilePosTopLeft = grid.GetTilePosition(row, col);
+        Vector3 tilePosBottomRight = grid.GetTilePosition(row + height - 1, col + width - 1);
         Vector3 averagePos = (tilePosTopLeft + tilePosBottomRight) * 0.5f;
         transform.position = averagePos;
         // Scale the space as well.
-        transform.localScale = new Vector3(height, width, 1.0f);
+        transform.localScale = new Vector3(width, height, 1.0f);
 	}
 
     public bool CanBlockFit(Block block)
@@ -48,7 +48,7 @@ public class Space : MonoBehaviour
         if (block.GetWidth() == width && block.GetHeight() == height)
         {
             // It fits, dimensionally speaking.
-            return grid.CanBlockFit(x, y, block); // Check if the important Cells are empty.
+            return grid.CanBlockFit(row, col, block); // Check if the important Cells are empty.
         }
         else
         {
@@ -60,7 +60,7 @@ public class Space : MonoBehaviour
 	//This method should be called when a DraggableBlock is dragged onto this Space.
 	public void PlaceBlock(DraggableBlock block)
 	{
-        grid.WriteBlock(x, y, block.GetBlock()); //We're placing this block. Apparently it's the external responsibility to make sure this will work
+        grid.WriteBlock(row, col, block.GetBlock()); //We're placing this block. Apparently it's the external responsibility to make sure this will work
         grid.PlacedDraggableBlock(); // Notify the Grid that we just placed a DraggableBlock.
         Destroy(block.gameObject); //And now we're done with this GameObject - it's on the grid
     }
