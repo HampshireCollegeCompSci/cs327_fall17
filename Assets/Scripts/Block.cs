@@ -40,9 +40,9 @@ public class Block
     }
     */
 
-    public void Fill(int row, int col)
+    public void Fill(int row, int col, TileData.TileType newType)
     {
-        tiles[row, col].Fill();
+        tiles[row, col].Fill(newType);
     }
 
     public void Clear(int row, int col)
@@ -55,11 +55,6 @@ public class Block
         return tiles[row, col].GetTileType();
     }
 
-    public void SetTileType(int row, int col, TileData.TileType type)
-    {
-        tiles[row, col].SetTileType(type);
-    }
-
     public bool GetIsOccupied(int row, int col)
     {
         return tiles[row, col].GetIsOccupied();
@@ -67,7 +62,7 @@ public class Block
 
     public Tile.ChangedHandler GetCallbackTileDataSetTileType(int row, int col)
     {
-        return tiles[row, col].SetTileType;
+        return tiles[row, col].Fill;
     }
 
     // Rotates the Block.

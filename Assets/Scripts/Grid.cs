@@ -25,7 +25,7 @@ public class Grid : MonoBehaviour
 
     Tile[,] tiles;
 
-    Dictionary<Vector2, List<Space>> spaces;
+    Dictionary<Vector2, List<Space>> spaces = new Dictionary<Vector2, List<Space>>();
 
     List<GridBlock> gridBlocks;
 
@@ -89,9 +89,9 @@ public class Grid : MonoBehaviour
         return tiles[row, col].transform.position;
     }
 
-    public void Fill(int row, int col)
+    public void Fill(int row, int col, TileData.TileType newType)
     {
-        tiles[row, col].Fill();
+        tiles[row, col].Fill(newType);
     }
 
     public void Clear(int row, int col)
@@ -103,12 +103,6 @@ public class Grid : MonoBehaviour
     {
         return tiles[row, col].GetTileType();
     }
-
-    public void SetTileType(int row, int col, TileData.TileType type)
-    {
-        tiles[row, col].SetTileType(type);
-    }
-
 
     /*
     public Tile[,] GetTiles()
@@ -161,7 +155,7 @@ public class Grid : MonoBehaviour
 			for (int r = 0; r < block.GetHeight(); r++)
 			{
                 if (block.GetIsOccupied(r, c)){
-                    tiles[row + r, col + c].Fill();
+                    tiles[row + r, col + c].Fill(block.GetTileType(r, c));
                     //Note x is col and y is row
                     //coords.Add(new Coordinate(x + c, y + r));
                 }
@@ -242,7 +236,7 @@ public class Grid : MonoBehaviour
                 else //Rest of rows just check two tiles
                 {
                     if (tiles[tR, c].GetTileType() != TileData.TileType.Regular
-                       && tiles[tR, c + length - 1].GetTileType() != TileData.TileType.Regular)
+                       && tiles[tR, c + length  - 1].GetTileType() != TileData.TileType.Regular)
                     {
                         isLegal = false;
                         processed.Clear();
@@ -255,6 +249,8 @@ public class Grid : MonoBehaviour
                     count += 2;
                 }
             }
+            if (isLegal)
+                OnSquareFormed(length);
         }
         return processed;
     }
@@ -481,6 +477,7 @@ public class Grid : MonoBehaviour
     }
     */
 
+    /*
     public void MoveAllBlocks(Enums.Direction direction)
     {   	
         switch(direction){
@@ -605,12 +602,11 @@ public class Grid : MonoBehaviour
 
         CheckForMatches();
     }
+    */
 
     //Instantiates all Spaces on the Grid
     void InstantiateSpaces()
     {
-        spaces = new Dictionary<Vector2, List<Space>>();
-
         InstantiateCertainSpaces(1, 1);
         InstantiateCertainSpaces(1, 2);
         InstantiateCertainSpaces(2, 1);
@@ -626,7 +622,7 @@ public class Grid : MonoBehaviour
         {
             for (int j = 0; j < height; j += h)
             {
-                Space s = GameObject.Instantiate(prefabSpace).GetComponent<Space>();
+                Space s = Instantiate(prefabSpace).GetComponent<Space>();
                 s.Init(i, j, w, h, this);
                 ts.Add(s);
             }
@@ -644,23 +640,30 @@ public class Grid : MonoBehaviour
 
     public List<Space> GetSpacesFree(int width, int height, Block block)
     {
-        return null; // Replace this with an actual implementation!
+        List<Space> potentialSpaces = spaces[new Vector2(width, height)];
+        List<Space> freeSpaces = new List<Space>();
+        foreach(Space s in potentialSpaces)
+        {
+            if (s.CanBlockFit(block))
+                freeSpaces.Add(s);
+        }
+        return freeSpaces;
     }
 
     //Check if the Block can't fit into any of the Spaces, including block after rotation
     public bool CheckIfSpacesFilled(Block block)
     {
-        List<Space> spaces;
+        List<Space> localSpaces;
 
         //After four rotation, the block turns back to the beginning state
         for (int rotate = 0; rotate < 4; rotate++)
         {
             block.Rotate(true);
-            spaces = GetSpaces(block.GetWidth(), block.GetHeight());
+            localSpaces = GetSpaces(block.GetWidth(), block.GetHeight());
 
             for (int i = 0; i < spaces.Count; i++)
             {
-                if (spaces[i].CanBlockFit(block))
+                if (localSpaces[i].CanBlockFit(block))
                 {
                     return false;
                 }
