@@ -6,9 +6,11 @@ using UnityEngine;
 
 public class GridBlock
 {
-    int x;
-
-    int y;
+    //row and col here are the position of the top-left
+    //tile in this gridblock, using them as startRow and startCol 
+    //to indicate the position of the entire gridblock.
+    int row;
+    int col;
 
     Block block;
 
@@ -16,75 +18,75 @@ public class GridBlock
 
     Tile[,] tiles;
 
-    public GridBlock(int xStart, int yStart, Block myBlock, Grid myGrid)
+    public GridBlock(int rStart, int cStart, Block myBlock, Grid myGrid)
     {
-        x = xStart;
-        y = xStart;
+        row = rStart;
+        col = cStart;
         block = myBlock;
         grid = myGrid;
         int width = block.GetWidth();
         int height = block.GetHeight();
-        tiles = new Tile[width, height];
-        for (int i = 0; i < width; ++i)
+        tiles = new Tile[height, width];
+        for (int i = 0; i < height; ++i)
         {
-            for (int j = 0; j < height; ++j)
+            for (int j = 0; j < width; ++j)
             {
-                SetTile(i, j, grid.GetTileAt(x + i, y + j));
+                SetTile(i, j, grid.GetTileAt(row + i, col + j));
             }
         }
     }
 
-    //Return the x index of the gridblock
-    public int GetX()
+    //Return the start row index of the gridblock
+    public int GetRow()
     {
-        return x;
+        return row;
     }
 
-    //Return the y index of the gridblock
-    public int GetY()
+    //Return the start col index of the gridblock
+    public int GetCol()
     {
-        return y;
+        return col;
     }
 
-    //Set the Tile of given indexes x and y to new Tile
-    public void SetTile(int x, int y, Tile newTile)
+    //Set the Tile of given indexes row and col to new Tile
+    public void SetTile(int row, int col, Tile newTile)
     {
         // Unsubscribe from the old tile.
-        tiles[x, y].Changed -= block.GetCallbackTileDataSetTileType(x, y);
+        tiles[row, col].Changed -= block.GetCallbackTileDataSetTileType(row, col);
         // Assign new tile.
-        tiles[x, y] = newTile;
+        tiles[row, col] = newTile;
         // Subscribe to the new tile.
-        tiles[x, y].Changed += block.GetCallbackTileDataSetTileType(x, y);
+        tiles[row, col].Changed += block.GetCallbackTileDataSetTileType(row, col);
     }
 
-    public void Fill(int x, int y)
+    public void Fill(int row, int col)
     {
-        tiles[x, y].Fill();
+        tiles[row, col].Fill();
     }
 
-    public void Clear(int x, int y)
+    public void Clear(int row, int col)
     {
-        tiles[x, y].Clear();
+        tiles[row, col].Clear();
     }
 
-    public bool GetIsOccupied(int x, int y)
+    public bool GetIsOccupied(int row, int col)
     {
-        return block.GetIsOccupied(x, y);
+        return block.GetIsOccupied(row, col);
     }
 
-    public TileData.TileType GetTileType(int x, int y)
+    public TileData.TileType GetTileType(int row, int col)
     {
-        return block.GetTileType(x, y);
+        return block.GetTileType(row, col);
     }
 
-    public void SetTileType(int x, int y, TileData.TileType type)
+    public void SetTileType(int row, int col, TileData.TileType type)
     {
-        tiles[x, y].SetTileType(type);
+        tiles[row, col].SetTileType(type);
     }
 
-    public bool BelongsToBlock(int x, int y)
+    public bool BelongsToBlock(int row, int col)
     {
-        return block.GetIsOccupied(x, y) == grid.GetIsOccupied(x, y);
+        return block.GetIsOccupied(row, col) == grid.GetIsOccupied(row, col);
     }
 
     /*Repeatedly moves the GridBlock along the Grid in
@@ -104,25 +106,25 @@ public class GridBlock
                 //Run through the tiles from left to right, top to bottom, and add right-most extremetiles of each row to the list
                 for (int i = 0; i < block.GetHeight(); i++)
                 {
-                    int maxX = -1; //Record the x index for right-most extremtile
+                    int maxCol = -1; //Record the col index for right-most extremtile
                     for (int j = 0; j < block.GetWidth(); j++)
                     {
                         if (grid.GetIsOccupied(i, j))
                         {
-                            maxX = j;
+                            maxCol = j;
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
-                            if (x + maxX + 1 > grid.GetWidth() || (maxX + 1 < block.GetWidth() &&
-                            !block.GetIsOccupied(i, maxX + 1) && grid.GetIsOccupied(i, x + maxX + 1))
-                            || (maxX + 1 == block.GetWidth() && grid.GetIsOccupied(i, x + maxX + 1)))
+                            if (col + maxCol + 1 > grid.GetWidth() || (maxCol + 1 < block.GetWidth() &&
+                            !block.GetIsOccupied(i, maxCol + 1) && grid.GetIsOccupied(i, col + maxCol + 1))
+                            || (maxCol + 1 == block.GetWidth() && grid.GetIsOccupied(i, col + maxCol + 1)))
                                 return false;
                         }
                     }
 
                     //If max equals to -1, then the row is empty
-                    if (maxX != -1)
-                        exTilesIndex.Add(new Vector2(i, maxX));
+                    if (maxCol != -1)
+                        exTilesIndex.Add(new Vector2(i, maxCol));
                 }
 
                 //From right to left, duplicate each tile and then clear, move the block one tile to the right side
@@ -134,13 +136,13 @@ public class GridBlock
                     for (int j = exTileY; j >= 0; j--)
                     {
                         //gridTiles[y + exTileX, j + x + 1].Duplicate(blockTiles[exTileX, j]);
-                        grid.SetTileType(y + exTileX, j + x + 1, block.GetTileType(exTileX, j));
-                        SetTile(y + exTileX, j + x + 1, grid.GetTileAt(y + exTileX, j + x + 1));
-                        grid.Clear(y + exTileX, j + x);
+                        grid.SetTileType(row + exTileX, j + col + 1, block.GetTileType(exTileX, j));
+                        SetTile(row + exTileX, j + col + 1, grid.GetTileAt(row + exTileX, j + col + 1));
+                        grid.Clear(row + exTileX, j + col);
                     }
                 }
 
-                x += 1;
+                col += 1;
 
                 break;
             case Enums.Direction.Down:
@@ -156,9 +158,9 @@ public class GridBlock
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
-                            if (y + maxY + 1 > grid.GetHeight() || (maxY + 1 < block.GetHeight() &&
-                            !block.GetIsOccupied(maxY + 1, i) && grid.GetIsOccupied(y + maxY + 1, i)
-                            || (maxY + 1 == block.GetHeight() && grid.GetIsOccupied(y + maxY + 1, i))))
+                            if (row + maxY + 1 > grid.GetHeight() || (maxY + 1 < block.GetHeight() &&
+                            !block.GetIsOccupied(maxY + 1, i) && grid.GetIsOccupied(row + maxY + 1, i)
+                            || (maxY + 1 == block.GetHeight() && grid.GetIsOccupied(row + maxY + 1, i))))
                                 return false;
                         }
                     }
@@ -177,13 +179,13 @@ public class GridBlock
                     for (int j = exTileX; j >= 0; j--)
                     {
                         //gridTiles[y + j + 1, x + exTileY].Duplicate(blockTiles[j, exTileY]);
-                        grid.SetTileType(y + j + 1, x + exTileY, block.GetTileType(j, exTileY));
-                        SetTile(y + j + 1, x + exTileY, grid.GetTileAt(y + j + 1, x + exTileY));
-                        grid.Clear(y + j, x + exTileY);
+                        grid.SetTileType(row + j + 1, col + exTileY, block.GetTileType(j, exTileY));
+                        SetTile(row + j + 1, col + exTileY, grid.GetTileAt(row + j + 1, col + exTileY));
+                        grid.Clear(row + j, col + exTileY);
                     }
                 }
 
-                y += 1;
+                row += 1;
 
                 break;
             case Enums.Direction.Left:
@@ -199,9 +201,9 @@ public class GridBlock
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
-                            if (x + minX - 1 < 0 || (minX - 1 >= 0 &&
-                            !block.GetIsOccupied(i, minX - 1) && grid.GetIsOccupied(i, x + minX - 1)
-                            || (minX - 1 == -1 && grid.GetIsOccupied(i, x + minX - 1))))
+                            if (col + minX - 1 < 0 || (minX - 1 >= 0 &&
+                            !block.GetIsOccupied(i, minX - 1) && grid.GetIsOccupied(i, col + minX - 1)
+                            || (minX - 1 == -1 && grid.GetIsOccupied(i, col + minX - 1))))
                                 return false;
                         }
                     }
@@ -220,13 +222,13 @@ public class GridBlock
                     for (int j = 0; j < exTileY; j++)
                     {
                         //gridTiles[y + exTileX, j + x - 1].Duplicate(blockTiles[exTileX, j]);
-                        grid.SetTileType(y + exTileX, j + x - 1, block.GetTileType(exTileX, j));
-                        SetTile(y + exTileX, j + x - 1, grid.GetTileAt(y + exTileX, j + x - 1));
-                        grid.Clear(y + exTileX, j + x);
+                        grid.SetTileType(row + exTileX, j + col - 1, block.GetTileType(exTileX, j));
+                        SetTile(row + exTileX, j + col - 1, grid.GetTileAt(row + exTileX, j + col - 1));
+                        grid.Clear(row + exTileX, j + col);
                     }
                 }
 
-                x -= 1;
+                col -= 1;
 
                 break;
 
@@ -243,9 +245,9 @@ public class GridBlock
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
-                            if (y + minY - 1 < 0 || (minY - 1 >= 0 &&
-                            !block.GetIsOccupied(minY - 1, i) && grid.GetIsOccupied(y + minY - 1, i)
-                            || (minY - 1 == -1 && grid.GetIsOccupied(y + minY - 1, i))))
+                            if (row + minY - 1 < 0 || (minY - 1 >= 0 &&
+                            !block.GetIsOccupied(minY - 1, i) && grid.GetIsOccupied(row + minY - 1, i)
+                            || (minY - 1 == -1 && grid.GetIsOccupied(row + minY - 1, i))))
                                 return false;
                         }
                     }
@@ -264,13 +266,13 @@ public class GridBlock
                     for (int j = 0; j < exTileX; j++)
                     {
                         //gridTiles[y + j - 1, x + exTileY].Duplicate(blockTiles[j, exTileY]);
-                        grid.SetTileType(y + j - 1, x + exTileY, block.GetTileType(j, exTileY));
-                        SetTile(y + j - 1, x + exTileY, grid.GetTileAt(y + j - 1, x + exTileY));
-                        grid.Clear(y + j, x + exTileY);
+                        grid.SetTileType(row + j - 1, col + exTileY, block.GetTileType(j, exTileY));
+                        SetTile(row + j - 1, col + exTileY, grid.GetTileAt(row + j - 1, col + exTileY));
+                        grid.Clear(row + j, col + exTileY);
                     }
                 }
 
-                y -= 1;
+                row -= 1;
 
                 break;
         }
