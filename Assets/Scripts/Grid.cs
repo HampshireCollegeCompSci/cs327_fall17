@@ -89,9 +89,9 @@ public class Grid : MonoBehaviour
         return tiles[row, col].transform.position;
     }
 
-    public void Fill(int row, int col)
+    public void Fill(int row, int col, TileData.TileType newType)
     {
-        tiles[row, col].Fill();
+        tiles[row, col].Fill(newType);
     }
 
     public void Clear(int row, int col)
@@ -106,7 +106,7 @@ public class Grid : MonoBehaviour
 
     public void SetTileType(int row, int col, TileData.TileType type)
     {
-        tiles[row, col].SetTileType(type);
+        tiles[row, col].Fill(type);
     }
 
 
@@ -161,7 +161,7 @@ public class Grid : MonoBehaviour
 			for (int r = 0; r < block.GetHeight(); r++)
 			{
                 if (block.GetIsOccupied(r, c)){
-                    tiles[row + r, col + c].Fill();
+                    tiles[row + r, col + c].Fill(block.GetTileType(r, c));
                     //Note x is col and y is row
                     //coords.Add(new Coordinate(x + c, y + r));
                 }
@@ -481,6 +481,7 @@ public class Grid : MonoBehaviour
     }
     */
 
+    /*
     public void MoveAllBlocks(Enums.Direction direction)
     {   	
         switch(direction){
@@ -605,6 +606,7 @@ public class Grid : MonoBehaviour
 
         CheckForMatches();
     }
+    */
 
     //Instantiates all Spaces on the Grid
     void InstantiateSpaces()
@@ -626,7 +628,7 @@ public class Grid : MonoBehaviour
         {
             for (int j = 0; j < height; j += h)
             {
-                Space s = GameObject.Instantiate(prefabSpace).GetComponent<Space>();
+                Space s = Instantiate(prefabSpace).GetComponent<Space>();
                 s.Init(i, j, w, h, this);
                 ts.Add(s);
             }
@@ -650,17 +652,17 @@ public class Grid : MonoBehaviour
     //Check if the Block can't fit into any of the Spaces, including block after rotation
     public bool CheckIfSpacesFilled(Block block)
     {
-        List<Space> spaces;
+        List<Space> localSpaces;
 
         //After four rotation, the block turns back to the beginning state
         for (int rotate = 0; rotate < 4; rotate++)
         {
             block.Rotate(true);
-            spaces = GetSpaces(block.GetWidth(), block.GetHeight());
+            localSpaces = GetSpaces(block.GetWidth(), block.GetHeight());
 
             for (int i = 0; i < spaces.Count; i++)
             {
-                if (spaces[i].CanBlockFit(block))
+                if (localSpaces[i].CanBlockFit(block))
                 {
                     return false;
                 }
