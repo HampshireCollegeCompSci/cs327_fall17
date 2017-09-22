@@ -72,6 +72,18 @@ public class Block
 
     public void Rotate(bool clockwise)
     {
-
+		if (clockwise = true) {
+			//rotates blocks to the right
+			tiles [0, 0].SetTileType (tiles[1,0].GetTileType);
+			tiles [0, 1].SetTileType (tiles[0,0].GetTileType);
+			tiles [1, 1].SetTileType (tiles[0,1].GetTileType);
+			tiles [1, 0].SetTileType (tiles[1,1].GetTileType);
+		}  else {
+			//rotates blocks to the left
+			tiles [0, 0].SetTileType (tiles[0,1].GetTileType);
+			tiles [0, 1].SetTileType (tiles[1,1].GetTileType);
+			tiles [1, 1].SetTileType (tiles[1,0].GetTileType);
+			tiles [1, 0].SetTileType (tiles[0,0].GetTileType);
+		}
     }
 }
