@@ -20,9 +20,17 @@ public class DraggableBlock : MonoBehaviour
     //Copies the data of a Block into this DraggableBlock’s contained Block
     public void SetBlock(Block copiedBlock)
     {
-        GameObject tileObject = Instantiate(prefabTile);
-        tiles = TileUtil.CreateTileArray(prefabTile, tileObject.transform.position, copiedBlock.GetWidth(), copiedBlock.GetHeight());
+        tiles = TileUtil.CreateTileArray(prefabTile, transform.position, copiedBlock.GetWidth(), copiedBlock.GetHeight());
         block = new Block(copiedBlock.GetWidth(), copiedBlock.GetHeight());
+        for (int r = 0; r < block.GetHeight(); r++)
+        {
+            for (int c = 0; c < block.GetWidth(); c++)
+            {
+                block.Fill(r, c, copiedBlock.GetTileType(r, c));
+            }
+        }
+        
+        UpdateTiles();
         UpdateAvailableSpaces();
     }
 
@@ -54,15 +62,19 @@ public class DraggableBlock : MonoBehaviour
     //array to match the Block’s TileData. Lastly, call UpdateAvailableSpaces.
     public void Rotate(bool clockwise)
     {
-        block.Rotate(true);
-        for (int i = 0; i < tiles.Length; i++)
+        block.Rotate(clockwise);
+        UpdateTiles();
+        UpdateAvailableSpaces();
+    }
+
+    public void UpdateTiles()
+    {
+        for (int r = 0; r < block.GetHeight(); r++)
         {
-            for (int j = 0; j < tiles.GetLength(i); j++)
+            for (int c = 0; c < block.GetWidth(); c++)
             {
-                tiles[i, j].Fill(block.GetTileType(i, j));
+                tiles[r, c].Fill(block.GetTileType(r, c));
             }
         }
-       
-        UpdateAvailableSpaces();
     }
 }
