@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class TileUtil
 {
+    const float spaceBetweenTiles = 0.64f;
+
     public static Tile[,] CreateTileArray(GameObject prefabTile, Vector3 center, int width, int height)
     {
         Tile[,] result = new Tile[width, height];
-
-        const float spaceBetweenTiles = 0.32f;
 
         // Calculate the position of the top-left corner of the array.
         float topLeftX = center.x - ((width - 1) * spaceBetweenTiles * 0.5f);

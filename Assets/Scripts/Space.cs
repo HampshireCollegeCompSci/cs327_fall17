@@ -6,11 +6,16 @@ using UnityEngine;
 
 public class Space : MonoBehaviour
 {
+    [SerializeField]
 	private int x; //the x-coordinate of this space
+    [SerializeField]
 	private int y; //the y-coordinate of this space
-	private int width; //width of this space
+    [SerializeField]
+    private int width; //width of this space
+    [SerializeField]
 	private int height; //height of this space
-	private Grid grid; //which grid this space is on
+    [SerializeField]
+    private Grid grid; //which grid this space is on
 
     [SerializeField]
     SnapLocation snapLocation;
@@ -28,6 +33,14 @@ public class Space : MonoBehaviour
         width = mwidth;
         height = mheight;
         grid = mgrid;
+
+        // Center the Space in the middle of all of the Tiles it occupies.
+        Vector3 tilePosTopLeft = grid.GetTilePosition(x, y);
+        Vector3 tilePosBottomRight = grid.GetTilePosition(x + width - 1, y + height - 1);
+        Vector3 averagePos = (tilePosTopLeft + tilePosBottomRight) * 0.5f;
+        transform.position = averagePos;
+        // Scale the space as well.
+        transform.localScale = new Vector3(height, width, 1.0f);
 	}
 
     public bool CanBlockFit(Block block)
