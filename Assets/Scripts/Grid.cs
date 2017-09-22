@@ -84,6 +84,11 @@ public class Grid : MonoBehaviour
         return tiles[x, y];
     }
 
+    public Vector3 GetTilePosition(int x, int y)
+    {
+        return tiles[x, y].transform.position;
+    }
+
     public void Fill(int x, int y)
     {
         tiles[x, y].Fill();
