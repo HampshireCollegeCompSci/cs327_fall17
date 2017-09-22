@@ -104,12 +104,6 @@ public class Grid : MonoBehaviour
         return tiles[row, col].GetTileType();
     }
 
-    public void SetTileType(int row, int col, TileData.TileType type)
-    {
-        tiles[row, col].Fill(type);
-    }
-
-
     /*
     public Tile[,] GetTiles()
     {
