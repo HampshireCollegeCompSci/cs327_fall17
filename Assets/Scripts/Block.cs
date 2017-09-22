@@ -37,34 +37,34 @@ public class Block
     }
     */
 
-    public void Fill(int x, int y)
+    public void Fill(int row, int col)
     {
-        tiles[x, y].Fill();
+        tiles[row, col].Fill();
     }
 
-    public void Clear(int x, int y)
+    public void Clear(int row, int col)
     {
-        tiles[x, y].Clear();
+        tiles[row, col].Clear();
     }
 
-    public TileData.TileType GetTileType(int x, int y)
+    public TileData.TileType GetTileType(int row, int col)
     {
-        return tiles[x, y].GetTileType();
+        return tiles[row, col].GetTileType();
     }
 
-    public void SetTileType(int x, int y, TileData.TileType type)
+    public void SetTileType(int row, int col, TileData.TileType type)
     {
-        tiles[x, y].SetTileType(type);
+        tiles[row, col].SetTileType(type);
     }
 
-    public bool GetIsOccupied(int x, int y)
+    public bool GetIsOccupied(int row, int col)
     {
-        return tiles[x, y].GetIsOccupied();
+        return tiles[row, col].GetIsOccupied();
     }
 
-    public Tile.ChangedHandler GetCallbackTileDataSetTileType(int x, int y)
+    public Tile.ChangedHandler GetCallbackTileDataSetTileType(int row, int col)
     {
-        return tiles[x, y].SetTileType;
+        return tiles[row, col].SetTileType;
     }
 
     public void Rotate(bool clockwise)

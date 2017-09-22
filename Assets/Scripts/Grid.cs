@@ -74,34 +74,34 @@ public class Grid : MonoBehaviour
         return height;
     }
 
-    public bool GetIsOccupied(int x, int y)
+    public bool GetIsOccupied(int row, int col)
     {
-        return tiles[x, y].GetIsOccupied();
+        return tiles[row, col].GetIsOccupied();
     }
 
-    public Tile GetTileAt(int x, int y)
+    public Tile GetTileAt(int row, int col)
     {
-        return tiles[x, y];
+        return tiles[row, col];
     }
 
-    public void Fill(int x, int y)
+    public void Fill(int row, int col)
     {
-        tiles[x, y].Fill();
+        tiles[row, col].Fill();
     }
 
-    public void Clear(int x, int y)
+    public void Clear(int row, int col)
     {
-        tiles[x, y].Clear();
+        tiles[row, col].Clear();
     }
 
-    public TileData.TileType GetTileType(int x, int y)
+    public TileData.TileType GetTileType(int row, int col)
     {
-        return tiles[x, y].GetTileType();
+        return tiles[row, col].GetTileType();
     }
 
-    public void SetTileType(int x, int y, TileData.TileType type)
+    public void SetTileType(int row, int col, TileData.TileType type)
     {
-        tiles[x, y].SetTileType(type);
+        tiles[row, col].SetTileType(type);
     }
 
 
@@ -112,12 +112,12 @@ public class Grid : MonoBehaviour
     }
     */
 
-    public bool CanBlockFit(int x, int y, Block block)
+    public bool CanBlockFit(int row, int col, Block block)
     {
         //Assume each tile is 1x1 size.
         for (int c = 0; c < block.GetWidth(); c++){
             for (int r = 0; r < block.GetHeight(); r++){
-                if (tiles[y + r, x + c].GetIsOccupied() &&
+                if (tiles[row + r, col + c].GetIsOccupied() &&
                     block.GetIsOccupied(r, c))
                     return false;
             }
@@ -126,6 +126,7 @@ public class Grid : MonoBehaviour
         return true;
     }
 
+    /*
     private class Coordinate
     {
         int x, y;
@@ -145,8 +146,9 @@ public class Grid : MonoBehaviour
             return y;
         }
     }
+    */
 
-    public GridBlock WriteBlock(int x, int y, Block block)
+    public GridBlock WriteBlock(int row, int col, Block block)
     {
         //List<Coordinate> coords = new List<Coordinate>();
 		for (int c = 0; c < block.GetWidth(); c++)
@@ -154,13 +156,13 @@ public class Grid : MonoBehaviour
 			for (int r = 0; r < block.GetHeight(); r++)
 			{
                 if (block.GetIsOccupied(r, c)){
-                    tiles[y + r, x + c].Fill();
+                    tiles[row + r, col + c].Fill();
                     //Note x is col and y is row
                     //coords.Add(new Coordinate(x + c, y + r));
                 }
 			}
 		}
-        GridBlock gb = new GridBlock(x, y, block, this);
+        GridBlock gb = new GridBlock(row, col, block, this);
         gridBlocks.Add(gb);
 
         //call LShapeCheck after each insertion
