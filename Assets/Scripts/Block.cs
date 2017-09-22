@@ -65,8 +65,64 @@ public class Block
         return tiles[row, col].Fill;
     }
 
+    // Rotates the Block.
+    // TODO: Support counterclockwise rotation.
     public void Rotate(bool clockwise)
     {
+        // Height and width are swapped when rotating 90 degrees.
+        TileData[,] tilesTemp = new TileData[height, width];
 
+        // Rotation algorithm adapted from:
+        // https://www.codeproject.com/Questions/854268/Rotate-a-matrix-degrees-cloclwise
+
+        // Transpose.
+        for (int i = 0; i < height; ++i)
+        {
+            for (int j = i + 1; j < width; ++j)
+            {
+                tilesTemp[i, j] = tiles[j, i];
+                tilesTemp[j, i] = tiles[i, j];
+            }
+        }
+        if (clockwise)
+        {
+            // Reverse each row.
+            for (int i = 0; i < height; ++i)
+            {
+                for (int j = 0; j < width / 2; ++j)
+                {
+                    tilesTemp[i, j] = tiles[i, width - 1 - j];
+                    tilesTemp[i, width - 1 - j] = tiles[i, j];
+                }
+            }
+        }
+        else
+        {
+            // Reverse each column.
+            for (int i = 0; i < height; ++i)
+            {
+                for (int j = 0; j < width / 2; ++j)
+                {
+                    tilesTemp[i, j] = tiles[height - 1 - i, j];
+                    tilesTemp[height - 1 - i, j] = tiles[i, j];
+                }
+            }
+        }
+
+        // Update the tiles array with the new Tiles.
+        tiles = tilesTemp;
+        // Swap width and height.
+        int temp = width;
+        width = height;
+        height = temp;
+
+        /*
+        if (!clockwise)
+        {
+            // Rotate clockwise two additional times to create a counterclockwise rotation.
+            Rotate(true);
+            Rotate(true);
+        }
+        */
     }
 }

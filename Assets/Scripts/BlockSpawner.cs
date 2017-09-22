@@ -34,10 +34,12 @@ public class BlockSpawner : MonoBehaviour
         //leave for now about the File reading
     }
 
+    /*
     public void Init(Grid newGrid)
     {
         grid = newGrid;
     }
+    */
 
     private void Update()
     {

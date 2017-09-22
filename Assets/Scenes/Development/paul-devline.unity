@@ -163,17 +163,17 @@ Prefab:
     - target: {fileID: 224282880185419056, guid: d5b9c14df8255d8498eba274462873e5,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -300
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224282880185419056, guid: d5b9c14df8255d8498eba274462873e5,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 64
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 224282880185419056, guid: d5b9c14df8255d8498eba274462873e5,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 64
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 224282880185419056, guid: d5b9c14df8255d8498eba274462873e5,
         type: 2}
@@ -924,7 +924,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 600, y: 800}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
