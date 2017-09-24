@@ -128,7 +128,7 @@ public class GridBlock
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
-                            if (col + maxCol + 1 > grid.GetWidth() || (maxCol + 1 < block.GetWidth() &&
+                            if (col + maxCol + 1 >= grid.GetWidth() || (maxCol + 1 < block.GetWidth() &&
                             !block.GetIsOccupied(i, maxCol + 1) && grid.GetIsOccupied(i, col + maxCol + 1))
                             || (maxCol + 1 == block.GetWidth() && grid.GetIsOccupied(i, col + maxCol + 1)))
                                 return false;
@@ -319,7 +319,14 @@ public class GridBlock
                 {
                     Clear(r, c);
                 }
-                else if (GetTileType(r, c) == TileData.TileType.Regular)
+            }
+        }
+
+        for (int r = 0; r < block.GetHeight(); r++)
+        {
+            for (int c = 0; c < block.GetWidth(); c++)
+            {
+                if (GetTileType(r, c) == TileData.TileType.Regular)
                 {
                     Block b = new Block(1, 1);
                     b.Fill(0, 0, TileData.TileType.Vestige);
@@ -330,6 +337,8 @@ public class GridBlock
                 }
             }
         }
+
+        vestiges.Sort((x, y) => x.GetRow().CompareTo(y.GetRow()));
 
         // Now we move all vestiges. Move the lower ones first.
 
