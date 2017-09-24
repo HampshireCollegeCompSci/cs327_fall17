@@ -227,25 +227,25 @@ public class Grid : MonoBehaviour
         if (r + length - 1 < height && c + length - 1 < width)
         {
             int count = 0;
-            int tR = r;
+            int currentRow = r;
             bool isLegal = true;
             //The max number of tiles to be checked
             while (count < length * length - (length - 2) * (length - 2) - 1)
             {
                 //For first and last rows check the whole line
-                if (tR == r || tR == r + length - 1)
+                if (currentRow == r || currentRow == r + length - 1)
                 {
                     for (int i = c; i < c + length; i++)
                     {
-                        if (tiles[tR, i].GetTileType() != TileData.TileType.Regular)
+                        if (tiles[currentRow, i].GetTileType() != TileData.TileType.Regular)
                         {
                             isLegal = false;
                             processed.Clear();
                             break;  //exit for loop
                         }
                         //Check to avoid repeated tiles
-                        if (processed.Find(t => t == tiles[tR, i]) == null)
-                            processed.Add(tiles[tR, i]);
+                        if (processed.Find(t => t == tiles[currentRow, i]) == null)
+                            processed.Add(tiles[currentRow, i]);
                         count++;
                     }
                     if (!isLegal)
@@ -253,19 +253,21 @@ public class Grid : MonoBehaviour
                 }
                 else //Rest of rows just check two tiles
                 {
-                    if (tiles[tR, c].GetTileType() != TileData.TileType.Regular
-                       && tiles[tR, c + length - 1].GetTileType() != TileData.TileType.Regular)
+                    if (tiles[currentRow, c].GetTileType() != TileData.TileType.Regular
+                       && tiles[currentRow, c + length - 1].GetTileType() != TileData.TileType.Regular)
                     {
                         isLegal = false;
                         processed.Clear();
                         break;  //exit while loop
                     }
-                    if (processed.Find(t => t == tiles[tR, c]) == null)
-                        processed.Add(tiles[tR, c]);
-                    if (processed.Find(t => t == tiles[tR, c + length - 1]) == null)
-                        processed.Add(tiles[tR, c + length - 1]);
+                    if (processed.Find(t => t == tiles[currentRow, c]) == null)
+                        processed.Add(tiles[currentRow, c]);
+                    if (processed.Find(t => t == tiles[currentRow, c + length - 1]) == null)
+                        processed.Add(tiles[currentRow, c + length - 1]);
                     count += 2;
                 }
+
+                currentRow += 1;
             }
             if (isLegal)
                 OnSquareFormed(length);
