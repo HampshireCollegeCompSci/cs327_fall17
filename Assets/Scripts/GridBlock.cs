@@ -171,7 +171,7 @@ public class GridBlock
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
-                            if (row + maxY + 1 > grid.GetHeight() || (maxY + 1 < block.GetHeight() &&
+                            if (row + maxY + 1 >= grid.GetHeight() || (maxY + 1 < block.GetHeight() &&
                             !block.GetIsOccupied(maxY + 1, i) && grid.GetIsOccupied(row + maxY + 1, i)
                             || (maxY + 1 == block.GetHeight() && grid.GetIsOccupied(row + maxY + 1, i))))
                                 return false;
