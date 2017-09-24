@@ -1,5 +1,5 @@
 ﻿// Author(s): Paul Calande, Yifeng Shi, Yixiang Xu
-// A 2-dimensional collections of tiles
+// A 2-dimensional collections of Tiles
 
 using System;
 using System.Collections;
@@ -38,7 +38,7 @@ public class Grid : MonoBehaviour
     private void Start()
     {
         //Instantiate tiles array
-        tiles = TileUtil.CreateTileArray(prefabTile, transform.position, width, height);
+        tiles = TileUtil.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
 
         //Instantiate spaces
         InstantiateSpaces();
@@ -58,6 +58,7 @@ public class Grid : MonoBehaviour
         */
 
         // Initialize BlockSpawner.
+        blockSpawner.Init();
         //blockSpawner.Init(this);
 
         //Instantiate GridBlocks
@@ -86,7 +87,7 @@ public class Grid : MonoBehaviour
 
     public Vector3 GetTilePosition(int row, int col)
     {
-        return tiles[row, col].transform.position;
+        return tiles[row, col].transform.localPosition;
     }
 
     public void Fill(int row, int col, TileData.TileType newType)
@@ -150,17 +151,18 @@ public class Grid : MonoBehaviour
     public GridBlock WriteBlock(int row, int col, Block block)
     {
         //List<Coordinate> coords = new List<Coordinate>();
-		for (int c = 0; c < block.GetWidth(); c++)
-		{
-			for (int r = 0; r < block.GetHeight(); r++)
-			{
-                if (block.GetIsOccupied(r, c)){
+        for (int c = 0; c < block.GetWidth(); c++)
+        {
+            for (int r = 0; r < block.GetHeight(); r++)
+            {
+                if (block.GetIsOccupied(r, c))
+                {
                     tiles[row + r, col + c].Fill(block.GetTileType(r, c));
                     //Note x is col and y is row
                     //coords.Add(new Coordinate(x + c, y + r));
                 }
-			}
-		}
+            }
+        }
         GridBlock gb = new GridBlock(row, col, block, this);
         gridBlocks.Add(gb);
 
@@ -170,24 +172,28 @@ public class Grid : MonoBehaviour
         return gb;
     }
 
-    public void CheckForMatches(){
+    public void CheckForMatches()
+    {
+        //Debug.Log("Checking for matches...");
 
-        //List keeping all tiles that are going to be removed.
-        //We do remove after calculation because it's possible to remove
-        //multiple squares together
+        int biggestSquareSize = Mathf.Min(width, height);
+
+        // List keeping all tiles that are going to be removed.
+        // We do remove after calculation because it's possible to remove
+        // multiple squares together.
         List<Tile> toRemove = new List<Tile>();
 
-        //Loop through all blocks from topLeft.
-        //Consider only the case that the current tile is the top-lefr corner
+        //Loop through all blocks from top left.
+        //Consider only the case that the current tile is the top-left corner.
         for (int r = 0; r < height; r++)
         {
             for (int c = 0; c < width; c++)
             {
-                //Only if the tile is regular black tile
-                if(tiles[r, c].GetTileType() == TileData.TileType.Regular)
+                // Proceed only if the Tile is regular tile.
+                if (tiles[r, c].GetTileType() == TileData.TileType.Regular)
                 {
-                    //Check for squares from length 3 to 8
-                    for (int length = 3; length <= 8; length++)
+                    // Check for squares from length 3 upwards.
+                    for (int length = 3; length <= biggestSquareSize; length++)
                     {
                         toRemove.AddRange(CheckForSquares(r, c, length));
                     }
@@ -196,9 +202,21 @@ public class Grid : MonoBehaviour
         }
 
         //Remove all tiles that form squares
-        toRemove.ForEach(t => t.Clear());
+        //toRemove.ForEach(t => t.Clear());
+        foreach (Tile t in toRemove)
+        {
+            t.Clear();
+        }
 
-        //For vestiges, leave it for now
+        // Inform all GridBlocks that matches have been checked.
+        for (int i = 0; i < gridBlocks.Count; ++i)
+        {
+            if (gridBlocks[i].MatchesChecked())
+            {
+                // Step back an index if the current GridBlock has been deleted.
+                --i;
+            }
+        }
     }
 
     private List<Tile> CheckForSquares(int r, int c, int length)
@@ -236,7 +254,7 @@ public class Grid : MonoBehaviour
                 else //Rest of rows just check two tiles
                 {
                     if (tiles[tR, c].GetTileType() != TileData.TileType.Regular
-                       && tiles[tR, c + length  - 1].GetTileType() != TileData.TileType.Regular)
+                       && tiles[tR, c + length - 1].GetTileType() != TileData.TileType.Regular)
                     {
                         isLegal = false;
                         processed.Clear();
@@ -604,7 +622,7 @@ public class Grid : MonoBehaviour
     }
     */
 
-    //Instantiates all Spaces on the Grid
+    // Instantiates all Spaces on the Grid.
     void InstantiateSpaces()
     {
         InstantiateCertainSpaces(1, 1);
@@ -613,17 +631,20 @@ public class Grid : MonoBehaviour
         InstantiateCertainSpaces(2, 2);
     }
 
-    //Instantiates spaces with certain dimension
-    void InstantiateCertainSpaces(int w, int h)
+    // Instantiates Spaces with certain dimensions.
+    void InstantiateCertainSpaces(int h, int w)
     {
         List<Space> ts = new List<Space>();
 
-        for (int i = 0; i < width; i += w)
+        for (int col = 0; col < width; col += w)
         {
-            for (int j = 0; j < height; j += h)
+            for (int row = 0; row < height; row += h)
             {
-                Space s = Instantiate(prefabSpace).GetComponent<Space>();
-                s.Init(i, j, w, h, this);
+                //Space s = Instantiate(prefabSpace).GetComponent<Space>();
+                GameObject current = GameObject.Instantiate(prefabSpace, transform, false);
+                Space s = current.GetComponent<Space>();
+                s.Init(row, col, h, w, this);
+                //s.GetComponent<RectTransform>().SetParent(canvas.transform);
                 ts.Add(s);
             }
         }
@@ -655,15 +676,17 @@ public class Grid : MonoBehaviour
     {
         List<Space> localSpaces;
 
-        //After four rotation, the block turns back to the beginning state
-        for (int rotate = 0; rotate < 4; rotate++)
+        // Construct a temporary block copy so that the original does not get modified.
+        Block testBlock = new Block(block);
+
+        // After four rotations, the block turns back to the beginning state.
+        for (int rotate = 0; rotate < 4; rotate++, testBlock.Rotate(true))
         {
-            block.Rotate(true);
-            localSpaces = GetSpaces(block.GetWidth(), block.GetHeight());
+            localSpaces = GetSpaces(testBlock.GetWidth(), testBlock.GetHeight());
 
             for (int i = 0; i < spaces.Count; i++)
             {
-                if (localSpaces[i].CanBlockFit(block))
+                if (localSpaces[i].CanBlockFit(testBlock))
                 {
                     return false;
                 }
@@ -676,7 +699,19 @@ public class Grid : MonoBehaviour
     // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
     public void PlacedDraggableBlock()
     {
+        CheckForMatches();
         blockSpawner.ProgressQueue();
+    }
+
+    // Removes a GridBlock from the List of GridBlocks.
+    public void RemoveGridBlock(GridBlock gb)
+    {
+        gridBlocks.Remove(gb);
+    }
+
+    public void MoveGridBlocksInOrder(List<GridBlock> gbs, Enums.Direction direction, bool repeatedly)
+    {
+
     }
 
     private void OnSquareFormed(int size)

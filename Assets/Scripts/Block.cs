@@ -13,11 +13,35 @@ public class Block
 
     TileData[,] tiles;
 
-    public Block(int newWidth, int newHeight)
+    public Block(int newHeight, int newWidth)
     {
         width = newWidth;
         height = newHeight;
-        tiles = new TileData[width, height];
+        // Initialize rows first, columns second.
+        tiles = new TileData[height, width];
+        // Construct TileDatas.
+        for (int row = 0; row < height; ++row)
+        {
+            for (int col = 0; col < width; ++col)
+            {
+                tiles[row, col] = new TileData();
+            }
+        }
+    }
+
+    // Copy constructor for Block.
+    public Block(Block other)
+    {
+        width = other.width;
+        height = other.height;
+        tiles = new TileData[height, width];
+        for (int row = 0; row < height; ++row)
+        {
+            for (int col = 0; col < width; ++col)
+            {
+                tiles[row, col] = new TileData(other.tiles[row, col]);
+            }
+        }
     }
 
     //Return the width of the block
@@ -60,69 +84,74 @@ public class Block
         return tiles[row, col].GetIsOccupied();
     }
 
-    public Tile.ChangedHandler GetCallbackTileDataSetTileType(int row, int col)
+    public Tile.ChangedHandler GetCallbackTileDataFill(int row, int col)
     {
         return tiles[row, col].Fill;
     }
 
     // Rotates the Block.
-    // TODO: Support counterclockwise rotation.
     public void Rotate(bool clockwise)
     {
-        // Height and width are swapped when rotating 90 degrees.
-        TileData[,] tilesTemp = new TileData[height, width];
+        //Debug.Log("Pre-rotation: " + ToString());
 
-        // Rotation algorithm adapted from:
-        // https://www.codeproject.com/Questions/854268/Rotate-a-matrix-degrees-cloclwise
+        TileData[,] newTiles = new TileData[width, height];
 
-        // Transpose.
-        for (int i = 0; i < height; ++i)
-        {
-            for (int j = i + 1; j < width; ++j)
-            {
-                tilesTemp[i, j] = tiles[j, i];
-                tilesTemp[j, i] = tiles[i, j];
-            }
-        }
         if (clockwise)
         {
-            // Reverse each row.
-            for (int i = 0; i < height; ++i)
+            for (int row = 0; row < height; ++row)
             {
-                for (int j = 0; j < width / 2; ++j)
+                for (int col = 0; col < width; ++col)
                 {
-                    tilesTemp[i, j] = tiles[i, width - 1 - j];
-                    tilesTemp[i, width - 1 - j] = tiles[i, j];
+                    newTiles[width - 1 - col, row] = new TileData(tiles[row, col]);
                 }
             }
         }
         else
         {
-            // Reverse each column.
-            for (int i = 0; i < height; ++i)
+            for (int row = 0; row < height; ++row)
             {
-                for (int j = 0; j < width / 2; ++j)
+                for (int col = 0; col < width; ++col)
                 {
-                    tilesTemp[i, j] = tiles[height - 1 - i, j];
-                    tilesTemp[height - 1 - i, j] = tiles[i, j];
+                    newTiles[col, height - 1 - row] = new TileData(tiles[row, col]);
                 }
             }
         }
 
         // Update the tiles array with the new Tiles.
-        tiles = tilesTemp;
+        tiles = newTiles;
+
         // Swap width and height.
         int temp = width;
         width = height;
         height = temp;
 
-        /*
-        if (!clockwise)
+        //Debug.Log("Post-rotation: " + ToString());
+    }
+
+    // Converts Block information to a string.
+    public override string ToString()
+    {
+        string ret = height + " x " + width + " Block: ";
+        for (int row = 0; row < height; ++row)
         {
-            // Rotate clockwise two additional times to create a counterclockwise rotation.
-            Rotate(true);
-            Rotate(true);
+            for (int col = 0; col < width; ++col)
+            {
+                ret += "(" + row + ", " + col + "): " + GetTileType(row, col) + ", ";
+            }
         }
-        */
+        return ret;
+    }
+
+    // Returns true if the entire Block is made of this type of tile.
+    public bool GetIsEntirely(TileData.TileType type)
+    {
+        foreach (TileData tile in tiles)
+        {
+            if (tile.GetTileType() != type)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

@@ -8,6 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 132db6728d8a6d048927a098e1e2061d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Development/paul-devline.unity
     guid: 8633dde381199a4489cdb433a25cf0e1
