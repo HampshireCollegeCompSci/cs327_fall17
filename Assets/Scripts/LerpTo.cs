@@ -7,6 +7,9 @@ using UnityEngine;
 //This class allows us to easily move game objects around
 public class LerpTo : MonoBehaviour
 {
+    public delegate void CompletedHandler();
+    public event CompletedHandler Completed;
+
     enum LerpState
     {
         None,
@@ -29,7 +32,7 @@ public class LerpTo : MonoBehaviour
     public void LerpToAtSpeed(Vector3 destination, float speed)
     {
         MovingSetup();
-        movingDestination = destination;
+        movingDestination = transform.InverseTransformPoint(destination);
         state = LerpState.Speed;
         movingSpeed = speed;
     }
@@ -39,7 +42,7 @@ public class LerpTo : MonoBehaviour
     public void LerpToInTime(Vector3 destination, float time)
     {
         MovingSetup();
-        movingDestination = destination;
+        movingDestination = transform.InverseTransformPoint(destination);
         state = LerpState.Time;
         movingTime = time;
         t = 0.0f;
@@ -49,29 +52,42 @@ public class LerpTo : MonoBehaviour
     private void MovingSetup()
     {
         startTime = Time.time;
-        startPosition = transform.position;
+        startPosition = transform.localPosition;
         journeyLength = Vector3.Distance(gameObject.transform.position, movingDestination);
     }
 
     private void Update()
     {
-        // If we've reached our destination, we're done.
-        if (movingDestination == transform.position)
+        if (state != LerpState.None)
         {
-            state = LerpState.None;
-        }
-        switch (state)
-        {
-            case LerpState.Speed:
-                float distCovered = (Time.time - startTime) * movingSpeed;
-                float fracJourney = distCovered / journeyLength;
-                transform.position = Vector3.Lerp(startPosition, movingDestination, fracJourney);
-                break;
+            switch (state)
+            {
+                case LerpState.Speed:
+                    float distCovered = (Time.time - startTime) * movingSpeed;
+                    float fracJourney = distCovered / journeyLength;
+                    transform.localPosition = Vector3.Lerp(startPosition, movingDestination, fracJourney);
+                    break;
 
-            case LerpState.Time:
-                t += Time.deltaTime / movingTime;
-                transform.position = Vector3.Lerp(startPosition, movingDestination, t);
-                break;
+                case LerpState.Time:
+                    t += Time.deltaTime / movingTime;
+                    transform.localPosition = Vector3.Lerp(startPosition, movingDestination, t);
+                    break;
+            }
+            // If we've reached our destination, we're done.
+            if (movingDestination == transform.localPosition)
+            {
+                state = LerpState.None;
+                OnCompleted();
+            }
+        }
+    }
+
+    // Invoke the Completed event.
+    void OnCompleted()
+    {
+        if (Completed != null)
+        {
+            Completed();
         }
     }
 }

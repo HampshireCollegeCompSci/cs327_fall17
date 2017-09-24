@@ -14,7 +14,24 @@ public class TileData
 		Vestige
 	}
 
-    TileType type = TileType.Unoccupied;
+    TileType type;
+
+    // Default constructor.
+    public TileData()
+    {
+        type = TileType.Unoccupied;
+    }
+
+    public TileData(TileType newType)
+    {
+        type = newType;
+    }
+
+    // Copy constructor.
+    public TileData(TileData other)
+    {
+        type = other.type;
+    }
 
     public void Clear()
     {

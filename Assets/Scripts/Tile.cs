@@ -1,9 +1,9 @@
 ﻿// Author(s): Paul Calande, Maia Doerner
 
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
@@ -12,10 +12,10 @@ public class Tile : MonoBehaviour
 
     //static Dictionary<TileData.TileType, Sprite> sprites = new Dictionary<TileData.TileType, Sprite>();
 
-	TileData data;
+	TileData data = new TileData();
 
     [SerializeField]
-	SpriteRenderer spriteRenderer;
+    Image spriteRenderer;
     [SerializeField]
     Sprite spriteUnoccupied;
     [SerializeField]
@@ -33,22 +33,7 @@ public class Tile : MonoBehaviour
     public void Fill(TileData.TileType newType)
     {
         data.Fill(newType);
-        // Set the sprite based on the new tile type.
-        switch (newType)
-        {
-            case TileData.TileType.Unoccupied:
-                spriteRenderer.sprite = spriteUnoccupied;
-                break;
-            case TileData.TileType.Regular:
-                spriteRenderer.sprite = spriteRegular;
-                break;
-            case TileData.TileType.Vacant:
-                spriteRenderer.sprite = spriteVacant;
-                break;
-            case TileData.TileType.Vestige:
-                spriteRenderer.sprite = spriteVestige;
-                break;
-        }
+        SetSprite(newType);
         OnChanged(newType);
     }
 
@@ -66,6 +51,26 @@ public class Tile : MonoBehaviour
     public void Duplicate(Tile other)
     {
         Fill(other.GetTileType());
+    }
+
+    public void SetSprite(TileData.TileType newType)
+    {
+        // Set the sprite based on the given tile type.
+        switch (newType)
+        {
+            case TileData.TileType.Unoccupied:
+                spriteRenderer.sprite = spriteUnoccupied;
+                break;
+            case TileData.TileType.Regular:
+                spriteRenderer.sprite = spriteRegular;
+                break;
+            case TileData.TileType.Vacant:
+                spriteRenderer.sprite = spriteVacant;
+                break;
+            case TileData.TileType.Vestige:
+                spriteRenderer.sprite = spriteVestige;
+                break;
+        }
     }
 
     void OnChanged(TileData.TileType newType)
