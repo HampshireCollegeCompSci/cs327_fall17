@@ -159,6 +159,7 @@ public class GridBlock
 
                 break;
             case Enums.Direction.Down:
+                
                 //Run through the tiles from top to bottom, left to right, and add bottom-most extremetiles of each column to the list
                 for (int i = 0; i < block.GetWidth(); i++)
                 {
@@ -171,19 +172,10 @@ public class GridBlock
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
-                            /*
-                            if (row + maxY + 1 >= grid.GetHeight() || (row + maxY + 1 < block.GetHeight() &&
+                            if (row + maxY + 1 >= grid.GetHeight() || (maxY + 1 < block.GetHeight() &&
                             !block.GetIsOccupied(maxY + 1, i) && grid.GetIsOccupied(row + maxY + 1, i)
                             || (maxY + 1 == block.GetHeight() && grid.GetIsOccupied(row + maxY + 1, i))))
                                 return false;
-                            */
-                            if (row + maxY + 1 >= grid.GetHeight())
-                                return false;
-                            else
-                            {
-                                if (grid.GetIsOccupied(row + maxY + 1, i))
-                                    return false;
-                            }
                         }
                     }
 
@@ -207,7 +199,7 @@ public class GridBlock
                     }
                 }
 
-                row += 1;
+                row += 1;              
 
                 break;
             case Enums.Direction.Left:
