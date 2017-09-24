@@ -340,11 +340,7 @@ public class GridBlock
 
         vestiges.Sort((x, y) => x.GetRow().CompareTo(y.GetRow()));
 
-        // Now we move all vestiges. Move the lower ones first.
-
-        /// TODO: Uncomment this line once this function is implemented.
-        //grid.MoveGridBlocksInOrder(vestiges, Enums.Direction.Down, true);
-        /// For the time being, we'll just use this as a placeholder:
+        // Now we move all vestiges. Since the vestiges are sorted, we move the lower ones first.
         foreach (GridBlock gb in vestiges)
         {
             gb.MoveRepeatedly(Enums.Direction.Down);
