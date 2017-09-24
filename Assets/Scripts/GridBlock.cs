@@ -175,11 +175,7 @@ public class GridBlock
                             if (row + maxY + 1 >= grid.GetHeight() || (maxY + 1 < block.GetHeight() &&
                             !block.GetIsOccupied(maxY + 1, i) && grid.GetIsOccupied(row + maxY + 1, i)
                             || (maxY + 1 == block.GetHeight() && grid.GetIsOccupied(row + maxY + 1, i))))
-                            {
-                                Debug.Log(row + maxY + 1);
                                 return false;
-                            }
-                                
                         }
                     }
 
@@ -343,7 +339,6 @@ public class GridBlock
         }
 
         vestiges.Sort((x, y) => x.GetRow().CompareTo(y.GetRow()));
-        //Debug.Log(vestiges.ToString());
 
         // Now we move all vestiges. Move the lower ones first.
 
@@ -352,7 +347,6 @@ public class GridBlock
         /// For the time being, we'll just use this as a placeholder:
         foreach (GridBlock gb in vestiges)
         {
-            //Debug.Log(gb.GetRow() + " " + gb.GetCol());
             gb.MoveRepeatedly(Enums.Direction.Down);
         }
 
