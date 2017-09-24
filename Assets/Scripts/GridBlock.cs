@@ -159,6 +159,7 @@ public class GridBlock
 
                 break;
             case Enums.Direction.Down:
+                
                 //Run through the tiles from top to bottom, left to right, and add bottom-most extremetiles of each column to the list
                 for (int i = 0; i < block.GetWidth(); i++)
                 {
@@ -198,7 +199,7 @@ public class GridBlock
                     }
                 }
 
-                row += 1;
+                row += 1;              
 
                 break;
             case Enums.Direction.Left:

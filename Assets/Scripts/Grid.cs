@@ -254,7 +254,7 @@ public class Grid : MonoBehaviour
                 else //Rest of rows just check two tiles
                 {
                     if (tiles[currentRow, c].GetTileType() != TileData.TileType.Regular
-                       && tiles[currentRow, c + length - 1].GetTileType() != TileData.TileType.Regular)
+                       || tiles[currentRow, c + length - 1].GetTileType() != TileData.TileType.Regular)
                     {
                         isLegal = false;
                         processed.Clear();
