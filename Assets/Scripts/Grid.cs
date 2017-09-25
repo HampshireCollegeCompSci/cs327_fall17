@@ -713,11 +713,6 @@ public class Grid : MonoBehaviour
         gridBlocks.Remove(gb);
     }
 
-    public void MoveGridBlocksInOrder(List<GridBlock> gbs, Enums.Direction direction, bool repeatedly)
-    {
-
-    }
-
     private void OnSquareFormed(int size)
     {
         if (SquareFormed != null)
