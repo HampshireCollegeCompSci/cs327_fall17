@@ -347,10 +347,10 @@ public class GridBlock
         /// TODO: Uncomment this line once this function is implemented.
         //grid.MoveGridBlocksInOrder(vestiges, Enums.Direction.Down, true);
         /// For the time being, we'll just use this as a placeholder:
-        foreach (GridBlock gb in vestiges)
+        /*foreach (GridBlock gb in vestiges)
         {
             gb.MoveRepeatedly(Enums.Direction.Down);
-        }
+        }*/
 
         // Remove this GridBlock from the Grid since it has been broken into smaller GridBlocks.
         grid.RemoveGridBlock(this);
