@@ -20,18 +20,24 @@ public class Score : MonoBehaviour
 
     private void Start()
     {
-        grid.SquareFormed += Grid_SquareFormed;
+        //grid.SquareFormed += Grid_SquareFormed;
         UpdateScore();
     }
 
     private void OnDestroy()
     {
-        grid.SquareFormed -= Grid_SquareFormed;
+        //grid.SquareFormed -= Grid_SquareFormed;
     }
 
     public void AddScore(int amount)
     {
         score += amount;
+        UpdateScore();
+    }
+
+    public void RemoveScore(int amount)
+    {
+        score -= amount;
         UpdateScore();
     }
 

@@ -40,6 +40,11 @@ public class Grid : MonoBehaviour
         //Instantiate tiles array
         tiles = TileUtil.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
 
+        foreach (Tile t in tiles)
+        {
+            t.Changed += Tile_Changed;
+        }
+
         //Instantiate spaces
         InstantiateSpaces();
         /*
@@ -711,6 +716,11 @@ public class Grid : MonoBehaviour
     public void RemoveGridBlock(GridBlock gb)
     {
         gridBlocks.Remove(gb);
+    }
+
+    private void Tile_Changed(TileData.TileType type)
+    {
+
     }
 
     private void OnSquareFormed(int size)

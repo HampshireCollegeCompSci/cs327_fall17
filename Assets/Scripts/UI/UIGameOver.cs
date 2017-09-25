@@ -60,6 +60,9 @@ public class UIGameOver : MonoBehaviour
             case GameFlow.GameOverCause.QueueOverflow:
                 reason = "You hesitated for too long!";
                 break;
+            case GameFlow.GameOverCause.NoMoreEnergy:
+                reason = "Out of energy!";
+                break;
             default:
                 reason = "Unknown reason. Please inform the programming team.";
                 break;

@@ -9,7 +9,8 @@ public class GameFlow : MonoBehaviour
     public enum GameOverCause
     {
         NoRemainingSpaces,
-        QueueOverflow
+        QueueOverflow,
+        NoMoreEnergy
     }
 
     public delegate void GameLostHandler(GameOverCause cause);
