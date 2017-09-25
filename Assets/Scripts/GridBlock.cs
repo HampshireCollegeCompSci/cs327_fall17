@@ -122,15 +122,15 @@ public class GridBlock
                     int maxCol = -1; //Record the col index for right-most extremtile
                     for (int j = 0; j < block.GetWidth(); j++)
                     {
-                        if (grid.GetIsOccupied(i, j))
+                        if (block.GetIsOccupied(i, j))
                         {
                             maxCol = j;
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
                             if (col + maxCol + 1 >= grid.GetWidth() || (maxCol + 1 < block.GetWidth() &&
-                            !block.GetIsOccupied(i, maxCol + 1) && grid.GetIsOccupied(i, col + maxCol + 1))
-                            || (maxCol + 1 == block.GetWidth() && grid.GetIsOccupied(i, col + maxCol + 1)))
+                            !block.GetIsOccupied(i, maxCol + 1) && grid.GetIsOccupied(row + i, col + maxCol + 1))
+                            || (maxCol + 1 == block.GetWidth() && grid.GetIsOccupied(row + i, col + maxCol + 1)))
                                 return false;
                         }
                     }
@@ -218,8 +218,8 @@ public class GridBlock
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
                             if (col + minX - 1 < 0 || (minX - 1 >= 0 &&
-                            !block.GetIsOccupied(i, minX - 1) && grid.GetIsOccupied(i, col + minX - 1)
-                            || (minX - 1 == -1 && grid.GetIsOccupied(i, col + minX - 1))))
+                            !block.GetIsOccupied(i, minX - 1) && grid.GetIsOccupied(row + i, col + minX - 1)
+                            || (minX - 1 == -1 && grid.GetIsOccupied(row + i, col + minX - 1))))
                                 return false;
                         }
                     }
@@ -262,8 +262,8 @@ public class GridBlock
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
                             if (row + minY - 1 < 0 || (minY - 1 >= 0 &&
-                            !block.GetIsOccupied(minY - 1, i) && grid.GetIsOccupied(row + minY - 1, i)
-                            || (minY - 1 == -1 && grid.GetIsOccupied(row + minY - 1, i))))
+                            !block.GetIsOccupied(minY - 1, i) && grid.GetIsOccupied(row + minY - 1, col + i)
+                            || (minY - 1 == -1 && grid.GetIsOccupied(row + minY - 1, col + i))))
                                 return false;
                         }
                     }
@@ -342,11 +342,10 @@ public class GridBlock
 
         vestiges.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
 
-        // Now we move all vestiges. Since the vestiges are sorted, we move the lower ones first.
-        foreach (GridBlock gb in vestiges)
+        /*foreach (GridBlock gb in vestiges)
         {
             gb.MoveRepeatedly(Enums.Direction.Down);
-        }
+        }*/
 
         // Remove this GridBlock from the Grid since it has been broken into smaller GridBlocks.
         grid.RemoveGridBlock(this);
