@@ -208,7 +208,7 @@ public class Grid : MonoBehaviour
             t.Clear();
         }
 
-        gridBlocks.Sort((x, y) => x.GetRow().CompareTo(y.GetRow()));
+        gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
 
         // Inform all GridBlocks that matches have been checked.
         for (int i = 0; i < gridBlocks.Count; ++i)
