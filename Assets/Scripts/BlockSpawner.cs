@@ -44,8 +44,7 @@ public class BlockSpawner : MonoBehaviour
 
     public void Init()
     {
-        // TODO: Replace with file reading later.
-
+        // TODO: Replace this for loop with file reading later.
         for (int i = 0; i < 10; ++i)
         {
             Block block;
@@ -64,14 +63,16 @@ public class BlockSpawner : MonoBehaviour
                     break;
             }
 
-            for (int row = 0; row < block.GetHeight(); ++row)
+            int w = block.GetWidth();
+            int h = block.GetHeight();
+            for (int row = 0; row < h; ++row)
             {
-                for (int col = 0; col < block.GetWidth(); ++col)
+                for (int col = 0; col < w; ++col)
                 {
                     int which = Random.Range(0, 3);
-                    if (which < 2 && !(row == 0 && col == 0))
+                    if (which < 2 && !((row == 0 && col == 0) || (row == h - 1 && col == w - 1)))
                     {
-                        block.Fill(row, col, TileData.TileType.Vacant);
+                        block.Fill(row, col, TileData.TileType.Unoccupied);
                     }
                     else
                     {

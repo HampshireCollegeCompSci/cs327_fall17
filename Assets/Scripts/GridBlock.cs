@@ -313,9 +313,12 @@ public class GridBlock
     public void ActivateVestiges()
     {
         List<GridBlock> vestiges = new List<GridBlock>();
-        for (int r = 0; r <block.GetHeight(); r++)
+
+        /*
+        // Clear all of the Vacant Tiles.
+        for (int r = 0; r < block.GetHeight(); r++)
         {
-            for (int c = 0; c <block.GetWidth(); c++)
+            for (int c = 0; c < block.GetWidth(); c++)
             {
                 if (GetTileType(r, c) == TileData.TileType.Vacant)
                 {
@@ -323,6 +326,7 @@ public class GridBlock
                 }
             }
         }
+        */
 
         for (int r = 0; r < block.GetHeight(); r++)
         {
