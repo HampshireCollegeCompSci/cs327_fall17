@@ -58,7 +58,8 @@ public class DraggableBlock : MonoBehaviour
     //List of SnapLocations. Use DraggableObject.SetSnapToAreas to pass in the List of SnapLocations.
     void UpdateAvailableSpaces()
     {
-        List<Space> spaces = grid.GetSpacesFree(block.GetWidth(),block.GetHeight(), block);
+        //List<Space> spaces = grid.GetSpacesFree(block.GetWidth(),block.GetHeight(), block);
+        List<Space> spaces = grid.GetSpacesFree(1, 1, block);
         List<SnapLocation> sl = new List<SnapLocation>();
         for (int i = 0; i < spaces.Count; i++)
         {

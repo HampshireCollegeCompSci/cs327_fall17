@@ -45,7 +45,7 @@ public class Space : MonoBehaviour
 
     public bool CanBlockFit(Block block)
     {
-        if (block.GetWidth() == width && block.GetHeight() == height)
+        /*if (block.GetWidth() == width && block.GetHeight() == height)
         {
             // It fits, dimensionally speaking.
             return grid.CanBlockFit(row, col, block); // Check if the important Cells are empty.
@@ -54,7 +54,9 @@ public class Space : MonoBehaviour
         {
             // It doesn't.
             return false;
-        }
+        }*/
+
+        return grid.CanBlockFit(row, col, block);
     }
 
 	//This method should be called when a DraggableBlock is dragged onto this Space.
