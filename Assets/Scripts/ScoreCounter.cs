@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 // This class keeps track of the player's score and updates the UI accordingly.
-public class Score : MonoBehaviour
+public class ScoreCounter : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("Reference to the Grid.")]
@@ -20,13 +20,13 @@ public class Score : MonoBehaviour
 
     private void Start()
     {
-        //grid.SquareFormed += Grid_SquareFormed;
+        grid.SquareFormed += Grid_SquareFormed;
         UpdateScore();
     }
 
     private void OnDestroy()
     {
-        //grid.SquareFormed -= Grid_SquareFormed;
+        grid.SquareFormed -= Grid_SquareFormed;
     }
 
     public void AddScore(int amount)

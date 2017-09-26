@@ -20,8 +20,8 @@ public class Tile : MonoBehaviour
     Sprite spriteUnoccupied;
     [SerializeField]
     Sprite spriteRegular;
-    [SerializeField]
-    Sprite spriteVacant;
+    //[SerializeField]
+    //Sprite spriteVacant;
     [SerializeField]
     Sprite spriteVestige;
 
@@ -32,9 +32,13 @@ public class Tile : MonoBehaviour
 
     public void Fill(TileData.TileType newType)
     {
-        data.Fill(newType);
-        SetSprite(newType);
-        OnChanged(newType);
+        TileData.TileType previousType = data.GetTileType();
+        if (previousType != newType)
+        {
+            data.Fill(newType);
+            SetSprite(newType);
+            OnChanged(newType);
+        }
     }
 
     public TileData.TileType GetTileType()
@@ -64,13 +68,20 @@ public class Tile : MonoBehaviour
             case TileData.TileType.Regular:
                 spriteRenderer.sprite = spriteRegular;
                 break;
+                /*
             case TileData.TileType.Vacant:
                 spriteRenderer.sprite = spriteVacant;
                 break;
+                */
             case TileData.TileType.Vestige:
                 spriteRenderer.sprite = spriteVestige;
                 break;
         }
+    }
+
+    public void EnableSpriteRenderer(bool enable)
+    {
+        spriteRenderer.enabled = enable;
     }
 
     void OnChanged(TileData.TileType newType)

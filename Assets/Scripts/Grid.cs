@@ -22,6 +22,8 @@ public class Grid : MonoBehaviour
     GameObject prefabSpace;
     [SerializeField]
     BlockSpawner blockSpawner;
+    [SerializeField]
+    EnergyCounter energyCounter;
 
     Tile[,] tiles;
 
@@ -179,11 +181,13 @@ public class Grid : MonoBehaviour
         return gb;
     }
 
-    public void CheckForMatches()
+    public bool CheckForMatches()
     {
         //Debug.Log("Checking for matches...");
 
         int biggestSquareSize = Mathf.Min(width, height);
+
+        bool squareFormed = false;
 
         // List keeping all tiles that are going to be removed.
         // We do remove after calculation because it's possible to remove
@@ -208,6 +212,12 @@ public class Grid : MonoBehaviour
             }
         }
 
+        //If toRemove is not empty, then there is at least one square formed
+        if (toRemove.Count != 0)
+        {
+            squareFormed = true;
+        }
+
         //Remove all tiles that form squares
         //toRemove.ForEach(t => t.Clear());
         foreach (Tile t in toRemove)
@@ -226,6 +236,8 @@ public class Grid : MonoBehaviour
                 --i;
             }
         }
+
+        return squareFormed;
     }
 
     private List<Tile> CheckForSquares(int r, int c, int length)
@@ -279,9 +291,30 @@ public class Grid : MonoBehaviour
                 currentRow += 1;
             }
             if (isLegal)
+            {
+                //If a legal square is formed, tell the event handler
+                //Also clear all tiles inside the square (Just mark them here)
+                processed.AddRange(MarkInsideTiles(r, c, length));
                 OnSquareFormed(length);
+            }
+                
         }
         return processed;
+    }
+
+    private List<Tile> MarkInsideTiles(int row, int col, int length)
+    {
+        List<Tile> inside = new List<Tile>();
+        //Looping inside the square
+        for (int r = row + 1; r < row + length - 1; r++)
+        {
+            for (int c = col + 1; c < col + length - 1; c++)
+            {
+                if (tiles[r, c].GetIsOccupied() && inside.Find(t => t == tiles[r, c]) == null)
+                    inside.Add(tiles[r, c]);
+            }
+        }
+        return inside;
     }
 
     /*
@@ -710,7 +743,26 @@ public class Grid : MonoBehaviour
     // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
     public void PlacedDraggableBlock()
     {
-        CheckForMatches();
+        //If there is not square formed this turn, then energy will be reduced by 1 plus number of vestiges
+        if (!CheckForMatches())
+        {
+            int vestigeNum = 0;
+
+            //Count the vestiges number on the grid
+            for (int r = 0; r < height; r++)
+            {
+                for (int c = 0; c < width; c++)
+                {
+                    if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
+                    {
+                        vestigeNum++;
+                    }
+                }
+            }
+
+            energyCounter.RemoveEnergy(1 + vestigeNum);
+        }
+
         blockSpawner.ProgressQueue();
     }
 
@@ -720,9 +772,14 @@ public class Grid : MonoBehaviour
         gridBlocks.Remove(gb);
     }
 
-    private void Tile_Changed(TileData.TileType type)
+    //Called when a tiletype is changed
+    private void Tile_Changed(TileData.TileType newType)
     {
-
+        //If a type is changed to Unoccupied, then add 1 energy
+        if (newType == TileData.TileType.Unoccupied)
+        {
+            energyCounter.AddEnergy(1);
+        }
     }
 
     private void OnSquareFormed(int size)

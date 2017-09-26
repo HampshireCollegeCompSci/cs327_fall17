@@ -102,6 +102,11 @@ public class DraggableBlock : MonoBehaviour
             for (int c = 0; c < width; c++)
             {
                 tiles[r, c].Fill(block.GetTileType(r, c));
+                // Unoccupied Tiles should not be visible.
+                if (tiles[r, c].GetTileType() == TileData.TileType.Unoccupied)
+                {
+                    tiles[r, c].EnableSpriteRenderer(false);
+                }
             }
         }
         UpdateAvailableSpaces();
