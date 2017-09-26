@@ -277,9 +277,31 @@ public class Grid : MonoBehaviour
                 currentRow += 1;
             }
             if (isLegal)
+            {
+                //If a legal square is formed, tell the event handler
+                //Also clear all tiles inside the square (Just mark them here)
+                processed.AddRange(MarkInsideTiles(r, c, length));
                 OnSquareFormed(length);
+            }
+                
         }
         return processed;
+    }
+
+    private List<Tile> MarkInsideTiles(int row, int col, int length)
+    {
+        List<Tile> inside = new List<Tile>();
+        //Looping inside the square
+        for (int r = row + 1; r < row + length - 1; r++)
+        {
+            for (int c = col + 1; c < col + length - 1; c++)
+            {
+                Debug.Log(r + " " + c);
+                if (tiles[r, c].GetIsOccupied() && inside.Find(t => t == tiles[r, c]) == null)
+                    inside.Add(tiles[r, c]);
+            }
+        }
+        return inside;
     }
 
     /*
