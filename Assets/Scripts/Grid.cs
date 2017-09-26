@@ -296,7 +296,6 @@ public class Grid : MonoBehaviour
         {
             for (int c = col + 1; c < col + length - 1; c++)
             {
-                Debug.Log(r + " " + c);
                 if (tiles[r, c].GetIsOccupied() && inside.Find(t => t == tiles[r, c]) == null)
                     inside.Add(tiles[r, c]);
             }
