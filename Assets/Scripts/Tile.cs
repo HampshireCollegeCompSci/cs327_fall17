@@ -32,9 +32,13 @@ public class Tile : MonoBehaviour
 
     public void Fill(TileData.TileType newType)
     {
-        data.Fill(newType);
-        SetSprite(newType);
-        OnChanged(newType);
+        TileData.TileType previousType = data.GetTileType();
+        if (previousType != newType)
+        {
+            data.Fill(newType);
+            SetSprite(newType);
+            OnChanged(newType);
+        }
     }
 
     public TileData.TileType GetTileType()
