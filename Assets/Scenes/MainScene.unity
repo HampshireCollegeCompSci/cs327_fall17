@@ -1072,6 +1072,11 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 501203751}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: energyCounter
+      value: 
+      objectReference: {fileID: 1612729227}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0
@@ -1430,6 +1435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textEnergy: {fileID: 1612729225}
   energy: 10
+  gameFlow: {fileID: 2051938913}
 --- !u!1 &1711877921
 GameObject:
   m_ObjectHideFlags: 0
