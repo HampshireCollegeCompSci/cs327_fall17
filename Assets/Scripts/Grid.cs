@@ -739,7 +739,7 @@ public class Grid : MonoBehaviour
         gridBlocks.Remove(gb);
     }
 
-    private void Tile_Changed(TileData.TileType type)
+    private void Tile_Changed(TileData.TileType newType)
     {
 
     }
