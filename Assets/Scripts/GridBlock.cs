@@ -18,6 +18,9 @@ public class GridBlock
 
     Tile[,] tiles;
 
+    // Is true if any of the GridBlock's Tiles were recently cleared.
+    bool tilesClearedRecently = false;
+
     public GridBlock(int rStart, int cStart, Block myBlock, Grid myGrid)
     {
         row = rStart;
@@ -54,6 +57,7 @@ public class GridBlock
         tiles[row, col] = newTile;
         // Subscribe to the new tile.
         tiles[row, col].Changed += block.GetCallbackTileDataFill(row, col);
+        tiles[row, col].Changed += Tile_Changed;
     }
 
     //Set the Tile of given indexes row and col to new Tile
@@ -61,6 +65,7 @@ public class GridBlock
     {
         // Unsubscribe from the old tile.
         tiles[row, col].Changed -= block.GetCallbackTileDataFill(row, col);
+        tiles[row, col].Changed -= Tile_Changed;
         // Subscribe to a new tile.
         InitializeTile(row, col, newTile);
     }
@@ -359,29 +364,44 @@ public class GridBlock
     // Returns true if the GridBlock is being removed.
     public bool MatchesChecked()
     {
-        // If the block is entirely made of unoccupied tiles, remove it from the Grid.
-        if (block.GetIsEntirely(TileData.TileType.Unoccupied))
+        if (tilesClearedRecently)
         {
-            grid.RemoveGridBlock(this);
-            return true;
-        }
-        else
-        {
-            // Otherwise, if any of the Tiles are Unoccupied, activate Vestiges.
-            bool toBeVestiges = false;
-            foreach (Tile tile in tiles)
+            // Reset the tiles cleared recently variable.
+            tilesClearedRecently = false;
+            // If the block is entirely made of unoccupied tiles, remove it from the Grid.
+            if (block.GetIsEntirely(TileData.TileType.Unoccupied))
             {
-                if (tile.GetIsOccupied() == false)
-                {
-                    toBeVestiges = true;
-                }
-            }
-            if (toBeVestiges)
-            {
-                ActivateVestiges();
+                grid.RemoveGridBlock(this);
                 return true;
+            }
+            else
+            {
+                // Otherwise, activate Vestiges.
+                /*
+                bool toBeVestiges = false;
+                foreach (Tile tile in tiles)
+                {
+                    if (tile.GetIsOccupied() == false)
+                    {
+                        toBeVestiges = true;
+                    }
+                }
+                if (toBeVestiges)
+                {
+                */
+                    ActivateVestiges();
+                    return true;
+                //}
             }
         }
         return false;
+    }
+
+    private void Tile_Changed(TileData.TileType newType)
+    {
+        if (newType == TileData.TileType.Unoccupied)
+        {
+            tilesClearedRecently = true;
+        }
     }
 }
