@@ -121,11 +121,13 @@ public class Grid : MonoBehaviour
 
     public bool CanBlockFit(int row, int col, Block block)
     {
-        //Assume each tile is 1x1 size.
+        //A block can only fit if all of its tiles will be put into
+        //the spaces that have no tile or vestige
         for (int c = 0; c < block.GetWidth(); c++){
             for (int r = 0; r < block.GetHeight(); r++){
-                if (tiles[row + r, col + c].GetIsOccupied() &&
-                    block.GetIsOccupied(r, c))
+                if (block.GetTileType(r, c) == TileData.TileType.Regular &&
+                    (tiles[row + r, col + c].GetTileType() == TileData.TileType.Regular ||
+                    tiles[row + r, col + c].GetTileType() == TileData.TileType.Vestige))
                     return false;
             }
         }
