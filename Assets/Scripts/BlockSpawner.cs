@@ -60,24 +60,42 @@ public class BlockSpawner : MonoBehaviour
             //Debug.Log(cell.ToString());
 
             block = new Block(h, w);
-            
-            //generate blocks according to cell, 1 means regular tile, 0 means unoccupied tile
+
             for (int row = 0; row < h; ++row)
             {
                 for (int col = 0; col < w; ++col)
                 {
-                    
-                    if (cell[row][col] == 0)
+                    int currentPos = col + w * row;
+                    int thisCell = cell[currentPos];
+                    if (thisCell == 0)
                     {
-                        
                         block.Fill(row, col, TileData.TileType.Unoccupied);
                     }
-                    else if (cell[row][col] == 1)
+                    else if (thisCell == 1)
                     {
                         block.Fill(row, col, TileData.TileType.Regular);
                     }
                 }
             }
+
+            /*
+            //generate blocks according to cell, 1 means regular tile, 0 means unoccupied tile
+            for (int row = 0; row < h; ++row)
+            {
+                for (int col = 0; col < w; ++col)
+                {
+                    int thisCell = cell[row][col];
+                    if (thisCell == 0)
+                    {  
+                        block.Fill(row, col, TileData.TileType.Unoccupied);
+                    }
+                    else if (thisCell == 1)
+                    {
+                        block.Fill(row, col, TileData.TileType.Regular);
+                    }
+                }
+            }
+            */
 
             possibleBlocks.Add(block);
         }
