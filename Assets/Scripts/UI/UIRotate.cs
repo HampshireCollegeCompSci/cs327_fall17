@@ -21,7 +21,6 @@ public class UIRotate : MonoBehaviour
 
     public void Flip()
     {
-        Debug.Log("Flip!");
         spawner.FlipCurrentBlock();
     }
 }
