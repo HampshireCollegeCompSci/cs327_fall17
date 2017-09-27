@@ -49,14 +49,13 @@ public class BlockSpawner : MonoBehaviour
         string blockType = File.ReadAllText(Application.dataPath + "/JSONs/PossibleBlocks.json");
         var json = JSON.Parse(blockType);
 
-        for (int i = 0; i < 10; ++i)
+        for (int i = 0; i < json["blocks"].Count; i++)
         {
-            
             Block block;
-            int formation = Random.Range(0, json["blocks"].Count);
-            var w = json["blocks"][formation]["width"].AsInt;
-            var h = json["blocks"][formation]["height"].AsInt;
-            var cell = json["blocks"][formation]["cells"].AsArray;
+            //int formation = Random.Range(0, json["blocks"].Count);
+            var w = json["blocks"][i]["width"].AsInt;
+            var h = json["blocks"][i]["height"].AsInt;
+            var cell = json["blocks"][i]["cells"].AsArray;
             //Debug.Log(cell.ToString());
 
             block = new Block(w, h);
