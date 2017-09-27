@@ -122,8 +122,10 @@ public class Grid : MonoBehaviour
     public bool CanBlockFit(int row, int col, Block block)
     {
         //Assume each tile is 1x1 size.
-        for (int c = 0; c < block.GetWidth(); c++){
-            for (int r = 0; r < block.GetHeight(); r++){
+        for (int c = 0; c < block.GetWidth(); c++)
+        {
+            for (int r = 0; r < block.GetHeight(); r++)
+            {
                 if (row + r >= GetHeight() || col + c >= GetWidth())
                 {
                     if (block.GetIsOccupied(r, c))
@@ -131,7 +133,7 @@ public class Grid : MonoBehaviour
                 }
                 else
                 {
-                    if(tiles[row + r, col + c].GetIsOccupied() && block.GetIsOccupied(r, c))
+                    if (tiles[row + r, col + c].GetIsOccupied() && block.GetIsOccupied(r, c))
                     {
                         return false;
                     }
@@ -750,7 +752,7 @@ public class Grid : MonoBehaviour
 
     // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
     public void PlacedDraggableBlock()
-    {
+    {    
         //If there is not square formed this turn, then energy will be reduced by 1 plus number of vestiges
         if (!CheckForMatches())
         {
@@ -772,6 +774,8 @@ public class Grid : MonoBehaviour
         }
 
         blockSpawner.ProgressQueue();
+        //Update Available spaces for all draggable blocks
+        blockSpawner.UpdateAllBlocks();
     }
 
     // Removes a GridBlock from the List of GridBlocks.
