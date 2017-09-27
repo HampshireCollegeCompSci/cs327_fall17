@@ -134,7 +134,6 @@ public class Block
         //for block with current width 1, flip does nothing
         if (width >= 2)
         {
-            Debug.Log(ToString());
             //If width is odd, then midCol is the middle;
             //otherwhise it is the middle-right column.
             int midCol = width / 2;
@@ -151,7 +150,6 @@ public class Block
             }
             
             tiles = newTileData;
-            Debug.Log(ToString());
         }
         else
         {
