@@ -167,13 +167,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ea0be4e0154e9489cd13363db2cc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenBlocks: 5
-  maxBlocksInQueue: 0
+  timeBetweenBlocks: -1
+  maxBlocksInQueue: 1
   blockPositions:
   - {fileID: 1861485758057634}
   - {fileID: 1978265206769888}
   - {fileID: 1595560154707428}
   - {fileID: 1343179390919268}
   gameFlow: {fileID: 0}
+  grid: {fileID: 0}
   prefabDraggableBlock: {fileID: 1274260059464758, guid: d5b9c14df8255d8498eba274462873e5,
     type: 2}

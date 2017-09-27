@@ -29,6 +29,7 @@ public class BlockSpawner : MonoBehaviour
 
     float timeBeforeNextBlock;
 
+
     private void Start()
     {
         //leave for now about the File reading
@@ -43,33 +44,50 @@ public class BlockSpawner : MonoBehaviour
 
     private void Update()
     {
-        //Decrement the time until next block to spawn.
-        //If reaching 0, spawn a new random block and 
-        //reset the timer
-        if (timeBeforeNextBlock <= 0)
-        {
-            ResetBlockTimer();
-            SpawnRandomBlock();
-        }
+		// if the timeBetweenBlocks is not -1 timer will function
+		if (timeBetweenBlocks != -1){
+			//Decrement the time until next block to spawn.
+        	//If reaching 0, spawn a new random block and 
+        	//reset the timer
+        	if (timeBeforeNextBlock <= 0)
+        	{
+            	ResetBlockTimer();
+            	SpawnRandomBlock();
+        	}
             
-        timeBeforeNextBlock -= Time.deltaTime;
-    }
+        	timeBeforeNextBlock -= Time.deltaTime;
+    	}
+	}
 
     public void ResetBlockTimer()
     {
-        //Reset the timer for spawning next block
+		//Reset the timer for spawning next block
         timeBeforeNextBlock = timeBetweenBlocks;
+		
     }
 
     public void SpawnRandomBlock()
     {
-        if(blocksQueue.Count == maxBlocksInQueue)
-        {
-            //if the # of elements in queue already reaches
-            //max, game over
-            gameFlow.GameOver();
-            return;
-        }
+		if (maxBlocksInQueue > 1) {
+			if (blocksQueue.Count == maxBlocksInQueue) {
+				//if the # of elements in queue already reaches
+				//max, game over
+				gameFlow.GameOver ();
+				return;
+			} else {
+				//otherwise we select a random block from the possible list,
+				//then instantiate the draggable block and add it into the queue.
+				int i = Random.Range (0, possibleBlocks.Count);
+				Block toSpawn = possibleBlocks [i];
+				prefabDraggableBlock.GetComponent<DraggableBlock> ().SetBlock (toSpawn);
+				Instantiate (prefabDraggableBlock);          
+				blocksQueue.Enqueue (prefabDraggableBlock.GetComponent<DraggableBlock> ());
+				//if this block is the only block in queue, enable it
+				if (blocksQueue.Count == 1)
+					EnableFrontBlock ();
+				PositionBlocks ();
+			} 
+		}
         else
         {
             //otherwise we select a random block from the possible list,
