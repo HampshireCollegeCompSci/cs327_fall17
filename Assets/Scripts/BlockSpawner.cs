@@ -107,6 +107,11 @@ public class BlockSpawner : MonoBehaviour
 
     public void SpawnRandomBlock()
     {
+        if (!enabled)
+        {
+            // If the component is disabled, don't spawn a block.
+            return;
+        }
         if(blocksQueue.Count == maxBlocksInQueue)
         {
             //if the # of elements in queue already reaches
