@@ -30,6 +30,9 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     // Whether the object is currently being dragged or not.
     protected bool isDragging = false;
 
+    // Snap detection offset for detecting snap locations.
+    Vector2 snapDetectionOffset;
+
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
         if (isDraggable)
@@ -68,6 +71,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             SnapLocation locationToGoTo = null;
 
             Vector2 myPos = transform.position;
+            myPos += snapDetectionOffset;
 
             // Used to figure out which location is the closest before snapping.
             float smallestDistance = Mathf.Infinity;
@@ -145,5 +149,10 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     public bool GetIsDragging()
     {
         return isDragging;
+    }
+
+    public void SetSnapDetectionOffset(Vector2 offset)
+    {
+        snapDetectionOffset = offset;
     }
 }

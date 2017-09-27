@@ -111,6 +111,13 @@ public class DraggableBlock : MonoBehaviour
             }
         }
         UpdateAvailableSpaces();
+
+        // Calculate the snap detection offset based on the width and height of the block.
+        const float sbt = TileUtil.spaceBetweenTiles;
+        float xoff = (width - 1) * 0.5f * sbt;
+        float yoff = (height - 1) * 0.5f * sbt;
+        Vector2 offset = new Vector2(-xoff, yoff);
+        draggableObject.SetSnapDetectionOffset(offset);
     }
 
     public void SetDefaultPosition(Vector2 pos)
