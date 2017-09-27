@@ -84,8 +84,10 @@ public class BlockSpawner : MonoBehaviour
 
             possibleBlocks.Add(block);
         }
+
+        ResetBlockTimer();
+        SpawnRandomBlock();
     }
-    */
 
     private void Update()
     {

@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ea0be4e0154e9489cd13363db2cc53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenBlocks: 9999999
+  timeBetweenBlocks: -1
   maxBlocksInQueue: 1
   blockPositions:
   - {fileID: 1861485758057634}
