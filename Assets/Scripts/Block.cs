@@ -134,20 +134,24 @@ public class Block
         //for block with current width 1, flip does nothing
         if (width >= 2)
         {
+            Debug.Log(ToString());
             //If width is odd, then midCol is the middle;
             //otherwhise it is the middle-right column.
             int midCol = width / 2;
-            for (int c = 0; c < midCol; c++)
-            {
-                TileData tempTileData = null;
+            TileData[,] newTileData = new TileData[height, width];
+            for (int c = 0; c < width; c++)
+            {            
                 for (int r = 0; r < height; r++)
                 {
-                    //flip tileData 
-                    tempTileData = new TileData(tiles[r, c]);
-                    tiles[r, c] = new TileData(tiles[height - 1 - r, c]);
-                    tiles[height - 1 - r, c] = new TileData(tempTileData);
-                }
+                    if (width % 2 == 1 && c == midCol) 
+                        newTileData[r, midCol] = new TileData(tiles[r, midCol]);
+                    else
+                        newTileData[r, c] = new TileData(tiles[r, width - 1 - c].GetTileType());
+                }               
             }
+            
+            tiles = newTileData;
+            Debug.Log(ToString());
         }
         else
         {
