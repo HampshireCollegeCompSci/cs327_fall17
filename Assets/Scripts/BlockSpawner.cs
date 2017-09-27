@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using SimpleJSON;
 
 public class BlockSpawner : MonoBehaviour
 {
@@ -44,6 +45,44 @@ public class BlockSpawner : MonoBehaviour
 
     public void Init()
     {
+        //read json file
+        string blockType = File.ReadAllText(Application.dataPath + "/JSONs/PossibleBlocks.json");
+        var json = JSON.Parse(blockType);
+
+        for (int i = 0; i < 10; ++i)
+        {
+            
+            Block block;
+            int formation = Random.Range(0, json["blocks"].Count);
+            var w = json["blocks"][formation]["width"].AsInt;
+            var h = json["blocks"][formation]["height"].AsInt;
+            var cell = json["blocks"][formation]["cells"].AsArray;
+            //Debug.Log(cell.ToString());
+
+            block = new Block(w, h);
+            
+            //generate blocks according to cell, 1 means regular tile, 0 means unoccupied tile
+            for (int row = 0; row < h; ++row)
+            {
+                for (int col = 0; col < w; ++col)
+                {
+                    
+                    if (cell[row][col] == 0)
+                    {
+                        
+                        block.Fill(row, col, TileData.TileType.Unoccupied);
+                    }
+                    else if (cell[row][col] == 1)
+                    {
+                        block.Fill(row, col, TileData.TileType.Regular);
+                    }
+                }
+            }
+
+            possibleBlocks.Add(block);
+        }
+        
+        /*
         // TODO: Replace this for loop with file reading later.
         for (int i = 0; i < 10; ++i)
         {
@@ -82,7 +121,7 @@ public class BlockSpawner : MonoBehaviour
             }
 
             possibleBlocks.Add(block);
-        }
+        }*/
     }
 
     private void Update()
