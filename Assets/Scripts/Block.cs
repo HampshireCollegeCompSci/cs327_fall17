@@ -131,8 +131,8 @@ public class Block
     //Flip the block based on vertical axis.
     public void Flip()
     {
-        //for 2x1 and 1x1 flip does not make any visualk effect
-        if (width >= 2 && height >= 2)
+        //for block with current width 1, flip does nothing
+        if (width >= 2)
         {
             //If width is odd, then midCol is the middle;
             //otherwhise it is the middle-right column.
