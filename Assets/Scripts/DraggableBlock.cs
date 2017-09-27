@@ -56,9 +56,10 @@ public class DraggableBlock : MonoBehaviour
 
     //Retrieve a List of Spaces that the DraggableBlock can fit into and store that List as draggableObject’s 
     //List of SnapLocations. Use DraggableObject.SetSnapToAreas to pass in the List of SnapLocations.
-    void UpdateAvailableSpaces()
+    public void UpdateAvailableSpaces()
     {
-        List<Space> spaces = grid.GetSpacesFree(block.GetWidth(),block.GetHeight(), block);
+        //List<Space> spaces = grid.GetSpacesFree(block.GetWidth(),block.GetHeight(), block);
+        List<Space> spaces = grid.GetSpacesFree(1, 1, block);
         List<SnapLocation> sl = new List<SnapLocation>();
         for (int i = 0; i < spaces.Count; i++)
         {
@@ -110,6 +111,13 @@ public class DraggableBlock : MonoBehaviour
             }
         }
         UpdateAvailableSpaces();
+
+        // Calculate the snap detection offset based on the width and height of the block.
+        const float sbt = TileUtil.spaceBetweenTiles;
+        float xoff = (width - 1) * 0.5f * sbt;
+        float yoff = (height - 1) * 0.5f * sbt;
+        Vector2 offset = new Vector2(-xoff, yoff);
+        draggableObject.SetSnapDetectionOffset(offset);
     }
 
     public void SetDefaultPosition(Vector2 pos)

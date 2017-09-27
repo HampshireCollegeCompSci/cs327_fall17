@@ -151,6 +151,14 @@ public class BlockSpawner : MonoBehaviour
         }
     }
 
+    public void UpdateAllBlocks()
+    {
+        foreach(DraggableBlock db in blocksQueue)
+        {
+            db.UpdateAvailableSpaces();
+        }
+    }
+
     public void ProgressQueue()
     {
         //Dequeue the block at the front

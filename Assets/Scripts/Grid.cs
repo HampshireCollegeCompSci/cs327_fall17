@@ -121,14 +121,23 @@ public class Grid : MonoBehaviour
 
     public bool CanBlockFit(int row, int col, Block block)
     {
-        //A block can only fit if all of its tiles will be put into
-        //the spaces that have no tile or vestige
-        for (int c = 0; c < block.GetWidth(); c++){
-            for (int r = 0; r < block.GetHeight(); r++){
-                if (block.GetTileType(r, c) == TileData.TileType.Regular &&
-                    (tiles[row + r, col + c].GetTileType() == TileData.TileType.Regular ||
-                    tiles[row + r, col + c].GetTileType() == TileData.TileType.Vestige))
-                    return false;
+        //Assume each tile is 1x1 size.
+        for (int c = 0; c < block.GetWidth(); c++)
+        {
+            for (int r = 0; r < block.GetHeight(); r++)
+            {
+                if (row + r >= GetHeight() || col + c >= GetWidth())
+                {
+                    if (block.GetIsOccupied(r, c))
+                        return false;
+                }
+                else
+                {
+                    if (tiles[row + r, col + c].GetIsOccupied() && block.GetIsOccupied(r, c))
+                    {
+                        return false;
+                    }
+                }
             }
         }
 
@@ -670,9 +679,9 @@ public class Grid : MonoBehaviour
     void InstantiateSpaces()
     {
         InstantiateCertainSpaces(1, 1);
-        InstantiateCertainSpaces(1, 2);
+        /*InstantiateCertainSpaces(1, 2);
         InstantiateCertainSpaces(2, 1);
-        InstantiateCertainSpaces(2, 2);
+        InstantiateCertainSpaces(2, 2);*/
     }
 
     // Instantiates Spaces with certain dimensions.
@@ -726,7 +735,8 @@ public class Grid : MonoBehaviour
         // After four rotations, the block turns back to the beginning state.
         for (int rotate = 0; rotate < 4; rotate++, testBlock.Rotate(true))
         {
-            localSpaces = GetSpaces(testBlock.GetWidth(), testBlock.GetHeight());
+            //localSpaces = GetSpaces(testBlock.GetWidth(), testBlock.GetHeight());
+            localSpaces = GetSpaces(1, 1);
 
             for (int i = 0; i < spaces.Count; i++)
             {
@@ -742,7 +752,7 @@ public class Grid : MonoBehaviour
 
     // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
     public void PlacedDraggableBlock()
-    {
+    {    
         //If there is not square formed this turn, then energy will be reduced by 1 plus number of vestiges
         if (!CheckForMatches())
         {
@@ -764,6 +774,8 @@ public class Grid : MonoBehaviour
         }
 
         blockSpawner.ProgressQueue();
+        //Update Available spaces for all draggable blocks
+        blockSpawner.UpdateAllBlocks();
     }
 
     // Removes a GridBlock from the List of GridBlocks.
