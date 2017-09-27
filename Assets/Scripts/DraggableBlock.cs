@@ -56,7 +56,7 @@ public class DraggableBlock : MonoBehaviour
 
     //Retrieve a List of Spaces that the DraggableBlock can fit into and store that List as draggableObject’s 
     //List of SnapLocations. Use DraggableObject.SetSnapToAreas to pass in the List of SnapLocations.
-    void UpdateAvailableSpaces()
+    public void UpdateAvailableSpaces()
     {
         //List<Space> spaces = grid.GetSpacesFree(block.GetWidth(),block.GetHeight(), block);
         List<Space> spaces = grid.GetSpacesFree(1, 1, block);

@@ -48,7 +48,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a6b10e2c8d8d5fd4d83452880cbfe404, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1ef395f6f4b1e464a9dbec63fb08cb5f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -68,10 +68,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 114459027929769306}
-  spriteUnoccupied: {fileID: 21300000, guid: a6b10e2c8d8d5fd4d83452880cbfe404, type: 3}
-  spriteRegular: {fileID: 21300000, guid: e2cc2e462da1c414bbe2063c01892f9f, type: 3}
-  spriteVacant: {fileID: 21300000, guid: 106a2170f05bbe1459502fe169f3a290, type: 3}
-  spriteVestige: {fileID: 21300000, guid: 9467fdf2389883742b390303110a8006, type: 3}
+  spriteUnoccupied: {fileID: 21300000, guid: 1ef395f6f4b1e464a9dbec63fb08cb5f, type: 3}
+  spriteRegular: {fileID: 21300000, guid: 6ec0cfd59f8d4ab45a95fb3c27791631, type: 3}
+  spriteVestige: {fileID: 21300000, guid: 3028d523bf6d69a45bece30fa0e47d01, type: 3}
 --- !u!222 &222653728882889582
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -94,5 +93,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 64, y: 64}
+  m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}

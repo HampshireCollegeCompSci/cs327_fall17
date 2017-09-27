@@ -31,6 +31,7 @@ public class BlockSpawner : MonoBehaviour
 
     float timeBeforeNextBlock;
 
+
     private void Start()
     {
         gameFlow.GameLost += GameFlow_GameLost;
@@ -121,30 +122,42 @@ public class BlockSpawner : MonoBehaviour
 
             possibleBlocks.Add(block);
         }*/
+
+        ResetBlockTimer();
+        SpawnRandomBlock();
     }
 
     private void Update()
     {
-        //Decrement the time until next block to spawn.
-        //If reaching 0, spawn a new random block and 
-        //reset the timer
-        if (timeBeforeNextBlock <= 0)
-        {
-            ResetBlockTimer();
-            SpawnRandomBlock();
-        }
+        // if the timeBetweenBlocks is not -1 timer will function
+        if (timeBetweenBlocks != -1){
+            //Decrement the time until next block to spawn.
+            //If reaching 0, spawn a new random block and 
+            //reset the timer
+            if (timeBeforeNextBlock <= 0)
+            {
+                ResetBlockTimer();
+                SpawnRandomBlock();
+            }
             
-        timeBeforeNextBlock -= Time.deltaTime;
+            timeBeforeNextBlock -= Time.deltaTime;
+        }
     }
 
     public void ResetBlockTimer()
     {
         //Reset the timer for spawning next block
         timeBeforeNextBlock = timeBetweenBlocks;
+        
     }
 
     public void SpawnRandomBlock()
     {
+        if (!enabled)
+        {
+            // If the component is disabled, don't spawn a block.
+            return;
+        }
         if(blocksQueue.Count == maxBlocksInQueue)
         {
             //if the # of elements in queue already reaches
@@ -186,6 +199,14 @@ public class BlockSpawner : MonoBehaviour
             int closestIndex = blocksQueue.Count - 1;
             PositionBlockAt(newDraggable, closestIndex);
             newDraggable.SetDefaultPosition(newBlock.transform.localPosition);
+        }
+    }
+
+    public void UpdateAllBlocks()
+    {
+        foreach(DraggableBlock db in blocksQueue)
+        {
+            db.UpdateAvailableSpaces();
         }
     }
 
