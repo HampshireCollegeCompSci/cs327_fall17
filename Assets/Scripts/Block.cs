@@ -128,6 +128,34 @@ public class Block
         //Debug.Log("Post-rotation: " + ToString());
     }
 
+    //Flip the block based on vertical axis.
+    public void Flip()
+    {
+        //for 2x1 and 1x1 flip does not make any visualk effect
+        if (width >= 2 && height >= 2)
+        {
+            //If width is odd, then midCol is the middle;
+            //otherwhise it is the middle-right column.
+            int midCol = width / 2;
+            for (int c = 0; c < midCol; c++)
+            {
+                TileData tempTileData = null;
+                for (int r = 0; r < height; r++)
+                {
+                    //flip tileData 
+                    tempTileData = new TileData(tiles[r, c]);
+                    tiles[r, c] = new TileData(tiles[height - 1 - r, c]);
+                    tiles[height - 1 - r, c] = new TileData(tempTileData);
+                }
+            }
+        }
+        else
+        {
+            //Do nothing for now
+            return;
+        }
+    }
+
     // Converts Block information to a string.
     public override string ToString()
     {
