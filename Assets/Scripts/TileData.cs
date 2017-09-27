@@ -10,30 +10,42 @@ public class TileData
 	{
         Unoccupied,
 		Regular,
-		Vacant,
+		//Vacant,
 		Vestige
 	}
 
-    TileType type = TileType.Unoccupied;
+    TileType type;
+
+    // Default constructor.
+    public TileData()
+    {
+        type = TileType.Unoccupied;
+    }
+
+    public TileData(TileType newType)
+    {
+        type = newType;
+    }
+
+    // Copy constructor.
+    public TileData(TileData other)
+    {
+        type = other.type;
+    }
 
     public void Clear()
     {
         type = TileType.Unoccupied;
     }
 
-    public void Fill()
+    public void Fill(TileType newType)
     {
-        type = TileType.Regular;
+        type = newType;
     }
 
     public bool GetIsOccupied()
     {
         return type != TileType.Unoccupied;
-    }
-
-    public void SetTileType(TileType newType)
-    {
-        type = newType;
     }
 
     public TileType GetTileType()

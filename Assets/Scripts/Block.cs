@@ -13,11 +13,35 @@ public class Block
 
     TileData[,] tiles;
 
-    public Block(int newWidth, int newHeight)
+    public Block(int newHeight, int newWidth)
     {
         width = newWidth;
         height = newHeight;
-        tiles = new TileData[width, height];
+        // Initialize rows first, columns second.
+        tiles = new TileData[height, width];
+        // Construct TileDatas.
+        for (int row = 0; row < height; ++row)
+        {
+            for (int col = 0; col < width; ++col)
+            {
+                tiles[row, col] = new TileData();
+            }
+        }
+    }
+
+    // Copy constructor for Block.
+    public Block(Block other)
+    {
+        width = other.width;
+        height = other.height;
+        tiles = new TileData[height, width];
+        for (int row = 0; row < height; ++row)
+        {
+            for (int col = 0; col < width; ++col)
+            {
+                tiles[row, col] = new TileData(other.tiles[row, col]);
+            }
+        }
     }
 
     //Return the width of the block
@@ -40,9 +64,9 @@ public class Block
     }
     */
 
-    public void Fill(int row, int col)
+    public void Fill(int row, int col, TileData.TileType newType)
     {
-        tiles[row, col].Fill();
+        tiles[row, col].Fill(newType);
     }
 
     public void Clear(int row, int col)
@@ -55,75 +79,79 @@ public class Block
         return tiles[row, col].GetTileType();
     }
 
-    public void SetTileType(int row, int col, TileData.TileType type)
-    {
-        tiles[row, col].SetTileType(type);
-    }
-
     public bool GetIsOccupied(int row, int col)
     {
         return tiles[row, col].GetIsOccupied();
     }
 
-    public Tile.ChangedHandler GetCallbackTileDataSetTileType(int row, int col)
+    public Tile.ChangedHandler GetCallbackTileDataFill(int row, int col)
     {
-        return tiles[row, col].SetTileType;
+        return tiles[row, col].Fill;
     }
 
+    // Rotates the Block.
     public void Rotate(bool clockwise)
     {
-        int newWidth = height;
-        int newHeight = width;
-        width = newWidth;
-        height = newHeight;
-        //TileData[,] tempTiles = new TileData[width, height];
+        //Debug.Log("Pre-rotation: " + ToString());
 
-		/*
-		for (int column = 0; column < width; ++column) {
-			for (int row = 0; row < height; ++row) {
-				TileData.TileType newType = tiles[].GetTileType();
-				tempTiles [row, column].SetTileType (newType);
-			}
-		}
-		*/
+        TileData[,] newTiles = new TileData[width, height];
 
-		// Rotation code from:
-		// https://www.codeproject.com/Questions/854268/Rotate-a-matrix-degrees-cloclwise
-		for (int i = 0; i < height; ++i) {
-			for (int j = i + 1; j < width; ++j) {
-				TileData temp = tiles [i, j];
-				tiles [i, j] = tiles [j, i];
-				tiles [j, i] = temp;
-			}
-		}
-		for (int i = 0; i < height; ++i) {
-			for (int j = 0; j < width / 2; ++j) {
-				TileData temp = tiles [i, j];
-				tiles [i, j] = tiles [i, width - 1 - j];
-				tiles [i, width - 1 - j] = temp;
-			}
-		}
-
-
-		/*
-        if (clockwise == true)
+        if (clockwise)
         {
-            //rotates blocks to the right
-            tempTiles[0, 0].SetTileType(tiles[1, 0].GetTileType());
-            tempTiles[0, 1].SetTileType(tiles[0, 0].GetTileType());
-            tempTiles[1, 1].SetTileType(tiles[0, 1].GetTileType());
-            tempTiles[1, 0].SetTileType(tiles[1, 1].GetTileType());
+            for (int row = 0; row < height; ++row)
+            {
+                for (int col = 0; col < width; ++col)
+                {
+                    newTiles[width - 1 - col, row] = new TileData(tiles[row, col]);
+                }
+            }
         }
         else
         {
-            //rotates blocks to the left
-            tempTiles[0, 0].SetTileType(tiles[0, 1].GetTileType());
-            tempTiles[0, 1].SetTileType(tiles[1, 1].GetTileType());
-            tempTiles[1, 1].SetTileType(tiles[1, 0].GetTileType());
-            tempTiles[1, 0].SetTileType(tiles[0, 0].GetTileType());
+            for (int row = 0; row < height; ++row)
+            {
+                for (int col = 0; col < width; ++col)
+                {
+                    newTiles[col, height - 1 - row] = new TileData(tiles[row, col]);
+                }
+            }
         }
-        */
 
-        //tiles = tempTiles;
+        // Update the tiles array with the new Tiles.
+        tiles = newTiles;
+
+        // Swap width and height.
+        int temp = width;
+        width = height;
+        height = temp;
+
+        //Debug.Log("Post-rotation: " + ToString());
+    }
+
+    // Converts Block information to a string.
+    public override string ToString()
+    {
+        string ret = height + " x " + width + " Block: ";
+        for (int row = 0; row < height; ++row)
+        {
+            for (int col = 0; col < width; ++col)
+            {
+                ret += "(" + row + ", " + col + "): " + GetTileType(row, col) + ", ";
+            }
+        }
+        return ret;
+    }
+
+    // Returns true if the entire Block is made of this type of tile.
+    public bool GetIsEntirely(TileData.TileType type)
+    {
+        foreach (TileData tile in tiles)
+        {
+            if (tile.GetTileType() != type)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

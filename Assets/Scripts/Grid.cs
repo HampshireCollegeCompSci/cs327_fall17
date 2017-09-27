@@ -1,5 +1,5 @@
 ﻿// Author(s): Paul Calande, Yifeng Shi, Yixiang Xu
-// A 2-dimensional collections of tiles
+// A 2-dimensional collections of Tiles
 
 using System;
 using System.Collections;
@@ -22,10 +22,12 @@ public class Grid : MonoBehaviour
     GameObject prefabSpace;
     [SerializeField]
     BlockSpawner blockSpawner;
+    [SerializeField]
+    EnergyCounter energyCounter;
 
     Tile[,] tiles;
 
-    Dictionary<Vector2, List<Space>> spaces;
+    Dictionary<Vector2, List<Space>> spaces = new Dictionary<Vector2, List<Space>>();
 
     List<GridBlock> gridBlocks;
 
@@ -38,7 +40,12 @@ public class Grid : MonoBehaviour
     private void Start()
     {
         //Instantiate tiles array
-        tiles = TileUtil.CreateTileArray(prefabTile, transform.position, width, height);
+        tiles = TileUtil.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
+
+        foreach (Tile t in tiles)
+        {
+            t.Changed += Tile_Changed;
+        }
 
         //Instantiate spaces
         InstantiateSpaces();
@@ -57,8 +64,9 @@ public class Grid : MonoBehaviour
 		}
         */
 
-        //Instantiate BlockSpawner
-        blockSpawner.Init(this);
+        // Initialize BlockSpawner.
+        blockSpawner.Init();
+        //blockSpawner.Init(this);
 
         //Instantiate GridBlocks
         gridBlocks = new List<GridBlock>();
@@ -86,12 +94,12 @@ public class Grid : MonoBehaviour
 
     public Vector3 GetTilePosition(int row, int col)
     {
-        return tiles[row, col].transform.position;
+        return tiles[row, col].transform.localPosition;
     }
 
-    public void Fill(int row, int col)
+    public void Fill(int row, int col, TileData.TileType newType)
     {
-        tiles[row, col].Fill();
+        tiles[row, col].Fill(newType);
     }
 
     public void Clear(int row, int col)
@@ -104,12 +112,6 @@ public class Grid : MonoBehaviour
         return tiles[row, col].GetTileType();
     }
 
-    public void SetTileType(int row, int col, TileData.TileType type)
-    {
-        tiles[row, col].SetTileType(type);
-    }
-
-
     /*
     public Tile[,] GetTiles()
     {
@@ -120,11 +122,22 @@ public class Grid : MonoBehaviour
     public bool CanBlockFit(int row, int col, Block block)
     {
         //Assume each tile is 1x1 size.
-        for (int c = 0; c < block.GetWidth(); c++){
-            for (int r = 0; r < block.GetHeight(); r++){
-                if (tiles[row + r, col + c].GetIsOccupied() &&
-                    block.GetIsOccupied(r, c))
-                    return false;
+        for (int c = 0; c < block.GetWidth(); c++)
+        {
+            for (int r = 0; r < block.GetHeight(); r++)
+            {
+                if (row + r >= GetHeight() || col + c >= GetWidth())
+                {
+                    if (block.GetIsOccupied(r, c))
+                        return false;
+                }
+                else
+                {
+                    if (tiles[row + r, col + c].GetIsOccupied() && block.GetIsOccupied(r, c))
+                    {
+                        return false;
+                    }
+                }
             }
         }
 
@@ -156,17 +169,18 @@ public class Grid : MonoBehaviour
     public GridBlock WriteBlock(int row, int col, Block block)
     {
         //List<Coordinate> coords = new List<Coordinate>();
-		for (int c = 0; c < block.GetWidth(); c++)
-		{
-			for (int r = 0; r < block.GetHeight(); r++)
-			{
-                if (block.GetIsOccupied(r, c)){
-                    tiles[row + r, col + c].Fill();
+        for (int c = 0; c < block.GetWidth(); c++)
+        {
+            for (int r = 0; r < block.GetHeight(); r++)
+            {
+                if (block.GetIsOccupied(r, c))
+                {
+                    tiles[row + r, col + c].Fill(block.GetTileType(r, c));
                     //Note x is col and y is row
                     //coords.Add(new Coordinate(x + c, y + r));
                 }
-			}
-		}
+            }
+        }
         GridBlock gb = new GridBlock(row, col, block, this);
         gridBlocks.Add(gb);
 
@@ -176,24 +190,30 @@ public class Grid : MonoBehaviour
         return gb;
     }
 
-    public void CheckForMatches(){
+    public bool CheckForMatches()
+    {
+        //Debug.Log("Checking for matches...");
 
-        //List keeping all tiles that are going to be removed.
-        //We do remove after calculation because it's possible to remove
-        //multiple squares together
+        int biggestSquareSize = Mathf.Min(width, height);
+
+        bool squareFormed = false;
+
+        // List keeping all tiles that are going to be removed.
+        // We do remove after calculation because it's possible to remove
+        // multiple squares together.
         List<Tile> toRemove = new List<Tile>();
 
-        //Loop through all blocks from topLeft.
-        //Consider only the case that the current tile is the top-lefr corner
+        //Loop through all blocks from top left.
+        //Consider only the case that the current tile is the top-left corner.
         for (int r = 0; r < height; r++)
         {
             for (int c = 0; c < width; c++)
             {
-                //Only if the tile is regular black tile
-                if(tiles[r, c].GetTileType() == TileData.TileType.Regular)
+                // Proceed only if the Tile is regular tile.
+                if (tiles[r, c].GetTileType() == TileData.TileType.Regular)
                 {
-                    //Check for squares from length 3 to 8
-                    for (int length = 3; length <= 8; length++)
+                    // Check for squares from length 3 upwards.
+                    for (int length = 3; length <= biggestSquareSize; length++)
                     {
                         toRemove.AddRange(CheckForSquares(r, c, length));
                     }
@@ -201,10 +221,32 @@ public class Grid : MonoBehaviour
             }
         }
 
-        //Remove all tiles that form squares
-        toRemove.ForEach(t => t.Clear());
+        //If toRemove is not empty, then there is at least one square formed
+        if (toRemove.Count != 0)
+        {
+            squareFormed = true;
+        }
 
-        //For vestiges, leave it for now
+        //Remove all tiles that form squares
+        //toRemove.ForEach(t => t.Clear());
+        foreach (Tile t in toRemove)
+        {
+            t.Clear();
+        }
+
+        gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
+
+        // Inform all GridBlocks that matches have been checked.
+        for (int i = 0; i < gridBlocks.Count; ++i)
+        {
+            if (gridBlocks[i].MatchesChecked())
+            {
+                // Step back an index if the current GridBlock has been deleted.
+                --i;
+            }
+        }
+
+        return squareFormed;
     }
 
     private List<Tile> CheckForSquares(int r, int c, int length)
@@ -215,25 +257,25 @@ public class Grid : MonoBehaviour
         if (r + length - 1 < height && c + length - 1 < width)
         {
             int count = 0;
-            int tR = r;
+            int currentRow = r;
             bool isLegal = true;
             //The max number of tiles to be checked
             while (count < length * length - (length - 2) * (length - 2) - 1)
             {
                 //For first and last rows check the whole line
-                if (tR == r || tR == r + length - 1)
+                if (currentRow == r || currentRow == r + length - 1)
                 {
                     for (int i = c; i < c + length; i++)
                     {
-                        if (tiles[tR, i].GetTileType() != TileData.TileType.Regular)
+                        if (tiles[currentRow, i].GetTileType() != TileData.TileType.Regular)
                         {
                             isLegal = false;
                             processed.Clear();
                             break;  //exit for loop
                         }
                         //Check to avoid repeated tiles
-                        if (processed.Find(t => t == tiles[tR, i]) == null)
-                            processed.Add(tiles[tR, i]);
+                        if (processed.Find(t => t == tiles[currentRow, i]) == null)
+                            processed.Add(tiles[currentRow, i]);
                         count++;
                     }
                     if (!isLegal)
@@ -241,22 +283,47 @@ public class Grid : MonoBehaviour
                 }
                 else //Rest of rows just check two tiles
                 {
-                    if (tiles[tR, c].GetTileType() != TileData.TileType.Regular
-                       && tiles[tR, c + length - 1].GetTileType() != TileData.TileType.Regular)
+                    if (tiles[currentRow, c].GetTileType() != TileData.TileType.Regular
+                       || tiles[currentRow, c + length - 1].GetTileType() != TileData.TileType.Regular)
                     {
                         isLegal = false;
                         processed.Clear();
                         break;  //exit while loop
                     }
-                    if (processed.Find(t => t == tiles[tR, c]) == null)
-                        processed.Add(tiles[tR, c]);
-                    if (processed.Find(t => t == tiles[tR, c + length - 1]) == null)
-                        processed.Add(tiles[tR, c + length - 1]);
+                    if (processed.Find(t => t == tiles[currentRow, c]) == null)
+                        processed.Add(tiles[currentRow, c]);
+                    if (processed.Find(t => t == tiles[currentRow, c + length - 1]) == null)
+                        processed.Add(tiles[currentRow, c + length - 1]);
                     count += 2;
                 }
+
+                currentRow += 1;
             }
+            if (isLegal)
+            {
+                //If a legal square is formed, tell the event handler
+                //Also clear all tiles inside the square (Just mark them here)
+                processed.AddRange(MarkInsideTiles(r, c, length));
+                OnSquareFormed(length);
+            }
+                
         }
         return processed;
+    }
+
+    private List<Tile> MarkInsideTiles(int row, int col, int length)
+    {
+        List<Tile> inside = new List<Tile>();
+        //Looping inside the square
+        for (int r = row + 1; r < row + length - 1; r++)
+        {
+            for (int c = col + 1; c < col + length - 1; c++)
+            {
+                if (tiles[r, c].GetIsOccupied() && inside.Find(t => t == tiles[r, c]) == null)
+                    inside.Add(tiles[r, c]);
+            }
+        }
+        return inside;
     }
 
     /*
@@ -481,6 +548,7 @@ public class Grid : MonoBehaviour
     }
     */
 
+    /*
     public void MoveAllBlocks(Enums.Direction direction)
     {   	
         switch(direction){
@@ -605,29 +673,31 @@ public class Grid : MonoBehaviour
 
         CheckForMatches();
     }
+    */
 
-    //Instantiates all Spaces on the Grid
+    // Instantiates all Spaces on the Grid.
     void InstantiateSpaces()
     {
-        spaces = new Dictionary<Vector2, List<Space>>();
-
         InstantiateCertainSpaces(1, 1);
-        InstantiateCertainSpaces(1, 2);
+        /*InstantiateCertainSpaces(1, 2);
         InstantiateCertainSpaces(2, 1);
-        InstantiateCertainSpaces(2, 2);
+        InstantiateCertainSpaces(2, 2);*/
     }
 
-    //Instantiates spaces with certain dimension
-    void InstantiateCertainSpaces(int w, int h)
+    // Instantiates Spaces with certain dimensions.
+    void InstantiateCertainSpaces(int h, int w)
     {
         List<Space> ts = new List<Space>();
 
-        for (int i = 0; i < width; i += w)
+        for (int col = 0; col < width; col += w)
         {
-            for (int j = 0; j < height; j += h)
+            for (int row = 0; row < height; row += h)
             {
-                Space s = GameObject.Instantiate(prefabSpace).GetComponent<Space>();
-                s.Init(i, j, w, h, this);
+                //Space s = Instantiate(prefabSpace).GetComponent<Space>();
+                GameObject current = GameObject.Instantiate(prefabSpace, transform, false);
+                Space s = current.GetComponent<Space>();
+                s.Init(row, col, h, w, this);
+                //s.GetComponent<RectTransform>().SetParent(canvas.transform);
                 ts.Add(s);
             }
         }
@@ -644,23 +714,32 @@ public class Grid : MonoBehaviour
 
     public List<Space> GetSpacesFree(int width, int height, Block block)
     {
-        return null; // Replace this with an actual implementation!
+        List<Space> potentialSpaces = spaces[new Vector2(width, height)];
+        List<Space> freeSpaces = new List<Space>();
+        foreach(Space s in potentialSpaces)
+        {
+            if (s.CanBlockFit(block))
+                freeSpaces.Add(s);
+        }
+        return freeSpaces;
     }
 
     //Check if the Block can't fit into any of the Spaces, including block after rotation
     public bool CheckIfSpacesFilled(Block block)
     {
-        List<Space> spaces;
+        List<Space> localSpaces;
 
-        //After four rotation, the block turns back to the beginning state
-        for (int rotate = 0; rotate < 4; rotate++)
+        // Construct a temporary block copy so that the original does not get modified.
+        Block testBlock = new Block(block);
+
+        // After four rotations, the block turns back to the beginning state.
+        for (int rotate = 0; rotate < 4; rotate++, testBlock.Rotate(true))
         {
-            block.Rotate(true);
-            spaces = GetSpaces(block.GetWidth(), block.GetHeight());
-
-            for (int i = 0; i < spaces.Count; i++)
+            //localSpaces = GetSpaces(testBlock.GetWidth(), testBlock.GetHeight());
+            localSpaces = GetSpaces(1, 1);
+            for (int i = 0; i < localSpaces.Count; i++)
             {
-                if (spaces[i].CanBlockFit(block))
+                if (localSpaces[i].CanBlockFit(testBlock))
                 {
                     return false;
                 }
@@ -672,8 +751,46 @@ public class Grid : MonoBehaviour
 
     // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
     public void PlacedDraggableBlock()
-    {
+    {    
+        //If there is not square formed this turn, then energy will be reduced by 1 plus number of vestiges
+        if (!CheckForMatches())
+        {
+            int vestigeNum = 0;
+
+            //Count the vestiges number on the grid
+            for (int r = 0; r < height; r++)
+            {
+                for (int c = 0; c < width; c++)
+                {
+                    if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
+                    {
+                        vestigeNum++;
+                    }
+                }
+            }
+
+            energyCounter.RemoveEnergy(1 + vestigeNum);
+        }
+
         blockSpawner.ProgressQueue();
+        //Update Available spaces for all draggable blocks
+        blockSpawner.UpdateAllBlocks();
+    }
+
+    // Removes a GridBlock from the List of GridBlocks.
+    public void RemoveGridBlock(GridBlock gb)
+    {
+        gridBlocks.Remove(gb);
+    }
+
+    //Called when a tiletype is changed
+    private void Tile_Changed(TileData.TileType newType)
+    {
+        //If a type is changed to Unoccupied, then add 1 energy
+        if (newType == TileData.TileType.Unoccupied)
+        {
+            energyCounter.AddEnergy(1);
+        }
     }
 
     private void OnSquareFormed(int size)

@@ -18,6 +18,9 @@ public class GridBlock
 
     Tile[,] tiles;
 
+    // Is true if any of the GridBlock's Tiles were recently cleared.
+    bool tilesClearedRecently = false;
+
     public GridBlock(int rStart, int cStart, Block myBlock, Grid myGrid)
     {
         row = rStart;
@@ -27,11 +30,11 @@ public class GridBlock
         int width = block.GetWidth();
         int height = block.GetHeight();
         tiles = new Tile[height, width];
-        for (int i = 0; i < height; ++i)
+        for (int r = 0; r < height; ++r)
         {
-            for (int j = 0; j < width; ++j)
+            for (int c = 0; c < width; ++c)
             {
-                SetTile(i, j, grid.GetTileAt(row + i, col + j));
+                InitializeTile(r, c, grid.GetTileAt(row + r, col + c));
             }
         }
     }
@@ -48,20 +51,40 @@ public class GridBlock
         return col;
     }
 
+    void InitializeTile(int row, int col, Tile newTile)
+    {
+        // Assign new Tile reference.
+        tiles[row, col] = newTile;
+        // Subscribe to the new tile.
+        tiles[row, col].Changed += block.GetCallbackTileDataFill(row, col);
+        tiles[row, col].Changed += Tile_Changed;
+    }
+
     //Set the Tile of given indexes row and col to new Tile
     public void SetTile(int row, int col, Tile newTile)
     {
         // Unsubscribe from the old tile.
-        tiles[row, col].Changed -= block.GetCallbackTileDataSetTileType(row, col);
-        // Assign new tile.
-        tiles[row, col] = newTile;
-        // Subscribe to the new tile.
-        tiles[row, col].Changed += block.GetCallbackTileDataSetTileType(row, col);
+        tiles[row, col].Changed -= block.GetCallbackTileDataFill(row, col);
+        tiles[row, col].Changed -= Tile_Changed;
+        // Subscribe to a new tile.
+        InitializeTile(row, col, newTile);
     }
 
-    public void Fill(int row, int col)
+    // Destructor. Unsubscribe all tiles.
+    ~GridBlock()
     {
-        tiles[row, col].Fill();
+        for (int row = 0; row < block.GetHeight(); ++row)
+        {
+            for (int col = 0; col < block.GetWidth(); ++col)
+            {
+                tiles[row, col].Changed -= block.GetCallbackTileDataFill(row, col);
+            }
+        }
+    }
+
+    public void Fill(int row, int col, TileData.TileType newType)
+    {
+        tiles[row, col].Fill(newType);
     }
 
     public void Clear(int row, int col)
@@ -77,11 +100,6 @@ public class GridBlock
     public TileData.TileType GetTileType(int row, int col)
     {
         return block.GetTileType(row, col);
-    }
-
-    public void SetTileType(int row, int col, TileData.TileType type)
-    {
-        tiles[row, col].SetTileType(type);
     }
 
     public bool BelongsToBlock(int row, int col)
@@ -109,15 +127,15 @@ public class GridBlock
                     int maxCol = -1; //Record the col index for right-most extremtile
                     for (int j = 0; j < block.GetWidth(); j++)
                     {
-                        if (grid.GetIsOccupied(i, j))
+                        if (block.GetIsOccupied(i, j))
                         {
                             maxCol = j;
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
-                            if (col + maxCol + 1 > grid.GetWidth() || (maxCol + 1 < block.GetWidth() &&
-                            !block.GetIsOccupied(i, maxCol + 1) && grid.GetIsOccupied(i, col + maxCol + 1))
-                            || (maxCol + 1 == block.GetWidth() && grid.GetIsOccupied(i, col + maxCol + 1)))
+                            if (col + maxCol + 1 >= grid.GetWidth() || (maxCol + 1 < block.GetWidth() &&
+                            !block.GetIsOccupied(i, maxCol + 1) && grid.GetIsOccupied(row + i, col + maxCol + 1))
+                            || (maxCol + 1 == block.GetWidth() && grid.GetIsOccupied(row + i, col + maxCol + 1)))
                                 return false;
                         }
                     }
@@ -136,8 +154,8 @@ public class GridBlock
                     for (int j = exTileY; j >= 0; j--)
                     {
                         //gridTiles[y + exTileX, j + x + 1].Duplicate(blockTiles[exTileX, j]);
-                        grid.SetTileType(row + exTileX, j + col + 1, block.GetTileType(exTileX, j));
-                        SetTile(row + exTileX, j + col + 1, grid.GetTileAt(row + exTileX, j + col + 1));
+                        grid.Fill(row + exTileX, j + col + 1, block.GetTileType(exTileX, j));
+                        SetTile(exTileX, j, grid.GetTileAt(row + exTileX, j + col + 1));
                         grid.Clear(row + exTileX, j + col);
                     }
                 }
@@ -146,6 +164,7 @@ public class GridBlock
 
                 break;
             case Enums.Direction.Down:
+                
                 //Run through the tiles from top to bottom, left to right, and add bottom-most extremetiles of each column to the list
                 for (int i = 0; i < block.GetWidth(); i++)
                 {
@@ -158,10 +177,12 @@ public class GridBlock
 
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
-                            if (row + maxY + 1 > grid.GetHeight() || (maxY + 1 < block.GetHeight() &&
-                            !block.GetIsOccupied(maxY + 1, i) && grid.GetIsOccupied(row + maxY + 1, i)
-                            || (maxY + 1 == block.GetHeight() && grid.GetIsOccupied(row + maxY + 1, i))))
+                            if (row + maxY + 1 >= grid.GetHeight() || (maxY + 1 < block.GetHeight() &&
+                            !block.GetIsOccupied(maxY + 1, i) && grid.GetIsOccupied(row + maxY + 1, col + i)
+                            || (maxY + 1 == block.GetHeight() && grid.GetIsOccupied(row + maxY + 1, col + i))))
+                            {
                                 return false;
+                            }
                         }
                     }
 
@@ -179,13 +200,13 @@ public class GridBlock
                     for (int j = exTileX; j >= 0; j--)
                     {
                         //gridTiles[y + j + 1, x + exTileY].Duplicate(blockTiles[j, exTileY]);
-                        grid.SetTileType(row + j + 1, col + exTileY, block.GetTileType(j, exTileY));
-                        SetTile(row + j + 1, col + exTileY, grid.GetTileAt(row + j + 1, col + exTileY));
+                        grid.Fill(row + j + 1, col + exTileY, block.GetTileType(j, exTileY));
+                        SetTile(j, exTileY, grid.GetTileAt(row + j + 1, col + exTileY));
                         grid.Clear(row + j, col + exTileY);
                     }
                 }
 
-                row += 1;
+                row += 1;              
 
                 break;
             case Enums.Direction.Left:
@@ -202,8 +223,8 @@ public class GridBlock
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
                             if (col + minX - 1 < 0 || (minX - 1 >= 0 &&
-                            !block.GetIsOccupied(i, minX - 1) && grid.GetIsOccupied(i, col + minX - 1)
-                            || (minX - 1 == -1 && grid.GetIsOccupied(i, col + minX - 1))))
+                            !block.GetIsOccupied(i, minX - 1) && grid.GetIsOccupied(row + i, col + minX - 1)
+                            || (minX - 1 == -1 && grid.GetIsOccupied(row + i, col + minX - 1))))
                                 return false;
                         }
                     }
@@ -222,8 +243,8 @@ public class GridBlock
                     for (int j = 0; j < exTileY; j++)
                     {
                         //gridTiles[y + exTileX, j + x - 1].Duplicate(blockTiles[exTileX, j]);
-                        grid.SetTileType(row + exTileX, j + col - 1, block.GetTileType(exTileX, j));
-                        SetTile(row + exTileX, j + col - 1, grid.GetTileAt(row + exTileX, j + col - 1));
+                        grid.Fill(row + exTileX, j + col - 1, block.GetTileType(exTileX, j));
+                        SetTile(exTileX, j, grid.GetTileAt(row + exTileX, j + col - 1));
                         grid.Clear(row + exTileX, j + col);
                     }
                 }
@@ -246,8 +267,8 @@ public class GridBlock
                             //Check conditions which stop the block from moving. Return false if there is one condition fulfilled
                             //Three conditions: block on the edge, obstruction inside the block, obstruction outside the block
                             if (row + minY - 1 < 0 || (minY - 1 >= 0 &&
-                            !block.GetIsOccupied(minY - 1, i) && grid.GetIsOccupied(row + minY - 1, i)
-                            || (minY - 1 == -1 && grid.GetIsOccupied(row + minY - 1, i))))
+                            !block.GetIsOccupied(minY - 1, i) && grid.GetIsOccupied(row + minY - 1, col + i)
+                            || (minY - 1 == -1 && grid.GetIsOccupied(row + minY - 1, col + i))))
                                 return false;
                         }
                     }
@@ -266,8 +287,8 @@ public class GridBlock
                     for (int j = 0; j < exTileX; j++)
                     {
                         //gridTiles[y + j - 1, x + exTileY].Duplicate(blockTiles[j, exTileY]);
-                        grid.SetTileType(row + j - 1, col + exTileY, block.GetTileType(j, exTileY));
-                        SetTile(row + j - 1, col + exTileY, grid.GetTileAt(row + j - 1, col + exTileY));
+                        grid.Fill(row + j - 1, col + exTileY, block.GetTileType(j, exTileY));
+                        SetTile(j, exTileY, grid.GetTileAt(row + j - 1, col + exTileY));
                         grid.Clear(row + j, col + exTileY);
                     }
                 }
@@ -296,22 +317,91 @@ public class GridBlock
     //by other tiles and stop right there
     public void ActivateVestiges()
     {
-        for (int r = 0; r <block.GetHeight(); r++)
+        List<GridBlock> vestiges = new List<GridBlock>();
+
+        /*
+        // Clear all of the Vacant Tiles.
+        for (int r = 0; r < block.GetHeight(); r++)
         {
-            for (int c = 0; c <block.GetWidth(); c++)
+            for (int c = 0; c < block.GetWidth(); c++)
             {
                 if (GetTileType(r, c) == TileData.TileType.Vacant)
                 {
                     Clear(r, c);
                 }
-                else if (GetTileType(r, c) == TileData.TileType.Regular)
+            }
+        }
+        */
+
+        for (int r = 0; r < block.GetHeight(); r++)
+        {
+            for (int c = 0; c < block.GetWidth(); c++)
+            {
+                if (GetTileType(r, c) == TileData.TileType.Regular)
                 {
                     Block b = new Block(1, 1);
-                    b.SetTileType(0, 0, TileData.TileType.Vestige);
-                    GridBlock gb = grid.WriteBlock(row + r, col + c, b);
-                    gb.MoveRepeatedly(Enums.Direction.Down);
+                    b.Fill(0, 0, TileData.TileType.Vestige);
+                    int vestigeRow = row + r;
+                    int vestigeCol = col + c;
+                    GridBlock gb = grid.WriteBlock(vestigeRow, vestigeCol, b);
+                    vestiges.Add(gb);
                 }
             }
+        }
+
+        vestiges.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
+
+        /*foreach (GridBlock gb in vestiges)
+        {
+            gb.MoveRepeatedly(Enums.Direction.Down);
+        }*/
+
+        // Remove this GridBlock from the Grid since it has been broken into smaller GridBlocks.
+        grid.RemoveGridBlock(this);
+    }
+
+    // Called when grid.CheckForMatches finishes.
+    // Returns true if the GridBlock is being removed.
+    public bool MatchesChecked()
+    {
+        if (tilesClearedRecently)
+        {
+            // Reset the tiles cleared recently variable.
+            tilesClearedRecently = false;
+            // If the block is entirely made of unoccupied tiles, remove it from the Grid.
+            if (block.GetIsEntirely(TileData.TileType.Unoccupied))
+            {
+                grid.RemoveGridBlock(this);
+                return true;
+            }
+            else
+            {
+                // Otherwise, activate Vestiges.
+                /*
+                bool toBeVestiges = false;
+                foreach (Tile tile in tiles)
+                {
+                    if (tile.GetIsOccupied() == false)
+                    {
+                        toBeVestiges = true;
+                    }
+                }
+                if (toBeVestiges)
+                {
+                */
+                    ActivateVestiges();
+                    return true;
+                //}
+            }
+        }
+        return false;
+    }
+
+    private void Tile_Changed(TileData.TileType newType)
+    {
+        if (newType == TileData.TileType.Unoccupied)
+        {
+            tilesClearedRecently = true;
         }
     }
 }

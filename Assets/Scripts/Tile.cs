@@ -1,9 +1,9 @@
 ﻿// Author(s): Paul Calande, Maia Doerner
 
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
@@ -12,16 +12,16 @@ public class Tile : MonoBehaviour
 
     //static Dictionary<TileData.TileType, Sprite> sprites = new Dictionary<TileData.TileType, Sprite>();
 
-	TileData data;
+	TileData data = new TileData();
 
     [SerializeField]
-	SpriteRenderer spriteRenderer;
+    Image spriteRenderer;
     [SerializeField]
     Sprite spriteUnoccupied;
     [SerializeField]
     Sprite spriteRegular;
-    [SerializeField]
-    Sprite spriteVacant;
+    //[SerializeField]
+    //Sprite spriteVacant;
     [SerializeField]
     Sprite spriteVestige;
 
@@ -30,26 +30,15 @@ public class Tile : MonoBehaviour
         return data.GetIsOccupied();
     }
 
-    public void SetTileType(TileData.TileType newType)
+    public void Fill(TileData.TileType newType)
     {
-        data.SetTileType(newType);
-        // Set the sprite based on the new tile type.
-        switch (newType)
+        TileData.TileType previousType = data.GetTileType();
+        if (previousType != newType)
         {
-            case TileData.TileType.Unoccupied:
-                spriteRenderer.sprite = spriteUnoccupied;
-                break;
-            case TileData.TileType.Regular:
-                spriteRenderer.sprite = spriteRegular;
-                break;
-            case TileData.TileType.Vacant:
-                spriteRenderer.sprite = spriteVacant;
-                break;
-            case TileData.TileType.Vestige:
-                spriteRenderer.sprite = spriteVestige;
-                break;
+            data.Fill(newType);
+            SetSprite(newType);
+            OnChanged(newType);
         }
-        OnChanged(newType);
     }
 
     public TileData.TileType GetTileType()
@@ -59,18 +48,40 @@ public class Tile : MonoBehaviour
 
     public void Clear()
     {
-        SetTileType(TileData.TileType.Unoccupied);
-    }
-
-    public void Fill()
-    {
-        SetTileType(TileData.TileType.Regular);
+        Fill(TileData.TileType.Unoccupied);
     }
 
     // Helper function.
     public void Duplicate(Tile other)
     {
-        SetTileType(other.GetTileType());
+        Fill(other.GetTileType());
+    }
+
+    public void SetSprite(TileData.TileType newType)
+    {
+        // Set the sprite based on the given tile type.
+        switch (newType)
+        {
+            case TileData.TileType.Unoccupied:
+                spriteRenderer.sprite = spriteUnoccupied;
+                break;
+            case TileData.TileType.Regular:
+                spriteRenderer.sprite = spriteRegular;
+                break;
+                /*
+            case TileData.TileType.Vacant:
+                spriteRenderer.sprite = spriteVacant;
+                break;
+                */
+            case TileData.TileType.Vestige:
+                spriteRenderer.sprite = spriteVestige;
+                break;
+        }
+    }
+
+    public void EnableSpriteRenderer(bool enable)
+    {
+        spriteRenderer.enabled = enable;
     }
 
     void OnChanged(TileData.TileType newType)

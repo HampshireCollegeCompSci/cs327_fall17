@@ -26,7 +26,7 @@ public class Space : MonoBehaviour
         snapLocation.SnappedTo += SnapLocation_SnappedTo;
     }
 
-    public void Init (int mcol, int mrow, int mwidth, int mheight, Grid mgrid)
+    public void Init(int mrow, int mcol, int mheight, int mwidth, Grid mgrid)
 	{
         col = mcol;
         row = mrow;
@@ -38,14 +38,14 @@ public class Space : MonoBehaviour
         Vector3 tilePosTopLeft = grid.GetTilePosition(row, col);
         Vector3 tilePosBottomRight = grid.GetTilePosition(row + height - 1, col + width - 1);
         Vector3 averagePos = (tilePosTopLeft + tilePosBottomRight) * 0.5f;
-        transform.position = averagePos;
+        transform.localPosition = averagePos;
         // Scale the space as well.
         transform.localScale = new Vector3(width, height, 1.0f);
 	}
 
     public bool CanBlockFit(Block block)
     {
-        if (block.GetWidth() == width && block.GetHeight() == height)
+        /*if (block.GetWidth() == width && block.GetHeight() == height)
         {
             // It fits, dimensionally speaking.
             return grid.CanBlockFit(row, col, block); // Check if the important Cells are empty.
@@ -54,7 +54,9 @@ public class Space : MonoBehaviour
         {
             // It doesn't.
             return false;
-        }
+        }*/
+
+        return grid.CanBlockFit(row, col, block);
     }
 
 	//This method should be called when a DraggableBlock is dragged onto this Space.
