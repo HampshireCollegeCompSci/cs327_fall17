@@ -68,25 +68,12 @@ public class BlockSpawner : MonoBehaviour
 
     public void SpawnRandomBlock()
     {
-        if (maxBlocksInQueue > 1) {
-            if (blocksQueue.Count == maxBlocksInQueue) {
-                //if the # of elements in queue already reaches
-                //max, game over
-                gameFlow.GameOver ();
-                return;
-            } else {
-                //otherwise we select a random block from the possible list,
-                //then instantiate the draggable block and add it into the queue.
-                int i = Random.Range (0, possibleBlocks.Count);
-                Block toSpawn = possibleBlocks [i];
-                prefabDraggableBlock.GetComponent<DraggableBlock> ().SetBlock (toSpawn);
-                Instantiate (prefabDraggableBlock);          
-                blocksQueue.Enqueue (prefabDraggableBlock.GetComponent<DraggableBlock> ());
-                //if this block is the only block in queue, enable it
-                if (blocksQueue.Count == 1)
-                    EnableFrontBlock ();
-                PositionBlocks ();
-            } 
+        
+        if (blocksQueue.Count == maxBlocksInQueue) {
+            //if the # of elements in queue already reaches
+            //max, game over
+            gameFlow.GameOver ();
+            return;
         }
         else
         {
