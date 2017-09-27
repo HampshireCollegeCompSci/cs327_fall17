@@ -77,6 +77,14 @@ public class DraggableBlock : MonoBehaviour
         UpdateTiles();
     }
 
+    // Forwards a Flip call to the underlying Block, then updates the tiles 
+    // array to match the Block’s TileData.
+    public void Flip()
+    {
+        block.Flip();
+        UpdateTiles();
+    }
+
     public void UpdateTiles()
     {
         // Destroy the Tiles so that they can be recreated.

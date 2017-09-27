@@ -18,4 +18,9 @@ public class UIRotate : MonoBehaviour
     {
         spawner.RotateCurrentBlock(false);
     }
+
+    public void Flip()
+    {
+        spawner.FlipCurrentBlock();
+    }
 }

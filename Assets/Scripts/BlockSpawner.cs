@@ -297,6 +297,14 @@ public class BlockSpawner : MonoBehaviour
         }
     }
 
+    public void FlipCurrentBlock()
+    {
+        if (blocksQueue.Count > 0)
+        {
+            blocksQueue.Peek().Flip();
+        }
+    }
+
     // Callback function for gameFlow's GameLost event.
     private void GameFlow_GameLost(GameFlow.GameOverCause cause)
     {

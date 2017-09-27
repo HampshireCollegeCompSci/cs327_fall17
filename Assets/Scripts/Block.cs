@@ -128,6 +128,36 @@ public class Block
         //Debug.Log("Post-rotation: " + ToString());
     }
 
+    //Flip the block based on vertical axis.
+    public void Flip()
+    {
+        //for block with current width 1, flip does nothing
+        if (width >= 2)
+        {
+            //If width is odd, then midCol is the middle;
+            //otherwhise it is the middle-right column.
+            int midCol = width / 2;
+            TileData[,] newTileData = new TileData[height, width];
+            for (int c = 0; c < width; c++)
+            {            
+                for (int r = 0; r < height; r++)
+                {
+                    if (width % 2 == 1 && c == midCol) 
+                        newTileData[r, midCol] = new TileData(tiles[r, midCol]);
+                    else
+                        newTileData[r, c] = new TileData(tiles[r, width - 1 - c].GetTileType());
+                }               
+            }
+            
+            tiles = newTileData;
+        }
+        else
+        {
+            //Do nothing for now
+            return;
+        }
+    }
+
     // Converts Block information to a string.
     public override string ToString()
     {
