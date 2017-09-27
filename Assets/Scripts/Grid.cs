@@ -737,8 +737,7 @@ public class Grid : MonoBehaviour
         {
             //localSpaces = GetSpaces(testBlock.GetWidth(), testBlock.GetHeight());
             localSpaces = GetSpaces(1, 1);
-
-            for (int i = 0; i < spaces.Count; i++)
+            for (int i = 0; i < localSpaces.Count; i++)
             {
                 if (localSpaces[i].CanBlockFit(testBlock))
                 {
