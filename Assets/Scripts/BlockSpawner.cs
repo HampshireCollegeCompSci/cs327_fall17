@@ -59,7 +59,7 @@ public class BlockSpawner : MonoBehaviour
             var cell = json["blocks"][i]["cells"].AsArray;
             //Debug.Log(cell.ToString());
 
-            block = new Block(w, h);
+            block = new Block(h, w);
             
             //generate blocks according to cell, 1 means regular tile, 0 means unoccupied tile
             for (int row = 0; row < h; ++row)
