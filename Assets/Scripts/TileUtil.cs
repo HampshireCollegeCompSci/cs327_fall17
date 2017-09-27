@@ -7,7 +7,7 @@ using UnityEngine;
 public class TileUtil
 {
     // The amount of space between each Tile in a grid of Tiles.
-    public const float spaceBetweenTiles = 64.0f;
+    public const float spaceBetweenTiles = 96.0f;
 
     public static Tile[,] CreateTileArray(GameObject prefabTile, Transform parent, Vector3 center, int height, int width)
     {
