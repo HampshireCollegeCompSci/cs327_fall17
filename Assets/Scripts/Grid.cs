@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
-    public delegate void SquareFormedHandler(int size);
+    public delegate void SquareFormedHandler(int size, Vector3 textPos);
     public event SquareFormedHandler SquareFormed;
 
     [SerializeField]
@@ -228,9 +228,9 @@ public class Grid : MonoBehaviour
         }
 
         //Remove all tiles that form squares
-        //toRemove.ForEach(t => t.Clear());
         foreach (Tile t in toRemove)
         {
+            
             t.Clear();
         }
 
@@ -301,10 +301,23 @@ public class Grid : MonoBehaviour
             }
             if (isLegal)
             {
+                //Spawn a text indicating scores at the center of the cleared square
+                Vector3 textPos = new Vector3();
+                if (length % 2 == 1)
+                {
+                    textPos = GetTilePosition(r + (length - 1) / 2, c + (length - 1) / 2);
+                }
+                else
+                {
+                    Vector3 rightPos = GetTilePosition(r + (length - 1) / 2 + 1, c + (length - 1) / 2 + 1);
+                    Vector3 leftPos = GetTilePosition(r + (length - 1) / 2, c + (length - 1) / 2);
+                    textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
+                }
+
                 //If a legal square is formed, tell the event handler
                 //Also clear all tiles inside the square (Just mark them here)
                 processed.AddRange(MarkInsideTiles(r, c, length));
-                OnSquareFormed(length);
+                OnSquareFormed(length, textPos);
             }
                 
         }
@@ -793,11 +806,11 @@ public class Grid : MonoBehaviour
         }
     }
 
-    private void OnSquareFormed(int size)
+    private void OnSquareFormed(int size, Vector3 textPos)
     {
         if (SquareFormed != null)
         {
-            SquareFormed(size);
+            SquareFormed(size, textPos);
         }
     }
 }
