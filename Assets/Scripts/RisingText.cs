@@ -13,8 +13,8 @@ public class RisingText : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        risingSpeed = 1f;
-        fadingSpeed = -0.02f;
+        risingSpeed = 100f * Time.deltaTime;
+        fadingSpeed = -1f * Time.deltaTime;
     }
 
     // Update is called once per frame
