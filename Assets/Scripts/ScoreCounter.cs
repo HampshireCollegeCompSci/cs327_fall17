@@ -53,7 +53,7 @@ public class ScoreCounter : MonoBehaviour
     {
         AddScore(size * 100);
         GameObject risingTextObj = Object.Instantiate(risingTextPrefab, grid.transform, false);
-        risingTextObj.GetComponent<Text>().text = (size * 100).ToString();
+        risingTextObj.GetComponent<Text>().GetComponent<RisingText>().SetText((size * 100).ToString());
         risingTextObj.transform.localPosition = textPos;
     }
 }

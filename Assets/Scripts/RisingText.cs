@@ -39,7 +39,7 @@ public class RisingText : MonoBehaviour {
         
     }
 
-    void SetText(string str)
+    public void SetText(string str)
     {
         textRising.text = str;
     }
