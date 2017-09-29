@@ -49,6 +49,8 @@ public class Tile : MonoBehaviour
     public void Clear()
     {
         Fill(TileData.TileType.Unoccupied);
+        //Make a new tile a bit in front of this one, fade it out
+
     }
 
     // Helper function.

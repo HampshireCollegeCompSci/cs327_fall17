@@ -13,8 +13,9 @@ public class TileFade : MonoBehaviour
     [SerializeField]
     [Tooltip("How long it takes for the tiles to fade when cleared, in seconds")]
     private float fadeTime = 0.4f;
+    //UPDATE: Look in Grid.cs for how to use the tuning variable JSON file
 	
-    void Fade(Image imageToFade)
+    public void Fade(Image imageToFade)
     {
         imageToFade.CrossFadeAlpha(0, fadeTime, false);
         Destroy(imageToFade.gameObject);
