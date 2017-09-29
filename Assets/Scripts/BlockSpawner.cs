@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using SimpleJSON;
 
 public class BlockSpawner : MonoBehaviour
 {
@@ -21,8 +22,8 @@ public class BlockSpawner : MonoBehaviour
     Grid grid;
     [SerializeField]
     GameObject prefabDraggableBlock;
-    //[SerializeField]
-    //File blockData;
+    [SerializeField]
+    TextAsset possibleBlocksJSON;
 
     List<Block> possibleBlocks = new List<Block>();
 
@@ -45,6 +46,60 @@ public class BlockSpawner : MonoBehaviour
 
     public void Init()
     {
+        //read json file
+        var json = JSON.Parse(possibleBlocksJSON.ToString());
+
+        for (int i = 0; i < json["blocks"].Count; i++)
+        {
+            Block block;
+            //int formation = Random.Range(0, json["blocks"].Count);
+            var w = json["blocks"][i]["width"].AsInt;
+            var h = json["blocks"][i]["height"].AsInt;
+            var cell = json["blocks"][i]["cells"].AsArray;
+            //Debug.Log(cell.ToString());
+
+            block = new Block(h, w);
+
+            for (int row = 0; row < h; ++row)
+            {
+                for (int col = 0; col < w; ++col)
+                {
+                    int currentPos = col + w * row;
+                    int thisCell = cell[currentPos];
+                    if (thisCell == 0)
+                    {
+                        block.Fill(row, col, TileData.TileType.Unoccupied);
+                    }
+                    else if (thisCell == 1)
+                    {
+                        block.Fill(row, col, TileData.TileType.Regular);
+                    }
+                }
+            }
+
+            /*
+            //generate blocks according to cell, 1 means regular tile, 0 means unoccupied tile
+            for (int row = 0; row < h; ++row)
+            {
+                for (int col = 0; col < w; ++col)
+                {
+                    int thisCell = cell[row][col];
+                    if (thisCell == 0)
+                    {  
+                        block.Fill(row, col, TileData.TileType.Unoccupied);
+                    }
+                    else if (thisCell == 1)
+                    {
+                        block.Fill(row, col, TileData.TileType.Regular);
+                    }
+                }
+            }
+            */
+
+            possibleBlocks.Add(block);
+        }
+        
+        /*
         // TODO: Replace this for loop with file reading later.
         for (int i = 0; i < 10; ++i)
         {
@@ -83,7 +138,7 @@ public class BlockSpawner : MonoBehaviour
             }
 
             possibleBlocks.Add(block);
-        }
+        }*/
 
         ResetBlockTimer();
         SpawnRandomBlock();
