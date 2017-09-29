@@ -14,6 +14,9 @@ public class ScoreCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Score UI text.")]
     Text textScore;
+    [SerializeField]
+    [Tooltip("Reference to the Rising Text prefab")]
+    GameObject risingTextPrefab;
 
     // The current score.
     int score = 0;
@@ -49,14 +52,7 @@ public class ScoreCounter : MonoBehaviour
     private void Grid_SquareFormed(int size, Vector3 textPos)
     {
         AddScore(size * 100);
-        GameObject spawnTextScoreObj = new GameObject();
-        Text spawnTextScore = spawnTextScoreObj.AddComponent<Text>();
-        spawnTextScore.text = (size * 100).ToString();
-        spawnTextScore.font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-        spawnTextScore.fontSize = 90;
-        spawnTextScore.alignment = TextAnchor.MiddleCenter;
-        spawnTextScoreObj.transform.SetParent(GameObject.Find("Canvas").transform);
-        spawnTextScoreObj.transform.localPosition = textPos;
-        Instantiate(spawnTextScoreObj, spawnTextScoreObj.transform.localPosition, Quaternion.identity);
+        GameObject risingTextScoreObj = Object.Instantiate(risingTextPrefab, grid.transform, false);
+        risingTextScoreObj.transform.localPosition = textPos;
     }
 }
