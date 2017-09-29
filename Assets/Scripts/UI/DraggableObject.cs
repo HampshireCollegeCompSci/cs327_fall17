@@ -59,6 +59,52 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
                 transform.localPosition = new Vector2(xPos, yPos);
             }
+
+            bool validSpotFound = false;
+            SnapLocation locationToGoTo = null;
+
+            Vector2 myPos = transform.position;
+            myPos += snapDetectionOffset;
+
+            // Used to figure out which location is the closest before snapping.
+            float smallestDistance = Mathf.Infinity;
+
+            foreach (SnapLocation solution in snapToAreas)
+            {
+                Vector2 solutionPos = solution.transform.position;
+                float solutionX = solutionPos.x;
+                float solutionY = solutionPos.y;
+
+                //Debug.Log("Me: (" + myPos.x + ", " + myPos.y + "), solution: (" + solutionX + ", " + solutionY + ")");
+
+                if ((myPos.x > solutionX - piecePlacementOffset.x) &&
+                    (myPos.x < solutionX + piecePlacementOffset.x) &&
+                    (myPos.y > solutionY - piecePlacementOffset.y) &&
+                    (myPos.y < solutionY + piecePlacementOffset.y))
+                {
+                    validSpotFound = true;
+                }
+
+                if (validSpotFound)
+                {
+                    float distance = Vector2.Distance(myPos, solutionPos);
+                    if (distance < smallestDistance)
+                    {
+                        locationToGoTo = solution;
+                        smallestDistance = distance;
+                    }
+                }
+            }
+
+            if (validSpotFound)
+            {
+                locationToGoTo.Hover(gameObject, false); // Clear all highlights
+                locationToGoTo.Hover(gameObject, true); // Set on highlight for current tile
+            }
+            else
+            {
+                snapToAreas[0].Hover(gameObject, false); // Turn off highlights
+            }
         }
     }
 
@@ -107,9 +153,11 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             {
                 transform.position = locationToGoTo.transform.position;
                 locationToGoTo.Snap(gameObject);
+                locationToGoTo.Hover(gameObject, false);
             }
             else
             {
+                snapToAreas[0].Hover(gameObject, false); // Turn off highlights
                 transform.localPosition = defaultPosition;
             }
 
