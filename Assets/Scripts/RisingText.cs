@@ -13,14 +13,14 @@ public class RisingText : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        risingSpeed = 100f * Time.deltaTime;
-        fadingSpeed = -1f * Time.deltaTime;
+        risingSpeed = 100f;
+        fadingSpeed = -1f;
     }
 
     // Update is called once per frame
     void Update () {
         float x = textRising.transform.localPosition.x;
-        float y = textRising.transform.localPosition.y + risingSpeed;
+        float y = textRising.transform.localPosition.y + risingSpeed * Time.deltaTime;
         float z = textRising.transform.localPosition.z;
         
         textRising.transform.localPosition = new Vector3(x, y, z);
@@ -28,7 +28,7 @@ public class RisingText : MonoBehaviour {
         float r = textRising.color.r;
         float g = textRising.color.g;
         float b = textRising.color.b;
-        float a = textRising.color.a + fadingSpeed;
+        float a = textRising.color.a + fadingSpeed * Time.deltaTime;
         
         textRising.color = new Color(r, g, b, a);
 
