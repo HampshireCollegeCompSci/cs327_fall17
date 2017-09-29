@@ -11,9 +11,10 @@
 		},
 		{
 			"width" : 1,
-			"height" : 2,
+			"height" : 3,
 			"cells" :
 			[1,
+			 0,
 			 1] 
 		},
 		{
