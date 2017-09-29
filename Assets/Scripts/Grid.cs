@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using SimpleJSON;
 
 public class Grid : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class Grid : MonoBehaviour
     [SerializeField]
     int height;
     [SerializeField]
+    int baseEnergyDecayRate;
+    [SerializeField]
+    int decayRatePerVestige;
+    [SerializeField]
     GameObject prefabTile;
     [SerializeField]
     GameObject prefabSpace;
@@ -24,6 +29,8 @@ public class Grid : MonoBehaviour
     BlockSpawner blockSpawner;
     [SerializeField]
     EnergyCounter energyCounter;
+    [SerializeField]
+    TextAsset tuningJSON;
 
     Tile[,] tiles;
 
@@ -37,8 +44,19 @@ public class Grid : MonoBehaviour
     //List<LShape> bottomLeft;
     //List<LShape> bottomRight;
 
+    private void Tune()
+    {
+        var json = JSON.Parse(tuningJSON.ToString());
+        width = json["grid width"].AsInt;
+        height = json["grid height"].AsInt;
+        baseEnergyDecayRate = json["base energy decay rate"].AsInt;
+        decayRatePerVestige = json["decay rate per vestige"].AsInt;
+    }
+
     private void Start()
     {
+        Tune();
+
         //Instantiate tiles array
         tiles = TileUtil.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
 
@@ -782,7 +800,8 @@ public class Grid : MonoBehaviour
                 }
             }
 
-            energyCounter.RemoveEnergy(1 + vestigeNum);
+            int energyChange = baseEnergyDecayRate + vestigeNum * decayRatePerVestige;
+            energyCounter.RemoveEnergy(energyChange);
         }
 
         blockSpawner.ProgressQueue();

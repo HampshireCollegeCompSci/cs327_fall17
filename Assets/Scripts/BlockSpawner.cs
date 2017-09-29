@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, Yifeng Shi
+﻿// Author(s): Paul Calande, Yifeng Shi, Yixiang Xu
 /* This class is working for spawning the random blocks
  * and maintaining the queue of incoming blocks.
  */
