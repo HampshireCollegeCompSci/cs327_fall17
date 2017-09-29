@@ -52,7 +52,8 @@ public class ScoreCounter : MonoBehaviour
     private void Grid_SquareFormed(int size, Vector3 textPos)
     {
         AddScore(size * 100);
-        GameObject risingTextScoreObj = Object.Instantiate(risingTextPrefab, grid.transform, false);
-        risingTextScoreObj.transform.localPosition = textPos;
+        GameObject risingTextObj = Object.Instantiate(risingTextPrefab, grid.transform, false);
+        risingTextObj.GetComponent<Text>().text = (size * 100).ToString();
+        risingTextObj.transform.localPosition = textPos;
     }
 }
