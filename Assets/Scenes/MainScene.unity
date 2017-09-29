@@ -1548,6 +1548,11 @@ Prefab:
       propertyPath: gameFlow
       value: 
       objectReference: {fileID: 2051938913}
+    - target: {fileID: 114317254578232620, guid: 5fa388134b667384caa9615ae4b7045e,
+        type: 2}
+      propertyPath: possibleBlocksJSON
+      value: 
+      objectReference: {fileID: 4900000, guid: 9df281a5798308947b09bc5a2ba18b20, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fa388134b667384caa9615ae4b7045e, type: 2}
   m_IsPrefabParent: 0

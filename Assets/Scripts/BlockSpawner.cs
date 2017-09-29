@@ -22,8 +22,8 @@ public class BlockSpawner : MonoBehaviour
     Grid grid;
     [SerializeField]
     GameObject prefabDraggableBlock;
-    //[SerializeField]
-    //File blockData;
+    [SerializeField]
+    TextAsset possibleBlocksJSON;
 
     List<Block> possibleBlocks = new List<Block>();
 
@@ -47,8 +47,7 @@ public class BlockSpawner : MonoBehaviour
     public void Init()
     {
         //read json file
-        string blockType = File.ReadAllText(Application.dataPath + "/JSONs/PossibleBlocks.json");
-        var json = JSON.Parse(blockType);
+        var json = JSON.Parse(possibleBlocksJSON.ToString());
 
         for (int i = 0; i < json["blocks"].Count; i++)
         {
