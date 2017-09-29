@@ -41,7 +41,8 @@ public class UIGameOver : MonoBehaviour
 
     public void Reset()
     {
-        SceneManager.LoadScene(0);
+        Scene currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
     }
 
     // Callback function for GameFlow.GameLost.
