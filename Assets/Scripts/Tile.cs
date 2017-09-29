@@ -84,6 +84,16 @@ public class Tile : MonoBehaviour
         spriteRenderer.enabled = enable;
     }
 
+    public void SetHighlight()
+    {
+        spriteRenderer.color = new Color(255f, 255f, 255f, 0.5f);
+    }
+
+    public void SetNormal()
+    {
+        spriteRenderer.color = new Color(255f, 255f, 255f, 1f);
+    }
+
     void OnChanged(TileData.TileType newType)
     {
         if (Changed != null)
