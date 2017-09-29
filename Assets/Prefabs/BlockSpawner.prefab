@@ -109,6 +109,7 @@ MonoBehaviour:
   grid: {fileID: 0}
   prefabDraggableBlock: {fileID: 1274260059464758, guid: d5b9c14df8255d8498eba274462873e5,
     type: 2}
+  possibleBlocksJSON: {fileID: 4900000, guid: 9df281a5798308947b09bc5a2ba18b20, type: 3}
 --- !u!224 &224066489780245838
 RectTransform:
   m_ObjectHideFlags: 1
