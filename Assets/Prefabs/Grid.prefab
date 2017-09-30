@@ -40,11 +40,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 8
   height: 8
+  baseEnergyDecayRate: 0
+  decayRatePerVestige: 0
   prefabTile: {fileID: 1107375466928364, guid: f21d4bcd0075aa74a82be9396f44f756, type: 2}
   prefabSpace: {fileID: 1842248367832416, guid: aa00b6ee3116e044fa9b37ca96f65aaf,
     type: 2}
   blockSpawner: {fileID: 0}
-  canvas: {fileID: 0}
+  energyCounter: {fileID: 0}
+  tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
 --- !u!224 &224804674211477668
 RectTransform:
   m_ObjectHideFlags: 1

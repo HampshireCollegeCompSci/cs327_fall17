@@ -24,6 +24,7 @@ public class Space : MonoBehaviour
     {
         //snapLocation = GetComponent<SnapLocation>();
         snapLocation.SnappedTo += SnapLocation_SnappedTo;
+        snapLocation.HoveringTo += SnapLocation_Highlight;
     }
 
     public void Init(int mrow, int mcol, int mheight, int mwidth, Grid mgrid)
@@ -70,5 +71,10 @@ public class Space : MonoBehaviour
     private void SnapLocation_SnappedTo(GameObject snapper)
     {
         PlaceBlock(snapper.GetComponent<DraggableBlock>());
+    }
+
+    private void SnapLocation_Highlight(GameObject snapper, bool on)
+    {
+        grid.SetHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), on);
     }
 }

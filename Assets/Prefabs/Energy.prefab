@@ -73,9 +73,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a4c52256820941aed90812d02dfe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textEnergy: {fileID: 114080833571507608}
   energy: 10
+  textEnergy: {fileID: 114080833571507608}
   gameFlow: {fileID: 0}
+  tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
 --- !u!222 &222316778221847238
 CanvasRenderer:
   m_ObjectHideFlags: 1

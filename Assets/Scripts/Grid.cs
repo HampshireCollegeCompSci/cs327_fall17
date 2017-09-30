@@ -208,6 +208,35 @@ public class Grid : MonoBehaviour
         return gb;
     }
 
+    public void SetHighlight(int row, int col, Block block, bool on)
+    {
+        if (!on)
+        {
+            for (int c = 0; c < GetWidth(); c++)
+            {
+                for (int r = 0; r < GetHeight(); r++)
+                {
+                    //Unhilight all tiles
+                    tiles[r, c].SetNormal();
+                }
+            }
+        }
+        else
+        {
+            for (int c = 0; c < block.GetWidth(); c++)
+            {
+                for (int r = 0; r < block.GetHeight(); r++)
+                {
+                    if (block.GetIsOccupied(r, c))
+                    {
+                        //If can place here then set highlight
+                        tiles[row + r, col + c].SetHighlight();
+                    }
+                }
+            }
+        }
+    }
+
     public bool CheckForMatches()
     {
         //Debug.Log("Checking for matches...");
