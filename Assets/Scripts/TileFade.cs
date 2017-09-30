@@ -17,6 +17,7 @@ public class TileFade : MonoBehaviour
 	
     public void Fade(Image imageToFade)
     {
+        Debug.Log("Fading image");
         imageToFade.CrossFadeAlpha(0, fadeTime, false);
         Destroy(imageToFade.gameObject);
     }
