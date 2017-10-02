@@ -272,13 +272,13 @@ public class Grid : MonoBehaviour
         if (toRemove.Count != 0)
         {
             squareFormed = true;
-        }
 
-        //Remove all tiles that form squares
-        foreach (Tile t in toRemove)
-        {
-            
-            t.Clear();
+            //Remove all tiles that form squares
+            foreach (Tile t in toRemove)
+            {
+
+                t.Clear();
+            }
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
@@ -361,14 +361,45 @@ public class Grid : MonoBehaviour
                     textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
                 }
 
-                //If a legal square is formed, tell the event handler
-                //Also clear all tiles inside the square (Just mark them here)
+                //If a legal square is formed, tell the event handler,
+                //clear all tiles inside the square (Just mark them here),
+                //and also all outside adjacent regular
+                //tiles will be turned in to vestiges.
                 processed.AddRange(MarkInsideTiles(r, c, length));
+                FormVestiges(r, c, length);
                 OnSquareFormed(length, textPos);
             }
                 
         }
         return processed;
+    }
+
+    private void FormVestiges(int row, int col, int length)
+    {
+        //Turn all adjacent outside regular tiles into vestiges.
+        //for the specified square.
+        
+        //Left edge
+        if (col > 0)
+            for (int r = row; r < row + length; r++)
+                if (tiles[r, col - 1].GetTileType() == TileData.TileType.Regular)
+                    tiles[r, col - 1].Fill(TileData.TileType.Vestige);
+        //Right edge
+        if (col + length - 1 < width)
+            for (int r = row; r < row + length; r++)
+                if (tiles[r, col + 1].GetTileType() == TileData.TileType.Regular)
+                    tiles[r, col + 1].Fill(TileData.TileType.Vestige);
+        //Top edge
+        if (row > 0)
+            for (int c = col; c < col + length; c++)
+                if (tiles[row - 1, c].GetTileType() == TileData.TileType.Regular)
+                    tiles[row - 1, c].Fill(TileData.TileType.Vestige);
+        //Bottom edge
+        if (row + length - 1 < height)
+            for (int c = col; c < col + length; c++)
+                if (tiles[row + 1, c].GetTileType() == TileData.TileType.Regular)
+                    tiles[row + 1, c].Fill(TileData.TileType.Vestige);
+
     }
 
     private List<Tile> MarkInsideTiles(int row, int col, int length)

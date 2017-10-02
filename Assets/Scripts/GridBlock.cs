@@ -70,6 +70,11 @@ public class GridBlock
         InitializeTile(row, col, newTile);
     }
 
+    public Tile[,] GetTiles()
+    {
+        return tiles;
+    }
+
     // Destructor. Unsubscribe all tiles.
     ~GridBlock()
     {
@@ -389,8 +394,8 @@ public class GridBlock
                 if (toBeVestiges)
                 {
                 */
-                    ActivateVestiges();
-                    return true;
+                //    ActivateVestiges();
+                //    return true;
                 //}
             }
         }
