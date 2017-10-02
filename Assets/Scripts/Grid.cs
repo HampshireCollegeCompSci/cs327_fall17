@@ -250,6 +250,9 @@ public class Grid : MonoBehaviour
         // multiple squares together.
         List<Tile> toRemove = new List<Tile>();
 
+        //List keeping all tiles that are going to be turned into vestiges
+        List<int[]> toVestiges = new List<int[]>();
+
         //Loop through all blocks from top left.
         //Consider only the case that the current tile is the top-left corner.
         for (int r = 0; r < height; r++)
@@ -262,7 +265,7 @@ public class Grid : MonoBehaviour
                     // Check for squares from length 3 upwards.
                     for (int length = 3; length <= biggestSquareSize; length++)
                     {
-                        toRemove.AddRange(CheckForSquares(r, c, length));
+                        CheckForSquares(r, c, length, ref toRemove, ref toVestiges);
                     }
                 }
             }
@@ -273,12 +276,17 @@ public class Grid : MonoBehaviour
         {
             squareFormed = true;
 
+            //Turn vestiges
+            foreach (int[] s in toVestiges)
+            {
+                FormVestiges(s[0], s[1], s[2], toRemove);
+            }
+
             //Remove all tiles that form squares
             foreach (Tile t in toRemove)
             {
-
                 t.Clear();
-            }
+            }    
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
@@ -296,7 +304,7 @@ public class Grid : MonoBehaviour
         return squareFormed;
     }
 
-    private List<Tile> CheckForSquares(int r, int c, int length)
+    private void CheckForSquares(int r, int c, int length, ref List<Tile> toRemove, ref List<int[]> toVestiges)
     {
         List<Tile> processed = new List<Tile>();
         //Do not check if the square is not possible
@@ -364,17 +372,17 @@ public class Grid : MonoBehaviour
                 //If a legal square is formed, tell the event handler,
                 //clear all tiles inside the square (Just mark them here),
                 //and also all outside adjacent regular
-                //tiles will be turned in to vestiges.
+                //tiles will be turned in to vestiges (Mark the certain square).
                 processed.AddRange(MarkInsideTiles(r, c, length));
-                FormVestiges(r, c, length);
+                toRemove.AddRange(processed);
+                toVestiges.Add(new int[]{ r, c, length });
                 OnSquareFormed(length, textPos);
             }
                 
         }
-        return processed;
     }
 
-    private void FormVestiges(int row, int col, int length)
+    private void FormVestiges(int row, int col, int length, List<Tile> toRemove)
     {
         //Turn all adjacent outside regular tiles into vestiges.
         //for the specified square.
@@ -382,23 +390,23 @@ public class Grid : MonoBehaviour
         //Left edge
         if (col > 0)
             for (int r = row; r < row + length; r++)
-                if (tiles[r, col - 1].GetTileType() == TileData.TileType.Regular)
+                if (toRemove.Find(t => t == tiles[r, col - 1]) == null && tiles[r, col - 1].GetTileType() == TileData.TileType.Regular)
                     tiles[r, col - 1].Fill(TileData.TileType.Vestige);
         //Right edge
         if (col + length - 1 < width)
             for (int r = row; r < row + length; r++)
-                if (tiles[r, col + 1].GetTileType() == TileData.TileType.Regular)
-                    tiles[r, col + 1].Fill(TileData.TileType.Vestige);
+                if (toRemove.Find(t => t == tiles[r, col + length]) == null && tiles[r, col + length].GetTileType() == TileData.TileType.Regular)
+                    tiles[r, col + length].Fill(TileData.TileType.Vestige);
         //Top edge
         if (row > 0)
             for (int c = col; c < col + length; c++)
-                if (tiles[row - 1, c].GetTileType() == TileData.TileType.Regular)
+                if (toRemove.Find(t => t == tiles[row - 1, c]) == null && tiles[row - 1, c].GetTileType() == TileData.TileType.Regular)
                     tiles[row - 1, c].Fill(TileData.TileType.Vestige);
         //Bottom edge
         if (row + length - 1 < height)
             for (int c = col; c < col + length; c++)
-                if (tiles[row + 1, c].GetTileType() == TileData.TileType.Regular)
-                    tiles[row + 1, c].Fill(TileData.TileType.Vestige);
+                if (toRemove.Find(t => t == tiles[row + length, c]) == null && tiles[row + length, c].GetTileType() == TileData.TileType.Regular)
+                    tiles[row + length, c].Fill(TileData.TileType.Vestige);
 
     }
 
