@@ -31,6 +31,8 @@ public class Grid : MonoBehaviour
     EnergyCounter energyCounter;
     [SerializeField]
     TextAsset tuningJSON;
+    [SerializeField]
+    int energyPerCell = 1;
 
     Tile[,] tiles;
 
@@ -51,6 +53,7 @@ public class Grid : MonoBehaviour
         height = json["grid height"].AsInt;
         baseEnergyDecayRate = json["base energy decay rate"].AsInt;
         decayRatePerVestige = json["decay rate per vestige"].AsInt;
+        energyPerCell = json["energy per cell cleared"];
     }
 
     private void Start()
@@ -847,10 +850,10 @@ public class Grid : MonoBehaviour
     //Called when a tiletype is changed
     private void Tile_Changed(TileData.TileType newType)
     {
-        //If a type is changed to Unoccupied, then add 1 energy
+        //If a type is changed to Unoccupied, then add energyPerCell energy
         if (newType == TileData.TileType.Unoccupied)
         {
-            energyCounter.AddEnergy();
+            energyCounter.AddEnergy(energyPerCell);
         }
     }
 

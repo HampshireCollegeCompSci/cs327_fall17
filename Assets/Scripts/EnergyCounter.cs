@@ -12,9 +12,6 @@ public class EnergyCounter : MonoBehaviour
     [Tooltip("The amount of energy the player currently has.")]
     int energy = 10;
     [SerializeField]
-    [Tooltip("The amount of energy gotten for a tile cleared.")]
-    int energyPerCell;
-    [SerializeField]
     [Tooltip("Reference to the energy UI text.")]
     Text textEnergy;
     [SerializeField]
@@ -26,7 +23,7 @@ public class EnergyCounter : MonoBehaviour
     {
         var json = JSON.Parse(tuningJSON.ToString());
         energy = json["starting energy"];
-        energyPerCell = json["energy per cell cleared"];
+        
     }
 
     void Start()
@@ -36,9 +33,9 @@ public class EnergyCounter : MonoBehaviour
         UpdateEnergy();
     }
 
-    public void AddEnergy()
+    public void AddEnergy(int amount)
     {
-        energy += energyPerCell;
+        energy += amount;
         UpdateEnergy();
     }
 
