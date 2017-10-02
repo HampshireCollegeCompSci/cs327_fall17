@@ -850,7 +850,7 @@ public class Grid : MonoBehaviour
         //If a type is changed to Unoccupied, then add 1 energy
         if (newType == TileData.TileType.Unoccupied)
         {
-            energyCounter.AddEnergy(1);
+            energyCounter.AddEnergy();
         }
     }
 
