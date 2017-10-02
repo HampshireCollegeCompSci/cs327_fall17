@@ -3,5 +3,6 @@
 	"grid height" : 8,
 	"starting energy" : 10,
 	"base energy decay rate" : 1,
-	"decay rate per vestige" : 1
+	"decay rate per vestige" : 1,
+	"energy per cell cleared": 1
 }

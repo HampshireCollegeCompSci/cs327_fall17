@@ -23,6 +23,7 @@ public class EnergyCounter : MonoBehaviour
     {
         var json = JSON.Parse(tuningJSON.ToString());
         energy = json["starting energy"];
+        
     }
 
     void Start()
