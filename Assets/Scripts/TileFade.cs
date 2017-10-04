@@ -13,6 +13,9 @@ public class TileFade : MonoBehaviour
 {
 	[SerializeField]
 	TextAsset tuningJSON;
+    [SerializeField]
+    Image imageToFade;
+    [SerializeField]
     private float fadeTime;
 
 	private void Tune()
@@ -22,7 +25,7 @@ public class TileFade : MonoBehaviour
         fadeTime = json["cleared cell fade time"].AsFloat;
 	}
 
-		public void Fade(Image imageToFade)
+	public void Fade()
     {
         Tune(); //Start doesn't get called right away for some reason, so we tune here.
         //Set alpha to full to start, so that fade will work

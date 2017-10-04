@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, Maia Doerner
+﻿// Author(s): Paul Calande, Maia Doerner, Wm. Josiah Erikson
 
 using System.Collections;
 using System.Collections.Generic;
@@ -27,7 +27,6 @@ public class Tile : MonoBehaviour
     [SerializeField]
     [Tooltip("The fading tile prefab")]
     Transform fadingTilePrefab;
-    TileFade tileToFade;
 
     public bool GetIsOccupied()
     {
@@ -36,9 +35,19 @@ public class Tile : MonoBehaviour
 
     public void Fill(TileData.TileType newType)
     {
-        TileData.TileType previousType = data.GetTileType();
+        TileData.TileType previousType = GetTileType();
         if (previousType != newType)
         {
+            // Before we actually change the tile type, check and handle special cases.
+            if (newType == TileData.TileType.Unoccupied)
+            {
+                // Create the fading visual effects if the Tile hasn't already been cleared.
+                if (previousType != TileData.TileType.Unoccupied)
+                {
+                    CreateVanishVisualEffects();
+                }
+            }
+
             data.Fill(newType);
             SetSprite(newType);
             OnChanged(newType);
@@ -52,17 +61,23 @@ public class Tile : MonoBehaviour
 
     public void Clear()
     {
-        Fill(TileData.TileType.Unoccupied); //Change this tile to unoccupied
+        // Change this tile to unoccupied
+        Fill(TileData.TileType.Unoccupied);
+    }
+
+    // Called when the Tile is occupied and gets cleared.
+    private void CreateVanishVisualEffects()
+    {
         GameObject gridObject = transform.parent.gameObject; //Get a handle on the grid
         Transform grid = gridObject.transform; //For readability, get its Transform
-        //Make a new prefab to fade out
+                                               //Make a new prefab instance to fade out
         Transform thisFadingTilePrefab = Instantiate(fadingTilePrefab, grid.transform.position, grid.transform.rotation);
         thisFadingTilePrefab.SetParent(grid, false);
         thisFadingTilePrefab.transform.localPosition = gameObject.transform.localPosition;
         //Get the fade component
-        tileToFade = thisFadingTilePrefab.GetComponent<TileFade>();
-        Image imageToFade = thisFadingTilePrefab.GetComponent<Image>();
-        tileToFade.Fade(imageToFade); //And fade the image out, which will destroy it as well
+        TileFade tileToFade = thisFadingTilePrefab.GetComponent<TileFade>();
+        //Image imageToFade = thisFadingTilePrefab.GetComponent<Image>();
+        tileToFade.Fade(); //And fade the image out, which will destroy it as well
     }
 
     // Helper function.
