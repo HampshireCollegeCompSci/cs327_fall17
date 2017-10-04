@@ -19,7 +19,7 @@ public class TileFade : MonoBehaviour
 	{
         //Read the tuning variables in from the JSON file
 		var json = JSON.Parse(tuningJSON.ToString());
-        fadeTime = json["fade time"].AsFloat;
+        fadeTime = json["cleared cell fade time"].AsFloat;
 	}
 
 		public void Fade(Image imageToFade)
