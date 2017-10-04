@@ -20,13 +20,7 @@ public class TileFade : MonoBehaviour
         //Read the tuning variables in from the JSON file
 		var json = JSON.Parse(tuningJSON.ToString());
         fadeTime = json["fade time"].AsFloat;
-        Debug.Log("Fade time is " + fadeTime + "Seconds");
 	}
-
-    private void Start()
-    {
-        Tune();
-    }
 
 		public void Fade(Image imageToFade)
     {
@@ -35,7 +29,6 @@ public class TileFade : MonoBehaviour
         Color temp = imageToFade.color;
         temp.a = 1.0f;
         imageToFade.color = temp;
-        Debug.Log("Fading image over " + fadeTime + "seconds.");
         imageToFade.CrossFadeAlpha(0.0f, fadeTime, true);
         StartCoroutine(WaitToDestroy(imageToFade.gameObject));
     }
