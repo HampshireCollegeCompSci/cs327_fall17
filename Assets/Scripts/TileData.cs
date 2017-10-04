@@ -10,7 +10,6 @@ public class TileData
 	{
         Unoccupied,
 		Regular,
-		//Vacant,
 		Vestige
 	}
 

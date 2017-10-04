@@ -7,17 +7,22 @@ using UnityEngine;
 public class Space : MonoBehaviour
 {
     [SerializeField]
-	private int col; //the column of this space
+    [Tooltip("The column of the Grid that this Space occupies.")]
+	private int col;
     [SerializeField]
-	private int row; //the row of this space
+    [Tooltip("The row of the Grid that this Space occupies.")]
+    private int row;
     [SerializeField]
-    private int width; //width of this space
+    [Tooltip("The width of this Space.")]
+    private int width;
     [SerializeField]
-	private int height; //height of this space
+    [Tooltip("The height of this Space.")]
+	private int height;
     [SerializeField]
-    private Grid grid; //which grid this space is on
-
+    [Tooltip("Reference to the Grid that this Space occupies.")]
+    private Grid grid;
     [SerializeField]
+    [Tooltip("Reference to the SnapLocation component to interface with.")]
     SnapLocation snapLocation;
 
     private void Start()

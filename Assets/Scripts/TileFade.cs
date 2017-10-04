@@ -12,10 +12,13 @@ using SimpleJSON;
 public class TileFade : MonoBehaviour
 {
 	[SerializeField]
+    [Tooltip("Refernce to the Tuning JSON to read from.")]
 	TextAsset tuningJSON;
     [SerializeField]
+    [Tooltip("Reference to the Image component to fade.")]
     Image imageToFade;
     [SerializeField]
+    [Tooltip("How many seconds the tile takes to fade. Populated by JSON.")]
     private float fadeTime;
 
 	private void Tune()

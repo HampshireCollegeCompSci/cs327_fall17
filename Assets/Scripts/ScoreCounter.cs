@@ -9,13 +9,13 @@ using UnityEngine.UI;
 public class ScoreCounter : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("Reference to the Grid.")]
+    [Tooltip("Reference to the Grid instance.")]
     Grid grid;
     [SerializeField]
     [Tooltip("Reference to the Score UI text.")]
     Text textScore;
     [SerializeField]
-    [Tooltip("Reference to the Rising Text prefab")]
+    [Tooltip("The Rising Text prefab to instantiate when points are gained from cleared squares.")]
     GameObject risingTextPrefab;
 
     // The current score.
@@ -49,11 +49,15 @@ public class ScoreCounter : MonoBehaviour
         textScore.text = "Score: " + score;
     }
 
+    // Callback function for a square on the Grid being cleared.
     private void Grid_SquareFormed(int size, Vector3 textPos)
     {
-        AddScore(size * 100);
+        int points = size * 100;
+        AddScore(points);
+
+        // Instantiate some rising text.
         GameObject risingTextObj = Object.Instantiate(risingTextPrefab, grid.transform, false);
-        risingTextObj.GetComponent<RisingText>().SetText((size * 100).ToString());
+        risingTextObj.GetComponent<RisingText>().SetText((points).ToString());
         risingTextObj.transform.localPosition = textPos;
     }
 }

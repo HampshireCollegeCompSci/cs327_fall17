@@ -7,8 +7,10 @@ using UnityEngine;
 public class Block
 {
     [SerializeField]
+    [Tooltip("The width of the block.")]
     int width;
     [SerializeField]
+    [Tooltip("The height of the block.")]
     int height;
 
     TileData[,] tiles;

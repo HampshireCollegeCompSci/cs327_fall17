@@ -15,17 +15,19 @@ public class Tile : MonoBehaviour
 	TileData data = new TileData();
 
     [SerializeField]
+    [Tooltip("Reference to the Image component to use for rendering the Tile.")]
     Image spriteRenderer;
     [SerializeField]
+    [Tooltip("The sprite to use for Unoccupied state.")]
     Sprite spriteUnoccupied;
     [SerializeField]
+    [Tooltip("The sprite to use for Regular state.")]
     Sprite spriteRegular;
-    //[SerializeField]
-    //Sprite spriteVacant;
     [SerializeField]
+    [Tooltip("The sprite to use for Vestige state.")]
     Sprite spriteVestige;
     [SerializeField]
-    [Tooltip("The fading tile prefab")]
+    [Tooltip("The fading tile prefab to instantiate.")]
     Transform fadingTilePrefab;
 
     public bool GetIsOccupied()

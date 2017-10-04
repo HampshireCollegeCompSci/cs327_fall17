@@ -11,14 +11,19 @@ using UnityEngine.EventSystems;
 public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [SerializeField]
+    [Tooltip("Whether the GameObject is currently draggable.")]
     protected bool isDraggable;
     [SerializeField]
-    protected List<SnapLocation> snapToAreas; // Change to list of blocks with position to include other properties.
+    [Tooltip("A List of locations that this GameObject can snap to.")]
+    protected List<SnapLocation> snapToAreas;
     [SerializeField]
+    [Tooltip("Reference to the UI canvas' RectTransform.")]
     protected RectTransform canvasTransform;
     [SerializeField]
+    [Tooltip("Reference to the draggable GameObject's RectTransform.")]
     protected RectTransform rectTransform;
     [SerializeField]
+    [Tooltip("The position to return to if dragging ceases and no SnapLocation is snapped to.")]
     protected Vector2 defaultPosition;
 
     protected static Vector2 piecePlacementOffset = new Vector2(100, 100);

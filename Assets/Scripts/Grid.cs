@@ -14,24 +14,34 @@ public class Grid : MonoBehaviour
     public event SquareFormedHandler SquareFormed;
 
     [SerializeField]
+    [Tooltip("The width of the Grid. Populated by JSON.")]
     int width;
     [SerializeField]
+    [Tooltip("The height of the Grid. Populated by JSON.")]
     int height;
     [SerializeField]
+    [Tooltip("The base energy decay per turn. Populated by JSON.")]
     int baseEnergyDecayRate;
     [SerializeField]
+    [Tooltip("The additional energy decayed per vestige. Populated by JSON.")]
     int decayRatePerVestige;
     [SerializeField]
+    [Tooltip("The Tile prefab to instantiate.")]
     GameObject prefabTile;
     [SerializeField]
+    [Tooltip("The Space prefab to instantiate.")]
     GameObject prefabSpace;
     [SerializeField]
+    [Tooltip("Reference to the BlockSpawner instance.")]
     BlockSpawner blockSpawner;
     [SerializeField]
+    [Tooltip("Reference to the EnergyCounter instance.")]
     EnergyCounter energyCounter;
     [SerializeField]
+    [Tooltip("Reference to the Tuning JSON.")]
     TextAsset tuningJSON;
     [SerializeField]
+    [Tooltip("Energy earned per Tile cleared. Populated by JSON.")]
     int energyPerCell = 1;
 
     Tile[,] tiles;

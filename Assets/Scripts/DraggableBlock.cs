@@ -10,10 +10,13 @@ using UnityEngine.EventSystems;
 public class DraggableBlock : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("The prefab to use to instantiate each Tile.")]
     GameObject prefabTile;
     [SerializeField]
+    [Tooltip("Reference to the Grid instance.")]
     Grid grid;
     [SerializeField]
+    [Tooltip("Reference to the DraggableObject component to interface with.")]
     DraggableObject draggableObject;
 
     Block block;

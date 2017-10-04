@@ -11,18 +11,25 @@ using SimpleJSON;
 public class BlockSpawner : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("The number of seconds between DraggableBlock spawns in the queue. Use -1 to disable this feature.")]
     float timeBetweenBlocks;
     [SerializeField]
+    [Tooltip("The maximum number of DraggableBlocks in the queue.")]
     int maxBlocksInQueue;
     [SerializeField]
+    [Tooltip("The GameObjects determining the position of each queue entry.")]
     GameObject[] blockPositions;
     [SerializeField]
+    [Tooltip("Reference to the GameFlow instance.")]
     GameFlow gameFlow;
     [SerializeField]
+    [Tooltip("Reference to the Grid instance.")]
     Grid grid;
     [SerializeField]
+    [Tooltip("The prefab to instantiate for DraggableBlocks.")]
     GameObject prefabDraggableBlock;
     [SerializeField]
+    [Tooltip("Reference to the PossibleBlocks JSON, which determines the block designs.")]
     TextAsset possibleBlocksJSON;
 
     List<Block> possibleBlocks = new List<Block>();

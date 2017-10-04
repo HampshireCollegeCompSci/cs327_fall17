@@ -9,21 +9,22 @@ using SimpleJSON;
 public class EnergyCounter : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("The amount of energy the player currently has.")]
+    [Tooltip("The amount of energy the player currently has. The initial amount is populated by JSON.")]
     int energy = 10;
     [SerializeField]
     [Tooltip("Reference to the energy UI text.")]
     Text textEnergy;
     [SerializeField]
+    [Tooltip("Reference to the GameFlow instance.")]
     GameFlow gameFlow;
     [SerializeField]
+    [Tooltip("Reference to the Tuning JSON.")]
     TextAsset tuningJSON;
 
     void Tune()
     {
         var json = JSON.Parse(tuningJSON.ToString());
         energy = json["starting energy"];
-        
     }
 
     void Start()
