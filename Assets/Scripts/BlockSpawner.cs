@@ -186,9 +186,6 @@ public class BlockSpawner : MonoBehaviour
         {
             //otherwise we select a random block from the possible list,
             //then instantiate the draggable block and add it into the queue.
-			if (isSeedCounterZero = true) {
-				Random.seed = 0;
-			}
 			int i = Random.Range(0, possibleBlocks.Count);
             Block toSpawn = possibleBlocks[i];
 
@@ -290,11 +287,6 @@ public class BlockSpawner : MonoBehaviour
     {
         db.transform.localPosition = blockPositions[positionIndex].transform.localPosition;
     }
-
-	void SetSeedCounterToZero()
-	{
-		isSeedCounterZero = true;
-	}
 
     public void RotateCurrentBlock(bool clockwise)
     {
