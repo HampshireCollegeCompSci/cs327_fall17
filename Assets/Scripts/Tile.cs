@@ -24,6 +24,10 @@ public class Tile : MonoBehaviour
     //Sprite spriteVacant;
     [SerializeField]
     Sprite spriteVestige;
+    [SerializeField]
+    [Tooltip("The fading tile prefab")]
+    Transform fadingTilePrefab;
+    TileFade tileToFade;
 
     public bool GetIsOccupied()
     {
@@ -48,7 +52,17 @@ public class Tile : MonoBehaviour
 
     public void Clear()
     {
-        Fill(TileData.TileType.Unoccupied);
+        Fill(TileData.TileType.Unoccupied); //Change this tile to unoccupied
+        GameObject gridObject = transform.parent.gameObject; //Get a handle on the grid
+        Transform grid = gridObject.transform; //For readability, get its Transform
+        //Make a new prefab to fade out
+        Transform thisFadingTilePrefab = Instantiate(fadingTilePrefab, grid.transform.position, grid.transform.rotation);
+        thisFadingTilePrefab.SetParent(grid, false);
+        thisFadingTilePrefab.transform.localPosition = gameObject.transform.localPosition;
+        //Get the fade component
+        tileToFade = thisFadingTilePrefab.GetComponent<TileFade>();
+        Image imageToFade = thisFadingTilePrefab.GetComponent<Image>();
+        tileToFade.Fade(imageToFade); //And fade the image out, which will destroy it as well
     }
 
     // Helper function.

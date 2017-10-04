@@ -9,32 +9,32 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1107375466928364}
+  m_RootGameObject: {fileID: 1501592787393966}
   m_IsPrefabParent: 1
---- !u!1 &1107375466928364
+--- !u!1 &1501592787393966
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 224965267752668918}
-  - component: {fileID: 114819840809224928}
-  - component: {fileID: 222653728882889582}
-  - component: {fileID: 114459027929769306}
+  - component: {fileID: 224265687730502198}
+  - component: {fileID: 222269075532248070}
+  - component: {fileID: 114008249746637138}
+  - component: {fileID: 114997386094656584}
   m_Layer: 0
-  m_Name: Tile
+  m_Name: FadingTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &114459027929769306
+--- !u!114 &114008249746637138
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1107375466928364}
+  m_GameObject: {fileID: 1501592787393966}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
@@ -48,7 +48,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 1ef395f6f4b1e464a9dbec63fb08cb5f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6ec0cfd59f8d4ab45a95fb3c27791631, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -56,35 +56,30 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114819840809224928
+--- !u!114 &114997386094656584
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1107375466928364}
+  m_GameObject: {fileID: 1501592787393966}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dc4186fe207a2349851369da7eb0757, type: 3}
+  m_Script: {fileID: 11500000, guid: 8c08d4361a8d54750ba90094f1d33ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteRenderer: {fileID: 114459027929769306}
-  spriteUnoccupied: {fileID: 21300000, guid: 1ef395f6f4b1e464a9dbec63fb08cb5f, type: 3}
-  spriteRegular: {fileID: 21300000, guid: 6ec0cfd59f8d4ab45a95fb3c27791631, type: 3}
-  spriteVestige: {fileID: 21300000, guid: 3028d523bf6d69a45bece30fa0e47d01, type: 3}
-  fadingTilePrefab: {fileID: 224265687730502198, guid: 54107ad6df97249d5aa77755958c042c,
-    type: 2}
---- !u!222 &222653728882889582
+  tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
+--- !u!222 &222269075532248070
 CanvasRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1107375466928364}
---- !u!224 &224965267752668918
+  m_GameObject: {fileID: 1501592787393966}
+--- !u!224 &224265687730502198
 RectTransform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1107375466928364}
+  m_GameObject: {fileID: 1501592787393966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -95,5 +90,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 128, y: 128}
+  m_SizeDelta: {x: 96, y: 96}
   m_Pivot: {x: 0.5, y: 0.5}
