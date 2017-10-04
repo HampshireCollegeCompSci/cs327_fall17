@@ -1,4 +1,4 @@
-//Author(s): Wm. Josiah Erikson
+//Author: Wm. Josiah Erikson
 //This class' only purpose is to have the Fade method, which takes an image, 
 //fades it over a specified period of time, and then destroys the GameObject
 //that it is attached to
