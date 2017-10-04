@@ -220,7 +220,7 @@ public class Grid : MonoBehaviour
                 for (int r = 0; r < GetHeight(); r++)
                 {
                     //Unhilight all tiles
-                    //tiles[r, c].SetNormal();
+                    tiles[r, c].SetNormal();
                     tiles[r, c].SetSprite(tiles[r, c].GetTileType());
                 }
             }
@@ -234,7 +234,7 @@ public class Grid : MonoBehaviour
                     if (block.GetIsOccupied(r, c))
                     {
                         //If can place here then set highlight
-                        //tiles[row + r, col + c].SetHighlight();
+                        tiles[row + r, col + c].SetHighlight();
                         tiles[row + r, col + c].SetSprite(block.GetTileType(r, c));
                     }
                 }
