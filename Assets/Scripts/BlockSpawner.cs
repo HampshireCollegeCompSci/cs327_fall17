@@ -37,7 +37,7 @@ public class BlockSpawner : MonoBehaviour
     Queue<DraggableBlock> blocksQueue = new Queue<DraggableBlock>();
 
     float timeBeforeNextBlock;
-
+	bool isSeedCounterZero = false;
 
     private void Start()
     {
@@ -193,7 +193,7 @@ public class BlockSpawner : MonoBehaviour
         {
             //otherwise we select a random block from the possible list,
             //then instantiate the draggable block and add it into the queue.
-            int i = Random.Range(0, possibleBlocks.Count);
+			int i = Random.Range(0, possibleBlocks.Count);
             Block toSpawn = possibleBlocks[i];
 
             // Instantiate the actual block.
@@ -320,4 +320,5 @@ public class BlockSpawner : MonoBehaviour
         }
         enabled = false;
     }
+		
 }
