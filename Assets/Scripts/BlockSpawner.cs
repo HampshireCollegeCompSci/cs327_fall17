@@ -37,7 +37,6 @@ public class BlockSpawner : MonoBehaviour
     Queue<DraggableBlock> blocksQueue = new Queue<DraggableBlock>();
 
     float timeBeforeNextBlock;
-	bool isSeedCounterZero = false;
 
     private void Start()
     {
