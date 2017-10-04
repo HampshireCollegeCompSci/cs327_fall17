@@ -53,16 +53,15 @@ public class Tile : MonoBehaviour
     public void Clear()
     {
         Fill(TileData.TileType.Unoccupied); //Change this tile to unoccupied
-        //Make a new prefab right where this one is, and fade it out - might have to move it forward just slightly
-        //Instantiate(fadingTilePrefab, gameObject.transform.position, gameObject.transform.rotation);
-        Transform thisFadingTilePrefab = Instantiate(fadingTilePrefab, gameObject.transform.position, gameObject.transform.rotation);
-        Debug.Log("Made Fading Tile Prefab");
+        GameObject gridObject = transform.parent.gameObject;
+        Transform grid = gridObject.transform;
+        Transform thisFadingTilePrefab = Instantiate(fadingTilePrefab, grid.transform.position, grid.transform.rotation);
+        thisFadingTilePrefab.SetParent(grid, false);
+        thisFadingTilePrefab.transform.localPosition = gameObject.transform.localPosition;
         //Get the fade component
         tileToFade = thisFadingTilePrefab.GetComponent<TileFade>();
         Image imageToFade = thisFadingTilePrefab.GetComponent<Image>();
-        //tileToFade.Fade(imageToFade); //And fade the image out
-        //then Destroy it
-        //DestroyObject(thisFadingTilePrefab);
+        tileToFade.Fade(imageToFade); //And fade the image out, which should destroy it as well
     }
 
     // Helper function.
