@@ -96,7 +96,7 @@ public class Block
 
         TileData[,] newTiles = new TileData[width, height];
 
-        if (clockwise)
+        if (!clockwise)
         {
             for (int row = 0; row < height; ++row)
             {
