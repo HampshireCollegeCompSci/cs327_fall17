@@ -51,6 +51,7 @@ MonoBehaviour:
   energyCounter: {fileID: 0}
   tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
   energyPerCell: 1
+  rectTransform: {fileID: 224804674211477668}
 --- !u!114 &114513065419024280
 MonoBehaviour:
   m_ObjectHideFlags: 1

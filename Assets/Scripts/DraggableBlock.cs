@@ -106,7 +106,7 @@ public class DraggableBlock : MonoBehaviour
         //tiles = new Tile[height, width];
         // Instantiate all Tiles.
         // The center is Vector3.zero because all of the Tiles will be positioned relative to this parent.
-        tiles = TileUtil.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
+        tiles = grid.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
         
         // Fill in all of the Tiles according to the Block.
         for (int r = 0; r < height; r++)
@@ -124,9 +124,9 @@ public class DraggableBlock : MonoBehaviour
         UpdateAvailableSpaces();
 
         // Calculate the snap detection offset based on the width and height of the block.
-        const float sbt = TileUtil.spaceBetweenTiles;
-        float xoff = (width - 1) * 0.5f * sbt;
-        float yoff = (height - 1) * 0.5f * sbt;
+        //const float sbt = TileUtil.spaceBetweenTiles;
+        float xoff = (width - 1) * 0.5f * grid.GetTileWidth();
+        float yoff = (height - 1) * 0.5f * grid.GetTileHeight();
         Vector2 offset = new Vector2(-xoff, yoff);
         draggableObject.SetSnapDetectionOffset(offset);
     }

@@ -43,6 +43,14 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Energy earned per Tile cleared. Populated by JSON.")]
     int energyPerCell = 1;
+    [SerializeField]
+    [Tooltip("Reference to the RectTransform component of this Grid.")]
+    RectTransform rectTransform;
+
+    // The width of one Tile, calculated compared to the Grid's dimensions.
+    private float tileWidth;
+    // The height of one Tile, calculated compared to the Grid's dimensions.
+    private float tileHeight;
 
     Tile[,] tiles;
 
@@ -70,8 +78,11 @@ public class Grid : MonoBehaviour
     {
         Tune();
 
+        tileWidth = rectTransform.rect.width / width;
+        tileHeight = rectTransform.rect.height / height;
+
         //Instantiate tiles array
-        tiles = TileUtil.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
+        tiles = CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
 
         foreach (Tile t in tiles)
         {
@@ -113,6 +124,16 @@ public class Grid : MonoBehaviour
         return height;
     }
 
+    public float GetTileWidth()
+    {
+        return tileWidth;
+    }
+
+    public float GetTileHeight()
+    {
+        return tileHeight;
+    }
+
     public bool GetIsOccupied(int row, int col)
     {
         return tiles[row, col].GetIsOccupied();
@@ -149,6 +170,42 @@ public class Grid : MonoBehaviour
         return tiles;
     }
     */
+
+    public Tile[,] CreateTileArray(GameObject prefabTile, Transform parent, Vector3 center, int height, int width)
+    {
+        Tile[,] result = new Tile[height, width];
+
+        // Calculate the position of the top-left corner of the array.
+        float cornerX = center.x - ((width - 1) * tileWidth * 0.5f);
+        float cornerY = center.y + ((height - 1) * tileHeight * 0.5f);
+
+        // Iterate through all the Tiles of the array.
+        for (int c = 0; c < width; c++)
+        {
+            for (int r = 0; r < height; r++)
+            {
+                // Calculate the position of the Tile.
+                float tileX = cornerX + c * tileWidth;
+                float tileY = cornerY - r * tileHeight;
+                Vector3 pos = new Vector3(tileX, tileY, 0.0f);
+
+                GameObject currentPrefabTile = GameObject.Instantiate(prefabTile, parent, false);
+                currentPrefabTile.transform.localPosition = pos;
+
+                /*
+                if (c == 0 && r == 0)
+                {
+                    // Let's figure out which Tile ends up in the (0, 0) corner...
+                    currentPrefabTile.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+                }
+                */
+
+                result[r, c] = currentPrefabTile.GetComponent<Tile>();
+            }
+        }
+
+        return result;
+    }
 
     public bool CanBlockFit(int row, int col, Block block)
     {
