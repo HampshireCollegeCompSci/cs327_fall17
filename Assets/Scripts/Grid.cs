@@ -396,7 +396,7 @@ public class Grid : MonoBehaviour
                 if (toRemove.Find(t => t == tiles[r, col - 1]) == null && tiles[r, col - 1].GetTileType() == TileData.TileType.Regular)
                     tiles[r, col - 1].Fill(TileData.TileType.Vestige);
         //Right edge
-        if (col + length - 1 < width)
+        if (col + length - 1 < width - 1)
             for (int r = row; r < row + length; r++)
                 if (toRemove.Find(t => t == tiles[r, col + length]) == null && tiles[r, col + length].GetTileType() == TileData.TileType.Regular)
                     tiles[r, col + length].Fill(TileData.TileType.Vestige);
@@ -406,7 +406,7 @@ public class Grid : MonoBehaviour
                 if (toRemove.Find(t => t == tiles[row - 1, c]) == null && tiles[row - 1, c].GetTileType() == TileData.TileType.Regular)
                     tiles[row - 1, c].Fill(TileData.TileType.Vestige);
         //Bottom edge
-        if (row + length - 1 < height)
+        if (row + length - 1 < height - 1)
             for (int c = col; c < col + length; c++)
                 if (toRemove.Find(t => t == tiles[row + length, c]) == null && tiles[row + length, c].GetTileType() == TileData.TileType.Regular)
                     tiles[row + length, c].Fill(TileData.TileType.Vestige);
