@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c08d4361a8d54750ba90094f1d33ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeTime: 0.4
+  tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
 --- !u!222 &222269075532248070
 CanvasRenderer:
   m_ObjectHideFlags: 1

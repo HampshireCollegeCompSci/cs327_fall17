@@ -6,17 +6,31 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using SimpleJSON;
 
 
 public class TileFade : MonoBehaviour
 {
-    [SerializeField]
-    [Tooltip("How long it takes for the tiles to fade when cleared, in seconds")]
-    private float fadeTime = 3.0f;
-    //UPDATE: Look in Grid.cs for how to use the tuning variable JSON file
-	
-    public void Fade(Image imageToFade)
+	[SerializeField]
+	TextAsset tuningJSON;
+    private float fadeTime;
+
+	private void Tune()
+	{
+        //Read the tuning variables in from the JSON file
+		var json = JSON.Parse(tuningJSON.ToString());
+        fadeTime = json["fade time"].AsFloat;
+        Debug.Log("Fade time is " + fadeTime + "Seconds");
+	}
+
+    private void Start()
     {
+        Tune();
+    }
+
+		public void Fade(Image imageToFade)
+    {
+        Tune(); //Start doesn't get called right away for some reason, so we tune here.
         //Set alpha to full to start, so that fade will work
         Color temp = imageToFade.color;
         temp.a = 1.0f;
