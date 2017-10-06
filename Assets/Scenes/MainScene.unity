@@ -1008,6 +1008,7 @@ GameObject:
   m_Component:
   - component: {fileID: 857237130}
   - component: {fileID: 857237131}
+  - component: {fileID: 857237132}
   m_Layer: 0
   m_Name: GameOver
   m_TagString: Untagged
@@ -1056,6 +1057,19 @@ MonoBehaviour:
   - {fileID: 525679354}
   - {fileID: 1353854683}
   textGameOverReason: {fileID: 525679356}
+--- !u!114 &857237132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 857237129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f45e41f9ac27491e821d561f88e16ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameFlow: {fileID: 2051938913}
+  Score: {fileID: 1623308074}
 --- !u!1 &858530961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,6 +1813,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 614040515}
   m_Script: {fileID: 11500000, guid: b76a4c52256820941aed90812d02dfe4, type: 3}
+--- !u!114 &1623308074 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114206889354076672, guid: 3bf4d17631f8c334f90e442ea5472402,
+    type: 2}
+  m_PrefabInternal: {fileID: 1478948022}
+  m_Script: {fileID: 11500000, guid: 7537c1d7152dfb842b895cc1a8270b9c, type: 3}
 --- !u!1 &1667098058
 GameObject:
   m_ObjectHideFlags: 0
