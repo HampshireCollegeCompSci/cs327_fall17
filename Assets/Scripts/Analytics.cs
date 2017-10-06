@@ -15,7 +15,9 @@ public class Analytics : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Score instance.")]
     ScoreCounter Score;
-
+    [SerializeField]
+    [Tooltip("Reference to the EnergyCounter instance")]
+    EnergyCounter Energy;
     // Use this for initialization
     void Start()
     {
@@ -28,11 +30,14 @@ public class Analytics : MonoBehaviour
 
     void SendData(GameFlow.GameOverCause cause)
     {
+        //Debug.Log("Sending analytics!");
         int score = Score.GetScore();
+        int peakEnergy = Energy.GetPeakEnergy();
         UnityEngine.Analytics.Analytics.CustomEvent("gameOver", new Dictionary<string, object>
         {
             { "score", score },
-    { "gameOverCause", cause }
+            { "gameOverCause", cause },
+            { "peakEnergy", peakEnergy}
   });
     }
 }

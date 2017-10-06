@@ -1070,6 +1070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameFlow: {fileID: 2051938913}
   Score: {fileID: 1623308074}
+  Energy: {fileID: 1612729227}
 --- !u!1 &858530961
 GameObject:
   m_ObjectHideFlags: 0
