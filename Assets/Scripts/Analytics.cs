@@ -18,6 +18,9 @@ public class Analytics : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the EnergyCounter instance")]
     EnergyCounter Energy;
+    [SerializeField]
+    [Tooltip("Reference to the TurnsCounter instance")]
+    TurnCounter Turns;
     // Use this for initialization
     void Start()
     {
@@ -33,11 +36,15 @@ public class Analytics : MonoBehaviour
         //Debug.Log("Sending analytics!");
         int score = Score.GetScore();
         int peakEnergy = Energy.GetPeakEnergy();
+        int turnsPlayed = Turns.GetTurns();
         UnityEngine.Analytics.Analytics.CustomEvent("gameOver", new Dictionary<string, object>
         {
             { "score", score },
             { "gameOverCause", cause },
-            { "peakEnergy", peakEnergy}
+            { "peakEnergy", peakEnergy},
+            { "timePlaying", Time.time},
+            { "turnsPlayed", turnsPlayed}
+
   });
     }
 }

@@ -37,6 +37,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the EnergyCounter instance.")]
     EnergyCounter energyCounter;
+	[SerializeField]
+	[Tooltip("Reference to the TurnCounter instance.")]
+	TurnCounter turnCounter;
     [SerializeField]
     [Tooltip("Reference to the Tuning JSON.")]
     TextAsset tuningJSON;
@@ -947,6 +950,8 @@ public class Grid : MonoBehaviour
         blockSpawner.ProgressQueue();
         //Update Available spaces for all draggable blocks
         blockSpawner.UpdateAllBlocks();
+        //Update turns played - this counts as a turn
+        turnCounter.PlayedTurn();
     }
 
     // Removes a GridBlock from the List of GridBlocks.
