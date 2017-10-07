@@ -14,19 +14,19 @@ public class Analytics : MonoBehaviour
     GameFlow gameFlow;
     [SerializeField]
     [Tooltip("Reference to the Score instance.")]
-    ScoreCounter Score;
+    ScoreCounter score;
     [SerializeField]
     [Tooltip("Reference to the EnergyCounter instance.")]
-    EnergyCounter Energy;
+    EnergyCounter energy;
     [SerializeField]
     [Tooltip("Reference to the TurnsCounter instance.")]
-    TurnCounter Turns;
+    TurnCounter turns;
     [SerializeField]
     [Tooltip("Reference to the VestigeCounter instance.")]
-    VestigeCounter Vestiges;
+    VestigeCounter vestiges;
     [SerializeField]
     [Tooltip("Reference to the ClearedSquares instance.")]
-    ClearedSquaresCounter ClearedSquares;
+    ClearedSquaresCounter clearedSquares;
     // Use this for initialization
     void Start()
     {
@@ -40,12 +40,12 @@ public class Analytics : MonoBehaviour
     void SendData(GameFlow.GameOverCause cause)
     {
         //Debug.Log("Sending analytics!");
-        int score = Score.GetScore();
-        int peakEnergy = Energy.GetPeakEnergy();
-        int turnsPlayed = Turns.GetTurns();
-        int peakVestiges = Vestiges.GetPeakVestiges();
-        int currentVestiges = Vestiges.GetCurrentVestiges();
-        int clearedSquares = ClearedSquares.GetClearedSquares();
+        int score = score.GetScore();
+        int peakEnergy = energy.GetPeakEnergy();
+        int turnsPlayed = turns.GetTurns();
+        int peakVestiges = vestiges.GetPeakVestiges();
+        int currentVestiges = vestiges.GetCurrentVestiges();
+        int clearedSquares = clearedSquares.GetClearedSquares();
         UnityEngine.Analytics.Analytics.CustomEvent("gameOver", new Dictionary<string, object>
         {
             { "score", score },
