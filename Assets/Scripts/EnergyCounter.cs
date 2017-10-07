@@ -12,6 +12,9 @@ public class EnergyCounter : MonoBehaviour
     [Tooltip("The amount of energy the player currently has. The initial amount is populated by JSON.")]
     int energy = 10;
     [SerializeField]
+    [Tooltip("The maximum amount of energy the player can have in the energy meter. Populated by JSON.")]
+    int maxEnergyInMeter = 60;
+    [SerializeField]
     [Tooltip("Reference to the energy UI text.")]
     Text textEnergy;
     [SerializeField]
@@ -20,12 +23,18 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Tuning JSON.")]
     TextAsset tuningJSON;
+    [SerializeField]
+    [Tooltip("The prefix for the Energy: string.")]
+    string prefix;
+
+    // The highest amount of energy achieved over the course of the game.
     int peakEnergy;
 
     void Tune()
     {
         var json = JSON.Parse(tuningJSON.ToString());
-        energy = json["starting energy"];
+        energy = json["starting energy"].AsInt;
+        maxEnergyInMeter = json["max energy in meter"].AsInt;
     }
 
     void Start()
@@ -38,6 +47,12 @@ public class EnergyCounter : MonoBehaviour
     public void AddEnergy(int amount)
     {
         energy += amount;
+        /*
+        if (energy > maxEnergy)
+        {
+            energy = maxEnergy;
+        }
+        */
         UpdateEnergy();
     }
 
@@ -56,7 +71,7 @@ public class EnergyCounter : MonoBehaviour
 
     private void UpdateEnergy()
     {
-        textEnergy.text = "Energy: " + energy.ToString();
+        textEnergy.text = prefix + energy.ToString();
         //Keep track of peak energy for Analytics
         if (energy > peakEnergy)
         { peakEnergy = energy; }
@@ -65,5 +80,10 @@ public class EnergyCounter : MonoBehaviour
     public int GetPeakEnergy()
     {
         return peakEnergy;
+    }
+
+    public int GetMaxEnergyInMeter()
+    {
+        return maxEnergyInMeter;
     }
 }
