@@ -55,7 +55,7 @@ public class Analytics : MonoBehaviour
             { "turnsPlayed", turnsPlayed},
             { "peakVestiges", peakVestiges},
             { "endingVestiges", currentVestiges},
-            { "clearedSquares", finalClearedSquares}
+            { "totalClearedSquares", finalClearedSquares}
 
   });
     }

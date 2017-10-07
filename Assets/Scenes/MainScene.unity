@@ -1719,41 +1719,41 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
-        type: 2}
-      propertyPath: gameFlow
-      value: 
-      objectReference: {fileID: 2051938913}
-    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
-        type: 2}
-      propertyPath: Score
-      value: 
-      objectReference: {fileID: 1623308074}
-    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
-        type: 2}
-      propertyPath: Energy
-      value: 
-      objectReference: {fileID: 1612729227}
-    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
-        type: 2}
-      propertyPath: Turns
-      value: 
-      objectReference: {fileID: 2051938917}
-    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
-        type: 2}
-      propertyPath: Vestiges
-      value: 
-      objectReference: {fileID: 2051938916}
-    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
-        type: 2}
-      propertyPath: ClearedSquares
-      value: 
-      objectReference: {fileID: 60084325}
     - target: {fileID: 114202807859211042, guid: d6b51dab45ec74b068a7b535ef93d7c6,
         type: 2}
       propertyPath: gameFlow
       value: 
       objectReference: {fileID: 2051938913}
+    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+        type: 2}
+      propertyPath: gameFlow
+      value: 
+      objectReference: {fileID: 2051938913}
+    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+        type: 2}
+      propertyPath: score
+      value: 
+      objectReference: {fileID: 1623308074}
+    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+        type: 2}
+      propertyPath: energy
+      value: 
+      objectReference: {fileID: 1612729227}
+    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+        type: 2}
+      propertyPath: turns
+      value: 
+      objectReference: {fileID: 2051938917}
+    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+        type: 2}
+      propertyPath: vestiges
+      value: 
+      objectReference: {fileID: 2051938916}
+    - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+        type: 2}
+      propertyPath: clearedSquares
+      value: 
+      objectReference: {fileID: 60084325}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
   m_IsPrefabParent: 0

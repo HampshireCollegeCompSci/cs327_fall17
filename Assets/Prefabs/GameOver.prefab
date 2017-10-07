@@ -141,11 +141,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameFlow: {fileID: 0}
-  Score: {fileID: 0}
-  Energy: {fileID: 0}
-  Turns: {fileID: 0}
-  Vestiges: {fileID: 0}
-  ClearedSquares: {fileID: 0}
+  score: {fileID: 0}
+  energy: {fileID: 0}
+  turns: {fileID: 0}
+  vestiges: {fileID: 0}
+  clearedSquares: {fileID: 0}
 --- !u!114 &114197422928446294
 MonoBehaviour:
   m_ObjectHideFlags: 1
