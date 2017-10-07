@@ -221,8 +221,9 @@ public class Grid : MonoBehaviour
         return gb;
     }
 
-    public void SetHighlight(int row, int col, Block block, bool on)
+    public bool SetHighlight(int row, int col, Block block, bool on)
     {
+        bool highlighted = false;
         if (!on)
         {
             for (int c = 0; c < GetWidth(); c++)
@@ -249,11 +250,18 @@ public class Grid : MonoBehaviour
                     }
                 }
             }
+            highlighted = true;
         }
+
+        return highlighted;
     }
 
-    public bool CheckForMatches()
+    public bool CheckForMatches(int hlr, int hlc, Block hlb, bool isPlaced)
     {
+        GridBlock temp = null;
+        if (hlb != null){
+            temp = WriteBlock(hlr, hlc, hlb);
+        }
         //Debug.Log("Checking for matches...");
 
         int biggestSquareSize = Mathf.Min(width, height);
@@ -270,6 +278,7 @@ public class Grid : MonoBehaviour
 
         //Loop through all blocks from top left.
         //Consider only the case that the current tile is the top-left corner.
+
         for (int r = 0; r < height; r++)
         {
             for (int c = 0; c < width; c++)
@@ -291,18 +300,51 @@ public class Grid : MonoBehaviour
         {
             squareFormed = true;
 
-            //Turn vestiges
-            foreach (int[] s in toVestiges)
-            {
-                FormVestiges(s[0], s[1], s[2], toRemove);
-            }
+            if(isPlaced){
 
-            //Remove all tiles that form squares
-            foreach (Tile t in toRemove)
+                //Turn vestiges when isPlaced is true
+                foreach (int[] s in toVestiges)
+                {
+                    FormVestiges(s[0], s[1], s[2], toRemove, true);
+                }
+
+                //Remove all tiles that form squares if isPlaced is true
+                foreach (Tile t in toRemove)
+                {
+                    t.Clear();
+                }
+            }
+            else
             {
-                t.Clear();
-            }    
+                //Mark all incoming vestiges to red if isPlaced is false
+                foreach (int[] s in toVestiges)
+                {
+                    FormVestiges(s[0], s[1], s[2], toRemove, false);
+                }
+
+                //Mark all incoming to-be-cleared tiles to blue if isPlaced is false
+                foreach (Tile t in toRemove)
+                {
+                    t.SetIncomingHighlight(TileData.TileType.Regular);
+                }
+
+
+            }
         }
+
+        /*
+        if (hlb != null && temp != null)
+        {
+            Tile[,] tempTiles = temp.GetTiles();
+            for (int tr = 0; tr < tempTiles.GetLength(0); tr++)
+            {
+                for (int tc = 0; tc < tempTiles.GetLength(1); tc++)
+                {
+                    temp.GetTiles()[tr, tc].Clear();
+                }
+            }
+        }
+        */
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
 
@@ -397,7 +439,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    private void FormVestiges(int row, int col, int length, List<Tile> toRemove)
+    private void FormVestiges(int row, int col, int length, List<Tile> toRemove, bool isPlaced)
     {
         //Turn all adjacent outside regular tiles into vestiges.
         //for the specified square.
@@ -406,22 +448,45 @@ public class Grid : MonoBehaviour
         if (col > 0)
             for (int r = row; r < row + length; r++)
                 if (toRemove.Find(t => t == tiles[r, col - 1]) == null && tiles[r, col - 1].GetTileType() == TileData.TileType.Regular)
-                    tiles[r, col - 1].Fill(TileData.TileType.Vestige);
+                {
+                    if (isPlaced)
+                        tiles[r, col - 1].Fill(TileData.TileType.Vestige);
+                    else
+                        tiles[r, col - 1].SetIncomingHighlight(TileData.TileType.Vestige);
+                }
+                    
         //Right edge
         if (col + length - 1 < width - 1)
             for (int r = row; r < row + length; r++)
                 if (toRemove.Find(t => t == tiles[r, col + length]) == null && tiles[r, col + length].GetTileType() == TileData.TileType.Regular)
-                    tiles[r, col + length].Fill(TileData.TileType.Vestige);
+                {
+                    if (isPlaced)
+                        tiles[r, col + length].Fill(TileData.TileType.Vestige);
+                    else
+                        tiles[r, col + length].SetIncomingHighlight(TileData.TileType.Vestige);
+                }
+        
         //Top edge
         if (row > 0)
             for (int c = col; c < col + length; c++)
                 if (toRemove.Find(t => t == tiles[row - 1, c]) == null && tiles[row - 1, c].GetTileType() == TileData.TileType.Regular)
-                    tiles[row - 1, c].Fill(TileData.TileType.Vestige);
+                {
+                    if (isPlaced)
+                        tiles[row - 1, c].Fill(TileData.TileType.Vestige);
+                    else
+                        tiles[row - 1, c].SetIncomingHighlight(TileData.TileType.Vestige);
+                }    
+
         //Bottom edge
         if (row + length - 1 < height - 1)
             for (int c = col; c < col + length; c++)
                 if (toRemove.Find(t => t == tiles[row + length, c]) == null && tiles[row + length, c].GetTileType() == TileData.TileType.Regular)
-                    tiles[row + length, c].Fill(TileData.TileType.Vestige);
+                {
+                    if (isPlaced)
+                        tiles[row + length, c].Fill(TileData.TileType.Vestige);
+                    else
+                        tiles[row + length, c].SetIncomingHighlight(TileData.TileType.Vestige);
+                }    
 
     }
 
@@ -808,7 +873,7 @@ public class Grid : MonoBehaviour
             for (int row = 0; row < height; row += h)
             {
                 //Space s = Instantiate(prefabSpace).GetComponent<Space>();
-                GameObject current = GameObject.Instantiate(prefabSpace, transform, false);
+                GameObject current = Instantiate(prefabSpace, transform, false);
                 Space s = current.GetComponent<Space>();
                 s.Init(row, col, h, w, this);
                 //s.GetComponent<RectTransform>().SetParent(canvas.transform);
@@ -867,7 +932,7 @@ public class Grid : MonoBehaviour
     public void PlacedDraggableBlock()
     {    
         //If there is not square formed this turn, then energy will be reduced by 1 plus number of vestiges
-        if (!CheckForMatches())
+        if (!CheckForMatches(0, 0, null, true))
         {
             int vestigeNum = 0;
 
