@@ -80,6 +80,7 @@ public class Tile : MonoBehaviour
         TileFade tileToFade = thisFadingTilePrefab.GetComponent<TileFade>();
         //Image imageToFade = thisFadingTilePrefab.GetComponent<Image>();
         tileToFade.Fade(); //And fade the image out, which will destroy it as well
+        gridObject.GetComponent<ClearedSquaresCounter>().ClearedSquare(); //increment the total number of cleared squares, for analytics
     }
 
     // Helper function.

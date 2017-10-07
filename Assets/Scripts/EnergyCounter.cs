@@ -20,6 +20,7 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Tuning JSON.")]
     TextAsset tuningJSON;
+    int peakEnergy;
 
     void Tune()
     {
@@ -56,5 +57,13 @@ public class EnergyCounter : MonoBehaviour
     private void UpdateEnergy()
     {
         textEnergy.text = "Energy: " + energy.ToString();
+        //Keep track of peak energy for Analytics
+        if (energy > peakEnergy)
+        { peakEnergy = energy; }
+    }
+
+    public int GetPeakEnergy()
+    {
+        return peakEnergy;
     }
 }
