@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, Yifeng Shi, Yixiang Xu
+﻿// Author(s): Paul Calande, Yifeng Shi, Yixiang Xu, Wm. Josiah Erikson
 // A 2-dimensional collections of Tiles
 
 using System;
@@ -925,26 +925,30 @@ public class Grid : MonoBehaviour
 
         return true;
     }
+    private int CountVestiges () 
+    {
+        int vestigeNum = 0;
+		//Count the number of vestiges on the grid
+		for (int r = 0; r < height; r++)
+		{
+			for (int c = 0; c < width; c++)
+			{
+				if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
+				{
+					vestigeNum++;
+				}
+			}
+		}
+        return vestigeNum;
+    }
 
     // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
     public void PlacedDraggableBlock()
     {    
-        //If there is not square formed this turn, then energy will be reduced by 1 plus number of vestiges
+        //If there was not a square formed this turn, then energy will be reduced by 1 plus number of vestiges
         if (!CheckForMatches())
         {
-            int vestigeNum = 0;
-
-            //Count the vestiges number on the grid
-            for (int r = 0; r < height; r++)
-            {
-                for (int c = 0; c < width; c++)
-                {
-                    if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
-                    {
-                        vestigeNum++;
-                    }
-                }
-            }
+            int vestigeNum = CountVestiges();
             vestigeCounter.SetCurrentVestiges(vestigeNum); //Set the current number of vestiges for analytics
             int energyChange = baseEnergyDecayRate + vestigeNum * decayRatePerVestige;
             energyCounter.RemoveEnergy(energyChange);
@@ -955,6 +959,8 @@ public class Grid : MonoBehaviour
         blockSpawner.UpdateAllBlocks();
         //Update turns played - this counts as a turn
         turnCounter.PlayedTurn();
+        //Count vestiges again, even if a square was formed this turn - for analytics
+        vestigeCounter.SetCurrentVestiges(CountVestiges());
     }
 
     // Removes a GridBlock from the List of GridBlocks.

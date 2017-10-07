@@ -5,7 +5,14 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ClearedSquaresCounter : MonoBehaviour {
+    [SerializeField]
+    [Tooltip("Cleared Squares counter. For debug viewing purposes only.")]
     int clearedSquares;
+
+    private void Start()
+    {
+        clearedSquares = 0;
+    }
 
     public void ClearedSquare() //Called when a square is cleared
     {

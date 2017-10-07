@@ -6,7 +6,14 @@ using UnityEngine;
 
 public class TurnCounter : MonoBehaviour {
 
+    [SerializeField]
+    [Tooltip("Turn counter. For debug viewing purposes only.")]
     int turns;
+
+    private void Start()
+    {
+        turns = 0;
+    }
     public int GetTurns () 
     {
         return turns;

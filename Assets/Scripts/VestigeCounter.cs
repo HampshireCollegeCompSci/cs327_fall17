@@ -5,9 +5,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class VestigeCounter : MonoBehaviour {
-
+    
+    [SerializeField]
+    [Tooltip("Peak vestiges counter. For debug viewing purposes only.")]
     int peakVestiges;
+    [SerializeField]
+    [Tooltip("Current Vestiges counter. For debug viewing purposes only.")]
     int currentVestiges;
+
+    private void Start()
+    {
+        peakVestiges = 0;
+        currentVestiges = 0;
+    }
 
     public int GetCurrentVestiges () {
         return currentVestiges;
