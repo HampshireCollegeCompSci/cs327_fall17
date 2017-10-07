@@ -16,11 +16,17 @@ public class Analytics : MonoBehaviour
     [Tooltip("Reference to the Score instance.")]
     ScoreCounter Score;
     [SerializeField]
-    [Tooltip("Reference to the EnergyCounter instance")]
+    [Tooltip("Reference to the EnergyCounter instance.")]
     EnergyCounter Energy;
     [SerializeField]
-    [Tooltip("Reference to the TurnsCounter instance")]
+    [Tooltip("Reference to the TurnsCounter instance.")]
     TurnCounter Turns;
+    [SerializeField]
+    [Tooltip("Reference to the VestigeCounter instance.")]
+    VestigeCounter Vestiges;
+    [SerializeField]
+    [Tooltip("Reference to the ClearedSquares instance.")]
+    ClearedSquaresCounter ClearedSquares;
     // Use this for initialization
     void Start()
     {
@@ -37,13 +43,19 @@ public class Analytics : MonoBehaviour
         int score = Score.GetScore();
         int peakEnergy = Energy.GetPeakEnergy();
         int turnsPlayed = Turns.GetTurns();
+        int peakVestiges = Vestiges.GetPeakVestiges();
+        int currentVestiges = Vestiges.GetCurrentVestiges();
+        int clearedSquares = ClearedSquares.GetClearedSquares();
         UnityEngine.Analytics.Analytics.CustomEvent("gameOver", new Dictionary<string, object>
         {
             { "score", score },
             { "gameOverCause", cause },
             { "peakEnergy", peakEnergy},
             { "timePlaying", Time.time},
-            { "turnsPlayed", turnsPlayed}
+            { "turnsPlayed", turnsPlayed},
+            { "peakVestiges", peakVestiges},
+            { "endingVestiges", currentVestiges},
+            { "clearedSquares", clearedSquares}
 
   });
     }

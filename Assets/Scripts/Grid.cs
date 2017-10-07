@@ -41,6 +41,9 @@ public class Grid : MonoBehaviour
 	[Tooltip("Reference to the TurnCounter instance.")]
 	TurnCounter turnCounter;
     [SerializeField]
+    [Tooltip("Reference to the VestigeCounter instance.")]
+    VestigeCounter vestigeCounter;
+    [SerializeField]
     [Tooltip("Reference to the Tuning JSON.")]
     TextAsset tuningJSON;
     [SerializeField]
@@ -942,7 +945,7 @@ public class Grid : MonoBehaviour
                     }
                 }
             }
-
+            vestigeCounter.SetCurrentVestiges(vestigeNum); //Set the current number of vestiges for analytics
             int energyChange = baseEnergyDecayRate + vestigeNum * decayRatePerVestige;
             energyCounter.RemoveEnergy(energyChange);
         }

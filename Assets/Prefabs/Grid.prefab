@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114185976160417868}
   - component: {fileID: 222066008711162748}
   - component: {fileID: 114513065419024280}
+  - component: {fileID: 114265381854382034}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -49,9 +50,22 @@ MonoBehaviour:
     type: 2}
   blockSpawner: {fileID: 0}
   energyCounter: {fileID: 0}
+  turnCounter: {fileID: 0}
+  vestigeCounter: {fileID: 0}
   tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
   energyPerCell: 1
   rectTransform: {fileID: 224804674211477668}
+--- !u!114 &114265381854382034
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825348459886726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ffaabef062464202a938e28c2be6996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114513065419024280
 MonoBehaviour:
   m_ObjectHideFlags: 1
