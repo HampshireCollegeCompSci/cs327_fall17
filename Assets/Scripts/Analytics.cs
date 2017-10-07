@@ -40,22 +40,22 @@ public class Analytics : MonoBehaviour
     void SendData(GameFlow.GameOverCause cause)
     {
         //Debug.Log("Sending analytics!");
-        int score = score.GetScore();
+        int finalScore = score.GetScore();
         int peakEnergy = energy.GetPeakEnergy();
         int turnsPlayed = turns.GetTurns();
         int peakVestiges = vestiges.GetPeakVestiges();
         int currentVestiges = vestiges.GetCurrentVestiges();
-        int clearedSquares = clearedSquares.GetClearedSquares();
+        int finalClearedSquares = clearedSquares.GetClearedSquares();
         UnityEngine.Analytics.Analytics.CustomEvent("gameOver", new Dictionary<string, object>
         {
-            { "score", score },
+            { "score", finalScore },
             { "gameOverCause", cause },
             { "peakEnergy", peakEnergy},
             { "timePlaying", Time.time},
             { "turnsPlayed", turnsPlayed},
             { "peakVestiges", peakVestiges},
             { "endingVestiges", currentVestiges},
-            { "clearedSquares", clearedSquares}
+            { "clearedSquares", finalClearedSquares}
 
   });
     }
