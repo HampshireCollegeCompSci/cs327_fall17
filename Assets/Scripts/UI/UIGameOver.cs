@@ -1,5 +1,6 @@
 ﻿// Author(s): Joel Esquilin, Paul Calande
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class UIGameOver : MonoBehaviour
     GameObject[] toBeEnabled;
     [SerializeField]
     [Tooltip("Reference to the Text object that will explain why the player lost.")]
-    Text textGameOverReason; 
+    Text textGameOverReason;
 
     private void Start()
     {
