@@ -73,6 +73,7 @@ MonoBehaviour:
   spriteVestige: {fileID: 21300000, guid: 3028d523bf6d69a45bece30fa0e47d01, type: 3}
   fadingTilePrefab: {fileID: 224265687730502198, guid: 54107ad6df97249d5aa77755958c042c,
     type: 2}
+  ClearedSquares: {fileID: 0}
 --- !u!222 &222653728882889582
 CanvasRenderer:
   m_ObjectHideFlags: 1
