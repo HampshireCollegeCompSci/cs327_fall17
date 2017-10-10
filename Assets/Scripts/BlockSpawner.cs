@@ -38,7 +38,6 @@ public class BlockSpawner : MonoBehaviour
 
     float timeBeforeNextBlock;
 
-
     private void Start()
     {
         gameFlow.GameLost += GameFlow_GameLost;
@@ -193,7 +192,7 @@ public class BlockSpawner : MonoBehaviour
         {
             //otherwise we select a random block from the possible list,
             //then instantiate the draggable block and add it into the queue.
-            int i = Random.Range(0, possibleBlocks.Count);
+			int i = Random.Range(0, possibleBlocks.Count);
             Block toSpawn = possibleBlocks[i];
 
             // Instantiate the actual block.
@@ -320,4 +319,5 @@ public class BlockSpawner : MonoBehaviour
         }
         enabled = false;
     }
+		
 }

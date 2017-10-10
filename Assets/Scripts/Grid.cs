@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, Yifeng Shi, Yixiang Xu
+﻿// Author(s): Paul Calande, Yifeng Shi, Yixiang Xu, Wm. Josiah Erikson
 // A 2-dimensional collections of Tiles
 
 using System;
@@ -37,12 +37,26 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the EnergyCounter instance.")]
     EnergyCounter energyCounter;
+	[SerializeField]
+	[Tooltip("Reference to the TurnCounter instance.")]
+	TurnCounter turnCounter;
+    [SerializeField]
+    [Tooltip("Reference to the VestigeCounter instance.")]
+    VestigeCounter vestigeCounter;
     [SerializeField]
     [Tooltip("Reference to the Tuning JSON.")]
     TextAsset tuningJSON;
     [SerializeField]
     [Tooltip("Energy earned per Tile cleared. Populated by JSON.")]
     int energyPerCell = 1;
+    [SerializeField]
+    [Tooltip("Reference to the RectTransform component of this Grid.")]
+    RectTransform rectTransform;
+
+    // The width of one Tile, calculated compared to the Grid's dimensions.
+    private float tileWidth;
+    // The height of one Tile, calculated compared to the Grid's dimensions.
+    private float tileHeight;
 
     Tile[,] tiles;
 
@@ -70,8 +84,11 @@ public class Grid : MonoBehaviour
     {
         Tune();
 
+        tileWidth = rectTransform.rect.width / width;
+        tileHeight = rectTransform.rect.height / height;
+
         //Instantiate tiles array
-        tiles = TileUtil.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
+        tiles = CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
 
         foreach (Tile t in tiles)
         {
@@ -113,6 +130,16 @@ public class Grid : MonoBehaviour
         return height;
     }
 
+    public float GetTileWidth()
+    {
+        return tileWidth;
+    }
+
+    public float GetTileHeight()
+    {
+        return tileHeight;
+    }
+
     public bool GetIsOccupied(int row, int col)
     {
         return tiles[row, col].GetIsOccupied();
@@ -149,6 +176,42 @@ public class Grid : MonoBehaviour
         return tiles;
     }
     */
+
+    public Tile[,] CreateTileArray(GameObject prefabTile, Transform parent, Vector3 center, int height, int width)
+    {
+        Tile[,] result = new Tile[height, width];
+
+        // Calculate the position of the top-left corner of the array.
+        float cornerX = center.x - ((width - 1) * tileWidth * 0.5f);
+        float cornerY = center.y + ((height - 1) * tileHeight * 0.5f);
+
+        // Iterate through all the Tiles of the array.
+        for (int c = 0; c < width; c++)
+        {
+            for (int r = 0; r < height; r++)
+            {
+                // Calculate the position of the Tile.
+                float tileX = cornerX + c * tileWidth;
+                float tileY = cornerY - r * tileHeight;
+                Vector3 pos = new Vector3(tileX, tileY, 0.0f);
+
+                GameObject currentPrefabTile = GameObject.Instantiate(prefabTile, parent, false);
+                currentPrefabTile.transform.localPosition = pos;
+
+                /*
+                if (c == 0 && r == 0)
+                {
+                    // Let's figure out which Tile ends up in the (0, 0) corner...
+                    currentPrefabTile.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+                }
+                */
+
+                result[r, c] = currentPrefabTile.GetComponent<Tile>();
+            }
+        }
+
+        return result;
+    }
 
     public bool CanBlockFit(int row, int col, Block block)
     {
@@ -221,9 +284,8 @@ public class Grid : MonoBehaviour
         return gb;
     }
 
-    public bool SetHighlight(int row, int col, Block block, bool on)
+    public void SetHighlight(int row, int col, Block block, bool on)
     {
-        bool highlighted = false;
         if (!on)
         {
             for (int c = 0; c < GetWidth(); c++)
@@ -250,29 +312,11 @@ public class Grid : MonoBehaviour
                     }
                 }
             }
-            highlighted = true;
         }
-
-        return highlighted;
     }
 
-    public bool CheckForMatches(int tr, int tc, Block tblock, bool isPlaced)
+    public bool CheckForMatches()
     {
-        Tile[,] tempTiles = null;
-        if (!isPlaced)
-        {
-            tempTiles = (Tile[,]) tiles.Clone();
-            for (int c = 0; c < tblock.GetWidth(); c++)
-            {
-                for (int r = 0; r < tblock.GetHeight(); r++)
-                {
-                    if (tblock.GetIsOccupied(r, c))
-                    {
-                        tempTiles[tr + r, tc + c].Fill(tblock.GetTileType(r, c));
-                    }
-                }
-            }
-        }
         //Debug.Log("Checking for matches...");
 
         int biggestSquareSize = Mathf.Min(width, height);
@@ -294,28 +338,13 @@ public class Grid : MonoBehaviour
         {
             for (int c = 0; c < width; c++)
             {
-                if (isPlaced)
+                // Proceed only if the Tile is regular tile.
+                if (tiles[r, c].GetTileType() == TileData.TileType.Regular)
                 {
-                    // Proceed only if the Tile is regular tile.
-                    if (tiles[r, c].GetTileType() == TileData.TileType.Regular)
+                    // Check for squares from length 3 upwards.
+                    for (int length = 3; length <= biggestSquareSize; length++)
                     {
-                        // Check for squares from length 3 upwards.
-                        for (int length = 3; length <= biggestSquareSize; length++)
-                        {
-                            CheckForSquares(r, c, length, ref toRemove, ref toVestiges, null);
-                        }
-                    }
-                }
-                else
-                {
-                    // Proceed only if the Tile is regular tile.
-                    if (tempTiles[r, c].GetTileType() == TileData.TileType.Regular)
-                    {
-                        // Check for squares from length 3 upwards.
-                        for (int length = 3; length <= biggestSquareSize; length++)
-                        {
-                            CheckForSquares(r, c, length, ref toRemove, ref toVestiges, tempTiles);
-                        }
+                        CheckForSquares(r, c, length, ref toRemove, ref toVestiges);
                     }
                 }
             }
@@ -323,38 +352,18 @@ public class Grid : MonoBehaviour
 
         //If toRemove is not empty, then there is at least one square formed
         if (toRemove.Count != 0)
-        {          
-            //If the we actually place the tile into the grid, do normal clearing
-            if(isPlaced)
+        {
+            squareFormed = true;
+            //Turn vestiges when isPlaced is true
+            foreach (int[] s in toVestiges)
             {
-                squareFormed = true;
-                //Turn vestiges when isPlaced is true
-                foreach (int[] s in toVestiges)
-                {
-                    FormVestiges(s[0], s[1], s[2], toRemove, true, null);
-                }
-
-                //Remove all tiles that form squares if isPlaced is true
-                foreach (Tile t in toRemove)
-                {
-                    t.Clear();
-                }
+                FormVestiges(s[0], s[1], s[2], toRemove);
             }
-            else //Otherwise just highlight the anticipated tiles
+
+            //Remove all tiles that form squares if isPlaced is true
+            foreach (Tile t in toRemove)
             {
-                //Mark all incoming vestiges to red if isPlaced is false
-                foreach (int[] s in toVestiges)
-                {
-                    FormVestiges(s[0], s[1], s[2], toRemove, false, tempTiles);
-                }
-
-                //Mark all incoming to-be-cleared tiles to blue if isPlaced is false
-                foreach (Tile t in toRemove)
-                {
-                    t.SetIncomingHighlight(TileData.TileType.Regular);
-                }
-
-
+                t.Clear();
             }
         }
 
@@ -373,14 +382,8 @@ public class Grid : MonoBehaviour
         return squareFormed;
     }
 
-    private void CheckForSquares(int r, int c, int length, ref List<Tile> toRemove, ref List<int[]> toVestiges, Tile[,] temp)
+    private void CheckForSquares(int r, int c, int length, ref List<Tile> toRemove, ref List<int[]> toVestiges)
     {
-        Tile[,] toCheck = null;
-        if (temp != null)
-            toCheck = temp;
-        else
-            toCheck = tiles;
-
         List<Tile> processed = new List<Tile>();
         //Do not check if the square is not possible
         //to be formed at this tile
@@ -397,15 +400,15 @@ public class Grid : MonoBehaviour
                 {
                     for (int i = c; i < c + length; i++)
                     {
-                        if (toCheck[currentRow, i].GetTileType() != TileData.TileType.Regular)
+                        if (tiles[currentRow, i].GetTileType() != TileData.TileType.Regular)
                         {
                             isLegal = false;
                             processed.Clear();
                             break;  //exit for loop
                         }
                         //Check to avoid repeated tiles
-                        if (processed.Find(t => t == toCheck[currentRow, i]) == null)
-                            processed.Add(toCheck[currentRow, i]);
+                        if (processed.Find(t => t == tiles[currentRow, i]) == null)
+                            processed.Add(tiles[currentRow, i]);
                         count++;
                     }
                     if (!isLegal)
@@ -413,17 +416,17 @@ public class Grid : MonoBehaviour
                 }
                 else //Rest of rows just check two tiles
                 {
-                    if (toCheck[currentRow, c].GetTileType() != TileData.TileType.Regular
-                       || toCheck[currentRow, c + length - 1].GetTileType() != TileData.TileType.Regular)
+                    if (tiles[currentRow, c].GetTileType() != TileData.TileType.Regular
+                       || tiles[currentRow, c + length - 1].GetTileType() != TileData.TileType.Regular)
                     {
                         isLegal = false;
                         processed.Clear();
                         break;  //exit while loop
                     }
-                    if (processed.Find(t => t == toCheck[currentRow, c]) == null)
-                        processed.Add(toCheck[currentRow, c]);
-                    if (processed.Find(t => t == toCheck[currentRow, c + length - 1]) == null)
-                        processed.Add(toCheck[currentRow, c + length - 1]);
+                    if (processed.Find(t => t == tiles[currentRow, c]) == null)
+                        processed.Add(tiles[currentRow, c]);
+                    if (processed.Find(t => t == tiles[currentRow, c + length - 1]) == null)
+                        processed.Add(tiles[currentRow, c + length - 1]);
                     count += 2;
                 }
 
@@ -433,85 +436,57 @@ public class Grid : MonoBehaviour
             if (isLegal)
             {
                 //Mark the tiles
-                processed.AddRange(MarkInsideTiles(r, c, length, toCheck));
+                processed.AddRange(MarkInsideTiles(r, c, length, tiles));
                 toRemove.AddRange(processed);
                 toVestiges.Add(new int[] { r, c, length });
 
-                if(temp == null)
+                //Spawn a text indicating scores at the center of the cleared square
+                Vector3 textPos = new Vector3();
+                if (length % 2 == 1)
                 {
-                    //Spawn a text indicating scores at the center of the cleared square
-                    Vector3 textPos = new Vector3();
-                    if (length % 2 == 1)
-                    {
-                        textPos = GetTilePosition(r + (length - 1) / 2, c + (length - 1) / 2);
-                    }
-                    else
-                    {
-                        Vector3 rightPos = GetTilePosition(r + (length - 1) / 2 + 1, c + (length - 1) / 2 + 1);
-                        Vector3 leftPos = GetTilePosition(r + (length - 1) / 2, c + (length - 1) / 2);
-                        textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
-                    }
+                    textPos = GetTilePosition(r + (length - 1) / 2, c + (length - 1) / 2);
+                }
+                else
+                {
+                    Vector3 rightPos = GetTilePosition(r + (length - 1) / 2 + 1, c + (length - 1) / 2 + 1);
+                    Vector3 leftPos = GetTilePosition(r + (length - 1) / 2, c + (length - 1) / 2);
+                    textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
+                }
 
-                    //If a legal square is formed, tell the event handler
-                    OnSquareFormed(length, textPos);
-                }           
+                //If a legal square is formed, tell the event handler
+                OnSquareFormed(length, textPos);
             }              
         }
     }
 
-    private void FormVestiges(int row, int col, int length, List<Tile> toRemove, bool isPlaced, Tile[,] temp)
+    private void FormVestiges(int row, int col, int length, List<Tile> toRemove)
     {
         //Turn all adjacent outside regular tiles into vestiges.
         //for the specified square.
-        Tile[,] toCheck = null;
-        if (temp != null)
-            toCheck = temp;
-        else
-            toCheck = tiles;
         
         //Left edge
         if (col > 0)
             for (int r = row; r < row + length; r++)
-                if (toRemove.Find(t => t == toCheck[r, col - 1]) == null && toCheck[r, col - 1].GetTileType() == TileData.TileType.Regular)
-                {
-                    if (isPlaced)
-                        toCheck[r, col - 1].Fill(TileData.TileType.Vestige);
-                    else
-                        toCheck[r, col - 1].SetIncomingHighlight(TileData.TileType.Vestige);
-                }
-                    
+                if (toRemove.Find(t => t == tiles[r, col - 1]) == null && tiles[r, col - 1].GetTileType() == TileData.TileType.Regular)
+                    tiles[r, col - 1].Fill(TileData.TileType.Vestige);
+
         //Right edge
         if (col + length - 1 < width - 1)
             for (int r = row; r < row + length; r++)
-                if (toRemove.Find(t => t == toCheck[r, col + length]) == null && toCheck[r, col + length].GetTileType() == TileData.TileType.Regular)
-                {
-                    if (isPlaced)
-                        toCheck[r, col + length].Fill(TileData.TileType.Vestige);
-                    else
-                        toCheck[r, col + length].SetIncomingHighlight(TileData.TileType.Vestige);
-                }
-        
+                if (toRemove.Find(t => t == tiles[r, col + length]) == null && tiles[r, col + length].GetTileType() == TileData.TileType.Regular)
+                    tiles[r, col + length].Fill(TileData.TileType.Vestige);
+
         //Top edge
         if (row > 0)
             for (int c = col; c < col + length; c++)
-                if (toRemove.Find(t => t == toCheck[row - 1, c]) == null && toCheck[row - 1, c].GetTileType() == TileData.TileType.Regular)
-                {
-                    if (isPlaced)
-                        toCheck[row - 1, c].Fill(TileData.TileType.Vestige);
-                    else
-                        toCheck[row - 1, c].SetIncomingHighlight(TileData.TileType.Vestige);
-                }    
+                if (toRemove.Find(t => t == tiles[row - 1, c]) == null && tiles[row - 1, c].GetTileType() == TileData.TileType.Regular)
+                    tiles[row - 1, c].Fill(TileData.TileType.Vestige);
 
         //Bottom edge
         if (row + length - 1 < height - 1)
             for (int c = col; c < col + length; c++)
-                if (toRemove.Find(t => t == toCheck[row + length, c]) == null && toCheck[row + length, c].GetTileType() == TileData.TileType.Regular)
-                {
-                    if (isPlaced)
-                        toCheck[row + length, c].Fill(TileData.TileType.Vestige);
-                    else
-                        toCheck[row + length, c].SetIncomingHighlight(TileData.TileType.Vestige);
-                }    
+                if (toRemove.Find(t => t == tiles[row + length, c]) == null && tiles[row + length, c].GetTileType() == TileData.TileType.Regular)
+                    tiles[row + length, c].Fill(TileData.TileType.Vestige);
 
     }
 
@@ -957,27 +932,31 @@ public class Grid : MonoBehaviour
 
         return true;
     }
+    private int CountVestiges () 
+    {
+        int vestigeNum = 0;
+		//Count the number of vestiges on the grid
+		for (int r = 0; r < height; r++)
+		{
+			for (int c = 0; c < width; c++)
+			{
+				if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
+				{
+					vestigeNum++;
+				}
+			}
+		}
+        return vestigeNum;
+    }
 
     // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
     public void PlacedDraggableBlock()
     {    
-        //If there is not square formed this turn, then energy will be reduced by 1 plus number of vestiges
-        if (!CheckForMatches(0, 0, null, true))
+        //If there was not a square formed this turn, then energy will be reduced by 1 plus number of vestiges
+        if (!CheckForMatches())
         {
-            int vestigeNum = 0;
-
-            //Count the vestiges number on the grid
-            for (int r = 0; r < height; r++)
-            {
-                for (int c = 0; c < width; c++)
-                {
-                    if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
-                    {
-                        vestigeNum++;
-                    }
-                }
-            }
-
+            int vestigeNum = CountVestiges();
+            vestigeCounter.SetCurrentVestiges(vestigeNum); //Set the current number of vestiges for analytics
             int energyChange = baseEnergyDecayRate + vestigeNum * decayRatePerVestige;
             energyCounter.RemoveEnergy(energyChange);
         }
@@ -985,6 +964,10 @@ public class Grid : MonoBehaviour
         blockSpawner.ProgressQueue();
         //Update Available spaces for all draggable blocks
         blockSpawner.UpdateAllBlocks();
+        //Update turns played - this counts as a turn
+        turnCounter.PlayedTurn();
+        //Count vestiges again, even if a square was formed this turn - for analytics
+        vestigeCounter.SetCurrentVestiges(CountVestiges());
     }
 
     // Removes a GridBlock from the List of GridBlocks.
