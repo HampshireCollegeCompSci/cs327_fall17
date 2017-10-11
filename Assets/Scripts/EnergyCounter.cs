@@ -57,8 +57,6 @@ public class EnergyCounter : MonoBehaviour
         }
         */
 
-        
-
         UpdateEnergy();
     }
 
@@ -71,8 +69,6 @@ public class EnergyCounter : MonoBehaviour
             energy = 0;
             gameFlow.GameOver(GameFlow.GameOverCause.NoMoreEnergy);
         }
-
-        PopUp("-", amount);
 
         UpdateEnergy();
     }

@@ -961,6 +961,7 @@ public class Grid : MonoBehaviour
             vestigeCounter.SetCurrentVestiges(vestigeNum); //Set the current number of vestiges for analytics
             int energyChange = baseEnergyDecayRate + vestigeNum * decayRatePerVestige;
             energyCounter.RemoveEnergy(energyChange);
+            energyCounter.PopUp("-", energyChange);
         }
 
         blockSpawner.ProgressQueue();
