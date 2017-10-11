@@ -80,12 +80,9 @@ public class Space : MonoBehaviour
 
     private void SnapLocation_Highlight(GameObject snapper, bool on)
     {
-        grid.SetHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), on);
-        /*
         if (grid.SetHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), on))
             grid.AnticipatedHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), true);
         else
             grid.AnticipatedHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), false);
-        */
     }
 }
