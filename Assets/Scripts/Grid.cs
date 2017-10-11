@@ -407,6 +407,7 @@ public class Grid : MonoBehaviour
 
         //Loop through all blocks from top left.
         //Consider only the case that the current tile is the top-left corner.
+
         for (int r = 0; r < height; r++)
         {
             for (int c = 0; c < width; c++)
@@ -427,18 +428,17 @@ public class Grid : MonoBehaviour
         if (toRemove.Count != 0)
         {
             squareFormed = true;
-
-            //Turn vestiges
+            //Turn vestiges when isPlaced is true
             foreach (int[] s in toVestiges)
             {
                 FormVestiges(s[0], s[1], s[2], toRemove, false);
             }
 
-            //Remove all tiles that form squares
+            //Remove all tiles that form squares if isPlaced is true
             foreach (Tile t in toRemove)
             {
                 t.Clear();
-            }    
+            }
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
@@ -551,6 +551,7 @@ public class Grid : MonoBehaviour
 
                 currentRow += 1;
             }
+
             if (isLegal)
             {
                 //clear all tiles inside the square (Just mark them here),
@@ -578,7 +579,7 @@ public class Grid : MonoBehaviour
                     //If a legal square is formed, tell the event handler,
                     OnSquareFormed(length, textPos);
                 }        
-            }               
+            }
         }
     }
 
@@ -608,7 +609,6 @@ public class Grid : MonoBehaviour
                     else
                         tiles[r, col + length].Fill(TileData.TileType.Vestige);
                 }
-                    
         //Top edge
         if (row > 0)
             for (int c = col; c < col + length; c++)
@@ -619,7 +619,7 @@ public class Grid : MonoBehaviour
                     else
                         tiles[row - 1, c].Fill(TileData.TileType.Vestige);
                 }
-                    
+
         //Bottom edge
         if (row + length - 1 < height - 1)
             for (int c = col; c < col + length; c++)
@@ -634,16 +634,21 @@ public class Grid : MonoBehaviour
 
     }
 
-    private List<Tile> MarkInsideTiles(int row, int col, int length)
+    private List<Tile> MarkInsideTiles(int row, int col, int length, Tile[,] temp)
     {
+        Tile[,] toCheck = null;
+        if (temp != null)
+            toCheck = temp;
+        else
+            toCheck = tiles;
         List<Tile> inside = new List<Tile>();
         //Looping inside the square
         for (int r = row + 1; r < row + length - 1; r++)
         {
             for (int c = col + 1; c < col + length - 1; c++)
             {
-                if (tiles[r, c].GetIsOccupied() && inside.Find(t => t == tiles[r, c]) == null)
-                    inside.Add(tiles[r, c]);
+                if (toCheck[r, c].GetIsOccupied() && inside.Find(t => t == toCheck[r, c]) == null)
+                    inside.Add(toCheck[r, c]);
             }
         }
         return inside;
@@ -1017,7 +1022,7 @@ public class Grid : MonoBehaviour
             for (int row = 0; row < height; row += h)
             {
                 //Space s = Instantiate(prefabSpace).GetComponent<Space>();
-                GameObject current = GameObject.Instantiate(prefabSpace, transform, false);
+                GameObject current = Instantiate(prefabSpace, transform, false);
                 Space s = current.GetComponent<Space>();
                 s.Init(row, col, h, w, this);
                 //s.GetComponent<RectTransform>().SetParent(canvas.transform);

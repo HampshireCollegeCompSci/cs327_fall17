@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, Wm. Josiah Erikson
+// Author(s): Paul Calande, Wm. Josiah Erikson
 
 using System.Collections;
 using System.Collections.Generic;
