@@ -365,6 +365,8 @@ public class Grid : MonoBehaviour
             {
                 t.Clear();
             }
+
+            energyCounter.PopUp("+", toRemove.Count);
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
