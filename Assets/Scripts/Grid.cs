@@ -634,21 +634,16 @@ public class Grid : MonoBehaviour
 
     }
 
-    private List<Tile> MarkInsideTiles(int row, int col, int length, Tile[,] temp)
+    private List<Tile> MarkInsideTiles(int row, int col, int length)
     {
-        Tile[,] toCheck = null;
-        if (temp != null)
-            toCheck = temp;
-        else
-            toCheck = tiles;
         List<Tile> inside = new List<Tile>();
         //Looping inside the square
         for (int r = row + 1; r < row + length - 1; r++)
         {
             for (int c = col + 1; c < col + length - 1; c++)
             {
-                if (toCheck[r, c].GetIsOccupied() && inside.Find(t => t == toCheck[r, c]) == null)
-                    inside.Add(toCheck[r, c]);
+                if (tiles[r, c].GetIsOccupied() && inside.Find(t => t == tiles[r, c]) == null)
+                    inside.Add(tiles[r, c]);
             }
         }
         return inside;
