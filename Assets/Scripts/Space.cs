@@ -68,6 +68,7 @@ public class Space : MonoBehaviour
 	//This method should be called when a DraggableBlock is dragged onto this Space.
 	public void PlaceBlock(DraggableBlock block)
 	{
+        AudioController.Instance.PlaceTile();
         grid.WriteBlock(row, col, block.GetBlock()); //We're placing this block. Apparently it's the external responsibility to make sure this will work
         grid.PlacedDraggableBlock(); // Notify the Grid that we just placed a DraggableBlock.
         Destroy(block.gameObject); //And now we're done with this GameObject - it's on the grid

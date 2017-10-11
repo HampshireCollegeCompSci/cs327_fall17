@@ -26,7 +26,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     [Tooltip("The position to return to if dragging ceases and no SnapLocation is snapped to.")]
     protected Vector2 defaultPosition;
 
-    protected static Vector2 piecePlacementOffset = new Vector2(100, 100);
+    protected static Vector2 piecePlacementOffset = new Vector2(60, 60);
 
     public Action<DraggableObject> BeginDragEvent;
     public Action<DraggableObject> EndDragEvent;

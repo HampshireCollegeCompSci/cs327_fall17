@@ -299,6 +299,7 @@ public class BlockSpawner : MonoBehaviour
         if (blocksQueue.Count > 0)
         {
             blocksQueue.Peek().Rotate(clockwise);
+            AudioController.Instance.RotateTile();
         }
     }
 
@@ -307,6 +308,7 @@ public class BlockSpawner : MonoBehaviour
         if (blocksQueue.Count > 0)
         {
             blocksQueue.Peek().Flip();
+            AudioController.Instance.RotateTile();
         }
     }
 
