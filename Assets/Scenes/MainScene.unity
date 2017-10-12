@@ -839,6 +839,17 @@ Prefab:
       propertyPath: gameFlow
       value: 
       objectReference: {fileID: 2051938913}
+    - target: {fileID: 114478268153692230, guid: 539940dbc777b7d44ae9cdc731762a43,
+        type: 2}
+      propertyPath: risingTextPrefab
+      value: 
+      objectReference: {fileID: 1846777300264232, guid: d69eabf2b54ae164db3861b11fa816b2,
+        type: 2}
+    - target: {fileID: 114478268153692230, guid: 539940dbc777b7d44ae9cdc731762a43,
+        type: 2}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1069704021}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 539940dbc777b7d44ae9cdc731762a43, type: 2}
   m_IsPrefabParent: 0

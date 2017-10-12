@@ -439,6 +439,8 @@ public class Grid : MonoBehaviour
             {
                 t.Clear();
             }
+
+            energyCounter.PopUp("+", toRemove.Count);
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
@@ -1098,6 +1100,7 @@ public class Grid : MonoBehaviour
             vestigeCounter.SetCurrentVestiges(vestigeNum); //Set the current number of vestiges for analytics
             int energyChange = baseEnergyDecayRate + vestigeNum * decayRatePerVestige;
             energyCounter.RemoveEnergy(energyChange);
+            energyCounter.PopUp("-", energyChange);
         }
 
         blockSpawner.ProgressQueue();

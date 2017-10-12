@@ -26,6 +26,9 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("The prefix for the Energy: string.")]
     string prefix;
+    [SerializeField]
+    [Tooltip("The Rising Text prefab to instantiate when energy is gained or lost.")]
+    GameObject risingTextPrefab;
 
     // The highest amount of energy achieved over the course of the game.
     int peakEnergy;
@@ -53,6 +56,7 @@ public class EnergyCounter : MonoBehaviour
             energy = maxEnergy;
         }
         */
+
         UpdateEnergy();
     }
 
@@ -67,6 +71,16 @@ public class EnergyCounter : MonoBehaviour
         }
 
         UpdateEnergy();
+    }
+
+    public void PopUp(string pref, int amount)
+    {
+        Vector3 popOutPos = new Vector3(transform.localPosition.x + 1.2f * GetComponent<RectTransform>().rect.width, transform.localPosition.y, transform.localPosition.z);
+        
+        GameObject risingTextObj = Object.Instantiate(risingTextPrefab, transform.parent.transform, false);
+        risingTextObj.GetComponent<RisingText>().SetText(pref + (amount).ToString());
+        risingTextObj.GetComponent<Text>().color = Color.green;
+        risingTextObj.transform.localPosition = popOutPos;
     }
 
     private void UpdateEnergy()
