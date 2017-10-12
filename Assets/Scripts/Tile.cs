@@ -121,10 +121,27 @@ public class Tile : MonoBehaviour
         spriteRenderer.color = new Color(255f, 255f, 255f, 0.5f);
     }
 
+    public void SetAnticipatedHighlight(TileData.TileType type)
+    {
+        if (type == TileData.TileType.Regular)
+            spriteRenderer.color = new Color(0f, 0f, 255f, 0.5f);
+        else if (type == TileData.TileType.Vestige)
+            spriteRenderer.color = new Color(255f, 0f, 0f, 0.5f);
+    }
+
     public void SetNormal()
     {
         spriteRenderer.color = new Color(255f, 255f, 255f, 1f);
     }
+
+    public void SetIncomingHighlight(TileData.TileType type)
+    {
+        if (type == TileData.TileType.Regular)
+            spriteRenderer.color = new Color(0f, 0f, 255f, 1f);
+        else if (type == TileData.TileType.Vestige)
+            spriteRenderer.color = new Color(255f, 0f, 0f, 1f);
+    }
+
 
     void OnChanged(TileData.TileType newType)
     {

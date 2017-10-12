@@ -15,14 +15,14 @@ public class EnergyMeter : MonoBehaviour {
 	void Update () {
         //Vector3 ourLocalPosition = transform.localPosition;
         //rT.sizeDelta = new Vector2(rT.sizeDelta.x, rT.sizeDelta.y + 0.5f);
-        float yPosition = transform.position.y;
+        float yPosition = transform.localPosition.y;
         yPosition += 2.0f;
-        float xPosition = transform.position.x;
-        float zPosition = transform.position.z;
+        float xPosition = transform.localPosition.x;
+        transform.localPosition = new Vector2(xPosition, yPosition);
         //transform.localPosition.Set(yPosition,xPosition,zPosition); //This doesn't work - don't know why. Have to use world space. Seems bad.
         //        transform.Translate(Vector3.up * 20);
-        Quaternion currentRotation = transform.localRotation;
-        Vector3 newPosition = new Vector3(xPosition, yPosition, zPosition);
-        transform.SetPositionAndRotation(newPosition, currentRotation);
+        //Quaternion currentRotation = transform.localRotation;
+        //Vector3 newPosition = new Vector3(xPosition, yPosition, zPosition);
+        //transform.SetPositionAndRotation(newPosition, currentRotation);
 	}
 }
