@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 // Reference the Unity Analytics namespace
 using UnityEngine.Analytics;
+using System;
 
 public class Analytics : MonoBehaviour
 {
@@ -46,16 +47,21 @@ public class Analytics : MonoBehaviour
         int peakVestiges = vestiges.GetPeakVestiges();
         int currentVestiges = vestiges.GetCurrentVestiges();
         int finalClearedSquares = clearedSquares.GetClearedSquares();
+        float timePlaying = Time.time;
+        string currentTimeStamp = System.DateTime.Now.ToString();
+        string allTheData = "timestamp;" + currentTimeStamp + ",score;" + finalScore + ",peakEnergy;" + peakEnergy + ",timePlaying;" + timePlaying + ",turnsPlayed;" + turnsPlayed + ",peakVestiges;" + peakVestiges + ",endingVestiges;" + currentVestiges + ",totalClearedSquares;" + finalClearedSquares;
+        Debug.Log("allTheData is" + allTheData);
         UnityEngine.Analytics.Analytics.CustomEvent("gameOver", new Dictionary<string, object>
         {
             { "score", finalScore },
             { "gameOverCause", cause },
             { "peakEnergy", peakEnergy},
-            { "timePlaying", Time.time},
+            { "timePlaying", timePlaying},
             { "turnsPlayed", turnsPlayed},
             { "peakVestiges", peakVestiges},
             { "endingVestiges", currentVestiges},
-            { "totalClearedSquares", finalClearedSquares}
+            { "totalClearedSquares", finalClearedSquares},
+            { "allTheData", allTheData}
 
   });
     }
