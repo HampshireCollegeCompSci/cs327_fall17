@@ -39,6 +39,10 @@ public class EnergyMeter : MonoBehaviour
         maxEnergy = ourEnergyCounter.GetMaxEnergyInMeter(); //Get max energy
         currentEnergy = ourEnergyCounter.GetCurrentEnergy(); //Get current energy
         percentOfMax = currentEnergy / maxEnergy * 100;
+        if (percentOfMax > 100) //You can get more than maxEnergy, the meter should just max out there.
+        {
+            percentOfMax = 100;
+        }
         //I don't know exactly why 230 is the magic number. It's close to the size of this object but not exactly. I would like to fix this
         //as it's probably easily breakable!!
         sizeDelta = -230.0f + (percentOfMax * 2.3f); //sizeDelta should be between -230 (invisible) and 0 (full size)
