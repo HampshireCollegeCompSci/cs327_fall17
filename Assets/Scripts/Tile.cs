@@ -28,7 +28,7 @@ public class Tile : MonoBehaviour
     Transform fadingTilePrefab;
 	[SerializeField]
 	[Tooltip("The sprite of regular Tile.")]
-	Sprite[] tiles = new Sprite[3];
+	Sprite[] tiles;
 
     public bool GetIsOccupied()
     {
@@ -97,19 +97,10 @@ public class Tile : MonoBehaviour
                 spriteRenderer.sprite = spriteUnoccupied;
                 break;
 			case TileData.TileType.Regular:
-				int randomInt = Random.Range (0, 3);				
-				if(randomInt == 0) 
-				{
-				spriteRenderer.sprite = tiles[0];
-				}
-				if(randomInt == 1)
-				{
-				spriteRenderer.sprite = tiles[2];
-				}
-				if(randomInt == 2)
-				{
-				spriteRenderer.sprite = tiles[3];
-				}
+			int randomInt = Random.Range (0, tiles.Length);				
+				spriteRenderer.sprite = tiles[randomInt];
+				spriteRenderer.sprite = tiles[randomInt];
+				spriteRenderer.sprite = tiles[randomInt];
                 break;
                 /*
             case TileData.TileType.Vacant:
