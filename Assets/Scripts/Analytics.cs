@@ -39,7 +39,7 @@ public class Analytics : MonoBehaviour
 
     void SendData(GameFlow.GameOverCause cause)
     {
-        //Debug.Log("Sending analytics!");
+        Debug.Log("Sending analytics!");
         int finalScore = score.GetScore();
         int peakEnergy = energy.GetPeakEnergy();
         int turnsPlayed = turns.GetTurns();
