@@ -346,7 +346,8 @@ public class Grid : MonoBehaviour
                 for (int c = 0; c < width; c++)
                 {
                     // Proceed only if the Tile is regular tile.
-                    if (copy[r, c] == TileData.TileType.Regular)
+                    if (copy[r, c] == TileData.TileType.Regular ||
+                        copy[r, c] == TileData.TileType.Vestige)
                     {
                         // Check for squares from length 3 upwards.
                         for (int length = 3; length <= biggestSquareSize; length++)
@@ -413,7 +414,7 @@ public class Grid : MonoBehaviour
             for (int c = 0; c < width; c++)
             {
                 // Proceed only if the Tile is regular tile.
-                if (tiles[r, c].GetTileType() == TileData.TileType.Regular)
+                if (tiles[r, c].GetIsOccupied())
                 {
                     // Check for squares from length 3 upwards.
                     for (int length = 3; length <= biggestSquareSize; length++)
@@ -475,7 +476,7 @@ public class Grid : MonoBehaviour
                 {
                     for (int i = c; i < c + length; i++)
                     {
-                        if (tiles[currentRow, i].GetTileType() != TileData.TileType.Regular)
+                        if (!tiles[currentRow, i].GetIsOccupied())
                         {
                             isLegal = false;
                             processed.Clear();
@@ -493,7 +494,7 @@ public class Grid : MonoBehaviour
                 {
                     for (int i = c; i < c + length; i++)
                     {
-                        if (copy[currentRow, i] != TileData.TileType.Regular)
+                        if (copy[currentRow, i] == TileData.TileType.Unoccupied)
                         {
                             isLegal = false;
                             processed.Clear();
@@ -501,7 +502,7 @@ public class Grid : MonoBehaviour
                         }
                         //Check to avoid repeated tiles, and 
                         //include only tiles in the original tiles array
-                        if (copy[currentRow, i] == TileData.TileType.Regular &&
+                        if (copy[currentRow, i] != TileData.TileType.Unoccupied &&
                             processed.Find(t => t == tiles[currentRow, i]) == null)
                             processed.Add(tiles[currentRow, i]);
                         count++;

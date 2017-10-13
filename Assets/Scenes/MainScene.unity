@@ -1233,6 +1233,10 @@ Prefab:
       propertyPath: vestigeCounter
       value: 
       objectReference: {fileID: 2051938916}
+    - target: {fileID: 1825348459886726, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0
