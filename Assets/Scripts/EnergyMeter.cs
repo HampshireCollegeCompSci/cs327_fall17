@@ -28,7 +28,7 @@ public class EnergyMeter : MonoBehaviour
 
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         rT = GetComponent<RectTransform>(); //Get the rect transform component of this game object. For efficiency, let's just do it this one time
         xPosition = transform.localPosition.x; //Our x position shouldn't change
