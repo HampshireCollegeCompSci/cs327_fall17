@@ -40,7 +40,7 @@ public class Analytics : MonoBehaviour
 
     void SendData(GameFlow.GameOverCause cause)
     {
-        Debug.Log("Sending analytics!");
+        //Debug.Log("Sending analytics!");
         int finalScore = score.GetScore();
         int peakEnergy = energy.GetPeakEnergy();
         int turnsPlayed = turns.GetTurns();
@@ -50,7 +50,7 @@ public class Analytics : MonoBehaviour
         float timePlaying = Time.time;
         string currentTimeStamp = System.DateTime.Now.ToString();
         string allTheData = "timestamp;" + currentTimeStamp + ",score;" + finalScore + ",peakEnergy;" + peakEnergy + ",timePlaying;" + timePlaying + ",turnsPlayed;" + turnsPlayed + ",peakVestiges;" + peakVestiges + ",endingVestiges;" + currentVestiges + ",totalClearedSquares;" + finalClearedSquares;
-        Debug.Log("allTheData is" + allTheData);
+        //Debug.Log("allTheData is" + allTheData);
         UnityEngine.Analytics.Analytics.CustomEvent("gameOver", new Dictionary<string, object>
         {
             { "score", finalScore },
