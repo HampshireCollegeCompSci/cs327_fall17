@@ -471,49 +471,45 @@ public class Grid : MonoBehaviour
             //The max number of tiles to be checked
             while (count < length * length - (length - 2) * (length - 2) - 1)
             {
-                //For first and last rows check the whole line
-                if (currentRow == r || currentRow == r + length - 1)
+                if (copy == null)
                 {
-                    if (copy == null)
+                    for (int i = c; i < c + length; i++)
                     {
-                        for (int i = c; i < c + length; i++)
+                        if (tiles[currentRow, i].GetTileType() != TileData.TileType.Regular)
                         {
-                            if (tiles[currentRow, i].GetTileType() != TileData.TileType.Regular)
-                            {
-                                isLegal = false;
-                                processed.Clear();
-                                break;  //exit for loop
-                            }
-                            //Check to avoid repeated tiles
-                            if (processed.Find(t => t == tiles[currentRow, i]) == null)
-                                processed.Add(tiles[currentRow, i]);
-                            count++;
+                            isLegal = false;
+                            processed.Clear();
+                            break;  //exit for loop
                         }
-                        if (!isLegal)
-                            break;  //exit while loop
+                        //Check to avoid repeated tiles
+                        if (processed.Find(t => t == tiles[currentRow, i]) == null)
+                            processed.Add(tiles[currentRow, i]);
+                        count++;
                     }
-                    else
-                    {
-                        for (int i = c; i < c + length; i++)
-                        {
-                            if (copy[currentRow, i] != TileData.TileType.Regular)
-                            {
-                                isLegal = false;
-                                processed.Clear();
-                                break;  //exit for loop
-                            }
-                            //Check to avoid repeated tiles, and 
-                            //include only tiles in the original tiles array
-                            if (copy[currentRow, i] == TileData.TileType.Regular &&
-                                processed.Find(t => t == tiles[currentRow, i]) == null)
-                                processed.Add(tiles[currentRow, i]);
-                            count++;
-                        }
-                        if (!isLegal)
-                            break;  //exit while loop
-                    }
-                    
+                    if (!isLegal)
+                        break;  //exit while loop
                 }
+                else
+                {
+                    for (int i = c; i < c + length; i++)
+                    {
+                        if (copy[currentRow, i] != TileData.TileType.Regular)
+                        {
+                            isLegal = false;
+                            processed.Clear();
+                            break;  //exit for loop
+                        }
+                        //Check to avoid repeated tiles, and 
+                        //include only tiles in the original tiles array
+                        if (copy[currentRow, i] == TileData.TileType.Regular &&
+                            processed.Find(t => t == tiles[currentRow, i]) == null)
+                            processed.Add(tiles[currentRow, i]);
+                        count++;
+                    }
+                    if (!isLegal)
+                        break;  //exit while loop
+                }
+                /*
                 else //Rest of rows just check two tiles
                 {
                     if(copy == null)
@@ -550,16 +546,14 @@ public class Grid : MonoBehaviour
                     }
                     
                 }
-
+                */
                 currentRow += 1;
             }
 
             if (isLegal)
             {
-                //clear all tiles inside the square (Just mark them here),
                 //and also all outside adjacent regular
                 //tiles will be turned in to vestiges (Mark the certain square).
-                processed.AddRange(MarkInsideTiles(r, c, length));
                 toRemove.AddRange(processed);
                 toVestiges.Add(new int[] { r, c, length });
 
@@ -636,6 +630,7 @@ public class Grid : MonoBehaviour
 
     }
 
+    /*
     private List<Tile> MarkInsideTiles(int row, int col, int length)
     {
         List<Tile> inside = new List<Tile>();
@@ -644,12 +639,21 @@ public class Grid : MonoBehaviour
         {
             for (int c = col + 1; c < col + length - 1; c++)
             {
+                if (!tiles[r, c].GetIsOccupied())
+                {
+                    inside.Clear();
+                    return inside;
+                }
+                                
                 if (tiles[r, c].GetIsOccupied() && inside.Find(t => t == tiles[r, c]) == null)
                     inside.Add(tiles[r, c]);
             }
         }
+
+
         return inside;
     }
+    */
 
     /*
     public void CheckForMatches()
