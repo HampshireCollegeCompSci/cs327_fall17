@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, Yixiang Xu
+﻿// Author(s): Paul Calande, Yixiang Xu, Wm. Josiah Erikson
 
 using System.Collections;
 using System.Collections.Generic;
@@ -29,6 +29,9 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("The Rising Text prefab to instantiate when energy is gained or lost.")]
     GameObject risingTextPrefab;
+    [SerializeField]
+    [Tooltip("Reference to the EnergyMeter instance.")]
+    EnergyMeter energyMeter;
 
     // The highest amount of energy achieved over the course of the game.
     int peakEnergy;
@@ -89,6 +92,8 @@ public class EnergyCounter : MonoBehaviour
         //Keep track of peak energy for Analytics
         if (energy > peakEnergy)
         { peakEnergy = energy; }
+        //Update the energy meter
+        energyMeter.UpdateEnergyMeter();
     }
 
     public int GetPeakEnergy()
@@ -99,5 +104,10 @@ public class EnergyCounter : MonoBehaviour
     public int GetMaxEnergyInMeter()
     {
         return maxEnergyInMeter;
+    }
+
+    public int GetCurrentEnergy()
+    {
+        return energy;
     }
 }
