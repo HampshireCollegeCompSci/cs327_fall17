@@ -284,6 +284,7 @@ MonoBehaviour:
   menu: {fileID: 114348154784065296}
   gameover: {fileID: 0}
   titlemenus: {fileID: 114762235267809560}
+  gameFlow: {fileID: 0}
 --- !u!114 &114348154784065296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -328,7 +329,7 @@ MonoBehaviour:
   m_Value: -1
   m_Options:
     m_Options:
-    - m_Text: Reset
+    - m_Text: End Game
       m_Image: {fileID: 0}
     - m_Text: MainMenu
       m_Image: {fileID: 0}
