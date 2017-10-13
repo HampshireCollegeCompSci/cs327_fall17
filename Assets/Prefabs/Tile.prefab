@@ -69,13 +69,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 114459027929769306}
   spriteUnoccupied: {fileID: 21300000, guid: 9c849b6698515364aa53275388642d96, type: 3}
-  spriteRegular: {fileID: 21300000, guid: 6ec0cfd59f8d4ab45a95fb3c27791631, type: 3}
-  spriteVestige: {fileID: 21300000, guid: 3028d523bf6d69a45bece30fa0e47d01, type: 3}
+  spriteVestige: {fileID: 21300000, guid: 7a74cb399d2417544b01bf6af861194c, type: 3}
   fadingTilePrefab: {fileID: 224265687730502198, guid: 54107ad6df97249d5aa77755958c042c,
     type: 2}
-  Tile_Regular: {fileID: 21300000, guid: 6ec0cfd59f8d4ab45a95fb3c27791631, type: 3}
-  Tile_Normal2: {fileID: 21300000, guid: 600607a8eee8f5f4d966e246e5816a06, type: 3}
-  Tile_Normal3: {fileID: 21300000, guid: e14ea0700e0e27241ada6b65b0e634fe, type: 3}
+  tiles:
+  - {fileID: 21300000, guid: 600607a8eee8f5f4d966e246e5816a06, type: 3}
+  - {fileID: 21300000, guid: e14ea0700e0e27241ada6b65b0e634fe, type: 3}
+  - {fileID: 21300000, guid: 6ec0cfd59f8d4ab45a95fb3c27791631, type: 3}
 --- !u!222 &222653728882889582
 CanvasRenderer:
   m_ObjectHideFlags: 1
