@@ -346,7 +346,7 @@ public class Grid : MonoBehaviour
                 for (int c = 0; c < width; c++)
                 {
                     // Proceed only if the Tile is regular tile.
-                    if (tiles[r, c].GetTileType() == TileData.TileType.Regular)
+                    if (copy[r, c] == TileData.TileType.Regular)
                     {
                         // Check for squares from length 3 upwards.
                         for (int length = 3; length <= biggestSquareSize; length++)
@@ -504,7 +504,7 @@ public class Grid : MonoBehaviour
                             }
                             //Check to avoid repeated tiles, and 
                             //include only tiles in the original tiles array
-                            if (tiles[currentRow, i].GetTileType() == TileData.TileType.Regular &&
+                            if (copy[currentRow, i] == TileData.TileType.Regular &&
                                 processed.Find(t => t == tiles[currentRow, i]) == null)
                                 processed.Add(tiles[currentRow, i]);
                             count++;
