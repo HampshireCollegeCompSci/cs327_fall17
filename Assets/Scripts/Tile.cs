@@ -99,8 +99,6 @@ public class Tile : MonoBehaviour
 			case TileData.TileType.Regular:
 			int randomInt = Random.Range (0, tiles.Length);				
 				spriteRenderer.sprite = tiles[randomInt];
-				spriteRenderer.sprite = tiles[randomInt];
-				spriteRenderer.sprite = tiles[randomInt];
                 break;
                 /*
             case TileData.TileType.Vacant:
