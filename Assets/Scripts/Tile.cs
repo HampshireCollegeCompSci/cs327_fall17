@@ -33,15 +33,6 @@ public class Tile : MonoBehaviour
 	[Tooltip("The sprite of regular Tile.")]
 	Sprite[] Tiles = new Sprite[3];
 
-
-	/**
-	[SerializeField]
-	[Tooltip("The sprite of Normal 2 Tile.")]
-	Sprite Tile_Normal2;
-	[SerializeField]
-	[Tooltip("The sprite of Normal 3 Tile.")]
-	Sprite Tile_Normal3;
-	*/
     public bool GetIsOccupied()
     {
         return data.GetIsOccupied();
@@ -112,17 +103,16 @@ public class Tile : MonoBehaviour
 				int randomInt = Random.Range (0, 2);				
 				if(randomInt == 0) 
 				{
-				//spriteRenderer.sprite = Tile_Regular;
+				spriteRenderer.sprite = Tiles[0];
 				}
 				if(randomInt == 1)
 				{
-				//spriteRenderer.sprite = Tile_Normal2;
+				spriteRenderer.sprite = Tiles[2];
 				}
 				if(randomInt == 2)
 				{
-				//spriteRenderer.sprite = Tile_Normal3;
+				spriteRenderer.sprite = Tiles[3];
 				}
-				//spriteRenderer.sprite = spriteRegular;
                 break;
                 /*
             case TileData.TileType.Vacant:
