@@ -1,10 +1,18 @@
 fileFormatVersion: 2
 guid: 1dc4186fe207a2349851369da7eb0757
-timeCreated: 1505475243
+timeCreated: 1507317827
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - spriteRenderer: {instanceID: 0}
+  - spriteUnoccupied: {instanceID: 0}
+  - spriteRegular: {instanceID: 0}
+  - spriteVestige: {instanceID: 0}
+  - fadingTilePrefab: {instanceID: 0}
+  - Tile_Regular: {fileID: 21300000, guid: 6ec0cfd59f8d4ab45a95fb3c27791631, type: 3}
+  - Tile_Normal2: {fileID: 21300000, guid: 600607a8eee8f5f4d966e246e5816a06, type: 3}
+  - Tile_Normal3: {fileID: 21300000, guid: e14ea0700e0e27241ada6b65b0e634fe, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
