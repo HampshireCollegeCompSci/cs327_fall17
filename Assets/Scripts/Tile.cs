@@ -21,9 +21,6 @@ public class Tile : MonoBehaviour
     [Tooltip("The sprite to use for Unoccupied state.")]
     Sprite spriteUnoccupied;
     [SerializeField]
-    [Tooltip("The sprite to use for Regular state.")]
-   	Sprite spriteRegular;
-    [SerializeField]
     [Tooltip("The sprite to use for Vestige state.")]
     Sprite spriteVestige;
     [SerializeField]
@@ -31,7 +28,7 @@ public class Tile : MonoBehaviour
     Transform fadingTilePrefab;
 	[SerializeField]
 	[Tooltip("The sprite of regular Tile.")]
-	Sprite[] Tiles = new Sprite[3];
+	Sprite[] tiles = new Sprite[3];
 
     public bool GetIsOccupied()
     {
@@ -103,15 +100,15 @@ public class Tile : MonoBehaviour
 				int randomInt = Random.Range (0, 3);				
 				if(randomInt == 0) 
 				{
-				spriteRenderer.sprite = Tiles[0];
+				spriteRenderer.sprite = tiles[0];
 				}
 				if(randomInt == 1)
 				{
-				spriteRenderer.sprite = Tiles[2];
+				spriteRenderer.sprite = tiles[2];
 				}
 				if(randomInt == 2)
 				{
-				spriteRenderer.sprite = Tiles[3];
+				spriteRenderer.sprite = tiles[3];
 				}
                 break;
                 /*
