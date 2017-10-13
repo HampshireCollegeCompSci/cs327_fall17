@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande, Wm. Josiah Erikson
+// Author(s): Paul Calande, Wm. Josiah Erikson
 
 using System.Collections;
 using System.Collections.Generic;
@@ -68,6 +68,7 @@ public class Space : MonoBehaviour
 	//This method should be called when a DraggableBlock is dragged onto this Space.
 	public void PlaceBlock(DraggableBlock block)
 	{
+        AudioController.Instance.PlaceTile();
         grid.WriteBlock(row, col, block.GetBlock()); //We're placing this block. Apparently it's the external responsibility to make sure this will work
         grid.PlacedDraggableBlock(); // Notify the Grid that we just placed a DraggableBlock.
         Destroy(block.gameObject); //And now we're done with this GameObject - it's on the grid
@@ -80,6 +81,9 @@ public class Space : MonoBehaviour
 
     private void SnapLocation_Highlight(GameObject snapper, bool on)
     {
-        grid.SetHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), on);
+        if (grid.SetHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), on))
+            grid.AnticipatedHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), true);
+        else
+            grid.AnticipatedHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), false);
     }
 }

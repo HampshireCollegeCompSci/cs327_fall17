@@ -1,5 +1,6 @@
-﻿// Author(s): Joel Esquilin, Paul Calande
+﻿// Author(s): Joel Esquilin, Paul Calande, Wm. Josiah Erikson
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class UIGameOver : MonoBehaviour
     GameObject[] toBeEnabled;
     [SerializeField]
     [Tooltip("Reference to the Text object that will explain why the player lost.")]
-    Text textGameOverReason; 
+    Text textGameOverReason;
 
     private void Start()
     {
@@ -41,6 +42,7 @@ public class UIGameOver : MonoBehaviour
 
     public void Reset()
     {
+        
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
@@ -63,6 +65,9 @@ public class UIGameOver : MonoBehaviour
                 break;
             case GameFlow.GameOverCause.NoMoreEnergy:
                 reason = "Out of energy!";
+                break;
+            case GameFlow.GameOverCause.Reset:
+                reason = "Manual reset!";
                 break;
             default:
                 reason = "Unknown reason. Please inform the programming team.";

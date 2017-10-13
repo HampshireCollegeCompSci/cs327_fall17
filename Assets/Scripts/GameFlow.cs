@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande
+﻿// Author(s): Paul Calande, Wm. Josiah Erikson
 
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +10,8 @@ public class GameFlow : MonoBehaviour
     {
         NoRemainingSpaces,
         QueueOverflow,
-        NoMoreEnergy
+        NoMoreEnergy,
+        Reset
     }
 
     public delegate void GameLostHandler(GameOverCause cause);

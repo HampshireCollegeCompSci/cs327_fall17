@@ -26,4 +26,8 @@ public class UITitleMenus : MonoBehaviour
 	{
 		SceneManager.LoadScene ("MainScene");
 	}
+    public void GoToCheatPage()
+    {
+        SceneManager.LoadScene("CheatPage");
+    }
 }
