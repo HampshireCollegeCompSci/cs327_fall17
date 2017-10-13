@@ -69,7 +69,7 @@ public class Space : MonoBehaviour
 	public void PlaceBlock(DraggableBlock block)
 	{
         AudioController.Instance.PlaceTile();
-        grid.WriteBlock(row, col, block.GetBlock()); //We're placing this block. Apparently it's the external responsibility to make sure this will work
+        grid.WriteBlock(row, col, block); //We're placing this block. Apparently it's the external responsibility to make sure this will work
         grid.PlacedDraggableBlock(); // Notify the Grid that we just placed a DraggableBlock.
         Destroy(block.gameObject); //And now we're done with this GameObject - it's on the grid
     }
@@ -81,9 +81,14 @@ public class Space : MonoBehaviour
 
     private void SnapLocation_Highlight(GameObject snapper, bool on)
     {
-        if (grid.SetHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), on))
-            grid.AnticipatedHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), true);
+        DraggableBlock draggable = snapper.GetComponent<DraggableBlock>();
+        if (grid.SetHighlight(row, col, draggable, on))
+        {
+            grid.AnticipatedHighlight(row, col, draggable, true);
+        }
         else
-            grid.AnticipatedHighlight(row, col, snapper.GetComponent<DraggableBlock>().GetBlock(), false);
+        {
+            grid.AnticipatedHighlight(row, col, draggable, false);
+        }
     }
 }

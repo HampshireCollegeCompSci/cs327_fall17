@@ -92,6 +92,10 @@ public class Grid : MonoBehaviour
 
         foreach (Tile t in tiles)
         {
+            // Make all of the Tiles clear.
+            t.Clear();
+            t.SetSprite(TileData.TileType.Unoccupied);
+            // Subscribe to events.
             t.Changed += Tile_Changed;
         }
 
@@ -269,7 +273,9 @@ public class Grid : MonoBehaviour
             {
                 if (block.GetIsOccupied(r, c))
                 {
-                    tiles[row + r, col + c].Fill(block.GetTileType(r, c));
+                    Tile theTile = tiles[row + r, col + c];
+                    theTile.Fill(block.GetTileType(r, c));
+
                     //Note x is col and y is row
                     //coords.Add(new Coordinate(x + c, y + r));
                 }
@@ -283,8 +289,34 @@ public class Grid : MonoBehaviour
 
         return gb;
     }
+    public GridBlock WriteBlock(int row, int col, DraggableBlock block)
+    {
+        //List<Coordinate> coords = new List<Coordinate>();
+        for (int c = 0; c < block.GetWidth(); c++)
+        {
+            for (int r = 0; r < block.GetHeight(); r++)
+            {
+                if (block.GetIsOccupied(r, c))
+                {
+                    Tile theTile = tiles[row + r, col + c];
+                    theTile.Fill(block.GetTileType(r, c));
+                    theTile.SetSpriteAbsolute(block.GetSprite(r, c));
 
-    public bool SetHighlight(int row, int col, Block block, bool on)
+                    //Note x is col and y is row
+                    //coords.Add(new Coordinate(x + c, y + r));
+                }
+            }
+        }
+        GridBlock gb = new GridBlock(row, col, block.GetBlock(), this);
+        gridBlocks.Add(gb);
+
+        //call LShapeCheck after each insertion
+        //LShapeCheck(coords);
+
+        return gb;
+    }
+
+    public bool SetHighlight(int row, int col, DraggableBlock block, bool on)
     {
         if (!on)
         {
@@ -292,9 +324,10 @@ public class Grid : MonoBehaviour
             {
                 for (int r = 0; r < GetHeight(); r++)
                 {
-                    //Unhilight all tiles
+                    //Unhighlight all tiles
                     tiles[r, c].SetNormal();
-                    tiles[r, c].SetSprite(tiles[r, c].GetTileType());
+                    //tiles[r, c].SetSprite(tiles[r, c].GetTileType());
+                    tiles[r, c].SetSpriteToTrueSprite();
                 }
             }
         }
@@ -308,7 +341,7 @@ public class Grid : MonoBehaviour
                     {
                         //If can place here then set highlight
                         tiles[row + r, col + c].SetHighlight();
-                        tiles[row + r, col + c].SetSprite(block.GetTileType(r, c));
+                        tiles[row + r, col + c].SetSprite(block.GetSprite(r, c));
                     }
                 }
             }
@@ -317,7 +350,7 @@ public class Grid : MonoBehaviour
         return on;
     }
 
-    public void AnticipatedHighlight(int row, int col, Block newBlock, bool on)
+    public void AnticipatedHighlight(int row, int col, DraggableBlock newBlock, bool on)
     {
         if (on)
         {
@@ -381,7 +414,8 @@ public class Grid : MonoBehaviour
                 {
                     //Unhilight all tiles
                     tiles[r, c].SetNormal();
-                    tiles[r, c].SetSprite(tiles[r, c].GetTileType());
+                    //tiles[r, c].SetSprite(tiles[r, c].GetTileType());
+                    tiles[r, c].SetSpriteToTrueSprite();
                 }
             }
         }

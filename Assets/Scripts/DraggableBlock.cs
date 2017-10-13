@@ -19,8 +19,10 @@ public class DraggableBlock : MonoBehaviour
     [Tooltip("Reference to the DraggableObject component to interface with.")]
     DraggableObject draggableObject;
 
+    // The TileData forming the DraggableBlock.
     Block block;
 
+    // The underlying array of Tiles forming the DraggableBlock.
     Tile[,] tiles;
 
     //Copies the data of a Block into this DraggableBlock’s contained Block
@@ -134,5 +136,30 @@ public class DraggableBlock : MonoBehaviour
     public void SetDefaultPosition(Vector2 pos)
     {
         draggableObject.SetDefaultPosition(pos);
+    }
+
+    public int GetWidth()
+    {
+        return block.GetWidth();
+    }
+
+    public int GetHeight()
+    {
+        return block.GetHeight();
+    }
+
+    public bool GetIsOccupied(int row, int col)
+    {
+        return block.GetIsOccupied(row, col);
+    }
+
+    public Sprite GetSprite(int row, int col)
+    {
+        return tiles[row, col].GetSprite();
+    }
+
+    public TileData.TileType GetTileType(int row, int col)
+    {
+        return tiles[row, col].GetTileType();
     }
 }
