@@ -20,6 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/HowToPlay.unity
     guid: 198995101d2bde348a1db0d5d94cbb5b
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Development/paul-devline.unity
     guid: 8633dde381199a4489cdb433a25cf0e1
