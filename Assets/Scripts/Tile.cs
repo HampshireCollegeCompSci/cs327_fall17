@@ -100,7 +100,7 @@ public class Tile : MonoBehaviour
                 spriteRenderer.sprite = spriteUnoccupied;
                 break;
 			case TileData.TileType.Regular:
-				int randomInt = Random.Range (0, 2);				
+				int randomInt = Random.Range (0, 3);				
 				if(randomInt == 0) 
 				{
 				spriteRenderer.sprite = Tiles[0];
