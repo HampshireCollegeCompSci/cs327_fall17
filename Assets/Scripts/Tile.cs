@@ -87,9 +87,10 @@ public class Tile : MonoBehaviour
         Transform thisFadingTilePrefab = Instantiate(fadingTilePrefab, grid.transform.position, grid.transform.rotation);
         thisFadingTilePrefab.SetParent(grid, false);
         thisFadingTilePrefab.transform.localPosition = gameObject.transform.localPosition;
+        //Copy the sprite to the instantiated prefab so that it fades out the same sprite that was cleared
+        thisFadingTilePrefab.GetComponent<Image>().sprite = trueSprite;
         //Get the fade component
         TileFade tileToFade = thisFadingTilePrefab.GetComponent<TileFade>();
-        //Image imageToFade = thisFadingTilePrefab.GetComponent<Image>();
         tileToFade.Fade(); //And fade the image out, which will destroy it as well
         gridObject.GetComponent<ClearedSquaresCounter>().ClearedSquare(); //increment the total number of cleared squares, for analytics
     }
