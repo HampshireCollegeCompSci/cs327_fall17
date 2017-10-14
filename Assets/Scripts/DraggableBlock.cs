@@ -18,6 +18,12 @@ public class DraggableBlock : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the DraggableObject component to interface with.")]
     DraggableObject draggableObject;
+    [SerializeField]
+    [Tooltip("The size of the draggable block while being dragged.")]
+    Vector3 draggingScale;
+    [SerializeField]
+    [Tooltip("The size of the draggable block while not being dragged.")]
+    Vector3 nonDraggingScale;
 
     // The TileData forming the DraggableBlock.
     Block block;
@@ -30,6 +36,13 @@ public class DraggableBlock : MonoBehaviour
     {
         grid = newGrid;
         draggableObject.SetCanvasTransform(canvas);
+
+        nonDraggingScale = new Vector3(0.75f, 0.75f, 0.75f);
+        draggingScale = new Vector3(1.0f, 1.0f, 1.0f);
+        draggableObject.SetDraggingScale(draggingScale);
+        draggableObject.SetNonDraggingScale(nonDraggingScale);
+
+        transform.localScale = nonDraggingScale;
 
         // Copy the copiedBlock data into this DraggableBlock's block.
         block = new Block(copiedBlock);
