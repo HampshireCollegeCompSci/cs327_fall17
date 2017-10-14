@@ -35,12 +35,12 @@ public class DraggableBlock : MonoBehaviour
         grid = newGrid;
         draggableObject.SetCanvasTransform(canvas);
 
-        draggingScale = new Vector3(0.75f, 0.75f, 0.75f);
-        nonDraggingScale = new Vector3(1.0f, 1.0f, 1.0f);
+        nonDraggingScale = new Vector3(0.75f, 0.75f, 0.75f);
+        draggingScale = new Vector3(1.0f, 1.0f, 1.0f);
         draggableObject.SetDraggingScale(draggingScale);
         draggableObject.SetNonDraggingScale(nonDraggingScale);
 
-        transform.localScale = draggingScale;
+        transform.localScale = nonDraggingScale;
 
         // Copy the copiedBlock data into this DraggableBlock's block.
         block = new Block(copiedBlock);

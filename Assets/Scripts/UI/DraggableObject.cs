@@ -52,7 +52,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out _pointerOffset);
 
             //Return the draggable block to normal size once it is being dragged
-            transform.localScale = nonDraggingScale;
+            transform.localScale = draggingScale;
 
             if (BeginDragEvent != null)
             {
@@ -171,7 +171,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             }
             else
             {
-                transform.localScale = draggingScale; //Make the block samller
+                transform.localScale = nonDraggingScale; //Make the block samller
                 snapToAreas[0].Hover(gameObject, false); // Turn off highlights
                 transform.localPosition = defaultPosition;
             }
