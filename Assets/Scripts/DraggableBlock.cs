@@ -19,8 +19,11 @@ public class DraggableBlock : MonoBehaviour
     [Tooltip("Reference to the DraggableObject component to interface with.")]
     DraggableObject draggableObject;
     [SerializeField]
-    [Tooltip("The size of the draggable block.")]
-    Vector3 size;
+    [Tooltip("The size of the draggable block while being dragged.")]
+    Vector3 draggingScale;
+    [SerializeField]
+    [Tooltip("The size of the draggable block while not being dragged.")]
+    Vector3 nonDraggingScale;
 
     Block block;
 
@@ -32,8 +35,12 @@ public class DraggableBlock : MonoBehaviour
         grid = newGrid;
         draggableObject.SetCanvasTransform(canvas);
 
-        size = new Vector3(0.75f, 0.75f, 0.75f);
-        transform.localScale = size;
+        draggingScale = new Vector3(0.75f, 0.75f, 0.75f);
+        nonDraggingScale = new Vector3(1.0f, 1.0f, 1.0f);
+        draggableObject.SetDraggingScale(draggingScale);
+        draggableObject.SetNonDraggingScale(nonDraggingScale);
+
+        transform.localScale = draggingScale;
 
         // Copy the copiedBlock data into this DraggableBlock's block.
         block = new Block(copiedBlock);
@@ -60,7 +67,7 @@ public class DraggableBlock : MonoBehaviour
 
     public void AllowDragging(bool draggable)
     {
-        draggableObject.SetIsDraggable(draggable, size);
+        draggableObject.SetIsDraggable(draggable);
     }
 
     //Retrieve a List of Spaces that the DraggableBlock can fit into and store that List as draggableObject’s 
