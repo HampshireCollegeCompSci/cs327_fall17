@@ -25,6 +25,9 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     [SerializeField]
     [Tooltip("The position to return to if dragging ceases and no SnapLocation is snapped to.")]
     protected Vector2 defaultPosition;
+    [SerializeField]
+    [Tooltip("The size of the draggable block.")]
+    Vector3 size;
 
     protected static Vector2 piecePlacementOffset = new Vector2(60, 60);
 
@@ -44,6 +47,9 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         {
             isDragging = true;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out _pointerOffset);
+
+            //Return the draggable block to normal size once it is being dragged
+            transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
             if (BeginDragEvent != null)
             {
@@ -162,6 +168,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             }
             else
             {
+                transform.localScale = size; //Make the block samller
                 snapToAreas[0].Hover(gameObject, false); // Turn off highlights
                 transform.localPosition = defaultPosition;
             }
@@ -184,9 +191,10 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         snapToAreas = snapLocations;
     }
 
-    public void SetIsDraggable(bool draggable)
+    public void SetIsDraggable(bool draggable, Vector3 scale)
     {
         isDraggable = draggable;
+        size = scale;
     }
 
     public void SetCanvasTransform(RectTransform newCanvasTransform)
