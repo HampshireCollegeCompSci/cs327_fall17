@@ -52,6 +52,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the RectTransform component of this Grid.")]
     RectTransform rectTransform;
+    [SerializeField]
+    [Tooltip("Reference to energy gain animator.")]
+    Animator energyGainController;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -441,6 +444,7 @@ public class Grid : MonoBehaviour
             }
 
             energyCounter.PopUp("+", toRemove.Count);
+            energyGainController.SetBool("active", true);
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
