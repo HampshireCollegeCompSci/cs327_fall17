@@ -11,6 +11,9 @@ public class DropDownMenuController : MonoBehaviour {
     public Dropdown menu;
     public UIGameOver gameover;
     public UITitleMenus titlemenus;
+    [SerializeField]
+    [Tooltip("Reference to the GameFlow Instance.")]
+    GameFlow gameFlow;
 
     UnityAction<int> onValue;
 
@@ -30,7 +33,7 @@ public class DropDownMenuController : MonoBehaviour {
     {
         if (menu.value == 0)
         {
-            gameover.Reset();
+            gameFlow.GameOver(GameFlow.GameOverCause.Reset);
         }
         else if (menu.value == 1)
         {

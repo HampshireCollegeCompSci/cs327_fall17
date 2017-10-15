@@ -70,6 +70,11 @@ public class GridBlock
         InitializeTile(row, col, newTile);
     }
 
+    public Sprite GetSprite(int row, int col)
+    {
+        return tiles[row, col].GetSprite();
+    }
+
     public Tile[,] GetTiles()
     {
         return tiles;

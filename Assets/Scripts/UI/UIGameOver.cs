@@ -1,4 +1,4 @@
-﻿// Author(s): Joel Esquilin, Paul Calande
+﻿// Author(s): Joel Esquilin, Paul Calande, Wm. Josiah Erikson
 
 using System;
 using System.Collections;
@@ -42,6 +42,7 @@ public class UIGameOver : MonoBehaviour
 
     public void Reset()
     {
+        
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
@@ -64,6 +65,9 @@ public class UIGameOver : MonoBehaviour
                 break;
             case GameFlow.GameOverCause.NoMoreEnergy:
                 reason = "Out of energy!";
+                break;
+            case GameFlow.GameOverCause.Reset:
+                reason = "Manual reset!";
                 break;
             default:
                 reason = "Unknown reason. Please inform the programming team.";
