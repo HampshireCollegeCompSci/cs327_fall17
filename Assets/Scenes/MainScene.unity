@@ -953,6 +953,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 858530961}
+--- !u!95 &974732715 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95563988984326064, guid: 539940dbc777b7d44ae9cdc731762a43,
+    type: 2}
+  m_PrefabInternal: {fileID: 670465509}
 --- !u!1001 &1069704020
 Prefab:
   m_ObjectHideFlags: 0
@@ -1074,6 +1079,11 @@ Prefab:
       propertyPath: m_StaticEditorFlags
       value: 4294967295
       objectReference: {fileID: 0}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: energyGainController
+      value: 
+      objectReference: {fileID: 974732715}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0
@@ -1668,6 +1678,11 @@ Prefab:
       propertyPath: ourEnergyCounter
       value: 
       objectReference: {fileID: 1612729227}
+    - target: {fileID: 224565880797182934, guid: 5770730666c9c411c9ed1aea87e1a9f6,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5770730666c9c411c9ed1aea87e1a9f6, type: 2}
   m_IsPrefabParent: 0
