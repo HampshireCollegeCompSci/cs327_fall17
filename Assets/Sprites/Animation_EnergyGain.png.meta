@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: cde168728aa752c438fcf0e94e0a6cb8
-timeCreated: 1507992889
+timeCreated: 1508166846
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -119,7 +119,7 @@ TextureImporter:
         x: 783
         y: 5981
         width: 213
-        height: 215
+        height: 216
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -285,9 +285,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 4561
-        y: 2507
-        width: 39
-        height: 40
+        y: 2506
+        width: 40
+        height: 41
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,9 +313,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2258
-        y: 1638
+        y: 1637
         width: 866
-        height: 787
+        height: 788
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -357,7 +357,7 @@ TextureImporter:
         x: 4530
         y: 1443
         width: 49
-        height: 57
+        height: 58
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -384,7 +384,7 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1692
+        width: 1693
         height: 1327
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -410,9 +410,9 @@ TextureImporter:
       name: Animation_EnergyGain_21
       rect:
         serializedVersion: 2
-        x: 1798
+        x: 1797
         y: 0
-        width: 3604
+        width: 3605
         height: 1353
       alignment: 0
       pivot: {x: 0, y: 0}
