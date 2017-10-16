@@ -125,7 +125,6 @@ public class Grid : MonoBehaviour
 
         //Instantiate GridBlocks
         gridBlocks = new List<GridBlock>();
-
     }
 
     public int GetWidth()
@@ -408,7 +407,6 @@ public class Grid : MonoBehaviour
                 {
                     t.SetAnticipatedHighlight(TileData.TileType.Regular);
                 }
-
             }
         }
         else
@@ -541,13 +539,10 @@ public class Grid : MonoBehaviour
                         }
                         //Check to avoid repeated tiles, and 
                         //include only tiles in the original tiles array
-                        if (copy[currentRow, i] != TileData.TileType.Unoccupied)
-                        {
-                            if (processed.Find(t => t == tiles[currentRow, i]) == null)
-                                processed.Add(tiles[currentRow, i]);
-                        }
+                        if (copy[currentRow, i] != TileData.TileType.Unoccupied &&
+                            processed.Find(t => t == tiles[currentRow, i]) == null)
+                            processed.Add(tiles[currentRow, i]);
                         count++;
-
                     }
                     if (!isLegal)
                         break;  //exit while loop
