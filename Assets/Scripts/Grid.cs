@@ -508,7 +508,7 @@ public class Grid : MonoBehaviour
             int currentRow = r;
             bool isLegal = true;
             //The max number of tiles to be checked
-            while (count < length * length - (length - 2) * (length - 2) - 1)
+            while (count < length * length)
             {
                 if (copy == null)
                 {
