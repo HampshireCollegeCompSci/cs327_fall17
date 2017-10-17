@@ -23,8 +23,11 @@ public class Grid : MonoBehaviour
     [Tooltip("The base energy decay per turn. Populated by JSON.")]
     int baseEnergyDecayRate;
     [SerializeField]
-    [Tooltip("The additional energy decayed per vestige. Populated by JSON.")]
-    int decayRatePerVestige;
+    [Tooltip("The list of additional energy decayed from vestige of each level. Populated by JSON.")]
+    JSONArray decayRates;
+    [SerializeField]
+    [Tooltip("The maximum level a vestige can be. Populated by JSON.")]
+    int vestigeMaxLevel;
     [SerializeField]
     [Tooltip("The Tile prefab to instantiate.")]
     GameObject prefabTile;
@@ -79,7 +82,8 @@ public class Grid : MonoBehaviour
         width = json["grid width"].AsInt;
         height = json["grid height"].AsInt;
         baseEnergyDecayRate = json["base energy decay rate"].AsInt;
-        decayRatePerVestige = json["decay rate per vestige"].AsInt;
+        decayRates = json["vestige decay rates"].AsArray;
+        vestigeMaxLevel = json["vestige max level"].AsInt;
         energyPerCell = json["energy per cell cleared"];
     }
 
@@ -371,7 +375,7 @@ public class Grid : MonoBehaviour
                 for (int r = 0; r < newBlock.GetHeight(); r++)
                     if (newBlock.GetIsOccupied(r, c))
                         copy[row + r, col + c] = newBlock.GetTileType(r, c);
-
+            
             List<Tile> anticipatedSquareTiles = new List<Tile>();
             List<int[]> anticipatedVestiges = new List<int[]>();
 
@@ -396,10 +400,11 @@ public class Grid : MonoBehaviour
 
             if (anticipatedSquareTiles.Count != 0)
             {
+                List<Tile> toVestiges = new List<Tile>(); //No effect. Just match parameter.
                 //Highligh anticipated vestiges
                 foreach (int[] s in anticipatedVestiges)
                 {
-                    FormVestiges(s[0], s[1], s[2], anticipatedSquareTiles, true);
+                    FormVestiges(s[0], s[1], s[2], anticipatedSquareTiles, copy, ref toVestiges);
                 }
 
                 //Highlight all tiles that will form squares
@@ -415,9 +420,8 @@ public class Grid : MonoBehaviour
             {
                 for (int r = 0; r < GetHeight(); r++)
                 {
-                    //Unhilight all tiles
+                    //Unhighlight all tiles
                     tiles[r, c].SetNormal();
-                    //tiles[r, c].SetSprite(tiles[r, c].GetTileType());
                     tiles[r, c].SetSpriteToTrueSprite();
                 }
             }
@@ -467,9 +471,23 @@ public class Grid : MonoBehaviour
         {
             squareFormed = true;
             //Turn vestiges when isPlaced is true
+            List<Tile> newVestiges = new List<Tile>();
             foreach (int[] s in toVestiges)
             {
-                FormVestiges(s[0], s[1], s[2], toRemove, false);
+                FormVestiges(s[0], s[1], s[2], toRemove, null, ref newVestiges);
+            }
+            foreach (Tile v in newVestiges)
+            {
+                if (v.GetTileType() == TileData.TileType.Regular)
+                {
+                    v.Fill(TileData.TileType.Vestige);
+                    v.SetVestigeLevel(1);
+                }
+                else if (v.GetTileType() == TileData.TileType.Vestige)
+                {
+                    if (v.GetVestigeLevel() < vestigeMaxLevel)
+                        v.SetVestigeLevel(v.GetVestigeLevel() + 1);
+                }
             }
 
             //Remove all tiles that form squares if isPlaced is true
@@ -508,7 +526,7 @@ public class Grid : MonoBehaviour
             int currentRow = r;
             bool isLegal = true;
             //The max number of tiles to be checked
-            while (count < length * length - (length - 2) * (length - 2) - 1)
+            while (count < length * length)
             {
                 if (copy == null)
                 {
@@ -618,7 +636,7 @@ public class Grid : MonoBehaviour
         }
     }
 
-    private void FormVestiges(int row, int col, int length, List<Tile> toRemove, bool isHighlighting)
+    private void FormVestiges(int row, int col, int length, List<Tile> toRemove, TileData.TileType[,] copy, ref List<Tile> newVestiges)
     {
         //Turn all adjacent outside regular tiles into vestiges.
         //for the specified square.
@@ -626,47 +644,79 @@ public class Grid : MonoBehaviour
         //Left edge
         if (col > 0)
             for (int r = row; r < row + length; r++)
-                if (toRemove.Find(t => t == tiles[r, col - 1]) == null && tiles[r, col - 1].GetTileType() == TileData.TileType.Regular)
+            {
+                if(copy == null)
                 {
-                    if (isHighlighting)
-                        tiles[r, col - 1].SetAnticipatedHighlight(TileData.TileType.Vestige);
-                    else
-                        tiles[r, col - 1].Fill(TileData.TileType.Vestige);
+                    if (toRemove.Find(t => t == tiles[r, col - 1]) == null)
+                    {
+                        if (newVestiges.Find(v => v == tiles[r, col - 1]) == null)
+                            newVestiges.Add(tiles[r, col - 1]);
+                    }                     
                 }
+                else
+                {
+                    if (toRemove.Find(t => t == tiles[r, col - 1]) == null && copy[r, col - 1] != TileData.TileType.Unoccupied)
+                        tiles[r, col - 1].SetAnticipatedHighlight(TileData.TileType.Vestige);
+                }                
+            }        
                     
         //Right edge
         if (col + length - 1 < width - 1)
             for (int r = row; r < row + length; r++)
-                if (toRemove.Find(t => t == tiles[r, col + length]) == null && tiles[r, col + length].GetTileType() == TileData.TileType.Regular)
+            {
+                if (copy == null)
                 {
-                    if (isHighlighting)
-                        tiles[r, col + length].SetAnticipatedHighlight(TileData.TileType.Vestige);
-                    else
-                        tiles[r, col + length].Fill(TileData.TileType.Vestige);
+                    if (toRemove.Find(t => t == tiles[r, col + length]) == null)
+                    {
+                        if (newVestiges.Find(v => v == tiles[r, col + length]) == null)
+                            newVestiges.Add(tiles[r, col + length]);
+                    }
                 }
+                else
+                {
+                    if (toRemove.Find(t => t == tiles[r, col + length]) == null && copy[r, col + length] != TileData.TileType.Unoccupied)
+                        tiles[r, col + length].SetAnticipatedHighlight(TileData.TileType.Vestige);
+                }
+            }
+
         //Top edge
         if (row > 0)
             for (int c = col; c < col + length; c++)
-                if (toRemove.Find(t => t == tiles[row - 1, c]) == null && tiles[row - 1, c].GetTileType() == TileData.TileType.Regular)
+            {
+                if (copy == null)
                 {
-                    if(isHighlighting)
-                        tiles[row - 1, c].SetAnticipatedHighlight(TileData.TileType.Vestige);
-                    else
-                        tiles[row - 1, c].Fill(TileData.TileType.Vestige);
+                    if (toRemove.Find(t => t == tiles[row - 1, c]) == null)
+                    {
+                        if (newVestiges.Find(v => v == tiles[row - 1, c]) == null)
+                            newVestiges.Add(tiles[row - 1, c]);
+                    }
                 }
+                else
+                {
+                    if (toRemove.Find(t => t == tiles[row - 1, c]) == null && copy[row - 1, c] != TileData.TileType.Unoccupied)
+                        tiles[row - 1, c].SetAnticipatedHighlight(TileData.TileType.Vestige);
+                }
+            }
 
         //Bottom edge
         if (row + length - 1 < height - 1)
             for (int c = col; c < col + length; c++)
-                if (toRemove.Find(t => t == tiles[row + length, c]) == null && tiles[row + length, c].GetTileType() == TileData.TileType.Regular)
-                {
-                    if (isHighlighting)
-                        tiles[row + length, c].SetAnticipatedHighlight(TileData.TileType.Vestige);
-                    else
-                        tiles[row + length, c].Fill(TileData.TileType.Vestige);
+            {
+                if (copy == null)
+                {                  
+                    if (toRemove.Find(t => t == tiles[row + length, c]) == null)
+                    {
+                        if (newVestiges.Find(v => v == tiles[row + length, c]) == null)
+                            newVestiges.Add(tiles[row + length, c]);
+                    }
                 }
-                    
-
+                else
+                {
+                    if (toRemove.Find(t => t == tiles[row + length, c]) == null && copy[row + length, c] != TileData.TileType.Unoccupied)
+                        tiles[row + length, c].SetAnticipatedHighlight(TileData.TileType.Vestige);
+                }
+            }
+     
     }
 
     /*
@@ -1141,7 +1191,13 @@ public class Grid : MonoBehaviour
         {
             int vestigeNum = CountVestiges();
             vestigeCounter.SetCurrentVestiges(vestigeNum); //Set the current number of vestiges for analytics
-            int energyChange = baseEnergyDecayRate + vestigeNum * decayRatePerVestige;
+            int energyChange = baseEnergyDecayRate;
+            //Calculating total energy drain
+            for (int r = 0; r < height; r++)
+                for (int c = 0; c < width; c++)
+                    if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
+                        energyChange += decayRates[tiles[r, c].GetVestigeLevel() - 1];
+
             energyCounter.RemoveEnergy(energyChange);
             energyCounter.PopUp("-", energyChange);
         }

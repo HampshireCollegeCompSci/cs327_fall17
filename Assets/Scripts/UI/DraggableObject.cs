@@ -32,7 +32,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     [Tooltip("The size of the draggable block while not being dragged.")]
     Vector3 nonDraggingScale;
 
-    protected static Vector2 piecePlacementOffset = new Vector2(60, 60);
+    protected static Vector2 piecePlacementOffset = new Vector2(80, 80);
 
     public Action<DraggableObject> BeginDragEvent;
     public Action<DraggableObject> EndDragEvent;

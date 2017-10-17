@@ -3,8 +3,9 @@
 	"grid height" : 8,
 	"starting energy" : 10,
 	"base energy decay rate" : 1,
-  	"cleared cell fade time": 2.0,
-	"decay rate per vestige" : 1,
+  "cleared cell fade time": 2.0,
+  "vestige max level": 3,
+  "vestige decay rates": [1, 2, 5],
 	"energy per cell cleared" : 1,
 	"max energy in meter" : 60
 }
