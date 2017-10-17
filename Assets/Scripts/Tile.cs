@@ -17,8 +17,8 @@ public class Tile : MonoBehaviour
     [Tooltip("The sprite to use for Unoccupied state.")]
     Sprite spriteUnoccupied;
     [SerializeField]
-    [Tooltip("The sprite to use for Vestige state.")]
-    Sprite spriteVestige;
+    [Tooltip("The sprites to use for Vestige state.")]
+    Sprite[] spriteVestigeList;
     [SerializeField]
     [Tooltip("The fading tile prefab to instantiate.")]
     Transform fadingTilePrefab;
@@ -120,7 +120,7 @@ public class Tile : MonoBehaviour
                 break;
             */
             case TileData.TileType.Vestige:
-                newSprite = spriteVestige;
+                newSprite = spriteVestigeList[0];
                 break;
         }
         spriteRenderer.sprite = newSprite;
@@ -176,5 +176,19 @@ public class Tile : MonoBehaviour
         {
             Changed(newType);
         }
+    }
+
+    public void SetVestigeLevel(int level)
+    {
+        Sprite newSprite = spriteVestigeList[level - 1];
+        spriteRenderer.sprite = newSprite;
+        trueSprite = newSprite;
+
+        data.SetVestigeLevel(level);
+    }
+
+    public int GetVestigeLevel()
+    {
+        return data.GetVestigeLevel();
     }
 }
