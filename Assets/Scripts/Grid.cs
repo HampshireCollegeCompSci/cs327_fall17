@@ -495,8 +495,8 @@ public class Grid : MonoBehaviour
             {
                 t.Clear();
             }
-
-            energyCounter.PopUp("+", toRemove.Count);
+            List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
+            energyCounter.PopUp("+", duplicatesRemoved.Count);
             energyGainController.SetBool("active", true);
         }
 
