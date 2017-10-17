@@ -14,11 +14,13 @@ public class TileData
 	}
 
     TileType type;
+    int vestigeLevel;
 
     // Default constructor.
     public TileData()
     {
         type = TileType.Unoccupied;
+        vestigeLevel = 0; //0 for all non-vestige tiles
     }
 
     public TileData(TileType newType)
@@ -50,5 +52,15 @@ public class TileData
     public TileType GetTileType()
     {
         return type;
+    }
+
+    public void SetVestigeLevel(int level)
+    {
+        vestigeLevel = level;
+    }
+
+    public int GetVestigeLevel()
+    {
+        return vestigeLevel;
     }
 }
