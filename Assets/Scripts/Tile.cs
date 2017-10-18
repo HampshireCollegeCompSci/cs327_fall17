@@ -149,20 +149,20 @@ public class Tile : MonoBehaviour
 
     public void SetHighlight()
     {
-        spriteRenderer.color = new Color(255f, 255f, 255f, 0.5f);
+        spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
     }
 
     public void SetAnticipatedHighlight(TileData.TileType type)
     {
         if (type == TileData.TileType.Regular)
-            spriteRenderer.color = new Color(0f, 0f, 255f, 0.5f);
+            spriteRenderer.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
         else if (type == TileData.TileType.Vestige)
-            spriteRenderer.color = new Color(255f, 0f, 0f, 0.5f);
+            spriteRenderer.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
     }
 
     public void SetNormal()
     {
-        spriteRenderer.color = new Color(255f, 255f, 255f, 1f);
+        spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
     public Sprite GetSprite()

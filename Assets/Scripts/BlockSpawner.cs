@@ -33,6 +33,7 @@ public class BlockSpawner : MonoBehaviour
     TextAsset possibleBlocksJSON;
 
     List<Block> possibleBlocks = new List<Block>();
+    List<Block> bag = new List<Block>();
 
     Queue<DraggableBlock> blocksQueue = new Queue<DraggableBlock>();
 
@@ -192,8 +193,20 @@ public class BlockSpawner : MonoBehaviour
         {
             //otherwise we select a random block from the possible list,
             //then instantiate the draggable block and add it into the queue.
-			int i = Random.Range(0, possibleBlocks.Count);
-            Block toSpawn = possibleBlocks[i];
+
+            if (bag.Count == 0)
+            {
+                // If the bag is empty, repopulate it.
+                for (int j = 0; j < possibleBlocks.Count; ++j)
+                {
+                    bag.Add(possibleBlocks[j]);
+                }
+            }
+
+			int i = Random.Range(0, bag.Count);
+            Block toSpawn = bag[i];
+            // Remove each chosen element from the bag.
+            bag.RemoveAt(i);
 
             // Instantiate the actual block.
             GameObject newBlock = Instantiate(prefabDraggableBlock, transform, false);
