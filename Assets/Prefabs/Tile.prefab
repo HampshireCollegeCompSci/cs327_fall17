@@ -79,6 +79,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 600607a8eee8f5f4d966e246e5816a06, type: 3}
   - {fileID: 21300000, guid: e14ea0700e0e27241ada6b65b0e634fe, type: 3}
   - {fileID: 21300000, guid: 6ec0cfd59f8d4ab45a95fb3c27791631, type: 3}
+  - {fileID: 21300000, guid: 543a14348e9fec3448b0ca458b2eabbe, type: 3}
+  - {fileID: 21300000, guid: b8e0801a8ec8d6c4ebfff6703371daf1, type: 3}
+  - {fileID: 21300000, guid: 8955548416748a04ea1b6582a4dd78f1, type: 3}
   trueSprite: {fileID: 0}
 --- !u!222 &222653728882889582
 CanvasRenderer:
