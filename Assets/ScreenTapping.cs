@@ -22,6 +22,5 @@ public class ScreenTapping : MonoBehaviour, IPointerDownHandler
         RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPoint);
         GameObject TappingAnim = Instantiate(prefabScreenTapping, transform, false);
         TappingAnim.transform.localPosition = localPoint;
-        TappingAnim.GetComponent<Animator>().SetBool("active", true);
     }
 }
