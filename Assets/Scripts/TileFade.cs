@@ -42,7 +42,7 @@ public class TileFade : MonoBehaviour
         StartCoroutine(WaitToDestroy(imageToFade.gameObject));
 
         //Clearing animation
-        GameObject tileClear = Instantiate(prefabTileClearing, transform, false);
+        Instantiate(prefabTileClearing, transform, false);
         //tileClear.GetComponent<Animator>().enabled = true;
     }
     IEnumerator WaitToDestroy (GameObject objectToDestroy) {
