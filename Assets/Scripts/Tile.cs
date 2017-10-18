@@ -55,6 +55,9 @@ public class Tile : MonoBehaviour
                 if (previousType != TileData.TileType.Unoccupied)
                 {
                     CreateVanishVisualEffects();
+
+                    //Clearing animation
+                    GetComponent<Animator>().enabled = true;
                 }
             }
 
@@ -76,6 +79,7 @@ public class Tile : MonoBehaviour
     {
         // Change this tile to unoccupied
         Fill(TileData.TileType.Unoccupied);
+        
     }
 
     // Called when the Tile is occupied and gets cleared.
