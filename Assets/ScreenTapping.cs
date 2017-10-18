@@ -20,7 +20,7 @@ public class ScreenTapping : MonoBehaviour, IPointerDownHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPoint);
-        GameObject TappingAnim = Instantiate(prefabScreenTapping, transform, false);
-        TappingAnim.transform.localPosition = localPoint;
+        GameObject tappingAnim = Instantiate(prefabScreenTapping, transform, false);
+        tappingAnim.transform.localPosition = localPoint;
     }
 }
