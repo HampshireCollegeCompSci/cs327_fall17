@@ -20,8 +20,11 @@ public class TileFade : MonoBehaviour
     [SerializeField]
     [Tooltip("How many seconds the tile takes to fade. Populated by JSON.")]
     private float fadeTime;
+    [SerializeField]
+    [Tooltip("Reference to the tile clearing prefab.")]
+    GameObject prefabTileClearing;
 
-	private void Tune()
+    private void Tune()
 	{
         //Read the tuning variables in from the JSON file
 		var json = JSON.Parse(tuningJSON.ToString());
@@ -37,6 +40,10 @@ public class TileFade : MonoBehaviour
         imageToFade.color = temp;
         imageToFade.CrossFadeAlpha(0.0f, fadeTime, true);
         StartCoroutine(WaitToDestroy(imageToFade.gameObject));
+
+        //Clearing animation
+        GameObject tileClear = Instantiate(prefabTileClearing, transform, false);
+        //tileClear.GetComponent<Animator>().enabled = true;
     }
     IEnumerator WaitToDestroy (GameObject objectToDestroy) {
         yield return new WaitForSeconds(fadeTime);
