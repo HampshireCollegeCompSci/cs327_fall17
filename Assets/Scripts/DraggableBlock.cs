@@ -139,11 +139,16 @@ public class DraggableBlock : MonoBehaviour
         UpdateAvailableSpaces();
 
         // Calculate the snap detection offset based on the width and height of the block.
-        //const float sbt = TileUtil.spaceBetweenTiles;
-        float xoff = (width - 1) * 0.5f * grid.GetTileWidth();
-        float yoff = (height - 1) * 0.5f * grid.GetTileHeight();
+        float tileWidth = grid.GetTileWidth();
+        float tileHeight = grid.GetTileHeight();
+        float xoff = (width - 1) * 0.5f * tileWidth;
+        float yoff = (height - 1) * 0.5f * tileHeight;
         Vector2 offset = new Vector2(-xoff, yoff);
         draggableObject.SetSnapDetectionOffset(offset);
+
+        //Debug.Log("DraggableBlock width / height: " + width + " / " + height);
+        //Debug.Log("tileWidth / tileHeight: " + tileWidth + " / " + tileHeight);
+        //Debug.Log("DraggableBlock snapDetectionOffset: " + offset);
     }
 
     public void SetDefaultPosition(Vector2 pos)
@@ -175,4 +180,11 @@ public class DraggableBlock : MonoBehaviour
     {
         return tiles[row, col].GetTileType();
     }
+
+    /*
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position, new Vector3(10.0f, 10.0f, 10.0f) * 10.0f);
+    }
+    */
 }
