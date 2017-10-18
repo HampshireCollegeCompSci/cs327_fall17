@@ -76,6 +76,7 @@ public class Tile : MonoBehaviour
     {
         // Change this tile to unoccupied
         Fill(TileData.TileType.Unoccupied);
+        
     }
 
     // Called when the Tile is occupied and gets cleared.
