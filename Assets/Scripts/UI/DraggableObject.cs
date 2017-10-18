@@ -42,7 +42,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     protected bool isDragging = false;
 
     // Snap detection offset for detecting snap locations.
-    Vector2 snapDetectionOffset;
+    protected Vector2 snapDetectionOffset;
 
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
@@ -74,43 +74,9 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                 transform.localPosition = new Vector2(xPos, yPos);
             }
 
-            bool validSpotFound = false;
-            SnapLocation locationToGoTo = null;
+            SnapLocation locationToGoTo = GetClosestSnapLocation();
 
-            Vector2 myPos = transform.position;
-            myPos += snapDetectionOffset;
-
-            // Used to figure out which location is the closest before snapping.
-            float smallestDistance = Mathf.Infinity;
-
-            foreach (SnapLocation solution in snapToAreas)
-            {
-                Vector2 solutionPos = solution.transform.position;
-                float solutionX = solutionPos.x;
-                float solutionY = solutionPos.y;
-
-                //Debug.Log("Me: (" + myPos.x + ", " + myPos.y + "), solution: (" + solutionX + ", " + solutionY + ")");
-
-                if ((myPos.x > solutionX - piecePlacementOffset.x) &&
-                    (myPos.x < solutionX + piecePlacementOffset.x) &&
-                    (myPos.y > solutionY - piecePlacementOffset.y) &&
-                    (myPos.y < solutionY + piecePlacementOffset.y))
-                {
-                    validSpotFound = true;
-                }
-
-                if (validSpotFound)
-                {
-                    float distance = Vector2.Distance(myPos, solutionPos);
-                    if (distance < smallestDistance)
-                    {
-                        locationToGoTo = solution;
-                        smallestDistance = distance;
-                    }
-                }
-            }
-
-            if (validSpotFound)
+            if (locationToGoTo != null)
             {
                 locationToGoTo.Hover(gameObject, false); // Clear all highlights
                 locationToGoTo.Hover(gameObject, true); // Set on highlight for current tile
@@ -127,43 +93,10 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         if (isDraggable)
         {
             isDragging = false;
-            bool validSpotFound = false;
-            SnapLocation locationToGoTo = null;
 
-            Vector2 myPos = transform.position;
-            myPos += snapDetectionOffset;
+            SnapLocation locationToGoTo = GetClosestSnapLocation();
 
-            // Used to figure out which location is the closest before snapping.
-            float smallestDistance = Mathf.Infinity;
-
-            foreach (SnapLocation solution in snapToAreas)
-            {
-                Vector2 solutionPos = solution.transform.position;
-                float solutionX = solutionPos.x;
-                float solutionY = solutionPos.y;
-
-                //Debug.Log("Me: (" + myPos.x + ", " + myPos.y + "), solution: (" + solutionX + ", " + solutionY + ")");
-
-                if ((myPos.x > solutionX - piecePlacementOffset.x) &&
-                    (myPos.x < solutionX + piecePlacementOffset.x) &&
-                    (myPos.y > solutionY - piecePlacementOffset.y) &&
-                    (myPos.y < solutionY + piecePlacementOffset.y))
-                {
-                    validSpotFound = true;
-                }
-
-                if (validSpotFound)
-                {
-                    float distance = Vector2.Distance(myPos, solutionPos);
-                    if (distance < smallestDistance)
-                    {
-                        locationToGoTo = solution;
-                        smallestDistance = distance;
-                    }
-                }
-            }
-
-            if (validSpotFound)
+            if (locationToGoTo != null)
             {
                 transform.position = locationToGoTo.transform.position;
                 locationToGoTo.Snap(gameObject);
@@ -181,6 +114,43 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                 EndDragEvent(this);
             }
         }
+    }
+
+    // Gets the closest SnapLocation within the range of the DraggableObject.
+    // Returns null if no SnapLocations are in range.
+    protected virtual SnapLocation GetClosestSnapLocation()
+    {
+        SnapLocation locationToGoTo = null;
+
+        Vector2 myPos = transform.position;
+        myPos += snapDetectionOffset;
+
+        // Used to figure out which location is the closest before snapping.
+        float smallestDistance = Mathf.Infinity;
+
+        foreach (SnapLocation solution in snapToAreas)
+        {
+            Vector2 solutionPos = solution.transform.position;
+            float solutionX = solutionPos.x;
+            float solutionY = solutionPos.y;
+
+            //Debug.Log("Me: (" + myPos.x + ", " + myPos.y + "), solution: (" + solutionX + ", " + solutionY + ")");
+
+            if ((myPos.x > solutionX - piecePlacementOffset.x) &&
+                (myPos.x < solutionX + piecePlacementOffset.x) &&
+                (myPos.y > solutionY - piecePlacementOffset.y) &&
+                (myPos.y < solutionY + piecePlacementOffset.y))
+            {
+                float distance = Vector2.Distance(myPos, solutionPos);
+                if (distance < smallestDistance)
+                {
+                    locationToGoTo = solution;
+                    smallestDistance = distance;
+                }
+            }
+        }
+
+        return locationToGoTo;
     }
 
     protected virtual void OnDestroy()
@@ -226,6 +196,28 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
     public void SetSnapDetectionOffset(Vector2 offset)
     {
+        // Account for the canvas' scale when setting the snap detection offset.
+        float canvasXScale = canvasTransform.lossyScale.x;
+        float canvasYScale = canvasTransform.lossyScale.y;
+        offset.x *= canvasXScale;
+        offset.y *= canvasYScale;
         snapDetectionOffset = offset;
+
+        //Debug.Log("DraggableObject canvas transform x scale: " + canvasXScale);
     }
+
+    /*
+    private void OnDrawGizmos()
+    {
+        float cubeSize = 25.0f;
+        Vector3 cube = new Vector3(cubeSize, cubeSize, cubeSize);
+
+        Vector2 pos = transform.position;
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(pos, cube);
+        pos += snapDetectionOffset;
+        Gizmos.color = Color.blue;
+        Gizmos.DrawCube(pos, cube);
+    }
+    */
 }
