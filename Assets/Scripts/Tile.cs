@@ -192,4 +192,13 @@ public class Tile : MonoBehaviour
     {
         return data.GetVestigeLevel();
     }
+	public void TurnTileRendererOn() 
+	{
+		spriteRenderer.enabled = true;
+	}
+
+	public void TurnTileRendererOff() 
+	{
+		spriteRenderer.enabled = false;
+	}
 }

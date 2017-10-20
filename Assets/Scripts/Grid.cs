@@ -420,6 +420,7 @@ public class Grid : MonoBehaviour
                     tiles[r, c].SetNormal();
                     //tiles[r, c].SetSprite(tiles[r, c].GetTileType());
                     tiles[r, c].SetSpriteToTrueSprite();
+					block.TurnBlockImageOn();
                 }
             }
         }
@@ -434,6 +435,7 @@ public class Grid : MonoBehaviour
                         //If can place here then set highlight
                         tiles[row + r, col + c].SetHighlight();
                         tiles[row + r, col + c].SetSprite(block.GetSprite(r, c));
+						block.TurnBlockImageOff();
                     }
                 }
             }
