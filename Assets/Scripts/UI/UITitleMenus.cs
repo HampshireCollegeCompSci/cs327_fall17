@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande
+﻿// Author(s): Paul Calande, Yixiang Xu
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,6 +11,7 @@ public class UITitleMenus : MonoBehaviour
 	public void GoToTitle()
     {
         SceneManager.LoadScene("Title");
+        Time.timeScale = 1f;
     }
 
     public void GoToHowToPlay()

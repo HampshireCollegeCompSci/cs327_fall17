@@ -1,4 +1,4 @@
-﻿// Author(s): Joel Esquilin, Paul Calande, Wm. Josiah Erikson
+﻿// Author(s): Joel Esquilin, Paul Calande, Wm. Josiah Erikson, Yixiang Xu
 
 using System;
 using System.Collections;
@@ -30,6 +30,8 @@ public class UIGameOver : MonoBehaviour
         {
             obj.SetActive(false);
         }
+
+        GetComponent<Image>().enabled = false;
     }
 
     private void OnDestroy()
@@ -45,6 +47,7 @@ public class UIGameOver : MonoBehaviour
         
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
+        Time.timeScale = 1f;
     }
 
     // Callback function for GameFlow.GameLost.
@@ -54,6 +57,8 @@ public class UIGameOver : MonoBehaviour
         {
             obj.SetActive(true);
         }
+
+        GetComponent<Image>().enabled = true;
         string reason;
         switch (cause)
         {
