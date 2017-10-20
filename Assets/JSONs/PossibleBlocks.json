@@ -5,7 +5,7 @@
 			"width" : 1,
 			"height" : 4,
 			"sprite" : 0,
-			"tiers" : [0]
+			"tiers" : [0,1,2,3]
 			"cells" :
 			[1,
 			 1,
@@ -16,7 +16,7 @@
 			"width" : 1,
 			"height" : 3,
 			"sprite" : 1,
-			"tiers" : [0],
+			"tiers" : [0,1,2,3],
 			"cells" :
 			[1,
 			 0,
@@ -35,7 +35,7 @@
 			"width" : 2,
 			"height" : 3,
 			"sprite" : 3,
-			"tiers" : [0],
+			"tiers" : [0,1,2],
 			"cells" :
 			[1, 1,
 			 1, 0, 
@@ -45,7 +45,7 @@
 			"width" : 2,
 			"height" : 3,
 			"sprite" : 4,
-			"tiers" : [0],
+			"tiers" : [0,1,2,3],
 			"cells" :
 			[0, 1,
 			 1, 0, 
@@ -55,7 +55,7 @@
 			"width" : 2,
 			"height" : 3,
 			"sprite" : 5,
-			"tiers" : [0],
+			"tiers" : [0,1],
 			"cells" :
 			[0, 1,
 			 1, 0, 
@@ -65,11 +65,31 @@
 			"width" : 3,
 			"height" : 3,
 			"sprite" : 0,
+			"tiers" : [2,3],
+			"cells" :
+			[0, 1, 0,
+			 1, 0, 1,
+			 0, 1, 0]
+		},
+		{
+			"width" : 3,
+			"height" : 3,
+			"sprite" : 0,
+			"tiers" : [3],
+			"cells" :
+			[1, 0, 0,
+			 1, 1, 1,
+			 0, 0, 1]
+		},
+		{
+			"width" : 3,
+			"height" : 3,
+			"sprite" : 0,
 			"tiers" : [1, 2, 3],
 			"cells" :
-			[1, 0, 1,
+			[1, 0, 0,
 			 0, 1, 0,
-			 1, 0, 1]
+			 0, 0, 1]
 		}
 	]
 }
