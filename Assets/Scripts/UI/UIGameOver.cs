@@ -1,4 +1,4 @@
-﻿// Author(s): Joel Esquilin, Paul Calande, Wm. Josiah Erikson
+﻿// Author(s): Joel Esquilin, Paul Calande, Wm. Josiah Erikson, Yixiang Xu
 
 using System;
 using System.Collections;
@@ -54,6 +54,7 @@ public class UIGameOver : MonoBehaviour
         {
             obj.SetActive(true);
         }
+
         string reason;
         switch (cause)
         {
