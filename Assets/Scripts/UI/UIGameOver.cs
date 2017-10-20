@@ -30,8 +30,6 @@ public class UIGameOver : MonoBehaviour
         {
             obj.SetActive(false);
         }
-
-        GetComponent<Image>().enabled = false;
     }
 
     private void OnDestroy()
@@ -58,7 +56,6 @@ public class UIGameOver : MonoBehaviour
             obj.SetActive(true);
         }
 
-        GetComponent<Image>().enabled = true;
         string reason;
         switch (cause)
         {
