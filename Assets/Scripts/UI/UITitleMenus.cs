@@ -11,7 +11,6 @@ public class UITitleMenus : MonoBehaviour
 	public void GoToTitle()
     {
         SceneManager.LoadScene("Title");
-        Time.timeScale = 1f;
     }
 
     public void GoToHowToPlay()

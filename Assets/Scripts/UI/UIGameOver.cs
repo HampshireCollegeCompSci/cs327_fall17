@@ -45,7 +45,6 @@ public class UIGameOver : MonoBehaviour
         
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
-        Time.timeScale = 1f;
     }
 
     // Callback function for GameFlow.GameLost.

@@ -15,14 +15,10 @@ public class PauseMenuController : MonoBehaviour {
     public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-        screenTapping.enabled = false;
     }
 
     public void Resume()
     {
         pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
-        screenTapping.enabled = true;
     }
 }

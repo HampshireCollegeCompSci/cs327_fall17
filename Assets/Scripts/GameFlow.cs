@@ -22,7 +22,6 @@ public class GameFlow : MonoBehaviour
     {
         //Debug.Log("Game over! Cause: " + cause);
         OnGameLost(cause);
-        Time.timeScale = 0f;
     }
 
     // Invoke the GameLost event.
