@@ -31,13 +31,24 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the PossibleBlocks JSON, which determines the block designs.")]
     TextAsset possibleBlocksJSON;
+    [SerializeField]
+    [Tooltip("The current junkyard tier. 0 = no junkyard event.")]
+    int tierCurrent = 0;
 
-    List<Block> possibleBlocks = new List<Block>();
+    List<Block>[] possibleBlocks = new List<Block>[4];
     List<Block> bag = new List<Block>();
 
     Queue<DraggableBlock> blocksQueue = new Queue<DraggableBlock>();
 
     float timeBeforeNextBlock;
+
+    private void Awake()
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            possibleBlocks[i] = new List<Block>();
+        }
+    }
 
     private void Start()
     {
@@ -56,7 +67,7 @@ public class BlockSpawner : MonoBehaviour
         //read json file
         var json = JSON.Parse(possibleBlocksJSON.ToString());
 
-        const string blocksNormal = "blocksNormal";
+        const string blocksNormal = "blocks";
 
         for (int i = 0; i < json[blocksNormal].Count; i++)
         {
@@ -65,6 +76,7 @@ public class BlockSpawner : MonoBehaviour
             var w = json[blocksNormal][i]["width"].AsInt;
             var h = json[blocksNormal][i]["height"].AsInt;
             var cell = json[blocksNormal][i]["cells"].AsArray;
+            var tiers = json[blocksNormal][i]["tiers"].AsArray;
             //Debug.Log(cell.ToString());
 
             block = new Block(h, w);
@@ -86,49 +98,13 @@ public class BlockSpawner : MonoBehaviour
                 }
             }
 
-            possibleBlocks.Add(block);
+            int numTiers = tiers.Count;
+            for (int t = 0; t < numTiers; ++t)
+            {
+                int tierID = tiers[t];
+                possibleBlocks[tierID].Add(block);
+            }
         }
-        
-        /*
-        // TODO: Replace this for loop with file reading later.
-        for (int i = 0; i < 10; ++i)
-        {
-            Block block;
-            int formation = Random.Range(0, 3);
-            switch (formation)
-            {
-                case 0:
-                    block = new Block(2, 2);
-                    break;
-                case 1:
-                    block = new Block(1, 2);
-                    break;
-                case 2:
-                default:
-                    block = new Block(2, 1);
-                    break;
-            }
-
-            int w = block.GetWidth();
-            int h = block.GetHeight();
-            for (int row = 0; row < h; ++row)
-            {
-                for (int col = 0; col < w; ++col)
-                {
-                    int which = Random.Range(0, 3);
-                    if (which < 2 && !((row == 0 && col == 0) || (row == h - 1 && col == w - 1)))
-                    {
-                        block.Fill(row, col, TileData.TileType.Unoccupied);
-                    }
-                    else
-                    {
-                        block.Fill(row, col, TileData.TileType.Regular);
-                    }
-                }
-            }
-
-            possibleBlocks.Add(block);
-        }*/
 
         ResetBlockTimer();
         SpawnRandomBlock();
@@ -180,9 +156,9 @@ public class BlockSpawner : MonoBehaviour
             if (bag.Count == 0)
             {
                 // If the bag is empty, repopulate it.
-                for (int j = 0; j < possibleBlocks.Count; ++j)
+                for (int j = 0; j < possibleBlocks[tierCurrent].Count; ++j)
                 {
-                    bag.Add(possibleBlocks[j]);
+                    bag.Add(possibleBlocks[tierCurrent][j]);
                 }
             }
 
@@ -308,6 +284,11 @@ public class BlockSpawner : MonoBehaviour
         }
     }
 
+    public void SetTier(int newTier)
+    {
+        tierCurrent = newTier;
+    }
+
     // Callback function for gameFlow's GameLost event.
     private void GameFlow_GameLost(GameFlow.GameOverCause cause)
     {
@@ -316,6 +297,5 @@ public class BlockSpawner : MonoBehaviour
             blocksQueue.Peek().AllowDragging(false);
         }
         enabled = false;
-    }
-		
+    }		
 }
