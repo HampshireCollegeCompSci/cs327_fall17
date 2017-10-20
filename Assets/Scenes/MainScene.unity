@@ -1113,6 +1113,12 @@ Prefab:
       propertyPath: energyGainController
       value: 
       objectReference: {fileID: 974732715}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: outLinePrefab
+      value: 
+      objectReference: {fileID: 1784033308065990, guid: 591aa46e960fcb24ab1b2e2b0ee1088c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0
