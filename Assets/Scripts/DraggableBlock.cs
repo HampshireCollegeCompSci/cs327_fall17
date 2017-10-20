@@ -189,7 +189,7 @@ public class DraggableBlock : MonoBehaviour
 		{
 			for (int c = 0; c < width; c++)
 			{
-				tiles [r, c].TurnTileRendererOff();
+				tiles [r, c].EnableSpriteRenderer(false);
 			}
 		}
 	}
@@ -202,7 +202,7 @@ public class DraggableBlock : MonoBehaviour
 		{
 			for (int c = 0; c < width; c++)
 			{
-				tiles [r, c].TurnTileRendererOn();
+				tiles [r, c].EnableSpriteRenderer(true);
 			}
 		}
 	}
