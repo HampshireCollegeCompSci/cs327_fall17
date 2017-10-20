@@ -181,10 +181,36 @@ public class DraggableBlock : MonoBehaviour
         return tiles[row, col].GetTileType();
     }
 
+	public void TurnBlockImageOff() 
+	{
+		int height = block.GetHeight();
+		int width = block.GetWidth();
+		for (int r = 0; r < height; r++)
+		{
+			for (int c = 0; c < width; c++)
+			{
+				tiles [r, c].EnableSpriteRenderer(false);
+			}
+		}
+	}
+
+	public void TurnBlockImageOn()
+	{
+		int height = block.GetHeight();
+		int width = block.GetWidth();
+		for (int r = 0; r < height; r++)
+		{
+			for (int c = 0; c < width; c++)
+			{
+				tiles [r, c].EnableSpriteRenderer(true);
+			}
+		}
+	}
     /*
     private void OnDrawGizmos()
     {
         Gizmos.DrawCube(transform.position, new Vector3(10.0f, 10.0f, 10.0f) * 10.0f);
     }
     */
+
 }
