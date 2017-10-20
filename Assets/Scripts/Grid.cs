@@ -41,9 +41,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the EnergyCounter instance.")]
     EnergyCounter energyCounter;
-	[SerializeField]
-	[Tooltip("Reference to the TurnCounter instance.")]
-	TurnCounter turnCounter;
+    [SerializeField]
+    [Tooltip("Reference to the TurnCounter instance.")]
+    TurnCounter turnCounter;
     [SerializeField]
     [Tooltip("Reference to the VestigeCounter instance.")]
     VestigeCounter vestigeCounter;
@@ -74,11 +74,57 @@ public class Grid : MonoBehaviour
 
     List<GridBlock> gridBlocks;
 
+    List<Outline> outlines;
+
     //Four lists storing lists of four direction of L-shapes respectively.
     //List<LShape> topLeft;
     //List<LShape> topRight;
     //List<LShape> bottomLeft;
     //List<LShape> bottomRight;
+
+    class Outline
+    {
+        Vector3[] vertices = new Vector3[4];
+        int[] location = new int[3];
+        GameObject outlineObj;
+        int nextPos;
+
+        public Outline(GameObject obj, int[] loc, Vector3[] ver)
+        {
+            outlineObj = obj;
+            location = loc;
+            vertices = ver;
+            nextPos = 1;
+        }
+
+        public void ChangeTarget()
+        {
+            if (nextPos == 3)
+                nextPos = 0;
+            else
+                nextPos++;
+        }
+
+        public GameObject GetOutlineObject()
+        {
+            return outlineObj;
+        }
+
+        public int[] GetLocation()
+        {
+            return location;
+        }
+
+        public Vector3[] GetVertices()
+        {
+            return vertices;
+        }
+
+        public int NextPos()
+        {
+            return nextPos;
+        }
+    }
 
     private void Tune()
     {
@@ -133,6 +179,41 @@ public class Grid : MonoBehaviour
 
         //Instantiate GridBlocks
         gridBlocks = new List<GridBlock>();
+
+        outlines = new List<Outline>();
+    }
+
+    private void Update()
+    {
+        if (outlines.Count > 0)
+        {
+            for (int i = 0; i < outlines.Count; i++)
+            {
+                Vector3 currentPos = outlines[i].GetOutlineObject().transform.position;
+                Vector3 nextPos = outlines[i].GetVertices()[outlines[i].NextPos()];
+                if (Vector3.Distance(currentPos, nextPos) <= 5f){
+                    outlines[i].GetOutlineObject().transform.position = nextPos;
+                    outlines[i].ChangeTarget();
+                }
+                Vector3 direction = Vector3.right;
+                switch (outlines[i].NextPos())
+                {
+                    case 0:
+                        direction = Vector3.up;
+                        break;
+                    case 1:
+                        direction = Vector3.right;
+                        break;
+                    case 2:
+                        direction = Vector3.down;
+                        break;
+                    case 3:
+                        direction = Vector3.left;
+                        break;
+                }
+                outlines[i].GetOutlineObject().transform.Translate(direction * Time.deltaTime * 500);
+            }
+        }
     }
 
     public int GetWidth()
@@ -404,17 +485,15 @@ public class Grid : MonoBehaviour
 
             if (anticipatedSquareTiles.Count != 0)
             {
-                Debug.Log(anticipatedPotentialSquares.Count);
                 //Exclude smaller squares
                 SmallerSquareExclusion(ref anticipatedPotentialSquares);
-                Debug.Log(anticipatedPotentialSquares.Count);
 
                 List<Tile> toVestiges = new List<Tile>(); //No effect. Just match parameter.
                 //Highligh anticipated vestiges
                 foreach (int[] s in anticipatedPotentialSquares)
                 {
                     FormVestiges(s[0], s[1], s[2], anticipatedSquareTiles, copy, ref toVestiges);
-                    //DrawOutLine(s[0], s[1], s[2]);
+                    DrawOutLine(s[0], s[1], s[2]);
                 }
 
                 //Highlight all tiles that will form squares
@@ -426,6 +505,8 @@ public class Grid : MonoBehaviour
         }
         else
         {
+            outlines.ForEach(o => Destroy(o.GetOutlineObject()));
+            outlines.Clear();
             for (int c = 0; c < GetWidth(); c++)
             {
                 for (int r = 0; r < GetHeight(); r++)
@@ -732,13 +813,23 @@ public class Grid : MonoBehaviour
 
     private void DrawOutLine(int r, int c, int length)
     {
-        GameObject outline = Instantiate(outLinePrefab, transform, false);
-        //outline.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-        float adjustX = GetTileWidth() / 2;
-        float adjustY = GetTileHeight() / 2;
-        outline.transform.localPosition = new Vector3(tiles[r, c].transform.localPosition.x - adjustX, 
-                                                      tiles[r, c].transform.localPosition.y + adjustY, 
-                                                      tiles[r, c].transform.localPosition.z);
+        if (outlines.Find(o => o.GetLocation()[0] == r && o.GetLocation()[1] == c && o.GetLocation()[2] == length) == null)
+        {           
+            GameObject outline = Instantiate(outLinePrefab, transform, false);
+            outline.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            float adjustX = GetTileWidth() / 2;
+            float adjustY = GetTileHeight() / 2;
+            outline.transform.localPosition = new Vector3(tiles[r, c].transform.localPosition.x - adjustX,
+                                                          tiles[r, c].transform.localPosition.y + adjustY,
+                                                          tiles[r, c].transform.localPosition.z);
+            Vector3 posUpperLeft = outline.transform.position;
+            Vector3 posUpperRight = new Vector3(posUpperLeft.x + length * GetTileWidth(), posUpperLeft.y, posUpperLeft.z);
+            Vector3 posLowerRight = new Vector3(posUpperRight.x, posUpperRight.y - length * GetTileHeight(), posUpperRight.z);
+            Vector3 posLowerLeft = new Vector3(posLowerRight.x - length * GetTileWidth(), posLowerRight.y, posLowerRight.z);
+            Vector3[] vertices = new Vector3[] { posUpperLeft, posUpperRight, posLowerRight, posLowerLeft };
+            outlines.Add(new Outline(outline, new int[] { r, c, length }, vertices));
+        }
+        
     }
 
     private void SmallerSquareExclusion(ref List<int[]> squaresFormed)
@@ -763,15 +854,12 @@ public class Grid : MonoBehaviour
                         //Delete all the smaller squares start at this tile
                         List<int[]> smallers = squaresFormed.FindAll(s => s[0] == r && s[1] == c && s[2] < length);
                         foreach(int[] s in smallers)
-                        {
                             squaresFormed.Remove(s);
-                        }
                     }
                 }
             }
             index++;
         }
-        
     }
 
     /*
