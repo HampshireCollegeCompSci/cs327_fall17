@@ -746,9 +746,9 @@ RectTransform:
   - {fileID: 1590728478}
   - {fileID: 1142477334}
   - {fileID: 857237130}
+  - {fileID: 1306943244}
   - {fileID: 665213129}
   - {fileID: 160948088}
-  - {fileID: 1306943244}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2049,7 +2049,7 @@ RectTransform:
   - {fileID: 1463032082}
   - {fileID: 1928216988}
   m_Father: {fileID: 501203755}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3282,7 +3282,8 @@ Prefab:
       propertyPath: toBeEnabled.Array.data[4]
       value: 
       objectReference: {fileID: 1530570021}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114899982193181076, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1928216987
