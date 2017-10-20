@@ -56,13 +56,15 @@ public class BlockSpawner : MonoBehaviour
         //read json file
         var json = JSON.Parse(possibleBlocksJSON.ToString());
 
-        for (int i = 0; i < json["blocks"].Count; i++)
+        const string blocksNormal = "blocksNormal";
+
+        for (int i = 0; i < json[blocksNormal].Count; i++)
         {
             Block block;
             //int formation = Random.Range(0, json["blocks"].Count);
-            var w = json["blocks"][i]["width"].AsInt;
-            var h = json["blocks"][i]["height"].AsInt;
-            var cell = json["blocks"][i]["cells"].AsArray;
+            var w = json[blocksNormal][i]["width"].AsInt;
+            var h = json[blocksNormal][i]["height"].AsInt;
+            var cell = json[blocksNormal][i]["cells"].AsArray;
             //Debug.Log(cell.ToString());
 
             block = new Block(h, w);
@@ -83,25 +85,6 @@ public class BlockSpawner : MonoBehaviour
                     }
                 }
             }
-
-            /*
-            //generate blocks according to cell, 1 means regular tile, 0 means unoccupied tile
-            for (int row = 0; row < h; ++row)
-            {
-                for (int col = 0; col < w; ++col)
-                {
-                    int thisCell = cell[row][col];
-                    if (thisCell == 0)
-                    {  
-                        block.Fill(row, col, TileData.TileType.Unoccupied);
-                    }
-                    else if (thisCell == 1)
-                    {
-                        block.Fill(row, col, TileData.TileType.Regular);
-                    }
-                }
-            }
-            */
 
             possibleBlocks.Add(block);
         }
