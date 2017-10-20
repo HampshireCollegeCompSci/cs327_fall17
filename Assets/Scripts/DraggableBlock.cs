@@ -18,9 +18,17 @@ public class DraggableBlock : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the DraggableObject component to interface with.")]
     DraggableObject draggableObject;
+    [SerializeField]
+    [Tooltip("The size of the draggable block while being dragged.")]
+    Vector3 draggingScale;
+    [SerializeField]
+    [Tooltip("The size of the draggable block while not being dragged.")]
+    Vector3 nonDraggingScale;
 
+    // The TileData forming the DraggableBlock.
     Block block;
 
+    // The underlying array of Tiles forming the DraggableBlock.
     Tile[,] tiles;
 
     //Copies the data of a Block into this DraggableBlock’s contained Block
@@ -28,6 +36,13 @@ public class DraggableBlock : MonoBehaviour
     {
         grid = newGrid;
         draggableObject.SetCanvasTransform(canvas);
+
+        nonDraggingScale = new Vector3(0.75f, 0.75f, 0.75f);
+        draggingScale = new Vector3(1.0f, 1.0f, 1.0f);
+        draggableObject.SetDraggingScale(draggingScale);
+        draggableObject.SetNonDraggingScale(nonDraggingScale);
+
+        transform.localScale = nonDraggingScale;
 
         // Copy the copiedBlock data into this DraggableBlock's block.
         block = new Block(copiedBlock);
@@ -124,15 +139,52 @@ public class DraggableBlock : MonoBehaviour
         UpdateAvailableSpaces();
 
         // Calculate the snap detection offset based on the width and height of the block.
-        //const float sbt = TileUtil.spaceBetweenTiles;
-        float xoff = (width - 1) * 0.5f * grid.GetTileWidth();
-        float yoff = (height - 1) * 0.5f * grid.GetTileHeight();
+        float tileWidth = grid.GetTileWidth();
+        float tileHeight = grid.GetTileHeight();
+        float xoff = (width - 1) * 0.5f * tileWidth;
+        float yoff = (height - 1) * 0.5f * tileHeight;
         Vector2 offset = new Vector2(-xoff, yoff);
         draggableObject.SetSnapDetectionOffset(offset);
+
+        //Debug.Log("DraggableBlock width / height: " + width + " / " + height);
+        //Debug.Log("tileWidth / tileHeight: " + tileWidth + " / " + tileHeight);
+        //Debug.Log("DraggableBlock snapDetectionOffset: " + offset);
     }
 
     public void SetDefaultPosition(Vector2 pos)
     {
         draggableObject.SetDefaultPosition(pos);
     }
+
+    public int GetWidth()
+    {
+        return block.GetWidth();
+    }
+
+    public int GetHeight()
+    {
+        return block.GetHeight();
+    }
+
+    public bool GetIsOccupied(int row, int col)
+    {
+        return block.GetIsOccupied(row, col);
+    }
+
+    public Sprite GetSprite(int row, int col)
+    {
+        return tiles[row, col].GetSprite();
+    }
+
+    public TileData.TileType GetTileType(int row, int col)
+    {
+        return tiles[row, col].GetTileType();
+    }
+
+    /*
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawCube(transform.position, new Vector3(10.0f, 10.0f, 10.0f) * 10.0f);
+    }
+    */
 }

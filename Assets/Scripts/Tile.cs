@@ -10,10 +10,6 @@ public class Tile : MonoBehaviour
     public delegate void ChangedHandler(TileData.TileType type);
     public event ChangedHandler Changed;
 
-    //static Dictionary<TileData.TileType, Sprite> sprites = new Dictionary<TileData.TileType, Sprite>();
-
-	TileData data = new TileData();
-
     [SerializeField]
     [Tooltip("Reference to the Image component to use for rendering the Tile.")]
     Image spriteRenderer;
@@ -21,23 +17,26 @@ public class Tile : MonoBehaviour
     [Tooltip("The sprite to use for Unoccupied state.")]
     Sprite spriteUnoccupied;
     [SerializeField]
-    [Tooltip("The sprite to use for Regular state.")]
-   	Sprite spriteRegular;
-    [SerializeField]
-    [Tooltip("The sprite to use for Vestige state.")]
-    Sprite spriteVestige;
+    [Tooltip("The sprites to use for Vestige state.")]
+    Sprite[] spriteVestigeList;
     [SerializeField]
     [Tooltip("The fading tile prefab to instantiate.")]
     Transform fadingTilePrefab;
-	[SerializeField]
-	[Tooltip("The sprite of regular Tile.")]
-	Sprite Tile_Regular;
-	[SerializeField]
-	[Tooltip("The sprite of Normal 2 Tile.")]
-	Sprite Tile_Normal2;
-	[SerializeField]
-	[Tooltip("The sprite of Normal 3 Tile.")]
-	Sprite Tile_Normal3;
+    [SerializeField]
+    [Tooltip("The sprite of regular Tile.")]
+    Sprite[] tiles;
+    [SerializeField]
+    [Tooltip("The current Sprite of the Tile chosen in Fill. Does not necessarily match the current SpriteRenderer sprite.")]
+    Sprite trueSprite;
+
+    // The underlying TileData.
+    TileData data = new TileData();
+
+    private void Awake()
+    {
+        SetSprite(data.GetTileType());
+        trueSprite = spriteRenderer.sprite;
+    }
 
     public bool GetIsOccupied()
     {
@@ -60,20 +59,24 @@ public class Tile : MonoBehaviour
             }
 
             data.Fill(newType);
+
             SetSprite(newType);
+            trueSprite = spriteRenderer.sprite;
+
             OnChanged(newType);
         }
     }
 
     public TileData.TileType GetTileType()
     {
-		return data.GetTileType();
+        return data.GetTileType();
     }
 
     public void Clear()
     {
         // Change this tile to unoccupied
         Fill(TileData.TileType.Unoccupied);
+        
     }
 
     // Called when the Tile is occupied and gets cleared.
@@ -85,9 +88,10 @@ public class Tile : MonoBehaviour
         Transform thisFadingTilePrefab = Instantiate(fadingTilePrefab, grid.transform.position, grid.transform.rotation);
         thisFadingTilePrefab.SetParent(grid, false);
         thisFadingTilePrefab.transform.localPosition = gameObject.transform.localPosition;
+        //Copy the sprite to the instantiated prefab so that it fades out the same sprite that was cleared
+        thisFadingTilePrefab.GetComponent<Image>().sprite = trueSprite;
         //Get the fade component
         TileFade tileToFade = thisFadingTilePrefab.GetComponent<TileFade>();
-        //Image imageToFade = thisFadingTilePrefab.GetComponent<Image>();
         tileToFade.Fade(); //And fade the image out, which will destroy it as well
         gridObject.GetComponent<ClearedSquaresCounter>().ClearedSquare(); //increment the total number of cleared squares, for analytics
     }
@@ -101,36 +105,42 @@ public class Tile : MonoBehaviour
     public void SetSprite(TileData.TileType newType)
     {
         // Set the sprite based on the given tile type.
+        Sprite newSprite = null;
         switch (newType)
         {
             case TileData.TileType.Unoccupied:
-                spriteRenderer.sprite = spriteUnoccupied;
+                newSprite = spriteUnoccupied;
                 break;
-			case TileData.TileType.Regular:
-				int randomInt = Random.Range (0, 2);				
-				if(randomInt == 0) 
-				{
-				spriteRenderer.sprite = Tile_Regular;
-				}
-				if(randomInt == 1)
-				{
-				spriteRenderer.sprite = Tile_Normal2;
-				}
-				if(randomInt == 2)
-				{
-				spriteRenderer.sprite = Tile_Normal3;
-				}
-				//spriteRenderer.sprite = spriteRegular;
+            case TileData.TileType.Regular:
+                int randomInt = Random.Range(0, tiles.Length);
+                newSprite = tiles[randomInt];
                 break;
-                /*
+            /*
             case TileData.TileType.Vacant:
-                spriteRenderer.sprite = spriteVacant;
+                newSprite = spriteVacant;
                 break;
-                */
+            */
             case TileData.TileType.Vestige:
-                spriteRenderer.sprite = spriteVestige;
+                newSprite = spriteVestigeList[0];
                 break;
         }
+        spriteRenderer.sprite = newSprite;
+    }
+
+    public void SetSprite(Sprite newSprite)
+    {
+        spriteRenderer.sprite = newSprite;
+    }
+
+    public void SetSpriteToTrueSprite()
+    {
+        spriteRenderer.sprite = trueSprite;
+    }
+
+    public void SetSpriteAbsolute(Sprite newSprite)
+    {
+        spriteRenderer.sprite = newSprite;
+        trueSprite = newSprite;
     }
 
     public void EnableSpriteRenderer(bool enable)
@@ -140,30 +150,26 @@ public class Tile : MonoBehaviour
 
     public void SetHighlight()
     {
-        spriteRenderer.color = new Color(255f, 255f, 255f, 0.5f);
+        spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
     }
 
     public void SetAnticipatedHighlight(TileData.TileType type)
     {
         if (type == TileData.TileType.Regular)
-            spriteRenderer.color = new Color(0f, 0f, 255f, 0.5f);
+            spriteRenderer.color = new Color(0.0f, 0.0f, 1.0f, 0.5f);
         else if (type == TileData.TileType.Vestige)
-            spriteRenderer.color = new Color(255f, 0f, 0f, 0.5f);
+            spriteRenderer.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
     }
 
     public void SetNormal()
     {
-        spriteRenderer.color = new Color(255f, 255f, 255f, 1f);
+        spriteRenderer.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
     }
 
-    public void SetIncomingHighlight(TileData.TileType type)
+    public Sprite GetSprite()
     {
-        if (type == TileData.TileType.Regular)
-            spriteRenderer.color = new Color(0f, 0f, 255f, 1f);
-        else if (type == TileData.TileType.Vestige)
-            spriteRenderer.color = new Color(255f, 0f, 0f, 1f);
+        return spriteRenderer.sprite;
     }
-
 
     void OnChanged(TileData.TileType newType)
     {
@@ -171,5 +177,19 @@ public class Tile : MonoBehaviour
         {
             Changed(newType);
         }
+    }
+
+    public void SetVestigeLevel(int level)
+    {
+        Sprite newSprite = spriteVestigeList[level - 1];
+        spriteRenderer.sprite = newSprite;
+        trueSprite = newSprite;
+
+        data.SetVestigeLevel(level);
+    }
+
+    public int GetVestigeLevel()
+    {
+        return data.GetVestigeLevel();
     }
 }

@@ -70,6 +70,8 @@ MonoBehaviour:
   tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
   imageToFade: {fileID: 114008249746637138}
   fadeTime: 0
+  prefabTileClearing: {fileID: 1730579715590450, guid: 0ffbfa98f22f6fc41886ffba160f2404,
+    type: 2}
 --- !u!222 &222269075532248070
 CanvasRenderer:
   m_ObjectHideFlags: 1

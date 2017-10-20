@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande
+﻿// Author(s): Paul Calande, Yixiang Xu
 
 using System.Collections;
 using System.Collections.Generic;
@@ -26,4 +26,8 @@ public class UITitleMenus : MonoBehaviour
 	{
 		SceneManager.LoadScene ("MainScene");
 	}
+    public void GoToCheatPage()
+    {
+        SceneManager.LoadScene("CheatPage");
+    }
 }
