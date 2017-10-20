@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using SimpleJSON;
 
 public class Grid : MonoBehaviour
@@ -58,6 +59,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to energy gain animator.")]
     Animator energyGainController;
+    [SerializeField]
+    [Tooltip("Placeholder sprite for square outline")]
+    GameObject outLinePrefab;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -377,7 +381,7 @@ public class Grid : MonoBehaviour
                         copy[row + r, col + c] = newBlock.GetTileType(r, c);
             
             List<Tile> anticipatedSquareTiles = new List<Tile>();
-            List<int[]> anticipatedVestiges = new List<int[]>();
+            List<int[]> anticipatedPotentialSquares = new List<int[]>();
 
             int biggestSquareSize = Mathf.Min(width, height);
 
@@ -392,19 +396,25 @@ public class Grid : MonoBehaviour
                         // Check for squares from length 3 upwards.
                         for (int length = 3; length <= biggestSquareSize; length++)
                         {
-                            CheckForSquares(r, c, length, ref anticipatedSquareTiles, ref anticipatedVestiges, copy);
+                            CheckForSquares(r, c, length, ref anticipatedSquareTiles, ref anticipatedPotentialSquares, copy);
                         }
                     }
                 }
-            }
+            } 
 
             if (anticipatedSquareTiles.Count != 0)
             {
+                Debug.Log(anticipatedPotentialSquares.Count);
+                //Exclude smaller squares
+                SmallerSquareExclusion(ref anticipatedPotentialSquares);
+                Debug.Log(anticipatedPotentialSquares.Count);
+
                 List<Tile> toVestiges = new List<Tile>(); //No effect. Just match parameter.
                 //Highligh anticipated vestiges
-                foreach (int[] s in anticipatedVestiges)
+                foreach (int[] s in anticipatedPotentialSquares)
                 {
                     FormVestiges(s[0], s[1], s[2], anticipatedSquareTiles, copy, ref toVestiges);
+                    //DrawOutLine(s[0], s[1], s[2]);
                 }
 
                 //Highlight all tiles that will form squares
@@ -444,8 +454,8 @@ public class Grid : MonoBehaviour
         // multiple squares together.
         List<Tile> toRemove = new List<Tile>();
 
-        //List keeping all tiles that are going to be turned into vestiges
-        List<int[]> toVestiges = new List<int[]>();
+        //List of all potential squares (including smaller squares inside bigger one)
+        List<int[]> squaresFormed = new List<int[]>();
 
         //Loop through all blocks from top left.
         //Consider only the case that the current tile is the top-left corner.
@@ -460,7 +470,7 @@ public class Grid : MonoBehaviour
                     // Check for squares from length 3 upwards.
                     for (int length = 3; length <= biggestSquareSize; length++)
                     {
-                        CheckForSquares(r, c, length, ref toRemove, ref toVestiges, null);
+                        CheckForSquares(r, c, length, ref toRemove, ref squaresFormed, null);
                     }
                 }
             }
@@ -470,12 +480,32 @@ public class Grid : MonoBehaviour
         if (toRemove.Count != 0)
         {
             squareFormed = true;
+
+            //Exclude smaller squares
+            SmallerSquareExclusion(ref squaresFormed);
             //Turn vestiges when isPlaced is true
             List<Tile> newVestiges = new List<Tile>();
-            foreach (int[] s in toVestiges)
+            foreach (int[] s in squaresFormed)
             {
+                //Spawn a text indicating scores at the center of the cleared square
+                Vector3 textPos = new Vector3();
+                if (s[2] % 2 == 1)
+                {
+                    textPos = GetTilePosition(s[0] + (s[2] - 1) / 2, s[1] + (s[2] - 1) / 2);
+                }
+                else
+                {
+                    Vector3 rightPos = GetTilePosition(s[0] + (s[2] - 1) / 2 + 1, s[1] + (s[2] - 1) / 2 + 1);
+                    Vector3 leftPos = GetTilePosition(s[0] + (s[2] - 1) / 2, s[1] + (s[2] - 1) / 2);
+                    textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
+                }
+                //If a legal square is formed, tell the event handler,
+                OnSquareFormed(s[2], textPos);
+
                 FormVestiges(s[0], s[1], s[2], toRemove, null, ref newVestiges);
             }
+
+            //Upgrading vestiges
             foreach (Tile v in newVestiges)
             {
                 if (v.GetTileType() == TileData.TileType.Regular)
@@ -515,7 +545,7 @@ public class Grid : MonoBehaviour
         return squareFormed;
     }
 
-    private void CheckForSquares(int r, int c, int length, ref List<Tile> toRemove, ref List<int[]> toVestiges, TileData.TileType[,] copy)
+    private void CheckForSquares(int r, int c, int length, ref List<Tile> toRemove, ref List<int[]> squaresFormed, TileData.TileType[,] copy)
     {
         List<Tile> processed = new List<Tile>();
         //Do not check if the square is not possible
@@ -612,26 +642,7 @@ public class Grid : MonoBehaviour
                 //and also all outside adjacent regular
                 //tiles will be turned in to vestiges (Mark the certain square).
                 toRemove.AddRange(processed);
-                toVestiges.Add(new int[] { r, c, length });
-
-                if(copy == null)
-                {
-                    //Spawn a text indicating scores at the center of the cleared square
-                    Vector3 textPos = new Vector3();
-                    if (length % 2 == 1)
-                    {
-                        textPos = GetTilePosition(r + (length - 1) / 2, c + (length - 1) / 2);
-                    }
-                    else
-                    {
-                        Vector3 rightPos = GetTilePosition(r + (length - 1) / 2 + 1, c + (length - 1) / 2 + 1);
-                        Vector3 leftPos = GetTilePosition(r + (length - 1) / 2, c + (length - 1) / 2);
-                        textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
-                    }
-
-                    //If a legal square is formed, tell the event handler,
-                    OnSquareFormed(length, textPos);
-                }        
+                squaresFormed.Add(new int[] { r, c, length });     
             }
         }
     }
@@ -717,6 +728,50 @@ public class Grid : MonoBehaviour
                 }
             }
      
+    }
+
+    private void DrawOutLine(int r, int c, int length)
+    {
+        GameObject outline = Instantiate(outLinePrefab, transform, false);
+        //outline.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        float adjustX = GetTileWidth() / 2;
+        float adjustY = GetTileHeight() / 2;
+        outline.transform.localPosition = new Vector3(tiles[r, c].transform.localPosition.x - adjustX, 
+                                                      tiles[r, c].transform.localPosition.y + adjustY, 
+                                                      tiles[r, c].transform.localPosition.z);
+    }
+
+    private void SmallerSquareExclusion(ref List<int[]> squaresFormed)
+    {
+        //Sort it for reducing the number of loops
+        squaresFormed = squaresFormed.OrderByDescending(s => s[2]).ToList();
+        int index = 0;
+        
+        while (index < squaresFormed.Count)
+        {
+            //Perform exclusion when  a 4x4 or bigger square has been formed
+            if (squaresFormed[index][2] > 3)
+            {
+                int row = squaresFormed[index][0];
+                int col = squaresFormed[index][1];
+                int length = squaresFormed[index][2];
+                //Exclude all squares from upper left 
+                for (int r = row; r < row + length - 2; r++)
+                {
+                    for (int c = col; c < col + row +length - 2; c++)
+                    {
+                        //Delete all the smaller squares start at this tile
+                        List<int[]> smallers = squaresFormed.FindAll(s => s[0] == r && s[1] == c && s[2] < length);
+                        foreach(int[] s in smallers)
+                        {
+                            squaresFormed.Remove(s);
+                        }
+                    }
+                }
+            }
+            index++;
+        }
+        
     }
 
     /*
