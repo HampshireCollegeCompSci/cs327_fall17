@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using SimpleJSON;
+//using SimpleJSON;
 
 public class Grid : MonoBehaviour
 {
@@ -15,20 +15,21 @@ public class Grid : MonoBehaviour
     public event SquareFormedHandler SquareFormed;
 
     [SerializeField]
-    [Tooltip("The width of the Grid. Populated by JSON.")]
-    int width;
+    [Tooltip("The width of the Grid. Populated by Remote Variables.")]
+    public int width;
     [SerializeField]
-    [Tooltip("The height of the Grid. Populated by JSON.")]
-    int height;
+    [Tooltip("The height of the Grid. Populated by Remote Variables.")]
+    public int height;
     [SerializeField]
-    [Tooltip("The base energy decay per turn. Populated by JSON.")]
-    int baseEnergyDecayRate;
+    [Tooltip("The base energy decay per turn. Populated by Remote Variables.")]
+    public int baseEnergyDecayRate;
     [SerializeField]
-    [Tooltip("The list of additional energy decayed from vestige of each level. Populated by JSON.")]
-    JSONArray decayRates;
+    [Tooltip("The list of additional energy decayed from vestige of each level. Populated by Remote Variables.")]
+    public string decayRatesString;
+    int[] decayRates; //Gets populated by Tune from decayRatesString
     [SerializeField]
-    [Tooltip("The maximum level a vestige can be. Populated by JSON.")]
-    int vestigeMaxLevel;
+    [Tooltip("The maximum level a vestige can be. Populated by Remote Variables.")]
+    public int vestigeMaxLevel;
     [SerializeField]
     [Tooltip("The Tile prefab to instantiate.")]
     GameObject prefabTile;
@@ -48,11 +49,8 @@ public class Grid : MonoBehaviour
     [Tooltip("Reference to the VestigeCounter instance.")]
     VestigeCounter vestigeCounter;
     [SerializeField]
-    [Tooltip("Reference to the Tuning JSON.")]
-    TextAsset tuningJSON;
-    [SerializeField]
-    [Tooltip("Energy earned per Tile cleared. Populated by JSON.")]
-    int energyPerCell = 1;
+    [Tooltip("Energy earned per Tile cleared. Populated by Remote Variables.")]
+    public int energyPerCell;
     [SerializeField]
     [Tooltip("Reference to the RectTransform component of this Grid.")]
     RectTransform rectTransform;
@@ -128,13 +126,26 @@ public class Grid : MonoBehaviour
 
     private void Tune()
     {
-        var json = JSON.Parse(tuningJSON.ToString());
-        width = json["grid width"].AsInt;
-        height = json["grid height"].AsInt;
-        baseEnergyDecayRate = json["base energy decay rate"].AsInt;
-        decayRates = json["vestige decay rates"].AsArray;
-        vestigeMaxLevel = json["vestige max level"].AsInt;
-        energyPerCell = json["energy per cell cleared"];
+        //var json = JSON.Parse(tuningJSON.ToString());
+        //width = json["grid width"].AsInt;
+        //height = json["grid height"].AsInt;
+        //baseEnergyDecayRate = json["base energy decay rate"].AsInt;
+        //decayRates = json["vestige decay rates"].AsArray;
+        //vestigeMaxLevel = json["vestige max level"].AsInt;
+        //energyPerCell = json["energy per cell cleared"];
+        string[] tempArray = decayRatesString.Split(',');
+        int j;
+        decayRates = new int[tempArray.Length];
+        for (int i = 0; i < tempArray.Length; i++)
+        {
+            if (int.TryParse(tempArray[i],out j))
+            {
+                decayRates[i] = j;
+            }
+            else{
+                Debug.Log("Could not parse Remote Variable Decay Rates String");
+            }
+        }
     }
 
     private void Start()

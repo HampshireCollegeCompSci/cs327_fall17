@@ -4,16 +4,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using SimpleJSON;
+//using SimpleJSON;
 
 public class EnergyCounter : MonoBehaviour
 {
     [SerializeField]
-    [Tooltip("The amount of energy the player currently has. The initial amount is populated by JSON.")]
+    [Tooltip("The amount of energy the player currently has. The initial amount is Remote Settings. This is just for debug viewing.")]
     int energy = 10;
     [SerializeField]
-    [Tooltip("The maximum amount of energy the player can have in the energy meter. Populated by JSON.")]
-    int maxEnergyInMeter = 60;
+    [Tooltip("The maximum amount of energy the player can have in the energy meter. Populated by Remote Settings.")]
+    public int maxEnergyInMeter;
     [SerializeField]
     [Tooltip("Reference to the energy UI text.")]
     Text textEnergy;
@@ -32,15 +32,20 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the EnergyMeter instance.")]
     EnergyMeter energyMeter;
+    [SerializeField]
+    [Tooltip("Populated by Remote Settings")]
+    public int initialEnergy;
 
     // The highest amount of energy achieved over the course of the game.
     int peakEnergy;
 
     void Tune()
     {
-        var json = JSON.Parse(tuningJSON.ToString());
-        energy = json["starting energy"].AsInt;
-        maxEnergyInMeter = json["max energy in meter"].AsInt;
+        //var json = JSON.Parse(tuningJSON.ToString());
+        //energy = json["starting energy"].AsInt;
+        energy = initialEnergy; //populated by Remote Settings
+        //maxEnergyInMeter will be controlled by Remote Settings
+        //maxEnergyInMeter = json["max energy in meter"].AsInt;
     }
 
     void Start()

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224484006560545138}
   - component: {fileID: 222010277845751414}
   - component: {fileID: 114916408207649430}
+  - component: {fileID: 114644015843119908}
   m_Layer: 5
   m_Name: Energy
   m_TagString: Untagged
@@ -229,6 +230,27 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114644015843119908
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1243157980227324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52774eb4e08ee1f44a312b607e84fb4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DriveableProperty:
+    m_Fields:
+    - m_Target: {fileID: 114916408207649430}
+      m_FieldPath: initialEnergy
+      m_RSKeyName: startingEnergy
+      m_Type: int
+    - m_Target: {fileID: 114916408207649430}
+      m_FieldPath: maxEnergyInMeter
+      m_RSKeyName: maxEnergyInMeter
+      m_Type: int
 --- !u!114 &114712294827328152
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -304,7 +326,6 @@ MonoBehaviour:
   percentOfMax: 0
   maxEnergy: 0
   ourEnergyCounter: {fileID: 114916408207649430}
-  sizeDelta: 0
 --- !u!114 &114916408207649430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,8 +337,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b76a4c52256820941aed90812d02dfe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energy: 10
-  maxEnergyInMeter: 60
+  energy: 2
+  maxEnergyInMeter: 0
   textEnergy: {fileID: 114712294827328152}
   gameFlow: {fileID: 0}
   tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
@@ -325,6 +346,7 @@ MonoBehaviour:
   risingTextPrefab: {fileID: 1846777300264232, guid: d69eabf2b54ae164db3861b11fa816b2,
     type: 2}
   energyMeter: {fileID: 114893180769059516}
+  initialEnergy: 0
 --- !u!222 &222010277845751414
 CanvasRenderer:
   m_ObjectHideFlags: 1

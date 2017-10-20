@@ -18,9 +18,6 @@ public class EnergyMeter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the EnergyCounter.")]
     EnergyCounter ourEnergyCounter;
-    [SerializeField]
-    [Tooltip("Size Delta. For debug viewing purposes only.")]
-    float sizeDelta;//For keeping track of our y sizeDelta
 
 
     // Use this for initialization

@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 222066008711162748}
   - component: {fileID: 114513065419024280}
   - component: {fileID: 114265381854382034}
+  - component: {fileID: 114392134107520436}
   m_Layer: 0
   m_Name: Grid
   m_TagString: Untagged
@@ -61,6 +62,7 @@ MonoBehaviour:
   width: 8
   height: 8
   baseEnergyDecayRate: 0
+  decayRatesString: 
   vestigeMaxLevel: 0
   prefabTile: {fileID: 1107375466928364, guid: f21d4bcd0075aa74a82be9396f44f756, type: 2}
   prefabSpace: {fileID: 1842248367832416, guid: aa00b6ee3116e044fa9b37ca96f65aaf,
@@ -69,7 +71,6 @@ MonoBehaviour:
   energyCounter: {fileID: 0}
   turnCounter: {fileID: 0}
   vestigeCounter: {fileID: 0}
-  tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
   energyPerCell: 1
   rectTransform: {fileID: 224804674211477668}
   energyGainController: {fileID: 0}
@@ -114,6 +115,43 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114392134107520436
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1825348459886726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52774eb4e08ee1f44a312b607e84fb4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DriveableProperty:
+    m_Fields:
+    - m_Target: {fileID: 114185976160417868}
+      m_FieldPath: baseEnergyDecayRate
+      m_RSKeyName: baseEnergyDecayRate
+      m_Type: int
+    - m_Target: {fileID: 114185976160417868}
+      m_FieldPath: height
+      m_RSKeyName: gridHeight
+      m_Type: int
+    - m_Target: {fileID: 114185976160417868}
+      m_FieldPath: width
+      m_RSKeyName: gridWidth
+      m_Type: int
+    - m_Target: {fileID: 114185976160417868}
+      m_FieldPath: energyPerCell
+      m_RSKeyName: energyPerCellCleared
+      m_Type: int
+    - m_Target: {fileID: 114185976160417868}
+      m_FieldPath: decayRatesString
+      m_RSKeyName: vestigeDecayRates
+      m_Type: string
+    - m_Target: {fileID: 114185976160417868}
+      m_FieldPath: vestigeMaxLevel
+      m_RSKeyName: vestigeMaxLevel
+      m_Type: int
 --- !u!114 &114513065419024280
 MonoBehaviour:
   m_ObjectHideFlags: 1

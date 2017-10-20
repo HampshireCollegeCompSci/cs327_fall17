@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222269075532248070}
   - component: {fileID: 114008249746637138}
   - component: {fileID: 114997386094656584}
+  - component: {fileID: 114339924597388494}
   m_Layer: 0
   m_Name: FadingTile
   m_TagString: Untagged
@@ -56,6 +57,23 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114339924597388494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501592787393966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52774eb4e08ee1f44a312b607e84fb4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DriveableProperty:
+    m_Fields:
+    - m_Target: {fileID: 114997386094656584}
+      m_FieldPath: fadeTime
+      m_RSKeyName: clearedCellFadeTime
+      m_Type: float
 --- !u!114 &114997386094656584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,7 +85,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c08d4361a8d54750ba90094f1d33ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
   imageToFade: {fileID: 114008249746637138}
   fadeTime: 0
   prefabTileClearing: {fileID: 1730579715590450, guid: 0ffbfa98f22f6fc41886ffba160f2404,
