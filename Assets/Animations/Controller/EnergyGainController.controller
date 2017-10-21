@@ -98,6 +98,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: active
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: energyGained
+    m_EventTreshold: 17
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102148518941480212}
   m_Solo: 0
@@ -122,6 +125,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: active
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: energyGained
+    m_EventTreshold: 10
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102769692095300698}
   m_Solo: 0
@@ -167,6 +173,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: active
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: energyGained
+    m_EventTreshold: 13
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102705482853176016}
   m_Solo: 0
@@ -233,6 +242,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: active
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: energyGained
+    m_EventTreshold: 21
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1102684918971167944}
   m_Solo: 0
