@@ -8,5 +8,6 @@
 	"vestige decay rates": [1, 2, 5],
 	"energy per cell cleared" : 1,
 	"max energy in meter" : 60,
+	"energy level animation" : [9, 12, 16, 20],
 	"asteroids can spawn in filled cells" : false
 }

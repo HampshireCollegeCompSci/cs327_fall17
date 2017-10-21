@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using SimpleJSON;
+using UnityEditor;
+using UnityEditor.Animations;
 
 public class EnergyCounter : MonoBehaviour
 {
@@ -14,6 +16,9 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("The maximum amount of energy the player can have in the energy meter. Populated by JSON.")]
     int maxEnergyInMeter = 60;
+    [SerializeField]
+    [Tooltip("The list of value to separate the levels of energy gained. Populated by JSON.")]
+    JSONArray energyLevel;
     [SerializeField]
     [Tooltip("Reference to the energy UI text.")]
     Text textEnergy;
@@ -32,6 +37,10 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the EnergyMeter instance.")]
     EnergyMeter energyMeter;
+    [SerializeField]
+    [Tooltip("Reference to energy gain animator.")]
+    Animator energyGainController;
+    
 
     // The highest amount of energy achieved over the course of the game.
     int peakEnergy;
@@ -41,13 +50,61 @@ public class EnergyCounter : MonoBehaviour
         var json = JSON.Parse(tuningJSON.ToString());
         energy = json["starting energy"].AsInt;
         maxEnergyInMeter = json["max energy in meter"].AsInt;
+        energyLevel = json["energy level animation"].AsArray;
     }
 
     void Start()
     {
         Tune();
-
+        SetEnergyLevel();
         UpdateEnergy();
+    }
+
+    public void SetEnergyLevel()
+    {
+        AnimatorController energyController = (AnimatorController)energyGainController.runtimeAnimatorController;
+        AnimatorStateMachine stateMachine = energyController.layers[0].stateMachine;
+        var states = stateMachine.states;
+        for (int i = 0; i < states.Length; i++)
+        {
+            AnimatorState state = states[i].state;
+            if(state.name.Equals("Inactive"))
+            {
+                for (int j = 0; j < state.transitions.Length; j++)
+                {
+                    AnimatorStateTransition tran = state.transitions[j];
+                    string stateName = tran.destinationState.name;
+                    if (tran.conditions.Length == 1)
+                    {
+                        tran.AddCondition(AnimatorConditionMode.Less, 0, "energyGained");
+                    }
+
+                    for (int l = 0; l < tran.conditions.Length; l++)
+                    {
+                        if (tran.conditions[l].parameter.Equals("energyGained"))
+                        {
+                            switch (stateName) {
+                                case "EnergyGain(Very Low)": tran.RemoveCondition(tran.conditions[l]);
+                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[0] + 1, "energyGained");
+                                    break;
+                                case "EnergyGain(Low)":
+                                    tran.RemoveCondition(tran.conditions[l]);
+                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[1] + 1, "energyGained");
+                                    break;
+                                case "EnergyGain(Medium)":
+                                    tran.RemoveCondition(tran.conditions[l]);
+                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[2] + 1, "energyGained");
+                                    break;
+                                case "EnergyGain(High)":
+                                    tran.RemoveCondition(tran.conditions[l]);
+                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[3] + 1, "energyGained");
+                                    break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public void AddEnergy(int amount)
