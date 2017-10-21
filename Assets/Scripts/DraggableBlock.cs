@@ -128,12 +128,16 @@ public class DraggableBlock : MonoBehaviour
         {
             for (int c = 0; c < width; c++)
             {
-                tiles[r, c].Fill(block.GetTileType(r, c));
+                tiles[r, c].Duplicate(block.GetTileData(r, c));
+                //tiles[r, c].Fill(block.GetTileType(r, c));
+                //tiles[r, c].SetVestigeLevel(block.GetVestigeLevel(r, c));
+                /*
                 // Unoccupied Tiles should not be visible.
                 if (tiles[r, c].GetTileType() == TileData.TileType.Unoccupied)
                 {
                     //tiles[r, c].EnableSpriteRenderer(false);
                 }
+                */
             }
         }
         UpdateAvailableSpaces();
@@ -179,6 +183,11 @@ public class DraggableBlock : MonoBehaviour
     public TileData.TileType GetTileType(int row, int col)
     {
         return tiles[row, col].GetTileType();
+    }
+
+    public TileData GetTileData(int row, int col)
+    {
+        return block.GetTileData(row, col);
     }
 
 	public void TurnBlockImageOff() 
