@@ -76,23 +76,32 @@ public class EnergyCounter : MonoBehaviour
                     string stateName = tran.destinationState.name;
                     if (tran.conditions.Length == 1)
                     {
-                        if (stateName.Equals("EnergyGain(Very Low)"))
+                        tran.AddCondition(AnimatorConditionMode.Less, 0, "energyGained");
+                    }
+
+                    for (int l = 0; l < tran.conditions.Length; l++)
+                    {
+                        if (tran.conditions[l].parameter.Equals("energyGained"))
                         {
-                            tran.AddCondition(AnimatorConditionMode.Less, energyLevel[0] + 1, "energyGained");
+                            switch (stateName) {
+                                case "EnergyGain(Very Low)": tran.RemoveCondition(tran.conditions[l]);
+                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[0] + 1, "energyGained");
+                                    break;
+                                case "EnergyGain(Low)":
+                                    tran.RemoveCondition(tran.conditions[l]);
+                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[1] + 1, "energyGained");
+                                    break;
+                                case "EnergyGain(Medium)":
+                                    tran.RemoveCondition(tran.conditions[l]);
+                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[2] + 1, "energyGained");
+                                    break;
+                                case "EnergyGain(High)":
+                                    tran.RemoveCondition(tran.conditions[l]);
+                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[3] + 1, "energyGained");
+                                    break;
+                            }
                         }
-                        else if (stateName.Equals("EnergyGain(Low)"))
-                        {
-                            tran.AddCondition(AnimatorConditionMode.Less, energyLevel[1] + 1, "energyGained");
-                        }
-                        else if (stateName.Equals("EnergyGain(Medium)"))
-                        {
-                            tran.AddCondition(AnimatorConditionMode.Less, energyLevel[2] + 1, "energyGained");
-                        }
-                        else if (stateName.Equals("EnergyGain(High)"))
-                        {
-                            tran.AddCondition(AnimatorConditionMode.Less, energyLevel[3] + 1, "energyGained");
-                        }
-                    } 
+                    }
                 }
             }
         }
