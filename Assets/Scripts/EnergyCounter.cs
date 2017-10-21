@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using SimpleJSON;
-using UnityEditor;
-using UnityEditor.Animations;
+//using UnityEditor;
+//using UnityEditor.Animations;
 
 public class EnergyCounter : MonoBehaviour
 {
@@ -37,9 +37,9 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the EnergyMeter instance.")]
     EnergyMeter energyMeter;
-    [SerializeField]
+    /*[SerializeField]
     [Tooltip("Reference to energy gain animator.")]
-    Animator energyGainController;
+    Animator energyGainController;*/
     
 
     // The highest amount of energy achieved over the course of the game.
@@ -50,17 +50,17 @@ public class EnergyCounter : MonoBehaviour
         var json = JSON.Parse(tuningJSON.ToString());
         energy = json["starting energy"].AsInt;
         maxEnergyInMeter = json["max energy in meter"].AsInt;
-        energyLevel = json["energy level animation"].AsArray;
+        //energyLevel = json["energy level animation"].AsArray;
     }
 
     void Start()
     {
         Tune();
-        SetEnergyLevel();
+        //SetEnergyLevel();
         UpdateEnergy();
     }
 
-    public void SetEnergyLevel()
+    /*public void SetEnergyLevel()
     {
         AnimatorController energyController = (AnimatorController)energyGainController.runtimeAnimatorController;
         AnimatorStateMachine stateMachine = energyController.layers[0].stateMachine;
@@ -105,7 +105,7 @@ public class EnergyCounter : MonoBehaviour
                 }
             }
         }
-    }
+    }*/
 
     public void AddEnergy(int amount)
     {
