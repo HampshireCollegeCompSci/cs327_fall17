@@ -24,6 +24,9 @@ public class Grid : MonoBehaviour
     [Tooltip("The base energy decay per turn. Populated by JSON.")]
     int baseEnergyDecayRate;
     [SerializeField]
+    [Tooltip("Base energy decay rate bonus. Set by VoidEventController.")]
+    int baseEnergyDecayRateBonus = 0;
+    [SerializeField]
     [Tooltip("The list of additional energy decayed from vestige of each level. Populated by JSON.")]
     JSONArray decayRates;
     [SerializeField]
@@ -60,15 +63,19 @@ public class Grid : MonoBehaviour
     [Tooltip("Reference to energy gain animator.")]
     Animator energyGainController;
     [SerializeField]
+    [Tooltip("Whether or not asteroids can spawn in filled cells.")]
+    bool asteroidsCanSpawnInFilledCells;
+    [SerializeField]
     [Tooltip("Placeholder sprite for square outline")]
     GameObject outLinePrefab;
+    [SerializeField]
+    [Tooltip("The underlying array of Tiles.")]
+    Tile[,] tiles;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
     // The height of one Tile, calculated compared to the Grid's dimensions.
     private float tileHeight;
-
-    Tile[,] tiles;
 
     Dictionary<Vector2, List<Space>> spaces = new Dictionary<Vector2, List<Space>>();
 
@@ -134,7 +141,8 @@ public class Grid : MonoBehaviour
         baseEnergyDecayRate = json["base energy decay rate"].AsInt;
         decayRates = json["vestige decay rates"].AsArray;
         vestigeMaxLevel = json["vestige max level"].AsInt;
-        energyPerCell = json["energy per cell cleared"];
+        energyPerCell = json["energy per cell cleared"].AsInt;
+        asteroidsCanSpawnInFilledCells = json["asteroids can spawn in filled cells"].AsBool;
     }
 
     private void Start()
@@ -356,6 +364,7 @@ public class Grid : MonoBehaviour
     }
     */
 
+    // IMPORTANT: Don't forget about the additional WriteBlock overload below!
     public GridBlock WriteBlock(int row, int col, Block block)
     {
         //List<Coordinate> coords = new List<Coordinate>();
@@ -366,7 +375,8 @@ public class Grid : MonoBehaviour
                 if (block.GetIsOccupied(r, c))
                 {
                     Tile theTile = tiles[row + r, col + c];
-                    theTile.Fill(block.GetTileType(r, c));
+                    //theTile.Fill(block.GetTileType(r, c));
+                    theTile.Duplicate(block.GetTileData(r, c));
 
                     //Note x is col and y is row
                     //coords.Add(new Coordinate(x + c, y + r));
@@ -391,7 +401,9 @@ public class Grid : MonoBehaviour
                 if (block.GetIsOccupied(r, c))
                 {
                     Tile theTile = tiles[row + r, col + c];
-                    theTile.Fill(block.GetTileType(r, c));
+                    theTile.Duplicate(block.GetTileData(r, c));
+
+                    //theTile.Fill(block.GetTileType(r, c));
                     theTile.SetSpriteAbsolute(block.GetSprite(r, c));
 
                     //Note x is col and y is row
@@ -645,7 +657,8 @@ public class Grid : MonoBehaviour
                 {
                     for (int i = c; i < c + length; i++)
                     {
-                        if (!tiles[currentRow, i].GetIsOccupied())
+                        //if (!tiles[currentRow, i].GetIsOccupied())
+                        if (!TileData.GetIsClearableInSquare(tiles[currentRow, i].GetTileType()))
                         {
                             isLegal = false;
                             processed.Clear();
@@ -663,7 +676,8 @@ public class Grid : MonoBehaviour
                 {
                     for (int i = c; i < c + length; i++)
                     {
-                        if (copy[currentRow, i] == TileData.TileType.Unoccupied)
+                        //if (copy[currentRow, i] == TileData.TileType.Unoccupied)
+                        if (!TileData.GetIsClearableInSquare(copy[currentRow, i]))
                         {
                             isLegal = false;
                             processed.Clear();
@@ -671,7 +685,7 @@ public class Grid : MonoBehaviour
                         }
                         //Check to avoid repeated tiles, and 
                         //include only tiles in the original tiles array
-                        if (copy[currentRow, i] != TileData.TileType.Unoccupied &&
+                        if (TileData.GetIsClearableInSquare(copy[currentRow, i]) &&
                             processed.Find(t => t == tiles[currentRow, i]) == null)
                             processed.Add(tiles[currentRow, i]);
                         count++;
@@ -1295,18 +1309,21 @@ public class Grid : MonoBehaviour
         // Construct a temporary block copy so that the original does not get modified.
         Block testBlock = new Block(block);
 
-        // After four rotations, the block turns back to the beginning state.
-        for (int rotate = 0; rotate < 4; rotate++, testBlock.Rotate(true))
+        for (int flip = 0; flip < 2; ++flip)
         {
-            //localSpaces = GetSpaces(testBlock.GetWidth(), testBlock.GetHeight());
-            localSpaces = GetSpaces(1, 1);
-            for (int i = 0; i < localSpaces.Count; i++)
+            for (int rotate = 0; rotate < 4; ++rotate)
             {
-                if (localSpaces[i].CanBlockFit(testBlock))
+                localSpaces = GetSpacesFree(1, 1, testBlock);
+                for (int i = 0; i < localSpaces.Count; i++)
                 {
-                    return false;
+                    if (localSpaces[i].CanBlockFit(testBlock))
+                    {
+                        return false;
+                    }
                 }
+                testBlock.Rotate(true);
             }
+            testBlock.Flip();
         }
 
         return true;
@@ -1336,7 +1353,7 @@ public class Grid : MonoBehaviour
         {
             int vestigeNum = CountVestiges();
             vestigeCounter.SetCurrentVestiges(vestigeNum); //Set the current number of vestiges for analytics
-            int energyChange = baseEnergyDecayRate;
+            int energyChange = baseEnergyDecayRate + baseEnergyDecayRateBonus;
             //Calculating total energy drain
             for (int r = 0; r < height; r++)
                 for (int c = 0; c < width; c++)
@@ -1362,7 +1379,76 @@ public class Grid : MonoBehaviour
         gridBlocks.Remove(gb);
     }
 
-    //Called when a tiletype is changed
+    public void SetBaseEnergyDecayRateBonus(int newVal)
+    {
+        baseEnergyDecayRateBonus = newVal;
+    }
+
+    public List<Tile> GetReferencesToType(TileData.TileType type)
+    {
+        List<Tile> result = new List<Tile>();
+        foreach (Tile t in tiles)
+        {
+            if (t.GetTileType() == type)
+            {
+                result.Add(t);
+            }
+        }
+        return result;
+    }
+
+    public List<Tile> GetReferencesToOccupiedTiles()
+    {
+        List<Tile> result = new List<Tile>();
+        foreach (Tile t in tiles)
+        {
+            if (t.GetIsOccupied())
+            {
+                result.Add(t);
+            }
+        }
+        return result;
+    }
+
+    // Randomly adds a given number of asteroids to the Grid.
+    public void AddAsteroids(int asteroidCount)
+    {
+        int asteroidsAdded = 0;
+        List<Tile> refs = GetReferencesToType(TileData.TileType.Unoccupied);
+        // If asteroids can spawn in filled cells, add the occupied Tiles to the refs List.
+        if (asteroidsCanSpawnInFilledCells)
+        {
+            List<Tile> occupieds = GetReferencesToOccupiedTiles();
+            refs.AddRange(occupieds);
+        }
+
+        while (asteroidsAdded < asteroidCount && refs.Count != 0)
+        {
+            int index = UnityEngine.Random.Range(0, refs.Count);
+            Tile v = refs[index];
+            v.Fill(TileData.TileType.Asteroid);
+            refs.RemoveAt(index);
+            ++asteroidsAdded;
+        }
+
+        blockSpawner.ForceUpdateSpaceInformation();
+    }
+
+    // Clear all asteroids on the Grid.
+    public void ClearAllAsteroids()
+    {
+        foreach (Tile t in tiles)
+        {
+            if (t.GetTileType() == TileData.TileType.Asteroid)
+            {
+                t.Clear();
+            }
+        }
+
+        blockSpawner.ForceUpdateSpaceInformation();
+    }
+
+    // Callback function for when a tiletype is changed.
     private void Tile_Changed(TileData.TileType newType)
     {
         //If a type is changed to Unoccupied, then add energyPerCell energy
