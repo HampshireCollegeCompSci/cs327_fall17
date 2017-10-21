@@ -83,6 +83,8 @@ public class Grid : MonoBehaviour
 
     List<Outline> outlines;
 
+    SnapLocation prevSnapLocation;
+
     //Four lists storing lists of four direction of L-shapes respectively.
     //List<LShape> topLeft;
     //List<LShape> topRight;
@@ -93,26 +95,31 @@ public class Grid : MonoBehaviour
     {
         Vector3[] vertices = new Vector3[4];
         int[] location = new int[3];
-        GameObject outlineObj;
-        int nextPos;
+        GameObject[] outlineObj;
+        int[] nextPos;
 
-        public Outline(GameObject obj, int[] loc, Vector3[] ver)
+        public Outline(GameObject[] obj, int[] loc, Vector3[] ver, int[] nPos)
         {
             outlineObj = obj;
             location = loc;
             vertices = ver;
-            nextPos = 1;
+            nextPos = nPos;
+
+            for (int i = 0; i < 4; i++)
+            {
+                outlineObj[i].transform.localPosition = vertices[i];
+            }
         }
 
-        public void ChangeTarget()
+        public void ChangeTarget(int i)
         {
-            if (nextPos == 3)
-                nextPos = 0;
+            if (nextPos[i] == 3)
+                nextPos[i] = 0;
             else
-                nextPos++;
+                nextPos[i]++;      
         }
 
-        public GameObject GetOutlineObject()
+        public GameObject[] GetOutlineObject()
         {
             return outlineObj;
         }
@@ -127,9 +134,15 @@ public class Grid : MonoBehaviour
             return vertices;
         }
 
-        public int NextPos()
+        public int[] NextPos()
         {
             return nextPos;
+        }
+
+        public void DesctroyObject()
+        {
+            foreach (GameObject obj in outlineObj)
+                Destroy(obj);
         }
     }
 
@@ -197,29 +210,34 @@ public class Grid : MonoBehaviour
         {
             for (int i = 0; i < outlines.Count; i++)
             {
-                Vector3 currentPos = outlines[i].GetOutlineObject().transform.position;
-                Vector3 nextPos = outlines[i].GetVertices()[outlines[i].NextPos()];
-                if (Vector3.Distance(currentPos, nextPos) <= 5f){
-                    outlines[i].GetOutlineObject().transform.position = nextPos;
-                    outlines[i].ChangeTarget();
-                }
-                Vector3 direction = Vector3.right;
-                switch (outlines[i].NextPos())
+                for(int j = 0; j < 4; j++)
                 {
-                    case 0:
-                        direction = Vector3.up;
-                        break;
-                    case 1:
-                        direction = Vector3.right;
-                        break;
-                    case 2:
-                        direction = Vector3.down;
-                        break;
-                    case 3:
-                        direction = Vector3.left;
-                        break;
-                }
-                outlines[i].GetOutlineObject().transform.Translate(direction * Time.deltaTime * 500);
+                    //GameObject obj = outlines[i].GetOutlineObject()[j];
+                    Vector3 currentPos = outlines[i].GetOutlineObject()[j].transform.localPosition;
+                    Vector3 nextPos = outlines[i].GetVertices()[outlines[i].NextPos()[j]];
+                    if (Vector3.Distance(currentPos, nextPos) <= 10f)
+                    {
+                        outlines[i].GetOutlineObject()[j].transform.localPosition = nextPos;
+                        outlines[i].ChangeTarget(j);
+                    }
+                    Vector3 direction = Vector3.right;
+                    switch (outlines[i].NextPos()[j])
+                    {
+                        case 0:
+                            direction = Vector3.up;
+                            break;
+                        case 1:
+                            direction = Vector3.right;
+                            break;
+                        case 2:
+                            direction = Vector3.down;
+                            break;
+                        case 3:
+                            direction = Vector3.left;
+                            break;
+                    }
+                    outlines[i].GetOutlineObject()[j].transform.Translate(direction * Time.deltaTime * 700);
+                }           
             }
         }
     }
@@ -456,7 +474,13 @@ public class Grid : MonoBehaviour
         return on;
     }
 
-    public void AnticipatedHighlight(int row, int col, DraggableBlock newBlock, bool on)
+    public void ClearOutline()
+    {
+        outlines.ForEach(o => o.DesctroyObject());
+        outlines.Clear();
+    }
+
+    public void AnticipatedHighlight(int row, int col, DraggableBlock newBlock, bool on, SnapLocation snapLocation)
     {
         if (on)
         {
@@ -495,7 +519,7 @@ public class Grid : MonoBehaviour
                         }
                     }
                 }
-            } 
+            }
 
             if (anticipatedSquareTiles.Count != 0)
             {
@@ -505,9 +529,24 @@ public class Grid : MonoBehaviour
                 List<Tile> toVestiges = new List<Tile>(); //No effect. Just match parameter.
                 //Highligh anticipated vestiges
                 foreach (int[] s in anticipatedPotentialSquares)
-                {
                     FormVestiges(s[0], s[1], s[2], anticipatedSquareTiles, copy, ref toVestiges);
-                    DrawOutLine(s[0], s[1], s[2]);
+
+                if (prevSnapLocation == null)
+                {
+                    foreach (int[] s in anticipatedPotentialSquares)
+                        DrawOutLine(s[0], s[1], s[2]);
+
+                    prevSnapLocation = snapLocation;
+                }
+                else
+                {
+                    if (prevSnapLocation.gameObject.transform.position != snapLocation.gameObject.transform.position)
+                    {
+                        foreach (int[] s in anticipatedPotentialSquares)
+                            DrawOutLine(s[0], s[1], s[2]);
+
+                        prevSnapLocation = snapLocation;
+                    }
                 }
 
                 //Highlight all tiles that will form squares
@@ -516,11 +555,19 @@ public class Grid : MonoBehaviour
                     t.SetAnticipatedHighlight(TileData.TileType.Regular);
                 }
             }
+            else
+            {
+                ClearOutline();
+            }
         }
         else
         {
-            outlines.ForEach(o => Destroy(o.GetOutlineObject()));
-            outlines.Clear();
+            if (prevSnapLocation != snapLocation)
+            {
+                ClearOutline();
+                prevSnapLocation = null;
+            }
+
             for (int c = 0; c < GetWidth(); c++)
             {
                 for (int r = 0; r < GetHeight(); r++)
@@ -531,9 +578,6 @@ public class Grid : MonoBehaviour
                 }
             }
         }
-        
-
-
     }
 
     public bool CheckForMatches()
@@ -830,20 +874,30 @@ public class Grid : MonoBehaviour
     private void DrawOutLine(int r, int c, int length)
     {
         if (outlines.Find(o => o.GetLocation()[0] == r && o.GetLocation()[1] == c && o.GetLocation()[2] == length) == null)
-        {           
-            GameObject outline = Instantiate(outLinePrefab, transform, false);
-            outline.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        {
+            GameObject[] outlineObjs = new GameObject[4];
+            float randomR = UnityEngine.Random.Range(0, 1.0f);
+            float randomG = UnityEngine.Random.Range(0, 1.0f);
+            float randomB = UnityEngine.Random.Range(0, 1.0f);
+            for (int i = 0; i < 4; i++)
+            {
+                GameObject obj = Instantiate(outLinePrefab, transform, false);
+                obj.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                obj.GetComponent<Image>().color = new Color(randomR, randomG, randomB);
+                outlineObjs[i] = obj;
+            }
+
             float adjustX = GetTileWidth() / 2;
             float adjustY = GetTileHeight() / 2;
-            outline.transform.localPosition = new Vector3(tiles[r, c].transform.localPosition.x - adjustX,
+            Vector3 posUpperLeft = new Vector3(tiles[r, c].transform.localPosition.x - adjustX,
                                                           tiles[r, c].transform.localPosition.y + adjustY,
                                                           tiles[r, c].transform.localPosition.z);
-            Vector3 posUpperLeft = outline.transform.position;
             Vector3 posUpperRight = new Vector3(posUpperLeft.x + length * GetTileWidth(), posUpperLeft.y, posUpperLeft.z);
             Vector3 posLowerRight = new Vector3(posUpperRight.x, posUpperRight.y - length * GetTileHeight(), posUpperRight.z);
             Vector3 posLowerLeft = new Vector3(posLowerRight.x - length * GetTileWidth(), posLowerRight.y, posLowerRight.z);
             Vector3[] vertices = new Vector3[] { posUpperLeft, posUpperRight, posLowerRight, posLowerLeft };
-            outlines.Add(new Outline(outline, new int[] { r, c, length }, vertices));
+
+            outlines.Add(new Outline(outlineObjs, new int[] { r, c, length },vertices, new int[] { 1, 2, 3, 0}));          
         }
         
     }
