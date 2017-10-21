@@ -8,10 +8,6 @@ public class EnergyGainBehavior : StateMachineBehaviour {
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-        energyAnim = animator.GetComponent<Image>();
-        Color temp = energyAnim.color;
-        temp.a = 1f;
-        energyAnim.color = temp;
     }
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

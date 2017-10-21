@@ -1,9 +1,26 @@
 fileFormatVersion: 2
 guid: b28243e0ef22d2e40818928136515699
-timeCreated: 1507918458
+timeCreated: 1508595280
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Animation_Tap_0
+    21300002: Animation_Tap_1
+    21300004: Animation_Tap_2
+    21300006: Animation_Tap_3
+    21300008: Animation_Tap_4
+    21300010: Animation_Tap_5
+    21300012: Animation_Tap_6
+    21300014: Animation_Tap_7
+    21300016: Animation_Tap_8
+    21300018: Animation_Tap_9
+    21300020: Animation_Tap_10
+    21300022: Animation_Tap_11
+    21300024: Animation_Tap_12
+    21300026: Animation_Tap_13
+    21300028: Animation_Tap_14
+    21300030: Animation_Tap_15
+    21300032: Animation_Tap_16
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -89,7 +106,245 @@ TextureImporter:
     overridden: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Animation_Tap_0
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 19702
+        width: 1031
+        height: 975
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_1
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 18408
+        width: 1106
+        height: 1105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_2
+      rect:
+        serializedVersion: 2
+        x: 499
+        y: 17245
+        width: 1081
+        height: 919
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_3
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 15928
+        width: 1104
+        height: 1104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_4
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 14722
+        width: 1243
+        height: 1118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_5
+      rect:
+        serializedVersion: 2
+        x: 462
+        y: 13420
+        width: 1133
+        height: 1192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_6
+      rect:
+        serializedVersion: 2
+        x: 470
+        y: 12324
+        width: 1089
+        height: 1074
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_7
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 11096
+        width: 1177
+        height: 1140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_8
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 9791
+        width: 1324
+        height: 1219
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_9
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 8662
+        width: 1241
+        height: 1092
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_10
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 7458
+        width: 1234
+        height: 1077
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_11
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 6195
+        width: 1376
+        height: 1173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_12
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 5006
+        width: 1010
+        height: 1039
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_13
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 3854
+        width: 1188
+        height: 935
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_14
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 2494
+        width: 1099
+        height: 1158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_15
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 1312
+        width: 1076
+        height: 1114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Animation_Tap_16
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 93
+        width: 1032
+        height: 1055
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
     outline: []
     physicsShape: []
   spritePackingTag: 
