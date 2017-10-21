@@ -91,6 +91,16 @@ public class Block
         return tiles[row, col].Fill;
     }
 
+    public int GetVestigeLevel(int row, int col)
+    {
+        return tiles[row, col].GetVestigeLevel();
+    }
+
+    public TileData GetTileData(int row, int col)
+    {
+        return tiles[row, col];
+    }
+
     // Rotates the Block.
     public void Rotate(bool clockwise)
     {
@@ -185,5 +195,32 @@ public class Block
             }
         }
         return true;
+    }
+
+    // Returns the number of tiles of a certain type in the block.
+    public int GetTileCount(TileData.TileType type)
+    {
+        int count = 0;
+        foreach (TileData t in tiles)
+        {
+            if (t.GetTileType() == type)
+            {
+                ++count;
+            }
+        }
+        return count;
+    }
+
+    public List<TileData> GetReferencesToType(TileData.TileType type)
+    {
+        List<TileData> result = new List<TileData>();
+        foreach (TileData t in tiles)
+        {
+            if (t.GetTileType() == type)
+            {
+                result.Add(t);
+            }
+        }
+        return result;
     }
 }

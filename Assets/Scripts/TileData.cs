@@ -4,23 +4,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class TileData
 {
 	public enum TileType
 	{
+        Uninitialized,
         Unoccupied,
 		Regular,
-		Vestige
+		Vestige,
+        Asteroid
 	}
 
+    [SerializeField]
+    [Tooltip("The TileType of this TileData.")]
     TileType type;
-    int vestigeLevel;
+    [SerializeField]
+    [Tooltip("The level of the vestige, if applicable. 0 for all non-vestige tiles.")]
+    int vestigeLevel = 0;
 
     // Default constructor.
     public TileData()
     {
-        type = TileType.Unoccupied;
-        vestigeLevel = 0; //0 for all non-vestige tiles
+        type = TileType.Uninitialized;
     }
 
     public TileData(TileType newType)
@@ -32,15 +38,18 @@ public class TileData
     public TileData(TileData other)
     {
         type = other.type;
+        vestigeLevel = other.vestigeLevel;
     }
 
     public void Clear()
     {
-        type = TileType.Unoccupied;
+        //type = TileType.Unoccupied;
+        Fill(TileType.Unoccupied);
     }
 
     public void Fill(TileType newType)
     {
+        //vestigeLevel = 0;
         type = newType;
     }
 
@@ -62,5 +71,18 @@ public class TileData
     public int GetVestigeLevel()
     {
         return vestigeLevel;
+    }
+
+    public bool GetIsClearableInSquare()
+    {
+        return GetIsClearableInSquare(type);
+    }
+
+    // Returns true if the given TileType is clearable.
+    // This method essentially lists all of the clearable TileTypes.
+    public static bool GetIsClearableInSquare(TileData.TileType type)
+    {
+        return type == TileType.Regular ||
+            type == TileType.Vestige;
     }
 }

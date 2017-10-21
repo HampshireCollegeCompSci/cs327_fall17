@@ -20,23 +20,31 @@ public class Tile : MonoBehaviour
     [Tooltip("The sprites to use for Vestige state.")]
     Sprite[] spriteVestigeList;
     [SerializeField]
+    [Tooltip("The sprite to use for Asteroid state.")]
+    Sprite spriteAsteroid;
+    [SerializeField]
     [Tooltip("The fading tile prefab to instantiate.")]
     Transform fadingTilePrefab;
     [SerializeField]
-    [Tooltip("The sprite of regular Tile.")]
+    [Tooltip("The sprites to use for Regular state.")]
     Sprite[] tiles;
     [SerializeField]
     [Tooltip("The current Sprite of the Tile chosen in Fill. Does not necessarily match the current SpriteRenderer sprite.")]
     Sprite trueSprite;
-
-    // The underlying TileData.
+    [SerializeField]
+    [Tooltip("The underlying TileData.")]
     TileData data = new TileData();
 
+    /*
     private void Awake()
     {
-        SetSprite(data.GetTileType());
+        TileData.TileType myType = data.GetTileType();
+        SetSprite(myType);
         trueSprite = spriteRenderer.sprite;
+
+        Debug.Log("Tile.Awake.myType: " + myType);
     }
+    */
 
     public bool GetIsOccupied()
     {
@@ -52,7 +60,8 @@ public class Tile : MonoBehaviour
             if (newType == TileData.TileType.Unoccupied)
             {
                 // Create the fading visual effects if the Tile hasn't already been cleared.
-                if (previousType != TileData.TileType.Unoccupied)
+                if (previousType != TileData.TileType.Unoccupied &&
+                    previousType != TileData.TileType.Uninitialized)
                 {
                     CreateVanishVisualEffects();
                 }
@@ -76,7 +85,6 @@ public class Tile : MonoBehaviour
     {
         // Change this tile to unoccupied
         Fill(TileData.TileType.Unoccupied);
-        
     }
 
     // Called when the Tile is occupied and gets cleared.
@@ -97,9 +105,22 @@ public class Tile : MonoBehaviour
     }
 
     // Helper function.
+    public void Duplicate(TileData other)
+    {
+        TileData.TileType newType = other.GetTileType();
+        Fill(newType);
+        if (newType == TileData.TileType.Vestige)
+        {
+            int level = other.GetVestigeLevel();
+
+            //Debug.Log("Tile.Duplicate: other vestige level: " + level);
+
+            SetVestigeLevel(level);
+        }
+    }
     public void Duplicate(Tile other)
     {
-        Fill(other.GetTileType());
+        Duplicate(other.data);
     }
 
     public void SetSprite(TileData.TileType newType)
@@ -115,13 +136,12 @@ public class Tile : MonoBehaviour
                 int randomInt = Random.Range(0, tiles.Length);
                 newSprite = tiles[randomInt];
                 break;
-            /*
-            case TileData.TileType.Vacant:
-                newSprite = spriteVacant;
-                break;
-            */
             case TileData.TileType.Vestige:
                 newSprite = spriteVestigeList[0];
+                //SyncSpriteToVestigeLevel();
+                break;
+            case TileData.TileType.Asteroid:
+                newSprite = spriteAsteroid;
                 break;
         }
         spriteRenderer.sprite = newSprite;
@@ -181,15 +201,37 @@ public class Tile : MonoBehaviour
 
     public void SetVestigeLevel(int level)
     {
-        Sprite newSprite = spriteVestigeList[level - 1];
-        spriteRenderer.sprite = newSprite;
-        trueSprite = newSprite;
-
         data.SetVestigeLevel(level);
+        SyncSpriteToVestigeLevel();
     }
 
     public int GetVestigeLevel()
     {
         return data.GetVestigeLevel();
+    }
+
+    private void SyncSpriteToVestigeLevel()
+    {
+        int level = data.GetVestigeLevel();
+
+        //Debug.Log("Tile.SyncSpriteToVestigeLevel level: " + level);
+        
+        // Make sure the detected level of vestige isn't lower than 1.
+        // This will prevent IndexOutOfRangeExceptions.
+        if (level < 1)
+        {
+            level = 1;
+        }
+
+        Sprite newSprite = spriteVestigeList[level - 1];
+        spriteRenderer.sprite = newSprite;
+        trueSprite = newSprite;
+
+        //Debug.Log("newSprite: " + newSprite);
+    }
+
+    public bool GetIsClearableInSquare()
+    {
+        return data.GetIsClearableInSquare();
     }
 }

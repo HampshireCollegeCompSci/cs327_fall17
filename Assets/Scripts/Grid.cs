@@ -24,6 +24,9 @@ public class Grid : MonoBehaviour
     [Tooltip("The base energy decay per turn. Populated by JSON.")]
     int baseEnergyDecayRate;
     [SerializeField]
+    [Tooltip("Base energy decay rate bonus. Set by VoidEventController.")]
+    int baseEnergyDecayRateBonus = 0;
+    [SerializeField]
     [Tooltip("The list of additional energy decayed from vestige of each level. Populated by JSON.")]
     JSONArray decayRates;
     [SerializeField]
@@ -60,21 +63,27 @@ public class Grid : MonoBehaviour
     [Tooltip("Reference to energy gain animator.")]
     Animator energyGainController;
     [SerializeField]
+    [Tooltip("Whether or not asteroids can spawn in filled cells.")]
+    bool asteroidsCanSpawnInFilledCells;
+    [SerializeField]
     [Tooltip("Placeholder sprite for square outline")]
     GameObject outLinePrefab;
+    [SerializeField]
+    [Tooltip("The underlying array of Tiles.")]
+    Tile[,] tiles;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
     // The height of one Tile, calculated compared to the Grid's dimensions.
     private float tileHeight;
 
-    Tile[,] tiles;
-
     Dictionary<Vector2, List<Space>> spaces = new Dictionary<Vector2, List<Space>>();
 
     List<GridBlock> gridBlocks;
 
     List<Outline> outlines;
+
+    SnapLocation prevSnapLocation;
 
     //Four lists storing lists of four direction of L-shapes respectively.
     //List<LShape> topLeft;
@@ -86,26 +95,31 @@ public class Grid : MonoBehaviour
     {
         Vector3[] vertices = new Vector3[4];
         int[] location = new int[3];
-        GameObject outlineObj;
-        int nextPos;
+        GameObject[] outlineObj;
+        int[] nextPos;
 
-        public Outline(GameObject obj, int[] loc, Vector3[] ver)
+        public Outline(GameObject[] obj, int[] loc, Vector3[] ver, int[] nPos)
         {
             outlineObj = obj;
             location = loc;
             vertices = ver;
-            nextPos = 1;
+            nextPos = nPos;
+
+            for (int i = 0; i < 4; i++)
+            {
+                outlineObj[i].transform.localPosition = vertices[i];
+            }
         }
 
-        public void ChangeTarget()
+        public void ChangeTarget(int i)
         {
-            if (nextPos == 3)
-                nextPos = 0;
+            if (nextPos[i] == 3)
+                nextPos[i] = 0;
             else
-                nextPos++;
+                nextPos[i]++;      
         }
 
-        public GameObject GetOutlineObject()
+        public GameObject[] GetOutlineObject()
         {
             return outlineObj;
         }
@@ -120,9 +134,15 @@ public class Grid : MonoBehaviour
             return vertices;
         }
 
-        public int NextPos()
+        public int[] NextPos()
         {
             return nextPos;
+        }
+
+        public void DesctroyObject()
+        {
+            foreach (GameObject obj in outlineObj)
+                Destroy(obj);
         }
     }
 
@@ -134,7 +154,8 @@ public class Grid : MonoBehaviour
         baseEnergyDecayRate = json["base energy decay rate"].AsInt;
         decayRates = json["vestige decay rates"].AsArray;
         vestigeMaxLevel = json["vestige max level"].AsInt;
-        energyPerCell = json["energy per cell cleared"];
+        energyPerCell = json["energy per cell cleared"].AsInt;
+        asteroidsCanSpawnInFilledCells = json["asteroids can spawn in filled cells"].AsBool;
     }
 
     private void Start()
@@ -189,29 +210,34 @@ public class Grid : MonoBehaviour
         {
             for (int i = 0; i < outlines.Count; i++)
             {
-                Vector3 currentPos = outlines[i].GetOutlineObject().transform.position;
-                Vector3 nextPos = outlines[i].GetVertices()[outlines[i].NextPos()];
-                if (Vector3.Distance(currentPos, nextPos) <= 5f){
-                    outlines[i].GetOutlineObject().transform.position = nextPos;
-                    outlines[i].ChangeTarget();
-                }
-                Vector3 direction = Vector3.right;
-                switch (outlines[i].NextPos())
+                for(int j = 0; j < 4; j++)
                 {
-                    case 0:
-                        direction = Vector3.up;
-                        break;
-                    case 1:
-                        direction = Vector3.right;
-                        break;
-                    case 2:
-                        direction = Vector3.down;
-                        break;
-                    case 3:
-                        direction = Vector3.left;
-                        break;
-                }
-                outlines[i].GetOutlineObject().transform.Translate(direction * Time.deltaTime * 500);
+                    //GameObject obj = outlines[i].GetOutlineObject()[j];
+                    Vector3 currentPos = outlines[i].GetOutlineObject()[j].transform.localPosition;
+                    Vector3 nextPos = outlines[i].GetVertices()[outlines[i].NextPos()[j]];
+                    if (Vector3.Distance(currentPos, nextPos) <= 10f)
+                    {
+                        outlines[i].GetOutlineObject()[j].transform.localPosition = nextPos;
+                        outlines[i].ChangeTarget(j);
+                    }
+                    Vector3 direction = Vector3.right;
+                    switch (outlines[i].NextPos()[j])
+                    {
+                        case 0:
+                            direction = Vector3.up;
+                            break;
+                        case 1:
+                            direction = Vector3.right;
+                            break;
+                        case 2:
+                            direction = Vector3.down;
+                            break;
+                        case 3:
+                            direction = Vector3.left;
+                            break;
+                    }
+                    outlines[i].GetOutlineObject()[j].transform.Translate(direction * Time.deltaTime * 700);
+                }           
             }
         }
     }
@@ -356,6 +382,7 @@ public class Grid : MonoBehaviour
     }
     */
 
+    // IMPORTANT: Don't forget about the additional WriteBlock overload below!
     public GridBlock WriteBlock(int row, int col, Block block)
     {
         //List<Coordinate> coords = new List<Coordinate>();
@@ -366,7 +393,8 @@ public class Grid : MonoBehaviour
                 if (block.GetIsOccupied(r, c))
                 {
                     Tile theTile = tiles[row + r, col + c];
-                    theTile.Fill(block.GetTileType(r, c));
+                    //theTile.Fill(block.GetTileType(r, c));
+                    theTile.Duplicate(block.GetTileData(r, c));
 
                     //Note x is col and y is row
                     //coords.Add(new Coordinate(x + c, y + r));
@@ -391,7 +419,9 @@ public class Grid : MonoBehaviour
                 if (block.GetIsOccupied(r, c))
                 {
                     Tile theTile = tiles[row + r, col + c];
-                    theTile.Fill(block.GetTileType(r, c));
+                    theTile.Duplicate(block.GetTileData(r, c));
+
+                    //theTile.Fill(block.GetTileType(r, c));
                     theTile.SetSpriteAbsolute(block.GetSprite(r, c));
 
                     //Note x is col and y is row
@@ -420,6 +450,7 @@ public class Grid : MonoBehaviour
                     tiles[r, c].SetNormal();
                     //tiles[r, c].SetSprite(tiles[r, c].GetTileType());
                     tiles[r, c].SetSpriteToTrueSprite();
+					block.TurnBlockImageOn();
                 }
             }
         }
@@ -434,6 +465,7 @@ public class Grid : MonoBehaviour
                         //If can place here then set highlight
                         tiles[row + r, col + c].SetHighlight();
                         tiles[row + r, col + c].SetSprite(block.GetSprite(r, c));
+						block.TurnBlockImageOff();
                     }
                 }
             }
@@ -442,7 +474,13 @@ public class Grid : MonoBehaviour
         return on;
     }
 
-    public void AnticipatedHighlight(int row, int col, DraggableBlock newBlock, bool on)
+    public void ClearOutline()
+    {
+        outlines.ForEach(o => o.DesctroyObject());
+        outlines.Clear();
+    }
+
+    public void AnticipatedHighlight(int row, int col, DraggableBlock newBlock, bool on, SnapLocation snapLocation)
     {
         if (on)
         {
@@ -481,7 +519,7 @@ public class Grid : MonoBehaviour
                         }
                     }
                 }
-            } 
+            }
 
             if (anticipatedSquareTiles.Count != 0)
             {
@@ -491,9 +529,24 @@ public class Grid : MonoBehaviour
                 List<Tile> toVestiges = new List<Tile>(); //No effect. Just match parameter.
                 //Highligh anticipated vestiges
                 foreach (int[] s in anticipatedPotentialSquares)
-                {
                     FormVestiges(s[0], s[1], s[2], anticipatedSquareTiles, copy, ref toVestiges);
-                    DrawOutLine(s[0], s[1], s[2]);
+
+                if (prevSnapLocation == null)
+                {
+                    foreach (int[] s in anticipatedPotentialSquares)
+                        DrawOutLine(s[0], s[1], s[2]);
+
+                    prevSnapLocation = snapLocation;
+                }
+                else
+                {
+                    if (prevSnapLocation.gameObject.transform.position != snapLocation.gameObject.transform.position)
+                    {
+                        foreach (int[] s in anticipatedPotentialSquares)
+                            DrawOutLine(s[0], s[1], s[2]);
+
+                        prevSnapLocation = snapLocation;
+                    }
                 }
 
                 //Highlight all tiles that will form squares
@@ -502,11 +555,19 @@ public class Grid : MonoBehaviour
                     t.SetAnticipatedHighlight(TileData.TileType.Regular);
                 }
             }
+            else
+            {
+                ClearOutline();
+            }
         }
         else
         {
-            outlines.ForEach(o => Destroy(o.GetOutlineObject()));
-            outlines.Clear();
+            if (prevSnapLocation != snapLocation)
+            {
+                ClearOutline();
+                prevSnapLocation = null;
+            }
+
             for (int c = 0; c < GetWidth(); c++)
             {
                 for (int r = 0; r < GetHeight(); r++)
@@ -517,9 +578,6 @@ public class Grid : MonoBehaviour
                 }
             }
         }
-        
-
-
     }
 
     public bool CheckForMatches()
@@ -644,7 +702,8 @@ public class Grid : MonoBehaviour
                 {
                     for (int i = c; i < c + length; i++)
                     {
-                        if (!tiles[currentRow, i].GetIsOccupied())
+                        //if (!tiles[currentRow, i].GetIsOccupied())
+                        if (!TileData.GetIsClearableInSquare(tiles[currentRow, i].GetTileType()))
                         {
                             isLegal = false;
                             processed.Clear();
@@ -662,7 +721,8 @@ public class Grid : MonoBehaviour
                 {
                     for (int i = c; i < c + length; i++)
                     {
-                        if (copy[currentRow, i] == TileData.TileType.Unoccupied)
+                        //if (copy[currentRow, i] == TileData.TileType.Unoccupied)
+                        if (!TileData.GetIsClearableInSquare(copy[currentRow, i]))
                         {
                             isLegal = false;
                             processed.Clear();
@@ -670,7 +730,7 @@ public class Grid : MonoBehaviour
                         }
                         //Check to avoid repeated tiles, and 
                         //include only tiles in the original tiles array
-                        if (copy[currentRow, i] != TileData.TileType.Unoccupied &&
+                        if (TileData.GetIsClearableInSquare(copy[currentRow, i]) &&
                             processed.Find(t => t == tiles[currentRow, i]) == null)
                             processed.Add(tiles[currentRow, i]);
                         count++;
@@ -815,20 +875,30 @@ public class Grid : MonoBehaviour
     private void DrawOutLine(int r, int c, int length)
     {
         if (outlines.Find(o => o.GetLocation()[0] == r && o.GetLocation()[1] == c && o.GetLocation()[2] == length) == null)
-        {           
-            GameObject outline = Instantiate(outLinePrefab, transform, false);
-            outline.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        {
+            GameObject[] outlineObjs = new GameObject[4];
+            float randomR = UnityEngine.Random.Range(0, 1.0f);
+            float randomG = UnityEngine.Random.Range(0, 1.0f);
+            float randomB = UnityEngine.Random.Range(0, 1.0f);
+            for (int i = 0; i < 4; i++)
+            {
+                GameObject obj = Instantiate(outLinePrefab, transform, false);
+                obj.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                obj.GetComponent<Image>().color = new Color(randomR, randomG, randomB);
+                outlineObjs[i] = obj;
+            }
+
             float adjustX = GetTileWidth() / 2;
             float adjustY = GetTileHeight() / 2;
-            outline.transform.localPosition = new Vector3(tiles[r, c].transform.localPosition.x - adjustX,
+            Vector3 posUpperLeft = new Vector3(tiles[r, c].transform.localPosition.x - adjustX,
                                                           tiles[r, c].transform.localPosition.y + adjustY,
                                                           tiles[r, c].transform.localPosition.z);
-            Vector3 posUpperLeft = outline.transform.position;
             Vector3 posUpperRight = new Vector3(posUpperLeft.x + length * GetTileWidth(), posUpperLeft.y, posUpperLeft.z);
             Vector3 posLowerRight = new Vector3(posUpperRight.x, posUpperRight.y - length * GetTileHeight(), posUpperRight.z);
             Vector3 posLowerLeft = new Vector3(posLowerRight.x - length * GetTileWidth(), posLowerRight.y, posLowerRight.z);
             Vector3[] vertices = new Vector3[] { posUpperLeft, posUpperRight, posLowerRight, posLowerLeft };
-            outlines.Add(new Outline(outline, new int[] { r, c, length }, vertices));
+
+            outlines.Add(new Outline(outlineObjs, new int[] { r, c, length },vertices, new int[] { 1, 2, 3, 0}));          
         }
         
     }
@@ -1294,18 +1364,21 @@ public class Grid : MonoBehaviour
         // Construct a temporary block copy so that the original does not get modified.
         Block testBlock = new Block(block);
 
-        // After four rotations, the block turns back to the beginning state.
-        for (int rotate = 0; rotate < 4; rotate++, testBlock.Rotate(true))
+        for (int flip = 0; flip < 2; ++flip)
         {
-            //localSpaces = GetSpaces(testBlock.GetWidth(), testBlock.GetHeight());
-            localSpaces = GetSpaces(1, 1);
-            for (int i = 0; i < localSpaces.Count; i++)
+            for (int rotate = 0; rotate < 4; ++rotate)
             {
-                if (localSpaces[i].CanBlockFit(testBlock))
+                localSpaces = GetSpacesFree(1, 1, testBlock);
+                for (int i = 0; i < localSpaces.Count; i++)
                 {
-                    return false;
+                    if (localSpaces[i].CanBlockFit(testBlock))
+                    {
+                        return false;
+                    }
                 }
+                testBlock.Rotate(true);
             }
+            testBlock.Flip();
         }
 
         return true;
@@ -1335,7 +1408,7 @@ public class Grid : MonoBehaviour
         {
             int vestigeNum = CountVestiges();
             vestigeCounter.SetCurrentVestiges(vestigeNum); //Set the current number of vestiges for analytics
-            int energyChange = baseEnergyDecayRate;
+            int energyChange = baseEnergyDecayRate + baseEnergyDecayRateBonus;
             //Calculating total energy drain
             for (int r = 0; r < height; r++)
                 for (int c = 0; c < width; c++)
@@ -1361,7 +1434,76 @@ public class Grid : MonoBehaviour
         gridBlocks.Remove(gb);
     }
 
-    //Called when a tiletype is changed
+    public void SetBaseEnergyDecayRateBonus(int newVal)
+    {
+        baseEnergyDecayRateBonus = newVal;
+    }
+
+    public List<Tile> GetReferencesToType(TileData.TileType type)
+    {
+        List<Tile> result = new List<Tile>();
+        foreach (Tile t in tiles)
+        {
+            if (t.GetTileType() == type)
+            {
+                result.Add(t);
+            }
+        }
+        return result;
+    }
+
+    public List<Tile> GetReferencesToOccupiedTiles()
+    {
+        List<Tile> result = new List<Tile>();
+        foreach (Tile t in tiles)
+        {
+            if (t.GetIsOccupied())
+            {
+                result.Add(t);
+            }
+        }
+        return result;
+    }
+
+    // Randomly adds a given number of asteroids to the Grid.
+    public void AddAsteroids(int asteroidCount)
+    {
+        int asteroidsAdded = 0;
+        List<Tile> refs = GetReferencesToType(TileData.TileType.Unoccupied);
+        // If asteroids can spawn in filled cells, add the occupied Tiles to the refs List.
+        if (asteroidsCanSpawnInFilledCells)
+        {
+            List<Tile> occupieds = GetReferencesToOccupiedTiles();
+            refs.AddRange(occupieds);
+        }
+
+        while (asteroidsAdded < asteroidCount && refs.Count != 0)
+        {
+            int index = UnityEngine.Random.Range(0, refs.Count);
+            Tile v = refs[index];
+            v.Fill(TileData.TileType.Asteroid);
+            refs.RemoveAt(index);
+            ++asteroidsAdded;
+        }
+
+        blockSpawner.ForceUpdateSpaceInformation();
+    }
+
+    // Clear all asteroids on the Grid.
+    public void ClearAllAsteroids()
+    {
+        foreach (Tile t in tiles)
+        {
+            if (t.GetTileType() == TileData.TileType.Asteroid)
+            {
+                t.Clear();
+            }
+        }
+
+        blockSpawner.ForceUpdateSpaceInformation();
+    }
+
+    // Callback function for when a tiletype is changed.
     private void Tile_Changed(TileData.TileType newType)
     {
         //If a type is changed to Unoccupied, then add energyPerCell energy

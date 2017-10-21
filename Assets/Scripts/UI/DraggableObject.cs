@@ -83,7 +83,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             }
             else
             {
-                snapToAreas[0].Hover(gameObject, false); // Turn off highlights
+                TurnOffHovering();
             }
         }
     }
@@ -105,7 +105,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             else
             {
                 transform.localScale = nonDraggingScale; //Make the block samller
-                snapToAreas[0].Hover(gameObject, false); // Turn off highlights
+                TurnOffHovering();
                 transform.localPosition = defaultPosition;
             }
 
@@ -204,6 +204,14 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         snapDetectionOffset = offset;
 
         //Debug.Log("DraggableObject canvas transform x scale: " + canvasXScale);
+    }
+
+    private void TurnOffHovering()
+    {
+        if (snapToAreas.Count != 0)
+        {
+            snapToAreas[0].Hover(gameObject, false); // Turn off highlights
+        }
     }
 
     /*
