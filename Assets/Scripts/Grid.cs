@@ -97,6 +97,7 @@ public class Grid : MonoBehaviour
         int[] location = new int[3];
         GameObject[] outlineObj;
         int[] nextPos;
+        float?[] prevDistance;
 
         public Outline(GameObject[] obj, int[] loc, Vector3[] ver, int[] nPos)
         {
@@ -109,6 +110,8 @@ public class Grid : MonoBehaviour
             {
                 outlineObj[i].transform.localPosition = vertices[i];
             }
+
+            prevDistance = new float?[4]{ null, null, null, null };
         }
 
         public void ChangeTarget(int i)
@@ -143,6 +146,11 @@ public class Grid : MonoBehaviour
         {
             foreach (GameObject obj in outlineObj)
                 Destroy(obj);
+        }
+
+        public float?[] PrevDistance()
+        {
+            return prevDistance;
         }
     }
 
@@ -215,11 +223,19 @@ public class Grid : MonoBehaviour
                     //GameObject obj = outlines[i].GetOutlineObject()[j];
                     Vector3 currentPos = outlines[i].GetOutlineObject()[j].transform.localPosition;
                     Vector3 nextPos = outlines[i].GetVertices()[outlines[i].NextPos()[j]];
-                    if (Vector3.Distance(currentPos, nextPos) <= 10f)
+
+                    //Checking if the distance from current position to the next position actually
+                    //getting large. If this is true, we fix the position and switch to next target.
+                    if (outlines[i].PrevDistance()[j] == null)
+                        outlines[i].PrevDistance()[j] = Vector3.Distance(currentPos, nextPos);
+
+                    if (outlines[i].PrevDistance()[j] < Vector3.Distance(currentPos, nextPos))
                     {
                         outlines[i].GetOutlineObject()[j].transform.localPosition = nextPos;
                         outlines[i].ChangeTarget(j);
                     }
+
+                    outlines[i].PrevDistance()[j] = Vector3.Distance(currentPos, nextPos);
                     Vector3 direction = Vector3.right;
                     switch (outlines[i].NextPos()[j])
                     {
@@ -808,7 +824,7 @@ public class Grid : MonoBehaviour
                 }
                 else
                 {
-                    if (toRemove.Find(t => t == tiles[r, col - 1]) == null && copy[r, col - 1] != TileData.TileType.Unoccupied)
+                    if (toRemove.Find(t => t == tiles[r, col - 1]) == null && TileData.GetIsClearableInSquare(copy[r, col - 1]))
                         tiles[r, col - 1].SetAnticipatedHighlight(TileData.TileType.Vestige);
                 }                
             }        
@@ -827,7 +843,7 @@ public class Grid : MonoBehaviour
                 }
                 else
                 {
-                    if (toRemove.Find(t => t == tiles[r, col + length]) == null && copy[r, col + length] != TileData.TileType.Unoccupied)
+                    if (toRemove.Find(t => t == tiles[r, col + length]) == null && TileData.GetIsClearableInSquare(copy[r, col + length]))
                         tiles[r, col + length].SetAnticipatedHighlight(TileData.TileType.Vestige);
                 }
             }
@@ -846,7 +862,7 @@ public class Grid : MonoBehaviour
                 }
                 else
                 {
-                    if (toRemove.Find(t => t == tiles[row - 1, c]) == null && copy[row - 1, c] != TileData.TileType.Unoccupied)
+                    if (toRemove.Find(t => t == tiles[row - 1, c]) == null && TileData.GetIsClearableInSquare(copy[row - 1, c]))
                         tiles[row - 1, c].SetAnticipatedHighlight(TileData.TileType.Vestige);
                 }
             }
@@ -865,7 +881,7 @@ public class Grid : MonoBehaviour
                 }
                 else
                 {
-                    if (toRemove.Find(t => t == tiles[row + length, c]) == null && copy[row + length, c] != TileData.TileType.Unoccupied)
+                    if (toRemove.Find(t => t == tiles[row + length, c]) == null && TileData.GetIsClearableInSquare(copy[row + length, c]))
                         tiles[row + length, c].SetAnticipatedHighlight(TileData.TileType.Vestige);
                 }
             }
