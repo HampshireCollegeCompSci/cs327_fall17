@@ -45,7 +45,7 @@ public class Analytics : MonoBehaviour
 
     void SendData(GameFlow.GameOverCause cause)
     {
-        if (settings.areCheatsEnabled())
+        if (settings.AreCheatsEnabled())
         {
             //Debug.Log("Not sending analytics because cheats are enabled.");
             return; //Don't send analytics if cheats were enabled

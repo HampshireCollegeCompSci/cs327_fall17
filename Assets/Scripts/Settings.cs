@@ -31,13 +31,13 @@ public class Settings : MonoBehaviour {
     }
 
 
-    public bool areCheatsEnabled () //Tell us whether cheats are enabled or not
+    public bool AreCheatsEnabled () //Tell us whether cheats are enabled or not
     {
         //Debug.Log("Cheats are enabled: " + cheatsEnabled);
         return cheatsEnabled;
     }
 
-    public void setCheatsEnabled () //Set cheats enabled
+    public void SetCheatsEnabled () //Set cheats enabled
     {
         cheatsEnabled = true;
         //Debug.Log("Cheats are enabled: " + cheatsEnabled);

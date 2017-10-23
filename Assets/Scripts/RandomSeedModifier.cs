@@ -15,7 +15,7 @@ public class RandomSeedModifier : MonoBehaviour {
 
     public void SetRandomSeedToZero() {
 		Random.InitState (0);
-        settings.setCheatsEnabled(); //Tell the game that cheats have been enabled
+        settings.SetCheatsEnabled(); //Tell the game that cheats have been enabled
 	}
 
 }
