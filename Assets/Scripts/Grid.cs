@@ -936,7 +936,7 @@ public class Grid : MonoBehaviour
                 //Exclude all squares from upper left 
                 for (int r = row; r < row + length - 2; r++)
                 {
-                    for (int c = col; c < col + row +length - 2; c++)
+                    for (int c = col; c < col +length - 2; c++)
                     {
                         //Delete all the smaller squares start at this tile
                         List<int[]> smallers = squaresFormed.FindAll(s => s[0] == r && s[1] == c && s[2] < length);
