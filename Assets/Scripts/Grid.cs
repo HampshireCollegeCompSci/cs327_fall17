@@ -539,10 +539,8 @@ public class Grid : MonoBehaviour
 
             if (anticipatedSquareTiles.Count != 0)
             {
-                Debug.Log(anticipatedPotentialSquares.Count);
                 //Exclude smaller squares
                 SmallerSquareExclusion(ref anticipatedPotentialSquares);
-                Debug.Log(anticipatedPotentialSquares.Count);
 
                 List<Tile> toVestiges = new List<Tile>(); //No effect. Just match parameter.
                 //Highligh anticipated vestiges
