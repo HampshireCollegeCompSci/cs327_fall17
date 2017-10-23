@@ -81,6 +81,7 @@ public class BlockSpawner : MonoBehaviour
             //int formation = Random.Range(0, json["blocks"].Count);
             var w = json[blocksNormal][i]["width"].AsInt;
             var h = json[blocksNormal][i]["height"].AsInt;
+            int sprite = json[blocksNormal][i]["sprite"].AsInt;
             var cell = json[blocksNormal][i]["cells"].AsArray;
             var tiers = json[blocksNormal][i]["tiers"].AsArray;
             //Debug.Log(cell.ToString());
@@ -101,6 +102,7 @@ public class BlockSpawner : MonoBehaviour
                     {
                         block.Fill(row, col, TileData.TileType.Regular);
                     }
+                    block.SetSpriteIndex(row, col, sprite);
                 }
             }
 
