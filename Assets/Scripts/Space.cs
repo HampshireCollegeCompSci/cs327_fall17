@@ -72,6 +72,7 @@ public class Space : MonoBehaviour
         AudioController.Instance.PlaceTile();
         grid.WriteBlock(row, col, block); //We're placing this block. Apparently it's the external responsibility to make sure this will work
         grid.PlacedDraggableBlock(); // Notify the Grid that we just placed a DraggableBlock.
+        grid.CheckForMatches(); //To make sure the tile clearing is finsihed before destroying the gameObject
         Destroy(block.gameObject); //And now we're done with this GameObject - it's on the grid
     }
 
