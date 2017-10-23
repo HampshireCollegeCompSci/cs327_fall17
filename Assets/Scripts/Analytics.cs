@@ -28,6 +28,9 @@ public class Analytics : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the ClearedSquares instance.")]
     ClearedSquaresCounter clearedSquares;
+
+    Settings settings;
+
     // Use this for initialization
     void Start()
     {
@@ -35,11 +38,18 @@ public class Analytics : MonoBehaviour
         {
             gameFlow.GameLost += SendData;
         }
+            
+        settings = FindObjectOfType<Settings>(); //Can't pass in a reference because it's a singleton
 
     }
 
     void SendData(GameFlow.GameOverCause cause)
     {
+        if (settings.AreCheatsEnabled())
+        {
+            //Debug.Log("Not sending analytics because cheats are enabled.");
+            return; //Don't send analytics if cheats were enabled
+        }
         //Debug.Log("Sending analytics!");
         int finalScore = score.GetScore();
         int peakEnergy = energy.GetPeakEnergy();
@@ -48,8 +58,8 @@ public class Analytics : MonoBehaviour
         int currentVestiges = vestiges.GetCurrentVestiges();
         int finalClearedSquares = clearedSquares.GetClearedSquares();
         float timePlaying = Time.time;
-        string currentTimeStamp = System.DateTime.Now.ToString();
-        string allTheData = "timestamp;" + currentTimeStamp + ",score;" + finalScore + ",peakEnergy;" + peakEnergy + ",timePlaying;" + timePlaying + ",turnsPlayed;" + turnsPlayed + ",peakVestiges;" + peakVestiges + ",endingVestiges;" + currentVestiges + ",totalClearedSquares;" + finalClearedSquares;
+        //string currentTimeStamp = System.DateTime.Now.ToString();
+        //string allTheData = "timestamp;" + currentTimeStamp + ",score;" + finalScore + ",peakEnergy;" + peakEnergy + ",timePlaying;" + timePlaying + ",turnsPlayed;" + turnsPlayed + ",peakVestiges;" + peakVestiges + ",endingVestiges;" + currentVestiges + ",totalClearedSquares;" + finalClearedSquares;
         //Debug.Log("allTheData is" + allTheData);
         UnityEngine.Analytics.Analytics.CustomEvent("gameOver", new Dictionary<string, object>
         {
@@ -60,8 +70,8 @@ public class Analytics : MonoBehaviour
             { "turnsPlayed", turnsPlayed},
             { "peakVestiges", peakVestiges},
             { "endingVestiges", currentVestiges},
-            { "totalClearedSquares", finalClearedSquares},
-            { "allTheData", allTheData}
+            { "totalClearedSquares", finalClearedSquares}
+            //{ "allTheData", allTheData} //I removed this because it wasn't working anyway
 
   });
     }
