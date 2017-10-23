@@ -637,6 +637,54 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1993166276
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4595478796252814, guid: 74f75a43f93e54757b2a50dfc9ab1070, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 515.744
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595478796252814, guid: 74f75a43f93e54757b2a50dfc9ab1070, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1153.3064
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595478796252814, guid: 74f75a43f93e54757b2a50dfc9ab1070, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595478796252814, guid: 74f75a43f93e54757b2a50dfc9ab1070, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595478796252814, guid: 74f75a43f93e54757b2a50dfc9ab1070, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595478796252814, guid: 74f75a43f93e54757b2a50dfc9ab1070, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595478796252814, guid: 74f75a43f93e54757b2a50dfc9ab1070, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4595478796252814, guid: 74f75a43f93e54757b2a50dfc9ab1070, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 74f75a43f93e54757b2a50dfc9ab1070, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &1993166277 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114973821527164248, guid: 74f75a43f93e54757b2a50dfc9ab1070,
+    type: 2}
+  m_PrefabInternal: {fileID: 1993166276}
+  m_Script: {fileID: 11500000, guid: bd1132cd6b1ab4f0da90015f637ea064, type: 3}
 --- !u!1 &2047730675
 GameObject:
   m_ObjectHideFlags: 0
@@ -667,6 +715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c946e64314224b0b9a2e166fd73830c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: {fileID: 1993166277}
 --- !u!114 &2047730677
 MonoBehaviour:
   m_ObjectHideFlags: 0
