@@ -20,6 +20,9 @@ public class TileData
     [Tooltip("The TileType of this TileData.")]
     TileType type;
     [SerializeField]
+    [Tooltip("The index of the sprite in the relevant sprites array, if applicable.")]
+    int spriteIndex = 0;
+    [SerializeField]
     [Tooltip("The level of the vestige, if applicable. 0 for all non-vestige tiles.")]
     int vestigeLevel = 0;
 
@@ -39,6 +42,7 @@ public class TileData
     {
         type = other.type;
         vestigeLevel = other.vestigeLevel;
+        spriteIndex = other.spriteIndex;
     }
 
     public void Clear()
@@ -76,6 +80,16 @@ public class TileData
     public bool GetIsClearableInSquare()
     {
         return GetIsClearableInSquare(type);
+    }
+
+    public void SetSpriteIndex(int index)
+    {
+        spriteIndex = index;
+    }
+
+    public int GetSpriteIndex()
+    {
+        return spriteIndex;
     }
 
     // Returns true if the given TileType is clearable.

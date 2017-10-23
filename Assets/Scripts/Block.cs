@@ -101,6 +101,11 @@ public class Block
         return tiles[row, col];
     }
 
+    public void SetSpriteIndex(int row, int col, int spriteIndex)
+    {
+        tiles[row, col].SetSpriteIndex(spriteIndex);
+    }
+
     // Rotates the Block.
     public void Rotate(bool clockwise)
     {

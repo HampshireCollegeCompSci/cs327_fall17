@@ -117,6 +117,8 @@ public class Tile : MonoBehaviour
 
             SetVestigeLevel(level);
         }
+        int spriteIndex = other.GetSpriteIndex();
+        SetSpriteIndex(spriteIndex);
     }
     public void Duplicate(Tile other)
     {
@@ -133,8 +135,9 @@ public class Tile : MonoBehaviour
                 newSprite = spriteUnoccupied;
                 break;
             case TileData.TileType.Regular:
-                int randomInt = Random.Range(0, tiles.Length);
-                newSprite = tiles[randomInt];
+                //int randomInt = Random.Range(0, tiles.Length);
+                //newSprite = tiles[randomInt];
+                newSprite = tiles[data.GetSpriteIndex()];
                 break;
             case TileData.TileType.Vestige:
                 newSprite = spriteVestigeList[0];
@@ -233,5 +236,11 @@ public class Tile : MonoBehaviour
     public bool GetIsClearableInSquare()
     {
         return data.GetIsClearableInSquare();
+    }
+
+    public void SetSpriteIndex(int spriteIndex)
+    {
+        data.SetSpriteIndex(spriteIndex);
+        SetSprite(data.GetTileType());
     }
 }
