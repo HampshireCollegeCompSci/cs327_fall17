@@ -37,6 +37,9 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     [SerializeField]
     [Tooltip("The spped of scale lerping.")]
     float lerpSpeed;
+    [SerializeField]
+    [Tooltip("The prefab to instantiate for ScreenTapping.")]
+    GameObject prefabScreenTapping;
 
     protected static Vector2 piecePlacementOffset = new Vector2(80, 80);
 
@@ -56,6 +59,8 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         {
             startTime = Time.time;
             isDragging = true;
+            tappingEffect(eventData); //Play screenTapping animation
+
             RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out _pointerOffset);
 
             if (BeginDragEvent != null)
@@ -69,6 +74,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         if (isDraggable)
         {
+            tappingEffect(eventData); //Play screenTapping animation
             Vector2 localPointerPosition;
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasTransform, eventData.position, eventData.pressEventCamera, out localPointerPosition))
             {
@@ -98,6 +104,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         {
             startTime = Time.time;
             isDragging = false;
+            tappingEffect(eventData); //Play screenTapping animation
 
             SnapLocation locationToGoTo = GetClosestSnapLocation();
 
@@ -119,6 +126,14 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                 EndDragEvent(this);
             }
         }
+    }
+
+    public void tappingEffect(PointerEventData eventData)
+    {
+        Vector2 localPoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasTransform, eventData.position, eventData.pressEventCamera, out localPoint);
+        GameObject tappingAnim = Instantiate(prefabScreenTapping, canvasTransform, false);
+        tappingAnim.transform.localPosition = localPoint;
     }
 
     private void Start()

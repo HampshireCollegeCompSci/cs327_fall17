@@ -15,31 +15,29 @@ public class ScreenTapping : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
     [Tooltip("The prefab to instantiate for ScreenTapping.")]
     GameObject prefabScreenTapping;
 
-    Vector2 localPoint;
-
     public void OnBeginDrag(PointerEventData eventData)
     {
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPoint);
-        GameObject tappingAnim = Instantiate(prefabScreenTapping, transform, false);
-        tappingAnim.transform.localPosition = localPoint;
+        tappingEffect(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPoint);
-        GameObject tappingAnim = Instantiate(prefabScreenTapping, transform, false);
-        tappingAnim.transform.localPosition = localPoint;
+        tappingEffect(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPoint);
-        GameObject tappingAnim = Instantiate(prefabScreenTapping, transform, false);
-        tappingAnim.transform.localPosition = localPoint;
+        tappingEffect(eventData);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        tappingEffect(eventData);
+    }
+
+    public void tappingEffect(PointerEventData eventData)
+    {
+        Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPoint);
         GameObject tappingAnim = Instantiate(prefabScreenTapping, transform, false);
         tappingAnim.transform.localPosition = localPoint;
