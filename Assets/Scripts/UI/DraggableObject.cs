@@ -32,10 +32,10 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     [Tooltip("The size of the draggable block while not being dragged.")]
     Vector3 nonDraggingScale;
     [SerializeField]
-    [Tooltip("The size of the draggable block while not being dragged.")]
+    [Tooltip("The time when drag event begins.")]
     float startTime;
     [SerializeField]
-    [Tooltip("The size of the draggable block while not being dragged.")]
+    [Tooltip("The spped of scale lerping.")]
     float lerpSpeed;
 
     protected static Vector2 piecePlacementOffset = new Vector2(80, 80);
@@ -54,14 +54,9 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         if (isDraggable)
         {
+            startTime = Time.time;
             isDragging = true;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out _pointerOffset);
-
-            startTime = Time.time;
-            lerpSpeed = 4f;
-
-            //Return the draggable block to normal size once it is being dragged
-            transform.localScale = draggingScale;
 
             if (BeginDragEvent != null)
             {
@@ -72,8 +67,6 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
     public virtual void OnDrag(PointerEventData eventData)
     {
-        transform.localScale = Vector3.Lerp(nonDraggingScale, draggingScale, (Time.time - startTime) * lerpSpeed); //Lerping
-
         if (isDraggable)
         {
             Vector2 localPointerPosition;
@@ -104,6 +97,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         if (isDraggable)
         {
             isDragging = false;
+            transform.localScale = nonDraggingScale;
 
             SnapLocation locationToGoTo = GetClosestSnapLocation();
 
@@ -125,6 +119,19 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                 EndDragEvent(this);
             }
         }
+    }
+
+    private void Start()
+    {
+        lerpSpeed = 4f;   
+    }
+
+    private void Update()
+    {
+        if (isDragging)
+        {
+            transform.localScale = Vector3.Lerp(nonDraggingScale, draggingScale, (Time.time - startTime) * lerpSpeed); //Lerping
+        }    
     }
 
     // Gets the closest SnapLocation within the range of the DraggableObject.
