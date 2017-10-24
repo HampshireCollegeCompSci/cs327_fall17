@@ -45,6 +45,10 @@ MonoBehaviour:
   canvasTransform: {fileID: 0}
   rectTransform: {fileID: 224282880185419056}
   defaultPosition: {x: 0, y: 0}
+  draggingScale: {x: 0, y: 0, z: 0}
+  nonDraggingScale: {x: 0, y: 0, z: 0}
+  startTime: 0
+  lerpSpeed: 4
 --- !u!114 &114874842910425634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,6 +63,8 @@ MonoBehaviour:
   prefabTile: {fileID: 1107375466928364, guid: f21d4bcd0075aa74a82be9396f44f756, type: 2}
   grid: {fileID: 0}
   draggableObject: {fileID: 114306336029341024}
+  draggingScale: {x: 0, y: 0, z: 0}
+  nonDraggingScale: {x: 0, y: 0, z: 0}
 --- !u!222 &222230386565931088
 CanvasRenderer:
   m_ObjectHideFlags: 1

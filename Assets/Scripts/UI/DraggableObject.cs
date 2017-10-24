@@ -96,8 +96,8 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         if (isDraggable)
         {
+            startTime = Time.time;
             isDragging = false;
-            transform.localScale = nonDraggingScale;
 
             SnapLocation locationToGoTo = GetClosestSnapLocation();
 
@@ -123,15 +123,20 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
     private void Start()
     {
-        lerpSpeed = 4f;   
+        transform.localScale = nonDraggingScale;
     }
 
     private void Update()
     {
+        //Lerping between dragging scale and nondragging scale
         if (isDragging)
         {
-            transform.localScale = Vector3.Lerp(nonDraggingScale, draggingScale, (Time.time - startTime) * lerpSpeed); //Lerping
-        }    
+            transform.localScale = Vector3.Lerp(nonDraggingScale, draggingScale, (Time.time - startTime) * lerpSpeed);
+        }
+        else
+        {
+            transform.localScale = Vector3.Lerp(draggingScale, nonDraggingScale,  (Time.time - startTime) * lerpSpeed);
+        }
     }
 
     // Gets the closest SnapLocation within the range of the DraggableObject.
