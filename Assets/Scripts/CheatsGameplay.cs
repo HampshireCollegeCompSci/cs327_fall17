@@ -14,7 +14,9 @@ public class CheatsGameplay : MonoBehaviour
     EnergyCounter energyCounter;
     Settings settings;
 
-    private void Start()
+    public static int scoreAdded, energyAdded;
+
+    private void Awake()
     {
         settings = FindObjectOfType<Settings>(); //Can't pass in a reference because it won't necessarily exist until the scene loads
     }
@@ -30,5 +32,23 @@ public class CheatsGameplay : MonoBehaviour
             energyCounter.AddEnergy(100);
             settings.SetCheatsEnabled();
         }
+    }
+
+    public void AddScore()
+    {
+        scoreCounter.AddScore(1000);
+        settings.SetCheatsEnabled();    
+    }
+
+    public void AddEnergy()
+    {
+        energyCounter.AddEnergy(100);
+        settings.SetCheatsEnabled();       
+    }
+
+    public void SetRandomSeedToZero()
+    {
+        Random.InitState(0);
+        settings.SetCheatsEnabled();
     }
 }
