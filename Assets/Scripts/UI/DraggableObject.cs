@@ -1,4 +1,4 @@
-﻿// Author(s): Joel Esquilin, Paul Calande
+﻿// Author(s): Joel Esquilin, Paul Calande, Yixiang Xu
 
 using System;
 using System.Collections;
@@ -31,6 +31,12 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     [SerializeField]
     [Tooltip("The size of the draggable block while not being dragged.")]
     Vector3 nonDraggingScale;
+    [SerializeField]
+    [Tooltip("The time when drag event begins.")]
+    float startTime;
+    [SerializeField]
+    [Tooltip("The spped of scale lerping.")]
+    float lerpSpeed;
 
     protected static Vector2 piecePlacementOffset = new Vector2(80, 80);
 
@@ -48,11 +54,9 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         if (isDraggable)
         {
+            startTime = Time.time;
             isDragging = true;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out _pointerOffset);
-
-            //Return the draggable block to normal size once it is being dragged
-            transform.localScale = draggingScale;
 
             if (BeginDragEvent != null)
             {
@@ -92,6 +96,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         if (isDraggable)
         {
+            startTime = Time.time;
             isDragging = false;
 
             SnapLocation locationToGoTo = GetClosestSnapLocation();
@@ -113,6 +118,24 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             {
                 EndDragEvent(this);
             }
+        }
+    }
+
+    private void Start()
+    {
+        transform.localScale = nonDraggingScale;
+    }
+
+    private void Update()
+    {
+        //Lerping between dragging scale and nondragging scale
+        if (isDragging)
+        {
+            transform.localScale = Vector3.Lerp(nonDraggingScale, draggingScale, (Time.time - startTime) * lerpSpeed);
+        }
+        else
+        {
+            transform.localScale = Vector3.Lerp(draggingScale, nonDraggingScale,  (Time.time - startTime) * lerpSpeed);
         }
     }
 
