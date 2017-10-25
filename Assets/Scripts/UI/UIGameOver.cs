@@ -18,7 +18,9 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Text object that will explain why the player lost.")]
     Text textGameOverReason;
-
+    [SerializeField]
+    [Tooltip("Reference to the Score Counter instance.")]
+    ScoreCounter score;
     private void Start()
     {
         if (gameFlow != null)
@@ -74,6 +76,13 @@ public class UIGameOver : MonoBehaviour
                 reason = "Unknown reason. Please inform the programming team.";
                 break;
         }
-        textGameOverReason.text = "Reason: " + reason;
+        int highScore = PlayerPrefs.GetInt("HighScore"); //Get the stored high score - 0 if doesn't exist
+        int finalScore = score.GetScore();
+        if (finalScore > highScore)
+        {
+            highScore = finalScore;
+        }
+
+        textGameOverReason.text = "Reason: " + reason + "High Score: " + highScore;
     }
 }

@@ -61,6 +61,14 @@ public class Analytics : MonoBehaviour
         //string currentTimeStamp = System.DateTime.Now.ToString();
         //string allTheData = "timestamp;" + currentTimeStamp + ",score;" + finalScore + ",peakEnergy;" + peakEnergy + ",timePlaying;" + timePlaying + ",turnsPlayed;" + turnsPlayed + ",peakVestiges;" + peakVestiges + ",endingVestiges;" + currentVestiges + ",totalClearedSquares;" + finalClearedSquares;
         //Debug.Log("allTheData is" + allTheData);
+        //Find high score
+        int highScore = PlayerPrefs.GetInt("HighScore"); //Set our high score - will be 0 if doesn't exist
+        if (finalScore > highScore) //If our current score is higher
+        {
+            //Debug.Log("New High Score! Setting High Score.");
+            highScore = finalScore; //Set it to send to analytics
+            PlayerPrefs.SetInt("HighScore", highScore); //Save it
+        }
         UnityEngine.Analytics.Analytics.CustomEvent("gameOver", new Dictionary<string, object>
         {
             { "score", finalScore },
@@ -70,9 +78,10 @@ public class Analytics : MonoBehaviour
             { "turnsPlayed", turnsPlayed},
             { "peakVestiges", peakVestiges},
             { "endingVestiges", currentVestiges},
-            { "totalClearedSquares", finalClearedSquares}
+            { "totalClearedSquares", finalClearedSquares},
+            { "highScore", highScore}
             //{ "allTheData", allTheData} //I removed this because it wasn't working anyway
 
-  });
+        });
     }
 }
