@@ -1921,6 +1921,11 @@ Prefab:
       propertyPath: grid
       value: 
       objectReference: {fileID: 1069704021}
+    - target: {fileID: 114317254578232620, guid: 5fa388134b667384caa9615ae4b7045e,
+        type: 2}
+      propertyPath: screenTapping
+      value: 
+      objectReference: {fileID: 501203756}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fa388134b667384caa9615ae4b7045e, type: 2}
   m_IsPrefabParent: 0

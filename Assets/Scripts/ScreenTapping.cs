@@ -17,25 +17,25 @@ public class ScreenTapping : MonoBehaviour, IPointerDownHandler, IBeginDragHandl
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        tappingEffect(eventData);
+        TappingEffect(eventData);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        tappingEffect(eventData);
+        TappingEffect(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        tappingEffect(eventData);
+        TappingEffect(eventData);
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        tappingEffect(eventData);
+        TappingEffect(eventData);
     }
 
-    public void tappingEffect(PointerEventData eventData)
+    public void TappingEffect(PointerEventData eventData)
     {
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPoint);
