@@ -19,8 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224975433569177900}
-  - component: {fileID: 114202807859211042}
   - component: {fileID: 114017712063440150}
+  - component: {fileID: 114202807859211042}
   - component: {fileID: 222148112583143352}
   m_Layer: 0
   m_Name: GameOver
@@ -285,7 +285,6 @@ MonoBehaviour:
   turns: {fileID: 0}
   vestiges: {fileID: 0}
   clearedSquares: {fileID: 0}
-  settings: {fileID: 0}
 --- !u!114 &114089338938984636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,6 +431,7 @@ MonoBehaviour:
   - {fileID: 1889851010916056}
   - {fileID: 1311757882570894}
   textGameOverReason: {fileID: 114089338938984636}
+  score: {fileID: 0}
 --- !u!114 &114230764441667554
 MonoBehaviour:
   m_ObjectHideFlags: 1
