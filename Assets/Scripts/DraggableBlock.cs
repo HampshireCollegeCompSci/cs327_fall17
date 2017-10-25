@@ -67,6 +67,11 @@ public class DraggableBlock : MonoBehaviour
         return block;
     }
 
+    public void SetScreenTapping(ScreenTapping tapping)
+    {
+        draggableObject.SetScreenTapping(tapping);
+    }
+
     public void AllowDragging(bool draggable)
     {
         draggableObject.SetIsDraggable(draggable);

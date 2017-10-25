@@ -9,16 +9,35 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class ScreenTapping : MonoBehaviour, IPointerDownHandler
+public class ScreenTapping : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField]
     [Tooltip("The prefab to instantiate for ScreenTapping.")]
     GameObject prefabScreenTapping;
 
-    Vector2 localPoint;
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        TappingEffect(eventData);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        TappingEffect(eventData);
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        TappingEffect(eventData);
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
+        TappingEffect(eventData);
+    }
+
+    public void TappingEffect(PointerEventData eventData)
+    {
+        Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out localPoint);
         GameObject tappingAnim = Instantiate(prefabScreenTapping, transform, false);
         tappingAnim.transform.localPosition = localPoint;

@@ -40,6 +40,9 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField]
     [Tooltip("The vestige level to use.")]
     int vestigeLevel = 1;
+    [SerializeField]
+    [Tooltip("Reference to ScreenTapping.")]
+    ScreenTapping screenTapping;
 
     List<Block>[] possibleBlocks = new List<Block>[4];
     List<Block> bag = new List<Block>();
@@ -200,6 +203,9 @@ public class BlockSpawner : MonoBehaviour
             DraggableBlock newDraggable = newBlock.GetComponent<DraggableBlock>();
             //newDraggable.Init(toSpawn, grid, canvas);
             newDraggable.Init(toSpawn, grid, GetComponent<RectTransform>());
+
+            newDraggable.SetScreenTapping(screenTapping);//Pass screenTapping to DraggableObject
+
             // Add it to the queue.
             blocksQueue.Enqueue(newDraggable);
 
