@@ -159,10 +159,14 @@ public class Block
             {            
                 for (int r = 0; r < height; r++)
                 {
-                    if (width % 2 == 1 && c == midCol) 
+                    if (width % 2 == 1 && c == midCol)
+                    {
                         newTileData[r, midCol] = new TileData(tiles[r, midCol]);
+                    }
                     else
-                        newTileData[r, c] = new TileData(tiles[r, width - 1 - c].GetTileType());
+                    {
+                        newTileData[r, c] = new TileData(tiles[r, width - 1 - c]);
+                    }
                 }               
             }
             
