@@ -26,6 +26,9 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     [Tooltip("The position to return to if dragging ceases and no SnapLocation is snapped to.")]
     protected Vector2 defaultPosition;
     [SerializeField]
+    [Tooltip("The current position.")]
+    protected Vector2 currentPosition;
+    [SerializeField]
     [Tooltip("The size of the draggable block while being dragged.")]
     Vector3 draggingScale;
     [SerializeField]
@@ -118,7 +121,8 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             {
                 transform.localScale = nonDraggingScale; //Make the block samller
                 TurnOffHovering();
-                transform.localPosition = defaultPosition;
+                currentPosition = transform.localPosition;
+                //transform.localPosition = defaultPosition;
             }
 
             if (EndDragEvent != null)
@@ -143,6 +147,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         else
         {
             transform.localScale = Vector3.Lerp(draggingScale, nonDraggingScale,  (Time.time - startTime) * lerpSpeed);
+            transform.localPosition = Vector3.Lerp(currentPosition, defaultPosition, (Time.time - startTime) * lerpSpeed);
         }
     }
 
