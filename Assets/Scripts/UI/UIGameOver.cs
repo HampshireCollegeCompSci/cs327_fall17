@@ -44,7 +44,8 @@ public class UIGameOver : MonoBehaviour
 
     public void Reset()
     {
-        
+        AudioController.Instance.MenuClick();
+
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }

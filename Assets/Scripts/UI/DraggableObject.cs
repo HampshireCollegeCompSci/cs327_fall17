@@ -65,6 +65,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
             if (BeginDragEvent != null)
             {
+                AudioController.Instance.PlaySFX("Tiles_Pickup_1");
                 BeginDragEvent(this);
             }
         }
@@ -119,6 +120,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                 transform.localScale = nonDraggingScale; //Make the block samller
                 TurnOffHovering();
                 transform.localPosition = defaultPosition;
+                AudioController.Instance.SnapTile();
             }
 
             if (EndDragEvent != null)

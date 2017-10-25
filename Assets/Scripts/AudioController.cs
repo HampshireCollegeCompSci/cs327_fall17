@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class AudioController : MonoBehaviour {
     public List<AudioClip> musicList;
@@ -10,8 +11,13 @@ public class AudioController : MonoBehaviour {
 
     public List<AudioSource> Channels = new List<AudioSource>();
 
-    public string[] PlaceTileSFX = new string[5];
-    public string[] RotateTileSFX = new string[2];
+    public string[] PlaceTileSFX;
+    public string[] RotateTileSFX;
+    public string[] FlipBtnSFX;
+    public string[] MenuClickSFX;
+    public string[] TileSnapSFX;
+
+    public string[] GeneralSFX;
 
     private AudioSource currentlyPlaying;
 
@@ -38,7 +44,16 @@ public class AudioController : MonoBehaviour {
 
     private void Start()
     {
-        PlayMusic("Main_Menu_Music_1");
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        if (currentScene.name != "MainScene")
+        {
+            PlayMusic("Main_Menu_Music_1");
+        }
+        else
+        {
+            PlayMusic("Gameplay_Music_1");
+        }
     }
 
     public void PlayMusic(string musicName)
@@ -113,6 +128,27 @@ public class AudioController : MonoBehaviour {
         int index = UnityEngine.Random.Range(0, RotateTileSFX.Length);
 
         PlaySFX(RotateTileSFX[index]);
+    }
+
+    public void FlipTile()
+    {
+        int index = UnityEngine.Random.Range(0, FlipBtnSFX.Length);
+
+        PlaySFX(FlipBtnSFX[index]);
+    }
+
+    public void MenuClick()
+    {
+        int index = UnityEngine.Random.Range(0, MenuClickSFX.Length);
+
+        PlaySFX(MenuClickSFX[index]);
+    }
+
+    public void SnapTile()
+    {
+        int index = UnityEngine.Random.Range(0, TileSnapSFX.Length);
+
+        PlaySFX(TileSnapSFX[index]);
     }
 
     IEnumerator PlayTempChannel(AudioClip clip)
