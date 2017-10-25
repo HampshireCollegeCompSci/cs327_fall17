@@ -336,8 +336,8 @@ public class BlockSpawner : MonoBehaviour
 
     public void ForceUpdateSpaceInformation()
     {
-        EnableFrontBlock();
         UpdateAllBlocks();
+        EnableFrontBlock();
     }
 
     // Callback function for gameFlow's GameLost event.
