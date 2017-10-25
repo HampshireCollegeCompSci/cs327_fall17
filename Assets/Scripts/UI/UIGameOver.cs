@@ -83,6 +83,6 @@ public class UIGameOver : MonoBehaviour
             highScore = finalScore;
         }
 
-        textGameOverReason.text = "Reason: " + reason + "High Score: " + highScore;
+        textGameOverReason.text = "Reason: " + reason + " High Score: " + highScore;
     }
 }
