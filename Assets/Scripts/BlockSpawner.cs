@@ -50,6 +50,8 @@ public class BlockSpawner : MonoBehaviour
     Queue<DraggableBlock> blocksQueue = new Queue<DraggableBlock>();
 
     float timeBeforeNextBlock;
+    Block currentBlock;
+    bool isSpawningSameBlocks;
 
     private void Awake()
     {
@@ -163,39 +165,50 @@ public class BlockSpawner : MonoBehaviour
         {
             //otherwise we select a random block from the possible list,
             //then instantiate the draggable block and add it into the queue.
-
-            if (bag.Count == 0)
+            Block toSpawn = null;      
+            if (isSpawningSameBlocks)
             {
-                // If the bag is empty, repopulate it.
-                for (int j = 0; j < possibleBlocks[tierCurrent].Count; ++j)
+                if (currentBlock != null)
                 {
-                    bag.Add(new Block(possibleBlocks[tierCurrent][j]));
-                }
+                    Debug.Log(currentBlock);
+                    toSpawn = currentBlock;
+                }                    
             }
-
-			int i = Random.Range(0, bag.Count);
-            Block toSpawn = bag[i];
-            // Remove each chosen element from the bag.
-            bag.RemoveAt(i);
-
-            // Add vestiges to the block, if applicable.
-            int vestigesAdded = 0;
-            List<TileData> refs = toSpawn.GetReferencesToType(TileData.TileType.Regular);
-
-            // Stop adding vestiges when there are no regular tiles left.
-            //Debug.Log("Vestige generation begin.");
-            while (vestigesAdded < vestigesPerBlock && refs.Count != 0)
+            else
             {
-                int index = Random.Range(0, refs.Count);
-                TileData v = refs[index];
-                v.Fill(TileData.TileType.Vestige);
-                v.SetVestigeLevel(vestigeLevel);
-                refs.RemoveAt(index);
-                ++vestigesAdded;
-                //Debug.Log("vestigesAdded / vestigesPerBlock: " + vestigesAdded + " / " + vestigesPerBlock);
-                //Debug.Log("BlockSpawner: vestigeLevel: " + vestigeLevel);
+                if (bag.Count == 0)
+                {
+                    // If the bag is empty, repopulate it.
+                    for (int j = 0; j < possibleBlocks[tierCurrent].Count; ++j)
+                    {
+                        bag.Add(new Block(possibleBlocks[tierCurrent][j]));
+                    }
+                }
+
+                int i = Random.Range(0, bag.Count);
+                toSpawn = bag[i];
+                // Remove each chosen element from the bag.
+                bag.RemoveAt(i);
+
+                // Add vestiges to the block, if applicable.
+                int vestigesAdded = 0;
+                List<TileData> refs = toSpawn.GetReferencesToType(TileData.TileType.Regular);
+
+                // Stop adding vestiges when there are no regular tiles left.
+                //Debug.Log("Vestige generation begin.");
+                while (vestigesAdded < vestigesPerBlock && refs.Count != 0)
+                {
+                    int index = Random.Range(0, refs.Count);
+                    TileData v = refs[index];
+                    v.Fill(TileData.TileType.Vestige);
+                    v.SetVestigeLevel(vestigeLevel);
+                    refs.RemoveAt(index);
+                    ++vestigesAdded;
+                    //Debug.Log("vestigesAdded / vestigesPerBlock: " + vestigesAdded + " / " + vestigesPerBlock);
+                    //Debug.Log("BlockSpawner: vestigeLevel: " + vestigeLevel);
+                }
+                //Debug.Log("Vestige generation end.");
             }
-            //Debug.Log("Vestige generation end.");
 
             // Instantiate the actual block.
             GameObject newBlock = Instantiate(prefabDraggableBlock, transform, false);
@@ -205,6 +218,8 @@ public class BlockSpawner : MonoBehaviour
             newDraggable.Init(toSpawn, grid, GetComponent<RectTransform>());
 
             newDraggable.SetScreenTapping(screenTapping);//Pass screenTapping to DraggableObject
+
+            currentBlock = new Block(newDraggable.GetBlock());
 
             // Add it to the queue.
             blocksQueue.Enqueue(newDraggable);
@@ -348,5 +363,11 @@ public class BlockSpawner : MonoBehaviour
             blocksQueue.Peek().AllowDragging(false);
         }
         enabled = false;
-    }		
+    }	
+    
+    //Will always spwan the same blocks as the current one
+    public void CheatSpawning(bool on)
+    {
+        isSpawningSameBlocks = on;
+    }
 }

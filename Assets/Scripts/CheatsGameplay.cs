@@ -3,6 +3,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CheatsGameplay : MonoBehaviour
 {
@@ -12,9 +13,15 @@ public class CheatsGameplay : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the EnergyCounter.")]
     EnergyCounter energyCounter;
+    [SerializeField]
+    [Tooltip("Reference to the BlockSpawner.")]
+    BlockSpawner blockSpawner;
+    [SerializeField]
+    [Tooltip("Reference to the child text.")]
+    Text text;
     Settings settings;
 
-    public static int scoreAdded, energyAdded;
+    bool isSpawningCheatingEnabled;
 
     private void Awake()
     {
@@ -50,5 +57,22 @@ public class CheatsGameplay : MonoBehaviour
     {
         Random.InitState(0);
         settings.SetCheatsEnabled();
+    }
+
+    public void SpawningSameBlock()
+    {
+        if (isSpawningCheatingEnabled)
+        {
+            blockSpawner.CheatSpawning(false);
+            text.text = "Spawn Same Block";
+            isSpawningCheatingEnabled = false;
+        }
+        else
+        {
+            blockSpawner.CheatSpawning(true);
+            text.text = "Spawn Normal Block";
+            settings.SetCheatsEnabled();
+            isSpawningCheatingEnabled = true;
+        }    
     }
 }
