@@ -17,9 +17,7 @@ public class Tip : MonoBehaviour {
 	void Start () {
         var json = JSON.Parse(tipJSON.ToString());
         tips = json["tips"].AsArray;
-        GetComponent<Text>().text = "23333333333";
-        Debug.Log(tips);
-        //tips[Random.Range(0, tips.Count)]
+        GetComponent<Text>().text = tips[Random.Range(0, tips.Count)];
 	}
 	
 	// Update is called once per frame
