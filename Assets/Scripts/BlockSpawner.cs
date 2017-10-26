@@ -169,10 +169,7 @@ public class BlockSpawner : MonoBehaviour
             if (isSpawningSameBlocks)
             {
                 if (currentBlock != null)
-                {
-                    Debug.Log(currentBlock);
-                    toSpawn = currentBlock;
-                }                    
+                    toSpawn = currentBlock;                    
             }
             else
             {
