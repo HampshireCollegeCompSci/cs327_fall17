@@ -77,6 +77,7 @@ public class AudioController : MonoBehaviour {
         {
             currentlyPlaying.Stop();
             Channels.Remove(currentlyPlaying);
+            currentlyPlaying = null;
         }
     }
 
