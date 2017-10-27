@@ -1,3 +1,6 @@
 {
-	"tips": ["tip1", "tip2", "tip3", "tip4"]
+	"tips": ["Try making more than one square at a time",
+		 "Some blocks are friends and like to make squares together", 
+		 "Don’t place blocks in the center of the board, it gives you less space to work in", 
+		 "Some blocks don’t work well together, try not to put them together if you can avoid it"]
 }
