@@ -60,6 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreCounter: {fileID: 0}
   energyCounter: {fileID: 0}
+  blockSpawner: {fileID: 0}
+  text: {fileID: 114909350576776392}
 --- !u!114 &114387742146712358
 MonoBehaviour:
   m_ObjectHideFlags: 1

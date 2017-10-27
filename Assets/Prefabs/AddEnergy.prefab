@@ -172,6 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreCounter: {fileID: 0}
   energyCounter: {fileID: 0}
+  blockSpawner: {fileID: 0}
+  text: {fileID: 114412473386961610}
 --- !u!222 &222170415131405972
 CanvasRenderer:
   m_ObjectHideFlags: 1
