@@ -1435,9 +1435,11 @@ public class Grid : MonoBehaviour
             energyCounter.PopUp("-", energyChange);
         }
 
-        blockSpawner.ProgressQueue();
         //Update Available spaces for all draggable blocks
         blockSpawner.UpdateAllBlocks();
+
+        blockSpawner.ProgressQueue();
+        
         //Update turns played - this counts as a turn
         turnCounter.PlayedTurn();
         //Count vestiges again, even if a square was formed this turn - for analytics

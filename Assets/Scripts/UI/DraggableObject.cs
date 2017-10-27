@@ -120,6 +120,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             else
             {
                 transform.localScale = nonDraggingScale; //Make the block samller
+                //transform.localScale = new Vector3(1f, 1f, 1f);
                 TurnOffHovering();
                 currentPosition = transform.localPosition;
                 //transform.localPosition = defaultPosition;
@@ -134,7 +135,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
     private void Start()
     {
-        transform.localScale = nonDraggingScale;
+        //transform.localScale = nonDraggingScale;
     }
 
     private void Update()
