@@ -15,10 +15,12 @@ public class PauseMenuController : MonoBehaviour {
     public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
+        AudioController.Instance.MenuClick();
     }
 
     public void Resume()
     {
         pauseMenu.SetActive(false);
+        AudioController.Instance.MenuClick();
     }
 }

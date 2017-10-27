@@ -44,7 +44,8 @@ public class UIGameOver : MonoBehaviour
 
     public void Reset()
     {
-        
+        AudioController.Instance.MenuClick();
+
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
@@ -52,6 +53,8 @@ public class UIGameOver : MonoBehaviour
     // Callback function for GameFlow.GameLost.
     void Appear(GameFlow.GameOverCause cause)
     {
+        AudioController.Instance.PlaySFX("Game_Over_1");
+
         foreach (GameObject obj in toBeEnabled)
         {
             obj.SetActive(true);

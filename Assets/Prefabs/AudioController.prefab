@@ -51,7 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a47e0b8a271cd4f9c8cfc32a9bb50f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicList: []
+  musicList:
+  - {fileID: 8300000, guid: cf6b65935d7873e488014efdb3b5d2ac, type: 3}
+  - {fileID: 8300000, guid: 35f7484fa3e35f54b8b11a894e408707, type: 3}
   sfxList:
   - {fileID: 8300000, guid: 91f0ce92319e90e4ea72686585bb1f1d, type: 3}
   - {fileID: 8300000, guid: 11b8903d0e4d6154ba286e6a42163c4d, type: 3}
@@ -60,6 +62,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4fcc34cf7693d0b41805718c022b143d, type: 3}
   - {fileID: 8300000, guid: 53cfb34434be5ff4bafd0e37bf7d35b8, type: 3}
   - {fileID: 8300000, guid: 991e09eb471121d4cb67e554ccbede61, type: 3}
+  - {fileID: 8300000, guid: d236364d53c941645b315e9386fd4c34, type: 3}
+  - {fileID: 8300000, guid: 0ab02569a14fdce4385513d4e2859449, type: 3}
+  - {fileID: 8300000, guid: e1316b5a876a5b14a96c66cd62181589, type: 3}
+  - {fileID: 8300000, guid: 5a28687fa086e5342aa95ad785aa2f18, type: 3}
+  - {fileID: 8300000, guid: 5811f9834d88481438a3d31001534f16, type: 3}
+  - {fileID: 8300000, guid: 1421d98c9309ef44e832afbd4c147d63, type: 3}
+  - {fileID: 8300000, guid: 16dd697846ce29f4a8e7e47b85f5ed59, type: 3}
+  - {fileID: 8300000, guid: 22109d7df99c62b4a8a51fd816effdf6, type: 3}
+  - {fileID: 8300000, guid: 7bcd5984fed1ba143aae4444cd103114, type: 3}
+  - {fileID: 8300000, guid: c3c9d27480ddad341b680629edb85b0c, type: 3}
+  - {fileID: 8300000, guid: 535c9c64cfaf68647b5da4b74adfab07, type: 3}
+  - {fileID: 8300000, guid: dd48a36aa63c95a489bbc60486ac8f4b, type: 3}
+  - {fileID: 8300000, guid: 4bfb7d9ccd70ef442ab1b57dc7fed11a, type: 3}
   Channels: []
   PlaceTileSFX:
   - Tiles Place_Tile_A_1
@@ -70,3 +85,20 @@ MonoBehaviour:
   RotateTileSFX:
   - Tiles Rotate_Tile_A_2
   - Tiles Rotate_Tile_B_2
+  FlipBtnSFX:
+  - Tiles_Flip_A_1
+  - Tiles_Flip_B_1
+  - Tiles_Flip_C_1
+  - Tiles_Flip_D_1
+  MenuClickSFX:
+  - Menu_Click_A_1
+  - Menu_Click_B_1
+  - Menu_Click_C_1
+  TileSnapSFX:
+  - Tiles_Snap_A_1
+  - Tiles_Snap_B_1
+  - Tiles_Snap_C_1
+  GeneralSFX:
+  - About_To_Lose_1
+  - Game_Over_1
+  - Tiles_Pickup_1
