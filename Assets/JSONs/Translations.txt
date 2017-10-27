@@ -1,6 +1,4 @@
-{
-	translationDictionary
-	[
+	{
 	  "GameOver": {
 	    "English": "Game Over",
 	    "Spanish": "Fin del Juego",
@@ -141,5 +139,4 @@
 	    "Polish": "Wskazówka: Nie pozwól pozostałościom pozostawać zbyt długo",
 	    "Swedish": 
 	  }
-	]
-}
+	}

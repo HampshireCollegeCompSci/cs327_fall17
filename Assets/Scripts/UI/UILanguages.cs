@@ -11,17 +11,30 @@ public class UILanguages : MonoBehaviour {
 
 	[SerializeField]
 	[Tooltip("Reference to the Translation JSON.")]
-
-	public Dropdown languages;
 	TextAsset translationsJSON;
+	[SerializeField]
+	[Tooltip("Dropdown language menu")]
+	Dropdown languages;
+
 	string gameLanguage;
 
 	UnityAction<int> onValue;
+
+	public static UILanguages instance = null;
 
 	public void Start() 
 	{
 		onValue += ChangeLanguage;
 		languages.onValueChanged.AddListener(onValue);
+	}
+
+	void Awake () {
+		if (instance) {
+			DestroyImmediate(gameObject);
+			return;
+		}
+		instance = this;
+		DontDestroyOnLoad(gameObject);
 	}
 
 	public string Translate(string descriptor)

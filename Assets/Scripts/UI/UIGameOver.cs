@@ -19,10 +19,11 @@ public class UIGameOver : MonoBehaviour
     [Tooltip("Reference to the Text object that will explain why the player lost.")]
     Text textGameOverReason;
 
-	UILanguages Translator;
+	UILanguages translator;
 
-    private void Start()
+	private void Start()
     {
+		translator = FindObjectOfType<UILanguages>();
         if (gameFlow != null)
         {
             gameFlow.GameLost += Appear;
@@ -76,6 +77,6 @@ public class UIGameOver : MonoBehaviour
                 reason = "ReasonHesitation";
                 break;
         }
-		textGameOverReason.text = Translator.Translate(reason);
+		textGameOverReason.text = translator.Translate(reason);
     }
 }
