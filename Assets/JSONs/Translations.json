@@ -1,4 +1,4 @@
-	{
+{
 	  "GameOver": {
 	    "English": "Game Over",
 	    "Spanish": "Fin del Juego",
@@ -10,7 +10,7 @@
 	    "Dutch": "Game Over",
 	    "Danish": "Spillet er slut",
 	    "Polish": "Przegrałeś",
-	    "Swedish": "Du Förlorade"
+	    "Swedish": "Du Förlorade",
 	    "Korean" : "게임 오버"
 	  },
 	  "OutOfEnergy": {
