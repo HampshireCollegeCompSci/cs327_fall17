@@ -1,0 +1,145 @@
+{
+	translationDictionary
+	[
+	  "GameOver": {
+	    "English": "Game Over",
+	    "Spanish": "Fin del Juego",
+	    "French": "Fin de jue",
+	    "Slovenian": "Konec igre",
+	    "Romanian": "Jocul s-a încheiat",
+	    "German": "",
+	    "Luxembourgish": "Spill aus",
+	    "Dutch": "Game Over",
+	    "Danish": "Spillet er slut",
+	    "Polish": "Przegrałeś",
+	    "Swedish": "Du Förlorade"
+	    "Korean" : "게임 오버"
+	  },
+	  "OutOfEnergy": {
+	    "key": "ReasonOutofEnergy",
+	    "English": "Reason: Out of Energy!",
+	    "Spanish": "Razón: ¡Fuera de energía!",
+	    "French": "",
+	    "Slovenian": "Razlog: Primanjkuje energije!",
+	    "Romanian": "Morivul: Nu mai ai energie!",
+	    "German": "",
+	    "Luxembourgish": "",
+	    "Dutch": "Zonder Energie",
+	    "Danish": "Grund: Manglende energi!",
+	    "Polish": "Przyczyna: Nie masz energii!",
+	    "Swedish": "Anledning: slut på energi!"
+	  },
+	  "ReasonHesitation": {
+	    "key": "ReasonHesitation",
+	    "English": "Reason: You hesitated for too long!",
+	    "Spanish": "Razón: ¡Dudaste por mucho tiempo!",
+	    "French": "",
+	    "Slovenian": "Razlog: Zmanjkalo časa!",
+	    "Romanian": "Motivul: Ai ezitat prea mult timp!",
+	    "German": "",
+	    "Luxembourgish": "",
+	    "Dutch": "Reden: Je twigfelde te lang!",
+	    "Danish": "Grund: Du tøvede for længe!",
+	    "Polish": "Przyczyna: Za długo czekałeś!",
+	    "Swedish": "Anledning: du tvekade för länge!"
+	  },
+	  "ReasonNoSpaceLeft": {
+	  	"key" : "ReasonNoSpaceLeft",
+	    "English": "Reason: No Space Left!",
+	    "Spanish": "Razón: ¡No hay espacio!",
+	    "French": "",
+	    "Slovenian": "Razlog: Ni več prostora!",
+	    "Romanian": "Motivul: Nu mai ai spaţiu!",
+	    "German": "",
+	    "Luxembourgish": "",
+	    "Dutch": "Reden: Geen ruimte over!",
+	    "Danish": "Grund: Løbet tør for plads!",
+	    "Polish": "Przyczyna: Koniec miejsca!",
+	    "Swedish": "Anledning: Ingen plats kvar!"
+	  },
+	  "ReasonManualReset": {
+	  	"key" : "ReasonManualReset",
+	    "English": "Manual Reset!",
+	    "Spanish": "Razón: Reinciar",
+	    "French": "",
+	    "Slovenian": "Razlog: Ročna ponastavitev!",
+	    "Romanian": "Motivul: Resetare manuală!",
+	    "German": "",
+	    "Luxembourgish": "",
+	    "Dutch": "Reden: Manuele reset!",
+	    "Danish": "Grund: Manuel genstart!",
+	    "Polish": "Przyczyna: Reset ręczny!",
+	    "Swedish": "Anledning: Manuell reset!"
+	  },
+	  "HowToPlay": {
+	  	"key" : "HowtToPlay",
+	  	"English": "How to Play",
+	    "Spanish": "Como Jugar",
+	    "French": "",
+	    "Slovenian": "Kako igrati",
+	    "Romanian": "Instrucțiuni",
+	    "German": "",
+	    "Luxembourgish": "",
+	    "Dutch": "Spelregels",
+	    "Danish": "Sådan spiller du",
+	    "Polish": "Jak grać",
+	    "Swedish": "Hur du spelar"
+	  },
+	  "Credits": {
+	  	"key" : "Credits",
+	    "English": "Credits",
+	    "Spanish": "Crédito",
+	    "French": "",
+	    "Slovenian": "Krediti",
+	    "Romanian": "Generic",
+	    "German": "",
+	    "Luxembourgish": "",
+	    "Dutch": "Credits",
+	    "Danish": "Kreditter",
+	    "Polish": "Podziękowania",
+	    "Swedish": "Eftertexter"
+	  },
+	  "PlayAgain": {
+	    "key" : "PlayAgain",
+	    "English": "Play Again",
+	    "Spanish": "Volver a Jugar",
+	    "French": "",
+	    "Slovenian": "Igraj ponovno",
+	    "Romanian": "Joacă din nou",
+	    "German": "",
+	    "Luxembourgish": "",
+	    "Dutch": "Speel Opnieuw",
+	    "Danish": "Spil igen",
+	    "Polish": "Zagraj jeszcze raz",
+	    "Swedish": "Spela igen"
+	  },
+	  "MainMenu": {
+	  	"key" : "MainMenu"
+	    "English": "Main Menu",
+	    "Spanish": "Menu",
+	    "French": "",
+	    "Slovenian": "Meni",
+	    "Romanian": "Meniu",
+	    "German": "",
+	    "Luxembourgish": "",
+	    "Dutch": "Hoofdmenu",
+	    "Danish": "Start menu",
+	    "Polish": "Menu główne",
+	    "Swedish": "Huvudmeny"
+	  },
+	  "Tip": {
+	  	"key" : "Tip",
+	    "English": "Tip: Don’t lest vestiges stick around too long",
+	    "Spanish": "Tip: No dejes que restos se quede por mucho tiempo",
+	    "French": "",
+	    "Slovenian": "Namig: Ne pusti ostanke predolgo časa",
+	    "Romanian": "Sugestie: Nu lăsa vestigiile să rămână prin preajmă prea mult timp",
+	    "German": "",
+	    "Luxembourgish": "",
+	    "Dutch": "Tip: Laat de overblijfsels niet te lang rondhangen",
+	    "Danish": "Hint: Lad ikke levn blive for længe",
+	    "Polish": "Wskazówka: Nie pozwól pozostałościom pozostawać zbyt długo",
+	    "Swedish": 
+	  }
+	]
+}

@@ -19,6 +19,8 @@ public class UIGameOver : MonoBehaviour
     [Tooltip("Reference to the Text object that will explain why the player lost.")]
     Text textGameOverReason;
 
+	UILanguages Translator;
+
     private void Start()
     {
         if (gameFlow != null)
@@ -59,21 +61,21 @@ public class UIGameOver : MonoBehaviour
         switch (cause)
         {
             case GameFlow.GameOverCause.NoRemainingSpaces:
-                reason = "No space left!";
+                reason = "ReasonNoSpaceLeft";
                 break;
             case GameFlow.GameOverCause.QueueOverflow:
-                reason = "You hesitated for too long!";
+                reason = "ReasonHesitation";
                 break;
             case GameFlow.GameOverCause.NoMoreEnergy:
-                reason = "Out of energy!";
+                reason = "ReasonNoEnergy";
                 break;
             case GameFlow.GameOverCause.Reset:
-                reason = "Manual reset!";
+                reason = "ReasonManualReset";
                 break;
             default:
-                reason = "Unknown reason. Please inform the programming team.";
+                reason = "ReasonHesitation";
                 break;
         }
-        textGameOverReason.text = "Reason: " + reason;
+		textGameOverReason.text = Translator.Translate(reason);
     }
 }

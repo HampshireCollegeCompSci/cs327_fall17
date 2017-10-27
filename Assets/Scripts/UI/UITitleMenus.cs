@@ -18,6 +18,11 @@ public class UITitleMenus : MonoBehaviour
         SceneManager.LoadScene("HowToPlay");
     }
 
+	public void GoToSettings()
+	{
+		SceneManager.LoadScene("Settings");
+	}
+
     public void GoToAbout()
     {
         SceneManager.LoadScene("About");
