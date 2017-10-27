@@ -167,9 +167,11 @@ public class EnergyCounter : MonoBehaviour
         if (isAboutToLose)
         {
             //Debug.Log("The player is about to lose!");
+            AudioController.Instance.PlayLoop("About_To_Lose_1");
         }
         else
         {
+            AudioController.Instance.StopSFX("About_To_Lose_1");
             //Debug.Log("The player isn't about to lose.");
         }
     }
