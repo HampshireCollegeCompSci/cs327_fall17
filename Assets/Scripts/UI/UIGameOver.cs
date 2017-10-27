@@ -53,6 +53,7 @@ public class UIGameOver : MonoBehaviour
     // Callback function for GameFlow.GameLost.
     void Appear(GameFlow.GameOverCause cause)
     {
+        AudioController.Instance.StopSFX("About_To_Lose_1");
         AudioController.Instance.PlaySFX("Game_Over_1");
 
         foreach (GameObject obj in toBeEnabled)

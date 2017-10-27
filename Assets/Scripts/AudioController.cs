@@ -92,6 +92,14 @@ public class AudioController : MonoBehaviour {
 
     public void PlayLoop(string sfxName)
     {
+        foreach (AudioSource source in Channels)
+        {
+            if (source.clip.name == sfxName)
+            {
+                return;
+            }
+        }
+
         AudioClip clip = GetSFX(sfxName);
 
         if (clip != null)
@@ -204,7 +212,7 @@ public class AudioController : MonoBehaviour {
         {
             yield return null;
         }
-
+        
         if (tempChannel != null)
         {
             Channels.Remove(tempChannel);
