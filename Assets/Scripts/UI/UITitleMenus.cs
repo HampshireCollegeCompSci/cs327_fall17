@@ -29,6 +29,8 @@ public class UITitleMenus : MonoBehaviour
 	{
 		SceneManager.LoadScene ("MainScene");
         AudioController.Instance.MenuClick();
+        AudioController.Instance.StopMusic();
+        AudioController.Instance.PlayMusic("Gameplay_Music_1");
     }
     public void GoToCheatPage()
     {
