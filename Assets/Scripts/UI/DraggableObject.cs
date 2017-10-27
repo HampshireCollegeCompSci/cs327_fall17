@@ -64,7 +64,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             isDragging = true;
             screenTapping.TappingEffect(eventData); //Play screenTapping animation
 
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out _pointerOffset);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform.parent.parent.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out _pointerOffset);
 
             if (BeginDragEvent != null)
             {
