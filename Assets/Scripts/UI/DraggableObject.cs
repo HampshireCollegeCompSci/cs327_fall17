@@ -121,6 +121,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             else
             {
                 transform.localScale = nonDraggingScale; //Make the block samller
+                //transform.localScale = new Vector3(1f, 1f, 1f);
                 TurnOffHovering();
                 AudioController.Instance.SnapTile();
                 currentPosition = transform.localPosition;
@@ -136,7 +137,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
     private void Start()
     {
-        transform.localScale = nonDraggingScale;
+        //transform.localScale = nonDraggingScale;
     }
 
     private void Update()

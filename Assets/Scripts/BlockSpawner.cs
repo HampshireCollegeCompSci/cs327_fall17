@@ -26,6 +26,9 @@ public class BlockSpawner : MonoBehaviour
     [Tooltip("Reference to the Grid instance.")]
     Grid grid;
     [SerializeField]
+    [Tooltip("Reference to the Grid instance.")]
+    ConsoleGrid consoleGrid;
+    [SerializeField]
     [Tooltip("The prefab to instantiate for DraggableBlocks.")]
     GameObject prefabDraggableBlock;
     [SerializeField]
@@ -212,7 +215,7 @@ public class BlockSpawner : MonoBehaviour
             // Initialize the DraggableBlock component.
             DraggableBlock newDraggable = newBlock.GetComponent<DraggableBlock>();
             //newDraggable.Init(toSpawn, grid, canvas);
-            newDraggable.Init(toSpawn, grid, GetComponent<RectTransform>());
+            newDraggable.Init(toSpawn, grid, GetComponent<RectTransform>(), consoleGrid);
 
             newDraggable.SetScreenTapping(screenTapping);//Pass screenTapping to DraggableObject
 
@@ -239,6 +242,8 @@ public class BlockSpawner : MonoBehaviour
             int closestIndex = blocksQueue.Count - 1;
             PositionBlockAt(newDraggable, closestIndex);
             newDraggable.SetDefaultPosition(newBlock.transform.localPosition);
+
+            consoleGrid.SetDraggableBlock(newDraggable); //Insert the block into the console grid
         }
     }
 

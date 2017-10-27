@@ -1,6 +1,8 @@
 {
 	"grid width" : 8,
 	"grid height" : 8,
+	"console grid width" : 4,
+	"console grid height" : 4,
 	"starting energy" : 10,
 	"base energy decay rate" : 1,
 	"cleared cell fade time": 2.0,
