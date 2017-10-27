@@ -90,6 +90,28 @@ public class AudioController : MonoBehaviour {
         }
     }
 
+    public void PlayLoop(string sfxName)
+    {
+        AudioClip clip = GetSFX(sfxName);
+
+        if (clip != null)
+        {
+            StartCoroutine(PlayLoopChannel(clip));
+        }
+    }
+
+    public void StopSFX(string sfxName)
+    {
+        foreach(AudioSource source in Channels)
+        {
+            if (source.clip.name == sfxName)
+            {
+                source.Stop();
+                break;
+            }
+        }
+    }
+
     AudioClip GetMusic(string musicName)
     {
         foreach (AudioClip clip in musicList)
@@ -168,5 +190,26 @@ public class AudioController : MonoBehaviour {
             Destroy(tempChannel);
         }
     }
-    
+
+    IEnumerator PlayLoopChannel(AudioClip clip)
+    {
+        AudioSource tempChannel = null;
+        tempChannel = gameObject.AddComponent<AudioSource>();
+        Channels.Add(tempChannel);
+        tempChannel.clip = clip;
+        tempChannel.loop = true;
+        tempChannel.Play();
+
+        while (tempChannel.isPlaying)
+        {
+            yield return null;
+        }
+
+        if (tempChannel != null)
+        {
+            Channels.Remove(tempChannel);
+            Destroy(tempChannel);
+        }
+    }
+
 }
