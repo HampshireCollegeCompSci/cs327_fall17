@@ -37,6 +37,9 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the EnergyMeter instance.")]
     EnergyMeter energyMeter;
+    [SerializeField]
+    [Tooltip("Reference to the Grid.")]
+    Grid grid;
     /*[SerializeField]
     [Tooltip("Reference to energy gain animator.")]
     Animator energyGainController;*/
@@ -146,11 +149,29 @@ public class EnergyCounter : MonoBehaviour
     private void UpdateEnergy()
     {
         textEnergy.text = prefix + energy.ToString();
-        //Keep track of peak energy for Analytics
+        // Keep track of peak energy for Analytics.
         if (energy > peakEnergy)
-        { peakEnergy = energy; }
-        //Update the energy meter
+        {
+            peakEnergy = energy;
+        }
+        // Update the energy meter.
         energyMeter.UpdateEnergyMeter();
+
+        // Check if the player is about to lose.
+        int energyDrain = grid.GetEnergyDrain();
+        SetIsAboutToLose(energyDrain >= energy);
+    }
+
+    private void SetIsAboutToLose(bool isAboutToLose)
+    {
+        if (isAboutToLose)
+        {
+            //Debug.Log("The player is about to lose!");
+        }
+        else
+        {
+            //Debug.Log("The player isn't about to lose.");
+        }
     }
 
     public int GetPeakEnergy()
