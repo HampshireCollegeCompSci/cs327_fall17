@@ -1399,10 +1399,11 @@ public class Grid : MonoBehaviour
 
         return true;
     }
-    private int CountVestiges () 
+
+	// Returns the number of vestiges on the grid.
+    public int CountVestiges() 
     {
         int vestigeNum = 0;
-		//Count the number of vestiges on the grid
 		for (int r = 0; r < height; r++)
 		{
 			for (int c = 0; c < width; c++)
@@ -1422,14 +1423,10 @@ public class Grid : MonoBehaviour
         //If there was not a square formed this turn, then energy will be reduced by 1 plus number of vestiges
         if (!CheckForMatches())
         {
-            int vestigeNum = CountVestiges();
-            vestigeCounter.SetCurrentVestiges(vestigeNum); //Set the current number of vestiges for analytics
-            int energyChange = baseEnergyDecayRate + baseEnergyDecayRateBonus;
-            //Calculating total energy drain
-            for (int r = 0; r < height; r++)
-                for (int c = 0; c < width; c++)
-                    if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
-                        energyChange += decayRates[tiles[r, c].GetVestigeLevel() - 1];
+            // Set the current number of vestiges for analytics.
+            vestigeCounter.SetCurrentVestiges(CountVestiges());
+
+            int energyChange = GetEnergyDrain();
 
             energyCounter.RemoveEnergy(energyChange);
             energyCounter.PopUp("-", energyChange);
@@ -1442,6 +1439,25 @@ public class Grid : MonoBehaviour
         turnCounter.PlayedTurn();
         //Count vestiges again, even if a square was formed this turn - for analytics
         vestigeCounter.SetCurrentVestiges(CountVestiges());
+    }
+
+    // Get the current level of energy drain on the Grid.
+    public int GetEnergyDrain()
+    {
+        int energyChange = baseEnergyDecayRate + baseEnergyDecayRateBonus;
+        //Calculating total energy drain
+        for (int r = 0; r < height; r++)
+        {
+            for (int c = 0; c < width; c++)
+            {
+                if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
+                {
+                    energyChange += decayRates[tiles[r, c].GetVestigeLevel() - 1];
+                }
+            }
+        }
+
+        return energyChange;
     }
 
     // Removes a GridBlock from the List of GridBlocks.
