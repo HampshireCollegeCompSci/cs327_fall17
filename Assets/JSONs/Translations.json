@@ -13,7 +13,7 @@
 	    "Swedish": "Du Förlorade",
 	    "Korean" : "게임 오버"
 	  },
-	  "OutOfEnergy": {
+	  "ReasonNoEnergy": {
 	    "key": "ReasonOutofEnergy",
 	    "English": "Reason: Out of Energy!",
 	    "Spanish": "Razón: ¡Fuera de energía!",

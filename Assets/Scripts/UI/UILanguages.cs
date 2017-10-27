@@ -16,7 +16,8 @@ public class UILanguages : MonoBehaviour {
 	[Tooltip("Dropdown language menu")]
 	Dropdown languages;
 
-	string gameLanguage;
+    // English by default.
+	string gameLanguage = "English";
 
 	UnityAction<int> onValue;
 
@@ -25,7 +26,10 @@ public class UILanguages : MonoBehaviour {
 	public void Start() 
 	{
 		onValue += ChangeLanguage;
-		languages.onValueChanged.AddListener(onValue);
+        if (languages != null)
+        {
+            languages.onValueChanged.AddListener(onValue);
+        }
 	}
 
 	void Awake () {
@@ -42,6 +46,7 @@ public class UILanguages : MonoBehaviour {
 		var json = JSON.Parse(translationsJSON.ToString());
 		JSONNode textToTranslate = json [descriptor];
 		string translation = textToTranslate [gameLanguage];
+        Debug.Log("descriptor / gameLanguage: " + descriptor + " / " + gameLanguage);
 		return translation;
 	}
 
