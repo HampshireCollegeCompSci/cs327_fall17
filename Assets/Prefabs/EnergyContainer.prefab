@@ -325,6 +325,7 @@ MonoBehaviour:
   risingTextPrefab: {fileID: 1846777300264232, guid: d69eabf2b54ae164db3861b11fa816b2,
     type: 2}
   energyMeter: {fileID: 114893180769059516}
+  grid: {fileID: 0}
 --- !u!222 &222010277845751414
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -494,8 +495,8 @@ RectTransform:
   m_Father: {fileID: 224208162082631140}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0}
-  m_AnchorMin: {x: 0.4, y: 0.24}
-  m_AnchorMax: {x: 0.6, y: 0.64}
+  m_AnchorMin: {x: 0.3, y: 0.28}
+  m_AnchorMax: {x: 0.75, y: 0.7}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
