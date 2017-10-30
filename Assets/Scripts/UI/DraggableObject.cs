@@ -56,6 +56,8 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     // Snap detection offset for detecting snap locations.
     protected Vector2 snapDetectionOffset;
 
+    SnapLocation lastLocation = null;
+
     public virtual void OnBeginDrag(PointerEventData eventData)
     {
         if (isDraggable)
@@ -92,6 +94,11 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
             if (locationToGoTo != null)
             {
+                if (lastLocation != locationToGoTo)
+                {
+                    lastLocation = locationToGoTo;
+                    AudioController.Instance.SnapTile();
+                }
                 locationToGoTo.Hover(gameObject, false); // Clear all highlights
                 locationToGoTo.Hover(gameObject, true); // Set on highlight for current tile
             }
@@ -123,7 +130,6 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                 transform.localScale = nonDraggingScale; //Make the block samller
                 //transform.localScale = new Vector3(1f, 1f, 1f);
                 TurnOffHovering();
-                AudioController.Instance.SnapTile();
                 currentPosition = transform.localPosition;
                 //transform.localPosition = defaultPosition;
             }
