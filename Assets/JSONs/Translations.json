@@ -149,5 +149,34 @@
 	    "Polish": "Wskazówka: Nie pozwól pozostałościom pozostawać zbyt długo",
 	    "Swedish": "Rotschlo: Loosst d’Iwwerreschter net ze laang dobleiwen",
 		"Korean": "힌트: 남은 퍼즐 조각들을 너무 오랫동안 내버려두지 말자"
-	  }
+	},
+	//Beyond here the text has not been second hand verified just created by Maia Doerner
+	"HighScore": {
+		"English": "High Score: ",
+	    "Spanish": "High Score: ",
+	    "French": "High Score: ",
+	    "Slovenian": "High Score: ",
+	    "Romanian": "High Score",
+	    "German": "High Score: ",
+	    "Luxembourgish": "High Score: ",
+	    "Dutch": "High Score: ",
+	    "Danish": "High Score: ",
+	    "Polish": "High Score: ",
+	    "Swedish": "High Score: ",
+		"Korean": "High Score: "
+	},
+	"Score": {
+		"English": "Score: ",
+	    "Spanish": "Score: ",
+	    "French": "Score: ",
+	    "Slovenian": "Score: ",
+	    "Romanian": "Score",
+	    "German": "Score: ",
+	    "Luxembourgish": "Score: ",
+	    "Dutch": "Score: ",
+	    "Danish": "Score: ",
+	    "Polish": "Score: ",
+	    "Swedish": "Score: ",
+		"Korean": "Score: "
 	}
+}

@@ -94,7 +94,7 @@ public class UIGameOver : MonoBehaviour
             highScore = finalScore;
         }
 
-		textGameOverReason.text = translator.Translate(reason) + " High Score: " + highScore;
+		textGameOverReason.text = translator.Translate(reason) + translator.Translate("HighScore") + highScore;
 
     }
 }
