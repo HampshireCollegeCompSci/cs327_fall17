@@ -18,6 +18,10 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Text object that will explain why the player lost.")]
     Text textGameOverReason;
+	[SerializeField]
+	[Tooltip("Reference to the Score Counter instance.")]
+	ScoreCounter score;
+
 
 	UILanguages translator;
 
@@ -45,7 +49,8 @@ public class UIGameOver : MonoBehaviour
 
     public void Reset()
     {
-        
+        AudioController.Instance.MenuClick();
+
         Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
@@ -53,6 +58,9 @@ public class UIGameOver : MonoBehaviour
     // Callback function for GameFlow.GameLost.
     void Appear(GameFlow.GameOverCause cause)
     {
+        AudioController.Instance.StopSFX("About_To_Lose_1");
+        AudioController.Instance.PlaySFX("Game_Over_1");
+
         foreach (GameObject obj in toBeEnabled)
         {
             obj.SetActive(true);
@@ -77,6 +85,16 @@ public class UIGameOver : MonoBehaviour
                 reason = "ReasonHesitation";
                 break;
         }
+
 		textGameOverReason.text = translator.Translate(reason);
+        int highScore = PlayerPrefs.GetInt("HighScore"); //Get the stored high score - 0 if doesn't exist
+        int finalScore = score.GetScore();
+        if (finalScore > highScore)
+        {
+            highScore = finalScore;
+        }
+
+		textGameOverReason.text = translator.Translate(reason) + " High Score: " + highScore;
+
     }
 }

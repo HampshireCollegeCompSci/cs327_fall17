@@ -1,4 +1,4 @@
-﻿// Author(s): Joel Esquilin, Paul Calande
+﻿// Author(s): Joel Esquilin, Paul Calande, Yixiang Xu
 
 using System;
 using System.Collections;
@@ -26,11 +26,23 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     [Tooltip("The position to return to if dragging ceases and no SnapLocation is snapped to.")]
     protected Vector2 defaultPosition;
     [SerializeField]
+    [Tooltip("The current position.")]
+    protected Vector2 currentPosition;
+    [SerializeField]
     [Tooltip("The size of the draggable block while being dragged.")]
     Vector3 draggingScale;
     [SerializeField]
     [Tooltip("The size of the draggable block while not being dragged.")]
     Vector3 nonDraggingScale;
+    [SerializeField]
+    [Tooltip("The time when drag event begins.")]
+    float startTime;
+    [SerializeField]
+    [Tooltip("The spped of scale lerping.")]
+    float lerpSpeed;
+    [SerializeField]
+    [Tooltip("Reference to ScreenTapping.")]
+    ScreenTapping screenTapping;
 
     protected static Vector2 piecePlacementOffset = new Vector2(80, 80);
 
@@ -48,14 +60,15 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         if (isDraggable)
         {
+            startTime = Time.time;
             isDragging = true;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, eventData.position, eventData.pressEventCamera, out _pointerOffset);
+            screenTapping.TappingEffect(eventData); //Play screenTapping animation
 
-            //Return the draggable block to normal size once it is being dragged
-            transform.localScale = draggingScale;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform.parent.parent.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out _pointerOffset);
 
             if (BeginDragEvent != null)
             {
+                AudioController.Instance.PlaySFX("Tiles_Pickup_1");
                 BeginDragEvent(this);
             }
         }
@@ -65,6 +78,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         if (isDraggable)
         {
+            screenTapping.TappingEffect(eventData); //Play screenTapping animation
             Vector2 localPointerPosition;
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasTransform, eventData.position, eventData.pressEventCamera, out localPointerPosition))
             {
@@ -83,7 +97,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             }
             else
             {
-                snapToAreas[0].Hover(gameObject, false); // Turn off highlights
+                TurnOffHovering();
             }
         }
     }
@@ -92,7 +106,9 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         if (isDraggable)
         {
+            startTime = Time.time;
             isDragging = false;
+            screenTapping.TappingEffect(eventData); //Play screenTapping animation
 
             SnapLocation locationToGoTo = GetClosestSnapLocation();
 
@@ -105,14 +121,36 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
             else
             {
                 transform.localScale = nonDraggingScale; //Make the block samller
-                snapToAreas[0].Hover(gameObject, false); // Turn off highlights
-                transform.localPosition = defaultPosition;
+                //transform.localScale = new Vector3(1f, 1f, 1f);
+                TurnOffHovering();
+                AudioController.Instance.SnapTile();
+                currentPosition = transform.localPosition;
+                //transform.localPosition = defaultPosition;
             }
 
             if (EndDragEvent != null)
             {
                 EndDragEvent(this);
             }
+        }
+    }
+
+    private void Start()
+    {
+        //transform.localScale = nonDraggingScale;
+    }
+
+    private void Update()
+    {
+        //Lerping between dragging scale and nondragging scale
+        if (isDragging)
+        {
+            transform.localScale = Vector3.Lerp(nonDraggingScale, draggingScale, (Time.time - startTime) * lerpSpeed);
+        }
+        else
+        {
+            transform.localScale = Vector3.Lerp(draggingScale, nonDraggingScale,  (Time.time - startTime) * lerpSpeed);
+            transform.localPosition = Vector3.Lerp(currentPosition, defaultPosition, (Time.time - startTime) * lerpSpeed);
         }
     }
 
@@ -169,6 +207,11 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         isDraggable = draggable;
     }
 
+    public void SetScreenTapping(ScreenTapping tapping)
+    {
+        screenTapping = tapping;
+    }
+
     public void SetDraggingScale(Vector3 scale)
     {
         draggingScale = scale;
@@ -204,6 +247,14 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         snapDetectionOffset = offset;
 
         //Debug.Log("DraggableObject canvas transform x scale: " + canvasXScale);
+    }
+
+    private void TurnOffHovering()
+    {
+        if (snapToAreas.Count != 0)
+        {
+            snapToAreas[0].Hover(gameObject, false); // Turn off highlights
+        }
     }
 
     /*

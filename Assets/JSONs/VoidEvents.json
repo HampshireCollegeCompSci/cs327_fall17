@@ -1,0 +1,94 @@
+{
+	"tier-specific data" :
+	[
+		{
+			"tier" : 1,
+			"radiation vestige count" : 1,
+			"radiation vestige level" : 1,
+			"radiation base energy decay rate bonus" : 0,
+			"asteroid count" : 3
+		},
+		{
+			"tier" : 2,
+			"radiation vestige count" : 2,
+			"radiation vestige level" : 1,
+			"radiation base energy decay rate bonus" : 0,
+			"asteroid count" : 5
+		},
+		{
+			"tier" : 3,
+			"radiation vestige count" : 3,
+			"radiation vestige level" : 1,
+			"radiation base energy decay rate bonus" : 0,
+			"asteroid count" : 7
+		}
+	],
+	"events" :
+	[
+		{
+			"begin" : 3000,
+			"end" : 5000,
+			"types" : ["1a"]
+		},
+		{
+			"begin" : 6000,
+			"end" : 8000,
+			"types" : ["1b"]
+		},
+		{
+			"begin" : 9000,
+			"end" : 11000,
+			"types" : ["1c"]
+		},
+		{
+			"begin" : 12000,
+			"end" : 14000,
+			"types" : ["2a"]
+		},
+		{
+			"begin" : 15000,
+			"end" : 17000,
+			"types" : ["2b"]
+		},
+		{
+			"begin" : 18000,
+			"end" : 20000,
+			"types" : ["2c"]
+		},
+		{
+			"begin" : 21000,
+			"end" : 23000,
+			"types" : ["3a"]
+		},
+		{
+			"begin" : 24000,
+			"end" : 26000,
+			"types" : ["3b"]
+		},
+		{
+			"begin" : 27000,
+			"end" : 29000,
+			"types" : ["3c"]
+		},
+		{
+			"begin" : 30000,
+			"end" : 32000,
+			"types" : ["3a", "3b"]
+		},
+		{
+			"begin" : 33000,
+			"end" : 35000,
+			"types" : ["3a", "3c"]
+		},
+		{
+			"begin" : 36000,
+			"end" : 38000,
+			"types" : ["3b", "3c"]
+		},
+		{
+			"begin" : 39000,
+			"end" : -1,
+			"types" : ["3a", "3b", "3c"]
+		}
+	]
+}

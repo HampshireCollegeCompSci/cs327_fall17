@@ -26,6 +26,9 @@ public class BlockSpawner : MonoBehaviour
     [Tooltip("Reference to the Grid instance.")]
     Grid grid;
     [SerializeField]
+    [Tooltip("Reference to the Grid instance.")]
+    ConsoleGrid consoleGrid;
+    [SerializeField]
     [Tooltip("The prefab to instantiate for DraggableBlocks.")]
     GameObject prefabDraggableBlock;
     [SerializeField]
@@ -34,6 +37,15 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField]
     [Tooltip("The current junkyard tier. 0 = no junkyard event.")]
     int tierCurrent = 0;
+    [SerializeField]
+    [Tooltip("The current number of vestiges to generate per block.")]
+    int vestigesPerBlock = 0;
+    [SerializeField]
+    [Tooltip("The vestige level to use.")]
+    int vestigeLevel = 1;
+    [SerializeField]
+    [Tooltip("Reference to ScreenTapping.")]
+    ScreenTapping screenTapping;
 
     List<Block>[] possibleBlocks = new List<Block>[4];
     List<Block> bag = new List<Block>();
@@ -41,6 +53,8 @@ public class BlockSpawner : MonoBehaviour
     Queue<DraggableBlock> blocksQueue = new Queue<DraggableBlock>();
 
     float timeBeforeNextBlock;
+    Block currentBlock;
+    bool isSpawningSameBlocks;
 
     private void Awake()
     {
@@ -75,6 +89,7 @@ public class BlockSpawner : MonoBehaviour
             //int formation = Random.Range(0, json["blocks"].Count);
             var w = json[blocksNormal][i]["width"].AsInt;
             var h = json[blocksNormal][i]["height"].AsInt;
+            int sprite = json[blocksNormal][i]["sprite"].AsInt;
             var cell = json[blocksNormal][i]["cells"].AsArray;
             var tiers = json[blocksNormal][i]["tiers"].AsArray;
             //Debug.Log(cell.ToString());
@@ -95,6 +110,7 @@ public class BlockSpawner : MonoBehaviour
                     {
                         block.Fill(row, col, TileData.TileType.Regular);
                     }
+                    block.SetSpriteIndex(row, col, sprite);
                 }
             }
 
@@ -141,7 +157,7 @@ public class BlockSpawner : MonoBehaviour
             // If the component is disabled, don't spawn a block.
             return;
         }
-        if(blocksQueue.Count == maxBlocksInQueue)
+        if (blocksQueue.Count == maxBlocksInQueue)
         {
             //if the # of elements in queue already reaches
             //max, game over
@@ -152,27 +168,59 @@ public class BlockSpawner : MonoBehaviour
         {
             //otherwise we select a random block from the possible list,
             //then instantiate the draggable block and add it into the queue.
-
-            if (bag.Count == 0)
+            Block toSpawn = null;      
+            if (isSpawningSameBlocks)
             {
-                // If the bag is empty, repopulate it.
-                for (int j = 0; j < possibleBlocks[tierCurrent].Count; ++j)
-                {
-                    bag.Add(possibleBlocks[tierCurrent][j]);
-                }
+                if (currentBlock != null)
+                    toSpawn = currentBlock;                    
             }
+            else
+            {
+                if (bag.Count == 0)
+                {
+                    // If the bag is empty, repopulate it.
+                    for (int j = 0; j < possibleBlocks[tierCurrent].Count; ++j)
+                    {
+                        bag.Add(new Block(possibleBlocks[tierCurrent][j]));
+                    }
+                }
 
-			int i = Random.Range(0, bag.Count);
-            Block toSpawn = bag[i];
-            // Remove each chosen element from the bag.
-            bag.RemoveAt(i);
+                int i = Random.Range(0, bag.Count);
+                toSpawn = bag[i];
+                // Remove each chosen element from the bag.
+                bag.RemoveAt(i);
+
+                // Add vestiges to the block, if applicable.
+                int vestigesAdded = 0;
+                List<TileData> refs = toSpawn.GetReferencesToType(TileData.TileType.Regular);
+
+                // Stop adding vestiges when there are no regular tiles left.
+                //Debug.Log("Vestige generation begin.");
+                while (vestigesAdded < vestigesPerBlock && refs.Count != 0)
+                {
+                    int index = Random.Range(0, refs.Count);
+                    TileData v = refs[index];
+                    v.Fill(TileData.TileType.Vestige);
+                    v.SetVestigeLevel(vestigeLevel);
+                    refs.RemoveAt(index);
+                    ++vestigesAdded;
+                    //Debug.Log("vestigesAdded / vestigesPerBlock: " + vestigesAdded + " / " + vestigesPerBlock);
+                    //Debug.Log("BlockSpawner: vestigeLevel: " + vestigeLevel);
+                }
+                //Debug.Log("Vestige generation end.");
+            }
 
             // Instantiate the actual block.
             GameObject newBlock = Instantiate(prefabDraggableBlock, transform, false);
             // Initialize the DraggableBlock component.
             DraggableBlock newDraggable = newBlock.GetComponent<DraggableBlock>();
             //newDraggable.Init(toSpawn, grid, canvas);
-            newDraggable.Init(toSpawn, grid, GetComponent<RectTransform>());
+            newDraggable.Init(toSpawn, grid, GetComponent<RectTransform>(), consoleGrid);
+
+            newDraggable.SetScreenTapping(screenTapping);//Pass screenTapping to DraggableObject
+
+            currentBlock = new Block(newDraggable.GetBlock());
+
             // Add it to the queue.
             blocksQueue.Enqueue(newDraggable);
 
@@ -194,6 +242,8 @@ public class BlockSpawner : MonoBehaviour
             int closestIndex = blocksQueue.Count - 1;
             PositionBlockAt(newDraggable, closestIndex);
             newDraggable.SetDefaultPosition(newBlock.transform.localPosition);
+
+            consoleGrid.SetDraggableBlock(newDraggable); //Insert the block into the console grid
         }
     }
 
@@ -228,7 +278,7 @@ public class BlockSpawner : MonoBehaviour
     void EnableFrontBlock()
     {
         //Check the size of queue just for safety
-        if(blocksQueue.Count > 0)
+        if (blocksQueue.Count > 0)
         {
             // Set up the front block.
             DraggableBlock frontBlock = blocksQueue.Peek();
@@ -280,13 +330,31 @@ public class BlockSpawner : MonoBehaviour
         if (blocksQueue.Count > 0)
         {
             blocksQueue.Peek().Flip();
-            AudioController.Instance.RotateTile();
+            AudioController.Instance.FlipTile();
         }
     }
 
-    public void SetTier(int newTier)
+    public void SetJunkyardTier(int newTier)
     {
         tierCurrent = newTier;
+        // Clear the bag to force a new bag to generate.
+        bag.Clear();
+    }
+
+    public void SetVestigesPerBlock(int newVal)
+    {
+        vestigesPerBlock = newVal;
+    }
+
+    public void SetVestigeLevel(int newVal)
+    {
+        vestigeLevel = newVal;
+    }
+
+    public void ForceUpdateSpaceInformation()
+    {
+        UpdateAllBlocks();
+        EnableFrontBlock();
     }
 
     // Callback function for gameFlow's GameLost event.
@@ -297,5 +365,11 @@ public class BlockSpawner : MonoBehaviour
             blocksQueue.Peek().AllowDragging(false);
         }
         enabled = false;
-    }		
+    }	
+    
+    //Will always spwan the same blocks as the current one
+    public void CheatSpawning(bool on)
+    {
+        isSpawningSameBlocks = on;
+    }
 }

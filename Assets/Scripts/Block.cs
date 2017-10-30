@@ -91,6 +91,21 @@ public class Block
         return tiles[row, col].Fill;
     }
 
+    public int GetVestigeLevel(int row, int col)
+    {
+        return tiles[row, col].GetVestigeLevel();
+    }
+
+    public TileData GetTileData(int row, int col)
+    {
+        return tiles[row, col];
+    }
+
+    public void SetSpriteIndex(int row, int col, int spriteIndex)
+    {
+        tiles[row, col].SetSpriteIndex(spriteIndex);
+    }
+
     // Rotates the Block.
     public void Rotate(bool clockwise)
     {
@@ -144,10 +159,14 @@ public class Block
             {            
                 for (int r = 0; r < height; r++)
                 {
-                    if (width % 2 == 1 && c == midCol) 
+                    if (width % 2 == 1 && c == midCol)
+                    {
                         newTileData[r, midCol] = new TileData(tiles[r, midCol]);
+                    }
                     else
-                        newTileData[r, c] = new TileData(tiles[r, width - 1 - c].GetTileType());
+                    {
+                        newTileData[r, c] = new TileData(tiles[r, width - 1 - c]);
+                    }
                 }               
             }
             
@@ -185,5 +204,32 @@ public class Block
             }
         }
         return true;
+    }
+
+    // Returns the number of tiles of a certain type in the block.
+    public int GetTileCount(TileData.TileType type)
+    {
+        int count = 0;
+        foreach (TileData t in tiles)
+        {
+            if (t.GetTileType() == type)
+            {
+                ++count;
+            }
+        }
+        return count;
+    }
+
+    public List<TileData> GetReferencesToType(TileData.TileType type)
+    {
+        List<TileData> result = new List<TileData>();
+        foreach (TileData t in tiles)
+        {
+            if (t.GetTileType() == type)
+            {
+                result.Add(t);
+            }
+        }
+        return result;
     }
 }

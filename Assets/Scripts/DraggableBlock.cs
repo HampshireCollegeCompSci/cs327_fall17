@@ -16,6 +16,9 @@ public class DraggableBlock : MonoBehaviour
     [Tooltip("Reference to the Grid instance.")]
     Grid grid;
     [SerializeField]
+    [Tooltip("Reference to the Console Grid instance.")]
+    ConsoleGrid consoleGrid;
+    [SerializeField]
     [Tooltip("Reference to the DraggableObject component to interface with.")]
     DraggableObject draggableObject;
     [SerializeField]
@@ -32,17 +35,27 @@ public class DraggableBlock : MonoBehaviour
     Tile[,] tiles;
 
     //Copies the data of a Block into this DraggableBlock’s contained Block
-    public void Init(Block copiedBlock, Grid newGrid, RectTransform canvas)
+    public void Init(Block copiedBlock, Grid newGrid, RectTransform canvas, ConsoleGrid newConsoleGrid)
     {
         grid = newGrid;
+        consoleGrid = newConsoleGrid;
+        consoleGrid.Init();
         draggableObject.SetCanvasTransform(canvas);
 
-        nonDraggingScale = new Vector3(0.75f, 0.75f, 0.75f);
-        draggingScale = new Vector3(1.0f, 1.0f, 1.0f);
+        //nonDraggingScale = new Vector3(0.75f, 0.75f, 0.75f);
+        nonDraggingScale = new Vector3(1f, 1f, 1f);
+        //draggingScale = new Vector3(1.0f, 1.0f, 1.0f);
+
+        float scaleVlaueY = grid.GetTileHeight() / consoleGrid.GetTileHeight();
+        float scaleVlaueX = grid.GetTileWidth() / consoleGrid.GetTileWidth();
+        draggingScale = new Vector3(scaleVlaueX, scaleVlaueY, 1.0f);
+
         draggableObject.SetDraggingScale(draggingScale);
         draggableObject.SetNonDraggingScale(nonDraggingScale);
 
-        transform.localScale = nonDraggingScale;
+        //transform.localScale = nonDraggingScale;
+
+        transform.SetParent(consoleGrid.transform);
 
         // Copy the copiedBlock data into this DraggableBlock's block.
         block = new Block(copiedBlock);
@@ -65,6 +78,11 @@ public class DraggableBlock : MonoBehaviour
     public Block GetBlock()
     {
         return block;
+    }
+
+    public void SetScreenTapping(ScreenTapping tapping)
+    {
+        draggableObject.SetScreenTapping(tapping);
     }
 
     public void AllowDragging(bool draggable)
@@ -121,19 +139,28 @@ public class DraggableBlock : MonoBehaviour
         //tiles = new Tile[height, width];
         // Instantiate all Tiles.
         // The center is Vector3.zero because all of the Tiles will be positioned relative to this parent.
-        tiles = grid.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
-        
+        //tiles = grid.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
+
+        tiles = CreateTileArrayForConsole(Vector3.zero, height, width);
+
+        //int rowStart = height / consoleGrid.GetHeight() - 1;
+        //int colStart = width / consoleGrid.GetWidth() - 1;
+
         // Fill in all of the Tiles according to the Block.
         for (int r = 0; r < height; r++)
         {
             for (int c = 0; c < width; c++)
             {
-                tiles[r, c].Fill(block.GetTileType(r, c));
+                tiles[r, c].Duplicate(block.GetTileData(r, c));
+                //tiles[r, c].Fill(block.GetTileType(r, c));
+                //tiles[r, c].SetVestigeLevel(block.GetVestigeLevel(r, c));
+                /*
                 // Unoccupied Tiles should not be visible.
                 if (tiles[r, c].GetTileType() == TileData.TileType.Unoccupied)
                 {
                     //tiles[r, c].EnableSpriteRenderer(false);
                 }
+                */
             }
         }
         UpdateAvailableSpaces();
@@ -149,6 +176,47 @@ public class DraggableBlock : MonoBehaviour
         //Debug.Log("DraggableBlock width / height: " + width + " / " + height);
         //Debug.Log("tileWidth / tileHeight: " + tileWidth + " / " + tileHeight);
         //Debug.Log("DraggableBlock snapDetectionOffset: " + offset);
+    }
+
+    public Tile[,] CreateTileArrayForConsole(Vector3 center, int blockHeight, int blockWidth)
+    {
+        Tile[,] result = new Tile[blockHeight, blockWidth];
+
+        int gridWidth = consoleGrid.GetWidth();
+        int gridHeight = consoleGrid.GetHeight();
+
+        float tileWidth = consoleGrid.GetTileWidth();
+        float tileHeight = consoleGrid.GetTileHeight();
+
+        // Calculate the position of the top-left corner of the array.
+        float cornerX = center.x - ((gridWidth - 1) * tileWidth * 0.5f);
+        float cornerY = center.y + ((gridHeight - 1) * tileHeight * 0.5f);
+
+        //Debug.Log(tileWidth);
+
+        int rowStart = (gridHeight - blockHeight) / 2;
+        int colStart = (gridWidth - blockWidth) / 2;
+
+        // Iterate through all the Tiles of the array.
+        for (int c = colStart; c < colStart + blockWidth; c++)
+        {
+            for (int r = rowStart; r < rowStart + blockHeight; r++)
+            {
+                // Calculate the position of the Tile.
+                float tileX = cornerX + c * tileWidth;
+                float tileY = cornerY - r * tileHeight;
+                Vector3 pos = new Vector3(tileX, tileY, 0.0f);
+
+                GameObject currentPrefabTile = GameObject.Instantiate(prefabTile, transform, false);
+                currentPrefabTile.transform.localPosition = pos;
+
+                result[r - rowStart, c - colStart] = currentPrefabTile.GetComponent<Tile>();
+
+                currentPrefabTile.GetComponent<RectTransform>().sizeDelta = new Vector2(tileWidth, tileHeight);
+            }
+        }
+
+        return result;
     }
 
     public void SetDefaultPosition(Vector2 pos)
@@ -181,6 +249,11 @@ public class DraggableBlock : MonoBehaviour
         return tiles[row, col].GetTileType();
     }
 
+    public TileData GetTileData(int row, int col)
+    {
+        return block.GetTileData(row, col);
+    }
+
 	public void TurnBlockImageOff() 
 	{
 		int height = block.GetHeight();
@@ -206,6 +279,7 @@ public class DraggableBlock : MonoBehaviour
 			}
 		}
 	}
+
     /*
     private void OnDrawGizmos()
     {

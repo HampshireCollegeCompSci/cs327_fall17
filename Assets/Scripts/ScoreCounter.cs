@@ -8,6 +8,10 @@ using UnityEngine.UI;
 // This class keeps track of the player's score and updates the UI accordingly.
 public class ScoreCounter : MonoBehaviour
 {
+    // Invoked when the score changes, with the new score passed in as an argument.
+    public delegate void ScoreChangedHandler(int newScore);
+    public event ScoreChangedHandler ScoreChanged;
+
     [SerializeField]
     [Tooltip("Reference to the Grid instance.")]
     Grid grid;
@@ -52,6 +56,7 @@ public class ScoreCounter : MonoBehaviour
     private void UpdateScore()
     {
         textScore.text = "Score: " + score;
+        OnScoreChanged(score);
     }
 
     // Callback function for a square on the Grid being cleared.
@@ -64,5 +69,13 @@ public class ScoreCounter : MonoBehaviour
         GameObject risingTextObj = Object.Instantiate(risingTextPrefab, grid.transform, false);
         risingTextObj.GetComponent<RisingText>().SetText((points).ToString());
         risingTextObj.transform.localPosition = textPos;
+    }
+
+    private void OnScoreChanged(int newScore)
+    {
+        if (ScoreChanged != null)
+        {
+            ScoreChanged(newScore);
+        }
     }
 }
