@@ -97,13 +97,14 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
                 if (lastLocation != locationToGoTo)
                 {
                     lastLocation = locationToGoTo;
+                    locationToGoTo.Hover(gameObject, false); // Clear all highlights
+                    locationToGoTo.Hover(gameObject, true); // Set on highlight for current tile
                     AudioController.Instance.SnapTile();
                 }
-                locationToGoTo.Hover(gameObject, false); // Clear all highlights
-                locationToGoTo.Hover(gameObject, true); // Set on highlight for current tile
             }
             else
             {
+                lastLocation = null;
                 TurnOffHovering();
             }
         }
