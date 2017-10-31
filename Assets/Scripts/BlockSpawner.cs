@@ -55,6 +55,7 @@ public class BlockSpawner : MonoBehaviour
     float timeBeforeNextBlock;
     Block currentBlock;
     bool isSpawningSameBlocks;
+    bool isSpawningOneTileBlocks;
 
     private void Awake()
     {
@@ -168,8 +169,15 @@ public class BlockSpawner : MonoBehaviour
         {
             //otherwise we select a random block from the possible list,
             //then instantiate the draggable block and add it into the queue.
-            Block toSpawn = null;      
-            if (isSpawningSameBlocks)
+            Block toSpawn = null;
+
+            if (isSpawningOneTileBlocks)
+            {
+                Block oneTile = new Block(1, 1);
+                oneTile.Fill(0, 0, TileData.TileType.Regular);
+                toSpawn = oneTile;
+            }
+            else if (isSpawningSameBlocks)
             {
                 if (currentBlock != null)
                     toSpawn = currentBlock;                    
@@ -371,5 +379,10 @@ public class BlockSpawner : MonoBehaviour
     public void CheatSpawning(bool on)
     {
         isSpawningSameBlocks = on;
+    }
+
+    public void OneTileCheatSpawning(bool on)
+    {
+        isSpawningOneTileBlocks = on;
     }
 }
