@@ -8,6 +8,7 @@ public class Settings : MonoBehaviour {
     [SerializeField]
     [Tooltip("Are cheats enabled? For debug viewing purposes only.")]
     bool cheatsEnabled; //Are there cheats enabled or not?
+    bool oneTileCheatEnabled;
 
     private static Settings instance = null;
     public static Settings Instance

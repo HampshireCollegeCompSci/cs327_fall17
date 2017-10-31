@@ -23,6 +23,8 @@ public class CheatsGameplay : MonoBehaviour
 
     bool isSpawningCheatingEnabled;
 
+    bool isSpawningOneTileEnabled;
+
     private void Awake()
     {
         settings = FindObjectOfType<Settings>(); //Can't pass in a reference because it won't necessarily exist until the scene loads
@@ -74,5 +76,22 @@ public class CheatsGameplay : MonoBehaviour
             settings.SetCheatsEnabled();
             isSpawningCheatingEnabled = true;
         }    
+    }
+
+    public void SpawnOneTileBlock()
+    {
+        if (isSpawningOneTileEnabled)
+        {
+            blockSpawner.OneTileCheatSpawning(false);
+            text.text = "Spawn One Tile Block";
+            isSpawningOneTileEnabled = false;
+        }
+        else
+        {
+            blockSpawner.OneTileCheatSpawning(true);
+            text.text = "Spawn Normal Block";
+            settings.SetCheatsEnabled();
+            isSpawningOneTileEnabled = true;
+        }
     }
 }
