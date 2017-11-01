@@ -1,4 +1,4 @@
-// Author(s): Paul Calande, Wm. Josiah Erikson
+﻿// Author(s): Paul Calande, Wm. Josiah Erikson
 
 using System.Collections;
 using System.Collections.Generic;
@@ -24,6 +24,9 @@ public class Space : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the SnapLocation component to interface with.")]
     SnapLocation snapLocation;
+    [SerializeField]
+    [Tooltip("Reference to the energy counter.")]
+    EnergyCounter energyCounter;
 
     private void Start()
     {
@@ -32,13 +35,14 @@ public class Space : MonoBehaviour
         snapLocation.HoveringTo += SnapLocation_Highlight;
     }
 
-    public void Init(int mrow, int mcol, int mheight, int mwidth, Grid mgrid)
+    public void Init(int mrow, int mcol, int mheight, int mwidth, Grid mgrid, EnergyCounter mEnergyCounter)
 	{
         col = mcol;
         row = mrow;
         width = mwidth;
         height = mheight;
         grid = mgrid;
+        energyCounter = mEnergyCounter;
 
         // Center the Space in the middle of all of the Tiles it occupies.
         Vector3 tilePosTopLeft = grid.GetTilePosition(row, col);
@@ -70,6 +74,14 @@ public class Space : MonoBehaviour
 	{
         grid.ClearOutline();
         AudioController.Instance.PlaceTile();
+
+        //Set position for energy gain text to pop up
+        Vector3 pos = block.transform.localPosition;
+        float width = block.GetComponent<RectTransform>().rect.width;
+        float height = block.GetComponent<RectTransform>().rect.height;
+        energyCounter.SetPopUpPos(new Vector3(pos.x + width/2.0f, pos.y - height/2.0f, pos.z)); 
+        energyCounter.SetBlockTransform(block.transform);
+
         grid.WriteBlock(row, col, block); //We're placing this block. Apparently it's the external responsibility to make sure this will work
         grid.PlacedDraggableBlock(); // Notify the Grid that we just placed a DraggableBlock.
         grid.CheckForMatches(); //To make sure the tile clearing is finsihed before destroying the gameObject

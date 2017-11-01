@@ -48,6 +48,12 @@ public class EnergyCounter : MonoBehaviour
     // The highest amount of energy achieved over the course of the game.
     int peakEnergy;
 
+    // The position for rising text to pop up.
+    Vector3 popUpPos;
+
+    // The reference to block transform.
+    Transform blockTransform;
+
     void Tune()
     {
         var json = JSON.Parse(tuningJSON.ToString());
@@ -136,14 +142,22 @@ public class EnergyCounter : MonoBehaviour
         UpdateEnergy();
     }
 
+    public void SetPopUpPos(Vector3 pos)
+    {
+        popUpPos = pos;
+    }
+
+    public void SetBlockTransform(Transform transform)
+    {
+        blockTransform = transform;
+    }
+
     public void PopUp(string pref, int amount)
     {
-        Vector3 popOutPos = new Vector3(transform.localPosition.x + 1.2f * GetComponent<RectTransform>().rect.width, transform.localPosition.y, transform.localPosition.z);
-        
-        GameObject risingTextObj = Object.Instantiate(risingTextPrefab, transform.parent.transform, false);
+        GameObject risingTextObj = Object.Instantiate(risingTextPrefab, blockTransform.parent.transform, false);
         risingTextObj.GetComponent<RisingText>().SetText(pref + (amount).ToString());
-        risingTextObj.GetComponent<Text>().color = Color.green;
-        risingTextObj.transform.localPosition = popOutPos;
+        risingTextObj.GetComponent<Text>().color = Color.white;
+        risingTextObj.transform.localPosition = popUpPos;
     }
 
     private void UpdateEnergy()
