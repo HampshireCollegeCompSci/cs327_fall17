@@ -1344,7 +1344,7 @@ public class Grid : MonoBehaviour
                 //Space s = Instantiate(prefabSpace).GetComponent<Space>();
                 GameObject current = Instantiate(prefabSpace, transform, false);
                 Space s = current.GetComponent<Space>();
-                s.Init(row, col, h, w, this);
+                s.Init(row, col, h, w, this, energyCounter);
                 //s.GetComponent<RectTransform>().SetParent(canvas.transform);
                 ts.Add(s);
             }
