@@ -40,9 +40,9 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Grid.")]
     Grid grid;
-    /*[SerializeField]
+    [SerializeField]
     [Tooltip("Reference to energy gain animator.")]
-    Animator energyGainController;*/
+    Animator energyGainController;
     
 
     // The highest amount of energy achieved over the course of the game.
@@ -169,11 +169,13 @@ public class EnergyCounter : MonoBehaviour
             peakEnergy = energy;
         }
         // Update the energy meter.
-        energyMeter.UpdateEnergyMeter();
+        //energyMeter.UpdateEnergyMeter();
 
         // Check if the player is about to lose.
         int energyDrain = grid.GetEnergyDrain();
         SetIsAboutToLose(energyDrain >= energy);
+
+        energyGainController.SetInteger("energy", energy);
     }
 
     private void SetIsAboutToLose(bool isAboutToLose)
