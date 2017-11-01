@@ -18,7 +18,7 @@ public class EnergyCounter : MonoBehaviour
     int maxEnergyInMeter = 60;
     [SerializeField]
     [Tooltip("The list of value to separate the levels of energy gained. Populated by JSON.")]
-    JSONArray energyLevel;
+    JSONArray energyThreshold;
     [SerializeField]
     [Tooltip("Reference to the energy UI text.")]
     Text textEnergy;
@@ -40,9 +40,9 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Grid.")]
     Grid grid;
-    /*[SerializeField]
+    [SerializeField]
     [Tooltip("Reference to energy gain animator.")]
-    Animator energyGainController;*/
+    Animator energyGainController;
     
 
     // The highest amount of energy achieved over the course of the game.
@@ -59,7 +59,7 @@ public class EnergyCounter : MonoBehaviour
         var json = JSON.Parse(tuningJSON.ToString());
         energy = json["starting energy"].AsInt;
         maxEnergyInMeter = json["max energy in meter"].AsInt;
-        //energyLevel = json["energy level animation"].AsArray;
+        energyThreshold = json["energy level animation"].AsArray;
     }
 
     void Start()
@@ -67,6 +67,26 @@ public class EnergyCounter : MonoBehaviour
         Tune();
         //SetEnergyLevel();
         UpdateEnergy();
+    }
+
+    public void UpdateEnergyLevel()
+    {
+        if (energy < energyThreshold[0])
+        {
+            energyGainController.SetInteger("energyLevel", 0);
+        }
+        else if (energy < energyThreshold[1])
+        {
+            energyGainController.SetInteger("energyLevel", 1);
+        }
+        else if (energy < energyThreshold[2])
+        {
+            energyGainController.SetInteger("energyLevel", 2);
+        }
+        else
+        {
+            energyGainController.SetInteger("energyLevel", 3);
+        }
     }
 
     /*public void SetEnergyLevel()
@@ -169,11 +189,13 @@ public class EnergyCounter : MonoBehaviour
             peakEnergy = energy;
         }
         // Update the energy meter.
-        energyMeter.UpdateEnergyMeter();
+        //energyMeter.UpdateEnergyMeter();
 
         // Check if the player is about to lose.
         int energyDrain = grid.GetEnergyDrain();
         SetIsAboutToLose(energyDrain >= energy);
+
+        UpdateEnergyLevel();
     }
 
     private void SetIsAboutToLose(bool isAboutToLose)

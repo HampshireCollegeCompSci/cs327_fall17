@@ -682,8 +682,6 @@ public class Grid : MonoBehaviour
             }
             List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
             energyCounter.PopUp("+", duplicatesRemoved.Count);
-            energyGainController.SetBool("active", true);
-            energyGainController.SetInteger("energyGained", duplicatesRemoved.Count);
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
