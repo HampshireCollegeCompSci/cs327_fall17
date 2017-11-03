@@ -15,13 +15,15 @@ public class Tip : MonoBehaviour {
 
 	UILanguages translator;
 
+	string displayTip;
+
 	// Use this for initialization
 	void Start () {
+		translator = FindObjectOfType<UILanguages>();
         var json = JSON.Parse(tipJSON.ToString());
         tips = json["tips"].AsArray;
-		string displayTip = tips [Random.Range (0, tips.Count)];
-		//displayTip = translator.Translate (displayTip);
+		displayTip = tips [Random.Range (0, tips.Count)];
+		displayTip = translator.Translate (displayTip);
 		GetComponent<Text>().text = displayTip;
-
 	}
 }

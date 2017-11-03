@@ -29,6 +29,7 @@ public class ScoreCounter : MonoBehaviour
 
     private void Start()
     {
+		translator = FindObjectOfType<UILanguages>();
         grid.SquareFormed += Grid_SquareFormed;
         UpdateScore();
     }
@@ -57,8 +58,8 @@ public class ScoreCounter : MonoBehaviour
 
     private void UpdateScore()
     {
-		//MAIA MAIA MAIA MAIA MAIA MAIA
-		//textScore.text = translator.Translate("Score") + score;
+		//FIXING THIS
+		textScore.text = translator.Translate("Score") + score;
         OnScoreChanged(score);
     }
 

@@ -1,9 +1,8 @@
 {
-	//Change tips to tip1-tip5
-	"tips": ["Tip1", //Try making more than one square at a time
-		 "Tip2", //Some blocks are more compatible than others
-		 "Tip3", //Don’t place blocks in the center of the board, it gives you less space to work in
-		 "Tip4", //Remember that cells diagonally adjacent to a cleared square don't become vestiges  
-		 "Tip5" //Remove vestiges from the board as quickly as you can, especially if they are level two or three
+	"tips": ["Tip1",
+		 "Tip2", 
+		 "Tip3", 
+		 "Tip4", 
+		 "Tip5" 
 		]
 }
