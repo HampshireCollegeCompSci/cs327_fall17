@@ -12,6 +12,9 @@ public class UITitleMenus : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
         AudioController.Instance.MenuClick();
+        AudioController.Instance.StopAllSFX();
+        AudioController.Instance.StopMusic();
+        AudioController.Instance.PlayMusic("Main_Menu_Music_1");
     }
 
     public void GoToHowToPlay()
