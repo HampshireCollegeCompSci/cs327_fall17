@@ -578,11 +578,8 @@ public class Grid : MonoBehaviour
         }
         else
         {
-            if (prevSnapLocation != snapLocation)
-            {
-                ClearOutline();
-                prevSnapLocation = null;
-            }
+            ClearOutline();
+            prevSnapLocation = null;
 
             for (int c = 0; c < GetWidth(); c++)
             {

@@ -20,6 +20,9 @@ public class Tile : MonoBehaviour
     [Tooltip("The sprites to use for Vestige state.")]
     Sprite[] spriteVestigeList;
     [SerializeField]
+    [Tooltip("The animation to use for Asteroid state.")]
+    Animator animationAsteroid;
+    [SerializeField]
     [Tooltip("The sprite to use for Asteroid state.")]
     Sprite spriteAsteroid;
     [SerializeField]
@@ -35,6 +38,8 @@ public class Tile : MonoBehaviour
     [Tooltip("The underlying TileData.")]
     TileData data = new TileData();
 
+    bool isReactorBreachAnimationEnd;
+
     /*
     private void Awake()
     {
@@ -45,6 +50,16 @@ public class Tile : MonoBehaviour
         Debug.Log("Tile.Awake.myType: " + myType);
     }
     */
+
+    void Update()
+    {
+        if (isReactorBreachAnimationEnd)
+        {   
+            spriteRenderer.sprite = spriteAsteroid;
+            trueSprite = spriteRenderer.sprite;
+            isReactorBreachAnimationEnd = false;
+        }
+    }
 
     public bool GetIsOccupied()
     {
@@ -144,7 +159,8 @@ public class Tile : MonoBehaviour
                 //SyncSpriteToVestigeLevel();
                 break;
             case TileData.TileType.Asteroid:
-                newSprite = spriteAsteroid;
+                newSprite = spriteUnoccupied;
+                StartCoroutine(AsteroidAnmiation());
                 break;
         }
         spriteRenderer.sprite = newSprite;
@@ -242,5 +258,19 @@ public class Tile : MonoBehaviour
     {
         data.SetSpriteIndex(spriteIndex);
         SetSprite(data.GetTileType());
+    }
+
+    IEnumerator AsteroidAnmiation()
+    {
+        //NOTE: the ratio and position is just an approximation.
+        Animator asteroidObj = Instantiate(animationAsteroid, transform);
+        asteroidObj.transform.localPosition = new Vector2(0, GetComponent<RectTransform>().rect.height * 0.2f);
+        asteroidObj.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().rect.width * 1 / 0.63f, GetComponent<RectTransform>().rect.height * 1 / 0.63f);
+        float length = asteroidObj.runtimeAnimatorController.animationClips[0].length;
+
+        yield return new WaitForSeconds(length);
+
+        isReactorBreachAnimationEnd = true;
+
     }
 }
