@@ -16,7 +16,6 @@
 	    "Korean" : "게임 오버"
 	  },
 	  "ReasonNoEnergy": {
-	    "key": "ReasonOutofEnergy",
 	    "English": "Reason: Out of Energy!",
 	    "Spanish": "Razón: ¡Fuera de energía!",
 	    "French": "Paison: Plus d’énergie!",
@@ -31,7 +30,6 @@
 		"Korean": "이유: 에너지 고갈!"
 	  },
 	  "ReasonHesitation": {
-	    "key": "ReasonHesitation",
 	    "English": "Reason: You hesitated for too long!",
 	    "Spanish": "Razón: ¡Dudaste por mucho tiempo!",
 	    "French": "Raison : Vous avez hésité trop longtemps !",
@@ -46,7 +44,6 @@
 		"Korean": "이유: 너무 오래 망설였음!"
 	  },
 	  "ReasonNoSpaceLeft": {
-	  	"key" : "ReasonNoSpaceLeft",
 	    "English": "Reason: No Space Left!",
 	    "Spanish": "Razón: ¡No hay espacio!",
 	    "French": "Raison : Plus de place!",
@@ -61,7 +58,6 @@
 		"Korean": "이유: 공간 부족!"
 	  },
 	  "ReasonManualReset": {
-	  	"key" : "ReasonManualReset",
 	    "English": "Manual Reset!",
 	    "Spanish": "Razón: Reinciar",
 	    "French": "Raison : Réinitialisation manuelle!",
@@ -76,7 +72,6 @@
 		"Korean": "이유: 수동 복귀!"
 	  },
 	  "HowToPlay": {
-	  	"key" : "HowtToPlay",
 	  	"English": "How to Play",
 	    "Spanish": "Como Jugar",
 	    "French": "Comment jouer",
@@ -91,7 +86,6 @@
 		"Korean": "게임 방법"
 	  },
 	  "Credits": {
-	  	"key" : "Credits",
 	    "English": "Credits",
 	    "Spanish": "Crédito",
 	    "French": "Crédits",
@@ -106,7 +100,6 @@
 		"Korean": "스태프롤"
 	  },
 	  "PlayAgain": {
-	    "key" : "PlayAgain",
 	    "English": "Play Again",
 	    "Spanish": "Volver a Jugar",
 	    "French": "Jouer à nouveau",
@@ -121,7 +114,6 @@
 		"Korean": "재도전"
 	  },
 	  "MainMenu": {
-	  	"key" : "MainMenu",
 	    "English": "Main Menu",
 	    "Spanish": "Menu",
 	    "French": "Menu principal",
@@ -136,7 +128,6 @@
 		"Korean": "메인 메뉴"
 	  },
 	  "Tip": {
-	  	"key" : "Tip",
 	    "English": "Tip: Don’t lest vestiges stick around too long",
 	    "Spanish": "Tip: No dejes que restos se quede por mucho tiempo",
 	    "French": "Astuce : Ne laissez pas les vestiges trainer trop longtemps dans les parages",
@@ -150,33 +141,103 @@
 	    "Swedish": "Rotschlo: Loosst d’Iwwerreschter net ze laang dobleiwen",
 		"Korean": "힌트: 남은 퍼즐 조각들을 너무 오랫동안 내버려두지 말자"
 	},
-	//Beyond here the text has not been second hand verified just created by Maia Doerner
-	"HighScore": {
+	
+	"HighScore1": {
 		"English": "High Score: ",
-	    "Spanish": "High Score: ",
-	    "French": "High Score: ",
-	    "Slovenian": "High Score: ",
-	    "Romanian": "High Score",
-	    "German": "High Score: ",
-	    "Luxembourgish": "High Score: ",
-	    "Dutch": "High Score: ",
-	    "Danish": "High Score: ",
-	    "Polish": "High Score: ",
-	    "Swedish": "High Score: ",
-		"Korean": "High Score: "
+	    "Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
 	},
 	"Score": {
 		"English": "Score: ",
-	    "Spanish": "Score: ",
-	    "French": "Score: ",
-	    "Slovenian": "Score: ",
-	    "Romanian": "Score",
-	    "German": "Score: ",
-	    "Luxembourgish": "Score: ",
-	    "Dutch": "Score: ",
-	    "Danish": "Score: ",
-	    "Polish": "Score: ",
-	    "Swedish": "Score: ",
-		"Korean": "Score: "
+	    "Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Tip1": {
+		"English": "Try making more than one square at a time",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Tip2": {
+		"English": "Some blocks are more compatible than others",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Tip3": {
+		"English" :"Don’t place blocks in the center of the board, it gives you less space to work in",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Tip4": {
+		"English" : "Remember that cells diagonally adjacent to a cleared square don't become vestiges",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Tip5" : {
+		"English": "Remove vestiges from the board as quickly as you can, especially if they are level two or three",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
 	}
 }

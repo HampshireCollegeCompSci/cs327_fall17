@@ -86,7 +86,7 @@ public class UIGameOver : MonoBehaviour
                 break;
         }
 
-		textGameOverReason.text = translator.Translate(reason);
+		//textGameOverReason.text = translator.Translate(reason);
         int highScore = PlayerPrefs.GetInt("HighScore"); //Get the stored high score - 0 if doesn't exist
         int finalScore = score.GetScore();
         if (finalScore > highScore)
@@ -94,7 +94,7 @@ public class UIGameOver : MonoBehaviour
             highScore = finalScore;
         }
 
-		textGameOverReason.text = translator.Translate(reason) + translator.Translate("HighScore") + highScore;
+		textGameOverReason.text = translator.Translate(reason) + translator.Translate("HighScore1") + highScore;
 
     }
 }

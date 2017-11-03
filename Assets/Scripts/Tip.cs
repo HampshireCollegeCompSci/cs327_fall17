@@ -13,10 +13,15 @@ public class Tip : MonoBehaviour {
     [Tooltip("The list of tips could be shown in the game over screen. Populated by JSON.")]
     JSONArray tips;
 
+	UILanguages translator;
+
 	// Use this for initialization
 	void Start () {
         var json = JSON.Parse(tipJSON.ToString());
         tips = json["tips"].AsArray;
-        GetComponent<Text>().text = tips[Random.Range(0, tips.Count)];
+		string displayTip = tips [Random.Range (0, tips.Count)];
+		//displayTip = translator.Translate (displayTip);
+		GetComponent<Text>().text = displayTip;
+
 	}
 }
