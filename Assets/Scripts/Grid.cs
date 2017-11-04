@@ -63,11 +63,17 @@ public class Grid : MonoBehaviour
     [Tooltip("Reference to energy gain animator.")]
     Animator energyGainController;
     [SerializeField]
+    [Tooltip("Reference to energy transfer ball animator.")]
+    Animator energyTransferBallController;
+    [SerializeField]
     [Tooltip("Whether or not asteroids can spawn in filled cells.")]
     bool asteroidsCanSpawnInFilledCells;
     [SerializeField]
     [Tooltip("Placeholder sprite for square outline")]
     GameObject outLinePrefab;
+    [SerializeField]
+    [Tooltip("Reference to energy transfer lighting prefab")]
+    GameObject energyTransferPrefab;
     [SerializeField]
     [Tooltip("The underlying array of Tiles.")]
     Tile[,] tiles;
@@ -675,12 +681,54 @@ public class Grid : MonoBehaviour
                 }
             }
 
+            List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
+            energyTransferBallController.SetBool("active", true); //activate energy transfer ball animation
+
             //Remove all tiles that form squares if isPlaced is true
-            foreach (Tile t in toRemove)
+            foreach (Tile t in duplicatesRemoved)
             {
                 t.Clear();
+
+                /*Vector3 tilePos = t.transform.position;
+                Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
+                float distance = Vector3.Distance(tilePos, energyTransferBallPos);
+                //float angle = Vector3.Angle(energyTransferBallPos - tilePos, t.transform.forward);
+                // Get Angle in Radians
+                float AngleRad = Mathf.Atan2(energyTransferBallPos.y - tilePos.y, energyTransferBallPos.x - tilePos.x);
+                // Get Angle in Degrees
+                float AngleDeg = (180 / Mathf.PI) * AngleRad;
+
+                Vector3 lightingCenter = (energyTransferBallPos + tilePos)/2f;
+
+                GameObject lighting = Instantiate(energyTransferPrefab, t.transform);
+                lighting.transform.position = lightingCenter;
+
+                float scaleY = distance / lighting.GetComponent<RectTransform>().rect.height;
+                float scaleX = scaleY * 0.8f;
+                lighting.transform.localScale = new Vector3(scaleX, scaleY, 1f);
+
+                float tiltAroundZ = Input.GetAxis("Horizontal") * AngleDeg;
+                float tiltAroundX = Input.GetAxis("Vertical") * AngleDeg;
+                Quaternion target = Quaternion.Euler(tiltAroundX, 0f, tiltAroundZ);
+                lighting.GetComponent<RectTransform>().localRotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime);
+
+                Debug.Log(AngleDeg);*/
+                Vector3 tilePos = t.transform.position;
+                Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
+                float distance = Vector3.Distance(tilePos, energyTransferBallPos);
+
+                GameObject lighting = Instantiate(energyTransferPrefab, transform.parent.transform);
+                Vector3 lightingCenter = (energyTransferBallPos + tilePos) / 2f;
+                lighting.transform.position = lightingCenter;
+
+                float scaleY = distance / lighting.GetComponent<RectTransform>().rect.height;
+                float scaleX = scaleY * 0.5f;
+                lighting.transform.localScale = new Vector3(scaleX, scaleY, 1f);
+
+                float angle = (90 - Mathf.Atan((tilePos.y - energyTransferBallPos.y) / (tilePos.x - energyTransferBallPos.x)) * 180f / Mathf.PI);
+                lighting.transform.rotation = Quaternion.Euler(0, 0, -angle);
             }
-            List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
+            
             energyCounter.PopUp("+", duplicatesRemoved.Count);
         }
 
