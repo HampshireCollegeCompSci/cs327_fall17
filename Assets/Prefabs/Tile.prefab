@@ -85,6 +85,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 543a14348e9fec3448b0ca458b2eabbe, type: 3}
   - {fileID: 21300000, guid: b8e0801a8ec8d6c4ebfff6703371daf1, type: 3}
   - {fileID: 21300000, guid: 8955548416748a04ea1b6582a4dd78f1, type: 3}
+  - {fileID: 21300000, guid: e4980c6687083e94aa4f4544177a3244, type: 3}
   trueSprite: {fileID: 0}
   data:
     type: 0
