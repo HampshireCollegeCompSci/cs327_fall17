@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande
+﻿// Author(s): Paul Calande, Wm. Josiah Erikson
 
 using System.Collections;
 using System.Collections.Generic;
@@ -53,6 +53,12 @@ public class CheatsGameplay : MonoBehaviour
     {
         energyCounter.AddEnergy(100);
         settings.SetCheatsEnabled();       
+    }
+
+    public void WipeSavedData()
+    {
+        //Wipes all saved data
+        PlayerPrefs.DeleteAll();
     }
 
     public void SetRandomSeedToZero()

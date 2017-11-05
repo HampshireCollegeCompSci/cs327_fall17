@@ -182,6 +182,17 @@ public class AudioController : MonoBehaviour {
         PlaySFX(TileSnapSFX[index]);
     }
 
+    public void StopAllSFX()
+    {
+        foreach(AudioSource channel in Channels)
+        {
+            if (sfxList.Contains(channel.clip))
+            {
+                channel.Stop();
+            }
+        }
+    }
+
     IEnumerator PlayTempChannel(AudioClip clip)
     {
         AudioSource tempChannel = null;
