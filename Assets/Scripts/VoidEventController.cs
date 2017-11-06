@@ -176,8 +176,40 @@ public class VoidEventController : MonoBehaviour
             letterBindings.Add(letter, types[i]);
         }
 
-        // Read from tuning data.
-        Tune();
+        PrintLetterBindings();
+
+        // Don't do event stuff in Zen Mode.
+        if (!Settings.Instance.IsZenModeEnabled())
+        {
+            // Read from tuning data and populate event groups.
+            Tune();
+        }
+    }
+
+    private void PrintLetterBindings()
+    {
+        List<VoidEvent.EventType> orderedEvents = new List<VoidEvent.EventType>();
+        orderedEvents.Add(letterBindings['a']);
+        orderedEvents.Add(letterBindings['b']);
+        orderedEvents.Add(letterBindings['c']);
+        string printstr = "The order of events is: ";
+        foreach (VoidEvent.EventType type in orderedEvents)
+        {
+            switch (type)
+            {
+                case VoidEvent.EventType.Asteroids:
+                    printstr += "Asteroids";
+                    break;
+                case VoidEvent.EventType.Junkyard:
+                    printstr += "Junkyard";
+                    break;
+                case VoidEvent.EventType.Radiation:
+                    printstr += "Radiation";
+                    break;
+            }
+            printstr += " -> ";
+        }
+        Debug.Log(printstr);
     }
 
     // Read variables from JSON data.
@@ -246,6 +278,7 @@ public class VoidEventController : MonoBehaviour
             case VoidEvent.EventType.Junkyard:
                 Debug.Log("Junkyard " + tier + " begin.");
                 blockSpawner.SetJunkyardTier(tier);
+                blockSpawner.BeginJunkyardEvent();
                 break;
 
             case VoidEvent.EventType.Radiation:

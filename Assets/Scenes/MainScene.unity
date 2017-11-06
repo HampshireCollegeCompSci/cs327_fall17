@@ -2366,6 +2366,11 @@ Prefab:
       propertyPath: consoleGrid
       value: 
       objectReference: {fileID: 1125939173}
+    - target: {fileID: 114317254578232620, guid: 5fa388134b667384caa9615ae4b7045e,
+        type: 2}
+      propertyPath: scoreCounter
+      value: 
+      objectReference: {fileID: 1623308074}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fa388134b667384caa9615ae4b7045e, type: 2}
   m_IsPrefabParent: 0
