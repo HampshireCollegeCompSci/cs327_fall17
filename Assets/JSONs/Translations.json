@@ -1,6 +1,4 @@
 {
-	//Out of all of these translations I trust the German, French, and Luxembourgish the least
-	//They were the most disputed
 	  "GameOver": {
 	    "English": "Game Over",
 	    "Spanish": "Fin del Juego",
@@ -159,6 +157,20 @@
 	"Score": {
 		"English": "Score: ",
 	    "Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Settings": {
+		"English": "Settings",
+		"Spanish": "PlaceholderSpanish",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
