@@ -22,11 +22,14 @@ public class ScoreCounter : MonoBehaviour
     [Tooltip("The Rising Text prefab to instantiate when points are gained from cleared squares.")]
     GameObject risingTextPrefab;
 
+	UILanguages translator;
+
     // The current score.
     int score = 0;
 
     private void Start()
     {
+	translator = FindObjectOfType<UILanguages>();
         grid.SquareFormed += Grid_SquareFormed;
         UpdateScore();
     }
@@ -55,7 +58,7 @@ public class ScoreCounter : MonoBehaviour
 
     private void UpdateScore()
     {
-        textScore.text = "Score: " + score;
+	textScore.text = translator.Translate("Score") + score;
         OnScoreChanged(score);
     }
 

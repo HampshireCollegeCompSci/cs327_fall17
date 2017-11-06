@@ -1,4 +1,4 @@
-﻿// Author(s): Joel Esquilin, Paul Calande, Wm. Josiah Erikson, Yixiang Xu
+﻿// Author(s): Joel Esquilin, Paul Calande, Wm. Josiah Erikson, Yixiang Xu, Maia
 
 using System;
 using System.Collections;
@@ -18,11 +18,16 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Text object that will explain why the player lost.")]
     Text textGameOverReason;
-    [SerializeField]
-    [Tooltip("Reference to the Score Counter instance.")]
-    ScoreCounter score;
-    private void Start()
+	[SerializeField]
+	[Tooltip("Reference to the Score Counter instance.")]
+	ScoreCounter score;
+
+
+	UILanguages translator;
+
+	private void Start()
     {
+		translator = FindObjectOfType<UILanguages>();
         if (gameFlow != null)
         {
             gameFlow.GameLost += Appear;
@@ -65,21 +70,23 @@ public class UIGameOver : MonoBehaviour
         switch (cause)
         {
             case GameFlow.GameOverCause.NoRemainingSpaces:
-                reason = "No space left!";
+                reason = "ReasonNoSpaceLeft";
                 break;
             case GameFlow.GameOverCause.QueueOverflow:
-                reason = "You hesitated for too long!";
+                reason = "ReasonHesitation";
                 break;
             case GameFlow.GameOverCause.NoMoreEnergy:
-                reason = "Out of energy!";
+                reason = "ReasonNoEnergy";
                 break;
             case GameFlow.GameOverCause.Reset:
-                reason = "Manual reset!";
+                reason = "ReasonManualReset";
                 break;
             default:
-                reason = "Unknown reason. Please inform the programming team.";
+                reason = "ReasonHesitation";
                 break;
         }
+
+		//textGameOverReason.text = translator.Translate(reason);
         int highScore = PlayerPrefs.GetInt("HighScore"); //Get the stored high score - 0 if doesn't exist
         int finalScore = score.GetScore();
         if (finalScore > highScore)
@@ -87,6 +94,7 @@ public class UIGameOver : MonoBehaviour
             highScore = finalScore;
         }
 
-        textGameOverReason.text = "Reason: " + reason + " High Score: " + highScore;
+		textGameOverReason.text = translator.Translate(reason) + translator.Translate("HighScore1") + highScore;
+
     }
 }

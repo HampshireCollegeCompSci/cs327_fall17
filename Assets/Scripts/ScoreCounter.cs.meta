@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 7537c1d7152dfb842b895cc1a8270b9c
-timeCreated: 1506213268
+timeCreated: 1509731277
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - grid: {instanceID: 0}
+  - textScore: {instanceID: 0}
+  - risingTextPrefab: {instanceID: 0}
+  - translator: {fileID: 114548693350383910, guid: 272ec4bd592b8456a82cf2e6e72aa73c,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

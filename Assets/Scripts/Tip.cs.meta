@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: 98bbb93d559534641a320bcaf4345f3f
-timeCreated: 1508945653
+timeCreated: 1509729299
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - tipJSON: {instanceID: 0}
+  - translator: {fileID: 114548693350383910, guid: 272ec4bd592b8456a82cf2e6e72aa73c,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
