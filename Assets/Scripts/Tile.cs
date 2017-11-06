@@ -152,7 +152,6 @@ public class Tile : MonoBehaviour
                 //SyncSpriteToVestigeLevel();
                 break;
             case TileData.TileType.Asteroid:
-                Time.timeScale = 0.5f;
                 newSprite = spriteUnoccupied;
                 Animator asteroidObj = Instantiate(animationAsteroid, transform);
                 asteroidObj.transform.localPosition = new Vector2(0, GetComponent<RectTransform>().rect.height * 0.18f);
