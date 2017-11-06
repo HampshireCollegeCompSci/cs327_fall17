@@ -15,6 +15,7 @@ public class UITitleMenus : MonoBehaviour
         AudioController.Instance.StopAllSFX();
         AudioController.Instance.StopMusic();
         AudioController.Instance.PlayMusic("Main_Menu_Music_1");
+        Destroy(TutorialController.Instance.gameObject);
     }
 
     public void GoToHowToPlay()

@@ -241,11 +241,13 @@ public class VoidEventController : MonoBehaviour
 
     private void VoidEvent_Started(VoidEvent.EventType eventType, int tier)
     {
+        TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_EVENT);
         switch (eventType)
         {
             case VoidEvent.EventType.Junkyard:
                 Debug.Log("Junkyard " + tier + " begin.");
                 blockSpawner.SetJunkyardTier(tier);
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_CONTAMINATION);
                 break;
 
             case VoidEvent.EventType.Radiation:
@@ -253,11 +255,13 @@ public class VoidEventController : MonoBehaviour
                 blockSpawner.SetVestigesPerBlock(tierToVestigeCount[tier]);
                 blockSpawner.SetVestigeLevel(tierToVestigeLevel[tier]);
                 grid.SetBaseEnergyDecayRateBonus(tierToDecayBonus[tier]);
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_MELTDOWN);
                 break;
 
             case VoidEvent.EventType.Asteroids:
                 Debug.Log("Asteroids " + tier + " begin.");
                 grid.AddAsteroids(tierToAsteroidCount[tier]);
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BREACH);
                 break;
         }
     }

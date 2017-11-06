@@ -928,7 +928,23 @@ public class Grid : MonoBehaviour
                         tiles[row + length, c].SetAnticipatedHighlight(TileData.TileType.Vestige);
                 }
             }
-     
+
+        foreach (Tile tile in newVestiges)
+        {
+            if (tile.GetVestigeLevel() == 0)
+            {
+                TutorialController.Instance.PanelToBlockLocation(row, col,TutorialController.Triggers.FIRST_WASTE);
+            }
+            else if (tile.GetVestigeLevel() == 1)
+            {
+                TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_2);
+            }
+            else
+            {
+                TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_3);
+            }
+        }
+
     }
 
     private void DrawOutLine(int r, int c, int length)
@@ -1462,7 +1478,9 @@ public class Grid : MonoBehaviour
 
     // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
     public void PlacedDraggableBlock()
-    {    
+    {
+        TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BLOCK);
+
         //If there was not a square formed this turn, then energy will be reduced by 1 plus number of vestiges
         if (!CheckForMatches())
         {
