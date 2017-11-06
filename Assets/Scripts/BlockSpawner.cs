@@ -227,6 +227,11 @@ public class BlockSpawner : MonoBehaviour
         return possibleBlocks.FindAll((BagBlock x) => x.IsJunkyardOnly());
     }
 
+    private List<BagBlock> GetBagBlocksJunkyardOnlyOfTier(int tier)
+    {
+        return possibleBlocks.FindAll(x => x.IsTier(tier) && x.IsJunkyardOnly());
+    }
+
     public void ResetBlockTimer()
     {
         //Reset the timer for spawning next block
@@ -287,8 +292,7 @@ public class BlockSpawner : MonoBehaviour
                     {
                         junkyardEventIsStarting = false;
 
-                        List<BagBlock> junkyardBlocks = possibleBlocks.FindAll(
-                            x => x.IsTier(tierCurrent) && x.IsJunkyardOnly());
+                        List<BagBlock> junkyardBlocks = GetBagBlocksJunkyardOnlyOfTier(tierCurrent);
 
                         int indexInJunkyardBlocks = Random.Range(0, junkyardBlocks.Count);
                         BagBlock junkyardBlock = junkyardBlocks[indexInJunkyardBlocks];
@@ -499,7 +503,12 @@ public class BlockSpawner : MonoBehaviour
     {
         junkyardEventIsStarting = true;
     }
-    
+
+    public void EndJunkyardEvent()
+    {
+        junkyardEventIsStarting = false;
+    }
+
     //Will always spwan the same blocks as the current one
     public void CheatSpawning(bool on)
     {

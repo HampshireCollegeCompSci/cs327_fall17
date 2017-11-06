@@ -313,6 +313,7 @@ public class VoidEventController : MonoBehaviour
             case VoidEvent.EventType.Junkyard:
                 Debug.Log("Junkyard " + tier + " end.");
                 blockSpawner.SetJunkyardTier(0);
+                blockSpawner.EndJunkyardEvent();
                 break;
 
             case VoidEvent.EventType.Radiation:
