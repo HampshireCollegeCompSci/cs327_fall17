@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class ReactorBreachBehavior : MonoBehaviour {
 
-	public void DestroyMe()
+    Tile tile;
+    Sprite sprite;
+
+    public void ReferenceTile(Tile thisTile, Sprite spriteAsteroid)
+    {
+        tile = thisTile;
+        sprite = spriteAsteroid;
+    }
+
+
+    public void DestroyMe()
     {
         Destroy(gameObject);
+        tile.SetSprite(sprite);
     }
 }
