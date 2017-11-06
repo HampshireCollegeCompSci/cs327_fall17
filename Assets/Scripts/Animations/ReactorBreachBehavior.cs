@@ -17,6 +17,6 @@ public class ReactorBreachBehavior : MonoBehaviour {
     public void DestroyMe()
     {
         Destroy(gameObject);
-        tile.SetSprite(sprite);
+        tile.SetSpriteAbsolute(sprite);
     }
 }
