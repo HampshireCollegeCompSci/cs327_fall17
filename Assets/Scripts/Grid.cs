@@ -66,7 +66,7 @@ public class Grid : MonoBehaviour
     [Tooltip("Reference to energy transfer ball animator.")]
     Animator energyTransferBallController;
     [SerializeField]
-    [Tooltip("Whether or not asteroids can spawn in filled cells.")]
+    [Tooltip("Whether or not asteroids can spawn in filled cells. Populated by JSON.")]
     bool asteroidsCanSpawnInFilledCells;
     [SerializeField]
     [Tooltip("Placeholder sprite for square outline")]
@@ -188,7 +188,7 @@ public class Grid : MonoBehaviour
             t.Clear();
             t.SetSprite(TileData.TileType.Unoccupied);
             // Subscribe to events.
-            t.Changed += Tile_Changed;
+            //t.Changed += Tile_Changed;
         }
 
         //Instantiate spaces
@@ -685,6 +685,7 @@ public class Grid : MonoBehaviour
             foreach (Tile t in duplicatesRemoved)
             {
                 t.Clear();
+                energyCounter.AddEnergy(energyPerCell);
 
                 /*Vector3 tilePos = t.transform.position;
                 Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
@@ -1581,6 +1582,7 @@ public class Grid : MonoBehaviour
     }
 
     // Callback function for when a tiletype is changed.
+    /*
     private void Tile_Changed(TileData.TileType newType)
     {
         //If a type is changed to Unoccupied, then add energyPerCell energy
@@ -1589,6 +1591,7 @@ public class Grid : MonoBehaviour
             energyCounter.AddEnergy(energyPerCell);
         }
     }
+    */
 
     private void OnSquareFormed(int size, Vector3 textPos)
     {

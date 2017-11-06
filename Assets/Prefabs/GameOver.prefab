@@ -378,6 +378,7 @@ MonoBehaviour:
   - {fileID: 1311757882570894}
   textGameOverReason: {fileID: 114089338938984636}
   score: {fileID: 0}
+  analytics: {fileID: 114017712063440150}
 --- !u!114 &114230764441667554
 MonoBehaviour:
   m_ObjectHideFlags: 1

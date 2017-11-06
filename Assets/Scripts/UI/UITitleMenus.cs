@@ -33,8 +33,9 @@ public class UITitleMenus : MonoBehaviour
         SceneManager.LoadScene("About");
         AudioController.Instance.MenuClick();
     }
-	public void GoToGamePlay() 
+	public void GoToGamePlay(bool isZenMode) 
 	{
+        Settings.Instance.SetZenModeEnabled(isZenMode);
 		SceneManager.LoadScene ("MainScene");
         AudioController.Instance.MenuClick();
         AudioController.Instance.StopMusic();
