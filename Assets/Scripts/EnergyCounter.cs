@@ -204,6 +204,7 @@ public class EnergyCounter : MonoBehaviour
         {
             //Debug.Log("The player is about to lose!");
             AudioController.Instance.PlayLoop("About_To_Lose_1");
+            TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_LOW_ENERGY);
         }
         else
         {
