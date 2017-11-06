@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Author(s): Joel Esquilin, Paul Calande
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +13,10 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     public List<Image> Panels = new List<Image>();
     public List<Text> PanelTexts = new List<Text>();
     public float offset = 100f;
+
+    [SerializeField]
+    [Tooltip("The overlay image to use for raycasting.")]
+    Image overlayImage;
 
     public enum Triggers
     {
@@ -52,7 +58,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
     public Grid grid;
 
-    public float overlaySeconds = 5f;
+    //public float overlaySeconds = 5f;
 
     bool overlayDone;
     bool currentlyPlaying;
@@ -78,12 +84,11 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             return;
         }
         instance = this;
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
 
         //Do JSON reading here and setup triggerData text here
-        JSONNode json = JSONNode.Parse(tutorialJSON.ToString());
-        
-        JSONNode triggers = json["TutorialJSON"];
+        JSONNode triggers = JSONNode.Parse(tutorialJSON.ToString());
+
         for (int i = 0; i < triggers.Count; ++i)
         {
             JSONNode trigger = triggers[i];
@@ -183,17 +188,20 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             Panels[panelNumber].gameObject.SetActive(true);
         }
 
-        float countDown = 0;
+        //float countDown = 0;
         overlayDone = false;
+        overlayImage.raycastTarget = true;
 
         while (!overlayDone)
         {
+            /*
             countDown += Time.deltaTime;
 
             if (countDown >= overlaySeconds)
             {
                 overlayDone = true;
             }
+            */
 
             yield return null;
         }
@@ -295,5 +303,6 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     public void OnPointerDown(PointerEventData eventData)
     {
         overlayDone = true;
+        overlayImage.raycastTarget = false;
     }
 }

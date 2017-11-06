@@ -1,6 +1,4 @@
 {
-  "TutorialJSON" : 
-  {
     "FIRST_OPEN" : 
     {
       "TriggerName" : "FIRST_OPEN",
@@ -85,5 +83,4 @@
       "TextInfo" : "Reactor Overload: The reactor has completely overloaded! All the events are occurring at once! This is your final challenge!",
       "PanelNumber" : 0
     }
-  }
 }
