@@ -27,7 +27,8 @@ public class UITitleMenus : MonoBehaviour
 	public void GoToSettings()
 	{
 		SceneManager.LoadScene("Settings");
-	}
+        AudioController.Instance.MenuClick();
+    }
 
     public void GoToAbout()
     {

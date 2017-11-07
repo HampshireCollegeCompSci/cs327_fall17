@@ -901,12 +901,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1071584079}
---- !u!114 &1085099033 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114548693350383910, guid: 272ec4bd592b8456a82cf2e6e72aa73c,
-    type: 2}
-  m_PrefabInternal: {fileID: 651399351}
-  m_Script: {fileID: 11500000, guid: 98d39013132b2492cbb61334a063f500, type: 3}
 --- !u!1 &1130328007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,6 +1368,7 @@ GameObject:
   - component: {fileID: 1759810172}
   - component: {fileID: 1759810171}
   - component: {fileID: 1759810170}
+  - component: {fileID: 1759810173}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -1470,18 +1465,7 @@ MonoBehaviour:
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1085099033}
-        m_MethodName: ChangeLanguage
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_TypeName: UnityEngine.UI.Dropdown+DropdownEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1759810171
@@ -1517,6 +1501,18 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1759810168}
+--- !u!114 &1759810173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1759810168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5039001c4c136e4e8d93f83b045e86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  languages: {fileID: 1759810170}
 --- !u!1 &1790534833
 GameObject:
   m_ObjectHideFlags: 0
