@@ -15,6 +15,7 @@ public class UITitleMenus : MonoBehaviour
         AudioController.Instance.StopAllSFX();
         AudioController.Instance.StopMusic();
         AudioController.Instance.PlayMusic("Main_Menu_Music_1");
+        //Destroy(TutorialController.Instance.gameObject);
     }
 
     public void GoToHowToPlay()
@@ -33,8 +34,9 @@ public class UITitleMenus : MonoBehaviour
         SceneManager.LoadScene("About");
         AudioController.Instance.MenuClick();
     }
-	public void GoToGamePlay() 
+	public void GoToGamePlay(bool isZenMode) 
 	{
+        Settings.Instance.SetZenModeEnabled(isZenMode);
 		SceneManager.LoadScene ("MainScene");
         AudioController.Instance.MenuClick();
         AudioController.Instance.StopMusic();

@@ -23,7 +23,7 @@ public class Tip : MonoBehaviour {
         var json = JSON.Parse(tipJSON.ToString());
         tips = json["tips"].AsArray;
 		displayTip = tips [Random.Range (0, tips.Count)];
-		displayTip = translator.Translate (displayTip);
+		//displayTip = translator.Translate (displayTip);
 		GetComponent<Text>().text = displayTip;
 	}
 }
