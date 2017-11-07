@@ -45,4 +45,9 @@ public class UILanguages : MonoBehaviour
         gameLanguage = language;
         PlayerPrefs.SetString("Language", gameLanguage);
     }
+
+    public string GetLanguage()
+    {
+        return gameLanguage;
+    }
 }

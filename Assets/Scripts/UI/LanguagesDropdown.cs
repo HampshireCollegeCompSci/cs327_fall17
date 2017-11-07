@@ -15,10 +15,12 @@ public class LanguagesDropdown : MonoBehaviour
     UILanguages translator;
 
     // Integers mapped to languages.
-    Dictionary<int, string> languageDictionary = new Dictionary<int, string>();
+    //Dictionary<int, string> languageDictionary = new Dictionary<int, string>();
+    List<string> languageList = new List<string>();
 
     private void Awake()
     {
+        /*
         languageDictionary.Add(0, "English");
         languageDictionary.Add(1, "Spanish");
         languageDictionary.Add(2, "French");
@@ -30,6 +32,18 @@ public class LanguagesDropdown : MonoBehaviour
         languageDictionary.Add(8, "Danish");
         languageDictionary.Add(9, "Polish");
         languageDictionary.Add(10, "Korean");
+        */
+        languageList.Add("English");
+        languageList.Add("Spanish");
+        languageList.Add("French");
+        languageList.Add("Slovenian");
+        languageList.Add("Romanian");
+        languageList.Add("German");
+        languageList.Add("Luxembourgish");
+        languageList.Add("Dutch");
+        languageList.Add("Danish");
+        languageList.Add("Polish");
+        languageList.Add("Korean");
     }
 
     void Start()
@@ -40,10 +54,12 @@ public class LanguagesDropdown : MonoBehaviour
         {
             languages.onValueChanged.AddListener(ChangeLanguage);
         }
+
+        languages.value = languageList.IndexOf(translator.GetLanguage());
     }
 
     public void ChangeLanguage(int value)
     {
-        translator.SetLanguage(languageDictionary[value]);
+        translator.SetLanguage(languageList[value]);
     }
 }
