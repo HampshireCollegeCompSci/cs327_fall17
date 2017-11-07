@@ -17,7 +17,6 @@ public class UILanguages : MonoBehaviour {
 	[Tooltip("Dropdown language menu")]
 	Dropdown languages;
 
-	UIButtons menuButton;
 
     // English by default.
 	string gameLanguage = "English";
