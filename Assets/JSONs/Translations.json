@@ -182,6 +182,20 @@
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean"
 	},
+	"PlayZenMode": {
+		"English": "Play Zen Mode",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
 	"Tip1": {
 		"English": "Try making more than one square at a time",
 		"Spanish": "PlaceholderSpanish",

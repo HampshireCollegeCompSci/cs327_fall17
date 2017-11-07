@@ -499,10 +499,9 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 795944205}
+  m_Children: []
   m_Father: {fileID: 2095276172}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.3, y: 0.01}
   m_AnchorMax: {x: 0.7, y: 0.09}
@@ -1172,6 +1171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  translationKey: PlayZenMode
 --- !u!114 &1420853837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1496,7 +1496,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1776664516
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1840,6 +1840,7 @@ RectTransform:
   - {fileID: 906551809}
   - {fileID: 1550580402}
   - {fileID: 1776664516}
+  - {fileID: 595703347}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

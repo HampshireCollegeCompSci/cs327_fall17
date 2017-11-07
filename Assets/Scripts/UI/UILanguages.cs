@@ -48,7 +48,7 @@ public class UILanguages : MonoBehaviour {
 		var json = JSON.Parse(translationsJSON.ToString());
 		JSONNode textToTranslate = json [descriptor];
 		string translation = textToTranslate [gameLanguage];
-        Debug.Log("descriptor / gameLanguage: " + descriptor + " / " + gameLanguage);
+        //Debug.Log("descriptor / gameLanguage: " + descriptor + " / " + gameLanguage);
 		return translation;
 	}
 

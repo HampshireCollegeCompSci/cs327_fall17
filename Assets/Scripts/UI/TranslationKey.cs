@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TranslationKey : MonoBehaviour {
-	[SerializeField]
-	string translationKey;
+public class TranslationKey : MonoBehaviour
+{
+    [SerializeField]
+    string translationKey;
 
-	Button button;
+    UILanguages translator;
 
-	UILanguages translator;
-
-	void Start () {
-		translator = FindObjectOfType<UILanguages>();
-		Button ();
-	}
-
-	public void Button() {
-		GetComponent<Text> ().text = translator.Translate (translationKey);
-	}
-
+    void Start()
+    {
+        translator = FindObjectOfType<UILanguages>();
+        GetComponent<Text>().text = translator.Translate(translationKey);
+    }
 }
