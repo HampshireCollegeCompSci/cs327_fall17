@@ -108,7 +108,8 @@ public class UIGameOver : MonoBehaviour
 
         analytics.SendData(cause, highScore);
 
-        //textGameOverReason.text = translator.Translate(reason) + translator.Translate("HighScore1") + highScore;
-        textGameOverReason.text = reason + "\nHigh score: " + highScore;
+        textGameOverReason.text = translator.Translate(reason) + "\n"
+            + translator.Translate("HighScore1") + highScore;
+        //textGameOverReason.text = reason + "\nHigh score: " + highScore;
     }
 }
