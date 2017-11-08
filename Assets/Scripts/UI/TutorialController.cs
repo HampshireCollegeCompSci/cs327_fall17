@@ -100,8 +100,6 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             triggerData.Add(new TriggerData(triggerName, textInfo, panelNumber));
         }
 
-        PlayerPrefs.DeleteAll();
-
         foreach (Triggers trigger in Enum.GetValues(typeof(Triggers)))
         {
             //Load Triggers from PlayerPrefs
