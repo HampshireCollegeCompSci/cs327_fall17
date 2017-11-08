@@ -58,7 +58,8 @@ public class ScoreCounter : MonoBehaviour
 
     private void UpdateScore()
     {
-	textScore.text = translator.Translate("Score") + score;
+        textScore.text = translator.Translate("Score") + score;
+        //textScore.text = "Score: " + score;
         OnScoreChanged(score);
     }
 

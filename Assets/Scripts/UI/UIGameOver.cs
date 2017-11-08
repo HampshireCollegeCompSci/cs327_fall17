@@ -21,7 +21,9 @@ public class UIGameOver : MonoBehaviour
 	[SerializeField]
 	[Tooltip("Reference to the Score Counter instance.")]
 	ScoreCounter score;
-
+    [SerializeField]
+    [Tooltip("Reference to the Analytics instance.")]
+    Analytics analytics;
 
 	UILanguages translator;
 
@@ -86,15 +88,28 @@ public class UIGameOver : MonoBehaviour
                 break;
         }
 
-		//textGameOverReason.text = translator.Translate(reason);
-        int highScore = PlayerPrefs.GetInt("HighScore"); //Get the stored high score - 0 if doesn't exist
+        string prefsEntry;
+        if (Settings.Instance.IsZenModeEnabled())
+        {
+            prefsEntry = "HighScoreZen";
+        }
+        else
+        {
+            prefsEntry = "HighScore";
+        }
+
+        int highScore = PlayerPrefs.GetInt(prefsEntry); //Get the stored high score - 0 if doesn't exist
         int finalScore = score.GetScore();
         if (finalScore > highScore)
         {
             highScore = finalScore;
+            PlayerPrefs.SetInt(prefsEntry, highScore); //Save it
         }
 
-		textGameOverReason.text = translator.Translate(reason) + translator.Translate("HighScore1") + highScore;
+        analytics.SendData(cause, highScore);
 
+        textGameOverReason.text = translator.Translate(reason) + "\n"
+            + translator.Translate("HighScore1") + highScore;
+        //textGameOverReason.text = reason + "\nHigh score: " + highScore;
     }
 }
