@@ -2300,6 +2300,18 @@ Prefab:
       value: 
       objectReference: {fileID: 1883308336936238, guid: 6a9d606527c80424badace527d6595c3,
         type: 2}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: outLineSide
+      value: 
+      objectReference: {fileID: 1281763838611572, guid: 0f821d5c5d96eea4995f2e633244dce0,
+        type: 2}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: outLineCorner
+      value: 
+      objectReference: {fileID: 1651284455340216, guid: 451d9f9d2ae61064a9b03962768d859c,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0

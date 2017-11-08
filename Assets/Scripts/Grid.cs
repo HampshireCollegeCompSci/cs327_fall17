@@ -69,8 +69,11 @@ public class Grid : MonoBehaviour
     [Tooltip("Whether or not asteroids can spawn in filled cells. Populated by JSON.")]
     bool asteroidsCanSpawnInFilledCells;
     [SerializeField]
-    [Tooltip("Placeholder sprite for square outline")]
-    GameObject outLinePrefab;
+    [Tooltip("Reference to glowing outline side prefab")]
+    GameObject outLineSide;
+    [SerializeField]
+    [Tooltip("Reference to glowing outline corner prefab")]
+    GameObject outLineCorner;
     [SerializeField]
     [Tooltip("Reference to energy transfer lighting prefab")]
     GameObject energyTransferPrefab;
@@ -96,69 +99,6 @@ public class Grid : MonoBehaviour
     //List<LShape> topRight;
     //List<LShape> bottomLeft;
     //List<LShape> bottomRight;
-
-    class Outline
-    {
-        Vector3[] vertices = new Vector3[4];
-        int[] location = new int[3];
-        GameObject[] outlineObj;
-        int[] nextPos;
-        float?[] prevDistance;
-
-        public Outline(GameObject[] obj, int[] loc, Vector3[] ver, int[] nPos)
-        {
-            outlineObj = obj;
-            location = loc;
-            vertices = ver;
-            nextPos = nPos;
-
-            for (int i = 0; i < 4; i++)
-            {
-                outlineObj[i].transform.localPosition = vertices[i];
-            }
-
-            prevDistance = new float?[4]{ null, null, null, null };
-        }
-
-        public void ChangeTarget(int i)
-        {
-            if (nextPos[i] == 3)
-                nextPos[i] = 0;
-            else
-                nextPos[i]++;      
-        }
-
-        public GameObject[] GetOutlineObject()
-        {
-            return outlineObj;
-        }
-
-        public int[] GetLocation()
-        {
-            return location;
-        }
-
-        public Vector3[] GetVertices()
-        {
-            return vertices;
-        }
-
-        public int[] NextPos()
-        {
-            return nextPos;
-        }
-
-        public void DesctroyObject()
-        {
-            foreach (GameObject obj in outlineObj)
-                Destroy(obj);
-        }
-
-        public float?[] PrevDistance()
-        {
-            return prevDistance;
-        }
-    }
 
     private void Tune()
     {
@@ -220,6 +160,7 @@ public class Grid : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (outlines.Count > 0)
         {
             for (int i = 0; i < outlines.Count; i++)
@@ -262,6 +203,7 @@ public class Grid : MonoBehaviour
                 }           
             }
         }
+        */
     }
 
     public int GetWidth()
@@ -549,7 +491,7 @@ public class Grid : MonoBehaviour
                 SmallerSquareExclusion(ref anticipatedPotentialSquares);
 
                 List<Tile> toVestiges = new List<Tile>(); //No effect. Just match parameter.
-                //Highligh anticipated vestiges
+                //Highlight anticipated vestiges
                 foreach (int[] s in anticipatedPotentialSquares)
                     FormVestiges(s[0], s[1], s[2], anticipatedSquareTiles, copy, ref toVestiges);
 
@@ -952,6 +894,36 @@ public class Grid : MonoBehaviour
     {
         if (outlines.Find(o => o.GetLocation()[0] == r && o.GetLocation()[1] == c && o.GetLocation()[2] == length) == null)
         {
+            GameObject[] sides = new GameObject[4];
+            GameObject[] corners = new GameObject[4];
+            Vector3[] positions = new Vector3[4];
+
+            positions[0] = GetTileAt(r, c).transform.localPosition; //UpperLeft
+            positions[1] = GetTileAt(r + length - 1, c).transform.localPosition; //BottomLeft
+            positions[2] = GetTileAt(r + length - 1, c + length - 1).transform.localPosition; //BottomRight
+            positions[3] = GetTileAt(r, c + length - 1).transform.localPosition; //UpperRight
+
+            float increaseFactor = (length - 1) / 2.0f;
+
+            Vector3[] directions = { Vector3.right, Vector3.up, Vector3.left, Vector3.down };
+            //Instantiate outline objects
+            for (int i = 0; i < 4; i++)
+            {
+                sides[i] = Instantiate(outLineSide, transform, false);             
+                sides[i].GetComponent<RectTransform>().sizeDelta = new Vector2(GetTileWidth() * (length - 2), GetTileHeight());
+                SetSide(ref sides[i], positions[i], i * 90, directions[i], increaseFactor);
+
+                corners[i] = Instantiate(outLineCorner, transform, false);
+                corners[i].GetComponent<RectTransform>().sizeDelta = new Vector2(GetTileWidth(), GetTileHeight());
+                SetCorner(ref corners[i], (i + 1) * 90, positions[i]);
+            }
+
+            outlines.Add(new Outline(corners, sides, new int[] { r, c, length }));
+
+        }
+        /*
+        if (outlines.Find(o => o.GetLocation()[0] == r && o.GetLocation()[1] == c && o.GetLocation()[2] == length) == null)
+        {
             GameObject[] outlineObjs = new GameObject[4];
             float randomR = UnityEngine.Random.Range(0, 1.0f);
             float randomG = UnityEngine.Random.Range(0, 1.0f);
@@ -976,7 +948,108 @@ public class Grid : MonoBehaviour
 
             outlines.Add(new Outline(outlineObjs, new int[] { r, c, length },vertices, new int[] { 1, 2, 3, 0}));          
         }
-        
+        */
+    }
+
+    void SetSide(ref GameObject side, Vector3 relativePos, int rotation, Vector3 direction, float factor)
+    {
+        side.GetComponent<RectTransform>().Rotate(0, 0, rotation);
+        side.transform.localPosition = relativePos + GetTileWidth() * factor * direction;
+    }
+
+    void SetCorner(ref GameObject corner, int rotation, Vector3 position)
+    {
+        corner.GetComponent<RectTransform>().Rotate(new Vector3(0, 0, rotation));
+        corner.transform.localPosition = position;
+    }
+
+    class Outline
+    {
+        GameObject[] corners;
+        GameObject[] sides;
+        int[] location;
+
+        public Outline(GameObject[] corners, GameObject[] sides, int[] loc)
+        {
+            this.corners = corners;
+            this.sides = sides;
+            location = loc;
+        }
+
+        public int[] GetLocation()
+        {
+            return location;
+        }
+
+        public void DesctroyObject()
+        {
+            foreach (GameObject side in sides)
+                Destroy(side);
+            foreach (GameObject corner in corners)
+                Destroy(corner);
+        }
+
+        /*
+        Vector3[] vertices = new Vector3[4];
+        int[] location = new int[3];
+        GameObject[] outlineObj;
+        int[] nextPos;
+        float?[] prevDistance;
+
+        public Outline(GameObject[] obj, int[] loc, Vector3[] ver, int[] nPos)
+        {
+            outlineObj = obj;
+            location = loc;
+            vertices = ver;
+            nextPos = nPos;
+
+            for (int i = 0; i < 4; i++)
+            {
+                outlineObj[i].transform.localPosition = vertices[i];
+            }
+
+            prevDistance = new float?[4]{ null, null, null, null };
+        }
+
+        public void ChangeTarget(int i)
+        {
+            if (nextPos[i] == 3)
+                nextPos[i] = 0;
+            else
+                nextPos[i]++;      
+        }
+
+        public GameObject[] GetOutlineObject()
+        {
+            return outlineObj;
+        }
+
+        public int[] GetLocation()
+        {
+            return location;
+        }
+
+        public Vector3[] GetVertices()
+        {
+            return vertices;
+        }
+
+        public int[] NextPos()
+        {
+            return nextPos;
+        }
+
+        public void DesctroyObject()
+        {
+            foreach (GameObject obj in outlineObj)
+                Destroy(obj);
+        }
+
+        public float?[] PrevDistance()
+        {
+            return prevDistance;
+        }
+        */
     }
 
     private void SmallerSquareExclusion(ref List<int[]> squaresFormed)
