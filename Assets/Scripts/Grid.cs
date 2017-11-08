@@ -981,16 +981,6 @@ public class Grid : MonoBehaviour
             return location;
         }
 
-        public GameObject[] GetSides()
-        {
-            return sides;
-        }
-
-        public GameObject[] GetCorners()
-        {
-            return corners;
-        }
-
         public void DesctroyObject()
         {
             foreach (GameObject side in sides)
