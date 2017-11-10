@@ -12,5 +12,6 @@
 	"energy level animation" : [10, 40, 100],
 	"asteroids can spawn in filled cells" : false,
 	"contamination blocks alternate" : true,
-	"friendly bag max score" : 0
+  "friendly bag max score": 0,
+  "event warning wait time": 1
 }

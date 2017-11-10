@@ -145,6 +145,9 @@ public class VoidEventController : MonoBehaviour
     [Tooltip("Reference to the void events JSON.")]
     TextAsset voidEventsJSON;
     [SerializeField]
+    [Tooltip("Reference to the void tuning JSON.")]
+    TextAsset tuningJSON;
+    [SerializeField]
     [Tooltip("Reference to the event popup window image")]
     GameObject eventPopup;
     [SerializeField]
@@ -291,8 +294,8 @@ public class VoidEventController : MonoBehaviour
             newEventGroup.Started += VoidEventGroup_Started;
             voidEventGroups.Add(newEventGroup);
         }
-
-        secondsToStay = json["secondsToStay"].AsFloat;
+        JSONNode tuning = JSON.Parse(tuningJSON.ToString());
+        secondsToStay = tuning["event warning wait time"].AsFloat;
     }
 
     // Callback function for the score changing.
@@ -311,7 +314,6 @@ public class VoidEventController : MonoBehaviour
         {
             case VoidEvent.EventType.Junkyard:
                 StartCoroutine(EventPopupWindow("Junkyard Lv." + tier + " begin!"));
-                Debug.Log("Junkyard " + tier + " begin.");
                 blockSpawner.SetJunkyardTier(tier);
                 blockSpawner.BeginJunkyardEvent();
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_URANIUM);        
@@ -319,7 +321,6 @@ public class VoidEventController : MonoBehaviour
 
             case VoidEvent.EventType.Radiation:
                 StartCoroutine(EventPopupWindow("Radiation Lv." + tier + " begin!"));
-                Debug.Log("Radiation " + tier + " begin.");
                 blockSpawner.SetVestigesPerBlock(tierToVestigeCount[tier]);
                 blockSpawner.SetVestigeLevel(tierToVestigeLevel[tier]);
                 grid.SetBaseEnergyDecayRateBonus(tierToDecayBonus[tier]);
@@ -328,7 +329,6 @@ public class VoidEventController : MonoBehaviour
 
             case VoidEvent.EventType.Asteroids:
                 StartCoroutine(EventPopupWindow("Asteroids Lv." + tier + " begin!"));
-                Debug.Log("Asteroids " + tier + " begin.");
                 grid.AddAsteroids(tierToAsteroidCount[tier]);
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BREACH);
                 break;
