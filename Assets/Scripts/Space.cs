@@ -98,11 +98,11 @@ public class Space : MonoBehaviour
         DraggableBlock draggable = snapper.GetComponent<DraggableBlock>();
         if (grid.SetHighlight(row, col, draggable, on))
         {
-            grid.AnticipatedHighlight(row, col, draggable, true, snapLocation);
+            grid.AnticipatedHighlight(row, col, draggable, true);
         }
         else
         {
-            grid.AnticipatedHighlight(row, col, draggable, false, snapLocation);
+            grid.AnticipatedHighlight(row, col, draggable, false);
         }
     }
 }
