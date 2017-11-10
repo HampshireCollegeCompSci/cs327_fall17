@@ -506,9 +506,8 @@ public class Grid : MonoBehaviour
             List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
             energyTransferBallController.SetBool("active", true); //activate energy transfer ball animation
 
-            blockSpawner.enabled = false;
+            //blockSpawner.enabled = false;
             StartCoroutine(ClearingOutlineEffect(squaresFormed, duplicatesRemoved));
-            
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
@@ -556,9 +555,10 @@ public class Grid : MonoBehaviour
             float angle = (90 - Mathf.Atan((tilePos.y - energyTransferBallPos.y) / (tilePos.x - energyTransferBallPos.x)) * 180f / Mathf.PI);
             lighting.transform.rotation = Quaternion.Euler(0, 0, -angle);
         }
-        blockSpawner.enabled = true;
+        //blockSpawner.enabled = true;
         blockSpawner.UpdateAllBlocks();
         blockSpawner.ProgressQueue();
+        Debug.Log("Coroutine finished.");
     }
 
     private void CheckForSquares(int r, int c, int length, ref List<Tile> toRemove, ref List<int[]> squaresFormed, TileData.TileType[,] copy)
@@ -899,18 +899,11 @@ public class Grid : MonoBehaviour
 
             energyCounter.RemoveEnergy(energyChange);
             energyCounter.PopUp("-", energyChange);
-        }
-        else
-        {
+
             //Update Available spaces for all draggable blocks
             blockSpawner.UpdateAllBlocks();
             blockSpawner.ProgressQueue();
         }
-
-        //Update Available spaces for all draggable blocks
-        blockSpawner.UpdateAllBlocks();
-
-        blockSpawner.ProgressQueue();
         
         //Update turns played - this counts as a turn
         turnCounter.PlayedTurn();
