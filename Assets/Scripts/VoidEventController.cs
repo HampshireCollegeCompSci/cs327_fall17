@@ -140,6 +140,9 @@ public class VoidEventController : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the void events JSON.")]
     TextAsset voidEventsJSON;
+    [SerializeField]
+    [Tooltip("Reference to the you win menu.")]
+    UIYouWin youWinMenu;
     /*
     [SerializeField]
     [Tooltip("Reference to the tuning JSON.")]
@@ -339,6 +342,8 @@ public class VoidEventController : MonoBehaviour
                 break;
 
             case 3:
+                youWinMenu.gameObject.SetActive(true);
+                youWinMenu.init();
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_OVERLOAD);
                 break;
         }
