@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
+using UnityEngine.UI;
 
 public class VoidEvent
 {
@@ -129,6 +130,9 @@ public class VoidEventGroup
 public class VoidEventController : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("Reference to the canvas instance.")]
+    GameObject canvas;
+    [SerializeField]
     [Tooltip("Reference to the ScoreCounter instance.")]
     ScoreCounter scoreCounter;
     [SerializeField]
@@ -140,6 +144,12 @@ public class VoidEventController : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the void events JSON.")]
     TextAsset voidEventsJSON;
+    [SerializeField]
+    [Tooltip("Reference to the event popup window image")]
+    GameObject eventPopup;
+    [SerializeField]
+    [Tooltip("Reference to the event popup window text")]
+    GameObject eventPopupText;
     /*
     [SerializeField]
     [Tooltip("Reference to the tuning JSON.")]
@@ -158,6 +168,12 @@ public class VoidEventController : MonoBehaviour
     Dictionary<int, int> tierToVestigeLevel = new Dictionary<int, int>();
     Dictionary<int, int> tierToDecayBonus = new Dictionary<int, int>();
     Dictionary<int, int> tierToAsteroidCount = new Dictionary<int, int>();
+
+    //Number of seconds for the event popup window to stay
+    float secondsToStay;
+
+    GameObject eventPopupWindow;
+    bool isTranslating;
 
     private void Start()
     {
@@ -188,6 +204,14 @@ public class VoidEventController : MonoBehaviour
         {
             // Read from tuning data and populate event groups.
             Tune();
+        }
+    }
+
+    private void Update()
+    {
+        if (eventPopupWindow != null && isTranslating)
+        {
+            eventPopupWindow.transform.Translate(Vector3.down * canvas.GetComponent<RectTransform>().rect.height * Time.deltaTime * 2f);
         }
     }
 
@@ -267,6 +291,8 @@ public class VoidEventController : MonoBehaviour
             newEventGroup.Started += VoidEventGroup_Started;
             voidEventGroups.Add(newEventGroup);
         }
+
+        secondsToStay = json["secondsToStay"].AsFloat;
     }
 
     // Callback function for the score changing.
@@ -284,13 +310,15 @@ public class VoidEventController : MonoBehaviour
         switch (eventType)
         {
             case VoidEvent.EventType.Junkyard:
+                StartCoroutine(EventPopupWindow("Junkyard Lv." + tier + " begin!"));
                 Debug.Log("Junkyard " + tier + " begin.");
                 blockSpawner.SetJunkyardTier(tier);
                 blockSpawner.BeginJunkyardEvent();
-                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_URANIUM);
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_URANIUM);        
                 break;
 
             case VoidEvent.EventType.Radiation:
+                StartCoroutine(EventPopupWindow("Radiation Lv." + tier + " begin!"));
                 Debug.Log("Radiation " + tier + " begin.");
                 blockSpawner.SetVestigesPerBlock(tierToVestigeCount[tier]);
                 blockSpawner.SetVestigeLevel(tierToVestigeLevel[tier]);
@@ -299,6 +327,7 @@ public class VoidEventController : MonoBehaviour
                 break;
 
             case VoidEvent.EventType.Asteroids:
+                StartCoroutine(EventPopupWindow("Asteroids Lv." + tier + " begin!"));
                 Debug.Log("Asteroids " + tier + " begin.");
                 grid.AddAsteroids(tierToAsteroidCount[tier]);
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BREACH);
@@ -342,5 +371,23 @@ public class VoidEventController : MonoBehaviour
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_OVERLOAD);
                 break;
         }
+    }
+
+    private IEnumerator EventPopupWindow(string eventText)
+    {
+        Rect canvasRect = canvas.GetComponent<RectTransform>().rect;
+        eventPopupText.GetComponent<Text>().text = eventText;
+        eventPopupText.GetComponent<RectTransform>().sizeDelta = new Vector2(canvasRect.width * 8 / 9, canvasRect.height / 8);
+        eventPopupWindow = Instantiate(eventPopup, canvas.transform, false);   
+        eventPopupWindow.GetComponent<RectTransform>().sizeDelta = new Vector2(canvasRect.width, canvasRect.height);
+        Vector3 centerPos = eventPopupWindow.transform.localPosition;
+        eventPopupWindow.transform.localPosition = new Vector3(centerPos.x, centerPos.y + canvasRect.height, centerPos.z);
+        isTranslating = true;
+        yield return new WaitForSeconds(0.5f);
+        isTranslating = false;
+        yield return new WaitForSeconds(secondsToStay);
+        isTranslating = true;
+        yield return new WaitForSeconds(0.5f);
+        Destroy(eventPopupWindow);
     }
 }
