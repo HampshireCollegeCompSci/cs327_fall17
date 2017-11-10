@@ -246,7 +246,6 @@ public class BlockSpawner : MonoBehaviour
             // If the component is disabled, don't spawn a block.
             return;
         }
-        Debug.Log("Block spawned.");
         if (blocksQueue.Count == maxBlocksInQueue)
         {
             //if the # of elements in queue already reaches
