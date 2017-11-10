@@ -14,10 +14,6 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     public List<Text> PanelTexts = new List<Text>();
     public float offset = 100f;
 
-    [SerializeField]
-    [Tooltip("The overlay image to use for raycasting.")]
-    Image overlayImage;
-
     public enum Triggers
     {
         FIRST_OPEN,
@@ -59,6 +55,8 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     public Grid grid;
 
     public float tapOffset = 0.5f;
+
+    public List<Image> masks = new List<Image>();
 
     float tapCountdown;
     bool overlayDone;
@@ -189,9 +187,12 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             Panels[panelNumber].gameObject.SetActive(true);
         }
 
+        if (masks[panelNumber] != null)
+        {
+            masks[panelNumber].gameObject.SetActive(true);
+        }
+
         overlayDone = false;
-        overlayImage.enabled = true;
-        overlayImage.raycastTarget = true;
         
         while (!overlayDone)
         {
@@ -202,11 +203,15 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
         tapCountdown = 0f;
         currentlyPlaying = false;
-        overlayImage.enabled = false;
 
         if (Panels[panelNumber] != null)
         {
             Panels[panelNumber].gameObject.SetActive(false);
+        }
+
+        if (masks[panelNumber] != null)
+        {
+            masks[panelNumber].gameObject.SetActive(false);
         }
 
         if (nextTriggers.Count > 0)
@@ -301,7 +306,6 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         if (tapCountdown >= tapOffset)
         {
             overlayDone = true;
-            overlayImage.raycastTarget = false;
         }
     }
 }
