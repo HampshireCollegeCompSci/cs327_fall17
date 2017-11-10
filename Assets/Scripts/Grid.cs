@@ -85,6 +85,8 @@ public class Grid : MonoBehaviour
     private float tileWidth;
     // The height of one Tile, calculated compared to the Grid's dimensions.
     private float tileHeight;
+    // The mask of asteroids, populated by JSON.
+    private int[,] asteroidMask;
 
     Dictionary<Vector2, List<Space>> spaces = new Dictionary<Vector2, List<Space>>();
 
@@ -110,6 +112,17 @@ public class Grid : MonoBehaviour
         vestigeMaxLevel = json["vestige max level"].AsInt;
         energyPerCell = json["energy per cell cleared"].AsInt;
         asteroidsCanSpawnInFilledCells = json["asteroids can spawn in filled cells"].AsBool;
+
+        asteroidMask = new int[height, width];
+        JSONArray asteroidMaskJSON = json["asteroid area denial"].AsArray;
+        int asteroidMaskCount = asteroidMaskJSON.Count;
+        for (int i = 0; i < asteroidMaskCount; ++i)
+        {
+            int val = asteroidMaskJSON[i].AsInt;
+            int col = i % width;
+            int row = i / width;
+            asteroidMask[row, col] = val;
+        }
     }
 
     private void Start()
@@ -1608,14 +1621,28 @@ public class Grid : MonoBehaviour
         baseEnergyDecayRateBonus = newVal;
     }
 
-    public List<Tile> GetReferencesToType(TileData.TileType type)
+    public delegate bool TileCheckCondition(Tile t);
+    public List<Tile> GetReferencesToTiles(TileCheckCondition condition, int[,] mask = null)
     {
         List<Tile> result = new List<Tile>();
-        foreach (Tile t in tiles)
+        for (int r = 0; r < height; ++r)
         {
-            if (t.GetTileType() == type)
+            for (int c = 0; c < width; ++c)
             {
-                result.Add(t);
+                // For each part of the mask that's 1, don't return the reference.
+                if (mask != null)
+                {
+                    if (mask[r, c] == 1)
+                    {
+                        continue;
+                    }
+                }
+                Tile t = GetTileAt(r, c);
+                //if (t.GetTileType() == type)
+                if (condition(t))
+                {
+                    result.Add(t);
+                }
             }
         }
         return result;
@@ -1638,11 +1665,12 @@ public class Grid : MonoBehaviour
     public void AddAsteroids(int asteroidCount)
     {
         int asteroidsAdded = 0;
-        List<Tile> refs = GetReferencesToType(TileData.TileType.Unoccupied);
+        List<Tile> refs = GetReferencesToTiles((Tile t) => t.GetIsOccupied() == false, asteroidMask);
         // If asteroids can spawn in filled cells, add the occupied Tiles to the refs List.
         if (asteroidsCanSpawnInFilledCells)
         {
-            List<Tile> occupieds = GetReferencesToOccupiedTiles();
+            //List<Tile> occupieds = GetReferencesToOccupiedTiles(asteroidMask);
+            List<Tile> occupieds = GetReferencesToTiles((Tile t) => t.GetIsOccupied() == true, asteroidMask);
             refs.AddRange(occupieds);
         }
 
