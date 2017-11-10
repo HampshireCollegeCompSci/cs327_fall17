@@ -73,10 +73,7 @@ public class Grid : MonoBehaviour
     bool asteroidsCanSpawnInFilledCells;
     [SerializeField]
     [Tooltip("Reference to glowing outline side prefab")]
-    GameObject outLineSide;
-    [SerializeField]
-    [Tooltip("Reference to glowing outline corner prefab")]
-    GameObject outLineCorner;
+    GameObject outLinePrefab;
     [SerializeField]
     [Tooltip("Reference to energy transfer lighting prefab")]
     GameObject energyTransferPrefab;
@@ -94,8 +91,6 @@ public class Grid : MonoBehaviour
     Dictionary<Vector2, List<Space>> spaces = new Dictionary<Vector2, List<Space>>();
 
     List<GridBlock> gridBlocks;
-
-    List<Outline> outlines;
 
     private void Tune()
     {
@@ -149,8 +144,6 @@ public class Grid : MonoBehaviour
 
         //Instantiate GridBlocks
         gridBlocks = new List<GridBlock>();
-
-        outlines = new List<Outline>();
     }
 
     private void Update()
@@ -368,12 +361,6 @@ public class Grid : MonoBehaviour
         return on;
     }
 
-    public void ClearOutline()
-    {
-        outlines.ForEach(o => o.DesctroyObject());
-        outlines.Clear();
-    }
-
     public void AnticipatedHighlight(int row, int col, DraggableBlock newBlock, bool on)
     {
         if (on)
@@ -519,26 +506,8 @@ public class Grid : MonoBehaviour
             List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
             energyTransferBallController.SetBool("active", true); //activate energy transfer ball animation
 
-            //Remove all tiles that form squares if isPlaced is true
-            foreach (Tile t in duplicatesRemoved)
-            {
-                t.Clear();
-
-                Vector3 tilePos = t.transform.position;
-                Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
-                float distance = Vector3.Distance(tilePos, energyTransferBallPos);
-
-                GameObject lighting = Instantiate(energyTransferPrefab, transform.parent.transform);
-                Vector3 lightingCenter = (energyTransferBallPos + tilePos) / 2f;
-                lighting.transform.position = lightingCenter;
-
-                float scaleY = distance / lighting.GetComponent<RectTransform>().rect.height;
-                float scaleX = scaleY * 0.5f;
-                lighting.transform.localScale = new Vector3(scaleX, scaleY, 1f);
-
-                float angle = (90 - Mathf.Atan((tilePos.y - energyTransferBallPos.y) / (tilePos.x - energyTransferBallPos.x)) * 180f / Mathf.PI);
-                lighting.transform.rotation = Quaternion.Euler(0, 0, -angle);
-            }
+            StartCoroutine(ClearingOutlineEffect(squaresFormed, duplicatesRemoved));
+            
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
@@ -554,6 +523,38 @@ public class Grid : MonoBehaviour
         }
 
         return squareFormed;
+    }
+
+    private IEnumerator ClearingOutlineEffect(List<int[]> squaresFormed, List<Tile> duplicatesRemoved)
+    {
+        foreach (int[] square in squaresFormed)
+        {
+            GameObject outline = DrawOutLine(square[0], square[1]);
+            yield return new WaitForSeconds(0.5f);
+            if (outline != null)
+                Destroy(outline);
+        }
+
+        //Remove all tiles that form squares if isPlaced is true
+        foreach (Tile t in duplicatesRemoved)
+        {
+            t.Clear();
+
+            Vector3 tilePos = t.transform.position;
+            Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
+            float distance = Vector3.Distance(tilePos, energyTransferBallPos);
+
+            GameObject lighting = Instantiate(energyTransferPrefab, transform.parent.transform);
+            Vector3 lightingCenter = (energyTransferBallPos + tilePos) / 2f;
+            lighting.transform.position = lightingCenter;
+
+            float scaleY = distance / lighting.GetComponent<RectTransform>().rect.height;
+            float scaleX = scaleY * 0.5f;
+            lighting.transform.localScale = new Vector3(scaleX, scaleY, 1f);
+
+            float angle = (90 - Mathf.Atan((tilePos.y - energyTransferBallPos.y) / (tilePos.x - energyTransferBallPos.x)) * 180f / Mathf.PI);
+            lighting.transform.rotation = Quaternion.Euler(0, 0, -angle);
+        }
     }
 
     private void CheckForSquares(int r, int c, int length, ref List<Tile> toRemove, ref List<int[]> squaresFormed, TileData.TileType[,] copy)
@@ -721,49 +722,12 @@ public class Grid : MonoBehaviour
 
     }
 
-    private void DrawOutLine(int r, int c, int length)
+    private GameObject DrawOutLine(int r, int c)
     {
-        if (outlines.Find(o => o.GetLocation()[0] == r && o.GetLocation()[1] == c && o.GetLocation()[2] == length) == null)
-        {
-            GameObject[] sides = new GameObject[4];
-            GameObject[] corners = new GameObject[4];
-            Vector3[] positions = new Vector3[4];
-
-            positions[0] = GetTileAt(r, c).transform.localPosition; //UpperLeft
-            positions[1] = GetTileAt(r + length - 1, c).transform.localPosition; //BottomLeft
-            positions[2] = GetTileAt(r + length - 1, c + length - 1).transform.localPosition; //BottomRight
-            positions[3] = GetTileAt(r, c + length - 1).transform.localPosition; //UpperRight
-
-            float increaseFactor = (length - 1) / 2.0f;
-
-            Vector3[] directions = { Vector3.right, Vector3.up, Vector3.left, Vector3.down };
-            //Instantiate outline objects
-            for (int i = 0; i < 4; i++)
-            {
-                sides[i] = Instantiate(outLineSide, transform, false);             
-                sides[i].GetComponent<RectTransform>().sizeDelta = new Vector2(GetTileWidth() * (length - 2), GetTileHeight());
-                SetSide(ref sides[i], positions[i], i * 90, directions[i], increaseFactor);
-
-                corners[i] = Instantiate(outLineCorner, transform, false);
-                corners[i].GetComponent<RectTransform>().sizeDelta = new Vector2(GetTileWidth(), GetTileHeight());
-                SetCorner(ref corners[i], (i + 1) * 90, positions[i]);
-            }
-
-            outlines.Add(new Outline(corners, sides, new int[] { r, c, length }));
-
-        }
-    }
-
-    void SetSide(ref GameObject side, Vector3 relativePos, int rotation, Vector3 direction, float factor)
-    {
-        side.GetComponent<RectTransform>().Rotate(0, 0, rotation);
-        side.transform.localPosition = relativePos + GetTileWidth() * factor * direction;
-    }
-
-    void SetCorner(ref GameObject corner, int rotation, Vector3 position)
-    {
-        corner.GetComponent<RectTransform>().Rotate(new Vector3(0, 0, rotation));
-        corner.transform.localPosition = position;
+        GameObject outline = Instantiate(outLinePrefab, transform, false);
+        outline.GetComponent<RectTransform>().sizeDelta = new Vector2(3 * GetTileWidth(), 3 * GetTileHeight());
+        outline.transform.localPosition = GetTileAt(r + 1, c + 1).transform.localPosition;
+        return outline;
     }
 
     class Outline

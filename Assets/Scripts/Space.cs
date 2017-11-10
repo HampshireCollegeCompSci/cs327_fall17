@@ -72,7 +72,6 @@ public class Space : MonoBehaviour
 	//This method should be called when a DraggableBlock is dragged onto this Space.
 	public void PlaceBlock(DraggableBlock block)
 	{
-        grid.ClearOutline();
         AudioController.Instance.PlaceTile();
 
         //Set position for energy gain text to pop up
