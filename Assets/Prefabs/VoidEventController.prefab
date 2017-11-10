@@ -51,7 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a86c946efba02314a94c98ea85c78c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
   scoreCounter: {fileID: 0}
   blockSpawner: {fileID: 0}
   grid: {fileID: 0}
   voidEventsJSON: {fileID: 4900000, guid: c59067427817598448b33a12dba4ac3a, type: 3}
+  tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
+  eventPopup: {fileID: 1172345597911460, guid: aa9d44205bf33444a8850de591ebccab, type: 2}
+  eventPopupText: {fileID: 1091383567793988, guid: aa9d44205bf33444a8850de591ebccab,
+    type: 2}

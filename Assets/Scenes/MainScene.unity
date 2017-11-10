@@ -4825,6 +4825,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114667375449285928, guid: 2eb6217eb14dcbb4196cc75edfc6d77a,
         type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 501203751}
+    - target: {fileID: 114667375449285928, guid: 2eb6217eb14dcbb4196cc75edfc6d77a,
+        type: 2}
       propertyPath: scoreCounter
       value: 
       objectReference: {fileID: 1623308074}
@@ -4838,23 +4843,6 @@ Prefab:
       propertyPath: grid
       value: 
       objectReference: {fileID: 1069704021}
-    - target: {fileID: 114667375449285928, guid: 2eb6217eb14dcbb4196cc75edfc6d77a,
-        type: 2}
-      propertyPath: eventPopup
-      value: 
-      objectReference: {fileID: 1172345597911460, guid: aa9d44205bf33444a8850de591ebccab,
-        type: 2}
-    - target: {fileID: 114667375449285928, guid: 2eb6217eb14dcbb4196cc75edfc6d77a,
-        type: 2}
-      propertyPath: eventPopupText
-      value: 
-      objectReference: {fileID: 1091383567793988, guid: aa9d44205bf33444a8850de591ebccab,
-        type: 2}
-    - target: {fileID: 114667375449285928, guid: 2eb6217eb14dcbb4196cc75edfc6d77a,
-        type: 2}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 501203751}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2eb6217eb14dcbb4196cc75edfc6d77a, type: 2}
   m_IsPrefabParent: 0
