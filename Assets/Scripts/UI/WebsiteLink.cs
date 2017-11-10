@@ -15,6 +15,6 @@ public class WebsiteLink : MonoBehaviour {
 	}
 
 	public void LinkToWebsite() {
-		Application.OpenURL("http://www.google.com");
+		Application.OpenURL("http://projectiona.net/");
 	}
 }
