@@ -27,12 +27,6 @@ public class ScreenTappingFader : MonoBehaviour {
 		StartCoroutine (FadeOut (image));
 
 	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		
-	}
 
 	private YieldInstruction fadeInstruction = new YieldInstruction();
 	IEnumerator FadeOut(Image image)
@@ -44,7 +38,7 @@ public class ScreenTappingFader : MonoBehaviour {
 			elapsedTime += Time.deltaTime ;
 			imageColor.a = 1.0f - Mathf.Clamp01(elapsedTime / fadeTime);
 			image.color = imageColor;
-			Debug.Log (imageColor);
+			//Debug.Log (imageColor);
 			if (imageColor.a == 0) {
 				Destroy (gameObject);
 			}
