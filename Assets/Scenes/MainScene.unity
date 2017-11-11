@@ -1308,6 +1308,12 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 323669693}
+--- !u!114 &373288582 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114113887046981802, guid: 6c3607a99caa3f74fb7d1cb080db2e73,
+    type: 2}
+  m_PrefabInternal: {fileID: 188011478}
+  m_Script: {fileID: 11500000, guid: 2e15718262811f94683d17544542903f, type: 3}
 --- !u!1 &383265816
 GameObject:
   m_ObjectHideFlags: 0
@@ -4935,6 +4941,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114667375449285928, guid: 2eb6217eb14dcbb4196cc75edfc6d77a,
         type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 501203751}
+    - target: {fileID: 114667375449285928, guid: 2eb6217eb14dcbb4196cc75edfc6d77a,
+        type: 2}
       propertyPath: scoreCounter
       value: 
       objectReference: {fileID: 1623308074}
@@ -4948,6 +4959,11 @@ Prefab:
       propertyPath: grid
       value: 
       objectReference: {fileID: 1069704021}
+    - target: {fileID: 114667375449285928, guid: 2eb6217eb14dcbb4196cc75edfc6d77a,
+        type: 2}
+      propertyPath: youWinMenu
+      value: 
+      objectReference: {fileID: 373288582}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2eb6217eb14dcbb4196cc75edfc6d77a, type: 2}
   m_IsPrefabParent: 0
