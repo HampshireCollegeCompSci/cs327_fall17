@@ -172,9 +172,6 @@ public class VoidEventController : MonoBehaviour
     //Number of seconds for the event popup window to stay
     float secondsToStay;
 
-    GameObject eventPopupWindow;
-    bool isTranslating;
-
     List<VoidEvent.EventType> eventsStarted = new List<VoidEvent.EventType>();
     int eventsLatestTier = 0;
 
@@ -212,10 +209,7 @@ public class VoidEventController : MonoBehaviour
 
     private void Update()
     {
-        if (eventPopupWindow != null && isTranslating)
-        {
-            eventPopupWindow.transform.Translate(Vector3.down * canvas.GetComponent<RectTransform>().rect.height * Time.deltaTime * Screen.height / 1000);
-        }
+        
     }
 
     private void PrintLetterBindings()
@@ -317,29 +311,29 @@ public class VoidEventController : MonoBehaviour
                 switch (thisEventType)
                 {
                     case VoidEvent.EventType.Junkyard:
-                        StartCoroutine(EventPopupWindow("Unrefined Uranium Lv." + tier + " begin!"));
+                        EventPopupWindow("Unrefined Uranium Lv." + tier + " begin!");
                         TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_URANIUM);
                         break;
 
                     case VoidEvent.EventType.Radiation:
-                        StartCoroutine(EventPopupWindow("Waste Contamination Lv." + tier + " begin!"));
+                        EventPopupWindow("Waste Contamination Lv." + tier + " begin!");
                         TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_CONTAMINATION);
                         break;
 
                     case VoidEvent.EventType.Asteroids:
-                        StartCoroutine(EventPopupWindow("Reactor Breach Lv." + tier + " begin!"));
+                        EventPopupWindow("Reactor Breach Lv." + tier + " begin!");
                         TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BREACH);
                         break;
                 }
                 break;
 
             case 2:
-                StartCoroutine(EventPopupWindow("Reactor Meltdown begin!"));
+                EventPopupWindow("Reactor Meltdown begin!");
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_MELTDOWN);
                 break;
 
             case 3:
-                StartCoroutine(EventPopupWindow("Reactor Overload begin!"));
+                EventPopupWindow("Reactor Overload begin!");
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_OVERLOAD);
                 break;
         }
@@ -408,26 +402,11 @@ public class VoidEventController : MonoBehaviour
     }
     */
 
-    private IEnumerator EventPopupWindow(string eventText)
+    private void EventPopupWindow(string eventText)
     {
-        Rect canvasRect = canvas.GetComponent<RectTransform>().rect;
-        
-        eventPopupWindow = Instantiate(eventPopup, canvas.transform, false);   
-        eventPopupWindow.GetComponent<RectTransform>().sizeDelta = new Vector2(canvasRect.width, canvasRect.height);
-        Text eventPopupText = eventPopupWindow.GetComponent<EventPopup>().GetEventText();
-        eventPopupText.GetComponent<Text>().text = eventText;
-        eventPopupText.GetComponent<RectTransform>().sizeDelta = new Vector2(canvasRect.width * 8 / 9, canvasRect.height / 8);
-
-        float rotationZ = -16.875f / Camera.main.aspect;
-        eventPopupText.transform.Rotate(new Vector3(0, 0, rotationZ));
-        Vector3 centerPos = eventPopupWindow.transform.localPosition;
-        eventPopupWindow.transform.localPosition = new Vector3(centerPos.x, centerPos.y + canvasRect.height, centerPos.z);
-        isTranslating = true;
-        yield return new WaitForSeconds(0.5f);
-        isTranslating = false;
-        yield return new WaitForSeconds(secondsToStay);
-        isTranslating = true;
-        yield return new WaitForSeconds(0.5f);
-        Destroy(eventPopupWindow);
+        GameObject eventPopupWindow = Instantiate(eventPopup, canvas.transform, false);
+        StartCoroutine(eventPopupWindow.GetComponent<EventPopup>().Translation(eventText, canvas, secondsToStay));
     }
+
+    
 }
