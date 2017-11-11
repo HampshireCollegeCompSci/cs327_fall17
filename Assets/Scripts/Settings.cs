@@ -54,4 +54,28 @@ public class Settings : MonoBehaviour
     {
         return zenModeEnabled;
     }
+
+    string GetHighScoreKeyName()
+    {
+        if (IsZenModeEnabled())
+        {
+            return "HighScoreZen";
+        }
+        else
+        {
+            return "HighScore";
+        }
+    }
+
+    // Get the stored high score - 0 if doesn't exist.
+    public int GetHighScore()
+    {
+        return PlayerPrefs.GetInt(GetHighScoreKeyName());
+    }
+
+    // Saves the high score.
+    public void SaveHighScore(int newHighScore)
+    {
+        PlayerPrefs.SetInt(GetHighScoreKeyName(), newHighScore);
+    }
 }

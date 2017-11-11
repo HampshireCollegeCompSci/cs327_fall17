@@ -150,6 +150,8 @@ public class VoidEventController : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the event popup window image")]
     GameObject eventPopup;
+    [Tooltip("Reference to the you win menu.")]
+    UIYouWin youWinMenu;
     /*
     [SerializeField]
     [Tooltip("Reference to the tuning JSON.")]
@@ -333,6 +335,8 @@ public class VoidEventController : MonoBehaviour
                 break;
 
             case 3:
+                youWinMenu.gameObject.SetActive(true);
+                youWinMenu.init();
                 EventPopupWindow("Reactor Overload begin!");
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_OVERLOAD);
                 break;

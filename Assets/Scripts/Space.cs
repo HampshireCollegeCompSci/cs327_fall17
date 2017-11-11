@@ -72,7 +72,6 @@ public class Space : MonoBehaviour
 	//This method should be called when a DraggableBlock is dragged onto this Space.
 	public void PlaceBlock(DraggableBlock block)
 	{
-        grid.ClearOutline();
         AudioController.Instance.PlaceTile();
 
         //Set position for energy gain text to pop up
@@ -84,7 +83,6 @@ public class Space : MonoBehaviour
 
         grid.WriteBlock(row, col, block); //We're placing this block. Apparently it's the external responsibility to make sure this will work
         grid.PlacedDraggableBlock(); // Notify the Grid that we just placed a DraggableBlock.
-        grid.CheckForMatches(); //To make sure the tile clearing is finsihed before destroying the gameObject
         Destroy(block.gameObject); //And now we're done with this GameObject - it's on the grid
     }
 
@@ -98,11 +96,11 @@ public class Space : MonoBehaviour
         DraggableBlock draggable = snapper.GetComponent<DraggableBlock>();
         if (grid.SetHighlight(row, col, draggable, on))
         {
-            grid.AnticipatedHighlight(row, col, draggable, true, snapLocation);
+            grid.AnticipatedHighlight(row, col, draggable, true);
         }
         else
         {
-            grid.AnticipatedHighlight(row, col, draggable, false, snapLocation);
+            grid.AnticipatedHighlight(row, col, draggable, false);
         }
     }
 }
