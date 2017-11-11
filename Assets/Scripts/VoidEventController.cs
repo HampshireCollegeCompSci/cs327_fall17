@@ -150,6 +150,7 @@ public class VoidEventController : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the event popup window image")]
     GameObject eventPopup;
+    [SerializeField]
     [Tooltip("Reference to the you win menu.")]
     UIYouWin youWinMenu;
     /*
