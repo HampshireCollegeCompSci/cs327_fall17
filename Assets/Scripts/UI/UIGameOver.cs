@@ -88,22 +88,12 @@ public class UIGameOver : MonoBehaviour
                 break;
         }
 
-        string prefsEntry;
-        if (Settings.Instance.IsZenModeEnabled())
-        {
-            prefsEntry = "HighScoreZen";
-        }
-        else
-        {
-            prefsEntry = "HighScore";
-        }
-
-        int highScore = PlayerPrefs.GetInt(prefsEntry); //Get the stored high score - 0 if doesn't exist
+        int highScore = Settings.Instance.GetHighScore();
         int finalScore = score.GetScore();
         if (finalScore > highScore)
         {
             highScore = finalScore;
-            PlayerPrefs.SetInt(prefsEntry, highScore); //Save it
+            Settings.Instance.SaveHighScore(highScore);
         }
 
         analytics.SendData(cause, highScore);
