@@ -229,4 +229,9 @@ public class EnergyCounter : MonoBehaviour
     {
         return energy;
     }
+
+    public void SetEnergy(int newEnergy)
+    {
+        energy = newEnergy;
+    }
 }
