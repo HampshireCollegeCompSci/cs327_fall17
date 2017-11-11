@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
+using UnityEngine.UI;
 
 public class VoidEvent
 {
@@ -143,6 +144,13 @@ public class VoidEventController : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the you win menu.")]
     UIYouWin youWinMenu;
+    [SerializeField]
+    [Tooltip("Reference to the event over bar.")]
+    GameObject eventOver;
+    [SerializeField]
+    [Tooltip("Reference to the event over text.")]
+    Text textEventOver;
+
     /*
     [SerializeField]
     [Tooltip("Reference to the tuning JSON.")]
@@ -317,6 +325,7 @@ public class VoidEventController : MonoBehaviour
                 Debug.Log("Junkyard " + tier + " end.");
                 blockSpawner.SetJunkyardTier(0);
                 blockSpawner.EndJunkyardEvent();
+
                 break;
 
             case VoidEvent.EventType.Radiation:
@@ -331,6 +340,9 @@ public class VoidEventController : MonoBehaviour
                 grid.ClearAllAsteroids();
                 break;
         }
+
+        textEventOver.text = "CRISIS AVERTED: REACTOR RESTORED";
+        eventOver.SetActive(true);
     }
 
     private void VoidEventGroup_Started(int eventCount)
