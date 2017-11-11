@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 224977391647335662}
   - component: {fileID: 222785627430034458}
   - component: {fileID: 114347438609051306}
+  - component: {fileID: 114930511715065204}
   m_Layer: 5
   m_Name: EventPopup
   m_TagString: Untagged
@@ -77,7 +78,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Event Start
+  m_Text: Unrefined Uranium Lv.1 begin!
 --- !u!114 &114347438609051306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,6 +106,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114930511715065204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1172345597911460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1236859317ba94b48b51555ad1c5be49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventText: {fileID: 114239169733980704}
 --- !u!222 &222785627430034458
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -123,17 +136,17 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1091383567793988}
-  m_LocalRotation: {x: 0, y: 0, z: -0.258819, w: 0.9659259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224977391647335662}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -20, y: -40}
-  m_SizeDelta: {x: 960, y: 240}
+  m_SizeDelta: {x: 1279.9999, y: 239.99998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224977391647335662
 RectTransform:

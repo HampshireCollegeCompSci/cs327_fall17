@@ -150,9 +150,6 @@ public class VoidEventController : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the event popup window image")]
     GameObject eventPopup;
-    [SerializeField]
-    [Tooltip("Reference to the event popup window text")]
-    GameObject eventPopupText;
     /*
     [SerializeField]
     [Tooltip("Reference to the tuning JSON.")]
@@ -217,7 +214,7 @@ public class VoidEventController : MonoBehaviour
     {
         if (eventPopupWindow != null && isTranslating)
         {
-            eventPopupWindow.transform.Translate(Vector3.down * canvas.GetComponent<RectTransform>().rect.height * Time.deltaTime * 2f);
+            eventPopupWindow.transform.Translate(Vector3.down * canvas.GetComponent<RectTransform>().rect.height * Time.deltaTime * Screen.height / 1000);
         }
     }
 
@@ -414,10 +411,15 @@ public class VoidEventController : MonoBehaviour
     private IEnumerator EventPopupWindow(string eventText)
     {
         Rect canvasRect = canvas.GetComponent<RectTransform>().rect;
-        eventPopupText.GetComponent<Text>().text = eventText;
-        eventPopupText.GetComponent<RectTransform>().sizeDelta = new Vector2(canvasRect.width * 8 / 9, canvasRect.height / 8);
+        
         eventPopupWindow = Instantiate(eventPopup, canvas.transform, false);   
         eventPopupWindow.GetComponent<RectTransform>().sizeDelta = new Vector2(canvasRect.width, canvasRect.height);
+        Text eventPopupText = eventPopupWindow.GetComponent<EventPopup>().GetEventText();
+        eventPopupText.GetComponent<Text>().text = eventText;
+        eventPopupText.GetComponent<RectTransform>().sizeDelta = new Vector2(canvasRect.width * 8 / 9, canvasRect.height / 8);
+
+        float rotationZ = -16.875f / Camera.main.aspect;
+        eventPopupText.transform.Rotate(new Vector3(0, 0, rotationZ));
         Vector3 centerPos = eventPopupWindow.transform.localPosition;
         eventPopupWindow.transform.localPosition = new Vector3(centerPos.x, centerPos.y + canvasRect.height, centerPos.z);
         isTranslating = true;
