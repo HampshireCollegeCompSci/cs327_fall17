@@ -53,6 +53,7 @@ public class CheatsGameplay : MonoBehaviour
     {
         int newEnergy = 1;
         energyCounter.SetEnergy(newEnergy);
+        settings.SetCheatsEnabled();
     }
 
     public void AddEnergy()

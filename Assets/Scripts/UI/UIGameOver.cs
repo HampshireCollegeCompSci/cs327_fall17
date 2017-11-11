@@ -24,6 +24,21 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Analytics instance.")]
     Analytics analytics;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that will display the player's high score")]
+    Text textHighScore;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that will display the player's score")]
+    Text textScore;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that will display the literal text High Score, if English. Still needs to be implemented in the JSON.")]
+    Text textHighScoreLabel;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that will display the literal text Your Score, if English. Still needs to be implemented in the JSON.")]
+    Text textYourScoreLabel;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that will display the literal text Game Over, if English. Still needs to be implemented in the JSON.")]
+    Text textGameOverLabel;
 
 	UILanguages translator;
 
@@ -98,8 +113,13 @@ public class UIGameOver : MonoBehaviour
 
         analytics.SendData(cause, highScore);
 
-        textGameOverReason.text = translator.Translate(reason) + "\n"
-            + translator.Translate("HighScore1") + highScore;
+        textGameOverReason.text = translator.Translate(reason);
+        textHighScore.text = highScore.ToString();
+        textScore.text = score.GetScore().ToString();
+        //Maia - leaving this in here as a template
+        //textGameOverLabel.text = translator.Translate("game over");
+        //textHighScoreLabel.text = translator.Translate("high score");
+        //textYourScoreLabel.text = translator.Translate("YOUR SCORE");
         //textGameOverReason.text = reason + "\nHigh score: " + highScore;
     }
 }
