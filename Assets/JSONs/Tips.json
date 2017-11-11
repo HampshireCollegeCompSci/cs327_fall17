@@ -1,8 +1,8 @@
 {
-	"tips": ["Try making more than one square at a time",
-		 "Some blocks are more compatible than others", 
-		 "Don’t place blocks in the center of the board, it gives you less space to work in", 
-		 "Remember that cells diagonally adjacent to a cleared square don't become vestiges  ",
-		 "Remove vestiges from the board as quickly as you can, especially if they are level two or three"
+	"tips": ["Tip1",
+		 "Tip2", 
+		 "Tip3", 
+		 "Tip4", 
+		 "Tip5" 
 		]
 }

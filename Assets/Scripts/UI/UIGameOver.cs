@@ -1,4 +1,4 @@
-﻿// Author(s): Joel Esquilin, Paul Calande, Wm. Josiah Erikson, Yixiang Xu
+﻿// Author(s): Joel Esquilin, Paul Calande, Wm. Josiah Erikson, Yixiang Xu, Maia
 
 using System;
 using System.Collections;
@@ -18,11 +18,18 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Text object that will explain why the player lost.")]
     Text textGameOverReason;
+	[SerializeField]
+	[Tooltip("Reference to the Score Counter instance.")]
+	ScoreCounter score;
     [SerializeField]
-    [Tooltip("Reference to the Score Counter instance.")]
-    ScoreCounter score;
-    private void Start()
+    [Tooltip("Reference to the Analytics instance.")]
+    Analytics analytics;
+
+	UILanguages translator;
+
+	private void Start()
     {
+		translator = FindObjectOfType<UILanguages>();
         if (gameFlow != null)
         {
             gameFlow.GameLost += Appear;
@@ -65,28 +72,34 @@ public class UIGameOver : MonoBehaviour
         switch (cause)
         {
             case GameFlow.GameOverCause.NoRemainingSpaces:
-                reason = "No space left!";
+                reason = "ReasonNoSpaceLeft";
                 break;
             case GameFlow.GameOverCause.QueueOverflow:
-                reason = "You hesitated for too long!";
+                reason = "ReasonHesitation";
                 break;
             case GameFlow.GameOverCause.NoMoreEnergy:
-                reason = "Out of energy!";
+                reason = "ReasonNoEnergy";
                 break;
             case GameFlow.GameOverCause.Reset:
-                reason = "Manual reset!";
+                reason = "ReasonManualReset";
                 break;
             default:
-                reason = "Unknown reason. Please inform the programming team.";
+                reason = "ReasonHesitation";
                 break;
         }
-        int highScore = PlayerPrefs.GetInt("HighScore"); //Get the stored high score - 0 if doesn't exist
+
+        int highScore = Settings.Instance.GetHighScore();
         int finalScore = score.GetScore();
         if (finalScore > highScore)
         {
             highScore = finalScore;
+            Settings.Instance.SaveHighScore(highScore);
         }
 
-        textGameOverReason.text = "Reason: " + reason + " High Score: " + highScore;
+        analytics.SendData(cause, highScore);
+
+        textGameOverReason.text = translator.Translate(reason) + "\n"
+            + translator.Translate("HighScore1") + highScore;
+        //textGameOverReason.text = reason + "\nHigh score: " + highScore;
     }
 }

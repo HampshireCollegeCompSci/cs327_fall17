@@ -34,16 +34,17 @@ public class Analytics : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        /*
         if (gameFlow != null)
         {
             gameFlow.GameLost += SendData;
         }
+        */
             
         settings = FindObjectOfType<Settings>(); //Can't pass in a reference because it's a singleton
-
     }
 
-    void SendData(GameFlow.GameOverCause cause)
+    public void SendData(GameFlow.GameOverCause cause, int highScore)
     {
         if (settings.AreCheatsEnabled())
         {
@@ -58,17 +59,10 @@ public class Analytics : MonoBehaviour
         int currentVestiges = vestiges.GetCurrentVestiges();
         int finalClearedSquares = clearedSquares.GetClearedSquares();
         float timePlaying = Time.time;
+        bool isZenMode = settings.IsZenModeEnabled();
         //string currentTimeStamp = System.DateTime.Now.ToString();
         //string allTheData = "timestamp;" + currentTimeStamp + ",score;" + finalScore + ",peakEnergy;" + peakEnergy + ",timePlaying;" + timePlaying + ",turnsPlayed;" + turnsPlayed + ",peakVestiges;" + peakVestiges + ",endingVestiges;" + currentVestiges + ",totalClearedSquares;" + finalClearedSquares;
         //Debug.Log("allTheData is" + allTheData);
-        //Find high score
-        int highScore = PlayerPrefs.GetInt("HighScore"); //Set our high score - will be 0 if doesn't exist
-        if (finalScore > highScore) //If our current score is higher
-        {
-            //Debug.Log("New High Score! Setting High Score.");
-            highScore = finalScore; //Set it to send to analytics
-            PlayerPrefs.SetInt("HighScore", highScore); //Save it
-        }
         UnityEngine.Analytics.Analytics.CustomEvent("gameOver", new Dictionary<string, object>
         {
             { "score", finalScore },
@@ -79,7 +73,8 @@ public class Analytics : MonoBehaviour
             { "peakVestiges", peakVestiges},
             { "endingVestiges", currentVestiges},
             { "totalClearedSquares", finalClearedSquares},
-            { "highScore", highScore}
+            { "highScore", highScore},
+            { "isZenMode", isZenMode }
             //{ "allTheData", allTheData} //I removed this because it wasn't working anyway
 
         });

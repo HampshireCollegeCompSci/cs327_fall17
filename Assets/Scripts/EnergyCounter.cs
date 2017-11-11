@@ -13,9 +13,11 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("The amount of energy the player currently has. The initial amount is populated by JSON.")]
     int energy = 10;
+    /*
     [SerializeField]
     [Tooltip("The maximum amount of energy the player can have in the energy meter. Populated by JSON.")]
     int maxEnergyInMeter = 60;
+    */
     [SerializeField]
     [Tooltip("The list of value to separate the levels of energy gained. Populated by JSON.")]
     JSONArray energyThreshold;
@@ -58,7 +60,7 @@ public class EnergyCounter : MonoBehaviour
     {
         var json = JSON.Parse(tuningJSON.ToString());
         energy = json["starting energy"].AsInt;
-        maxEnergyInMeter = json["max energy in meter"].AsInt;
+        //maxEnergyInMeter = json["max energy in meter"].AsInt;
         energyThreshold = json["energy level animation"].AsArray;
     }
 
@@ -204,6 +206,7 @@ public class EnergyCounter : MonoBehaviour
         {
             //Debug.Log("The player is about to lose!");
             AudioController.Instance.PlayLoop("About_To_Lose_1");
+            TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_LOW_ENERGY);
         }
         else
         {
@@ -216,12 +219,12 @@ public class EnergyCounter : MonoBehaviour
     {
         return peakEnergy;
     }
-
+    /*
     public int GetMaxEnergyInMeter()
     {
         return maxEnergyInMeter;
     }
-
+    */
     public int GetCurrentEnergy()
     {
         return energy;

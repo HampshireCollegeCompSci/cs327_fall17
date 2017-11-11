@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleJSON;
+using UnityEngine.UI;
 
 public class VoidEvent
 {
@@ -62,6 +63,10 @@ public class VoidEvent
 // A collection of void events, grouped together.
 public class VoidEventGroup
 {
+    // Invoked when the event group is started.
+    public delegate void StartedHandler(int eventCount);
+    public event StartedHandler Started;
+
     public enum Status
     {
         Waiting, // Score hasn't passed begin.
@@ -97,6 +102,7 @@ public class VoidEventGroup
                 {
                     ve.Start();
                 }
+                OnStarted();
             }
         }
         if (status == Status.InProgress)
@@ -112,17 +118,20 @@ public class VoidEventGroup
         }
     }
 
-    /*
-    // Returns true if the given score is between beginning (inclusive) and end (exclusive).
-    public bool IsScoreInRange(int givenScore)
+    private void OnStarted()
     {
-        return (givenScore >= begin && givenScore < end);
+        if (Started != null)
+        {
+            Started(voidEvents.Count);
+        }
     }
-    */
 }
 
 public class VoidEventController : MonoBehaviour
 {
+    [SerializeField]
+    [Tooltip("Reference to the canvas instance.")]
+    GameObject canvas;
     [SerializeField]
     [Tooltip("Reference to the ScoreCounter instance.")]
     ScoreCounter scoreCounter;
@@ -135,6 +144,15 @@ public class VoidEventController : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the void events JSON.")]
     TextAsset voidEventsJSON;
+    [SerializeField]
+    [Tooltip("Reference to the void tuning JSON.")]
+    TextAsset tuningJSON;
+    [SerializeField]
+    [Tooltip("Reference to the event popup window image")]
+    GameObject eventPopup;
+    [SerializeField]
+    [Tooltip("Reference to the you win menu.")]
+    UIYouWin youWinMenu;
     /*
     [SerializeField]
     [Tooltip("Reference to the tuning JSON.")]
@@ -153,6 +171,12 @@ public class VoidEventController : MonoBehaviour
     Dictionary<int, int> tierToVestigeLevel = new Dictionary<int, int>();
     Dictionary<int, int> tierToDecayBonus = new Dictionary<int, int>();
     Dictionary<int, int> tierToAsteroidCount = new Dictionary<int, int>();
+
+    //Number of seconds for the event popup window to stay
+    float secondsToStay;
+
+    List<VoidEvent.EventType> eventsStarted = new List<VoidEvent.EventType>();
+    int eventsLatestTier = 0;
 
     private void Start()
     {
@@ -176,8 +200,45 @@ public class VoidEventController : MonoBehaviour
             letterBindings.Add(letter, types[i]);
         }
 
-        // Read from tuning data.
-        Tune();
+        PrintLetterBindings();
+
+        // Don't do event stuff in Zen Mode.
+        if (!Settings.Instance.IsZenModeEnabled())
+        {
+            // Read from tuning data and populate event groups.
+            Tune();
+        }
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    private void PrintLetterBindings()
+    {
+        List<VoidEvent.EventType> orderedEvents = new List<VoidEvent.EventType>();
+        orderedEvents.Add(letterBindings['a']);
+        orderedEvents.Add(letterBindings['b']);
+        orderedEvents.Add(letterBindings['c']);
+        string printstr = "The order of events is: ";
+        foreach (VoidEvent.EventType type in orderedEvents)
+        {
+            switch (type)
+            {
+                case VoidEvent.EventType.Asteroids:
+                    printstr += "Asteroids";
+                    break;
+                case VoidEvent.EventType.Junkyard:
+                    printstr += "Junkyard";
+                    break;
+                case VoidEvent.EventType.Radiation:
+                    printstr += "Radiation";
+                    break;
+            }
+            printstr += " -> ";
+        }
+        Debug.Log(printstr);
     }
 
     // Read variables from JSON data.
@@ -226,37 +287,83 @@ public class VoidEventController : MonoBehaviour
                 myEvents.Add(newEvent);
             }
 
-            voidEventGroups.Add(new VoidEventGroup(myEvents, begin, end));
+            VoidEventGroup newEventGroup = new VoidEventGroup(myEvents, begin, end);
+            //newEventGroup.Started += VoidEventGroup_Started;
+            voidEventGroups.Add(newEventGroup);
         }
+        JSONNode tuning = JSON.Parse(tuningJSON.ToString());
+        secondsToStay = tuning["event warning wait time"].AsFloat;
     }
 
     // Callback function for the score changing.
     private void ScoreCounter_ScoreChanged(int newScore)
     {
+        // Reset the eventsStarted list.
+        eventsStarted.Clear();
+
         foreach (VoidEventGroup eventGroup in voidEventGroups)
         {
             eventGroup.UpdateProgressFromScore(newScore);
+        }
+
+        switch (eventsStarted.Count)
+        {
+            case 1:
+                VoidEvent.EventType thisEventType = eventsStarted[0];
+                int tier = eventsLatestTier;
+                switch (thisEventType)
+                {
+                    case VoidEvent.EventType.Junkyard:
+                        EventPopupWindow("Unrefined Uranium Lv." + tier + " begin!");
+                        TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_URANIUM);
+                        break;
+
+                    case VoidEvent.EventType.Radiation:
+                        EventPopupWindow("Waste Contamination Lv." + tier + " begin!");
+                        TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_CONTAMINATION);
+                        break;
+
+                    case VoidEvent.EventType.Asteroids:
+                        EventPopupWindow("Reactor Breach Lv." + tier + " begin!");
+                        TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BREACH);
+                        break;
+                }
+                break;
+
+            case 2:
+                EventPopupWindow("Reactor Meltdown begin!");
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_MELTDOWN);
+                break;
+
+            case 3:
+                youWinMenu.gameObject.SetActive(true);
+                youWinMenu.init();
+                EventPopupWindow("Reactor Overload begin!");
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_OVERLOAD);
+                break;
         }
     }
 
     private void VoidEvent_Started(VoidEvent.EventType eventType, int tier)
     {
+        eventsStarted.Add(eventType);
+        eventsLatestTier = tier;
+
+        TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_EVENT);
         switch (eventType)
         {
             case VoidEvent.EventType.Junkyard:
-                Debug.Log("Junkyard " + tier + " begin.");
                 blockSpawner.SetJunkyardTier(tier);
+                blockSpawner.BeginJunkyardEvent();
                 break;
 
             case VoidEvent.EventType.Radiation:
-                Debug.Log("Radiation " + tier + " begin.");
                 blockSpawner.SetVestigesPerBlock(tierToVestigeCount[tier]);
                 blockSpawner.SetVestigeLevel(tierToVestigeLevel[tier]);
                 grid.SetBaseEnergyDecayRateBonus(tierToDecayBonus[tier]);
                 break;
 
             case VoidEvent.EventType.Asteroids:
-                Debug.Log("Asteroids " + tier + " begin.");
                 grid.AddAsteroids(tierToAsteroidCount[tier]);
                 break;
         }
@@ -267,21 +374,44 @@ public class VoidEventController : MonoBehaviour
         switch (eventType)
         {
             case VoidEvent.EventType.Junkyard:
-                Debug.Log("Junkyard " + tier + " end.");
+                //Debug.Log("Junkyard " + tier + " end.");
                 blockSpawner.SetJunkyardTier(0);
+                blockSpawner.EndJunkyardEvent();
                 break;
 
             case VoidEvent.EventType.Radiation:
-                Debug.Log("Radiation " + tier + " end.");
+                //Debug.Log("Radiation " + tier + " end.");
                 blockSpawner.SetVestigesPerBlock(0);
                 grid.SetBaseEnergyDecayRateBonus(0);
                 // Don't need to do anything to vestige level.
                 break;
 
             case VoidEvent.EventType.Asteroids:
-                Debug.Log("Asteroids " + tier + " end.");
+                //Debug.Log("Asteroids " + tier + " end.");
                 grid.ClearAllAsteroids();
                 break;
         }
     }
+
+    /*
+    private void VoidEventGroup_Started(int eventCount)
+    {
+        switch (eventCount)
+        {
+            case 2:
+                break;
+
+            case 3:
+                break;
+        }
+    }
+    */
+
+    private void EventPopupWindow(string eventText)
+    {
+        GameObject eventPopupWindow = Instantiate(eventPopup, canvas.transform, false);
+        StartCoroutine(eventPopupWindow.GetComponent<EventPopup>().Translation(eventText, canvas, secondsToStay));
+    }
+
+    
 }

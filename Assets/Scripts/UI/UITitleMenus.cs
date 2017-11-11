@@ -11,10 +11,11 @@ public class UITitleMenus : MonoBehaviour
 	public void GoToTitle()
     {
         SceneManager.LoadScene("Title");
-        AudioController.Instance.MenuClick();
         AudioController.Instance.StopAllSFX();
+        AudioController.Instance.MenuClick();
         AudioController.Instance.StopMusic();
         AudioController.Instance.PlayMusic("Main_Menu_Music_1");
+        //Destroy(TutorialController.Instance.gameObject);
     }
 
     public void GoToHowToPlay()
@@ -23,13 +24,20 @@ public class UITitleMenus : MonoBehaviour
         AudioController.Instance.MenuClick();
     }
 
+	public void GoToSettings()
+	{
+		SceneManager.LoadScene("Settings");
+        AudioController.Instance.MenuClick();
+    }
+
     public void GoToAbout()
     {
         SceneManager.LoadScene("About");
         AudioController.Instance.MenuClick();
     }
-	public void GoToGamePlay() 
+	public void GoToGamePlay(bool isZenMode) 
 	{
+        Settings.Instance.SetZenModeEnabled(isZenMode);
 		SceneManager.LoadScene ("MainScene");
         AudioController.Instance.MenuClick();
         AudioController.Instance.StopMusic();
