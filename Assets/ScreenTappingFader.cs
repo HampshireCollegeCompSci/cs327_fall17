@@ -48,6 +48,8 @@ public class ScreenTappingFader : MonoBehaviour {
 			if (imageColor.a == 0) {
 				Destroy (gameObject);
 			}
+			transform.Rotate((Time.deltaTime * 5), 0, 0);
+			transform.Rotate(0, (Time.deltaTime * 5), 0, 0);
 		}
 	} 
 
