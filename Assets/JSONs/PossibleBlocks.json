@@ -35,7 +35,7 @@
 			"width" : 2,
 			"height" : 3,
 			"sprite" : 3,
-			"tiers" : [0,1,2],
+			"tiers" : [-1,0,1,2],
 			"cells" :
 			[1, 1,
 			 1, 0, 
