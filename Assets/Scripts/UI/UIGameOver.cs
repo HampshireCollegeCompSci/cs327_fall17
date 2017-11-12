@@ -10,6 +10,9 @@ using UnityEngine.UI;
 public class UIGameOver : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("Reference to the game over window.")]
+    GameObject gameOverWindow;
+    [SerializeField]
     [Tooltip("Reference to the GameFlow instance.")]
     GameFlow gameFlow;
     /*
@@ -59,7 +62,7 @@ public class UIGameOver : MonoBehaviour
             obj.SetActive(false);
         }
         */
-        gameObject.SetActive(false);
+        gameOverWindow.SetActive(false);
     }
 
     private void OnDestroy()
@@ -89,7 +92,8 @@ public class UIGameOver : MonoBehaviour
             obj.SetActive(true);
         }
         */
-        gameObject.SetActive(true);
+        gameOverWindow.SetActive(true);
+
         string reason;
         switch (cause)
         {
