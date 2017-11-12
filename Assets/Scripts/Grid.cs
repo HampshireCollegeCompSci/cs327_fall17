@@ -80,6 +80,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("The underlying array of Tiles.")]
     Tile[,] tiles;
+    [SerializeField]
+    [Tooltip("Reference to the console grid.")]
+    ConsoleGrid consoleGrid;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -886,6 +889,8 @@ public class Grid : MonoBehaviour
     public void PlacedDraggableBlock()
     {
         TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BLOCK);
+
+        consoleGrid.SetDraggableBlock(null);
 
         //If there was not a square formed this turn, then energy will be reduced by 1 plus number of vestiges
         if (!CheckForMatches())
