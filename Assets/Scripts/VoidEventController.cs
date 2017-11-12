@@ -217,11 +217,6 @@ public class VoidEventController : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void PrintLetterBindings()
     {
         List<VoidEvent.EventType> orderedEvents = new List<VoidEvent.EventType>();

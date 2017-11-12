@@ -10,11 +10,16 @@ using UnityEngine.UI;
 public class UIGameOver : MonoBehaviour
 {
     [SerializeField]
+    [Tooltip("Reference to the game over window.")]
+    GameObject gameOverWindow;
+    [SerializeField]
     [Tooltip("Reference to the GameFlow instance.")]
     GameFlow gameFlow;
+    /*
     [SerializeField]
     [Tooltip("An array of all the GameObjects to be enabled upon game over.")]
     GameObject[] toBeEnabled;
+    */
     [SerializeField]
     [Tooltip("Reference to the Text object that will explain why the player lost.")]
     Text textGameOverReason;
@@ -24,21 +29,40 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Analytics instance.")]
     Analytics analytics;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that will display the player's high score")]
+    Text textHighScore;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that will display the player's score")]
+    Text textScore;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that will display the literal text High Score, if English. Still needs to be implemented in the JSON.")]
+    Text textHighScoreLabel;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that will display the literal text Your Score, if English. Still needs to be implemented in the JSON.")]
+    Text textYourScoreLabel;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that will display the literal text Game Over, if English. Still needs to be implemented in the JSON.")]
+    Text textGameOverLabel;
 
 	UILanguages translator;
 
-	private void Start()
+    private void Awake()
     {
-		translator = FindObjectOfType<UILanguages>();
-        if (gameFlow != null)
-        {
-            gameFlow.GameLost += Appear;
-        }
+        translator = FindObjectOfType<UILanguages>();
 
+        //if (gameFlow != null)
+        //{
+        gameFlow.GameLost += Appear;
+        //}
+
+        /*
         foreach (GameObject obj in toBeEnabled)
         {
             obj.SetActive(false);
         }
+        */
+        gameOverWindow.SetActive(false);
     }
 
     private void OnDestroy()
@@ -49,7 +73,7 @@ public class UIGameOver : MonoBehaviour
         }
     }
 
-    public void Reset()
+    public void ResetScene()
     {
         AudioController.Instance.MenuClick();
 
@@ -62,11 +86,13 @@ public class UIGameOver : MonoBehaviour
     {
         AudioController.Instance.StopSFX("About_To_Lose_1");
         AudioController.Instance.PlaySFX("Game_Over_1");
-
+        /*
         foreach (GameObject obj in toBeEnabled)
         {
             obj.SetActive(true);
         }
+        */
+        gameOverWindow.SetActive(true);
 
         string reason;
         switch (cause)
@@ -98,8 +124,13 @@ public class UIGameOver : MonoBehaviour
 
         analytics.SendData(cause, highScore);
 
-        textGameOverReason.text = translator.Translate(reason) + "\n"
-            + translator.Translate("HighScore1") + highScore;
+        textGameOverReason.text = translator.Translate(reason);
+        textHighScore.text = highScore.ToString();
+        textScore.text = score.GetScore().ToString();
+        // For Maia - leaving this in here as a template
+        //textGameOverLabel.text = translator.Translate("game over");
+        //textHighScoreLabel.text = translator.Translate("high score");
+        //textYourScoreLabel.text = translator.Translate("YOUR SCORE");
         //textGameOverReason.text = reason + "\nHigh score: " + highScore;
     }
 }

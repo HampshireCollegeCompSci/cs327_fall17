@@ -32,15 +32,8 @@ public class Analytics : MonoBehaviour
     Settings settings;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
-        /*
-        if (gameFlow != null)
-        {
-            gameFlow.GameLost += SendData;
-        }
-        */
-            
         settings = FindObjectOfType<Settings>(); //Can't pass in a reference because it's a singleton
     }
 
