@@ -399,7 +399,8 @@ public class BlockSpawner : MonoBehaviour
     public void ProgressQueue()
     {
         //Dequeue the block at the front
-        blocksQueue.Dequeue();
+        if (blocksQueue.Count > 0)
+            blocksQueue.Dequeue();
         
         if (blocksQueue.Count == 0)
         {

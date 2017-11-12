@@ -14,10 +14,6 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     public List<Text> PanelTexts = new List<Text>();
     public float offset = 100f;
 
-    [SerializeField]
-    [Tooltip("The overlay image to use for raycasting.")]
-    Image overlayImage;
-
     public enum Triggers
     {
         FIRST_OPEN,
@@ -58,8 +54,11 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
     public Grid grid;
 
-    //public float overlaySeconds = 5f;
+    public float tapOffset = 0.5f;
 
+    public List<Image> masks = new List<Image>();
+
+    float tapCountdown;
     bool overlayDone;
     bool currentlyPlaying;
 
@@ -85,7 +84,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         }
         instance = this;
         //DontDestroyOnLoad(gameObject);
-
+        
         //Do JSON reading here and setup triggerData text here
         JSONNode triggers = JSONNode.Parse(tutorialJSON.ToString());
 
@@ -98,7 +97,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             
             triggerData.Add(new TriggerData(triggerName, textInfo, panelNumber));
         }
-        
+
         foreach (Triggers trigger in Enum.GetValues(typeof(Triggers)))
         {
             //Load Triggers from PlayerPrefs
@@ -115,8 +114,8 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             }
             else
             {
-                PlayerPrefs.SetInt(trigger.ToString(), 0);
-                triggerRecord.Add(trigger, false);
+            PlayerPrefs.SetInt(trigger.ToString(), 0);
+            triggerRecord.Add(trigger, false);
             }
         }
     }
@@ -188,29 +187,31 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             Panels[panelNumber].gameObject.SetActive(true);
         }
 
-        //float countDown = 0;
-        overlayDone = false;
-        overlayImage.raycastTarget = true;
+        if (masks[panelNumber] != null)
+        {
+            masks[panelNumber].gameObject.SetActive(true);
+        }
 
+        overlayDone = false;
+        
         while (!overlayDone)
         {
-            /*
-            countDown += Time.deltaTime;
-
-            if (countDown >= overlaySeconds)
-            {
-                overlayDone = true;
-            }
-            */
+            tapCountdown += Time.deltaTime;
 
             yield return null;
         }
 
+        tapCountdown = 0f;
         currentlyPlaying = false;
 
         if (Panels[panelNumber] != null)
         {
             Panels[panelNumber].gameObject.SetActive(false);
+        }
+
+        if (masks[panelNumber] != null)
+        {
+            masks[panelNumber].gameObject.SetActive(false);
         }
 
         if (nextTriggers.Count > 0)
@@ -252,11 +253,11 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
         if (col < grid.GetHeight() / 2)
         {
-            yPos = grid.GetTilePosition(row, col).y + offset;
+            yPos = grid.GetTilePosition(row, col).y - offset;
         }
         else
         {
-            yPos = grid.GetTilePosition(row, col).y - offset;
+            yPos = grid.GetTilePosition(row, col).y + offset;
         }
 
         Panels[panelNumber].transform.localPosition = new Vector2(xPos, yPos);
@@ -302,7 +303,9 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        overlayDone = true;
-        overlayImage.raycastTarget = false;
+        if (tapCountdown >= tapOffset)
+        {
+            overlayDone = true;
+        }
     }
 }
