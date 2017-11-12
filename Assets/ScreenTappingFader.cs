@@ -4,31 +4,29 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ScreenTappingFader : MonoBehaviour {
-	/*
-	[SerializeField]
-	[Tooltip("The amount of time the fade animation takes")]
-	float fadeTime;
-	[SerializeField]
-	[Tooltip("Image ")]
-	Image image;
-	[SerializeField]
-	[Tooltip("")]
-	Color imageColor;
-	*/
+
 	float fadeTime = .8f;
 	Image image;
 	Color imageColor;
-	// Use this for initialization
-	void Start () 
+	float randomRotate;
+	float randomPosition;
+	float speed;
+	Vector3 direction;
+
+	void Awake () 
 	{
 		//fadetTime = 1f;
 		image = GetComponent<Image>();
 		imageColor = image.color;
 		StartCoroutine (FadeOut (image));
-
+		randomRotate = Random.Range(0, 5);
+		randomPosition = Random.Range(0, 50);
+		float x = Random.Range(-1f, 1f);
+		float y = Random.Range(-1f, 1f);
+		direction = new Vector3(x, y, 0f);
+		speed = 5f;
 	}
-	
-	// Update is called once per frame
+
 	void Update () 
 	{
 		
@@ -48,8 +46,9 @@ public class ScreenTappingFader : MonoBehaviour {
 			if (imageColor.a == 0) {
 				Destroy (gameObject);
 			}
-			transform.Rotate((Time.deltaTime * 5), 0, 0);
-			transform.Rotate(0, (Time.deltaTime * 5), 0, 0);
+			transform.Rotate(Time.deltaTime * 5, Time.deltaTime * 5, 0);
+			transform.position += direction * speed;
+
 		}
 	} 
 
