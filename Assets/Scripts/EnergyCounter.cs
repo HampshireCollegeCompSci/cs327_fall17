@@ -61,7 +61,7 @@ public class EnergyCounter : MonoBehaviour
         var json = JSON.Parse(tuningJSON.ToString());
         energy = json["starting energy"].AsInt;
         //maxEnergyInMeter = json["max energy in meter"].AsInt;
-        energyThreshold = json["energy level animation"].AsArray;
+        energyThreshold = json["energy level animation turns remaining"].AsArray;
     }
 
     void Start()
@@ -71,17 +71,18 @@ public class EnergyCounter : MonoBehaviour
         UpdateEnergy();
     }
 
-    public void UpdateEnergyLevel()
+    // Updates the animation on the reactor.
+    private void UpdateEnergyLevel(int turnsRemaining)
     {
-        if (energy < energyThreshold[0])
+        if (turnsRemaining <= energyThreshold[0])
         {
             energyGainController.SetInteger("energyLevel", 0);
         }
-        else if (energy < energyThreshold[1])
+        else if (turnsRemaining <= energyThreshold[1])
         {
             energyGainController.SetInteger("energyLevel", 1);
         }
-        else if (energy < energyThreshold[2])
+        else if (turnsRemaining <= energyThreshold[2])
         {
             energyGainController.SetInteger("energyLevel", 2);
         }
@@ -195,9 +196,9 @@ public class EnergyCounter : MonoBehaviour
 
         // Check if the player is about to lose.
         int energyDrain = grid.GetEnergyDrain();
-        SetIsAboutToLose(energyDrain >= energy);
-
-        UpdateEnergyLevel();
+        int turnsRemaining = Mathf.CeilToInt((float)energy / energyDrain);
+        SetIsAboutToLose(turnsRemaining == 1);
+        UpdateEnergyLevel(turnsRemaining);
     }
 
     private void SetIsAboutToLose(bool isAboutToLose)
@@ -233,5 +234,6 @@ public class EnergyCounter : MonoBehaviour
     public void SetEnergy(int newEnergy)
     {
         energy = newEnergy;
+        UpdateEnergy();
     }
 }

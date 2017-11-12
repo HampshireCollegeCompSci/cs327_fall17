@@ -42,7 +42,7 @@ public class UIGameOver : MonoBehaviour
 
 	UILanguages translator;
 
-	private void Start()
+	private void Awake()
     {
 		translator = FindObjectOfType<UILanguages>();
         if (gameFlow != null)
