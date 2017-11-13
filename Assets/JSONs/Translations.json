@@ -168,6 +168,20 @@
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean"
 	},
+	"YourScore" : {
+		"English": "YOUR SCORE",
+	    "Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
 	"Settings": {
 		"English": "Settings",
 		"Spanish": "PlaceholderSpanish",
