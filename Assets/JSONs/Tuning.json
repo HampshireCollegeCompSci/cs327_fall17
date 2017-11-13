@@ -23,5 +23,5 @@
 	 0, 0, 0, 0, 0, 0, 0, 0],
 	"contamination blocks alternate" : true,
 	"friendly bag max score": 0,
-	"event warning wait time": 1
+	"event warning wait time": 2
 }
