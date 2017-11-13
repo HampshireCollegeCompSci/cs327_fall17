@@ -159,6 +159,9 @@ public class VoidEventController : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the event over text.")]
     Text textEventOver;
+    [SerializeField]
+    [Tooltip("Reference to the event slider.")]
+    EventSlider eventSlider;
 
     /*
     [SerializeField]
@@ -318,16 +321,19 @@ public class VoidEventController : MonoBehaviour
                     case VoidEvent.EventType.Junkyard:
                         EventPopupWindow("Unrefined Uranium Lv." + tier + " begin!");
                         TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_URANIUM);
+                        eventSlider.SetCurrentState(EventSlider.State.Junkyard);
                         break;
 
                     case VoidEvent.EventType.Radiation:
                         EventPopupWindow("Waste Contamination Lv." + tier + " begin!");
                         TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_CONTAMINATION);
+                        eventSlider.SetCurrentState(EventSlider.State.Radiation);
                         break;
 
                     case VoidEvent.EventType.Asteroids:
                         EventPopupWindow("Reactor Breach Lv." + tier + " begin!");
                         TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BREACH);
+                        eventSlider.SetCurrentState(EventSlider.State.Asteroids);
                         break;
                 }
                 break;
@@ -335,6 +341,7 @@ public class VoidEventController : MonoBehaviour
             case 2:
                 EventPopupWindow("Reactor Meltdown begin!");
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_MELTDOWN);
+                eventSlider.SetCurrentState(EventSlider.State.Overload);
                 break;
 
             case 3:
@@ -342,6 +349,7 @@ public class VoidEventController : MonoBehaviour
                 youWinMenu.init();
                 EventPopupWindow("Reactor Overload begin!");
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_OVERLOAD);
+                eventSlider.SetCurrentState(EventSlider.State.Overload);
                 break;
         }
     }
@@ -397,6 +405,7 @@ public class VoidEventController : MonoBehaviour
 
         textEventOver.text = "CRISIS AVERTED: REACTOR RESTORED";
         eventOver.SetActive(true);
+        eventSlider.SetCurrentState(EventSlider.State.None);
     }
 
     /*
