@@ -182,6 +182,11 @@ public class AudioController : MonoBehaviour {
         PlaySFX(TileSnapSFX[index]);
     }
 
+    public void GameOver()
+    {
+        PlaySFX("Game_Over_2");
+    }
+
     public void StopAllSFX()
     {
         foreach(AudioSource channel in Channels)

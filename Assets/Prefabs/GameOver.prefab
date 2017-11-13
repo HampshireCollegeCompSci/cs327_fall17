@@ -443,8 +443,8 @@ MonoBehaviour:
   analytics: {fileID: 114017712063440150}
   textHighScore: {fileID: 114900417953852792}
   textScore: {fileID: 114351132283412814}
-  textHighScoreLabel: {fileID: 0}
-  textYourScoreLabel: {fileID: 0}
+  textHighScoreLabel: {fileID: 114032042357403000}
+  textYourScoreLabel: {fileID: 114169973117623672}
   textGameOverLabel: {fileID: 114230764441667554}
 --- !u!114 &114230764441667554
 MonoBehaviour:
