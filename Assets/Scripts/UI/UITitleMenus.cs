@@ -48,4 +48,9 @@ public class UITitleMenus : MonoBehaviour
         SceneManager.LoadScene("CheatPage");
         AudioController.Instance.MenuClick();
     }
+	public void GoToGameModeMenu()
+	{
+		SceneManager.LoadScene("GameMode");
+		AudioController.Instance.MenuClick();
+	}
 }
