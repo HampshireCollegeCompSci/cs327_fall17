@@ -64,14 +64,13 @@ public class ScoreCounter : MonoBehaviour
     }
 
     // Callback function for a square on the Grid being cleared.
-    private void Grid_SquareFormed(int size, Vector3 textPos)
+    private void Grid_SquareFormed(int scorePerSquare, Vector3 textPos)
     {
-        int points = size * 100;
-        AddScore(points);
+        AddScore(scorePerSquare);
 
         // Instantiate some rising text.
         GameObject risingTextObj = Object.Instantiate(risingTextPrefab, grid.transform, false);
-        risingTextObj.GetComponent<RisingText>().SetText((points).ToString());
+        risingTextObj.GetComponent<RisingText>().SetText((scorePerSquare).ToString());
         risingTextObj.transform.localPosition = textPos;
     }
 

@@ -1,4 +1,4 @@
-﻿// Author(s): Maia Doerner, Paul Calande
+// Author(s): Maia Doerner, Paul Calande
 
 using System.Collections;
 using System.Collections.Generic;

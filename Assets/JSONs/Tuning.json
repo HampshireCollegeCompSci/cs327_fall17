@@ -8,8 +8,9 @@
 	"cleared cell fade time": 2.0,
 	"vestige max level": 3,
 	"vestige decay rates": [1, 3, 5],
-	"energy per cell cleared" : 1,
-	"energy level animation" : [10, 40, 100],
+	"energy per 3x3 square cleared": 7,
+	"score per 3x3 square cleared": 300,
+	"energy level animation turns remaining" : [1, 2, 3],
 	"asteroids can spawn in filled cells" : false,
 	"asteroid area denial" :
 	[0, 0, 0, 0, 0, 0, 0, 0,
@@ -21,5 +22,6 @@
 	 0, 1, 1, 0, 0, 1, 1, 0,
 	 0, 0, 0, 0, 0, 0, 0, 0],
 	"contamination blocks alternate" : true,
-	"friendly bag max score" : 0
+	"friendly bag max score": 0,
+	"event warning wait time": 1
 }

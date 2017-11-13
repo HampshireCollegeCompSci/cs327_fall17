@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Author(s): Paul Calande, Yixiang Xu
+// Script for the console grid that new DraggableBlocks spawn in.
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,12 +27,20 @@ public class ConsoleGrid : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     [SerializeField]
     [Tooltip("Reference to the main grid.")]
     Grid grid;
+    /*
     [SerializeField]
     [Tooltip("Reference to the current draggableBlock in the grid.")]
     DraggableBlock draggableBlock;
+    */
+    [SerializeField]
+    [Tooltip("Reference to the DraggableBlock's DraggableObject.")]
+    DraggableObject draggableObject;
     [SerializeField]
     [Tooltip("The prefab to use to instantiate each Tile.")]
     GameObject prefabTile;
+    [SerializeField]
+    [Tooltip("Reference to the RectTransform component.")]
+    RectTransform rt;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     float tileWidth;
@@ -44,39 +55,27 @@ public class ConsoleGrid : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         //Debug.Log(width);
     }
 
-    // Use this for initialization
-    void Start () {
-        
-        //Debug.Log(GetComponent<RectTransform>().rect.width);
-
-        //Instantiate tiles array
-        /*tiles = CreateTileArray(prefabTile, Vector3.zero, height, width);
-
-        foreach (Tile t in tiles)
-        {
-            // Make all of the Tiles clear.
-            t.Clear();
-            t.SetSprite(TileData.TileType.Unoccupied);
-        }*/
-    }
-
     public void Init()
     {
         Tune();
-        tileWidth = GetComponent<RectTransform>().rect.width / (float)width;
-        tileHeight = GetComponent<RectTransform>().rect.height / (float)height;
-        //Debug.Log(tileWidth);
+        tileWidth = rt.rect.width / (float)width;
+        tileHeight = rt.rect.height / (float)height;
     }
 
     public void SetDraggableBlock(DraggableBlock block)
     {
-        draggableBlock = block;
+        //draggableBlock = block;
+        if (block != null)
+        {
+            draggableObject = block.GetComponent<DraggableObject>();
+            enabled = true;
+        }
+        else
+        {
+            draggableObject = null;
+            enabled = false;
+        }
     }
-	
-	// Update is called once per frame
-	private void Update () {
-		
-	}
 
     public float GetTileWidth()
     {
@@ -105,16 +104,16 @@ public class ConsoleGrid : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 
     public void OnDrag(PointerEventData eventData)
     {
-        draggableBlock.GetComponent<DraggableObject>().OnDrag(eventData);
+        draggableObject.OnDrag(eventData);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        draggableBlock.GetComponent<DraggableObject>().OnBeginDrag(eventData);
+        draggableObject.OnBeginDrag(eventData);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        draggableBlock.GetComponent<DraggableObject>().OnEndDrag(eventData);
+        draggableObject.OnEndDrag(eventData);
     }
 }
