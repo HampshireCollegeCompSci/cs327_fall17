@@ -544,7 +544,6 @@ public class Grid : MonoBehaviour
         foreach (Tile t in duplicatesRemoved)
         {
             t.Clear();
-
         }
 
         foreach (int[] square in squaresFormed)
@@ -564,7 +563,7 @@ public class Grid : MonoBehaviour
     {
         Vector3 tilePos = GetTileAt(r + 1, c + 1).transform.position;
         Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
-        float distance = Vector3.Distance(tilePos, energyTransferBallPos);
+        float distance = Vector3.Distance(tilePos, energyTransferBallPos) / transform.parent.transform.localScale.y;
 
         GameObject lighting = Instantiate(energyTransferPrefab, transform.parent.transform);
         Vector3 lightingCenter = (energyTransferBallPos + tilePos) / 2f;
