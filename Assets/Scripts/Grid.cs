@@ -83,6 +83,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the console grid.")]
     ConsoleGrid consoleGrid;
+    [SerializeField]
+    [Tooltip("Reference to the clear explosion prefab")]
+    GameObject explosionPrefab;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -491,7 +494,7 @@ public class Grid : MonoBehaviour
 
             energyCounter.PopUp("+", squaresFormed.Count * energyPerSquare);
 
-            //Upgrading vestiges
+            //Turning and upgrading vestiges
             foreach (Tile v in newVestiges)
             {
                 if (v.GetTileType() == TileData.TileType.Regular)
@@ -541,25 +544,37 @@ public class Grid : MonoBehaviour
         foreach (Tile t in duplicatesRemoved)
         {
             t.Clear();
+        }
 
-            Vector3 tilePos = t.transform.position;
-            Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
-            float distance = Vector3.Distance(tilePos, energyTransferBallPos);
+        foreach (int[] square in squaresFormed)
+        {
+            GameObject explosion = Instantiate(explosionPrefab, transform, false);
+            explosion.GetComponent<RectTransform>().sizeDelta = new Vector2(3 * GetTileWidth(), 3 * GetTileHeight());
+            explosion.transform.localPosition = GetTileAt(square[0] + 1, square[1] + 1).transform.localPosition;
 
-            GameObject lighting = Instantiate(energyTransferPrefab, transform.parent.transform);
-            Vector3 lightingCenter = (energyTransferBallPos + tilePos) / 2f;
-            lighting.transform.position = lightingCenter;
-
-            float scaleY = distance / lighting.GetComponent<RectTransform>().rect.height;
-            float scaleX = scaleY * 0.5f;
-            lighting.transform.localScale = new Vector3(scaleX, scaleY, 1f);
-
-            float angle = (90 - Mathf.Atan((tilePos.y - energyTransferBallPos.y) / (tilePos.x - energyTransferBallPos.x)) * 180f / Mathf.PI);
-            lighting.transform.rotation = Quaternion.Euler(0, 0, -angle);
+            DrawLightning(square[0], square[1]);
         }
 
         blockSpawner.UpdateAllBlocks();
         blockSpawner.ProgressQueue();
+    }
+
+    private void DrawLightning(int r, int c)
+    {
+        Vector3 tilePos = GetTileAt(r + 1, c + 1).transform.position;
+        Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
+        float distance = Vector3.Distance(tilePos, energyTransferBallPos) / transform.parent.transform.localScale.y;
+
+        GameObject lighting = Instantiate(energyTransferPrefab, transform.parent.transform);
+        Vector3 lightingCenter = (energyTransferBallPos + tilePos) / 2f;
+        lighting.transform.position = lightingCenter;
+
+        float scaleY = distance / lighting.GetComponent<RectTransform>().rect.height;
+        float scaleX = scaleY * 0.5f;
+        lighting.transform.localScale = new Vector3(scaleX, scaleY, 1f);
+
+        float angle = (90 - Mathf.Atan((tilePos.y - energyTransferBallPos.y) / (tilePos.x - energyTransferBallPos.x)) * 180f / Mathf.PI);
+        lighting.transform.rotation = Quaternion.Euler(0, 0, -angle);
     }
 
     private void CheckForSquares(int r, int c, int length, ref List<Tile> toRemove, ref List<int[]> squaresFormed, TileData.TileType[,] copy)

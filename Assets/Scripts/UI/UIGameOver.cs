@@ -85,7 +85,7 @@ public class UIGameOver : MonoBehaviour
     void Appear(GameFlow.GameOverCause cause)
     {
         AudioController.Instance.StopSFX("About_To_Lose_1");
-        AudioController.Instance.PlaySFX("Game_Over_1");
+        AudioController.Instance.GameOver();
         /*
         foreach (GameObject obj in toBeEnabled)
         {
