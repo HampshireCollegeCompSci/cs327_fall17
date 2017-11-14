@@ -542,19 +542,20 @@ public class Grid : MonoBehaviour
         {
             t.Clear();
 
-            Vector3 tilePos = t.transform.position;
-            Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
-            float distance = Vector3.Distance(tilePos, energyTransferBallPos);
+            Vector2 tilePos = new Vector2(t.transform.position.x, t.transform.position.y);
+            Vector2  energyTransferBallPos = new Vector2(energyTransferBallController.transform.position.x, energyTransferBallController.transform.position.y);
+            float distance = Vector2.Distance(tilePos, energyTransferBallPos) / transform.parent.transform.localScale.y;
 
             GameObject lighting = Instantiate(energyTransferPrefab, transform.parent.transform);
             Vector3 lightingCenter = (energyTransferBallPos + tilePos) / 2f;
             lighting.transform.position = lightingCenter;
-
             float scaleY = distance / lighting.GetComponent<RectTransform>().rect.height;
             float scaleX = scaleY * 0.5f;
             lighting.transform.localScale = new Vector3(scaleX, scaleY, 1f);
-
+            
             float angle = (90 - Mathf.Atan((tilePos.y - energyTransferBallPos.y) / (tilePos.x - energyTransferBallPos.x)) * 180f / Mathf.PI);
+            if (tilePos.x - energyTransferBallPos.x < 0)
+                angle = angle + 180;
             lighting.transform.rotation = Quaternion.Euler(0, 0, -angle);
         }
 
