@@ -2599,6 +2599,12 @@ Prefab:
       propertyPath: consoleGrid
       value: 
       objectReference: {fileID: 1125939173}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: explosionPrefab
+      value: 
+      objectReference: {fileID: 1051306887122920, guid: 26124d372277b2846863e62077bfa56d,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0
