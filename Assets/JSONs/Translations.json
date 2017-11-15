@@ -1,6 +1,6 @@
 {
 	  "GameOver": {
-	    "English": "Game Over",
+	    "English": "game over",
 	    "Spanish": "Fin del Juego",
 	    "French": "Fin de jue",
 	    "Slovenian": "Konec igre",
@@ -14,7 +14,7 @@
 	    "Korean" : "게임 오버"
 	  },
 	  "ReasonNoEnergy": {
-	    "English": "Reason: Out of Energy!",
+	    "English": "Out of Energy!",
 	    "Spanish": "Razón: ¡Fuera de energía!",
 	    "French": "Paison: Plus d’énergie!",
 	    "Slovenian": "Razlog: Primanjkuje energije!",
@@ -28,7 +28,7 @@
 		"Korean": "이유: 에너지 고갈!"
 	  },
 	  "ReasonHesitation": {
-	    "English": "Reason: You hesitated for too long!",
+	    "English": "You hesitated for too long!",
 	    "Spanish": "Razón: ¡Dudaste por mucho tiempo!",
 	    "French": "Raison : Vous avez hésité trop longtemps !",
 	    "Slovenian": "Razlog: Zmanjkalo časa!",
@@ -42,7 +42,7 @@
 		"Korean": "이유: 너무 오래 망설였음!"
 	  },
 	  "ReasonNoSpaceLeft": {
-	    "English": "Reason: No Space Left!",
+	    "English": "No Space Left!",
 	    "Spanish": "Razón: ¡No hay espacio!",
 	    "French": "Raison : Plus de place!",
 	    "Slovenian": "Razlog: Ni več prostora!",
@@ -141,7 +141,7 @@
 	},
 	
 	"HighScore1": {
-		"English": "High Score: ",
+		"English": "high score",
 	    "Spanish": "PlaceholderSpanish",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
@@ -212,6 +212,20 @@
 	},
 	"Reset": {
 		"English": "Play Again",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"StartOver": {
+		"English": "Start Over",
 		"Spanish": "PlaceholderSpanish",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",

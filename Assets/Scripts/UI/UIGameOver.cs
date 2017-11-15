@@ -44,7 +44,17 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Text object that will display the literal text Game Over, if English. Still needs to be implemented in the JSON.")]
     Text textGameOverLabel;
+    [SerializeField]
+    [Tooltip("Reference to the Text object that describes how far you've come.")]
+    Text textYouReached;
+    [SerializeField]
+    [Tooltip("Reference to the VoidEventController.")]
+    VoidEventController voidEventController;
+    [SerializeField]
+    [Tooltip("Reference to the progress bar overlay.")]
+    RectTransform progressBarTop;
 
+    // Reference to the Translator.
 	UILanguages translator;
 
     private void Awake()
@@ -131,6 +141,10 @@ public class UIGameOver : MonoBehaviour
         textGameOverLabel.text = translator.Translate("GameOver");
         textHighScoreLabel.text = translator.Translate("HighScore1");
         textYourScoreLabel.text = translator.Translate("YourScore");
-        textGameOverReason.text = reason + "\nHigh score: " + highScore;
+        textYouReached.text = "YOU REACHED:\n" + voidEventController.GetLatestEventName();
+
+        float progress = voidEventController.GetProgress();
+        progressBarTop.anchorMax = new Vector2(progress, progressBarTop.anchorMax.y);
+        //Debug.Log(progressBarTop.anchorMax);
     }
 }

@@ -255,6 +255,13 @@ public class VoidEventController : MonoBehaviour
     // This flag is set to true when a Reactor Overload event hits.
     bool eventsNeverEnd = false;
 
+    // Used for the game over screen.
+    VoidEventGroup.EventGroupType latestGroupType = VoidEventGroup.EventGroupType.None;
+    int latestTier = 0;
+
+    // The biggest end score for any event, presumed to be the end of the game.
+    int endScore;
+
     private void Start()
     {
         // Subscribe to delegate events.
@@ -343,6 +350,11 @@ public class VoidEventController : MonoBehaviour
             int end = nodeEvent["end"].AsInt;
             JSONArray types = nodeEvent["types"].AsArray;
 
+            if (end > endScore)
+            {
+                endScore = end;
+            }
+
             List<VoidEvent> myEvents = new List<VoidEvent>();
             for (int j = 0; j < types.Count; ++j)
             {
@@ -430,33 +442,32 @@ public class VoidEventController : MonoBehaviour
 
     private void VoidEventGroup_Started(VoidEventGroup.EventGroupType type, int tier)
     {
+        latestGroupType = type;
+        latestTier = tier;
+
         AudioController.Instance.StartEventGroup(type);
         eventSlider.SetCurrentState(type);
+        EventPopupWindow(GetEventName(type, tier) + " begin!");
         switch (type)
         {
             case VoidEventGroup.EventGroupType.Junkyard:
-                EventPopupWindow("Unrefined Uranium Lv." + tier + " begin!");
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_URANIUM);
                 break;
 
             case VoidEventGroup.EventGroupType.Radiation:
-                EventPopupWindow("Waste Contamination Lv." + tier + " begin!");
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_CONTAMINATION);
                 break;
 
             case VoidEventGroup.EventGroupType.Asteroids:
-                EventPopupWindow("Reactor Breach Lv." + tier + " begin!");
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BREACH);
                 break;
 
             case VoidEventGroup.EventGroupType.Meltdown:
-                EventPopupWindow("Reactor Meltdown begin!");
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_MELTDOWN);
                 break;
 
             case VoidEventGroup.EventGroupType.Overload:
                 eventsNeverEnd = true;
-                EventPopupWindow("Reactor Overload begin!");
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_OVERLOAD);
                 break;
         }
@@ -481,5 +492,61 @@ public class VoidEventController : MonoBehaviour
     {
         GameObject eventPopupWindow = Instantiate(eventPopup, canvas.transform, false);
         StartCoroutine(eventPopupWindow.GetComponent<EventPopup>().Translation(eventText, canvas, secondsToStay));
+    }
+
+    private string GetEventName(VoidEventGroup.EventGroupType type, int tier)
+    {
+        string result = "";
+        bool levelsImportant = true;
+        switch (type)
+        {
+            case VoidEventGroup.EventGroupType.None:
+                result += "Nothing";
+                levelsImportant = false;
+                break;
+
+            case VoidEventGroup.EventGroupType.Junkyard:
+                result += "Unrefined Uranium";
+                break;
+
+            case VoidEventGroup.EventGroupType.Radiation:
+                result += "Waste Contamination";
+                break;
+
+            case VoidEventGroup.EventGroupType.Asteroids:
+                result += "Reactor Breach";
+                break;
+
+            case VoidEventGroup.EventGroupType.Meltdown:
+                result += "Reactor Meltdown";
+                levelsImportant = false;
+                break;
+
+            case VoidEventGroup.EventGroupType.Overload:
+                result += "Reactor Overload";
+                levelsImportant = false;
+                break;
+        }
+        if (levelsImportant)
+        {
+            result += " Lv. " + tier;
+        }
+        return result;
+    }
+
+    public string GetLatestEventName()
+    {
+        return GetEventName(latestGroupType, latestTier);
+    }
+
+    // Get how close the player is to reaching the end of the game, as a percentage.
+    public float GetProgress()
+    {
+        float percentage = (float)scoreCounter.GetScore() / endScore;
+        if (percentage > 1.0f)
+        {
+            percentage = 1.0f;
+        }
+        return percentage;
     }
 }
