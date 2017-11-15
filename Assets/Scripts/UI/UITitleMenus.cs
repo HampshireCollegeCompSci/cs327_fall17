@@ -32,7 +32,7 @@ public class UITitleMenus : MonoBehaviour
 
     public void GoToAbout()
     {
-        SceneManager.LoadScene("About");
+        SceneManager.LoadScene("Credits");
         AudioController.Instance.MenuClick();
     }
 	public void GoToGamePlay(bool isZenMode) 
