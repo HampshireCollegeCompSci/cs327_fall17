@@ -13,8 +13,12 @@ public class UITitleMenus : MonoBehaviour
         SceneManager.LoadScene("Title");
         AudioController.Instance.StopAllSFX();
         AudioController.Instance.MenuClick();
-        AudioController.Instance.StopMusic();
-        AudioController.Instance.PlayMusic("Main_Menu_Music_1");
+
+        if (AudioController.Instance.currentlyPlaying.clip.name != "Main_Menu_Music_1")
+        {
+            AudioController.Instance.StopMusic();
+            AudioController.Instance.PlayMusic("Main_Menu_Music_1");
+        }
         //Destroy(TutorialController.Instance.gameObject);
     }
 

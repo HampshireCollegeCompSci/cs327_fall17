@@ -24,7 +24,7 @@ public class AudioController : MonoBehaviour {
     public AudioMixerGroup musicGroup;
     public AudioMixerGroup sfxGroup;
 
-    private AudioSource currentlyPlaying;
+    public AudioSource currentlyPlaying;
 
     private static AudioController instance = null;
     public static AudioController Instance
@@ -53,7 +53,17 @@ public class AudioController : MonoBehaviour {
 
         if (currentScene.name != "MainScene")
         {
-            PlayMusic("Main_Menu_Music_1");
+            if (currentlyPlaying.clip == null)
+            {
+                PlayMusic("Main_Menu_Music_1");
+            }
+            else
+            {
+                if (currentlyPlaying.clip.name == "Gameplay_Music_1")
+                {
+                    PlayMusic("Main_Menu_Music_1");
+                }
+            }
         }
         else
         {
