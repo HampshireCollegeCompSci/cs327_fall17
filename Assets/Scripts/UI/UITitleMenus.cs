@@ -40,6 +40,7 @@ public class UITitleMenus : MonoBehaviour
         Settings.Instance.SetZenModeEnabled(isZenMode);
 		SceneManager.LoadScene ("MainScene");
         AudioController.Instance.MenuClick();
+        AudioController.Instance.PressPlay();
         AudioController.Instance.StopMusic();
         AudioController.Instance.PlayMusic("Gameplay_Music_1");
     }

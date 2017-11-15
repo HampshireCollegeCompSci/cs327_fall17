@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Author(s): Yifeng Shi, Paul Calande
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,10 +15,17 @@ public class ReactorBreachBehavior : MonoBehaviour {
         sprite = spriteAsteroid;
     }
 
-
     public void DestroyMe()
     {
         Destroy(gameObject);
+        tile.NullifyAsteroid();
         tile.SetSpriteAbsolute(sprite);
+    }
+
+    public void DestroyMePrematurely()
+    {
+        Destroy(gameObject);
+        tile.NullifyAsteroid();
+        tile.Clear();
     }
 }

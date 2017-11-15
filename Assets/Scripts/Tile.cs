@@ -38,21 +38,8 @@ public class Tile : MonoBehaviour
     [Tooltip("The underlying TileData.")]
     TileData data = new TileData();
 
-    /*
-    private void Awake()
-    {
-        TileData.TileType myType = data.GetTileType();
-        SetSprite(myType);
-        trueSprite = spriteRenderer.sprite;
-
-        Debug.Log("Tile.Awake.myType: " + myType);
-    }
-    */
-
-    void Update()
-    {
-
-    }
+    // The current asteroid object animator.
+    Animator asteroidObj = null;
 
     public bool GetIsOccupied()
     {
@@ -133,8 +120,17 @@ public class Tile : MonoBehaviour
         Duplicate(other.data);
     }
 
+    void SpriteChanging()
+    {
+        if (asteroidObj != null)
+        {
+            asteroidObj.GetComponent<ReactorBreachBehavior>().DestroyMePrematurely();
+        }
+    }
+
     public void SetSprite(TileData.TileType newType)
     {
+        SpriteChanging();
         // Set the sprite based on the given tile type.
         Sprite newSprite = null;
         switch (newType)
@@ -153,10 +149,11 @@ public class Tile : MonoBehaviour
                 break;
             case TileData.TileType.Asteroid:
                 newSprite = spriteUnoccupied;
-                Animator asteroidObj = Instantiate(animationAsteroid, transform);
+                asteroidObj = Instantiate(animationAsteroid, transform);
                 asteroidObj.transform.localPosition = new Vector2(0, GetComponent<RectTransform>().rect.height * 0.18f);
                 asteroidObj.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().rect.width * 1 / 0.63f, GetComponent<RectTransform>().rect.height * 1 / 0.63f);
-                asteroidObj.GetComponent<ReactorBreachBehavior>().ReferenceTile(this, spriteAsteroid);
+                ReactorBreachBehavior rbb = asteroidObj.GetComponent<ReactorBreachBehavior>();
+                rbb.ReferenceTile(this, spriteAsteroid);
                 break;
         }
         spriteRenderer.sprite = newSprite;
@@ -164,16 +161,19 @@ public class Tile : MonoBehaviour
 
     public void SetSprite(Sprite newSprite)
     {
+        SpriteChanging();
         spriteRenderer.sprite = newSprite;
     }
 
     public void SetSpriteToTrueSprite()
     {
+        SpriteChanging();
         spriteRenderer.sprite = trueSprite;
     }
 
     public void SetSpriteAbsolute(Sprite newSprite)
     {
+        SpriteChanging();
         spriteRenderer.sprite = newSprite;
         trueSprite = newSprite;
     }
@@ -254,5 +254,10 @@ public class Tile : MonoBehaviour
     {
         data.SetSpriteIndex(spriteIndex);
         SetSprite(data.GetTileType());
+    }
+
+    public void NullifyAsteroid()
+    {
+        asteroidObj = null;
     }
 }

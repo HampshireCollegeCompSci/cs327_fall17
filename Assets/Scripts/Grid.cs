@@ -11,8 +11,10 @@ using SimpleJSON;
 
 public class Grid : MonoBehaviour
 {
-    public delegate void SquareFormedHandler(int size, Vector3 textPos);
+    public delegate void SquareFormedHandler(int scorePerSquare, Vector3 textPos);
     public event SquareFormedHandler SquareFormed;
+    public delegate void SquareClearedHandler(int scorePerSquare, Vector3 textPos);
+    public event SquareClearedHandler SquareCleared;
 
     [SerializeField]
     [Tooltip("The width of the Grid. Populated by JSON.")]
@@ -62,12 +64,14 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the RectTransform component of this Grid.")]
     RectTransform rectTransform;
+    /*
     [SerializeField]
     [Tooltip("Reference to energy gain animator.")]
     Animator energyGainController;
     [SerializeField]
     [Tooltip("Reference to energy transfer ball animator.")]
     Animator energyTransferBallController;
+    */
     [SerializeField]
     [Tooltip("Whether or not asteroids can spawn in filled cells. Populated by JSON.")]
     bool asteroidsCanSpawnInFilledCells;
@@ -86,6 +90,12 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the clear explosion prefab")]
     GameObject explosionPrefab;
+    [SerializeField]
+    [Tooltip("The number of seconds between each square highlighting animation. Populated by JSON.")]
+    float secondsBetweenSquareAnimations;
+    [SerializeField]
+    [Tooltip("Reference to the reactor GameObject.")]
+    GameObject reactor;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -108,6 +118,7 @@ public class Grid : MonoBehaviour
         vestigeMaxLevel = json["vestige max level"].AsInt;
         energyPerSquare = json["energy per 3x3 square cleared"].AsInt;
         scorePerSquare = json["score per 3x3 square cleared"].AsInt;
+        secondsBetweenSquareAnimations = json["seconds between square animations"].AsFloat;
         asteroidsCanSpawnInFilledCells = json["asteroids can spawn in filled cells"].AsBool;
 
         asteroidMask = new int[height, width];
@@ -150,11 +161,6 @@ public class Grid : MonoBehaviour
 
         //Instantiate GridBlocks
         gridBlocks = new List<GridBlock>();
-    }
-
-    private void Update()
-    {
-
     }
 
     public int GetWidth()
@@ -485,14 +491,15 @@ public class Grid : MonoBehaviour
                     Vector3 leftPos = GetTilePosition(s[0] + (s[2] - 1) / 2, s[1] + (s[2] - 1) / 2);
                     textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
                 }
-                //If a legal square is formed, tell the event handler,
+
+                // If a legal square is formed, tell the event handler.
+                // This doesn't actually give points.
                 OnSquareFormed(scorePerSquare, textPos);
-                energyCounter.AddEnergy(energyPerSquare); 
 
                 FormVestiges(s[0], s[1], s[2], toRemove, null, ref newVestiges);
             }
 
-            energyCounter.PopUp("+", squaresFormed.Count * energyPerSquare);
+            //energyCounter.PopUp("+", squaresFormed.Count * energyPerSquare);
 
             //Turning and upgrading vestiges
             foreach (Tile v in newVestiges)
@@ -510,7 +517,6 @@ public class Grid : MonoBehaviour
             }
 
             List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
-            energyTransferBallController.SetBool("active", true); //activate energy transfer ball animation
 
             StartCoroutine(ClearingOutlineEffect(squaresFormed, duplicatesRemoved));
         }
@@ -535,9 +541,11 @@ public class Grid : MonoBehaviour
         foreach (int[] square in squaresFormed)
         {
             GameObject outline = DrawOutLine(square[0], square[1]);
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(secondsBetweenSquareAnimations);
             if (outline != null)
+            {
                 Destroy(outline);
+            }
         }
 
         //Remove all tiles that form squares if isPlaced is true
@@ -546,6 +554,9 @@ public class Grid : MonoBehaviour
             t.Clear();
         }
 
+        Vector3 reactorPos = reactor.transform.position;
+
+        int totalEnergyGain = 0;
         foreach (int[] square in squaresFormed)
         {
             GameObject explosion = Instantiate(explosionPrefab, transform, false);
@@ -553,7 +564,20 @@ public class Grid : MonoBehaviour
             explosion.transform.localPosition = GetTileAt(square[0] + 1, square[1] + 1).transform.localPosition;
 
             DrawLightning(square[0], square[1]);
+
+            Vector3 rightPos = GetTilePosition(square[0] + (square[2] - 1) / 2 + 1, square[1] + (square[2] - 1) / 2 + 1);
+            Vector3 leftPos = GetTilePosition(square[0] + (square[2] - 1) / 2, square[1] + (square[2] - 1) / 2);
+            Vector3 textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
+
+            OnSquareCleared(scorePerSquare, textPos);
+            //energyCounter.AddEnergy(energyPerSquare);
+            totalEnergyGain += energyPerSquare;
         }
+        
+        //Debug.Log("Grid.ClearingOutlineEffect: Reached the end of the coroutine.");
+
+        energyCounter.AddEnergy(totalEnergyGain);
+        energyCounter.PopUp(totalEnergyGain, reactorPos);
 
         blockSpawner.UpdateAllBlocks();
         blockSpawner.ProgressQueue();
@@ -562,7 +586,8 @@ public class Grid : MonoBehaviour
     private void DrawLightning(int r, int c)
     {
         Vector3 tilePos = GetTileAt(r + 1, c + 1).transform.position;
-        Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
+        //Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
+        Vector3 energyTransferBallPos = reactor.transform.position;
         float distance = Vector3.Distance(tilePos, energyTransferBallPos) / transform.parent.transform.localScale.y;
 
         GameObject lighting = Instantiate(energyTransferPrefab, transform.parent.transform);
@@ -827,7 +852,7 @@ public class Grid : MonoBehaviour
                 //Space s = Instantiate(prefabSpace).GetComponent<Space>();
                 GameObject current = Instantiate(prefabSpace, transform, false);
                 Space s = current.GetComponent<Space>();
-                s.Init(row, col, h, w, this, energyCounter);
+                s.Init(row, col, h, w, this);
                 //s.GetComponent<RectTransform>().SetParent(canvas.transform);
                 ts.Add(s);
             }
@@ -901,7 +926,7 @@ public class Grid : MonoBehaviour
     }
 
     // To be called by the Space class whenever a new DraggableBlock is successfully placed on the Grid.
-    public void PlacedDraggableBlock()
+    public void PlacedDraggableBlock(Vector3 blockCenter)
     {
         TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BLOCK);
 
@@ -915,8 +940,8 @@ public class Grid : MonoBehaviour
 
             int energyChange = GetEnergyDrain();
 
-            energyCounter.RemoveEnergy(energyChange);
-            energyCounter.PopUp("-", energyChange);
+            energyCounter.RemoveEnergy(energyChange, false);
+            energyCounter.PopUp(-energyChange, blockCenter, reactor.transform.position);
 
             //Update Available spaces for all draggable blocks
             blockSpawner.UpdateAllBlocks();
@@ -1055,6 +1080,14 @@ public class Grid : MonoBehaviour
         if (SquareFormed != null)
         {
             SquareFormed(scorePerSquare, textPos);
+        }
+    }
+
+    private void OnSquareCleared(int scorePerSquare, Vector3 textPos)
+    {
+        if (SquareFormed != null)
+        {
+            SquareCleared(scorePerSquare, textPos);
         }
     }
 }

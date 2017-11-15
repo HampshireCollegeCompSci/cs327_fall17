@@ -52,6 +52,7 @@ public class DraggableBlock : MonoBehaviour
 
         draggableObject.SetDraggingScale(draggingScale);
         draggableObject.SetNonDraggingScale(nonDraggingScale);
+        draggableObject.BeginDragEvent += DraggableObject_BeginDragEvent;
 
         //transform.localScale = nonDraggingScale;
 
@@ -73,6 +74,11 @@ public class DraggableBlock : MonoBehaviour
         */
         
         UpdateTiles();
+    }
+
+    private void OnDestroy()
+    {
+        draggableObject.BeginDragEvent -= DraggableObject_BeginDragEvent;
     }
 
     public Block GetBlock()
@@ -287,4 +293,8 @@ public class DraggableBlock : MonoBehaviour
     }
     */
 
+    private void DraggableObject_BeginDragEvent(DraggableObject drag)
+    {
+        AudioController.Instance.PickupTile();
+    }
 }
