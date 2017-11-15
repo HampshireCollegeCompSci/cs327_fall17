@@ -55,7 +55,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: cf6b65935d7873e488014efdb3b5d2ac, type: 3}
   - {fileID: 8300000, guid: 35f7484fa3e35f54b8b11a894e408707, type: 3}
   sfxList:
-  - {fileID: 8300000, guid: 91f0ce92319e90e4ea72686585bb1f1d, type: 3}
   - {fileID: 8300000, guid: 11b8903d0e4d6154ba286e6a42163c4d, type: 3}
   - {fileID: 8300000, guid: 479f49811e4bd6046bf50af5b87d5c8d, type: 3}
   - {fileID: 8300000, guid: 191fd18f8cf89dd4284097590fc2ee18, type: 3}
@@ -75,9 +74,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 535c9c64cfaf68647b5da4b74adfab07, type: 3}
   - {fileID: 8300000, guid: dd48a36aa63c95a489bbc60486ac8f4b, type: 3}
   - {fileID: 8300000, guid: 4bfb7d9ccd70ef442ab1b57dc7fed11a, type: 3}
+  - {fileID: 8300000, guid: 95567a575f99772449d3bcfd5fa38f42, type: 3}
+  - {fileID: 8300000, guid: 0a720d396aed98546bea9833e82b183f, type: 3}
+  - {fileID: 8300000, guid: ca31b9158ee9efc43887403b5aba2096, type: 3}
+  - {fileID: 8300000, guid: 45f25854c6a4c914b900389b3e8e7c08, type: 3}
   Channels: []
   PlaceTileSFX:
-  - Tiles Place_Tile_A_1
   - Tiles Place_Tile_B_1
   - Tiles Place_Tile_C_1
   - Tiles Place_Tile_D_1

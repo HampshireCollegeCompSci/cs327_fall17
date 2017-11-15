@@ -1,5 +1,9 @@
 ﻿// Author(s): Paul Calande, Wm. Josiah Erikson
 
+// Comment out the following line to use transform.position instead of transform.localPosition.
+// transform.localPosition might not function properly.
+//#define USING_LOCAL_POSITION
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,9 +36,9 @@ public class LerpTo : MonoBehaviour
     public void LerpToAtSpeed(Vector3 destination, float speed)
     {
         MovingSetup();
-        movingDestination = transform.InverseTransformPoint(destination);
         state = LerpState.Speed;
         movingSpeed = speed;
+        SetMovingDestination(destination);
     }
 
     // When this method is called, the GameObject moves towards the destination
@@ -42,17 +46,32 @@ public class LerpTo : MonoBehaviour
     public void LerpToInTime(Vector3 destination, float time)
     {
         MovingSetup();
-        movingDestination = transform.InverseTransformPoint(destination);
         state = LerpState.Time;
         movingTime = time;
         t = 0.0f;
+        SetMovingDestination(destination);
+    }
+
+    private void SetMovingDestination(Vector3 newDest)
+    {
+#if USING_LOCAL_POSITION
+        movingDestination = transform.InverseTransformPoint(newDest);
+#else
+        movingDestination = newDest;
+#endif
     }
 
     // This method sets all of the variables up to start moving.
     private void MovingSetup()
     {
         startTime = Time.time;
+
+#if USING_LOCAL_POSITION
         startPosition = transform.localPosition;
+#else
+        startPosition = transform.position;
+#endif
+
         journeyLength = Vector3.Distance(gameObject.transform.position, movingDestination);
     }
 
@@ -60,21 +79,31 @@ public class LerpTo : MonoBehaviour
     {
         if (state != LerpState.None)
         {
+            Vector3 newPos;
             switch (state)
             {
                 case LerpState.Speed:
                     float distCovered = (Time.time - startTime) * movingSpeed;
                     float fracJourney = distCovered / journeyLength;
-                    transform.localPosition = Vector3.Lerp(startPosition, movingDestination, fracJourney);
+                    newPos = Vector3.Lerp(startPosition, movingDestination, fracJourney);
                     break;
 
                 case LerpState.Time:
                     t += Time.deltaTime / movingTime;
-                    transform.localPosition = Vector3.Lerp(startPosition, movingDestination, t);
+                    newPos = Vector3.Lerp(startPosition, movingDestination, t);
+                    break;
+
+                default:
+                    newPos = Vector3.zero;
                     break;
             }
+#if USING_LOCAL_POSITION
+            transform.localPosition = newPos;
+#else
+            transform.position = newPos;
+#endif
             // If we've reached our destination, we're done.
-            if (movingDestination == transform.localPosition)
+            if (movingDestination == newPos)
             {
                 state = LerpState.None;
                 OnCompleted();

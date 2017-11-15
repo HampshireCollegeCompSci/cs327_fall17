@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 222437940468981134}
   - component: {fileID: 114043860260626230}
   - component: {fileID: 114493266588522554}
+  - component: {fileID: 114966433255583570}
   m_Layer: 5
   m_Name: RisingText
   m_TagString: Untagged
@@ -74,8 +75,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textRising: {fileID: 114043860260626230}
-  risingSpeed: 100
-  fadingSpeed: -1
+  risingSpeed: 150
+  risingSpeedDecayRate: 100
+  fadingSpeed: 0.3
+  secondsToReachDestination: 0.5
+  lerpTo: {fileID: 114966433255583570}
+--- !u!114 &114966433255583570
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1846777300264232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ad36fa936046f42932eabee113a80c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &222437940468981134
 CanvasRenderer:
   m_ObjectHideFlags: 1

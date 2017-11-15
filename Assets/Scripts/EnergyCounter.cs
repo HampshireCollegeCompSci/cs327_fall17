@@ -13,11 +13,6 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("The amount of energy the player currently has. The initial amount is populated by JSON.")]
     int energy = 10;
-    /*
-    [SerializeField]
-    [Tooltip("The maximum amount of energy the player can have in the energy meter. Populated by JSON.")]
-    int maxEnergyInMeter = 60;
-    */
     [SerializeField]
     [Tooltip("The list of value to separate the levels of energy gained. Populated by JSON.")]
     JSONArray energyThreshold;
@@ -31,9 +26,6 @@ public class EnergyCounter : MonoBehaviour
     [Tooltip("Reference to the Tuning JSON.")]
     TextAsset tuningJSON;
     [SerializeField]
-    [Tooltip("The prefix for the Energy: string.")]
-    string prefix;
-    [SerializeField]
     [Tooltip("The Rising Text prefab to instantiate when energy is gained or lost.")]
     GameObject risingTextPrefab;
     [SerializeField]
@@ -45,13 +37,24 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to energy gain animator.")]
     Animator energyGainController;
-    
+    [SerializeField]
+    [Tooltip("The color that the rising text should have when energy is gained.")]
+    Color energyTextColorGain;
+    [SerializeField]
+    [Tooltip("The color that the rising text should have when energy is lost.")]
+    Color energyTextColorLoss;
+    [SerializeField]
+    [Tooltip("Reference to the UI canvas transform.")]
+    Transform canvas;
+    [SerializeField]
+    [Tooltip("Reference to energy transfer ball animator.")]
+    Animator energyTransferBallController;
+    [SerializeField]
+    [Tooltip("Reference to the BufferedValue component for buffering the energy.")]
+    BufferedValue bufferedValueEnergy;
 
     // The highest amount of energy achieved over the course of the game.
     int peakEnergy;
-
-    // The position for rising text to pop up.
-    Vector3 popUpPos;
 
     // The reference to block transform.
     Transform blockTransform;
@@ -67,6 +70,8 @@ public class EnergyCounter : MonoBehaviour
     void Start()
     {
         Tune();
+        bufferedValueEnergy.ValueUpdated += BufferedValueEnergy_ValueUpdated;
+        bufferedValueEnergy.ForceSetBufferedValue(energy);
         //SetEnergyLevel();
         UpdateEnergy();
     }
@@ -92,54 +97,7 @@ public class EnergyCounter : MonoBehaviour
         }
     }
 
-    /*public void SetEnergyLevel()
-    {
-        AnimatorController energyController = (AnimatorController)energyGainController.runtimeAnimatorController;
-        AnimatorStateMachine stateMachine = energyController.layers[0].stateMachine;
-        var states = stateMachine.states;
-        for (int i = 0; i < states.Length; i++)
-        {
-            AnimatorState state = states[i].state;
-            if(state.name.Equals("Inactive"))
-            {
-                for (int j = 0; j < state.transitions.Length; j++)
-                {
-                    AnimatorStateTransition tran = state.transitions[j];
-                    string stateName = tran.destinationState.name;
-                    if (tran.conditions.Length == 1)
-                    {
-                        tran.AddCondition(AnimatorConditionMode.Less, 0, "energyGained");
-                    }
-
-                    for (int l = 0; l < tran.conditions.Length; l++)
-                    {
-                        if (tran.conditions[l].parameter.Equals("energyGained"))
-                        {
-                            switch (stateName) {
-                                case "EnergyGain(Very Low)": tran.RemoveCondition(tran.conditions[l]);
-                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[0] + 1, "energyGained");
-                                    break;
-                                case "EnergyGain(Low)":
-                                    tran.RemoveCondition(tran.conditions[l]);
-                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[1] + 1, "energyGained");
-                                    break;
-                                case "EnergyGain(Medium)":
-                                    tran.RemoveCondition(tran.conditions[l]);
-                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[2] + 1, "energyGained");
-                                    break;
-                                case "EnergyGain(High)":
-                                    tran.RemoveCondition(tran.conditions[l]);
-                                    tran.AddCondition(AnimatorConditionMode.Less, energyLevel[3] + 1, "energyGained");
-                                    break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }*/
-
-    public void AddEnergy(int amount)
+    public void AddEnergy(int amount, bool updateBufferedEnergyTarget = true)
     {
         energy += amount;
         /*
@@ -149,10 +107,18 @@ public class EnergyCounter : MonoBehaviour
         }
         */
 
+        if (updateBufferedEnergyTarget)
+        {
+            UpdateBufferedEnergyTarget();
+        }
+
         UpdateEnergy();
+
+        // Activate the energy transfer ball animation.
+        energyTransferBallController.SetBool("active", true);
     }
 
-    public void RemoveEnergy(int amount)
+    public void RemoveEnergy(int amount, bool updateBufferedEnergyTarget = true)
     {
         energy -= amount;
 
@@ -162,37 +128,70 @@ public class EnergyCounter : MonoBehaviour
             gameFlow.GameOver(GameFlow.GameOverCause.NoMoreEnergy);
         }
 
+        if (updateBufferedEnergyTarget)
+        {
+            UpdateBufferedEnergyTarget();
+        }
+
         UpdateEnergy();
     }
 
-    public void SetPopUpPos(Vector3 pos)
+    public void SetEnergy(int newEnergy, bool updateBufferedEnergyTarget = true)
     {
-        popUpPos = pos;
+        energy = newEnergy;
+
+        if (updateBufferedEnergyTarget)
+        {
+            UpdateBufferedEnergyTarget();
+        }
+
+        UpdateEnergy();
     }
 
-    public void SetBlockTransform(Transform transform)
+    public void PopUp(int amount, Vector3 popUpPos, Vector3? destinationPos = null)
     {
-        blockTransform = transform;
-    }
+        GameObject risingTextObj = Instantiate(risingTextPrefab, canvas, false);
 
-    public void PopUp(string pref, int amount)
-    {
-        GameObject risingTextObj = Object.Instantiate(risingTextPrefab, blockTransform.parent.transform, false);
-        risingTextObj.GetComponent<RisingText>().SetText(pref + (amount).ToString());
-        risingTextObj.GetComponent<Text>().color = Color.white;
-        risingTextObj.transform.localPosition = popUpPos;
+        /*
+        Debug.Log("EnergyCounter.PopUp: amount / popUpPos / destinationPos: "
+    + amount + " / " + popUpPos + " / " + destinationPos);
+        Debug.Log("Is risingTextObj null: " + (risingTextObj == null));
+        Debug.Log("risingTextObj: " + risingTextObj);
+        */
+
+        string pref;
+        Color col;
+        if (amount < 0)
+        {
+            // The number is negative already, so we don't need a prefix.
+            pref = "";
+            col = energyTextColorLoss;
+        }
+        else
+        {
+            pref = "+";
+            col = energyTextColorGain;
+        }
+        RisingText risingText = risingTextObj.GetComponent<RisingText>();
+        risingText.SetText(pref + amount.ToString());
+        risingText.SetColor(col);
+        risingTextObj.transform.position = popUpPos;
+        if (destinationPos != null)
+        {
+            //Debug.Log("EnergyCounter.PopUp: Destination position is not null!");
+            // Prepare to move to the given destination.
+            risingText.SetDestination((Vector3)destinationPos);
+            risingTextObj.GetComponent<LerpTo>().Completed += RisingTextEnergyPenaltyCallback;
+        }
     }
 
     private void UpdateEnergy()
     {
-        textEnergy.text = prefix + energy.ToString();
         // Keep track of peak energy for Analytics.
         if (energy > peakEnergy)
         {
             peakEnergy = energy;
         }
-        // Update the energy meter.
-        //energyMeter.UpdateEnergyMeter();
 
         // Check if the player is about to lose.
         int energyDrain = grid.GetEnergyDrain();
@@ -211,8 +210,8 @@ public class EnergyCounter : MonoBehaviour
         }
         else
         {
-            AudioController.Instance.StopSFX("About_To_Lose_1");
             //Debug.Log("The player isn't about to lose.");
+            AudioController.Instance.StopSFX("About_To_Lose_1");
         }
     }
 
@@ -220,20 +219,25 @@ public class EnergyCounter : MonoBehaviour
     {
         return peakEnergy;
     }
-    /*
-    public int GetMaxEnergyInMeter()
-    {
-        return maxEnergyInMeter;
-    }
-    */
+
     public int GetCurrentEnergy()
     {
         return energy;
     }
 
-    public void SetEnergy(int newEnergy)
+    public void UpdateBufferedEnergyTarget()
     {
-        energy = newEnergy;
-        UpdateEnergy();
+        bufferedValueEnergy.SetBufferedValueTarget(energy);
+    }
+
+    private void RisingTextEnergyPenaltyCallback()
+    {
+        //Debug.Log("EnergyCounter.RisingTextEnergyPenaltyCallback");
+        UpdateBufferedEnergyTarget();
+    }
+
+    private void BufferedValueEnergy_ValueUpdated(int newValue, int difference)
+    {
+        textEnergy.text = newValue.ToString();
     }
 }

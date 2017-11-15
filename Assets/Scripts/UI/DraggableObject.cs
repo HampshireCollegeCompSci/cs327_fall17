@@ -70,7 +70,6 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
 
             if (BeginDragEvent != null)
             {
-                AudioController.Instance.PlaySFX("Tiles_Pickup_1");
                 BeginDragEvent(this);
             }
         }

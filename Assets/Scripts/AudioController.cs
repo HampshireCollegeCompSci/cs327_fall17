@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Author(s): Joel Esquilin, Paul Calande
+
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -185,6 +187,34 @@ public class AudioController : MonoBehaviour {
     public void GameOver()
     {
         PlaySFX("Game_Over_2");
+    }
+
+    public void PressPlay()
+    {
+        PlaySFX("Press_Play_1");
+    }
+
+    public void PickupTile()
+    {
+        PlaySFX("Tiles_Pickup_1");
+    }
+
+    public void StartEventGroup(VoidEventGroup.EventGroupType eventType)
+    {
+        switch (eventType)
+        {
+            case VoidEventGroup.EventGroupType.Junkyard:
+                PlaySFX("Unrefined_Uranium_1");
+                break;
+
+            case VoidEventGroup.EventGroupType.Radiation:
+                PlaySFX("Waste_Contamination_1");
+                break;
+
+            case VoidEventGroup.EventGroupType.Asteroids:
+                PlaySFX("Reactor_Breach_1");
+                break;
+        }
     }
 
     public void StopAllSFX()

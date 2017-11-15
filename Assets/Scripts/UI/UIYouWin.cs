@@ -16,7 +16,7 @@ public class UIYouWin : MonoBehaviour {
     [Tooltip("Reference to the score counter.")]
     ScoreCounter scoreCounter;
 
-    public void init()
+    public void Init()
     {
         yourScore.text = scoreCounter.GetScore().ToString();
 

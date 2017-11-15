@@ -44,6 +44,16 @@ public class VoidEvent
         OnFinished();
     }
 
+    public EventType GetEventType()
+    {
+        return eventType;
+    }
+
+    public int GetTier()
+    {
+        return tier;
+    }
+
     private void OnStarted()
     {
         if (Started != null)
@@ -64,8 +74,21 @@ public class VoidEvent
 public class VoidEventGroup
 {
     // Invoked when the event group is started.
-    public delegate void StartedHandler(int eventCount);
+    public delegate void StartedHandler(VoidEventGroup.EventGroupType type, int tier);
     public event StartedHandler Started;
+    // Invoked when the event group is finished.
+    public delegate void FinishedHandler(VoidEventGroup.EventGroupType type, int tier);
+    public event FinishedHandler Finished;
+
+    public enum EventGroupType
+    {
+        None,
+        Asteroids,
+        Junkyard,
+        Radiation,
+        Meltdown,
+        Overload
+    }
 
     public enum Status
     {
@@ -82,6 +105,10 @@ public class VoidEventGroup
     List<VoidEvent> voidEvents;
     // The current status of the event group.
     Status status = Status.Waiting;
+    // The type of the event group.
+    EventGroupType type;
+    // The overall tier of the event.
+    int tier;
 
     // Constructor.
     public VoidEventGroup(List<VoidEvent> voidEventsIn, int beginIn, int endIn)
@@ -89,6 +116,33 @@ public class VoidEventGroup
         voidEvents = voidEventsIn;
         begin = beginIn;
         end = endIn;
+        tier = voidEventsIn[0].GetTier();
+
+        switch (voidEventsIn.Count)
+        {
+            case 1:
+                switch (voidEventsIn[0].GetEventType())
+                {
+                    case VoidEvent.EventType.Asteroids:
+                        type = EventGroupType.Asteroids;
+                        break;
+                    case VoidEvent.EventType.Junkyard:
+                        type = EventGroupType.Junkyard;
+                        break;
+                    case VoidEvent.EventType.Radiation:
+                        type = EventGroupType.Radiation;
+                        break;
+                }
+                break;
+
+            case 2:
+                type = EventGroupType.Meltdown;
+                break;
+
+            case 3:
+                type = EventGroupType.Overload;
+                break;
+        }
     }
 
     public void UpdateProgressFromScore(int score)
@@ -114,15 +168,28 @@ public class VoidEventGroup
                 {
                     ve.Finish();
                 }
+                OnFinished();
             }
         }
+    }
+
+    public EventGroupType GetEventGroupType()
+    {
+        return type;
     }
 
     private void OnStarted()
     {
         if (Started != null)
         {
-            Started(voidEvents.Count);
+            Started(type, tier);
+        }
+    }
+    private void OnFinished()
+    {
+        if (Started != null)
+        {
+            Finished(type, tier);
         }
     }
 }
@@ -185,8 +252,8 @@ public class VoidEventController : MonoBehaviour
     //Number of seconds for the event popup window to stay
     float secondsToStay;
 
-    List<VoidEvent.EventType> eventsStarted = new List<VoidEvent.EventType>();
-    int eventsLatestTier = 0;
+    // This flag is set to true when a Reactor Overload event hits.
+    bool eventsNeverEnd = false;
 
     private void Start()
     {
@@ -293,7 +360,8 @@ public class VoidEventController : MonoBehaviour
             }
 
             VoidEventGroup newEventGroup = new VoidEventGroup(myEvents, begin, end);
-            //newEventGroup.Started += VoidEventGroup_Started;
+            newEventGroup.Started += VoidEventGroup_Started;
+            newEventGroup.Finished += VoidEventGroup_Finished;
             voidEventGroups.Add(newEventGroup);
         }
         JSONNode tuning = JSON.Parse(tuningJSON.ToString());
@@ -303,62 +371,14 @@ public class VoidEventController : MonoBehaviour
     // Callback function for the score changing.
     private void ScoreCounter_ScoreChanged(int newScore)
     {
-        // Reset the eventsStarted list.
-        eventsStarted.Clear();
-
         foreach (VoidEventGroup eventGroup in voidEventGroups)
         {
             eventGroup.UpdateProgressFromScore(newScore);
-        }
-
-        switch (eventsStarted.Count)
-        {
-            case 1:
-                VoidEvent.EventType thisEventType = eventsStarted[0];
-                int tier = eventsLatestTier;
-                switch (thisEventType)
-                {
-                    case VoidEvent.EventType.Junkyard:
-                        EventPopupWindow("Unrefined Uranium Lv." + tier + " begin!");
-                        TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_URANIUM);
-                        eventSlider.SetCurrentState(EventSlider.State.Junkyard);
-                        break;
-
-                    case VoidEvent.EventType.Radiation:
-                        EventPopupWindow("Waste Contamination Lv." + tier + " begin!");
-                        TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_CONTAMINATION);
-                        eventSlider.SetCurrentState(EventSlider.State.Radiation);
-                        break;
-
-                    case VoidEvent.EventType.Asteroids:
-                        EventPopupWindow("Reactor Breach Lv." + tier + " begin!");
-                        TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BREACH);
-                        eventSlider.SetCurrentState(EventSlider.State.Asteroids);
-                        break;
-                }
-                break;
-
-            case 2:
-                EventPopupWindow("Reactor Meltdown begin!");
-                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_MELTDOWN);
-                eventSlider.SetCurrentState(EventSlider.State.Overload);
-                break;
-
-            case 3:
-                youWinMenu.gameObject.SetActive(true);
-                youWinMenu.init();
-                EventPopupWindow("Reactor Overload begin!");
-                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_OVERLOAD);
-                eventSlider.SetCurrentState(EventSlider.State.Overload);
-                break;
         }
     }
 
     private void VoidEvent_Started(VoidEvent.EventType eventType, int tier)
     {
-        eventsStarted.Add(eventType);
-        eventsLatestTier = tier;
-
         TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_EVENT);
         switch (eventType)
         {
@@ -381,13 +401,17 @@ public class VoidEventController : MonoBehaviour
 
     private void VoidEvent_Finished(VoidEvent.EventType eventType, int tier)
     {
+        if (eventsNeverEnd)
+        {
+            // Prevent events from finishing!
+            return;
+        }
         switch (eventType)
         {
             case VoidEvent.EventType.Junkyard:
                 //Debug.Log("Junkyard " + tier + " end.");
                 blockSpawner.SetJunkyardTier(0);
                 blockSpawner.EndJunkyardEvent();
-
                 break;
 
             case VoidEvent.EventType.Radiation:
@@ -402,31 +426,60 @@ public class VoidEventController : MonoBehaviour
                 grid.ClearAllAsteroids();
                 break;
         }
-
-        textEventOver.text = "CRISIS AVERTED: REACTOR RESTORED";
-        eventOver.SetActive(true);
-        eventSlider.SetCurrentState(EventSlider.State.None);
     }
 
-    /*
-    private void VoidEventGroup_Started(int eventCount)
+    private void VoidEventGroup_Started(VoidEventGroup.EventGroupType type, int tier)
     {
-        switch (eventCount)
+        AudioController.Instance.StartEventGroup(type);
+        eventSlider.SetCurrentState(type);
+        switch (type)
         {
-            case 2:
+            case VoidEventGroup.EventGroupType.Junkyard:
+                EventPopupWindow("Unrefined Uranium Lv." + tier + " begin!");
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_URANIUM);
                 break;
 
-            case 3:
+            case VoidEventGroup.EventGroupType.Radiation:
+                EventPopupWindow("Waste Contamination Lv." + tier + " begin!");
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_CONTAMINATION);
+                break;
+
+            case VoidEventGroup.EventGroupType.Asteroids:
+                EventPopupWindow("Reactor Breach Lv." + tier + " begin!");
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BREACH);
+                break;
+
+            case VoidEventGroup.EventGroupType.Meltdown:
+                EventPopupWindow("Reactor Meltdown begin!");
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_MELTDOWN);
+                break;
+
+            case VoidEventGroup.EventGroupType.Overload:
+                eventsNeverEnd = true;
+                EventPopupWindow("Reactor Overload begin!");
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_OVERLOAD);
                 break;
         }
     }
-    */
+
+    private void VoidEventGroup_Finished(VoidEventGroup.EventGroupType type, int tier)
+    {
+        if (type == VoidEventGroup.EventGroupType.Overload)
+        {
+            youWinMenu.gameObject.SetActive(true);
+            youWinMenu.Init();
+        }
+        else
+        {
+            textEventOver.text = "CRISIS AVERTED: REACTOR RESTORED";
+            eventOver.SetActive(true);
+            eventSlider.SetCurrentState(VoidEventGroup.EventGroupType.None);
+        }
+    }
 
     private void EventPopupWindow(string eventText)
     {
         GameObject eventPopupWindow = Instantiate(eventPopup, canvas.transform, false);
         StartCoroutine(eventPopupWindow.GetComponent<EventPopup>().Translation(eventText, canvas, secondsToStay));
     }
-
-    
 }

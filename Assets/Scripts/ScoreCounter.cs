@@ -30,7 +30,7 @@ public class ScoreCounter : MonoBehaviour
     private void Start()
     {
 	translator = FindObjectOfType<UILanguages>();
-        grid.SquareFormed += Grid_SquareFormed;
+        grid.SquareCleared += Grid_SquareCleared;
         UpdateScore();
     }
 
@@ -41,7 +41,7 @@ public class ScoreCounter : MonoBehaviour
 
     private void OnDestroy()
     {
-        grid.SquareFormed -= Grid_SquareFormed;
+        grid.SquareCleared -= Grid_SquareCleared;
     }
 
     public void AddScore(int amount)
@@ -60,25 +60,25 @@ public class ScoreCounter : MonoBehaviour
     {
         textScore.text = translator.Translate("Score") + score;
         //textScore.text = "Score: " + score;
-        OnScoreChanged(score);
+        OnScoreChanged();
     }
 
     // Callback function for a square on the Grid being cleared.
-    private void Grid_SquareFormed(int scorePerSquare, Vector3 textPos)
+    private void Grid_SquareCleared(int scorePerSquare, Vector3 textPos)
     {
         AddScore(scorePerSquare);
 
         // Instantiate some rising text.
         GameObject risingTextObj = Object.Instantiate(risingTextPrefab, grid.transform, false);
-        risingTextObj.GetComponent<RisingText>().SetText((scorePerSquare).ToString());
+        risingTextObj.GetComponent<RisingText>().SetText(scorePerSquare.ToString());
         risingTextObj.transform.localPosition = textPos;
     }
 
-    private void OnScoreChanged(int newScore)
+    private void OnScoreChanged()
     {
         if (ScoreChanged != null)
         {
-            ScoreChanged(newScore);
+            ScoreChanged(score);
         }
     }
 }

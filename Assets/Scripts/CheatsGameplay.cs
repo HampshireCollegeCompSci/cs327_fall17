@@ -27,13 +27,20 @@ public class CheatsGameplay : MonoBehaviour
 
     private void Awake()
     {
-        settings = FindObjectOfType<Settings>(); //Can't pass in a reference because it won't necessarily exist until the scene loads
+        // Can't pass in a reference because it won't necessarily exist until the scene loads.
+        settings = FindObjectOfType<Settings>();
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
             scoreCounter.AddScore(1000);
+            settings.SetCheatsEnabled();
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            scoreCounter.AddScore(999);
             settings.SetCheatsEnabled();
         }
         if (Input.GetKeyDown(KeyCode.E))
