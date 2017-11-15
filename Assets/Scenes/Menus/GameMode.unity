@@ -759,6 +759,12 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114022222046773454, guid: 27a27589748ded645867762d6f8ea1b9,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 0bcbea7838bed41fba6d679805b97e96,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27a27589748ded645867762d6f8ea1b9, type: 2}
   m_IsPrefabParent: 0
