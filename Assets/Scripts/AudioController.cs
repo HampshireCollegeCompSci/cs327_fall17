@@ -21,6 +21,9 @@ public class AudioController : MonoBehaviour {
 
     public string[] GeneralSFX;
 
+    public AudioMixerGroup musicGroup;
+    public AudioMixerGroup sfxGroup;
+
     private AudioSource currentlyPlaying;
 
     private static AudioController instance = null;
@@ -67,6 +70,7 @@ public class AudioController : MonoBehaviour {
             AudioSource newChannel = gameObject.AddComponent<AudioSource>();
             Channels.Add(newChannel);
             newChannel.clip = clip;
+            newChannel.outputAudioMixerGroup = musicGroup;
             newChannel.loop = true;
             newChannel.Play();
             currentlyPlaying = newChannel;
@@ -235,6 +239,7 @@ public class AudioController : MonoBehaviour {
         tempChannel = gameObject.AddComponent<AudioSource>();
         Channels.Add(tempChannel);
         tempChannel.clip = clip;
+        tempChannel.outputAudioMixerGroup = sfxGroup;
         tempChannel.Play();
 
         yield return new WaitForSeconds(remainingTime);
@@ -253,6 +258,7 @@ public class AudioController : MonoBehaviour {
         Channels.Add(tempChannel);
         tempChannel.clip = clip;
         tempChannel.loop = true;
+        tempChannel.outputAudioMixerGroup = sfxGroup;
         tempChannel.Play();
 
         while (tempChannel.isPlaying)
