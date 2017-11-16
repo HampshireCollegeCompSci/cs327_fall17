@@ -99,6 +99,10 @@ public class EnergyCounter : MonoBehaviour
 
     public void AddEnergy(int amount, bool updateBufferedEnergyTarget = true)
     {
+        if (amount < -energy)
+        {
+            amount = -energy;
+        }
         energy += amount;
         /*
         if (energy > maxEnergy)
@@ -106,20 +110,30 @@ public class EnergyCounter : MonoBehaviour
             energy = maxEnergy;
         }
         */
+        if (energy == 0)
+        {
+            energy = 0;
+            gameFlow.GameOver(GameFlow.GameOverCause.NoMoreEnergy);
+        }
 
         if (updateBufferedEnergyTarget)
         {
-            UpdateBufferedEnergyTarget();
+            AddToBufferedEnergyTarget(amount);
         }
 
         UpdateEnergy();
 
-        // Activate the energy transfer ball animation.
-        energyTransferBallController.SetBool("active", true);
+        if (amount > 0)
+        {
+            // Activate the energy transfer ball animation.
+            energyTransferBallController.SetBool("active", true);
+        }
     }
 
     public void RemoveEnergy(int amount, bool updateBufferedEnergyTarget = true)
     {
+        AddEnergy(-amount, updateBufferedEnergyTarget);
+        /*
         energy -= amount;
 
         if (energy <= 0)
@@ -134,10 +148,13 @@ public class EnergyCounter : MonoBehaviour
         }
 
         UpdateEnergy();
+        */
     }
 
     public void SetEnergy(int newEnergy, bool updateBufferedEnergyTarget = true)
     {
+        AddEnergy(newEnergy - energy, updateBufferedEnergyTarget);
+        /*
         energy = newEnergy;
 
         if (updateBufferedEnergyTarget)
@@ -146,6 +163,7 @@ public class EnergyCounter : MonoBehaviour
         }
 
         UpdateEnergy();
+        */
     }
 
     public void PopUp(int amount, Vector3 popUpPos, Vector3? destinationPos = null)
@@ -181,7 +199,9 @@ public class EnergyCounter : MonoBehaviour
             //Debug.Log("EnergyCounter.PopUp: Destination position is not null!");
             // Prepare to move to the given destination.
             risingText.SetDestination((Vector3)destinationPos);
-            risingTextObj.GetComponent<LerpTo>().Completed += RisingTextEnergyPenaltyCallback;
+            //risingTextObj.GetComponent<LerpTo>().Completed += RisingTextEnergyPenaltyCallback;
+            risingTextObj.GetComponent<LerpTo>().Completed +=
+                (() => RisingTextEnergyPenaltyCallback(amount));
         }
     }
 
@@ -225,15 +245,15 @@ public class EnergyCounter : MonoBehaviour
         return energy;
     }
 
-    public void UpdateBufferedEnergyTarget()
+    public void AddToBufferedEnergyTarget(int amount)
     {
-        bufferedValueEnergy.SetBufferedValueTarget(energy);
+        bufferedValueEnergy.AddToBufferedValueTarget(amount);
     }
 
-    private void RisingTextEnergyPenaltyCallback()
+    private void RisingTextEnergyPenaltyCallback(int amount)
     {
         //Debug.Log("EnergyCounter.RisingTextEnergyPenaltyCallback");
-        UpdateBufferedEnergyTarget();
+        AddToBufferedEnergyTarget(amount);
     }
 
     private void BufferedValueEnergy_ValueUpdated(int newValue, int difference)
