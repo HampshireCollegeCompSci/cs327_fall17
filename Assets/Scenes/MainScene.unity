@@ -966,6 +966,10 @@ Prefab:
       propertyPath: scoreCounter
       value: 
       objectReference: {fileID: 1623308074}
+    - target: {fileID: 1445572675775558, guid: 6c3607a99caa3f74fb7d1cb080db2e73, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c3607a99caa3f74fb7d1cb080db2e73, type: 2}
   m_IsPrefabParent: 0
@@ -3214,6 +3218,10 @@ Prefab:
       propertyPath: voidEventController
       value: 
       objectReference: {fileID: 809854789}
+    - target: {fileID: 1065589403178500, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
   m_IsPrefabParent: 0
