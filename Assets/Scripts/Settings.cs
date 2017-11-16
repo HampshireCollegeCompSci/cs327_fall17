@@ -76,6 +76,9 @@ public class Settings : MonoBehaviour
     // Saves the high score.
     public void SaveHighScore(int newHighScore)
     {
-        PlayerPrefs.SetInt(GetHighScoreKeyName(), newHighScore);
+        if (!AreCheatsEnabled())
+        {
+            PlayerPrefs.SetInt(GetHighScoreKeyName(), newHighScore);
+        }
     }
 }
