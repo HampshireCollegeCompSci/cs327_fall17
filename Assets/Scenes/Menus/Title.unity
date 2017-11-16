@@ -316,8 +316,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 437046585}
-        m_MethodName: GoToGameModeMenu
-        m_Mode: 1
+        m_MethodName: GoToGamePlay
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
