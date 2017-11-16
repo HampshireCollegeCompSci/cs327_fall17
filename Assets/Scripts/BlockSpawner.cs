@@ -52,6 +52,30 @@ public class BlockSpawner : MonoBehaviour
         }
     }
 
+    // A bag containing blocks.
+    class BagOfBlocks
+    {
+        List<BagBlock> bagBlocks = new List<BagBlock>();
+
+        // Copy constructor.
+        /*
+        public BagOfBlocks(BagOfBlocks other)
+        {
+            foreach (BagBlock block in other.bagBlocks)
+            {
+                bagBlocks.Add(block);
+            }
+        }
+        */
+
+        public void AddBlock(BagBlock newBlock)
+        {
+            bagBlocks.Add(newBlock);
+        }
+
+        //public Block x;
+    }
+
     [SerializeField]
     [Tooltip("The number of seconds between DraggableBlock spawns in the queue. Use -1 to disable this feature.")]
     float timeBetweenBlocks;
@@ -145,11 +169,18 @@ public class BlockSpawner : MonoBehaviour
         // Read PossibleBlocks JSON.
         JSONNode json = JSON.Parse(possibleBlocksJSON.ToString());
 
-        const string blocksNormal = "blocks";
+        JSONArray bagsArray = json["bags"].AsArray;
 
-        for (int i = 0; i < json[blocksNormal].Count; i++)
+        for (int i = 0; i < bagsArray.Count; ++i)
         {
-            JSONNode blockNode = json[blocksNormal][i];
+            JSONNode bagNode = bagsArray[i];
+        }
+
+        JSONArray blocksArray = json["blocks"].AsArray;
+
+        for (int i = 0; i < blocksArray.Count; ++i)
+        {
+            JSONNode blockNode = blocksArray[i];
 
             int w = blockNode["width"].AsInt;
             int h = blockNode["height"].AsInt;
