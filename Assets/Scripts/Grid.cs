@@ -480,6 +480,7 @@ public class Grid : MonoBehaviour
             foreach (int[] s in squaresFormed)
             {
                 //Spawn a text indicating scores at the center of the cleared square
+                /*
                 Vector3 textPos = new Vector3();
                 if (s[2] % 2 == 1)
                 {
@@ -495,30 +496,18 @@ public class Grid : MonoBehaviour
                 // If a legal square is formed, tell the event handler.
                 // This doesn't actually give points.
                 OnSquareFormed(scorePerSquare, textPos);
+                */
 
                 FormVestiges(s[0], s[1], s[2], toRemove, null, ref newVestiges);
             }
 
             //energyCounter.PopUp("+", squaresFormed.Count * energyPerSquare);
 
-            //Turning and upgrading vestiges
-            foreach (Tile v in newVestiges)
-            {
-                if (v.GetTileType() == TileData.TileType.Regular)
-                {
-                    v.Fill(TileData.TileType.Vestige);
-                    v.SetVestigeLevel(1);
-                }
-                else if (v.GetTileType() == TileData.TileType.Vestige)
-                {
-                    if (v.GetVestigeLevel() < vestigeMaxLevel)
-                        v.SetVestigeLevel(v.GetVestigeLevel() + 1);
-                }
-            }
+
 
             List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
 
-            StartCoroutine(ClearingOutlineEffect(squaresFormed, duplicatesRemoved));
+            StartCoroutine(ClearingOutlineEffect(squaresFormed, duplicatesRemoved, newVestiges));
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
@@ -536,12 +525,39 @@ public class Grid : MonoBehaviour
         return squareFormed;
     }
 
-    private IEnumerator ClearingOutlineEffect(List<int[]> squaresFormed, List<Tile> duplicatesRemoved)
+    private void TurnTilesIntoVestiges(List<Tile> newVestiges)
+    {
+        //Turning and upgrading vestiges
+        foreach (Tile v in newVestiges)
+        {
+            if (v.GetTileType() == TileData.TileType.Regular)
+            {
+                v.Fill(TileData.TileType.Vestige);
+                v.SetVestigeLevel(1);
+            }
+            else if (v.GetTileType() == TileData.TileType.Vestige)
+            {
+                if (v.GetVestigeLevel() < vestigeMaxLevel)
+                    v.SetVestigeLevel(v.GetVestigeLevel() + 1);
+            }
+        }
+    }
+
+    private IEnumerator ClearingOutlineEffect(List<int[]> squaresFormed, List<Tile> duplicatesRemoved,
+        List<Tile> newVestiges)
     {
         foreach (int[] square in squaresFormed)
         {
             GameObject outline = DrawOutLine(square[0], square[1]);
+
+            Vector3 rightPos = GetTilePosition(square[0] + (square[2] - 1) / 2 + 1, square[1] + (square[2] - 1) / 2 + 1);
+            Vector3 leftPos = GetTilePosition(square[0] + (square[2] - 1) / 2, square[1] + (square[2] - 1) / 2);
+            Vector3 textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
+
+            OnSquareCleared(scorePerSquare, textPos);
+
             yield return new WaitForSeconds(secondsBetweenSquareAnimations);
+
             if (outline != null)
             {
                 Destroy(outline);
@@ -565,14 +581,11 @@ public class Grid : MonoBehaviour
 
             DrawLightning(square[0], square[1]);
 
-            Vector3 rightPos = GetTilePosition(square[0] + (square[2] - 1) / 2 + 1, square[1] + (square[2] - 1) / 2 + 1);
-            Vector3 leftPos = GetTilePosition(square[0] + (square[2] - 1) / 2, square[1] + (square[2] - 1) / 2);
-            Vector3 textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
-
-            OnSquareCleared(scorePerSquare, textPos);
             //energyCounter.AddEnergy(energyPerSquare);
             totalEnergyGain += energyPerSquare;
         }
+
+        TurnTilesIntoVestiges(newVestiges);
         
         //Debug.Log("Grid.ClearingOutlineEffect: Reached the end of the coroutine.");
 
@@ -672,26 +685,26 @@ public class Grid : MonoBehaviour
     {
         //Turn all adjacent outside regular tiles into vestiges.
         //for the specified square.
-        
+
         //Left edge
         if (col > 0)
             for (int r = row; r < row + length; r++)
             {
-                if(copy == null)
+                if (copy == null)
                 {
                     if (toRemove.Find(t => t == tiles[r, col - 1]) == null)
                     {
                         if (newVestiges.Find(v => v == tiles[r, col - 1]) == null)
                             newVestiges.Add(tiles[r, col - 1]);
-                    }                     
+                    }
                 }
                 else
                 {
                     if (toRemove.Find(t => t == tiles[r, col - 1]) == null && TileData.GetIsClearableInSquare(copy[r, col - 1]))
                         tiles[r, col - 1].SetAnticipatedHighlight(TileData.TileType.Vestige);
-                }                
-            }        
-                    
+                }
+            }
+
         //Right edge
         if (col + length - 1 < width - 1)
             for (int r = row; r < row + length; r++)
@@ -735,7 +748,7 @@ public class Grid : MonoBehaviour
             for (int c = col; c < col + length; c++)
             {
                 if (copy == null)
-                {                  
+                {
                     if (toRemove.Find(t => t == tiles[row + length, c]) == null)
                     {
                         if (newVestiges.Find(v => v == tiles[row + length, c]) == null)
@@ -753,7 +766,7 @@ public class Grid : MonoBehaviour
         {
             if (tile.GetVestigeLevel() == 0)
             {
-                TutorialController.Instance.PanelToBlockLocation(row, col,TutorialController.Triggers.FIRST_WASTE);
+                TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE);
             }
             else if (tile.GetVestigeLevel() == 1)
             {
@@ -764,7 +777,6 @@ public class Grid : MonoBehaviour
                 TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_3);
             }
         }
-
     }
 
     private GameObject DrawOutLine(int r, int c)
