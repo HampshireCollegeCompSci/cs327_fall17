@@ -556,6 +556,8 @@ public class Grid : MonoBehaviour
 
             OnSquareCleared(scorePerSquare, textPos);
 
+            AudioController.Instance.Outline();
+
             yield return new WaitForSeconds(secondsBetweenSquareAnimations);
 
             if (outline != null)
@@ -598,6 +600,8 @@ public class Grid : MonoBehaviour
 
     private void DrawLightning(int r, int c)
     {
+        AudioController.Instance.Lightning();
+
         Vector3 tilePos = GetTileAt(r + 1, c + 1).transform.position;
         //Vector3 energyTransferBallPos = energyTransferBallController.transform.position;
         Vector3 energyTransferBallPos = reactor.transform.position;

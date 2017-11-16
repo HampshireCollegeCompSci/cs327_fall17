@@ -1,4 +1,9 @@
 ﻿// Author(s): Joel Esquilin, Paul Calande
+// An audio controller class with a few too many responsibilities.
+// Ideally, an audio controller class should only perform channel management.
+// The AudioClips should be kept elsewhere, namely on the objects that should play them.
+// The AudioClips should be passed to this AudioController for channel creation and playback.
+// Alas, it's likely too late in the development cycle to change that.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -7,8 +12,9 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
-public class AudioController : MonoBehaviour {
-    public List<AudioClip> musicList;
+public class AudioController : MonoBehaviour
+{
+    //public List<AudioClip> musicList;
     public List<AudioClip> sfxList;
 
     public List<AudioSource> Channels = new List<AudioSource>();
@@ -24,7 +30,11 @@ public class AudioController : MonoBehaviour {
     public AudioMixerGroup musicGroup;
     public AudioMixerGroup sfxGroup;
 
-    public AudioSource currentlyPlaying;
+    //public AudioSource currentlyPlaying;
+
+    [SerializeField]
+    [Tooltip("Reference to the music audio source.")]
+    AudioSource musicSource;
 
     private static AudioController instance = null;
     public static AudioController Instance
@@ -40,17 +50,33 @@ public class AudioController : MonoBehaviour {
     {
         if (instance)
         {
+            //instance.PlayMusic(sceneMusic);
+
             DestroyImmediate(gameObject);
             return;
         }
         instance = this;
+
+        //PlayMusic(sceneMusic);
+
         DontDestroyOnLoad(gameObject);
+        //SceneManager.activeSceneChanged += SceneManager_SceneChanged;
     }
 
+    /*
+    private void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= SceneManager_SceneChanged;
+    }
+    */
+
+    /*
     private void Start()
     {
         Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
 
+        /*
         if (currentScene.name != "MainScene")
         {
             if (currentlyPlaying.clip == null)
@@ -70,23 +96,34 @@ public class AudioController : MonoBehaviour {
             PlayMusic("Gameplay_Music_1");
         }
     }
+    */
 
+    /*
     public void PlayMusic(string musicName)
     {
         AudioClip clip = GetMusic(musicName);
 
-        if (clip != null)
+        if (clip == null)
         {
-            AudioSource newChannel = gameObject.AddComponent<AudioSource>();
-            Channels.Add(newChannel);
-            newChannel.clip = clip;
-            newChannel.outputAudioMixerGroup = musicGroup;
-            newChannel.loop = true;
-            newChannel.Play();
-            currentlyPlaying = newChannel;
+            CreateMusicChannel(clip);
         }
     }
+    */
 
+    /*
+    public void CreateMusicChannel()
+    {
+        AudioSource newChannel = gameObject.AddComponent<AudioSource>();
+        Channels.Add(newChannel);
+        //newChannel.clip = clip;
+        newChannel.outputAudioMixerGroup = musicGroup;
+        newChannel.loop = true;
+        newChannel.Play();
+        currentlyPlaying = newChannel;
+    }
+    */
+
+    /*
     public void StopMusic()
     {
         if (currentlyPlaying != null)
@@ -94,6 +131,25 @@ public class AudioController : MonoBehaviour {
             currentlyPlaying.Stop();
             Channels.Remove(currentlyPlaying);
             currentlyPlaying = null;
+        }
+    }
+    */
+
+    public void PlayMusic(AudioClip clip)
+    {
+        if (musicSource.clip != clip)
+        {
+            musicSource.Stop();
+            musicSource.clip = clip;
+            musicSource.Play();
+        }
+    }
+
+    public void StopMusic()
+    {
+        if (musicSource.isPlaying)
+        {
+            musicSource.Stop();
         }
     }
 
@@ -137,6 +193,7 @@ public class AudioController : MonoBehaviour {
         }
     }
 
+    /*
     AudioClip GetMusic(string musicName)
     {
         foreach (AudioClip clip in musicList)
@@ -149,6 +206,7 @@ public class AudioController : MonoBehaviour {
 
         return null;
     }
+    */
 
     AudioClip GetSFX(string sfxName)
     {
@@ -211,6 +269,16 @@ public class AudioController : MonoBehaviour {
     public void PickupTile()
     {
         PlaySFX("Tiles_Pickup_1");
+    }
+
+    public void Lightning()
+    {
+        PlaySFX("Clear_Square_Lightning");
+    }
+
+    public void Outline()
+    {
+        PlaySFX("Clear_Square_Outline");
     }
 
     public void StartEventGroup(VoidEventGroup.EventGroupType eventType)
@@ -283,4 +351,10 @@ public class AudioController : MonoBehaviour {
         }
     }
 
+    /*
+    private void SceneManager_SceneChanged(Scene from, Scene to)
+    {
+
+    }
+    */
 }

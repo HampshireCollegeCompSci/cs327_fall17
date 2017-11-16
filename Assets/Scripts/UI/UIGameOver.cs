@@ -53,6 +53,9 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the progress bar overlay.")]
     RectTransform progressBarTop;
+    [SerializeField]
+    [Tooltip("The game over music to play.")]
+    AudioClip musicGameOver;
 
     // Reference to the Translator.
 	UILanguages translator;
@@ -96,6 +99,7 @@ public class UIGameOver : MonoBehaviour
     {
         AudioController.Instance.StopSFX("About_To_Lose_1");
         AudioController.Instance.GameOver();
+        AudioController.Instance.PlayMusic(musicGameOver);
         /*
         foreach (GameObject obj in toBeEnabled)
         {

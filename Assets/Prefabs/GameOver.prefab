@@ -502,6 +502,7 @@ MonoBehaviour:
   textYouReached: {fileID: 114089338938984636}
   voidEventController: {fileID: 0}
   progressBarTop: {fileID: 224549071322884934}
+  musicGameOver: {fileID: 8300000, guid: f2e6e684bd6413c488fbd0e1f0833cdd, type: 3}
 --- !u!114 &114230764441667554
 MonoBehaviour:
   m_ObjectHideFlags: 1
