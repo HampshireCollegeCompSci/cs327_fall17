@@ -244,21 +244,23 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
         if (row < grid.GetWidth() / 2)
         {
-            xPos = grid.GetTilePosition(row, col).x + offset;
+            xPos = -offset;
         }
         else
         {
-            xPos = grid.GetTilePosition(row, col).x - offset;
+            xPos = offset;
         }
 
         if (col < grid.GetHeight() / 2)
         {
-            yPos = grid.GetTilePosition(row, col).y - offset;
+            yPos = offset;
         }
         else
         {
-            yPos = grid.GetTilePosition(row, col).y + offset;
+            yPos = -offset;
         }
+
+
 
         Panels[panelNumber].transform.localPosition = new Vector2(xPos, yPos);
 
