@@ -110,7 +110,8 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             {
                 JSONNode infoBite = infoBitesArray[j];
                 string textInfo = infoBite["TextInfo"];
-                int panelNumber = infoBite["PanelNumber"].AsInt;
+                string panelStr = infoBite["Panel"];
+                int panelNumber = PanelStringToInt(panelStr);
                 infoBites.Add(new TriggerData.InfoBite(textInfo, panelNumber));
             }
 
@@ -144,7 +145,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         TriggerEvent(Triggers.FIRST_OPEN);
         //TriggerEvent(Triggers.FIRST_OPEN_2);
 
-        grid.SquareFormed += OnSquare;
+        grid.SquaresCleared += OnSquare;
     }
 
     public void TriggerEvent(Triggers trigger)
@@ -294,6 +295,26 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         Panels[panelNumber].transform.localPosition = new Vector2(xPos, yPos);
     }
 
+    private int PanelStringToInt(string panelString)
+    {
+        switch (panelString)
+        {
+            case "Grid":
+                return 0;
+            case "Console":
+                return 1;
+            case "Reactor":
+                return 2;
+            case "ScoreBar":
+                return 3;
+            case "Waste":
+                return 4;
+            default:
+                Debug.LogError("PanelStringToInt: Couldn't find panel with name " + panelString + "!");
+                return 5;
+        }
+    }
+
     /*
     //Call this instead of TriggerEvent if you want the panel to move to a block location
     public void PanelToBlockLocation(int row, int col, Triggers trigger)
@@ -345,10 +366,10 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
     private void OnDestroy()
     {
-        grid.SquareFormed -= OnSquare;
+        grid.SquaresCleared -= OnSquare;
     }
 
-    private void OnSquare(int size, Vector3 textPos)
+    private void OnSquare()
     {
         TriggerEvent(Triggers.FIRST_SQUARE);
     }
