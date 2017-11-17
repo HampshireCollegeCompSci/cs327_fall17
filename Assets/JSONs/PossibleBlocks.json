@@ -19,6 +19,7 @@
 		},
 		{
 			"name" : "tutorial 3",
+			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_1",
 			"preconditions" :
 			{
 				"tutorial is active" : true,
@@ -27,6 +28,7 @@
 		},
 		{
 			"name" : "tutorial 4",
+			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_2",
 			"preconditions" :
 			{
 				"tutorial is active" : true,

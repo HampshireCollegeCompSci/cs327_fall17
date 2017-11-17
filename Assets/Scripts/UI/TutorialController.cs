@@ -29,7 +29,12 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         FIRST_URANIUM,
         FIRST_CONTAMINATION,
         FIRST_MELTDOWN,
-        FIRST_OVERLOAD
+        FIRST_OVERLOAD,
+        TUTORIAL_BAG_TRIGGER_1,
+        TUTORIAL_BAG_TRIGGER_2,
+        TUTORIAL_BAG_TRIGGER_3,
+        TUTORIAL_BAG_TRIGGER_4,
+        TUTORIAL_BAG_TRIGGER_5
     }
 
     [Serializable]
@@ -146,6 +151,12 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         //TriggerEvent(Triggers.FIRST_OPEN_2);
 
         grid.SquaresCleared += OnSquare;
+    }
+
+    public void TriggerEvent(string trigger)
+    {
+        // Convert the string to an enum.
+        TriggerEvent((Triggers)Enum.Parse(typeof(Triggers), trigger));
     }
 
     public void TriggerEvent(Triggers trigger)

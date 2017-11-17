@@ -29,7 +29,7 @@ public class ScoreCounter : MonoBehaviour
 
     private void Start()
     {
-	translator = FindObjectOfType<UILanguages>();
+	    translator = FindObjectOfType<UILanguages>();
         grid.SquareOutlined += Grid_SquareCleared;
         UpdateScore();
     }

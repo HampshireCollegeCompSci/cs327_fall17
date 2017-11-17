@@ -287,7 +287,8 @@ public class VoidEventController : MonoBehaviour
         PrintLetterBindings();
 
         // Don't do event stuff in Zen Mode.
-        if (!Settings.Instance.IsZenModeEnabled())
+        if (!Settings.Instance.IsZenModeEnabled() &&
+            !Settings.Instance.IsTutorialModeEnabled())
         {
             // Read from tuning data and populate event groups.
             Tune();
