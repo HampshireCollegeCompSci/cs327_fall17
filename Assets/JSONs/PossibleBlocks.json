@@ -34,6 +34,15 @@
 			}
 		},
 		{
+			"name" : "tutorial end",
+			"ends tutorial mode" : true,
+			"preconditions" :
+			{
+				"tutorial is active" : true,
+				"square clearings count is equal to" : 4
+			}
+		},
+		{
 			"name" : "friendly",
 			"preconditions" :
 			{

@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIGameOver : MonoBehaviour
@@ -84,14 +83,6 @@ public class UIGameOver : MonoBehaviour
         {
             gameFlow.GameLost -= Appear;
         }
-    }
-
-    public void ResetScene()
-    {
-        AudioController.Instance.MenuClick();
-
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
     }
 
     // Callback function for GameFlow.GameLost.

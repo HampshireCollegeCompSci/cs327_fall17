@@ -24,6 +24,7 @@ public class ReactorBreachBehavior : MonoBehaviour {
 
     public void DestroyMePrematurely()
     {
+        //Debug.Log("RBB.DestroyMePrematurely");
         Destroy(gameObject);
         tile.NullifyAsteroid();
         tile.Clear();
