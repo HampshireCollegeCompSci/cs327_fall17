@@ -5,34 +5,19 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Drag blocks onto the board to place them.",
+				"TextInfo" : "Drag blocks onto the board to place them. Make squares to get energy and points.",
 				"Panel" : "Console"
-			},
-			{
-				"TextInfo" : "Place blocks on the grid to make squares to get energy and points.",
-				"Panel" : "Grid"
 			}
 		]
     },
-	"FIRST_BLOCK" : 
-	{
-		"TriggerName" : "FIRST_BLOCK",
-		"Info" :
-		[
-			{
-				"TextInfo" : "Here is your energy. It will go up when you make squares and down when you don't. If it hits zero, you lose.",
-				"Panel" : "Reactor"
-			}
-		]
-	},
 	"FIRST_SQUARE" : 
 	{
 		"TriggerName" : "FIRST_SQUARE",
 		"Info" :
 		[
 			{
-				"TextInfo" : "Making squares will earn you points and energy. Try to get a high score!",
-				"Panel" : "ScoreBar"
+				"TextInfo" : "Here is your energy. It will go up when you make squares and down every turn you don't. If it hits 0, you lose.",
+				"Panel" : "Reactor"
 			}
 		]
 	},
@@ -42,7 +27,11 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Extra blocks that are adjacent to squares become Waste. They drain 1 energy from you every move. Get rid of them by using them to make squares!",
+				"TextInfo" : "Extra blocks that are adjacent to squares become Waste. They drain 1 additional energy from you every move. Get rid of them by using them to make squares!",
+				"Panel" : "Waste"
+			},
+			{
+				"TextInfo" : "Place this block so that the Waste fits in the corner of the block in order to clear it. Use the buttons to rotate and flip blocks.",
 				"Panel" : "Waste"
 			}
 		]
