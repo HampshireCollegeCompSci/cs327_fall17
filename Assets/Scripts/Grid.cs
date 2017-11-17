@@ -96,6 +96,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the reactor GameObject.")]
     GameObject reactor;
+    [SerializeField]
+    [Tooltip("How many square clearings have occurred so far. Incremented by 1 every time the player forms any number of squares in a single turn.")]
+    int squareClearingsCount = 0;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -510,6 +513,11 @@ public class Grid : MonoBehaviour
             List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
 
             StartCoroutine(ClearingOutlineEffect(squaresFormed, duplicatesRemoved, newVestiges));
+
+            if (squaresFormed.Count != 0)
+            {
+                squareClearingsCount += 1;
+            }
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
@@ -1192,6 +1200,11 @@ public class Grid : MonoBehaviour
         }
     }
     */
+
+    public int GetSquareClearingsCount()
+    {
+        return squareClearingsCount;
+    }
 
     private void OnSquareFormed(int scorePerSquare, Vector3 textPos)
     {

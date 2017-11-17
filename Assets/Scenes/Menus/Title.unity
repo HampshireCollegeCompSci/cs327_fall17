@@ -811,7 +811,7 @@ GameObject:
   - component: {fileID: 1283103058}
   - component: {fileID: 1283103061}
   m_Layer: 5
-  m_Name: How to Play
+  m_Name: HowToPlay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -877,7 +877,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1283103061}
-        m_MethodName: GoToHowToPlay
+        m_MethodName: PlayInTutorialMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

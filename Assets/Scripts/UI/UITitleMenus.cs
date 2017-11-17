@@ -30,6 +30,12 @@ public class UITitleMenus : MonoBehaviour
         AudioController.Instance.MenuClick();
     }
 
+    public void PlayInTutorialMode()
+    {
+        Settings.Instance.SetTutorialModeEnabled(true);
+        GoToGamePlay(false);
+    }
+
 	public void GoToSettings()
 	{
 		SceneManager.LoadScene("Settings");
