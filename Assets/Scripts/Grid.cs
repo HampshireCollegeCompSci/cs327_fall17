@@ -583,17 +583,21 @@ public class Grid : MonoBehaviour
 
             int row = vm.GetRow();
             int col = vm.GetCol();
+            TutorialController.Instance.MovePanelToBlockLocation(4, row, col);
             if (v.GetVestigeLevel() == 1)
             {
-                TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE);
+                //TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE);
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE);
             }
             else if (v.GetVestigeLevel() == 2)
             {
-                TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_2);
+                //TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_2);
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE_2);
             }
             else if (v.GetVestigeLevel() == 3)
             {
-                TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_3);
+                //TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_3);
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE_3);
             }
         }
     }
