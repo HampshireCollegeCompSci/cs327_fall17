@@ -1,11 +1,95 @@
 {
+	"bags" :
+	[
+		{
+			"name" : "tutorial 1",
+			"preconditions" :
+			{
+				"tutorial is active" : true,
+				"square clearings count is equal to" : 0
+			}
+		},
+		{
+			"name" : "tutorial 2",
+			"preconditions" :
+			{
+				"tutorial is active" : true,
+				"square clearings count is equal to" : 1
+			}
+		},
+		{
+			"name" : "tutorial 3",
+			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_1",
+			"preconditions" :
+			{
+				"tutorial is active" : true,
+				"square clearings count is equal to" : 2
+			}
+		},
+		{
+			"name" : "tutorial 4",
+			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_2",
+			"preconditions" :
+			{
+				"tutorial is active" : true,
+				"square clearings count is equal to" : 3
+			}
+		},
+		{
+			"name" : "tutorial end",
+			"ends tutorial mode" : true,
+			"preconditions" :
+			{
+				"tutorial is active" : true,
+				"square clearings count is equal to" : 4
+			}
+		},
+		{
+			"name" : "friendly",
+			"preconditions" :
+			{
+				"tutorial is active" : false,
+				"score is equal to" : 0
+			}
+		},
+		{
+			"name" : "normal",
+			"preconditions" :
+			{
+				"tutorial is active" : false,
+				"junkyard tier is equal to" : 0,
+				"score is greater than" : 0
+			}
+		},
+		{
+			"name" : "junkyard 1",
+			"preconditions" :
+			{
+				"junkyard tier is equal to" : 1
+			}
+		},
+		{
+			"name" : "junkyard 2",
+			"preconditions" :
+			{
+				"junkyard tier is equal to" : 2
+			}
+		},
+		{
+			"name" : "junkyard 3",
+			"preconditions" :
+			{
+				"junkyard tier is equal to" : 3
+			}
+		}
+	],
 	"blocks" :
 	[
 		{
 			"width" : 1,
 			"height" : 4,
 			"sprite" : 0,
-			"tiers" : [-1,0,1,2,3]
+			"bags" : ["friendly", "normal", "junkyard 1", "junkyard 2", "junkyard 3"],
 			"cells" :
 			[1,
 			 1,
@@ -16,7 +100,7 @@
 			"width" : 1,
 			"height" : 3,
 			"sprite" : 1,
-			"tiers" : [0,1,2,3],
+			"bags" : ["normal", "junkyard 1", "junkyard 2", "junkyard 3"],
 			"cells" :
 			[1,
 			 0,
@@ -26,7 +110,7 @@
 			"width" : 2,
 			"height" : 2,
 			"sprite" : 2,
-			"tiers" : [-1,0],
+			"bags" : ["friendly", "normal"],
 			"cells" :
 			[1, 0,
 			 1, 1]  
@@ -35,7 +119,7 @@
 			"width" : 2,
 			"height" : 3,
 			"sprite" : 3,
-			"tiers" : [-1,0,1,2],
+			"bags" : ["friendly", "normal", "junkyard 1", "junkyard 2"],
 			"cells" :
 			[1, 1,
 			 1, 0, 
@@ -45,7 +129,7 @@
 			"width" : 2,
 			"height" : 3,
 			"sprite" : 4,
-			"tiers" : [0,1,2,3],
+			"bags" : ["normal", "junkyard 1", "junkyard 2", "junkyard 3"],
 			"cells" :
 			[0, 1,
 			 1, 0, 
@@ -55,7 +139,7 @@
 			"width" : 2,
 			"height" : 3,
 			"sprite" : 5,
-			"tiers" : [0,1],
+			"bags" : ["normal", "junkyard 1"],
 			"cells" :
 			[0, 1,
 			 1, 0, 
@@ -65,7 +149,7 @@
 			"width" : 3,
 			"height" : 3,
 			"sprite" : 6,
-			"tiers" : [2,3],
+			"bags" : ["junkyard 2", "junkyard 3"],
 			"cells" :
 			[0, 1, 0,
 			 1, 0, 1,
@@ -75,7 +159,7 @@
 			"width" : 3,
 			"height" : 3,
 			"sprite" : 6,
-			"tiers" : [3],
+			"bags" : ["junkyard 3"],
 			"cells" :
 			[1, 0, 0,
 			 1, 1, 1,
@@ -85,11 +169,53 @@
 			"width" : 3,
 			"height" : 3,
 			"sprite" : 6,
-			"tiers" : [1, 2, 3],
+			"bags" : ["junkyard 1", "junkyard 2", "junkyard 3"],
 			"cells" :
 			[1, 0, 0,
 			 0, 1, 0,
 			 0, 0, 1]
+		},
+		{
+			"width" : 3,
+			"height" : 3,
+			"sprite" : 0,
+			"bags" : ["tutorial 1"],
+			"cells" :
+			[1, 1, 1,
+			 1, 1, 1,
+			 1, 1, 1]
+		},
+		{
+			"width" : 3,
+			"height" : 4,
+			"sprite" : 1,
+			"bags" : ["tutorial 2"],
+			"cells" :
+			[0, 0, 1,
+			 1, 1, 1,
+			 1, 1, 1,
+			 1, 1, 1]
+		},
+		{
+			"width" : 3,
+			"height" : 3,
+			"sprite" : 2,
+			"bags" : ["tutorial 3"],
+			"cells" :
+			[1, 1, 1,
+			 1, 1, 1,
+			 1, 1, 0]
+		},
+		{
+			"width" : 4,
+			"height" : 4,
+			"sprite" : 3,
+			"bags" : ["tutorial 4"],
+			"cells" :
+			[0, 0, 0, 1,
+			 1, 1, 1, 0,
+			 1, 1, 1, 0,
+			 1, 1, 1, 1]
 		}
 	]
 }

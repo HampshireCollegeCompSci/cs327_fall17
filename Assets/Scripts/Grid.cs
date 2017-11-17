@@ -13,8 +13,12 @@ public class Grid : MonoBehaviour
 {
     public delegate void SquareFormedHandler(int scorePerSquare, Vector3 textPos);
     public event SquareFormedHandler SquareFormed;
-    public delegate void SquareClearedHandler(int scorePerSquare, Vector3 textPos);
-    public event SquareClearedHandler SquareCleared;
+    // Invoked when a square is outlined during the clearing animation,
+    public delegate void SquareOutlinedHandler(int scorePerSquare, Vector3 textPos);
+    public event SquareOutlinedHandler SquareOutlined;
+    // Invoked when the clearing animation is finished for any number of squares.
+    public delegate void SquaresClearedHandler();
+    public event SquaresClearedHandler SquaresCleared;
 
     [SerializeField]
     [Tooltip("The width of the Grid. Populated by JSON.")]
@@ -96,6 +100,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the reactor GameObject.")]
     GameObject reactor;
+    [SerializeField]
+    [Tooltip("How many square clearings have occurred so far. Incremented by 1 every time the player forms any number of squares in a single turn.")]
+    int squareClearingsCount = 0;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -510,6 +517,11 @@ public class Grid : MonoBehaviour
             List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
 
             StartCoroutine(ClearingOutlineEffect(squaresFormed, duplicatesRemoved, newVestiges));
+
+            if (squaresFormed.Count != 0)
+            {
+                squareClearingsCount += 1;
+            }
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));
@@ -575,17 +587,21 @@ public class Grid : MonoBehaviour
 
             int row = vm.GetRow();
             int col = vm.GetCol();
+            TutorialController.Instance.MovePanelToBlockLocation(4, row, col);
             if (v.GetVestigeLevel() == 1)
             {
-                TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE);
+                //TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE);
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE);
             }
             else if (v.GetVestigeLevel() == 2)
             {
-                TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_2);
+                //TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_2);
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE_2);
             }
             else if (v.GetVestigeLevel() == 3)
             {
-                TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_3);
+                //TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_3);
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE_3);
             }
         }
     }
@@ -601,7 +617,7 @@ public class Grid : MonoBehaviour
             Vector3 leftPos = GetTilePosition(square[0] + (square[2] - 1) / 2, square[1] + (square[2] - 1) / 2);
             Vector3 textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
 
-            OnSquareCleared(scorePerSquare, textPos);
+            OnSquareOutlined(scorePerSquare, textPos);
 
             AudioController.Instance.Outline();
 
@@ -635,6 +651,8 @@ public class Grid : MonoBehaviour
         }
         // Only play the lightning sound once so that we don't destroy the player's ears.
         AudioController.Instance.Lightning();
+
+        OnSquaresCleared();
 
         TurnTilesIntoVestiges(newVestiges);
         
@@ -1193,6 +1211,11 @@ public class Grid : MonoBehaviour
     }
     */
 
+    public int GetSquareClearingsCount()
+    {
+        return squareClearingsCount;
+    }
+
     private void OnSquareFormed(int scorePerSquare, Vector3 textPos)
     {
         if (SquareFormed != null)
@@ -1201,11 +1224,19 @@ public class Grid : MonoBehaviour
         }
     }
 
-    private void OnSquareCleared(int scorePerSquare, Vector3 textPos)
+    private void OnSquareOutlined(int scorePerSquare, Vector3 textPos)
     {
-        if (SquareFormed != null)
+        if (SquareOutlined != null)
         {
-            SquareCleared(scorePerSquare, textPos);
+            SquareOutlined(scorePerSquare, textPos);
+        }
+    }
+
+    private void OnSquaresCleared()
+    {
+        if (SquaresCleared != null)
+        {
+            SquaresCleared();
         }
     }
 }

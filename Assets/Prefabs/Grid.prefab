@@ -61,6 +61,7 @@ MonoBehaviour:
   width: 8
   height: 8
   baseEnergyDecayRate: 0
+  baseEnergyDecayRateBonus: 0
   vestigeMaxLevel: 0
   prefabTile: {fileID: 1107375466928364, guid: f21d4bcd0075aa74a82be9396f44f756, type: 2}
   prefabSpace: {fileID: 1842248367832416, guid: aa00b6ee3116e044fa9b37ca96f65aaf,
@@ -70,11 +71,20 @@ MonoBehaviour:
   turnCounter: {fileID: 0}
   vestigeCounter: {fileID: 0}
   tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
-  energyPerCell: 1
+  energyPerSquare: 0
+  scorePerSquare: 0
   rectTransform: {fileID: 224804674211477668}
-  energyGainController: {fileID: 0}
-  outLinePrefab: {fileID: 1784033308065990, guid: 591aa46e960fcb24ab1b2e2b0ee1088c,
+  asteroidsCanSpawnInFilledCells: 0
+  outLinePrefab: {fileID: 1232262177716418, guid: 591aa46e960fcb24ab1b2e2b0ee1088c,
     type: 2}
+  energyTransferPrefab: {fileID: 1883308336936238, guid: 6a9d606527c80424badace527d6595c3,
+    type: 2}
+  consoleGrid: {fileID: 0}
+  explosionPrefab: {fileID: 1051306887122920, guid: 26124d372277b2846863e62077bfa56d,
+    type: 2}
+  secondsBetweenSquareAnimations: 0
+  reactor: {fileID: 0}
+  squareClearingsCount: 0
 --- !u!114 &114265381854382034
 MonoBehaviour:
   m_ObjectHideFlags: 1

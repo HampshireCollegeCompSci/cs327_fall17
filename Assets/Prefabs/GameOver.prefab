@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 222197522204774978}
   - component: {fileID: 114924614775150918}
   - component: {fileID: 114293960052090390}
+  - component: {fileID: 114702479861265680}
   m_Layer: 5
   m_Name: Reset
   m_TagString: Untagged
@@ -636,7 +637,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114202807859211042}
+      - m_Target: {fileID: 114702479861265680}
         m_MethodName: ResetScene
         m_Mode: 1
         m_Arguments:
@@ -829,6 +830,17 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Reason: LOL!!!!!!!!!!!!!!!!!!!!!!!!'
+--- !u!114 &114702479861265680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345163838110658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92544b2910a65c14c9559dffac87b6dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114709252200992596
 MonoBehaviour:
   m_ObjectHideFlags: 1
