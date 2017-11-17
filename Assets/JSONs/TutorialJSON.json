@@ -1,86 +1,149 @@
 {
     "FIRST_OPEN" : 
     {
-      "TriggerName" : "FIRST_OPEN",
-      "TextInfo" : "Drag blocks onto the board to place them.",
-      "PanelNumber" : 1
+		"TriggerName" : "FIRST_OPEN",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Drag blocks onto the board to place them.",
+				"PanelNumber" : 1
+			},
+			{
+				"TextInfo" : "Place blocks on the grid to make squares to get energy and points.",
+				"PanelNumber" : 0
+			}
+		]
     },
-    "FIRST_OPEN_2" : 
-    {
-      "TriggerName" : "FIRST_OPEN_2",
-      "TextInfo" : "Place blocks on the grid to make squares to get energy and points.",
-      "PanelNumber" : 0
-    },
-    "FIRST_BLOCK" : 
-    {
-      "TriggerName" : "FIRST_BLOCK",
-      "TextInfo" : "Here is your energy. It will go up when you make squares and down when you don’t. If it hits zero, you lose.",
-      "PanelNumber" : 2
-    },
-    "FIRST_SQUARE" : 
-    {
-      "TriggerName" : "FIRST_SQUARE",
-      "TextInfo" : "Making squares will earn you points and energy. Try to get a high score!",
-      "PanelNumber" : 3
-    },
-    "FIRST_WASTE" : 
-    {
-      "TriggerName" : "FIRST_WASTE",
-      "TextInfo" : "Extra blocks that are adjacent to squares become Waste. They drain 1 energy from you every move. Get rid of them by using them to make squares!",
-      "PanelNumber" : 4
-    },
-    "FIRST_WASTE_2" : 
-    {
-      "TriggerName" : "FIRST_WASTE_2",
-      "TextInfo" : "Waste that is adjacent to squares becomes more potent. Level 2 Waste drains 3 energy each move.",
-      "PanelNumber" : 4
-    },
-    "FIRST_WASTE_3" : 
-    {
-      "TriggerName" : "FIRST_WASTE_3",
-      "TextInfo" : "This Waste block has grown out of control! It will drain 5 energy from you each move, so clean it up quick!",
-      "PanelNumber" : 4
-    },
-    "FIRST_LOW_ENERGY" : 
-    {
-      "TriggerName" : "FIRST_LOW_ENERGY",
-      "TextInfo" : "You’re running out of energy! Make a square this turn or you’ll lose!",
-      "PanelNumber" : 2
-    },
-    "FIRST_EVENT" : 
-    {
-      "TriggerName" : "FIRST_EVENT",
-      "TextInfo" : "At certain score thresholds Events will be triggered, that make the game harder. Each event continues until you earn a certain number of points.",
-      "PanelNumber" : 0
-    },
-    "FIRST_BREACH" : 
-    {
-      "TriggerName" : "FIRST_BREACH",
-      "TextInfo" : "Reactor Breach: A breach has occurred in the reactor and foreign material is taking up space.",
-      "PanelNumber" : 0
-    },
-    "FIRST_URANIUM" : 
-    {
-      "TriggerName" : "FIRST_URANIUM",
-      "TextInfo" : "Unrefined Uranium: Some budget cuts mean you have to place some less than perfect blocks on the board.",
-      "PanelNumber" : 0
-    },
-    "FIRST_CONTAMINATION" : 
-    {
-      "TriggerName" : "FIRST_CONTAMINATION",
-      "TextInfo" : "Contamination: Your material has become contaminated and now blocks will spawn with wastes in them.",
-      "PanelNumber" : 0
-    },
-    "FIRST_MELTDOWN" : 
-    {
-      "TriggerName" : "FIRST_MELTDOWN",
-      "TextInfo" : "Reactor Meltdown: The reactor is melting down! Be prepared for multiple events at once!",
-      "PanelNumber" : 0
-    },
-    "FIRST_OVERLOAD" : 
-    {
-      "TriggerName" : "FIRST_OVERLOAD",
-      "TextInfo" : "Reactor Overload: The reactor has completely overloaded! All the events are occurring at once! This is your final challenge!",
-      "PanelNumber" : 0
-    }
+	"FIRST_BLOCK" : 
+	{
+		"TriggerName" : "FIRST_BLOCK",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Here is your energy. It will go up when you make squares and down when you don’t. If it hits zero, you lose.",
+				"PanelNumber" : 2
+			}
+		]
+	},
+	"FIRST_SQUARE" : 
+	{
+		"TriggerName" : "FIRST_SQUARE",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Making squares will earn you points and energy. Try to get a high score!",
+				"PanelNumber" : 3
+			}
+		]
+	},
+	"FIRST_WASTE" : 
+	{
+		"TriggerName" : "FIRST_WASTE",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Extra blocks that are adjacent to squares become Waste. They drain 1 energy from you every move. Get rid of them by using them to make squares!",
+				"PanelNumber" : 4
+			}
+		]
+	},
+	"FIRST_WASTE_2" : 
+	{
+		"TriggerName" : "FIRST_WASTE_2",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Waste that is adjacent to squares becomes more potent. Level 2 Waste drains 3 energy each move.",
+				"PanelNumber" : 4
+			}
+		]
+	},
+	"FIRST_WASTE_3" : 
+	{
+		"TriggerName" : "FIRST_WASTE_3",
+		"Info" :
+		[
+			{
+				"TextInfo" : "This Waste block has grown out of control! It will drain 5 energy from you each move, so clean it up quick!",
+				"PanelNumber" : 4
+			}
+		]
+	},
+	"FIRST_LOW_ENERGY" : 
+	{
+		"TriggerName" : "FIRST_LOW_ENERGY",
+		"Info" :
+		[
+			{
+				"TextInfo" : "You’re running out of energy! Make a square this turn or you’ll lose!",
+				"PanelNumber" : 2
+			}
+		]
+	},
+	"FIRST_EVENT" : 
+	{
+		"TriggerName" : "FIRST_EVENT",
+		"Info" :
+		[
+			{
+				"TextInfo" : "At certain score thresholds Events will be triggered, that make the game harder. Each event continues until you earn a certain number of points.",
+				"PanelNumber" : 0
+			}
+		]
+	},
+	"FIRST_BREACH" : 
+	{
+		"TriggerName" : "FIRST_BREACH",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Reactor Breach: A breach has occurred in the reactor and foreign material is taking up space.",
+				"PanelNumber" : 0
+			}
+		]
+	},
+	"FIRST_URANIUM" : 
+	{
+		"TriggerName" : "FIRST_URANIUM",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Unrefined Uranium: Some budget cuts mean you have to place some less than perfect blocks on the board.",
+				"PanelNumber" : 0
+			}
+		]
+	},
+	"FIRST_CONTAMINATION" : 
+	{
+		"TriggerName" : "FIRST_CONTAMINATION",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Contamination: Your material has become contaminated and now blocks will spawn with wastes in them.",
+				"PanelNumber" : 0
+			}
+		]
+	},
+	"FIRST_MELTDOWN" : 
+	{
+		"TriggerName" : "FIRST_MELTDOWN",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Reactor Meltdown: The reactor is melting down! Be prepared for multiple events at once!",
+				"PanelNumber" : 0
+			}
+		]
+	},
+	"FIRST_OVERLOAD" : 
+	{
+		"TriggerName" : "FIRST_OVERLOAD",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Reactor Overload: The reactor has completely overloaded! All the events are occurring at once! This is your final challenge!",
+				"PanelNumber" : 0
+			}
+		]
+	}
 }

@@ -17,7 +17,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     public enum Triggers
     {
         FIRST_OPEN,
-        FIRST_OPEN_2,
+        //FIRST_OPEN_2,
         FIRST_BLOCK,
         FIRST_SQUARE,
         FIRST_WASTE,
@@ -35,17 +35,27 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     [Serializable]
     public class TriggerData
     {
-        public Triggers trigger;
-        public string textInfo;
-        public int panelNumber;
+        public class InfoBite
+        {
+            public string textInfo;
+            public int panelNumber;
 
-        public TriggerData(string trig, string text, int panel)
+            public InfoBite(string textInfoIn, int panelNumberIn)
+            {
+                textInfo = textInfoIn;
+                panelNumber = panelNumberIn;
+            }
+        }
+
+        public Triggers trigger;
+        public List<InfoBite> infoBites;
+
+        public TriggerData(string trig, List<InfoBite> infoBitesIn)
         {
             Triggers parsed_enum = (Triggers) Enum.Parse(typeof(Triggers), trig);
 
             trigger = parsed_enum;
-            textInfo = text;
-            panelNumber = panel;
+            infoBites = infoBitesIn;
         }
     }
 
@@ -84,7 +94,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         }
         instance = this;
         //DontDestroyOnLoad(gameObject);
-        
+
         //Do JSON reading here and setup triggerData text here
         JSONNode triggers = JSONNode.Parse(tutorialJSON.ToString());
 
@@ -92,10 +102,19 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         {
             JSONNode trigger = triggers[i];
             string triggerName = trigger["TriggerName"];
-            string textInfo = trigger["TextInfo"];
-            int panelNumber = trigger["PanelNumber"].AsInt;
-            
-            triggerData.Add(new TriggerData(triggerName, textInfo, panelNumber));
+
+            List<TriggerData.InfoBite> infoBites = new List<TriggerData.InfoBite>();
+
+            JSONArray infoBitesArray = trigger["Info"].AsArray;
+            for (int j = 0; j < infoBitesArray.Count; ++j)
+            {
+                JSONNode infoBite = infoBitesArray[j];
+                string textInfo = infoBite["TextInfo"];
+                int panelNumber = infoBite["PanelNumber"].AsInt;
+                infoBites.Add(new TriggerData.InfoBite(textInfo, panelNumber));
+            }
+
+            triggerData.Add(new TriggerData(triggerName, infoBites));
         }
 
         foreach (Triggers trigger in Enum.GetValues(typeof(Triggers)))
@@ -114,8 +133,8 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             }
             else
             {
-            PlayerPrefs.SetInt(trigger.ToString(), 0);
-            triggerRecord.Add(trigger, false);
+                PlayerPrefs.SetInt(trigger.ToString(), 0);
+                triggerRecord.Add(trigger, false);
             }
         }
     }
@@ -123,7 +142,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     private void Start()
     {
         TriggerEvent(Triggers.FIRST_OPEN);
-        TriggerEvent(Triggers.FIRST_OPEN_2);
+        //TriggerEvent(Triggers.FIRST_OPEN_2);
 
         grid.SquareFormed += OnSquare;
     }
@@ -152,14 +171,15 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         triggerRecord[trigger] = true;
         PlayerPrefs.SetInt(trigger.ToString(), 1);
 
+        TriggerData thisTrigger = triggerData.Find((x) => x.trigger == trigger);
 
-        string textInfo = triggerData.Find((x) => x.trigger == trigger).textInfo;
+        string textInfo = thisTrigger.textInfo;
         if (textInfo == null)
         {
             Debug.LogError("No text data found for Trigger!");
         }
 
-        int panelNumber = triggerData.Find((x) => x.trigger == trigger).panelNumber;
+        int panelNumber = thisTrigger.panelNumber;
 
         if (Panels[panelNumber] == null)
         {
