@@ -73,6 +73,7 @@ public class CheatsGameplay : MonoBehaviour
     {
         //Wipes all saved data
         PlayerPrefs.DeleteAll();
+        Settings.Instance.SetTutorialModeEnabled(true);
     }
 
     public void SetRandomSeedToZero()

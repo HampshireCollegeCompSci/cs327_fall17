@@ -75,6 +75,9 @@ public class BlockSpawner : MonoBehaviour
         // Whether or not the bag is a junkyard bag.
         bool isJunkyard = false;
 
+        // The trigger to run when the bag becomes active.
+        string trigger = "";
+
         // Whether or not the block ends the tutorial.
         //bool endsTutorial = false;
 
@@ -99,6 +102,10 @@ public class BlockSpawner : MonoBehaviour
                     return false;
                 }
             }
+            if (trigger != "")
+            {
+                TutorialController.Instance.TriggerEvent(trigger);
+            }
             return true;
         }
 
@@ -115,6 +122,11 @@ public class BlockSpawner : MonoBehaviour
         public bool IsJunkyard()
         {
             return isJunkyard;
+        }
+
+        public void SetTrigger(string newTrigger)
+        {
+            trigger = newTrigger;
         }
 
         /*
@@ -244,6 +256,12 @@ public class BlockSpawner : MonoBehaviour
                     //newBag.LabelAsEndsTutorial();
                     tutorialEnders.Add(newBag);
                 }
+            }
+
+            aNode = bagNode["trigger when starting"];
+            if (aNode != null)
+            {
+                newBag.SetTrigger(aNode);
             }
 
             JSONNode condsNode = bagNode["preconditions"];

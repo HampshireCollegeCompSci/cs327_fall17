@@ -134,5 +134,27 @@
 				"Panel" : "Grid"
 			}
 		]
+	},
+	"TUTORIAL_BAG_TRIGGER_1" : 
+	{
+		"TriggerName" : "TUTORIAL_BAG_TRIGGER_1",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Place the block with the Waste in the corner to get rid of it. Use the buttons to rotate and flip it.",
+				"Panel" : "Grid"
+			}
+		]
+	},
+	"TUTORIAL_BAG_TRIGGER_2" : 
+	{
+		"TriggerName" : "TUTORIAL_BAG_TRIGGER_2",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Blocks diagonal to completed squares won’t become Waste!",
+				"Panel" : "Grid"
+			}
+		]
 	}
 }
