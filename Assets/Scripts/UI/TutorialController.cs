@@ -161,6 +161,12 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
     public void TriggerEvent(Triggers trigger)
     {
+        // If the trigger doesn't exist, get outta here.
+        if (triggerData.Find(x => x.trigger == trigger) == null)
+        {
+            return;
+        }
+
         if (currentlyPlaying)
         {
             if (!nextTriggers.Contains(trigger))
