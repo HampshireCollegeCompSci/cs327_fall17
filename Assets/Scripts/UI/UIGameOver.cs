@@ -138,11 +138,18 @@ public class UIGameOver : MonoBehaviour
         textHighScore.text = highScore.ToString();
         textScore.text = score.GetScore().ToString();
         // For Maia - leaving this in here as a template
-        textGameOverLabel.text = translator.Translate("GameOver");
-        textHighScoreLabel.text = translator.Translate("HighScore1");
-        textYourScoreLabel.text = translator.Translate("YourScore");
+        //textGameOverLabel.text = translator.Translate("GameOver");
+        //textHighScoreLabel.text = translator.Translate("HighScore1");
+        //textYourScoreLabel.text = translator.Translate("YourScore");
         textYouReached.text = "YOU REACHED:\n" + voidEventController.GetLatestEventName();
-
+		/*
+		if (translator.IsLanguageThatNeedsNewFont == true) {
+			textGameOverReason.trueTypeFont = translator.Font ();
+			textGameOverLabel.trueTypeFont = translator.Font ();
+			textHighScoreLabel.trueTypeFont = translator.Font ();
+			textYourScoreLabel.trueTypeFont = translator.Font ();
+		}
+		*/
         float progress = voidEventController.GetProgress();
         progressBarTop.anchorMax = new Vector2(progress, progressBarTop.anchorMax.y);
         //Debug.Log(progressBarTop.anchorMax);

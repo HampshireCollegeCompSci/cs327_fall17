@@ -1,4 +1,4 @@
-﻿// Author(s): Paul Calande
+﻿//]// Author(s): Paul Calande
 
 using System.Collections;
 using System.Collections.Generic;
@@ -262,6 +262,12 @@ public class VoidEventController : MonoBehaviour
     // The biggest end score for any event, presumed to be the end of the game.
     int endScore;
 
+	UILanguages translator;
+
+	void Awake() {
+		translator = FindObjectOfType<UILanguages>();
+	}
+
     private void Start()
     {
         // Subscribe to delegate events.
@@ -447,7 +453,7 @@ public class VoidEventController : MonoBehaviour
 
         AudioController.Instance.StartEventGroup(type);
         eventSlider.SetCurrentState(type);
-        EventPopupWindow(GetEventName(type, tier) + " begin!");
+		EventPopupWindow(GetEventName(type, tier) + translator.Translate(" begin!"));
         switch (type)
         {
             case VoidEventGroup.EventGroupType.Junkyard:
@@ -501,35 +507,36 @@ public class VoidEventController : MonoBehaviour
         switch (type)
         {
             case VoidEventGroup.EventGroupType.None:
-                result += "Nothing";
+				result += translator.Translate ("Nothing");
                 levelsImportant = false;
                 break;
 
             case VoidEventGroup.EventGroupType.Junkyard:
-                result += "Unrefined Uranium";
+				result += translator.Translate ("Unrefined Uranium");
                 break;
 
             case VoidEventGroup.EventGroupType.Radiation:
-                result += "Waste Contamination";
+				result += translator.Translate ("Waste Contamination");
                 break;
 
             case VoidEventGroup.EventGroupType.Asteroids:
-                result += "Reactor Breach";
+				result += translator.Translate ("Reactor Breach");
                 break;
 
             case VoidEventGroup.EventGroupType.Meltdown:
-                result += "Reactor Meltdown";
+				result += translator.Translate ("Reactor Meltdown");
                 levelsImportant = false;
                 break;
 
             case VoidEventGroup.EventGroupType.Overload:
-                result += "Reactor Overload";
+				result += translator.Translate ("Reactor Overload");
                 levelsImportant = false;
                 break;
         }
         if (levelsImportant)
         {
             result += " Lv. " + tier;
+			//result = translator.Translate (result);
         }
         return result;
     }

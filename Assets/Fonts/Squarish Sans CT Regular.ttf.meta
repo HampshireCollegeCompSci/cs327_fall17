@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 3ac6750a27b694c3d90e23f4c985abd0
+timeCreated: 1510945096
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Squarish Sans CT
+  fontNames:
+  - Squarish Sans CT
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f3e8e24dc2fee4aeb98019a9d9248dab, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
