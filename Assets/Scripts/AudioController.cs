@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 public class AudioController : MonoBehaviour
 {
@@ -32,9 +32,14 @@ public class AudioController : MonoBehaviour
 
     //public AudioSource currentlyPlaying;
 
+    AudioMixer thisMixer;
+
     [SerializeField]
     [Tooltip("Reference to the music audio source.")]
     AudioSource musicSource;
+
+    [SerializeField]
+    GameObject go;
 
     private static AudioController instance = null;
     public static AudioController Instance
@@ -44,7 +49,6 @@ public class AudioController : MonoBehaviour
             return instance;
         }
     }
-
 
     void Awake()
     {
@@ -59,81 +63,17 @@ public class AudioController : MonoBehaviour
 
         //PlayMusic(sceneMusic);
 
+        thisMixer = musicGroup.audioMixer;
+
         DontDestroyOnLoad(gameObject);
-        //SceneManager.activeSceneChanged += SceneManager_SceneChanged;
     }
 
-    /*
-    private void OnDestroy()
-    {
-        SceneManager.activeSceneChanged -= SceneManager_SceneChanged;
-    }
-    */
-
-    /*
     private void Start()
     {
-        Scene currentScene = SceneManager.GetActiveScene();
-        string sceneName = currentScene.name;
-
-        /*
-        if (currentScene.name != "MainScene")
-        {
-            if (currentlyPlaying.clip == null)
-            {
-                PlayMusic("Main_Menu_Music_1");
-            }
-            else
-            {
-                if (currentlyPlaying.clip.name == "Gameplay_Music_1")
-                {
-                    PlayMusic("Main_Menu_Music_1");
-                }
-            }
-        }
-        else
-        {
-            PlayMusic("Gameplay_Music_1");
-        }
+        // Unfortunately, mixer values cannot be set within Awake.
+        AudioSlider.LoadValueIntoMixer(thisMixer, "musicVol");
+        AudioSlider.LoadValueIntoMixer(thisMixer, "sfxVol");
     }
-    */
-
-    /*
-    public void PlayMusic(string musicName)
-    {
-        AudioClip clip = GetMusic(musicName);
-
-        if (clip == null)
-        {
-            CreateMusicChannel(clip);
-        }
-    }
-    */
-
-    /*
-    public void CreateMusicChannel()
-    {
-        AudioSource newChannel = gameObject.AddComponent<AudioSource>();
-        Channels.Add(newChannel);
-        //newChannel.clip = clip;
-        newChannel.outputAudioMixerGroup = musicGroup;
-        newChannel.loop = true;
-        newChannel.Play();
-        currentlyPlaying = newChannel;
-    }
-    */
-
-    /*
-    public void StopMusic()
-    {
-        if (currentlyPlaying != null)
-        {
-            currentlyPlaying.Stop();
-            Channels.Remove(currentlyPlaying);
-            currentlyPlaying = null;
-        }
-    }
-    */
 
     public void PlayMusic(AudioClip clip)
     {

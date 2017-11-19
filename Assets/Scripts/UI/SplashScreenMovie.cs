@@ -16,6 +16,12 @@ public class SplashScreenMovie : MonoBehaviour
     private void Start()
     {
         videoPlayer.loopPointReached += VideoFinished;
+        videoPlayer.prepareCompleted += VideoPrepared;
+        videoPlayer.Prepare();
+    }
+
+    private void VideoPrepared(VideoPlayer vp)
+    {
         videoPlayer.Play();
     }
 
