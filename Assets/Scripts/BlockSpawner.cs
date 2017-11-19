@@ -406,6 +406,12 @@ public class BlockSpawner : MonoBehaviour
         }
     }
 
+    // Get all blocks whose bags satisfy the current conditions of the game.
+    private List<BagBlock> GetSatisfiedBagBlocks()
+    {
+        return possibleBlocks.FindAll(x => x.AreConditionsSatisfied());
+    }
+
     public void ResetBlockTimer()
     {
         //Reset the timer for spawning next block
@@ -470,7 +476,8 @@ public class BlockSpawner : MonoBehaviour
 
                 if (currentBag.Count == 0)
                 {
-                    currentBag = possibleBlocks.FindAll(x => x.AreConditionsSatisfied());
+                    //currentBag = possibleBlocks.FindAll(x => x.AreConditionsSatisfied());
+                    currentBag = GetSatisfiedBagBlocks();
                     //Debug.Log("BlockSpawner.SpawnRandomBlock: currentBag size: " + currentBag.Count);
                     //Debug.Log("Score: " + scoreCounter.GetScore());
 
@@ -707,6 +714,17 @@ public class BlockSpawner : MonoBehaviour
     public void OneTileCheatSpawning(bool on)
     {
         isSpawningOneTileBlocks = on;
+    }
+
+    public List<Block> GetListOfPossibleBlocksInBag()
+    {
+        List<BagBlock> bagBlocks = GetSatisfiedBagBlocks();
+        List<Block> result = new List<Block>();
+        foreach(BagBlock bagBlock in bagBlocks)
+        {
+            result.Add(bagBlock.CreateBlock());
+        }
+        return result;
     }
 
     // Callback function for gameFlow's GameLost event.

@@ -126,7 +126,7 @@
 		"Korean": "메인 메뉴"
 	  },
 	  "Tip": {
-	    "English": "Tip: Don’t lest vestiges stick around too long",
+	    "English": "Tip: Don’t lest wastes stick around too long",
 	    "Spanish": "Tip: No dejes que restos se quede por mucho tiempo",
 	    "French": "Astuce : Ne laissez pas les vestiges trainer trop longtemps dans les parages",
 	    "Slovenian": "Namig: Ne pusti ostanke predolgo časa",
@@ -281,7 +281,7 @@
 		"Korean": "PlaceholderKorean"
 	},
 	"Tip4": {
-		"English" : "Remember that cells diagonally adjacent to a cleared square don't become vestiges",
+		"English" : "Remember that cells diagonally adjacent to a cleared square don't become wastes",
 		"Spanish": "PlaceholderSpanish",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
@@ -295,7 +295,7 @@
 		"Korean": "PlaceholderKorean"
 	},
 	"Tip5" : {
-		"English": "Remove vestiges from the board as quickly as you can, especially if they are level two or three",
+		"English": "Remove wastes from the board as quickly as you can, especially if they are level two or three",
 		"Spanish": "PlaceholderSpanish",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
