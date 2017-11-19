@@ -66,4 +66,9 @@ public class UITitleMenus : MonoBehaviour
 		SceneManager.LoadScene("GameMode");
 		AudioController.Instance.MenuClick();
 	}
+
+    public void PlayButtonSound()
+    {
+        AudioController.Instance.MenuClick();
+    }
 }
