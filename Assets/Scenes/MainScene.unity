@@ -2787,6 +2787,11 @@ Prefab:
       propertyPath: endTutorialWindow
       value: 
       objectReference: {fileID: 769299213}
+    - target: {fileID: 114317254578232620, guid: 5fa388134b667384caa9615ae4b7045e,
+        type: 2}
+      propertyPath: tutorialController
+      value: 
+      objectReference: {fileID: 1320689074}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5fa388134b667384caa9615ae4b7045e, type: 2}
   m_IsPrefabParent: 0
@@ -3008,6 +3013,16 @@ Prefab:
       propertyPath: energyCounter
       value: 
       objectReference: {fileID: 1612729227}
+    - target: {fileID: 114102348243853774, guid: 72f094fd769b4da48bff93ea635bd309,
+        type: 2}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1069704021}
+    - target: {fileID: 114102348243853774, guid: 72f094fd769b4da48bff93ea635bd309,
+        type: 2}
+      propertyPath: blockSpawner
+      value: 
+      objectReference: {fileID: 1142477333}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 72f094fd769b4da48bff93ea635bd309, type: 2}
   m_IsPrefabParent: 0
@@ -3143,6 +3158,11 @@ Prefab:
       propertyPath: masks.Array.data[4]
       value: 
       objectReference: {fileID: 1561553330}
+    - target: {fileID: 114405037784632014, guid: ba5fee6af934eb146bb0079cab820924,
+        type: 2}
+      propertyPath: endTutorialWindow
+      value: 
+      objectReference: {fileID: 769299213}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba5fee6af934eb146bb0079cab820924, type: 2}
   m_IsPrefabParent: 0
@@ -3219,6 +3239,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306943243}
+--- !u!114 &1320689074 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114405037784632014, guid: ba5fee6af934eb146bb0079cab820924,
+    type: 2}
+  m_PrefabInternal: {fileID: 1276550072}
+  m_Script: {fileID: 11500000, guid: 71eecc1245a3dbf4fa0b85230047f48b, type: 3}
 --- !u!1001 &1324725161
 Prefab:
   m_ObjectHideFlags: 0

@@ -79,7 +79,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1198027083940074
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +387,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e8faf3e16ace7ba4fbbc4e302499f9e2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f9fabc1f8af0d9a4a90b93c59d63da25, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

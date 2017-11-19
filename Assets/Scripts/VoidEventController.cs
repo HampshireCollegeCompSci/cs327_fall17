@@ -265,7 +265,8 @@ public class VoidEventController : MonoBehaviour
     private void Start()
     {
         // Subscribe to delegate events.
-        scoreCounter.ScoreChanged += ScoreCounter_ScoreChanged;
+        //scoreCounter.ScoreChanged += ScoreCounter_ScoreChanged;
+        grid.SquaresCleared += CheckScore;
 
         // Randomize letter bindings.
         List<char> letters = new List<char>(3);
@@ -381,9 +382,10 @@ public class VoidEventController : MonoBehaviour
         secondsToStay = tuning["event warning wait time"].AsFloat;
     }
 
-    // Callback function for the score changing.
-    private void ScoreCounter_ScoreChanged(int newScore)
+    // Callback function for checking the score and changing event status accordingly.
+    private void CheckScore()
     {
+        int newScore = scoreCounter.GetScore();
         foreach (VoidEventGroup eventGroup in voidEventGroups)
         {
             eventGroup.UpdateProgressFromScore(newScore);

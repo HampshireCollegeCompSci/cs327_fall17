@@ -185,8 +185,8 @@ public class BlockSpawner : MonoBehaviour
     [Tooltip("Reference to the ScoreCounter.")]
     ScoreCounter scoreCounter;
     [SerializeField]
-    [Tooltip("Reference to the end tutorial window.")]
-    GameObject endTutorialWindow;
+    [Tooltip("Reference to the TutorialController.")]
+    TutorialController tutorialController;
 
     // List of all possible blocks that can be put into the bag.
     List<BagBlock> possibleBlocks = new List<BagBlock>();
@@ -230,8 +230,6 @@ public class BlockSpawner : MonoBehaviour
         {
             maxBlocksInQueue = blockPositions.Length;
         }
-
-        endTutorialWindow.SetActive(false);
     }
 
     private void Tune()
@@ -457,7 +455,7 @@ public class BlockSpawner : MonoBehaviour
                 List<Bag> tutEndBags = tutorialEnders.FindAll(x => x.AreConditionsSatisfied());
                 if (tutEndBags.Count != 0)
                 {
-                    EndTutorialMode();
+                    tutorialController.EndTutorialMode();
                     enabled = false;
                     return;
                 }
@@ -709,12 +707,6 @@ public class BlockSpawner : MonoBehaviour
     public void OneTileCheatSpawning(bool on)
     {
         isSpawningOneTileBlocks = on;
-    }
-
-    void EndTutorialMode()
-    {
-        endTutorialWindow.SetActive(true);
-        Settings.Instance.SetTutorialComplete();
     }
 
     // Callback function for gameFlow's GameLost event.

@@ -64,8 +64,13 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         }
     }
 
+    [SerializeField]
+    [Tooltip("Reference to the end tutorial window.")]
+    GameObject endTutorialWindow;
+
     public List<TriggerData> triggerData = new List<TriggerData>();
     Dictionary<Triggers, bool> triggerRecord = new Dictionary<Triggers, bool>();
+    List<Triggers> triggersTemporarilyEnabled = new List<Triggers>();
 
     public Grid grid;
 
@@ -147,10 +152,17 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
     private void Start()
     {
+        if (Settings.Instance.IsTutorialModeEnabled())
+        {
+            TemporarilyEnableTriggers();
+        }
+
         TriggerEvent(Triggers.FIRST_OPEN);
         //TriggerEvent(Triggers.FIRST_OPEN_2);
 
         grid.SquaresCleared += OnSquare;
+
+        endTutorialWindow.SetActive(false);
     }
 
     public void TriggerEvent(string trigger)
@@ -332,57 +344,43 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         }
     }
 
-    /*
-    //Call this instead of TriggerEvent if you want the panel to move to a block location
-    public void PanelToBlockLocation(int row, int col, Triggers trigger)
+    public void EndTutorialMode()
     {
-        string textInfo = triggerData.Find((x) => x.trigger == trigger).textInfo;
-        if (textInfo == null)
+        endTutorialWindow.SetActive(true);
+        DisableTemporaryTriggers();
+        Settings.Instance.SetTutorialComplete();
+    }
+
+    // Re-enable triggers for when the player replays tutorial mode.
+    public void TemporarilyEnableTriggers()
+    {
+        foreach (var pair in triggerRecord)
         {
-            Debug.LogError("No text data found for Trigger!");
-        }
-
-        int panelNumber = triggerData.Find((x) => x.trigger == trigger).panelNumber;
-
-        if (Panels[panelNumber] == null)
-        {
-            Debug.LogError("No panel found for Trigger!");
-        }
-
-        MovePanelToBlockLocation(panelNumber, row, col);
-
-        if (currentlyPlaying)
-        {
-            if (!nextTriggers.Contains(trigger))
+            if (pair.Value == true)
             {
-                nextTriggers.Add(trigger);
-                return;
-            }
-            else
-            {
-                return;
+                Triggers trig = pair.Key;
+                //triggerRecord[trig] = false;
+                triggersTemporarilyEnabled.Add(trig);
             }
         }
-
-        //if already played do not trigger
-        if (triggerRecord[trigger])
+        foreach (Triggers trig in triggersTemporarilyEnabled)
         {
-            return;
-        }
-
-        triggerRecord[trigger] = true;
-        PlayerPrefs.SetInt(trigger.ToString(), 1);
-
-        if (Panels[panelNumber] != null && textInfo != null)
-        {
-            PanelTexts[panelNumber].text = textInfo;
-            ActivatePanel(trigger, panelNumber);
+            triggerRecord[trig] = false;
         }
     }
-    */
+    // Disable the temporarily re-enabled triggers.
+    public void DisableTemporaryTriggers()
+    {
+        foreach (Triggers trig in triggersTemporarilyEnabled)
+        {
+            triggerRecord[trig] = true;
+        }
+        triggersTemporarilyEnabled.Clear();
+    }
 
     private void OnDestroy()
     {
+        DisableTemporaryTriggers();
         grid.SquaresCleared -= OnSquare;
     }
 

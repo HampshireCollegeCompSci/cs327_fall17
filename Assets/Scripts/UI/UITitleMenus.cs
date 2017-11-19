@@ -30,12 +30,6 @@ public class UITitleMenus : MonoBehaviour
         AudioController.Instance.MenuClick();
     }
 
-    public void PlayInTutorialMode()
-    {
-        Settings.Instance.SetTutorialModeEnabled(true);
-        GoToGamePlay(false);
-    }
-
 	public void GoToSettings()
 	{
 		SceneManager.LoadScene("Settings");
@@ -55,6 +49,11 @@ public class UITitleMenus : MonoBehaviour
         AudioController.Instance.PressPlay();
         AudioController.Instance.StopMusic();
         //AudioController.Instance.PlayMusic("Gameplay_Music_1");
+    }
+    public void PlayInTutorialMode()
+    {
+        Settings.Instance.SetTutorialModeEnabled(true);
+        GoToGamePlay(false);
     }
     public void GoToCheatPage()
     {

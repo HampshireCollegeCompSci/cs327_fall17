@@ -19,6 +19,10 @@ public class CheatsGameplay : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the child text.")]
     Text text;
+    [SerializeField]
+    [Tooltip("Reference to the Grid.")]
+    Grid grid;
+
     Settings settings;
 
     bool isSpawningCheatingEnabled;
@@ -35,13 +39,11 @@ public class CheatsGameplay : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            scoreCounter.AddScore(1000);
-            settings.SetCheatsEnabled();
+            AddScore(1000);
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            scoreCounter.AddScore(999);
-            settings.SetCheatsEnabled();
+            AddScore(999);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -52,8 +54,7 @@ public class CheatsGameplay : MonoBehaviour
 
     public void AddScore()
     {
-        scoreCounter.AddScore(1000);
-        settings.SetCheatsEnabled();    
+        AddScore(1000);
     }
 
     public void SetEnergyTo1()
@@ -114,5 +115,13 @@ public class CheatsGameplay : MonoBehaviour
             settings.SetCheatsEnabled();
             isSpawningOneTileEnabled = true;
         }
+    }
+    
+    void AddScore(int amount)
+    {
+        scoreCounter.AddScore(amount);
+        settings.SetCheatsEnabled();
+        // Force event status to update.
+        grid.ForceOnSquaresCleared();
     }
 }

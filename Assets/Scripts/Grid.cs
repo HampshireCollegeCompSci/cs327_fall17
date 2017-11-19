@@ -1239,4 +1239,8 @@ public class Grid : MonoBehaviour
             SquaresCleared();
         }
     }
+    public void ForceOnSquaresCleared()
+    {
+        OnSquaresCleared();
+    }
 }
