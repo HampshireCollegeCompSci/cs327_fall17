@@ -85,6 +85,10 @@ MonoBehaviour:
   secondsBetweenSquareAnimations: 0
   reactor: {fileID: 0}
   squareClearingsCount: 0
+  prefabEnergyLossVestige: {fileID: 1237029679059904, guid: 83f381fb27202344b9563a2809df0a8b,
+    type: 2}
+  prefabEnergyLossReactor: {fileID: 1634025938188188, guid: 93d020b24f674124588a9154230163d2,
+    type: 2}
 --- !u!114 &114265381854382034
 MonoBehaviour:
   m_ObjectHideFlags: 1

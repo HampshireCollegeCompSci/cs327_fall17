@@ -103,6 +103,12 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("How many square clearings have occurred so far. Incremented by 1 every time the player forms any number of squares in a single turn.")]
     int squareClearingsCount = 0;
+    [SerializeField]
+    [Tooltip("Prefab to instantiate for vestige energy loss animation.")]
+    GameObject prefabEnergyLossVestige;
+    [SerializeField]
+    [Tooltip("Prefab to instantiate for reactor energy loss animation.")]
+    GameObject prefabEnergyLossReactor;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -1079,6 +1085,8 @@ public class Grid : MonoBehaviour
             energyCounter.RemoveEnergy(energyChange, false);
             energyCounter.PopUp(-energyChange, blockCenter, reactor.transform.position);
 
+            AnimateVestigeEnergyLoss();
+
             //Update Available spaces for all draggable blocks
             blockSpawner.UpdateAllBlocks();
             blockSpawner.ProgressQueue();
@@ -1107,6 +1115,26 @@ public class Grid : MonoBehaviour
         }
 
         return energyChange;
+    }
+
+    // Instantiate the energy loss animation for all vestiges on the Grid.
+    public void AnimateVestigeEnergyLoss()
+    {
+        for (int r = 0; r < height; r++)
+        {
+            for (int c = 0; c < width; c++)
+            {
+                if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
+                {
+                    Vector3 pos = GetTilePosition(r, c);
+                    GameObject obj = Instantiate(prefabEnergyLossVestige, transform, false);
+                    obj.transform.localPosition = pos;
+                }
+            }
+        }
+        Vector3 reactorPos = reactor.transform.position;
+        GameObject reactorAnim = Instantiate(prefabEnergyLossReactor, transform, false);
+        reactorAnim.transform.position = reactorPos;
     }
 
     // Removes a GridBlock from the List of GridBlocks.
