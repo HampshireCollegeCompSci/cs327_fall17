@@ -13,8 +13,14 @@ public class UITitleMenus : MonoBehaviour
         SceneManager.LoadScene("Title");
         AudioController.Instance.StopAllSFX();
         AudioController.Instance.MenuClick();
-        AudioController.Instance.StopMusic();
-        AudioController.Instance.PlayMusic("Main_Menu_Music_1");
+
+        /*
+        if (AudioController.Instance.currentlyPlaying.clip.name != "Main_Menu_Music_1")
+        {
+            AudioController.Instance.StopMusic();
+            //AudioController.Instance.PlayMusic("Main_Menu_Music_1");
+        }
+        */
         //Destroy(TutorialController.Instance.gameObject);
     }
 
@@ -32,7 +38,7 @@ public class UITitleMenus : MonoBehaviour
 
     public void GoToAbout()
     {
-        SceneManager.LoadScene("About");
+        SceneManager.LoadScene("Credits");
         AudioController.Instance.MenuClick();
     }
 	public void GoToGamePlay(bool isZenMode) 
@@ -42,7 +48,12 @@ public class UITitleMenus : MonoBehaviour
         AudioController.Instance.MenuClick();
         AudioController.Instance.PressPlay();
         AudioController.Instance.StopMusic();
-        AudioController.Instance.PlayMusic("Gameplay_Music_1");
+        //AudioController.Instance.PlayMusic("Gameplay_Music_1");
+    }
+    public void PlayInTutorialMode()
+    {
+        Settings.Instance.SetTutorialModeEnabled(true);
+        GoToGamePlay(false);
     }
     public void GoToCheatPage()
     {
@@ -54,4 +65,9 @@ public class UITitleMenus : MonoBehaviour
 		SceneManager.LoadScene("GameMode");
 		AudioController.Instance.MenuClick();
 	}
+
+    public void PlayButtonSound()
+    {
+        AudioController.Instance.MenuClick();
+    }
 }

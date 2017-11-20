@@ -98,6 +98,16 @@ public class BufferedValue : MonoBehaviour
         }
     }
 
+    public void AddToBufferedValueTarget(int amount)
+    {
+        SetBufferedValueTarget(bufferedValueTarget + amount);
+    }
+
+    public void SubtractFromBufferedValueTarget(int amount)
+    {
+        SetBufferedValueTarget(bufferedValueTarget - amount);
+    }
+
     // Keep track of time and perform steps.
     private void Update()
     {

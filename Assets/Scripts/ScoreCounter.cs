@@ -29,8 +29,8 @@ public class ScoreCounter : MonoBehaviour
 
     private void Start()
     {
-	translator = FindObjectOfType<UILanguages>();
-        grid.SquareCleared += Grid_SquareCleared;
+	    translator = FindObjectOfType<UILanguages>();
+        grid.SquareOutlined += Grid_SquareCleared;
         UpdateScore();
     }
 
@@ -41,7 +41,7 @@ public class ScoreCounter : MonoBehaviour
 
     private void OnDestroy()
     {
-        grid.SquareCleared -= Grid_SquareCleared;
+        grid.SquareOutlined -= Grid_SquareCleared;
     }
 
     public void AddScore(int amount)

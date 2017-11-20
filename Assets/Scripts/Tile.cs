@@ -167,7 +167,7 @@ public class Tile : MonoBehaviour
 
     public void SetSpriteToTrueSprite()
     {
-        SpriteChanging();
+        //SpriteChanging();
         spriteRenderer.sprite = trueSprite;
     }
 

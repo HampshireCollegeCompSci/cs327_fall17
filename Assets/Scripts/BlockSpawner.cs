@@ -10,39 +10,21 @@ using SimpleJSON;
 
 public class BlockSpawner : MonoBehaviour
 {
-    // A block that exists within the bag.
-    // Contains additional data such as tier information.
+    // A block that exists within the bags.
+    // Contains additional data such as bag information.
     class BagBlock
     {
         Block block;
-        List<int> tiers;
+
+        // The bags that the block is in.
+        List<Bag> bags;
 
         // Constructor.
-        public BagBlock(Block mblock, List<int> mtiers)
+        //public BagBlock(Block mblock, List<int> mtiers)
+        public BagBlock(Block mblock, List<Bag> mbags)
         {
             block = mblock;
-            tiers = mtiers;
-        }
-
-        // Returns true if the BagBlock is in the given tier.
-        public bool IsTier(int tier)
-        {
-            return tiers.Contains(tier);
-        }
-
-        // Returns true if the BagBlock is a junkyard-only block.
-        public bool IsJunkyardOnly()
-        {
-            int smallestTier = tiers[0];
-            for (int i = 1; i < tiers.Count; ++i)
-            {
-                int tier = tiers[i];
-                if (tier < smallestTier)
-                {
-                    smallestTier = tier;
-                }
-            }
-            return smallestTier > 0;
+            bags = mbags;
         }
 
         // Duplicates the contained Block and returns it.
@@ -50,6 +32,114 @@ public class BlockSpawner : MonoBehaviour
         {
             return new Block(block);
         }
+
+        // Returns true if any of the current bags contain this block.
+        public bool AreConditionsSatisfied()
+        {
+            //Debug.Log("BagBlock.AreConditionsSatisfied: bags.Count: " + bags.Count);
+            foreach (Bag bag in bags)
+            {
+                if (bag.AreConditionsSatisfied())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        // Returns true if the BagBlock is a junkyard-only block.
+        public bool IsJunkyardOnly()
+        {
+            foreach (Bag bag in bags)
+            {
+                if (!bag.IsJunkyard())
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    // Bags determine the conditions under which blocks are spawned.
+    class Bag
+    {
+        public delegate bool Condition();
+
+        // The list of conditions required to enable the bag.
+        List<Condition> preconditions = new List<Condition>();
+
+        // The name of the bag, as determined by JSON.
+        string name;
+
+        // Whether or not the bag is a junkyard bag.
+        bool isJunkyard = false;
+
+        // The trigger to run when the bag becomes active.
+        string trigger = "";
+
+        // Whether or not the block ends the tutorial.
+        //bool endsTutorial = false;
+
+        // Constructor.
+        public Bag(string mname)
+        {
+            name = mname;
+        }
+
+        public void AddCondition(Condition cond)
+        {
+            preconditions.Add(cond);
+        }
+
+        // Return false if any of the conditions are not met. Otherwise, return true.
+        public bool AreConditionsSatisfied()
+        {
+            foreach (Condition cond in preconditions)
+            {
+                if (cond() == false)
+                {
+                    return false;
+                }
+            }
+            if (trigger != "")
+            {
+                TutorialController.Instance.TriggerEvent(trigger);
+            }
+            return true;
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+
+        public void LabelAsJunkyard()
+        {
+            isJunkyard = true;
+        }
+
+        public bool IsJunkyard()
+        {
+            return isJunkyard;
+        }
+
+        public void SetTrigger(string newTrigger)
+        {
+            trigger = newTrigger;
+        }
+
+        /*
+        public void LabelAsEndsTutorial()
+        {
+            endsTutorial = true;
+        }
+
+        public bool EndsTutorial()
+        {
+            return endsTutorial;
+        }
+        */
     }
 
     [SerializeField]
@@ -81,7 +171,7 @@ public class BlockSpawner : MonoBehaviour
     TextAsset tuningJSON;
     [SerializeField]
     [Tooltip("The current junkyard tier. 0 = no junkyard event. -1 = friendly bag only.")]
-    int tierCurrent = -1;
+    int tierCurrent = 0;
     [SerializeField]
     [Tooltip("The current number of vestiges to generate per block.")]
     int vestigesPerBlock = 0;
@@ -94,11 +184,19 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the ScoreCounter.")]
     ScoreCounter scoreCounter;
+    [SerializeField]
+    [Tooltip("Reference to the TutorialController.")]
+    TutorialController tutorialController;
 
     // List of all possible blocks that can be put into the bag.
     List<BagBlock> possibleBlocks = new List<BagBlock>();
+    // List of all different bags.
+    List<Bag> allBags = new List<Bag>();
     // List of blocks remaining in the bag.
-    List<BagBlock> bag = new List<BagBlock>();
+    List<BagBlock> currentBag = new List<BagBlock>();
+
+    // List of bags that end the tutorial.
+    List<Bag> tutorialEnders = new List<Bag>();
 
     Queue<DraggableBlock> blocksQueue = new Queue<DraggableBlock>();
 
@@ -112,25 +210,19 @@ public class BlockSpawner : MonoBehaviour
     bool doContaminationBlocksAlternate;
     // The maximum score for the friendly bag. When the score becomes larger than this value,
     // the friendly bag gets abandoned.
-    int friendlyBagMaxScore;
+    //int friendlyBagMaxScore;
     // Whether a junkyard event is currently starting.
     bool junkyardEventIsStarting = false;
 
     private void Awake()
     {
-        tierCurrent = -1;
-        /*
-        foreach (int tier in tiers)
-        {
-            possibleBlocks.Add(tier, new List<Block>());
-        }
-        */
+        tierCurrent = 0;
     }
 
     private void Start()
     {
         gameFlow.GameLost += GameFlow_GameLost;
-        scoreCounter.ScoreChanged += ScoreCounter_ScoreChanged;
+        //scoreCounter.ScoreChanged += ScoreCounter_ScoreChanged;
 
         // Make sure that we can't have more DraggableBlocks in the queue
         // than there are block positions!
@@ -145,17 +237,110 @@ public class BlockSpawner : MonoBehaviour
         // Read PossibleBlocks JSON.
         JSONNode json = JSON.Parse(possibleBlocksJSON.ToString());
 
-        const string blocksNormal = "blocks";
+        JSONArray bagsCategory = json["bags"].AsArray;
 
-        for (int i = 0; i < json[blocksNormal].Count; i++)
+        for (int i = 0; i < bagsCategory.Count; ++i)
         {
-            JSONNode blockNode = json[blocksNormal][i];
+            JSONNode bagNode = bagsCategory[i];
+            string name = bagNode["name"];
+            Bag newBag = new Bag(name);
+
+            JSONNode aNode;
+            aNode = bagNode["ends tutorial mode"];
+            if (aNode != null)
+            {
+                if (aNode == true)
+                {
+                    //newBag.LabelAsEndsTutorial();
+                    tutorialEnders.Add(newBag);
+                }
+            }
+
+            aNode = bagNode["trigger when starting"];
+            if (aNode != null)
+            {
+                newBag.SetTrigger(aNode);
+            }
+
+            JSONNode condsNode = bagNode["preconditions"];
+            JSONNode cond;
+
+            cond = condsNode["tutorial is active"];
+            if (cond != null)
+            {
+                bool compTo = cond.AsBool;
+                newBag.AddCondition(() =>
+                {
+                    /*
+                    Debug.Log(newBag.GetName() + ": compTo / tutenabled: "
+                        + compTo + " / " + Settings.Instance.IsTutorialModeEnabled());
+                        */
+                    return (compTo == Settings.Instance.IsTutorialModeEnabled());
+                });
+            }
+            cond = condsNode["square clearings count is equal to"];
+            if (cond != null)
+            {
+                int compTo = cond.AsInt;
+                newBag.AddCondition(() => compTo == grid.GetSquareClearingsCount());
+            }
+            cond = condsNode["score is equal to"];
+            if (cond != null)
+            {
+                int compTo = cond.AsInt;
+                newBag.AddCondition(() => compTo == scoreCounter.GetScore());
+            }
+            cond = condsNode["score is not equal to"];
+            if (cond != null)
+            {
+                int compTo = cond.AsInt;
+                newBag.AddCondition(() => compTo != scoreCounter.GetScore());
+            }
+            cond = condsNode["score is greater than"];
+            if (cond != null)
+            {
+                int compTo = cond.AsInt;
+                newBag.AddCondition(() =>
+                {
+                    //Debug.Log(newBag.GetName() + ": compTo / score: " + compTo + " / " + scoreCounter.GetScore());
+                    return (compTo < scoreCounter.GetScore());
+                });
+            }
+            cond = condsNode["score is less than"];
+            if (cond != null)
+            {
+                int compTo = cond.AsInt;
+                newBag.AddCondition(() => compTo > scoreCounter.GetScore());
+            }
+            cond = condsNode["junkyard tier is equal to"];
+            if (cond != null)
+            {
+                int compTo = cond.AsInt;
+                newBag.AddCondition(() =>
+                {
+                    //Debug.Log(newBag.GetName() + ": compTo / tierCurrent: " + compTo + " / " + tierCurrent);
+                    return (compTo == tierCurrent);
+                });
+                if (compTo != 0)
+                {
+                    newBag.LabelAsJunkyard();
+                }
+            }
+
+            allBags.Add(newBag);
+        }
+
+        JSONArray blocksCategory = json["blocks"].AsArray;
+
+        for (int i = 0; i < blocksCategory.Count; ++i)
+        {
+            JSONNode blockNode = blocksCategory[i];
 
             int w = blockNode["width"].AsInt;
             int h = blockNode["height"].AsInt;
             int sprite = blockNode["sprite"].AsInt;
             JSONArray cell = blockNode["cells"].AsArray;
-            JSONArray tiers = blockNode["tiers"].AsArray;
+            JSONArray bagsArray = blockNode["bags"].AsArray;
 
             Block block = new Block(h, w);
 
@@ -177,19 +362,23 @@ public class BlockSpawner : MonoBehaviour
                 }
             }
 
-            List<int> tierList = new List<int>();
-            int numTiers = tiers.Count;
-            for (int t = 0; t < numTiers; ++t)
+            // List of all the bags that this new block is a part of.
+            List<Bag> bagList = new List<Bag>();
+            int numBags = bagsArray.Count;
+            for (int t = 0; t < numBags; ++t)
             {
-                int tierID = tiers[t];
-                tierList.Add(tierID);
+                string bagName = bagsArray[t];
+                Bag theBag = allBags.Find(x => x.GetName() == bagName);
+                bagList.Add(theBag);
             }
-            possibleBlocks.Add(new BagBlock(block, tierList));
+            //possibleBlocks.Add(new BagBlock(block, tierList));
+            BagBlock newBagBlock = new BagBlock(block, bagList);
+            possibleBlocks.Add(newBagBlock);
         }
 
         json = JSON.Parse(tuningJSON.ToString());
         doContaminationBlocksAlternate = json["contamination blocks alternate"].AsBool;
-        friendlyBagMaxScore = json["friendly bag max score"].AsInt;
+        //friendlyBagMaxScore = json["friendly bag max score"].AsInt;
     }
 
     public void Init()
@@ -198,7 +387,7 @@ public class BlockSpawner : MonoBehaviour
         ResetBlockTimer();
         SpawnRandomBlock();
     }
-
+    
     private void Update()
     {
         // if the timeBetweenBlocks is not -1 timer will function
@@ -217,19 +406,10 @@ public class BlockSpawner : MonoBehaviour
         }
     }
 
-    private List<BagBlock> GetBagBlocksOfTier(int tier)
+    // Get all blocks whose bags satisfy the current conditions of the game.
+    private List<BagBlock> GetSatisfiedBagBlocks()
     {
-        return possibleBlocks.FindAll((BagBlock x) => x.IsTier(tier));
-    }
-
-    private List<BagBlock> GetBagBlocksJunkyardOnly()
-    {
-        return possibleBlocks.FindAll((BagBlock x) => x.IsJunkyardOnly());
-    }
-
-    private List<BagBlock> GetBagBlocksJunkyardOnlyOfTier(int tier)
-    {
-        return possibleBlocks.FindAll(x => x.IsTier(tier) && x.IsJunkyardOnly());
+        return possibleBlocks.FindAll(x => x.AreConditionsSatisfied());
     }
 
     public void ResetBlockTimer()
@@ -276,30 +456,45 @@ public class BlockSpawner : MonoBehaviour
             {
                 // The index of the block to choose from the bag.
                 int indexInBagToChoose = -1;
-                if (bag.Count == 0)
+
+                // Check if the tutorial has ended yet.
+                List<Bag> tutEndBags = tutorialEnders.FindAll(x => x.AreConditionsSatisfied());
+                if (tutEndBags.Count != 0)
                 {
-                    // If the bag is empty, repopulate it.
-                    List<BagBlock> viableBlocks = GetBagBlocksOfTier(tierCurrent);
-                    for (int j = 0; j < viableBlocks.Count; ++j)
-                    {
-                        //Block bagBlock = possibleBlocks[tierCurrent][j];
-                        //Block bagBlock = new Block(possibleBlocks[tierCurrent][j]);
-                        BagBlock viableBlock = viableBlocks[j];
-                        bag.Add(viableBlock);
-                    }
+                    tutorialController.EndTutorialMode();
+                    enabled = false;
+                    return;
+                }
+
+                // Check if conditions have changed.
+                List<BagBlock> diff = currentBag.FindAll(x => x.AreConditionsSatisfied());
+                if (diff.Count != currentBag.Count)
+                {
+                    // If conditions have changed, clear the bag so that it gets replaced.
+                    currentBag.Clear();
+                }
+
+                if (currentBag.Count == 0)
+                {
+                    //currentBag = possibleBlocks.FindAll(x => x.AreConditionsSatisfied());
+                    currentBag = GetSatisfiedBagBlocks();
+                    //Debug.Log("BlockSpawner.SpawnRandomBlock: currentBag size: " + currentBag.Count);
+                    //Debug.Log("Score: " + scoreCounter.GetScore());
+
                     // If a Junkyard event is starting, choose a junkyard-specific block.
                     if (junkyardEventIsStarting)
                     {
                         junkyardEventIsStarting = false;
 
-                        List<BagBlock> junkyardBlocks = GetBagBlocksJunkyardOnlyOfTier(tierCurrent);
+                        //List<BagBlock> junkyardBlocks = GetBagBlocksJunkyardOnlyOfTier(tierCurrent);
+                        List<BagBlock> junkyardBlocks = currentBag.FindAll(x => x.IsJunkyardOnly());
 
                         int indexInJunkyardBlocks = Random.Range(0, junkyardBlocks.Count);
                         BagBlock junkyardBlock = junkyardBlocks[indexInJunkyardBlocks];
 
-                        for (int j = 0; j < bag.Count; ++j)
+                        for (int j = 0; j < currentBag.Count; ++j)
                         {
-                            BagBlock bagBlock = bag[j];
+                            BagBlock bagBlock = currentBag[j];
                             if (bagBlock == junkyardBlock)
                             {
                                 indexInBagToChoose = j;
@@ -313,16 +508,16 @@ public class BlockSpawner : MonoBehaviour
                     }
                     else
                     {
-                        indexInBagToChoose = Random.Range(0, bag.Count);
+                        indexInBagToChoose = Random.Range(0, currentBag.Count);
                     }
                 }
                 else
                 {
-                    indexInBagToChoose = Random.Range(0, bag.Count);
+                    indexInBagToChoose = Random.Range(0, currentBag.Count);
                 }
-                toSpawn = bag[indexInBagToChoose].CreateBlock();
+                toSpawn = currentBag[indexInBagToChoose].CreateBlock();
                 // Remove each chosen element from the bag.
-                bag.RemoveAt(indexInBagToChoose);
+                currentBag.RemoveAt(indexInBagToChoose);
 
                 // Add vestiges to the block, if applicable.
                 if (isContaminationBlock)
@@ -480,7 +675,7 @@ public class BlockSpawner : MonoBehaviour
     {
         tierCurrent = newTier;
         // Clear the bag to force a new bag to generate.
-        bag.Clear();
+        currentBag.Clear();
     }
 
     public void SetVestigesPerBlock(int newVal)
@@ -521,6 +716,17 @@ public class BlockSpawner : MonoBehaviour
         isSpawningOneTileBlocks = on;
     }
 
+    public List<Block> GetListOfPossibleBlocksInBag()
+    {
+        List<BagBlock> bagBlocks = GetSatisfiedBagBlocks();
+        List<Block> result = new List<Block>();
+        foreach(BagBlock bagBlock in bagBlocks)
+        {
+            result.Add(bagBlock.CreateBlock());
+        }
+        return result;
+    }
+
     // Callback function for gameFlow's GameLost event.
     private void GameFlow_GameLost(GameFlow.GameOverCause cause)
     {
@@ -531,6 +737,7 @@ public class BlockSpawner : MonoBehaviour
         enabled = false;
     }
 
+    /*
     private void ScoreCounter_ScoreChanged(int newScore)
     {
         // If the score is high enough, abandon the friendly bag.
@@ -539,4 +746,5 @@ public class BlockSpawner : MonoBehaviour
             SetJunkyardTier(0);
         }
     }
+    */
 }

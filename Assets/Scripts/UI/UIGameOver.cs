@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIGameOver : MonoBehaviour
@@ -53,6 +52,9 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the progress bar overlay.")]
     RectTransform progressBarTop;
+    [SerializeField]
+    [Tooltip("The game over music to play.")]
+    AudioClip musicGameOver;
 
     // Reference to the Translator.
 	UILanguages translator;
@@ -83,19 +85,12 @@ public class UIGameOver : MonoBehaviour
         }
     }
 
-    public void ResetScene()
-    {
-        AudioController.Instance.MenuClick();
-
-        Scene currentScene = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(currentScene.name);
-    }
-
     // Callback function for GameFlow.GameLost.
     void Appear(GameFlow.GameOverCause cause)
     {
         AudioController.Instance.StopSFX("About_To_Lose_1");
         AudioController.Instance.GameOver();
+        AudioController.Instance.PlayMusic(musicGameOver);
         /*
         foreach (GameObject obj in toBeEnabled)
         {

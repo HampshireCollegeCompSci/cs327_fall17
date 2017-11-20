@@ -79,22 +79,21 @@ public class LerpTo : MonoBehaviour
     {
         if (state != LerpState.None)
         {
-            Vector3 newPos;
+            float progressPercent = 0.0f;
+            Vector3 newPos = Vector3.zero;
             switch (state)
             {
                 case LerpState.Speed:
                     float distCovered = (Time.time - startTime) * movingSpeed;
                     float fracJourney = distCovered / journeyLength;
                     newPos = Vector3.Lerp(startPosition, movingDestination, fracJourney);
+                    progressPercent = fracJourney;
                     break;
 
                 case LerpState.Time:
                     t += Time.deltaTime / movingTime;
                     newPos = Vector3.Lerp(startPosition, movingDestination, t);
-                    break;
-
-                default:
-                    newPos = Vector3.zero;
+                    progressPercent = t;
                     break;
             }
 #if USING_LOCAL_POSITION
@@ -103,7 +102,8 @@ public class LerpTo : MonoBehaviour
             transform.position = newPos;
 #endif
             // If we've reached our destination, we're done.
-            if (movingDestination == newPos)
+            //if (movingDestination == newPos)
+            if (progressPercent >= 1.0f)
             {
                 state = LerpState.None;
                 OnCompleted();

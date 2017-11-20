@@ -17,7 +17,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     public enum Triggers
     {
         FIRST_OPEN,
-        FIRST_OPEN_2,
+        //FIRST_OPEN_2,
         FIRST_BLOCK,
         FIRST_SQUARE,
         FIRST_WASTE,
@@ -29,28 +29,48 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         FIRST_URANIUM,
         FIRST_CONTAMINATION,
         FIRST_MELTDOWN,
-        FIRST_OVERLOAD
+        FIRST_OVERLOAD,
+        TUTORIAL_BAG_TRIGGER_1,
+        TUTORIAL_BAG_TRIGGER_2,
+        TUTORIAL_BAG_TRIGGER_3,
+        TUTORIAL_BAG_TRIGGER_4,
+        TUTORIAL_BAG_TRIGGER_5
     }
 
     [Serializable]
     public class TriggerData
     {
-        public Triggers trigger;
-        public string textInfo;
-        public int panelNumber;
+        public class InfoBite
+        {
+            public string textInfo;
+            public int panelNumber;
 
-        public TriggerData(string trig, string text, int panel)
+            public InfoBite(string textInfoIn, int panelNumberIn)
+            {
+                textInfo = textInfoIn;
+                panelNumber = panelNumberIn;
+            }
+        }
+
+        public Triggers trigger;
+        public List<InfoBite> infoBites;
+
+        public TriggerData(string trig, List<InfoBite> infoBitesIn)
         {
             Triggers parsed_enum = (Triggers) Enum.Parse(typeof(Triggers), trig);
 
             trigger = parsed_enum;
-            textInfo = text;
-            panelNumber = panel;
+            infoBites = infoBitesIn;
         }
     }
 
+    [SerializeField]
+    [Tooltip("Reference to the end tutorial window.")]
+    GameObject endTutorialWindow;
+
     public List<TriggerData> triggerData = new List<TriggerData>();
     Dictionary<Triggers, bool> triggerRecord = new Dictionary<Triggers, bool>();
+    List<Triggers> triggersTemporarilyEnabled = new List<Triggers>();
 
     public Grid grid;
 
@@ -84,7 +104,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         }
         instance = this;
         //DontDestroyOnLoad(gameObject);
-        
+
         //Do JSON reading here and setup triggerData text here
         JSONNode triggers = JSONNode.Parse(tutorialJSON.ToString());
 
@@ -92,10 +112,20 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         {
             JSONNode trigger = triggers[i];
             string triggerName = trigger["TriggerName"];
-            string textInfo = trigger["TextInfo"];
-            int panelNumber = trigger["PanelNumber"].AsInt;
-            
-            triggerData.Add(new TriggerData(triggerName, textInfo, panelNumber));
+
+            List<TriggerData.InfoBite> infoBites = new List<TriggerData.InfoBite>();
+
+            JSONArray infoBitesArray = trigger["Info"].AsArray;
+            for (int j = 0; j < infoBitesArray.Count; ++j)
+            {
+                JSONNode infoBite = infoBitesArray[j];
+                string textInfo = infoBite["TextInfo"];
+                string panelStr = infoBite["Panel"];
+                int panelNumber = PanelStringToInt(panelStr);
+                infoBites.Add(new TriggerData.InfoBite(textInfo, panelNumber));
+            }
+
+            triggerData.Add(new TriggerData(triggerName, infoBites));
         }
 
         foreach (Triggers trigger in Enum.GetValues(typeof(Triggers)))
@@ -114,22 +144,41 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             }
             else
             {
-            PlayerPrefs.SetInt(trigger.ToString(), 0);
-            triggerRecord.Add(trigger, false);
+                PlayerPrefs.SetInt(trigger.ToString(), 0);
+                triggerRecord.Add(trigger, false);
             }
         }
     }
 
     private void Start()
     {
-        TriggerEvent(Triggers.FIRST_OPEN);
-        TriggerEvent(Triggers.FIRST_OPEN_2);
+        if (Settings.Instance.IsTutorialModeEnabled())
+        {
+            TemporarilyEnableTriggers();
+        }
 
-        grid.SquareFormed += OnSquare;
+        TriggerEvent(Triggers.FIRST_OPEN);
+        //TriggerEvent(Triggers.FIRST_OPEN_2);
+
+        grid.SquaresCleared += OnSquare;
+
+        endTutorialWindow.SetActive(false);
+    }
+
+    public void TriggerEvent(string trigger)
+    {
+        // Convert the string to an enum.
+        TriggerEvent((Triggers)Enum.Parse(typeof(Triggers), trigger));
     }
 
     public void TriggerEvent(Triggers trigger)
     {
+        // If the trigger doesn't exist, get outta here.
+        if (triggerData.Find(x => x.trigger == trigger) == null)
+        {
+            return;
+        }
+
         if (currentlyPlaying)
         {
             if (!nextTriggers.Contains(trigger))
@@ -152,14 +201,19 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         triggerRecord[trigger] = true;
         PlayerPrefs.SetInt(trigger.ToString(), 1);
 
+        TriggerData thisTrigger = triggerData.Find((x) => x.trigger == trigger);
 
-        string textInfo = triggerData.Find((x) => x.trigger == trigger).textInfo;
+        StartCoroutine(OpenPanels(thisTrigger));
+
+        /*
+        string textInfo = thisTrigger.textInfo;
+
         if (textInfo == null)
         {
             Debug.LogError("No text data found for Trigger!");
         }
 
-        int panelNumber = triggerData.Find((x) => x.trigger == trigger).panelNumber;
+        int panelNumber = thisTrigger.panelNumber;
 
         if (Panels[panelNumber] == null)
         {
@@ -171,19 +225,48 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             PanelTexts[panelNumber].text = textInfo;
             ActivatePanel(trigger, panelNumber);
         }
+        */
     }
 
-    public void ActivatePanel(Triggers trigger, int panelNumber)
+    IEnumerator OpenPanels(TriggerData data)
     {
-        StartCoroutine(OpenPanel(trigger, panelNumber));
+        List<TriggerData.InfoBite> infoBites = data.infoBites;
+
+        for (int i = 0; i < infoBites.Count; ++i)
+        {
+            TriggerData.InfoBite infoBite = infoBites[i];
+            string text = infoBite.textInfo;
+            int panel = infoBite.panelNumber;
+
+            ActivatePanel(panel, text);
+
+            while (currentlyPlaying)
+            {
+                yield return null;
+            }
+        }
+
+        // Now that we're done, move onto the next trigger if possible.
+        if (nextTriggers.Count > 0)
+        {
+            Triggers next = nextTriggers[0];
+            nextTriggers.Remove(next);
+            TriggerEvent(next);
+        }
     }
 
-    IEnumerator OpenPanel(Triggers trigger, int panelNumber)
+    public void ActivatePanel(int panelNumber, string text)
+    {
+        StartCoroutine(OpenPanel(panelNumber, text));
+    }
+
+    IEnumerator OpenPanel(int panelNumber, string text)
     {
         currentlyPlaying = true;
 
         if (Panels[panelNumber] != null)
         {
+            PanelTexts[panelNumber].text = text;
             Panels[panelNumber].gameObject.SetActive(true);
         }
 
@@ -201,9 +284,6 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             yield return null;
         }
 
-        tapCountdown = 0f;
-        currentlyPlaying = false;
-
         if (Panels[panelNumber] != null)
         {
             Panels[panelNumber].gameObject.SetActive(false);
@@ -214,91 +294,99 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             masks[panelNumber].gameObject.SetActive(false);
         }
 
-        if (nextTriggers.Count > 0)
-        {
-            Triggers next = nextTriggers[0];
-            nextTriggers.Remove(next);
-            TriggerEvent(next);
-        }
+        tapCountdown = 0f;
+        currentlyPlaying = false;
     }
 
-    //Call this instead of TriggerEvent if you want the panel to move to a block location
-    public void PanelToBlockLocation(int row, int col, Triggers trigger)
+    public void MovePanelToBlockLocation(int panelNumber, int row, int col)
     {
-        
-        string textInfo = triggerData.Find((x) => x.trigger == trigger).textInfo;
-        if (textInfo == null)
-        {
-            Debug.LogError("No text data found for Trigger!");
-        }
-
-        int panelNumber = triggerData.Find((x) => x.trigger == trigger).panelNumber;
-
-        if (Panels[panelNumber] == null)
-        {
-            Debug.LogError("No panel found for Trigger!");
-        }
-
         float xPos;
         float yPos;
 
         if (row < grid.GetWidth() / 2)
         {
-            xPos = grid.GetTilePosition(row, col).x + offset;
+            xPos = -offset;
         }
         else
         {
-            xPos = grid.GetTilePosition(row, col).x - offset;
+            xPos = offset;
         }
 
         if (col < grid.GetHeight() / 2)
         {
-            yPos = grid.GetTilePosition(row, col).y - offset;
+            yPos = offset;
         }
         else
         {
-            yPos = grid.GetTilePosition(row, col).y + offset;
+            yPos = -offset;
         }
 
         Panels[panelNumber].transform.localPosition = new Vector2(xPos, yPos);
-
-        if (currentlyPlaying)
-        {
-            if (!nextTriggers.Contains(trigger))
-            {
-                nextTriggers.Add(trigger);
-                return;
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        //if already played do not trigger
-        if (triggerRecord[trigger])
-        {
-            return;
-        }
-
-        triggerRecord[trigger] = true;
-        PlayerPrefs.SetInt(trigger.ToString(), 1);
-
-        if (Panels[panelNumber] != null && textInfo != null)
-        {
-            PanelTexts[panelNumber].text = textInfo;
-            ActivatePanel(trigger, panelNumber);
-        }
     }
 
-    private void OnSquare(int size, Vector3 textPos)
+    private int PanelStringToInt(string panelString)
     {
-        TriggerEvent(Triggers.FIRST_SQUARE);
+        switch (panelString)
+        {
+            case "Grid":
+                return 0;
+            case "Console":
+                return 1;
+            case "Reactor":
+                return 2;
+            case "ScoreBar":
+                return 3;
+            case "Waste":
+                return 4;
+            default:
+                Debug.LogError("PanelStringToInt: Couldn't find panel with name " + panelString + "!");
+                return 5;
+        }
     }
-    
+
+    public void EndTutorialMode()
+    {
+        endTutorialWindow.SetActive(true);
+        DisableTemporaryTriggers();
+        Settings.Instance.SetTutorialComplete();
+    }
+
+    // Re-enable triggers for when the player replays tutorial mode.
+    public void TemporarilyEnableTriggers()
+    {
+        foreach (var pair in triggerRecord)
+        {
+            if (pair.Value == true)
+            {
+                Triggers trig = pair.Key;
+                //triggerRecord[trig] = false;
+                triggersTemporarilyEnabled.Add(trig);
+            }
+        }
+        foreach (Triggers trig in triggersTemporarilyEnabled)
+        {
+            triggerRecord[trig] = false;
+        }
+    }
+    // Disable the temporarily re-enabled triggers.
+    public void DisableTemporaryTriggers()
+    {
+        foreach (Triggers trig in triggersTemporarilyEnabled)
+        {
+            triggerRecord[trig] = true;
+        }
+        triggersTemporarilyEnabled.Clear();
+    }
+
     private void OnDestroy()
     {
-        grid.SquareFormed -= OnSquare;
+        DisableTemporaryTriggers();
+        grid.SquaresCleared -= OnSquare;
+    }
+
+    private void OnSquare()
+    {
+        TriggerEvent(Triggers.FIRST_SQUARE);
     }
 
     public void OnPointerDown(PointerEventData eventData)

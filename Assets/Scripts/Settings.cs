@@ -12,6 +12,9 @@ public class Settings : MonoBehaviour
     [SerializeField]
     [Tooltip("Whether Zen Mode is enabled or not.")]
     bool zenModeEnabled = false;
+    [SerializeField]
+    [Tooltip("Whether Tutorial Mode is enabled or not.")]
+    bool tutorialModeEnabled = true;
 
     private static Settings instance = null;
     public static Settings Instance
@@ -31,6 +34,15 @@ public class Settings : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        if (GetTutorialComplete())
+        {
+            SetTutorialModeEnabled(false);
+        }
+        else
+        {
+            SetTutorialModeEnabled(true);
+        }
     }
 
     public bool AreCheatsEnabled() //Tell us whether cheats are enabled or not
@@ -55,6 +67,16 @@ public class Settings : MonoBehaviour
         return zenModeEnabled;
     }
 
+    public void SetTutorialModeEnabled(bool on)
+    {
+        tutorialModeEnabled = on;
+    }
+
+    public bool IsTutorialModeEnabled()
+    {
+        return tutorialModeEnabled;
+    }
+
     string GetHighScoreKeyName()
     {
         if (IsZenModeEnabled())
@@ -76,6 +98,21 @@ public class Settings : MonoBehaviour
     // Saves the high score.
     public void SaveHighScore(int newHighScore)
     {
-        PlayerPrefs.SetInt(GetHighScoreKeyName(), newHighScore);
+        if (!AreCheatsEnabled() && !IsTutorialModeEnabled())
+        {
+            PlayerPrefs.SetInt(GetHighScoreKeyName(), newHighScore);
+        }
+    }
+
+    public void SetTutorialComplete()
+    {
+        PlayerPrefs.SetInt("TutorialDone", 1);
+        SetTutorialModeEnabled(false);
+    }
+
+    public bool GetTutorialComplete()
+    {
+        int result = PlayerPrefs.GetInt("TutorialDone");
+        return (result == 1);
     }
 }

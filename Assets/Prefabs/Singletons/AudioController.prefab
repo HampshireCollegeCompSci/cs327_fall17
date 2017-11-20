@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4759594972464500}
   - component: {fileID: 114823428492862832}
+  - component: {fileID: 82236612722053510}
   m_Layer: 0
   m_Name: AudioController
   m_TagString: Untagged
@@ -40,6 +41,87 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &82236612722053510
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1933545667893238}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243257605468147166, guid: ff98622eb62353c41a656249542fc88d,
+    type: 2}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114823428492862832
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,9 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2a47e0b8a271cd4f9c8cfc32a9bb50f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicList:
-  - {fileID: 8300000, guid: cf6b65935d7873e488014efdb3b5d2ac, type: 3}
-  - {fileID: 8300000, guid: 35f7484fa3e35f54b8b11a894e408707, type: 3}
   sfxList:
   - {fileID: 8300000, guid: 11b8903d0e4d6154ba286e6a42163c4d, type: 3}
   - {fileID: 8300000, guid: 479f49811e4bd6046bf50af5b87d5c8d, type: 3}
@@ -78,6 +157,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0a720d396aed98546bea9833e82b183f, type: 3}
   - {fileID: 8300000, guid: ca31b9158ee9efc43887403b5aba2096, type: 3}
   - {fileID: 8300000, guid: 45f25854c6a4c914b900389b3e8e7c08, type: 3}
+  - {fileID: 8300000, guid: 94424788dd18243498cfe7f43d24e895, type: 3}
+  - {fileID: 8300000, guid: d1ac4f60ebd328b4d849ab1df1b8cdce, type: 3}
   Channels: []
   PlaceTileSFX:
   - Tiles Place_Tile_B_1
@@ -104,3 +185,7 @@ MonoBehaviour:
   - About_To_Lose_1
   - Game_Over_1
   - Tiles_Pickup_1
+  musicGroup: {fileID: 243257605468147166, guid: ff98622eb62353c41a656249542fc88d,
+    type: 2}
+  sfxGroup: {fileID: 243888803352446948, guid: ff98622eb62353c41a656249542fc88d, type: 2}
+  musicSource: {fileID: 82236612722053510}
