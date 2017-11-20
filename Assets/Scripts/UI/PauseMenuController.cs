@@ -11,6 +11,8 @@ public class PauseMenuController : MonoBehaviour {
     [SerializeField]
     [Tooltip("Reference to the screen tapping controller.")]
     ScreenTapping screenTapping;
+    [SerializeField]
+    GameObject blocksInBagPanel;
 
     public void OpenPauseMenu()
     {
@@ -22,5 +24,10 @@ public class PauseMenuController : MonoBehaviour {
     {
         pauseMenu.SetActive(false);
         AudioController.Instance.MenuClick();
+    }
+
+    public void ShowBlocksInBag()
+    {
+        blocksInBagPanel.GetComponent<ShowBlocksInBag>().ShowBlocks();
     }
 }
