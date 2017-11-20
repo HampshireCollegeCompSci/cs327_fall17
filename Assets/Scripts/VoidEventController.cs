@@ -536,7 +536,6 @@ public class VoidEventController : MonoBehaviour
         if (levelsImportant)
         {
             result += " Lv. " + tier;
-			//result = translator.Translate (result);
         }
         return result;
     }

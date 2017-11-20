@@ -12,6 +12,7 @@ TrueTypeFontImporter:
   fontName: BigNoodleTitling
   fontNames:
   - BigNoodleTitling
+  - Squarish Sans CT
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

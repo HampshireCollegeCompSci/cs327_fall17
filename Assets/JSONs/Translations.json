@@ -125,6 +125,21 @@
 	    "Swedish": "Huvudmeny",
 		"Korean": "메인 메뉴"
 	  },
+	  "Resume" : {
+		"English": "Resume",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+
+	  },
 	  "Tip": {
 	    "English": "Tip: Don’t lest vestiges stick around too long",
 	    "Spanish": "Tip: No dejes que restos se quede por mucho tiempo",
@@ -503,6 +518,118 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean"
-	}
+	}, 
+	"Instruction(0)" : {
+		"English": "-Place blocks on the board to make squares and generate energy.
 
+		-When you complete a square, every cell used to make it is removed from the board. You gain 1 energy for each cell cleared. ",
+		"Spanish": "PlaceholderSpanishx",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Instruction(1)" : {
+		"English": "-Any cells adjacent to the square that is cleared becomes waste.
+
+		-You lose 1 energy every time you place a block and an extra -1 energy for every waste you have on the board.",
+		"Spanish": "PlaceholderSpanishx",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Instruction(2)" : {
+		"English": "-If a square is cleared next to a waste, that waste levels up.
+		Level 1 Waste : -1 energy per turn
+		Level 2 Waste : -3 energy per turn
+		Level 3 Waste : -5 energy per turn
+
+		-If you run out of energy, the game ends.",
+		"Spanish": "PlaceholderSpanishx",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Instruction(3)" : {
+		"English": "-There are three different events that occur during the game at certain thresholds throughout the game.
+
+		-Each event has three tiers of difficulty and you will encounter all three of one tier before advancing to the next tier.",
+		"Spanish": "PlaceholderSpanishx",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Instruction(4)" : {
+		"English": "-There are three events: Breach, Unrefined Uranium, and Contamination.
+
+		Breach - some empty cells will become unusable and will not be able to be cleared
+		Unrefined Uranium - new blocks will temporarily be generated
+		Contamination - blocks will now appear with wastes inside of them",
+		"Spanish": "PlaceholderSpanishx",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"CS327": {
+		"English": "This game was created by Hampshire College class CS-327 during the fall of 2017.",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Website": {
+		"English": "Checkout our website",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	} 
 }
