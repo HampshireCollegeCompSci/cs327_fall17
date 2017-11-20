@@ -14,13 +14,7 @@ public class ShowBlocksInBag : MonoBehaviour {
     [SerializeField]
     Grid grid;
 
-    List<GameObject> blocksInBag;
-
-    void Awake()
-    {
-        Debug.Log("A");
-        blocksInBag = new List<GameObject>();
-    }
+    List<GameObject> blocksInBag = new List<GameObject>();
 
     public void ShowBlocks()
     {
