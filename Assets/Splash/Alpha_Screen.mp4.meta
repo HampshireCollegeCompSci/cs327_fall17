@@ -24,7 +24,34 @@ VideoClipImporter:
   importAudio: 0
   sourceAudioChannelCount: 
   sourceAudioSampleRate: 
-  targetSettings: {}
+  targetSettings:
+    0:
+      enableTranscoding: 0
+      codec: 0
+      resizeFormat: 0
+      aspectRatio: 0
+      customWidth: 1536
+      customHeight: 2048
+      bitrateMode: 2
+      spatialQuality: 2
+    4:
+      enableTranscoding: 1
+      codec: 0
+      resizeFormat: 0
+      aspectRatio: 0
+      customWidth: 1536
+      customHeight: 2048
+      bitrateMode: 0
+      spatialQuality: 2
+    7:
+      enableTranscoding: 1
+      codec: 0
+      resizeFormat: 0
+      aspectRatio: 0
+      customWidth: 1536
+      customHeight: 2048
+      bitrateMode: 0
+      spatialQuality: 2
   output:
     format: 1
     settings:
