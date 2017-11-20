@@ -1178,7 +1178,7 @@ Prefab:
     - target: {fileID: 224106449231437458, guid: 99d1dc03aaa887043adfc3dcbe1dd720,
         type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 224106449231437458, guid: 99d1dc03aaa887043adfc3dcbe1dd720,
         type: 2}
@@ -1639,9 +1639,9 @@ RectTransform:
   - {fileID: 77510614}
   - {fileID: 465470039}
   - {fileID: 181955867}
+  - {fileID: 293700729}
   - {fileID: 1069704022}
   - {fileID: 927509410}
-  - {fileID: 293700729}
   - {fileID: 1155208513}
   - {fileID: 1306943244}
   - {fileID: 856736359}
@@ -1820,6 +1820,10 @@ Prefab:
       propertyPath: voidEventController
       value: 
       objectReference: {fileID: 809854789}
+    - target: {fileID: 1065589403178500, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
   m_IsPrefabParent: 0
@@ -2585,7 +2589,7 @@ Prefab:
     - target: {fileID: 224804674211477668, guid: cb21f09757ec2044a92d76ac406761cd,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224804674211477668, guid: cb21f09757ec2044a92d76ac406761cd,
         type: 2}
@@ -4002,7 +4006,7 @@ Prefab:
     - target: {fileID: 224372488172158858, guid: d2616a75a7ff69044baa07df8bdeaf7e,
         type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 224372488172158858, guid: d2616a75a7ff69044baa07df8bdeaf7e,
         type: 2}
