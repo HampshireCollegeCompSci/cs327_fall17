@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SimpleJSON;
 
 public class UIGameOver : MonoBehaviour
 {
@@ -55,6 +56,18 @@ public class UIGameOver : MonoBehaviour
     [SerializeField]
     [Tooltip("The game over music to play.")]
     AudioClip musicGameOver;
+    [SerializeField]
+    [Tooltip("Reference to the console mask.")]
+    GameObject maskConsole;
+    [SerializeField]
+    [Tooltip("Reference to the reactor mask.")]
+    GameObject maskReactor;
+    [SerializeField]
+    [Tooltip("How long the game over window waits to appear when game over status is achieved. Populated by JSON.")]
+    float secondsToWait;
+    [SerializeField]
+    [Tooltip("Reference to the tuning JSON.")]
+    TextAsset tuningJSON;
 
     // Reference to the Translator.
 	UILanguages translator;
@@ -63,40 +76,64 @@ public class UIGameOver : MonoBehaviour
     {
         translator = FindObjectOfType<UILanguages>();
 
-        //if (gameFlow != null)
-        //{
-        gameFlow.GameLost += Appear;
-        //}
+        gameFlow.GameLost += GameFlow_GameLost;
 
-        /*
-        foreach (GameObject obj in toBeEnabled)
-        {
-            obj.SetActive(false);
-        }
-        */
         gameOverWindow.SetActive(false);
+
+        Tune();
+    }
+
+    private void Tune()
+    {
+        JSONNode json = JSON.Parse(tuningJSON.ToString());
+        secondsToWait = json["seconds to wait for game over"].AsFloat;
     }
 
     private void OnDestroy()
     {
         if (gameFlow != null)
         {
-            gameFlow.GameLost -= Appear;
+            gameFlow.GameLost -= GameFlow_GameLost;
         }
     }
 
     // Callback function for GameFlow.GameLost.
-    void Appear(GameFlow.GameOverCause cause)
+    void GameFlow_GameLost(GameFlow.GameOverCause cause)
+    {
+        StartCoroutine(GameOverWait(cause));
+    }
+
+    IEnumerator GameOverWait(GameFlow.GameOverCause cause)
     {
         AudioController.Instance.StopSFX("About_To_Lose_1");
         AudioController.Instance.GameOver();
-        AudioController.Instance.PlayMusic(musicGameOver);
-        /*
-        foreach (GameObject obj in toBeEnabled)
+
+        float waitTime = secondsToWait;
+        switch (cause)
         {
-            obj.SetActive(true);
+            case GameFlow.GameOverCause.NoRemainingSpaces:
+                maskConsole.SetActive(true);
+                break;
+
+            case GameFlow.GameOverCause.NoMoreEnergy:
+                // Wait a little longer for the -# text to hit the reactor.
+                //waitTime += 2.0f;
+                // BlockSpawner handles its game over logic itself.
+                maskReactor.SetActive(true);
+                break;
         }
-        */
+
+        yield return new WaitForSeconds(waitTime);
+
+        maskConsole.SetActive(false);
+        maskReactor.SetActive(false);
+
+        Appear(cause);
+    }
+
+    void Appear(GameFlow.GameOverCause cause)
+    {
+        AudioController.Instance.PlayMusic(musicGameOver);
         gameOverWindow.SetActive(true);
 
         string reason;

@@ -213,6 +213,8 @@ public class BlockSpawner : MonoBehaviour
     //int friendlyBagMaxScore;
     // Whether a junkyard event is currently starting.
     bool junkyardEventIsStarting = false;
+    // Whether any blocks in the spawner are allowed to be dragged.
+    bool draggingIsAllowed = true;
 
     private void Awake()
     {
@@ -579,7 +581,13 @@ public class BlockSpawner : MonoBehaviour
             PositionBlockAt(newDraggable, closestIndex);
             newDraggable.SetDefaultPosition(newBlock.transform.localPosition);
 
-            consoleGrid.SetDraggableBlock(newDraggable); //Insert the block into the console grid
+            if (!draggingIsAllowed)
+            {
+                newDraggable.AllowDragging(false);
+            }
+
+            // Insert the block into the console grid.
+            consoleGrid.SetDraggableBlock(newDraggable);
         }
     }
 
@@ -727,14 +735,23 @@ public class BlockSpawner : MonoBehaviour
         return result;
     }
 
-    // Callback function for gameFlow's GameLost event.
-    private void GameFlow_GameLost(GameFlow.GameOverCause cause)
+    public void DisableDragging()
     {
         if (blocksQueue.Count > 0)
         {
             blocksQueue.Peek().AllowDragging(false);
         }
-        enabled = false;
+        draggingIsAllowed = false;
+    }
+
+    // Callback function for gameFlow's GameLost event.
+    private void GameFlow_GameLost(GameFlow.GameOverCause cause)
+    {
+        DisableDragging();
+        if (cause == GameFlow.GameOverCause.NoMoreEnergy)
+        {
+            enabled = false;
+        }
     }
 
     /*

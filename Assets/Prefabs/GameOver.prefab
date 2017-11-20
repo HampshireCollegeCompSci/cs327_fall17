@@ -61,7 +61,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1139495737981970
 GameObject:
   m_ObjectHideFlags: 1
@@ -571,6 +571,10 @@ MonoBehaviour:
   voidEventController: {fileID: 0}
   progressBarTop: {fileID: 224549071322884934}
   musicGameOver: {fileID: 8300000, guid: f2e6e684bd6413c488fbd0e1f0833cdd, type: 3}
+  maskConsole: {fileID: 0}
+  maskReactor: {fileID: 0}
+  secondsToWait: 0
+  tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
 --- !u!114 &114230764441667554
 MonoBehaviour:
   m_ObjectHideFlags: 1

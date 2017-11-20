@@ -675,6 +675,11 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224419443405568338, guid: a476f5f4ec97b1b459353d01e22dbeb5,
     type: 2}
   m_PrefabInternal: {fileID: 96723528}
+--- !u!1 &102934869 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1024265162736024, guid: 26734c1bcbdc21842a685d02d83b73a7,
+    type: 2}
+  m_PrefabInternal: {fileID: 972460582}
 --- !u!1 &141761570
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,10 +1825,16 @@ Prefab:
       propertyPath: voidEventController
       value: 
       objectReference: {fileID: 809854789}
-    - target: {fileID: 1065589403178500, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+    - target: {fileID: 114202807859211042, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+        type: 2}
+      propertyPath: maskConsole
+      value: 
+      objectReference: {fileID: 102934869}
+    - target: {fileID: 114202807859211042, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+        type: 2}
+      propertyPath: maskReactor
+      value: 
+      objectReference: {fileID: 1963392371}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
   m_IsPrefabParent: 0
@@ -2464,6 +2475,14 @@ Prefab:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1800592063411620, guid: 26734c1bcbdc21842a685d02d83b73a7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1511843604778408, guid: 26734c1bcbdc21842a685d02d83b73a7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1024265162736024, guid: 26734c1bcbdc21842a685d02d83b73a7, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -5206,6 +5225,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 107022f30410f6e499d720f53801baa4, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1963392371 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1511843604778408, guid: 26734c1bcbdc21842a685d02d83b73a7,
+    type: 2}
+  m_PrefabInternal: {fileID: 972460582}
 --- !u!114 &1966224418 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114975690288865388, guid: 5770730666c9c411c9ed1aea87e1a9f6,
