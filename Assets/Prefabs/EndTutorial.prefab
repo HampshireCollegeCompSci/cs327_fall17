@@ -53,6 +53,8 @@ GameObject:
   - component: {fileID: 224993321851201744}
   - component: {fileID: 222458926192444276}
   - component: {fileID: 114549103908822398}
+  - component: {fileID: 114601187291632064}
+  - component: {fileID: 114996382388021718}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -70,6 +72,8 @@ GameObject:
   - component: {fileID: 224963085282470538}
   - component: {fileID: 222517599792101492}
   - component: {fileID: 114080067239264954}
+  - component: {fileID: 114323495835971276}
+  - component: {fileID: 114132415254527408}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -156,6 +160,30 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: OK
+--- !u!114 &114132415254527408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1962142109359940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
+--- !u!114 &114323495835971276
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1962142109359940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: OK
 --- !u!114 &114342852581478266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -241,6 +269,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Tutorial complete! Now let's play the REAL game!
+--- !u!114 &114601187291632064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1788479489945978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: TutorialComplete
 --- !u!114 &114887385244785414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -279,6 +319,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92544b2910a65c14c9559dffac87b6dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114996382388021718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1788479489945978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
 --- !u!222 &222458926192444276
 CanvasRenderer:
   m_ObjectHideFlags: 1

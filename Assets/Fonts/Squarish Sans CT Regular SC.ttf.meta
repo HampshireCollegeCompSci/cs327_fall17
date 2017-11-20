@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0bcbea7838bed41fba6d679805b97e96
-timeCreated: 1510435707
+guid: f3e8e24dc2fee4aeb98019a9d9248dab
+timeCreated: 1510945093
 licenseType: Free
 TrueTypeFontImporter:
   serializedVersion: 4
@@ -9,9 +9,8 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: BigNoodleTitling
+  fontName: Squarish Sans CT
   fontNames:
-  - BigNoodleTitling
   - Squarish Sans CT
   fallbackFontReferences: []
   customCharacters: 

@@ -12,6 +12,10 @@ public class UILanguages : MonoBehaviour
     [Tooltip("Reference to the Translation JSON.")]
     TextAsset translationsJSON;
 
+	[SerializeField]
+	[Tooltip("Font for languages with advance characters")]
+	Font fontBackUp;
+
     string gameLanguage;
 
     public static UILanguages instance = null;
@@ -37,7 +41,14 @@ public class UILanguages : MonoBehaviour
         JSONNode textToTranslate = json[descriptor];
         string translation = textToTranslate[gameLanguage];
         //Debug.Log("descriptor / gameLanguage: " + descriptor + " / " + gameLanguage);
-        return translation;
+		if (gameLanguage == "Polish" || gameLanguage == "Romanian" || gameLanguage == "Slovenian") 
+		{
+			/*
+			textMesh.font = fontBackUp;
+			textMesh.renderer.sharedMaterial = ArialFont.material;
+			*/
+		}
+		return translation;
     }
 
     public void SetLanguage(string language)
@@ -45,7 +56,22 @@ public class UILanguages : MonoBehaviour
         gameLanguage = language;
         PlayerPrefs.SetString("Language", gameLanguage);
     }
+	/*
+	public bool IsLanguageThatNeedsNewFont () {
+		if (gameLanguage == "Polish" || gameLanguage == "Romanian" || gameLanguage == "Slovenian") 
+		{
+			return true;
+		} 
+		else 
+		{
+			return false;
+		}
+	}
 
+	public Font Font() {
+		return fontBackUp;
+	}
+	*/
     public string GetLanguage()
     {
         return gameLanguage;

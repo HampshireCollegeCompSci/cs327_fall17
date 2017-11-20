@@ -119,6 +119,8 @@ GameObject:
   - component: {fileID: 33201285}
   - component: {fileID: 33201284}
   - component: {fileID: 33201286}
+  - component: {fileID: 33201287}
+  - component: {fileID: 33201288}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -195,6 +197,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: Credits
+--- !u!114 &33201287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 33201282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ba647365e1fad74c9423edaa1aed7fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &33201288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 33201282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
 --- !u!1001 &298656306
 Prefab:
   m_ObjectHideFlags: 0
@@ -384,6 +409,7 @@ GameObject:
   - component: {fileID: 470354018}
   - component: {fileID: 470354017}
   - component: {fileID: 470354020}
+  - component: {fileID: 470354021}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -471,6 +497,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: Settings
+--- !u!114 &470354021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 470354015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
 --- !u!1 &597235003
 GameObject:
   m_ObjectHideFlags: 0
@@ -945,6 +983,7 @@ GameObject:
   - component: {fileID: 1330076797}
   - component: {fileID: 1330076799}
   - component: {fileID: 1330076800}
+  - component: {fileID: 1330076801}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1032,6 +1071,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   translationKey: HowToPlay
+--- !u!114 &1330076801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1330076795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
 --- !u!1 &1550580401
 GameObject:
   m_ObjectHideFlags: 0
