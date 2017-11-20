@@ -556,12 +556,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114022222046773454, guid: 27a27589748ded645867762d6f8ea1b9,
-        type: 2}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 0bcbea7838bed41fba6d679805b97e96,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27a27589748ded645867762d6f8ea1b9, type: 2}
   m_IsPrefabParent: 0
@@ -570,23 +564,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224607912779322094, guid: 27a27589748ded645867762d6f8ea1b9,
     type: 2}
   m_PrefabInternal: {fileID: 362466561}
---- !u!1 &362466563 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1293900504183226, guid: 27a27589748ded645867762d6f8ea1b9,
-    type: 2}
-  m_PrefabInternal: {fileID: 362466561}
---- !u!114 &362466564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 362466563}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
 --- !u!1 &543828297
 GameObject:
   m_ObjectHideFlags: 0

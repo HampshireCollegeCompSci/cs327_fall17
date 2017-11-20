@@ -845,6 +845,8 @@ GameObject:
   - component: {fileID: 598905064}
   - component: {fileID: 598905066}
   - component: {fileID: 598905065}
+  - component: {fileID: 598905068}
+  - component: {fileID: 598905067}
   m_Layer: 5
   m_Name: TextSFX
   m_TagString: Untagged
@@ -909,6 +911,30 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 598905063}
+--- !u!114 &598905067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 598905063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
+--- !u!114 &598905068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 598905063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: SFX
 --- !u!1 &646423482
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,7 +1192,7 @@ Prefab:
     - target: {fileID: 224795791543986622, guid: f73e4e7fcb544d14da9adc9f1397c465,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.006
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224795791543986622, guid: f73e4e7fcb544d14da9adc9f1397c465,
         type: 2}
@@ -1176,12 +1202,12 @@ Prefab:
     - target: {fileID: 224762257661907586, guid: f73e4e7fcb544d14da9adc9f1397c465,
         type: 2}
       propertyPath: m_AnchorMin.x
-      value: 0.006
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224762257661907586, guid: f73e4e7fcb544d14da9adc9f1397c465,
         type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0.006
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224762257661907586, guid: f73e4e7fcb544d14da9adc9f1397c465,
         type: 2}
@@ -2690,6 +2716,8 @@ GameObject:
   - component: {fileID: 1812409138}
   - component: {fileID: 1812409140}
   - component: {fileID: 1812409139}
+  - component: {fileID: 1812409142}
+  - component: {fileID: 1812409141}
   m_Layer: 5
   m_Name: TextMusic
   m_TagString: Untagged
@@ -2754,6 +2782,30 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1812409137}
+--- !u!114 &1812409141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1812409137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
+--- !u!114 &1812409142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1812409137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: Music
 --- !u!1 &1998297101
 GameObject:
   m_ObjectHideFlags: 0

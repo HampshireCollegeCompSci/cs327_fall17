@@ -21,8 +21,10 @@ GameObject:
   - component: {fileID: 224447630120531504}
   - component: {fileID: 222175048273148008}
   - component: {fileID: 114195053731045888}
+  - component: {fileID: 114633735932051422}
+  - component: {fileID: 114173701091847180}
   m_Layer: 5
-  m_Name: YouWin
+  m_Name: YouWinTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,6 +59,8 @@ GameObject:
   - component: {fileID: 224193499162447700}
   - component: {fileID: 222578655955688170}
   - component: {fileID: 114507164506954166}
+  - component: {fileID: 114821113875422478}
+  - component: {fileID: 114754444799508184}
   m_Layer: 5
   m_Name: HighScoreTitle
   m_TagString: Untagged
@@ -74,6 +78,7 @@ GameObject:
   - component: {fileID: 224724816017725092}
   - component: {fileID: 222402952561125082}
   - component: {fileID: 114054076561363462}
+  - component: {fileID: 114317367747175892}
   m_Layer: 5
   m_Name: YourScoreTitle
   m_TagString: Untagged
@@ -98,7 +103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1578279172590174
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,6 +166,8 @@ GameObject:
   - component: {fileID: 224655356414453128}
   - component: {fileID: 222180866229734548}
   - component: {fileID: 114560478330518774}
+  - component: {fileID: 114435639142546372}
+  - component: {fileID: 114096575021474696}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -179,6 +186,7 @@ GameObject:
   - component: {fileID: 222049986479974760}
   - component: {fileID: 114031791466955186}
   - component: {fileID: 114463396512155916}
+  - component: {fileID: 114548509702763464}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -284,7 +292,19 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: ?????
+--- !u!114 &114096575021474696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1962795837961376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
 --- !u!114 &114113887046981802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,6 +319,18 @@ MonoBehaviour:
   highScore: {fileID: 114896710840274686}
   yourScore: {fileID: 114059591685548002}
   scoreCounter: {fileID: 0}
+--- !u!114 &114173701091847180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1075853661975562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
 --- !u!114 &114195053731045888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,6 +391,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114317367747175892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1318539018584982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: YourScore
 --- !u!114 &114325689129764520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -449,6 +493,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114435639142546372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1962795837961376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: Continue
 --- !u!114 &114463396512155916
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -494,6 +550,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: high score
+--- !u!114 &114548509702763464
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1973547339993180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
 --- !u!114 &114560478330518774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -527,6 +595,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Continue
+--- !u!114 &114633735932051422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1075853661975562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: YouWin
 --- !u!114 &114675529037883204
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -554,6 +634,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114754444799508184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1243164029388356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: f3e8e24dc2fee4aeb98019a9d9248dab, type: 3}
 --- !u!114 &114785374936036004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -607,6 +699,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114821113875422478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1243164029388356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: HighScore1
 --- !u!114 &114896710840274686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -639,7 +743,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: ?????
 --- !u!222 &222049986479974760
 CanvasRenderer:
   m_ObjectHideFlags: 1

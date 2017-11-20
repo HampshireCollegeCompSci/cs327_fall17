@@ -631,5 +631,89 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean"
-	} 
+	},
+	"Music" : {
+		"English": "Music",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"SFX" : {
+		"English": "SFX",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"YouWin" : {
+		"English": "YOU WIN!",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	}
+	"Continue" : {
+		"English": "Continue",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"TutorialComplete" : {
+		"English": "Tutorial complete! Now let's play the REAL game!",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"OK" : {
+		"English": "OK",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	}
 }
