@@ -715,5 +715,47 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean"
+	},
+	"LoseProgress": {
+		"English": "You will lose all progress on your current game. Are you sure?",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Yes": {
+		"English": "Yes",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"Cancel": {
+		"English": "Cancel",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
 	}
 }

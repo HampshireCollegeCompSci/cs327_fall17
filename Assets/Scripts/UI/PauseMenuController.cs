@@ -13,6 +13,9 @@ public class PauseMenuController : MonoBehaviour {
     ScreenTapping screenTapping;
     [SerializeField]
     GameObject blocksInBagPanel;
+    [SerializeField]
+    [Tooltip("Reference to the lose progress warning.")]
+    GameObject LoseProgressWarning;
 
     public void OpenPauseMenu()
     {
@@ -29,5 +32,17 @@ public class PauseMenuController : MonoBehaviour {
     public void ShowBlocksInBag()
     {
         blocksInBagPanel.GetComponent<ShowBlocksInBag>().ShowBlocks();
+    }
+
+    public void Warning()
+    {
+        LoseProgressWarning.SetActive(true);
+        AudioController.Instance.MenuClick();
+    }
+
+    public void CancelExit()
+    {
+        LoseProgressWarning.SetActive(false);
+        AudioController.Instance.MenuClick();
     }
 }
