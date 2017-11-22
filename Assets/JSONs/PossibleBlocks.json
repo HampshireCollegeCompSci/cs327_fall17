@@ -100,7 +100,7 @@
 			"width" : 1,
 			"height" : 3,
 			"sprite" : 1,
-			"bags" : ["normal", "junkyard 1", "junkyard 2", "junkyard 3"],
+			"bags" : ["friendly", "normal", "junkyard 1", "junkyard 2", "junkyard 3"],
 			"cells" :
 			[1,
 			 0,
@@ -129,7 +129,7 @@
 			"width" : 2,
 			"height" : 3,
 			"sprite" : 4,
-			"bags" : ["normal", "junkyard 1", "junkyard 2", "junkyard 3"],
+			"bags" : ["friendly", "normal", "junkyard 1", "junkyard 2", "junkyard 3"],
 			"cells" :
 			[0, 1,
 			 1, 0, 
@@ -139,7 +139,7 @@
 			"width" : 2,
 			"height" : 3,
 			"sprite" : 5,
-			"bags" : ["normal", "junkyard 1"],
+			"bags" : ["friendly", "normal", "junkyard 1"],
 			"cells" :
 			[0, 1,
 			 1, 0, 
