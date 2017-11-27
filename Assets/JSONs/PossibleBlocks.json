@@ -197,7 +197,7 @@
 			"width": 3,
 			"height": 4,
 			"sprite": 5,
-			"bags": ["Tutorial 2"],
+			"bags": ["tutorial 2"],
 			"cells":
 			[1,1,1,
 			 1,1,1,
