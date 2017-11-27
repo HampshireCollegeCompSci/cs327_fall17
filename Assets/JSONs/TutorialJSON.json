@@ -23,7 +23,7 @@
 	},
 	"Third_Square":
 	{
-			"TriggerName" : "Third Square"
+			"TriggerName" : "Third_Square",
 			"Info" : 
 		[
 			{
