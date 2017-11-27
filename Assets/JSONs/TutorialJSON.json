@@ -131,20 +131,9 @@
 			}
 		]
 	},
-	"TUTORIAL_BAG_TRIGGER_1" : 
+	"Tutorial_Trigger_1" :
 	{
-		"TriggerName" : "TUTORIAL_BAG_TRIGGER_1",
-		"Info" :
-		[
-			{
-				"TextInfo" : "Place the block with the Waste in the corner to get rid of it. Use the buttons to rotate and flip it.",
-				"Panel" : "Grid"
-			}
-		]
-	},
-	"Tutorial_Trigger_2" :
-	{
-		"TriggerName" : "Tutorial_Bag_Trigger 2",
+		"TriggerName" : "Tutorial_Bag_Trigger 1",
 		"Info":
 		[
 			{
@@ -152,6 +141,18 @@
 				"Panel" : "Grid"
 			}
 		]	
+	}, 
+	"TUTORIAL_BAG_TRIGGER_2" : 
+	{
+		"TriggerName" : "TUTORIAL_BAG_TRIGGER_2",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Place the block with the Waste in the corner to get rid of it. Use the buttons to rotate and flip it.",
+				"Panel" : "Grid"
+			}
+		]
+	
 	}, 
 	"TUTORIAL_BAG_TRIGGER_3" : 
 	{
