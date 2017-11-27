@@ -26,7 +26,7 @@
 			}
 		},
 		{
-			"name" : "tutorial 3",
+			"name" : "tutorial 4",
 			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_2",
 			"preconditions" :
 			{
@@ -35,7 +35,7 @@
 			}
 		},
 		{
-			"name" : "tutorial 4",
+			"name" : "tutorial 5",
 			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_3",
 			"preconditions" :
 			{
@@ -219,7 +219,7 @@
 			"width" : 3,
 			"height" : 3,
 			"sprite" : 2,
-			"bags" : ["tutorial 3"],
+			"bags" : ["tutorial 4"],
 			"cells" :
 			[1, 1, 1,
 			 1, 1, 1,
