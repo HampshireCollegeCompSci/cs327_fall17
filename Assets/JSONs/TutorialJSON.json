@@ -16,10 +16,21 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Here is your energy. It will go up when you make squares and down every turn you don't. If it hits 0, you lose.",
-				"Panel" : "Reactor"
+				"TextInfo" : "Multiple square can be cleared at a time",
+				"Panel" : "Grid"
 			}
 		]
+	},
+	"Third_Square":
+		{
+			"TriggerName" : "Third Square"
+			"Info" : 
+		[
+			{
+				"Text Info" : "Place the block with the Waste in the corner to get rid of it. Use the buttons to rotate and flip it."
+			}
+		]
+		
 	},
 	"FIRST_WASTE" : 
 	{
