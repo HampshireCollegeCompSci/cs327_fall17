@@ -104,7 +104,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         }
         instance = this;
         //DontDestroyOnLoad(gameObject);
-
+        
         //Do JSON reading here and setup triggerData text here
         JSONNode triggers = JSONNode.Parse(tutorialJSON.ToString());
 
@@ -303,7 +303,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         float xPos;
         float yPos;
 
-        if (row < grid.GetWidth() / 2)
+        if (row < grid.GetWidth() / 2 - 1)
         {
             xPos = -offset;
         }
@@ -312,13 +312,13 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             xPos = offset;
         }
 
-        if (col < grid.GetHeight() / 2)
+        if (col <= grid.GetHeight() / 2 - 1)
         {
-            yPos = offset;
+            yPos = offset * 2.5f;
         }
         else
         {
-            yPos = -offset;
+            yPos = 0;
         }
 
         Panels[panelNumber].transform.localPosition = new Vector2(xPos, yPos);
