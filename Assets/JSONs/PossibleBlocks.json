@@ -10,7 +10,7 @@
 			}
 		},
 		{
-			"name" : "3x4 tutorial",
+			"name" : "tutorial 2",
 			"preconditions" :
 			{
 				"tutorial is active" : true,
@@ -18,7 +18,7 @@
 			}
 		},
 		{
-			"name" : "tutorial 2",
+			"name" : "tutorial 3",
 			"preconditions" :
 			{
 				"tutorial is active" : true,
@@ -27,7 +27,7 @@
 		},
 		{
 			"name" : "tutorial 3",
-			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_1",
+			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_2",
 			"preconditions" :
 			{
 				"tutorial is active" : true,
@@ -36,7 +36,7 @@
 		},
 		{
 			"name" : "tutorial 4",
-			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_2",
+			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_3",
 			"preconditions" :
 			{
 				"tutorial is active" : true,
@@ -197,7 +197,7 @@
 			"width": 3,
 			"height": 4,
 			"sprite": 5,
-			"bags": ["3x4 tutorial"],
+			"bags": ["Tutorial 2"],
 			"cells":
 			[1,1,1,
 			 1,1,1,
@@ -208,7 +208,7 @@
 			"width" : 3,
 			"height" : 4,
 			"sprite" : 1,
-			"bags" : ["tutorial 2"],
+			"bags" : ["tutorial 3"],
 			"cells" :
 			[0, 0, 1,
 			 1, 1, 1,
@@ -229,7 +229,7 @@
 			"width" : 4,
 			"height" : 4,
 			"sprite" : 3,
-			"bags" : ["tutorial 4"],
+			"bags" : ["tutorial 5"],
 			"cells" :
 			[0, 0, 0, 1,
 			 1, 1, 1, 0,
