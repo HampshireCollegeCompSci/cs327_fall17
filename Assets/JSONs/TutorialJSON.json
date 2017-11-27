@@ -142,9 +142,20 @@
 			}
 		]
 	},
-	"TUTORIAL_BAG_TRIGGER_2" : 
+	"Tutorial_Trigger_2" :
+		"TriggerName" : "Tutorial_Bag_Trigger 2",
+		"Info":
+		[
+			{
+				"TextInfo" : "Multiple square can be cleared at a time" ,
+				"Panel" : "Grid"
+			}
+		]	
 	{
-		"TriggerName" : "TUTORIAL_BAG_TRIGGER_2",
+	}, 
+	"TUTORIAL_BAG_TRIGGER_3" : 
+	{
+		"TriggerName" : "TUTORIAL_BAG_TRIGGER_3",
 		"Info" :
 		[
 			{
