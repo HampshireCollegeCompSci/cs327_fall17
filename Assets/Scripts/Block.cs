@@ -151,25 +151,23 @@ public class Block
         //for block with current width 1, flip does nothing
         if (width >= 2)
         {
-            //If width is odd, then midCol is the middle;
-            //otherwhise it is the middle-right column.
-            int midCol = width / 2;
             TileData[,] newTileData = new TileData[height, width];
-            for (int c = 0; c < width; c++)
-            {            
+            if (IsSymmetric())
+            {
+                int midRow = height / 2;
                 for (int r = 0; r < height; r++)
-                {
-                    if (width % 2 == 1 && c == midCol)
-                    {
-                        newTileData[r, midCol] = new TileData(tiles[r, midCol]);
-                    }
-                    else
-                    {
-                        newTileData[r, c] = new TileData(tiles[r, width - 1 - c]);
-                    }
-                }               
+                    for (int c = 0; c < width; c++)
+                        newTileData[r, c] = new TileData(tiles[height - 1 - r, c]);
             }
-            
+            else
+            {
+                //If width is odd, then midCol is the middle;
+                //otherwhise it is the middle-right column.
+                int midCol = width / 2;
+                for (int c = 0; c < width; c++)
+                    for (int r = 0; r < height; r++)
+                        newTileData[r, c] = new TileData(tiles[r, width - 1 - c]);
+            }
             tiles = newTileData;
         }
         else
@@ -177,6 +175,23 @@ public class Block
             //Do nothing for now
             return;
         }
+    }
+
+    //Check if the block is horizontally symmetric.
+    private bool IsSymmetric()
+    {
+        for (int row = 0; row < height; row++)
+        {
+            for (int col = 0; col < width / 2; col++)
+            {
+                int leftIndex = col;
+                int rightIndex = width - 1 - col;
+                if (tiles[row, leftIndex].GetTileType() != tiles[row, rightIndex].GetTileType())
+                    return false;
+            }
+        }
+
+        return true;
     }
 
     // Converts Block information to a string.
