@@ -143,6 +143,7 @@
 		]
 	},
 	"Tutorial_Trigger_2" :
+	{
 		"TriggerName" : "Tutorial_Bag_Trigger 2",
 		"Info":
 		[
@@ -151,7 +152,6 @@
 				"Panel" : "Grid"
 			}
 		]	
-	{
 	}, 
 	"TUTORIAL_BAG_TRIGGER_3" : 
 	{
