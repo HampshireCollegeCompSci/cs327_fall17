@@ -1,6 +1,6 @@
 {
-    "FIRST_OPEN" : 
-    {
+    	"FIRST_OPEN" : 
+    	{
 		"TriggerName" : "FIRST_OPEN",
 		"Info" :
 		[
@@ -9,9 +9,9 @@
 				"Panel" : "Console"
 			}
 		]
-    },
-	"First_Square :
-	
+    	},
+	"FIRST_SQUARE" :
+	{
 		"TriggerName" : "FIRST_SQUARE",
 		"Info" : 
 		[
@@ -134,7 +134,7 @@
 	},
 	"Tutorial_Trigger_1" :
 	{
-		"TriggerName" : "Tutorial_Bag_Trigger 1",
+		"TriggerName" : "TUTORIAL_BAG_TRIGGER_1",
 		"Info":
 		[
 			{
