@@ -14,15 +14,16 @@
 			"preconditions" :
 			{
 				"tutorial is active" : true,
-				"square clearings count is equal to" :1
+				"square clearings count is equal to" : 1
 			}
 		},
 		{
 			"name" : "tutorial 3",
+			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_1",
 			"preconditions" :
 			{
 				"tutorial is active" : true,
-				"square clearings count is equal to" : 3
+				"square clearings count is equal to" : 2
 			}
 		},
 		{
@@ -31,7 +32,7 @@
 			"preconditions" :
 			{
 				"tutorial is active" : true,
-				"square clearings count is equal to" : 4
+				"square clearings count is equal to" : 3
 			}
 		},
 		{
@@ -40,7 +41,7 @@
 			"preconditions" :
 			{
 				"tutorial is active" : true,
-				"square clearings count is equal to" : 5
+				"square clearings count is equal to" : 4
 			}
 		},
 		{
@@ -49,7 +50,7 @@
 			"preconditions" :
 			{
 				"tutorial is active" : true,
-				"square clearings count is equal to" : 6
+				"square clearings count is equal to" : 5
 			}
 		},
 		{
@@ -201,8 +202,8 @@
 			"cells":
 			[1,1,1,
 			 1,1,1,
-			 1,1,1
-			 1,1,1,]
+			 1,1,1,
+			 1,1,1]
 		},
 		{
 			"width" : 3,

@@ -1,6 +1,6 @@
 {
-    	"FIRST_OPEN" : 
-    	{
+	"FIRST_OPEN" : 
+	{
 		"TriggerName" : "FIRST_OPEN",
 		"Info" :
 		[
@@ -9,14 +9,14 @@
 				"Panel" : "Console"
 			}
 		]
-    	},
+	},
 	"FIRST_SQUARE" :
 	{
 		"TriggerName" : "FIRST_SQUARE",
 		"Info" : 
 		[
 			{
-				"TextInfo" : "Place the block with the Waste in the corner to get rid of it. Use the buttons to rotate and flip it.",
+				"TextInfo" : "3x3 squares will get cleared.",
 				"Panel" : "Grid"
 			}
 		]
@@ -132,13 +132,13 @@
 			}
 		]
 	},
-	"Tutorial_Trigger_1" :
+	"TUTORIAL_BAG_TRIGGER_1" :
 	{
 		"TriggerName" : "TUTORIAL_BAG_TRIGGER_1",
-		"Info":
+		"Info" :
 		[
 			{
-				"TextInfo" : "Multiple square can be cleared at a time" ,
+				"TextInfo" : "Multiple squares can be cleared at a time.",
 				"Panel" : "Grid"
 			}
 		]	
