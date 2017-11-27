@@ -10,11 +10,18 @@
 			}
 		},
 		{
+			"name" : "3x4 tutorial",
+			{
+				"tutorial is active" : true,
+				"square clearings count is equal to" :1
+			}
+		},
+		{
 			"name" : "tutorial 2",
 			"preconditions" :
 			{
 				"tutorial is active" : true,
-				"square clearings count is equal to" : 1
+				"square clearings count is equal to" : 3
 			}
 		},
 		{
@@ -23,7 +30,7 @@
 			"preconditions" :
 			{
 				"tutorial is active" : true,
-				"square clearings count is equal to" : 2
+				"square clearings count is equal to" : 4
 			}
 		},
 		{
@@ -32,7 +39,7 @@
 			"preconditions" :
 			{
 				"tutorial is active" : true,
-				"square clearings count is equal to" : 3
+				"square clearings count is equal to" : 5
 			}
 		},
 		{
@@ -41,7 +48,7 @@
 			"preconditions" :
 			{
 				"tutorial is active" : true,
-				"square clearings count is equal to" : 4
+				"square clearings count is equal to" : 6
 			}
 		},
 		{
@@ -185,6 +192,15 @@
 			 1, 1, 1,
 			 1, 1, 1]
 		},
+			"width" 3,
+			"height" : 4
+			"sprite" : 5
+			"bags" : ["3x4 tutorial"],
+			"cells" :
+			[1,1,1,
+			 1,1,1,
+			 1,1,1
+			 1,1,1,}
 		{
 			"width" : 3,
 			"height" : 4,
