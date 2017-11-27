@@ -193,11 +193,11 @@
 			 1, 1, 1,
 			 1, 1, 1]
 		},
-			"width" : 3,
-			"height" : 4,
-			"sprite" : 5,
-			"bags" : ["3x4 tutorial"],
-			"cells" :
+			"width": 3,
+			"height": 4,
+			"sprite": 5,
+			"bags": ["3x4 tutorial"],
+			"cells":
 			[1,1,1,
 			 1,1,1,
 			 1,1,1
