@@ -14,6 +14,10 @@ public class Tip : MonoBehaviour
     [Tooltip("The list of tips could be shown in the game over screen. Populated by JSON.")]
     JSONArray tips;
 
+    [SerializeField]
+    [Tooltip("Reference to the Tuning JSON.")]
+    TextAsset tuningJSON;
+
     UILanguages translator;
 
     string displayTip;
@@ -24,8 +28,24 @@ public class Tip : MonoBehaviour
         translator = FindObjectOfType<UILanguages>();
         var json = JSON.Parse(tipJSON.ToString());
         tips = json["tips"].AsArray;
-        displayTip = tips[Random.Range(0, tips.Count)];
+
+        var tjson = JSON.Parse(tuningJSON.ToString());
+        bool randomized = tjson["randomize tips"].AsBool;
+
+        int tipsCount = 0;
+
+        if (randomized)
+            tipsCount = Random.Range(0, tips.Count);
+        else
+            tipsCount = PlayerPrefs.GetInt("Current Tip", 0);
+
+        displayTip = tips[tipsCount];
         displayTip = translator.Translate(displayTip);
         GetComponent<Text>().text = displayTip;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetInt("Current Tip", (PlayerPrefs.GetInt("Current Tip", 0) + 1) % tips.Count);
     }
 }
