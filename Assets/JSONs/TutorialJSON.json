@@ -10,20 +10,9 @@
 			}
 		]
     },
-	"FIRST_SQUARE" : 
+	"First_Squate:
 	{
-		"TriggerName" : "FIRST_SQUARE",
-		"Info" :
-		[
-			{
-				"TextInfo" : "Multiple square can be cleared at a time",
-				"Panel" : "Grid"
-			}
-		]
-	},
-	"Third_Square":
-	{
-			"TriggerName" : "Third_Square",
+			"TriggerName" : "First_Square",
 			"Info" : 
 		[
 			{
