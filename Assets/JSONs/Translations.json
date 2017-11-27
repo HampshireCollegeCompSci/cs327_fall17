@@ -226,7 +226,7 @@
 		"Korean": "PlaceholderKorean"
 	},
 	"SelectLanguage": {
-		"English": "SelectLanguage",
+		"English": "SelectLanguage:",
 		"Spanish": "PlaceholderSpanish",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
