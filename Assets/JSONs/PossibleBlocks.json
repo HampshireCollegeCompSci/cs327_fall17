@@ -11,6 +11,7 @@
 		},
 		{
 			"name" : "3x4 tutorial",
+			"preconditions" :
 			{
 				"tutorial is active" : true,
 				"square clearings count is equal to" :1
