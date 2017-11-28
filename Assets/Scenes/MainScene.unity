@@ -1948,6 +1948,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114196298837808818, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+        type: 2}
+      propertyPath: tuningJSON
+      value: 
+      objectReference: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
   m_IsPrefabParent: 0

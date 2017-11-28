@@ -24,5 +24,6 @@
 	"contamination blocks alternate" : true,
 	"event warning wait time" : 2.0,
 	"seconds between square animations" : 0.5,
-	"seconds to wait for game over" : 3.5
+	"seconds to wait for game over" : 3.5,
+	"randomize tips" : false
 }
