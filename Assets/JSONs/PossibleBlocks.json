@@ -117,12 +117,13 @@
 		},
 		{
 			"width" : 2,
-			"height" : 2,
-			"sprite" : 2,
-			"bags" : ["friendly", "normal"],
+			"height" : 3,
+			"sprite" : 4,
+			"bags" : ["friendly", "normal", "junkyard 1", "junkyard 2", "junkyard 3"],
 			"cells" :
-			[1, 0,
-			 1, 1]  
+			[0, 1,
+			 1, 0, 
+			 1, 0]  
 		},
 		{
 			"width" : 2,
@@ -137,22 +138,21 @@
 		{
 			"width" : 2,
 			"height" : 3,
-			"sprite" : 4,
-			"bags" : ["friendly", "normal", "junkyard 1", "junkyard 2", "junkyard 3"],
-			"cells" :
-			[0, 1,
-			 1, 0, 
-			 1, 0]  
-		},
-		{
-			"width" : 2,
-			"height" : 3,
 			"sprite" : 5,
 			"bags" : ["friendly", "normal", "junkyard 1"],
 			"cells" :
 			[0, 1,
 			 1, 0, 
 			 0, 1]
+		},
+		{
+			"width" : 2,
+			"height" : 2,
+			"sprite" : 2,
+			"bags" : ["friendly", "normal"],
+			"cells" :
+			[1, 0,
+			 1, 1]  
 		},
 		{
 			"width" : 3,
