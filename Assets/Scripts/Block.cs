@@ -154,7 +154,7 @@ public class Block
             TileData[,] newTileData = new TileData[height, width];
             if (IsSymmetric())
             {
-                int midRow = height / 2;
+                //int midRow = height / 2;
                 for (int r = 0; r < height; r++)
                     for (int c = 0; c < width; c++)
                         newTileData[r, c] = new TileData(tiles[height - 1 - r, c]);
@@ -163,7 +163,7 @@ public class Block
             {
                 //If width is odd, then midCol is the middle;
                 //otherwhise it is the middle-right column.
-                int midCol = width / 2;
+                //int midCol = width / 2;
                 for (int c = 0; c < width; c++)
                     for (int r = 0; r < height; r++)
                         newTileData[r, c] = new TileData(tiles[r, width - 1 - c]);
