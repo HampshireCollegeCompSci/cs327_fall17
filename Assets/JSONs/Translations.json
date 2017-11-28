@@ -137,7 +137,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "돌아가기"
 
 	  },
 	  "Tip": {
@@ -195,7 +195,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "내 스코어"
 	},
 	"HighScore" : {
 		"English": "HIGH SCORE",
@@ -209,7 +209,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "최고 스코어"
 	},
 	"Settings": {
 		"English": "Settings",
@@ -223,7 +223,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "옵션"
 	},
 	"SelectLanguage": {
 		"English": "Select Language:",
@@ -237,7 +237,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "언어 선택"
 	},
 	"PlayZenMode": {
 		"English": "Play Zen Mode",
@@ -321,7 +321,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "도달"
 	},
 	"CRISIS AVERTED: REACTOR RESTORED": {
 		"English": "CRISIS AVERTED: REACTOR RESTORED",
@@ -335,7 +335,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "위기 모면: 원자로 복원"
 	},
 	"PauseMenu": {
 		"English": "Pause Menu",
@@ -349,7 +349,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "정지 메뉴"
 	},
 	"Tip1": {
 		"English": "Try making more than one square at a time",
@@ -363,7 +363,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "한 번에 여러 개의 정사각형들을 만들어 보세요"
 	},
 	"Tip2": {
 		"English": "Some blocks are more compatible than others",
@@ -377,7 +377,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "특정 블록들은 다른 블록들보다 호환성이 더 높습니다."
 	},
 	"Tip3": {
 		"English" :"Don’t place blocks in the center of the board, it gives you less space to work in",
@@ -391,7 +391,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "블록을 중앙에 놓지 마십시오. 여유 공간이 줄어듭니다."
 	},
 	"Tip4": {
 		"English" : "Remember that cells diagonally adjacent to a cleared square don't become wastes",
@@ -405,7 +405,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "치워진 정사각형들과 대각선으로 맟닿은 셀들은 남은 퍼즐 조각들이 되지 않습니다."
 	},
 	"Tip5" : {
 		"English": "Remove wastes from the board as quickly as you can, especially if they are level two or three",
@@ -419,7 +419,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오."
 	},
 	"Nothing" : {
 		"English": "Nothing",
@@ -433,7 +433,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "무"
 	},
 	"Unrefined Uranium" : {
 		"English": "Unrefined Uranium",
@@ -447,7 +447,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "우라늄 원석"
 	},
 	"Waste Contamination": {
 		"English": "Waste Contamination",
@@ -461,7 +461,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "폐기물 오염"
 	},
 	"Reactor Breach": {
 		"English": "Reactor Breach",
@@ -475,7 +475,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "원자로 균열"
 	}, 
 	"Reactor Meltdown": {
 		"English": "Reactor Meltdown",
@@ -489,7 +489,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "노심 융해"
 	},
 	"Reactor Overload": {
 		"English": "Reactor Overload",
@@ -503,7 +503,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "PLACEHOLDER"
 	},
 	" begin!": {
 		"English": " begin!",
@@ -531,7 +531,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "도달"
 	}, 
 	"Instruction(0)" : {
 		"English": "-Place blocks on the board to make squares and generate energy.
@@ -630,7 +630,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "이 게임은 햄프셔 대학 CS-327 학생들이 2017년 가을에 만들었습니다."
 	},
 	"Website": {
 		"English": "Checkout our website",
@@ -644,7 +644,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "홈페이지를 둘러봐주세요"
 	},
 	"Music" : {
 		"English": "Music",
