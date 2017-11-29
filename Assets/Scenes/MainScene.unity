@@ -649,11 +649,6 @@ Prefab:
       propertyPath: gameOver
       value: 
       objectReference: {fileID: 1095900781}
-    - target: {fileID: 114985900637936118, guid: 5770730666c9c411c9ed1aea87e1a9f6,
-        type: 2}
-      propertyPath: m_PreserveAspect
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5770730666c9c411c9ed1aea87e1a9f6, type: 2}
   m_IsPrefabParent: 0
