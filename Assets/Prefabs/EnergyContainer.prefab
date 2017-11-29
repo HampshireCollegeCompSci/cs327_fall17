@@ -806,7 +806,7 @@ MonoBehaviour:
   energyMeter: {fileID: 114893180769059516}
   grid: {fileID: 0}
   energyGainController: {fileID: 95769553267905262}
-  energyTextColorGain: {r: 0, g: 0.8088235, b: 0.30679515, a: 1}
+  energyTextColorGain: {r: 0, g: 0.68235296, b: 0.03137255, a: 1}
   energyTextColorLoss: {r: 1, g: 0, b: 0, a: 1}
   canvas: {fileID: 0}
   energyTransferBallController: {fileID: 95014424890742646}
@@ -817,6 +817,9 @@ MonoBehaviour:
     type: 3}
   imageConsoleGrid: {fileID: 0}
   gameOver: {fileID: 0}
+  textSecondsBeforeHeadingToDestination: 0
+  energyTextColorNormal: {r: 0, g: 0, b: 0, a: 0}
+  energyTextColorDanger: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &114975690288865388
 MonoBehaviour:
   m_ObjectHideFlags: 1
