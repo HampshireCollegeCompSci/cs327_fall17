@@ -183,6 +183,10 @@ MonoBehaviour:
   - Tiles_Snap_A_1
   - Tiles_Snap_B_1
   - Tiles_Snap_C_1
+  OutlineSFX:
+  - Clear_Square_Outline_A
+  - Clear_Square_Outline_B
+  - Clear_Square_Outline_C
   GeneralSFX:
   - About_To_Lose_1
   - Game_Over_1
