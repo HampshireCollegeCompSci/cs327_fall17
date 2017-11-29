@@ -109,6 +109,12 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Prefab to instantiate for reactor energy loss animation.")]
     GameObject prefabEnergyLossReactor;
+    [SerializeField]
+    [Tooltip("Seconds between each vestige energy loss animation. Populated by JSON.")]
+    float secondsBetweenVestigeEnergyLossAnimations;
+    [SerializeField]
+    [Tooltip("Reference to the game over controller.")]
+    UIGameOver gameOver;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -133,6 +139,7 @@ public class Grid : MonoBehaviour
         scorePerSquare = json["score per 3x3 square cleared"].AsInt;
         secondsBetweenSquareAnimations = json["seconds between square animations"].AsFloat;
         asteroidsCanSpawnInFilledCells = json["asteroids can spawn in filled cells"].AsBool;
+        secondsBetweenVestigeEnergyLossAnimations = json["seconds between vestige energy loss animations"].AsFloat;
 
         asteroidMask = new int[height, width];
         JSONArray asteroidMaskJSON = json["asteroid area denial"].AsArray;
@@ -615,6 +622,8 @@ public class Grid : MonoBehaviour
     private IEnumerator ClearingOutlineEffect(List<int[]> squaresFormed, List<Tile> duplicatesRemoved,
         List<VestigeMarker> newVestiges)
     {
+        Vector3 reactorPos = reactor.transform.position;
+
         foreach (int[] square in squaresFormed)
         {
             GameObject outline = DrawOutLine(square[0], square[1]);
@@ -626,6 +635,12 @@ public class Grid : MonoBehaviour
             OnSquareOutlined(scorePerSquare, textPos);
 
             AudioController.Instance.Outline();
+
+            Vector3 textPosAbsolute = transform.TransformPoint(textPos);
+
+            int energyGain = energyPerSquare;
+            energyCounter.AddEnergy(energyGain, false);
+            energyCounter.PopUp(energyGain, textPosAbsolute, reactorPos);
 
             yield return new WaitForSeconds(secondsBetweenSquareAnimations);
 
@@ -641,9 +656,7 @@ public class Grid : MonoBehaviour
             t.Clear();
         }
 
-        Vector3 reactorPos = reactor.transform.position;
-
-        int totalEnergyGain = 0;
+        //int totalEnergyGain = 0;
         foreach (int[] square in squaresFormed)
         {
             GameObject explosion = Instantiate(explosionPrefab, transform, false);
@@ -653,7 +666,7 @@ public class Grid : MonoBehaviour
             DrawLightning(square[0], square[1]);
 
             //energyCounter.AddEnergy(energyPerSquare);
-            totalEnergyGain += energyPerSquare;
+            //totalEnergyGain += energyPerSquare;
         }
         // Only play the lightning sound once so that we don't destroy the player's ears.
         AudioController.Instance.Lightning();
@@ -664,8 +677,8 @@ public class Grid : MonoBehaviour
         
         //Debug.Log("Grid.ClearingOutlineEffect: Reached the end of the coroutine.");
 
-        energyCounter.AddEnergy(totalEnergyGain);
-        energyCounter.PopUp(totalEnergyGain, reactorPos);
+        //energyCounter.AddEnergy(totalEnergyGain);
+        //energyCounter.PopUp(totalEnergyGain, reactorPos);
 
         blockSpawner.UpdateAllBlocks();
         blockSpawner.ProgressQueue();
@@ -1081,11 +1094,13 @@ public class Grid : MonoBehaviour
             vestigeCounter.SetCurrentVestiges(CountVestiges());
 
             int energyChange = GetEnergyDrain();
+            if (energyChange != 0)
+            {
+                energyCounter.RemoveEnergy(energyChange, false);
+                //energyCounter.PopUp(-energyChange, blockCenter, reactor.transform.position);
 
-            energyCounter.RemoveEnergy(energyChange, false);
-            energyCounter.PopUp(-energyChange, blockCenter, reactor.transform.position);
-
-            AnimateVestigeEnergyLoss();
+                AnimateVestigeEnergyLosses();
+            }
 
             //Update Available spaces for all draggable blocks
             blockSpawner.UpdateAllBlocks();
@@ -1117,23 +1132,73 @@ public class Grid : MonoBehaviour
         return energyChange;
     }
 
-    // Instantiate the energy loss animation for all vestiges on the Grid.
-    public void AnimateVestigeEnergyLoss()
+    private List<VestigeMarker> GetAllVestiges()
     {
+        List<VestigeMarker> result = new List<VestigeMarker>();
         for (int r = 0; r < height; r++)
         {
             for (int c = 0; c < width; c++)
             {
-                if (tiles[r, c].GetTileType() == TileData.TileType.Vestige)
+                Tile theTile = tiles[r, c];
+                if (theTile.GetTileType() == TileData.TileType.Vestige)
                 {
-                    Vector3 pos = GetTilePosition(r, c);
-                    GameObject obj = Instantiate(prefabEnergyLossVestige, transform, false);
-                    obj.transform.localPosition = pos;
+                    VestigeMarker vm = new VestigeMarker(theTile, r, c);
+                    result.Add(vm);
                 }
             }
         }
-        Vector3 reactorPos = reactor.transform.position;
+        return result;
+    }
+
+    IEnumerator AnimateVestigeEnergyLossOneByOne()
+    {
+        List<VestigeMarker> vestiges = GetAllVestiges();
+        foreach (VestigeMarker vm in vestiges)
+        {
+            AnimateVestigeEnergyLoss(vm);
+            Tile theTile = vm.GetTile();
+            Vector3 vestigePos = theTile.transform.position;
+            int energyChange = decayRates[theTile.GetVestigeLevel() - 1];
+            energyCounter.PopUp(-energyChange, vestigePos, reactor.transform.position);
+
+            gameOver.ResetGameOverWaitTime();
+            yield return new WaitForSeconds(secondsBetweenVestigeEnergyLossAnimations);
+        }
+        gameOver.TryStartGameOverWaitTimer();
+    }
+
+    // Instantiate the energy loss animation for all vestiges on the Grid.
+    public void AnimateVestigeEnergyLosses()
+    {
+        /*
+        List<VestigeMarker> vestiges = GetAllVestiges();
+        foreach (VestigeMarker vm in vestiges)
+        {
+            AnimateVestigeEnergyLoss(vm);
+        }
+        AnimateReactorEnergyLoss();
+        */
+
+        StartCoroutine(AnimateVestigeEnergyLossOneByOne());
+    }
+
+    // Animate the vestige energy loss on the given Tile.
+    public void AnimateVestigeEnergyLoss(int row, int col)
+    {
+        Vector3 pos = GetTilePosition(row, col);
+        GameObject obj = Instantiate(prefabEnergyLossVestige, transform, false);
+        obj.transform.localPosition = pos;
+    }
+
+    private void AnimateVestigeEnergyLoss(VestigeMarker vm)
+    {
+        AnimateVestigeEnergyLoss(vm.GetRow(), vm.GetCol());
+    }
+
+    public void AnimateReactorEnergyLoss()
+    {
         GameObject reactorAnim = Instantiate(prefabEnergyLossReactor, transform, false);
+        Vector3 reactorPos = reactor.transform.position;
         reactorAnim.transform.position = reactorPos;
     }
 

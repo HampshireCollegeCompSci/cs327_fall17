@@ -69,8 +69,16 @@ public class UIGameOver : MonoBehaviour
     [Tooltip("Reference to the tuning JSON.")]
     TextAsset tuningJSON;
 
+    // Whether the game over wait time shall be incremented.
+    bool waitingForGameOver = false;
+    // How long the game over has been waited for since the last call to ResetGameOverWaitTime.
+    float secondsWaitedForGameOver = 0.0f;
+    // The cause of the game over.
+    GameFlow.GameOverCause causeOfGameOver;
     // Reference to the Translator.
-	UILanguages translator;
+    UILanguages translator;
+    // Whether the game is over or not.
+    bool gameIsOver = false;
 
     private void Awake()
     {
@@ -97,13 +105,43 @@ public class UIGameOver : MonoBehaviour
         }
     }
 
-    // Callback function for GameFlow.GameLost.
-    void GameFlow_GameLost(GameFlow.GameOverCause cause)
+    public void TryStartGameOverWaitTimer()
     {
-        StartCoroutine(GameOverWait(cause));
+        if (gameIsOver)
+        {
+            StartGameOverWaitTimer();
+        }
     }
 
-    IEnumerator GameOverWait(GameFlow.GameOverCause cause)
+    public void StartGameOverWaitTimer()
+    {
+        waitingForGameOver = true;
+    }
+
+    public void ResetGameOverWaitTime()
+    {
+        secondsWaitedForGameOver = 0.0f;
+    }
+
+    private void Update()
+    {
+        if (waitingForGameOver)
+        {
+            secondsWaitedForGameOver += Time.deltaTime;
+            if (secondsWaitedForGameOver > secondsToWait)
+            {
+                waitingForGameOver = false;
+
+                maskConsole.SetActive(false);
+                maskReactor.SetActive(false);
+
+                Appear(causeOfGameOver);
+            }
+        }
+    }
+
+    // Callback function for GameFlow.GameLost.
+    void GameFlow_GameLost(GameFlow.GameOverCause cause)
     {
         AudioController.Instance.StopSFX("About_To_Lose_1");
         AudioController.Instance.GameOver();
@@ -113,22 +151,24 @@ public class UIGameOver : MonoBehaviour
         {
             case GameFlow.GameOverCause.NoRemainingSpaces:
                 maskConsole.SetActive(true);
+                // Wait a little longer than usual.
+                waitTime += 2.0f;
                 break;
 
             case GameFlow.GameOverCause.NoMoreEnergy:
-                // Wait a little longer for the -# text to hit the reactor.
-                //waitTime += 2.0f;
                 // BlockSpawner handles its game over logic itself.
                 maskReactor.SetActive(true);
                 break;
         }
+        secondsToWait = waitTime;
 
-        yield return new WaitForSeconds(waitTime);
+        if (cause == GameFlow.GameOverCause.NoRemainingSpaces)
+        {
+            StartGameOverWaitTimer();
+        }
 
-        maskConsole.SetActive(false);
-        maskReactor.SetActive(false);
-
-        Appear(cause);
+        causeOfGameOver = cause;
+        gameIsOver = true;
     }
 
     void Appear(GameFlow.GameOverCause cause)

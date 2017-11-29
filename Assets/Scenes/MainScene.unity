@@ -893,6 +893,16 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 501203755}
+    - target: {fileID: 114916408207649430, guid: 5770730666c9c411c9ed1aea87e1a9f6,
+        type: 2}
+      propertyPath: imageConsoleGrid
+      value: 
+      objectReference: {fileID: 1125939174}
+    - target: {fileID: 114916408207649430, guid: 5770730666c9c411c9ed1aea87e1a9f6,
+        type: 2}
+      propertyPath: gameOver
+      value: 
+      objectReference: {fileID: 1095900781}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5770730666c9c411c9ed1aea87e1a9f6, type: 2}
   m_IsPrefabParent: 0
@@ -3079,6 +3089,11 @@ Prefab:
       propertyPath: reactor
       value: 
       objectReference: {fileID: 642454970}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: gameOver
+      value: 
+      objectReference: {fileID: 1095900781}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0

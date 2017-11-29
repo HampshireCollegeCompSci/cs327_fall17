@@ -52,6 +52,27 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the BufferedValue component for buffering the energy.")]
     BufferedValue bufferedValueEnergy;
+    [SerializeField]
+    [Tooltip("Console Grid sprite to use when the player isn't at the lowest energy threshold.")]
+    Sprite spriteConsoleGridNormal;
+    [SerializeField]
+    [Tooltip("Console Grid sprite to use when the player is at the lowest energy threshold.")]
+    Sprite spriteConsoleGridDanger;
+    [SerializeField]
+    [Tooltip("Reference to the console grid image.")]
+    Image imageConsoleGrid;
+    [SerializeField]
+    [Tooltip("Reference to the game over controller.")]
+    UIGameOver gameOver;
+    [SerializeField]
+    [Tooltip("How many seconds the rising text will wait before heading to its destination. Populated by JSON.")]
+    float textSecondsBeforeHeadingToDestination;
+    [SerializeField]
+    [Tooltip("The text color to use for the energy counter when the player isn't at the lowest energy threshold.")]
+    Color energyTextColorNormal;
+    [SerializeField]
+    [Tooltip("The text color to use for the energy counter when the player is at the lowest energy threshold.")]
+    Color energyTextColorDanger;
 
     // The highest amount of energy achieved over the course of the game.
     int peakEnergy;
@@ -65,15 +86,25 @@ public class EnergyCounter : MonoBehaviour
         energy = json["starting energy"].AsInt;
         //maxEnergyInMeter = json["max energy in meter"].AsInt;
         energyThreshold = json["energy level animation turns remaining"].AsArray;
+        textSecondsBeforeHeadingToDestination = json["seconds for rising text to rise"].AsFloat;
     }
 
     void Start()
     {
         Tune();
+
+        energyTextColorNormal = energyTextColorGain;
+        energyTextColorDanger = energyTextColorLoss;
+
         bufferedValueEnergy.ValueUpdated += BufferedValueEnergy_ValueUpdated;
         bufferedValueEnergy.ForceSetBufferedValue(energy);
         //SetEnergyLevel();
         UpdateEnergy();
+    }
+
+    private void EnterEnergyLevel(int level)
+    {
+        energyGainController.SetInteger("energyLevel", level);
     }
 
     // Updates the animation on the reactor.
@@ -81,20 +112,37 @@ public class EnergyCounter : MonoBehaviour
     {
         if (turnsRemaining <= energyThreshold[0])
         {
-            energyGainController.SetInteger("energyLevel", 0);
-        }
-        else if (turnsRemaining <= energyThreshold[1])
-        {
-            energyGainController.SetInteger("energyLevel", 1);
-        }
-        else if (turnsRemaining <= energyThreshold[2])
-        {
-            energyGainController.SetInteger("energyLevel", 2);
+            imageConsoleGrid.sprite = spriteConsoleGridDanger;
+            textEnergy.color = energyTextColorDanger;
+
+            EnterEnergyLevel(0);
+            return;
         }
         else
         {
-            energyGainController.SetInteger("energyLevel", 3);
+            imageConsoleGrid.sprite = spriteConsoleGridNormal;
+            textEnergy.color = energyTextColorNormal;
         }
+
+        if (turnsRemaining <= energyThreshold[1])
+        {
+            EnterEnergyLevel(1);
+            return;
+        }
+
+        if (turnsRemaining <= energyThreshold[2])
+        {
+            EnterEnergyLevel(2);
+            return;
+        }
+
+        EnterEnergyLevel(3);
+    }
+
+    // Sets the energy level based on the highest threshold.
+    public void EnterHighestEnergyLevel()
+    {
+        UpdateEnergyLevel(energyThreshold[energyThreshold.Count - 1]);
     }
 
     public void AddEnergy(int amount, bool updateBufferedEnergyTarget = true)
@@ -112,7 +160,6 @@ public class EnergyCounter : MonoBehaviour
         */
         if (energy == 0)
         {
-            energy = 0;
             gameFlow.GameOver(GameFlow.GameOverCause.NoMoreEnergy);
         }
 
@@ -133,37 +180,11 @@ public class EnergyCounter : MonoBehaviour
     public void RemoveEnergy(int amount, bool updateBufferedEnergyTarget = true)
     {
         AddEnergy(-amount, updateBufferedEnergyTarget);
-        /*
-        energy -= amount;
-
-        if (energy <= 0)
-        {
-            energy = 0;
-            gameFlow.GameOver(GameFlow.GameOverCause.NoMoreEnergy);
-        }
-
-        if (updateBufferedEnergyTarget)
-        {
-            UpdateBufferedEnergyTarget();
-        }
-
-        UpdateEnergy();
-        */
     }
 
     public void SetEnergy(int newEnergy, bool updateBufferedEnergyTarget = true)
     {
         AddEnergy(newEnergy - energy, updateBufferedEnergyTarget);
-        /*
-        energy = newEnergy;
-
-        if (updateBufferedEnergyTarget)
-        {
-            UpdateBufferedEnergyTarget();
-        }
-
-        UpdateEnergy();
-        */
     }
 
     public void PopUp(int amount, Vector3 popUpPos, Vector3? destinationPos = null)
@@ -199,6 +220,7 @@ public class EnergyCounter : MonoBehaviour
             //Debug.Log("EnergyCounter.PopUp: Destination position is not null!");
             // Prepare to move to the given destination.
             risingText.SetDestination((Vector3)destinationPos);
+            risingText.SetSecondsBeforeHeadingToDestination(textSecondsBeforeHeadingToDestination);
             //risingTextObj.GetComponent<LerpTo>().Completed += RisingTextEnergyPenaltyCallback;
             risingTextObj.GetComponent<LerpTo>().Completed +=
                 (() => RisingTextEnergyPenaltyCallback(amount));
@@ -215,9 +237,17 @@ public class EnergyCounter : MonoBehaviour
 
         // Check if the player is about to lose.
         int energyDrain = grid.GetEnergyDrain();
-        int turnsRemaining = Mathf.CeilToInt((float)energy / energyDrain);
-        SetIsAboutToLose(turnsRemaining == 1);
-        UpdateEnergyLevel(turnsRemaining);
+        if (energyDrain <= 0)
+        {
+            SetIsAboutToLose(false);
+            EnterHighestEnergyLevel();
+        }
+        else
+        {
+            int turnsRemaining = Mathf.CeilToInt((float)energy / energyDrain);
+            SetIsAboutToLose(turnsRemaining == 1);
+            UpdateEnergyLevel(turnsRemaining);
+        }
     }
 
     private void SetIsAboutToLose(bool isAboutToLose)
@@ -254,10 +284,16 @@ public class EnergyCounter : MonoBehaviour
     {
         //Debug.Log("EnergyCounter.RisingTextEnergyPenaltyCallback");
         AddToBufferedEnergyTarget(amount);
+        if (amount < 0)
+        {
+            grid.AnimateReactorEnergyLoss();
+            gameOver.ResetGameOverWaitTime();
+        }
     }
 
     private void BufferedValueEnergy_ValueUpdated(int newValue, int difference)
     {
+        //Debug.Log("EnergyCounter.BufferedValueEnergy_ValueUpdated.newValue: " + newValue);
         textEnergy.text = newValue.ToString();
     }
 }
