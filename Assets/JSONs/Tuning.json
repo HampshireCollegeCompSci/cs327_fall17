@@ -24,6 +24,8 @@
 	"contamination blocks alternate" : true,
 	"event warning wait time" : 2.0,
 	"seconds between square animations" : 0.5,
-	"seconds to wait for game over" : 3.5,
-	"randomize tips" : false
+	"seconds to wait for game over" : 1.5,
+	"randomize tips" : false,
+	"seconds between vestige energy loss animations" : 0.2,
+	"seconds for rising text to rise" : 0.5
 }

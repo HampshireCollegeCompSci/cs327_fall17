@@ -33,6 +33,18 @@ public class BufferedValue : MonoBehaviour
     public event ValueUpdatedHandler ValueUpdated;
 
     [SerializeField]
+    [Tooltip("Whether the buffered value target pays attention to its minimum value when being set.")]
+    bool hasBufferedValueTargetMin = false;
+    [SerializeField]
+    [Tooltip("Whether the buffered value target pays attention to its maximum value when being set.")]
+    bool hasBufferedValueTargetMax = false;
+    [SerializeField]
+    [Tooltip("The minimum value that the buffered target value can be. Only takes effect if hasBufferValueTargetMin is true.")]
+    int bufferedValueTargetMin;
+    [SerializeField]
+    [Tooltip("The maximum value that the buffered target value can be. Only takes effect if hasBufferValueTargetMax is true.")]
+    int bufferedValueTargetMax;
+    [SerializeField]
     [Tooltip("Seconds between each run of the UpdateBufferValue loop.")]
     float secondsBetweenSteps = 0.1f;
     [SerializeField]
@@ -65,6 +77,20 @@ public class BufferedValue : MonoBehaviour
     // Set a new target for the buffered value.
     public void SetBufferedValueTarget(int newTarget)
     {
+        if (hasBufferedValueTargetMin)
+        {
+            if (newTarget < bufferedValueTargetMin)
+            {
+                newTarget = (int)bufferedValueTargetMin;
+            }
+        }
+        if (hasBufferedValueTargetMax)
+        {
+            if (newTarget > bufferedValueTargetMax)
+            {
+                newTarget = (int)bufferedValueTargetMax;
+            }
+        }
         bufferedValueTarget = newTarget;
 
         // See the BufferTargetUpdatePauseConditions for a description of each condition.
@@ -108,9 +134,19 @@ public class BufferedValue : MonoBehaviour
         SetBufferedValueTarget(bufferedValueTarget - amount);
     }
 
+    public bool DoesBufferedValueMatchTarget()
+    {
+        return bufferedValue == bufferedValueTarget;
+    }
+
     // Keep track of time and perform steps.
     private void Update()
     {
+        if (DoesBufferedValueMatchTarget())
+        {
+            return;
+        }
+
         if (secondsLeftAtTargetUpdate > 0.0f)
         {
             secondsLeftAtTargetUpdate -= Time.deltaTime;
