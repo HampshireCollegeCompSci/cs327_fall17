@@ -158,7 +158,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: ca31b9158ee9efc43887403b5aba2096, type: 3}
   - {fileID: 8300000, guid: 45f25854c6a4c914b900389b3e8e7c08, type: 3}
   - {fileID: 8300000, guid: 94424788dd18243498cfe7f43d24e895, type: 3}
-  - {fileID: 8300000, guid: d1ac4f60ebd328b4d849ab1df1b8cdce, type: 3}
+  - {fileID: 8300000, guid: 2d6ab14c53d012b45906b67d35095c58, type: 3}
+  - {fileID: 8300000, guid: b1ce94b6e631c414ebbe0e63e137420c, type: 3}
+  - {fileID: 8300000, guid: 26c2276c9d0b49d40a0886d2d127d42b, type: 3}
   Channels: []
   PlaceTileSFX:
   - Tiles Place_Tile_B_1
@@ -189,3 +191,4 @@ MonoBehaviour:
     type: 2}
   sfxGroup: {fileID: 243888803352446948, guid: ff98622eb62353c41a656249542fc88d, type: 2}
   musicSource: {fileID: 82236612722053510}
+  go: {fileID: 0}
