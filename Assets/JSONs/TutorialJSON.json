@@ -1,6 +1,6 @@
 {
-    "FIRST_OPEN" : 
-    {
+	"FIRST_OPEN" : 
+	{
 		"TriggerName" : "FIRST_OPEN",
 		"Info" :
 		[
@@ -9,17 +9,18 @@
 				"Panel" : "Console"
 			}
 		]
-    },
-	"FIRST_SQUARE" : 
+	},
+	"FIRST_SQUARE" :
 	{
 		"TriggerName" : "FIRST_SQUARE",
-		"Info" :
+		"Info" : 
 		[
 			{
-				"TextInfo" : "Here is your energy. It will go up when you make squares and down every turn you don't. If it hits 0, you lose.",
-				"Panel" : "Reactor"
+				"TextInfo" : "3x3 squares will get cleared.",
+				"Panel" : "Grid"
 			}
 		]
+		
 	},
 	"FIRST_WASTE" : 
 	{
@@ -131,9 +132,20 @@
 			}
 		]
 	},
-	"TUTORIAL_BAG_TRIGGER_1" : 
+	"TUTORIAL_BAG_TRIGGER_1" :
 	{
 		"TriggerName" : "TUTORIAL_BAG_TRIGGER_1",
+		"Info" :
+		[
+			{
+				"TextInfo" : "Multiple squares can be cleared at a time.",
+				"Panel" : "Grid"
+			}
+		]	
+	}, 
+	"TUTORIAL_BAG_TRIGGER_2" : 
+	{
+		"TriggerName" : "TUTORIAL_BAG_TRIGGER_2",
 		"Info" :
 		[
 			{
@@ -141,10 +153,11 @@
 				"Panel" : "Grid"
 			}
 		]
-	},
-	"TUTORIAL_BAG_TRIGGER_2" : 
+	
+	}, 
+	"TUTORIAL_BAG_TRIGGER_3" : 
 	{
-		"TriggerName" : "TUTORIAL_BAG_TRIGGER_2",
+		"TriggerName" : "TUTORIAL_BAG_TRIGGER_3",
 		"Info" :
 		[
 			{

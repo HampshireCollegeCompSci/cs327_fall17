@@ -19,11 +19,9 @@ public class RisingText : MonoBehaviour
     [SerializeField]
     [Tooltip("The speed at which the Text fades into nothingness.")]
     float fadingSpeed;
-    /*
     [SerializeField]
     [Tooltip("How many seconds the rising text has to exist before it heads to its destination (if it exists).")]
     float secondsBeforeHeadingToDestination = 1.0f;
-    */
     [SerializeField]
     [Tooltip("How many seconds it takes for the rising text to reach its destination once it starts moving.")]
     float secondsToReachDestination;
@@ -41,13 +39,6 @@ public class RisingText : MonoBehaviour
 
     // How long the rising text has existed for.
     float secondsElapsed = 0.0f;
-    
-    /*
-    private void Start()
-    {
-        Debug.Log("Hey YouTube, RisingText here.");
-    }
-    */
 
     void Update()
     {
@@ -85,8 +76,8 @@ public class RisingText : MonoBehaviour
         {
             if (!movingToDestination)
             {
-                //if (secondsElapsed > secondsBeforeHeadingToDestination)
-                if (risingSpeed <= 0.0f)
+                if (secondsElapsed > secondsBeforeHeadingToDestination
+                    || risingSpeed <= 0.0f)
                 {
                     movingToDestination = true;
                     lerpTo.LerpToInTime(destination, secondsToReachDestination);
@@ -118,6 +109,11 @@ public class RisingText : MonoBehaviour
     {
         destination = destinationPos;
         hasDestination = true;
+    }
+
+    public void SetSecondsBeforeHeadingToDestination(float val)
+    {
+        secondsBeforeHeadingToDestination = val;
     }
 
     /*

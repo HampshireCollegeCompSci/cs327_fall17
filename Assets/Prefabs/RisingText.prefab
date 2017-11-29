@@ -79,6 +79,7 @@ MonoBehaviour:
   risingSpeed: 150
   risingSpeedDecayRate: 100
   fadingSpeed: 0.3
+  secondsBeforeHeadingToDestination: 1
   secondsToReachDestination: 0.5
   lerpTo: {fileID: 114966433255583570}
 --- !u!114 &114570150693995080

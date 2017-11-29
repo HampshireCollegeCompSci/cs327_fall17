@@ -771,5 +771,19 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean"
+	},
+	"PossibleBlocks": {
+		"English": "Possible Blocks",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
 	}
 }

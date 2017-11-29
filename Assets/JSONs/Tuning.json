@@ -4,11 +4,11 @@
 	"console grid width" : 4,
 	"console grid height" : 4,
 	"starting energy" : 20,
-	"base energy decay rate" : 1,
+	"base energy decay rate" : 0,
 	"cleared cell fade time": 2.0,
 	"vestige max level": 3,
 	"vestige decay rates": [1, 3, 5],
-	"energy per 3x3 square cleared": 7,
+	"energy per 3x3 square cleared": 5,
 	"score per 3x3 square cleared": 300,
 	"energy level animation turns remaining" : [1, 2, 3],
 	"asteroids can spawn in filled cells" : false,
@@ -21,9 +21,11 @@
 	 0, 1, 1, 0, 0, 1, 1, 0,
 	 0, 1, 1, 0, 0, 1, 1, 0,
 	 0, 0, 0, 0, 0, 0, 0, 0],
-	"contamination blocks alternate" : true,
-	"friendly bag max score" : 0,
+	"contamination blocks alternate" : false,
 	"event warning wait time" : 2.0,
 	"seconds between square animations" : 0.5,
-	"seconds to wait for game over" : 3.5
+	"seconds to wait for game over" : 1.5,
+	"randomize tips" : false,
+	"seconds between vestige energy loss animations" : 0.2,
+	"seconds for rising text to rise" : 0.5
 }

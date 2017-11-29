@@ -36,22 +36,22 @@ VideoClipImporter:
       spatialQuality: 2
     4:
       enableTranscoding: 1
-      codec: 0
-      resizeFormat: 0
-      aspectRatio: 0
+      codec: 2
+      resizeFormat: 1
+      aspectRatio: 5
       customWidth: 1536
       customHeight: 2048
       bitrateMode: 0
-      spatialQuality: 2
+      spatialQuality: 0
     7:
       enableTranscoding: 1
-      codec: 0
-      resizeFormat: 0
-      aspectRatio: 0
+      codec: 2
+      resizeFormat: 1
+      aspectRatio: 5
       customWidth: 1536
       customHeight: 2048
       bitrateMode: 0
-      spatialQuality: 2
+      spatialQuality: 0
   output:
     format: 1
     settings:

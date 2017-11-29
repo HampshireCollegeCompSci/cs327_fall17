@@ -68,10 +68,12 @@ public class ScoreCounter : MonoBehaviour
     {
         AddScore(scorePerSquare);
 
+        /*
         // Instantiate some rising text.
         GameObject risingTextObj = Object.Instantiate(risingTextPrefab, grid.transform, false);
         risingTextObj.GetComponent<RisingText>().SetText(scorePerSquare.ToString());
         risingTextObj.transform.localPosition = textPos;
+        */
     }
 
     private void OnScoreChanged()

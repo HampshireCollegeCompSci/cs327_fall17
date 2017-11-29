@@ -36,12 +36,21 @@
 			}
 		},
 		{
+			"name" : "tutorial 5",
+			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_3",
+			"preconditions" :
+			{
+				"tutorial is active" : true,
+				"square clearings count is equal to" : 4
+			}
+		},
+		{
 			"name" : "tutorial end",
 			"ends tutorial mode" : true,
 			"preconditions" :
 			{
 				"tutorial is active" : true,
-				"square clearings count is equal to" : 4
+				"square clearings count is equal to" : 5
 			}
 		},
 		{
@@ -108,12 +117,13 @@
 		},
 		{
 			"width" : 2,
-			"height" : 2,
-			"sprite" : 2,
-			"bags" : ["friendly", "normal"],
+			"height" : 3,
+			"sprite" : 4,
+			"bags" : ["friendly", "normal", "junkyard 1", "junkyard 2", "junkyard 3"],
 			"cells" :
-			[1, 0,
-			 1, 1]  
+			[0, 1,
+			 1, 0, 
+			 1, 0]  
 		},
 		{
 			"width" : 2,
@@ -128,22 +138,21 @@
 		{
 			"width" : 2,
 			"height" : 3,
-			"sprite" : 4,
-			"bags" : ["friendly", "normal", "junkyard 1", "junkyard 2", "junkyard 3"],
-			"cells" :
-			[0, 1,
-			 1, 0, 
-			 1, 0]  
-		},
-		{
-			"width" : 2,
-			"height" : 3,
 			"sprite" : 5,
 			"bags" : ["friendly", "normal", "junkyard 1"],
 			"cells" :
 			[0, 1,
 			 1, 0, 
 			 0, 1]
+		},
+		{
+			"width" : 2,
+			"height" : 2,
+			"sprite" : 2,
+			"bags" : ["friendly", "normal"],
+			"cells" :
+			[1, 0,
+			 1, 1]  
 		},
 		{
 			"width" : 3,
@@ -186,10 +195,21 @@
 			 1, 1, 1]
 		},
 		{
+			"width": 3,
+			"height": 4,
+			"sprite": 5,
+			"bags": ["tutorial 2"],
+			"cells":
+			[1,1,1,
+			 1,1,1,
+			 1,1,1,
+			 1,1,1]
+		},
+		{
 			"width" : 3,
 			"height" : 4,
 			"sprite" : 1,
-			"bags" : ["tutorial 2"],
+			"bags" : ["tutorial 3"],
 			"cells" :
 			[0, 0, 1,
 			 1, 1, 1,
@@ -200,7 +220,7 @@
 			"width" : 3,
 			"height" : 3,
 			"sprite" : 2,
-			"bags" : ["tutorial 3"],
+			"bags" : ["tutorial 4"],
 			"cells" :
 			[1, 1, 1,
 			 1, 1, 1,
@@ -210,7 +230,7 @@
 			"width" : 4,
 			"height" : 4,
 			"sprite" : 3,
-			"bags" : ["tutorial 4"],
+			"bags" : ["tutorial 5"],
 			"cells" :
 			[0, 0, 0, 1,
 			 1, 1, 1, 0,
