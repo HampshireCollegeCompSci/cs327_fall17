@@ -149,7 +149,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Use the Waste to complete a 3x3 square. Use red flip and blue rotate buttons.",
+				"TextInfo" : "Use the red flip and blue rotate buttons, and make 3x3 square with the Waste.",
 				"Panel" : "Grid"
 			}
 		]
