@@ -1,6 +1,6 @@
 {
 	  "GameOver": {
-	    "English": "game over",
+	    "English": "Game Over",
 	    "Spanish": "Fin del Juego",
 	    "French": "Fin de jue",
 	    "Slovenian": "Konec igre",
@@ -11,7 +11,8 @@
 	    "Danish": "Spillet er slut",
 	    "Polish": "Przegrałeś",
 	    "Swedish": "Du Förlorade",
-	    "Korean" : "게임 오버"
+	    "Korean" : "게임 오버",
+		"Portuguese": ,
 	  },
 	  "ReasonNoEnergy": {
 	    "English": "Out of Energy!",
@@ -137,7 +138,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "돌아가기"
+		"Korean": "돌아가기",
+		"Portuguese": "Continuar"
 
 	  },
 	  "Tip": {
@@ -167,7 +169,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "PlaceholderKorean",
+		"Portuguese": "Pontuação Máxima"
 	},
 	"Score": {
 		"English": "Score: ",
@@ -181,7 +184,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "스코어"
+      "Portuguese": "Pontuação"
+      "Korean": "스코어"
 	},
 	"YourScore" : {
 		"English": "YOUR SCORE",
@@ -195,7 +199,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "내 스코어"
+		"Korean": "내 스코어",
+		"Portuguese": "Sua Pontuação"
 	},
 	"HighScore" : {
 		"English": "HIGH SCORE",
@@ -209,7 +214,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "최고 스코어"
+		"Korean": "최고 스코어",
+		"Portuguese": "Pontuação Máxima"
 	},
 	"Settings": {
 		"English": "Settings",
@@ -223,7 +229,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "옵션"
+		"Korean": "옵션",
+		"Portuguese": "Configurações"
 	},
 	"SelectLanguage": {
 		"English": "Select Language:",
@@ -237,7 +244,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "언어 선택"
+		"Korean": "언어 선택",
+		"Portuguese": "Pontuação Máxima"
 	},
 	"PlayZenMode": {
 		"English": "Play Zen Mode",
@@ -251,7 +259,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "PlaceholderKorean",
+		"Portuguese": "Pontuação Máxima"
 	},
 	"Reset": {
 		"English": "Play Again",
@@ -265,7 +274,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "재시작"
+      "Portuguese": "Pontuação Máxima"
+      "Korean": "재시작"
 	},
 	"StartOver": {
 		"English": "Start Over",
