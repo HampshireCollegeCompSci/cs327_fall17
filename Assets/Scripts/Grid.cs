@@ -68,6 +68,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the RectTransform component of this Grid.")]
     RectTransform rectTransform;
+    [SerializeField]
+    [Tooltip("Referebce to the canvas object")]
+    GameObject canvas;
     /*
     [SerializeField]
     [Tooltip("Reference to energy gain animator.")]
@@ -156,6 +159,10 @@ public class Grid : MonoBehaviour
     private void Start()
     {
         Tune();
+        float size = canvas.GetComponent<RectTransform>().rect.width / 1.1f;
+        if (rectTransform.rect.width > size)         
+            rectTransform.sizeDelta = new Vector2(size, size);
+        
 
         tileWidth = rectTransform.rect.width / width;
         tileHeight = rectTransform.rect.height / height;

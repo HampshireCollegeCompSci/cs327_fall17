@@ -5,7 +5,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Drag blocks onto the board to place them. Make squares to get energy and points.",
+				"TextInfo" : "Drag blocks onto the board.",
 				"Panel" : "Console"
 			}
 		]
@@ -16,7 +16,7 @@
 		"Info" : 
 		[
 			{
-				"TextInfo" : "3x3 squares will get cleared.",
+				"TextInfo" : "3x3 squares will be cleared from the board and generate energy.",
 				"Panel" : "Grid"
 			}
 		]
@@ -28,7 +28,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Extra blocks that are adjacent to squares become Waste. They drain 1 additional energy from you every move. Get rid of them by using them to make squares!",
+				"TextInfo" : "Blocks adjacent to cleared squares become Waste, each draining 1 energy per move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -39,7 +39,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Waste that is adjacent to squares becomes more potent. Level 2 Waste drains 3 energy each move.",
+				"TextInfo" : "Waste that is adjacent to cleared squares levels up. Level 2 Waste drains 3 energy each move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -50,7 +50,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "This Waste block has grown out of control! It will drain 5 energy from you each move, so clean it up quick!",
+				"TextInfo" : "This Waste block has become level 3 and will drain 5 energy each move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -72,7 +72,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "At certain score thresholds Events will be triggered that make the game harder. Each event continues until you earn a certain number of points.",
+				"TextInfo" : "For every 5 cleared squares an event begins that will make the game harder. Each event continues until you clear another 5 squares.",
 				"Panel" : "Grid"
 			}
 		]
@@ -138,7 +138,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Multiple squares can be cleared at a time.",
+				"TextInfo" : "Multiple overlapping 3x3 squares can be cleared at once.",
 				"Panel" : "Grid"
 			}
 		]	
@@ -149,7 +149,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Place the block with the Waste in the corner to get rid of it. Use the buttons to rotate and flip it.",
+				"TextInfo" : "Use the Waste to complete this 3x3 square. Use the buttons to rotate and flip it.",
 				"Panel" : "Grid"
 			}
 		]

@@ -161,6 +161,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2d6ab14c53d012b45906b67d35095c58, type: 3}
   - {fileID: 8300000, guid: b1ce94b6e631c414ebbe0e63e137420c, type: 3}
   - {fileID: 8300000, guid: 26c2276c9d0b49d40a0886d2d127d42b, type: 3}
+  - {fileID: 8300000, guid: 9a835a8e800058e45a794934055174b4, type: 3}
   Channels: []
   PlaceTileSFX:
   - Tiles Place_Tile_B_1
@@ -183,6 +184,10 @@ MonoBehaviour:
   - Tiles_Snap_A_1
   - Tiles_Snap_B_1
   - Tiles_Snap_C_1
+  OutlineSFX:
+  - Clear_Square_Outline_A
+  - Clear_Square_Outline_B
+  - Clear_Square_Outline_C
   GeneralSFX:
   - About_To_Lose_1
   - Game_Over_1

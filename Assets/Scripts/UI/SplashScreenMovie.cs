@@ -12,6 +12,9 @@ public class SplashScreenMovie : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the video player.")]
     VideoPlayer videoPlayer;
+    [SerializeField]
+    [Tooltip("Reference to the AudioSource.")]
+    AudioSource audioSource;
 
     private void Start()
     {
@@ -23,6 +26,7 @@ public class SplashScreenMovie : MonoBehaviour
     private void VideoPrepared(VideoPlayer vp)
     {
         videoPlayer.Play();
+        audioSource.Play();
     }
 
     private void VideoFinished(VideoPlayer vp)

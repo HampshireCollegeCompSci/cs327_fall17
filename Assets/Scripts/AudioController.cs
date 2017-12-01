@@ -24,6 +24,7 @@ public class AudioController : MonoBehaviour
     public string[] FlipBtnSFX;
     public string[] MenuClickSFX;
     public string[] TileSnapSFX;
+    public string[] OutlineSFX;
 
     public string[] GeneralSFX;
 
@@ -218,7 +219,15 @@ public class AudioController : MonoBehaviour
 
     public void Outline()
     {
-        PlaySFX("Clear_Square_Outline");
+        //PlaySFX("Clear_Square_Outline");
+        int index = UnityEngine.Random.Range(0, OutlineSFX.Length);
+
+        PlaySFX(OutlineSFX[index]);
+    }
+
+    public void WinGame()
+    {
+        PlaySFX("Game_Win");
     }
 
     public void StartEventGroup(VoidEventGroup.EventGroupType eventType)

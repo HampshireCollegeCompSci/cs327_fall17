@@ -89,6 +89,7 @@ MonoBehaviour:
   energyCounter: {fileID: 0}
   blockSpawner: {fileID: 0}
   text: {fileID: 114711318933906132}
+  grid: {fileID: 0}
 --- !u!114 &114711318933906132
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -218,8 +219,8 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.3, y: 0.20010416}
-  m_AnchorMax: {x: 0.7, y: 0.30010423}
+  m_AnchorMin: {x: 0.05, y: 0.20010416}
+  m_AnchorMax: {x: 0.45, y: 0.30010423}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
