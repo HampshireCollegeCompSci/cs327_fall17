@@ -546,6 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipJSON: {fileID: 4900000, guid: f40b6621084d843c186f53fd46dafec7, type: 3}
+  tuningJSON: {fileID: 4900000, guid: 7d1523919ff371542a4d2c54d7080ec6, type: 3}
 --- !u!114 &114202807859211042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -894,7 +895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationKey: HighScore1
+  translationKey: HighScore
 --- !u!114 &114556595637579686
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -181,7 +181,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "스코어"
 	},
 	"YourScore" : {
 		"English": "YOUR SCORE",
@@ -265,7 +265,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "재시작"
 	},
 	"StartOver": {
 		"English": "Start Over",
@@ -279,7 +279,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "재시작"
 	},
 	"NormalMode": {
 		"English": "Normal Mode",
@@ -503,7 +503,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PLACEHOLDER"
+		"Korean": "원자로 폭주"
 	},
 	" begin!": {
 		"English": " begin!",
@@ -517,7 +517,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "시작"
 	}, 
 	"YOUREACHED" : {
 		"English": "YOU REACHED: ",
