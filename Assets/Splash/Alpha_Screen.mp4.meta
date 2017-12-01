@@ -53,7 +53,7 @@ VideoClipImporter:
       bitrateMode: 0
       spatialQuality: 0
   output:
-    format: 0
+    format: 1
     settings:
       enableTranscoding: 0
       codec: 0
