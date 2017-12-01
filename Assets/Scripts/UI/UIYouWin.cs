@@ -39,4 +39,9 @@ public class UIYouWin : MonoBehaviour {
         gameObject.SetActive(false);
         AudioController.Instance.MenuClick();
     }
+
+    private void OnEnable()
+    {
+        AudioController.Instance.WinGame();
+    }
 }
