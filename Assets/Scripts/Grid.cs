@@ -267,7 +267,7 @@ public class Grid : MonoBehaviour
 
                 GameObject currentPrefabTile = GameObject.Instantiate(prefabTile, parent, false);
                 currentPrefabTile.transform.localPosition = pos;
-
+                currentPrefabTile.GetComponent<RectTransform>().sizeDelta = new Vector2(tileWidth, tileHeight);
                 /*
                 if (c == 0 && r == 0)
                 {

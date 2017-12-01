@@ -824,7 +824,35 @@
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean",
 		"Portugese": "Não"
-	} ,
+	},
+	"Restart": {
+		"English": "Restart",
+		"Spanish": "PlaceholderSpanish",
+	    "French": "PlaceholderFrench",
+	    "Slovenian": "PlaceholderSlovenian",
+	    "Romanian": "PlacehoderRomanian",
+	    "German": "PlaceholderGerman",
+	    "Luxembourgish": "PlaceholderLuxembourgish",
+	    "Dutch": "PlaceholderDutch",
+	    "Danish": "PlaceholderDanish",
+	    "Polish": "PlaceholderPolish",
+	    "Swedish": "PlaceholderSwedish",
+		"Korean": "PlaceholderKorean"
+	},
+	"TapContinue": {
+    "English": "(Tap to Continue)",
+    "Spanish": "(Tap to Continue)",
+    "French": "(Tap to Continue)",
+    "Slovenian": "(Tap to Continue)",
+    "Romanian": "(Tap to Continue)",
+    "German": "(Tap to Continue)",
+    "Luxembourgish": "(Tap to Continue)",
+    "Dutch": "(Tap to Continue)",
+    "Danish": "(Tap to Continue)",
+    "Polish": "(Tap to Continue)",
+    "Swedish": "(Tap to Continue)",
+    "Korean": "(Tap to Continue)"
+	},
 	"PossibleBlocks": {
 		"English": "Possible Blocks",
 		"Spanish": "PlaceholderSpanish",
@@ -841,4 +869,3 @@
 		"Portugese": "PlaceholderPortugese"
 	}
 }
-
