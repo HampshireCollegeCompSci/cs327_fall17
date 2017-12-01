@@ -9,23 +9,13 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-public class ScreenTapping : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class ScreenTapping : MonoBehaviour, IDragHandler, IPointerDownHandler
 {
     [SerializeField]
     [Tooltip("The prefab to instantiate for ScreenTapping.")]
     GameObject prefabScreenTapping;
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        TappingEffect(eventData);
-    }
-
     public void OnDrag(PointerEventData eventData)
-    {
-        TappingEffect(eventData);
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
     {
         TappingEffect(eventData);
     }
