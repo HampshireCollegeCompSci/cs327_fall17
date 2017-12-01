@@ -72,7 +72,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "For every 5 cleared squares an event begins that will make the game harder. Each event continues until you clear another 5 squares.",
+				"TextInfo" : "An event has begun! Each event continues until you clear 5 squares.",
 				"Panel" : "Grid"
 			}
 		]
@@ -154,7 +154,19 @@
 			}
 		]
 	
-	}, 
+	},
+	"FIRST_SQUARE_NOT_TUTORIAL" : 
+	{
+		"TriggerName" : "FIRST_SQUARE_NOT_TUTORIAL",
+		"Info" :
+		[
+			{
+				"TextInfo" : "This bar tracks cleared sqaures and shows when events will start and end. ",
+				"Panel" : "ScoreBar"
+			}
+		]
+	
+	},
 	"TUTORIAL_BAG_TRIGGER_3" : 
 	{
 		"TriggerName" : "TUTORIAL_BAG_TRIGGER_3",
