@@ -225,6 +225,11 @@ public class AudioController : MonoBehaviour
         PlaySFX(OutlineSFX[index]);
     }
 
+    public void WinGame()
+    {
+        PlaySFX("Game_Win");
+    }
+
     public void StartEventGroup(VoidEventGroup.EventGroupType eventType)
     {
         switch (eventType)
