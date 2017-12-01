@@ -1,65 +1,68 @@
 {
 	  "GameOver": {
-	    "English": "Game Over",
+	    "English": "game over",
 	    "Spanish": "Fin del Juego",
 	    "French": "Fin de jue",
 	    "Slovenian": "Konec igre",
-	    "Romanian": "Jocul s-a încheiat",
+	    "Romanian": "Jocul s-a îcheiat",
 	    "German": "Game Over",
 	    "Luxembourgish": "Spill aus",
 	    "Dutch": "Game Over",
 	    "Danish": "Spillet er slut",
 	    "Polish": "Przegrałeś",
-	    "Swedish": "Du Förlorade",
+	    "Swedish": "Du Fölorade",
 	    "Korean" : "게임 오버",
-		"Portuguese": ,
+		"Portugese": "PlaceholderPortugese"
 	  },
 	  "ReasonNoEnergy": {
 	    "English": "Out of Energy!",
-	    "Spanish": "Razón: ¡Fuera de energía!",
-	    "French": "Paison: Plus d’énergie!",
+	    "Spanish": "Razó: ¡uera de energí!",
+	    "French": "Paison: Plus d’éergie!",
 	    "Slovenian": "Razlog: Primanjkuje energije!",
 	    "Romanian": "Morivul: Nu mai ai energie!",
 	    "German": "Keiner Energie mehr!",
-	    "Luxembourgish": "Keng Energie méi!",
+	    "Luxembourgish": "Keng Energie mé!",
 	    "Dutch": "Zonder Energie",
 	    "Danish": "Grund: Manglende energi!",
 	    "Polish": "Przyczyna: Nie masz energii!",
-	    "Swedish": "Anledning: slut på energi!",
-		"Korean": "이유: 에너지 고갈!"
+	    "Swedish": "Anledning: slut pånergi!",
+		"Korean": "이유: 에너지 고갈!",
+		"Portugese": "PlaceholderPortugese"
 	  },
 	  "ReasonHesitation": {
 	    "English": "You hesitated for too long!",
-	    "Spanish": "Razón: ¡Dudaste por mucho tiempo!",
-	    "French": "Raison : Vous avez hésité trop longtemps !",
+	    "Spanish": "Razó: ¡udaste por mucho tiempo!",
+	    "French": "Raison : Vous avez héitérop longtemps !",
 	    "Slovenian": "Razlog: Zmanjkalo časa!",
 	    "Romanian": "Motivul: Ai ezitat prea mult timp!",
-	    "German": "Grund: Sie haben zu lange gezögert!",
-	    "Luxembourgish": "Grond: Dir hutt ze laang gezéckt!",
+	    "German": "Grund: Sie haben zu lange gezöert!",
+	    "Luxembourgish": "Grond: Dir hutt ze laang gezékt!",
 	    "Dutch": "Reden: Je twigfelde te lang!",
-	    "Danish": "Grund: Du tøvede for længe!",
+	    "Danish": "Grund: Du tøede for læge!",
 	    "Polish": "Przyczyna: Za długo czekałeś!",
-	    "Swedish": "Anledning: du tvekade för länge!",
-		"Korean": "이유: 너무 오래 망설였음!"
+	    "Swedish": "Anledning: du tvekade fö läge!",
+		"Korean": "이유: 너무 오래 망설였음!",
+		"Portugese": "PlaceholderPortugese"
 	  },
 	  "ReasonNoSpaceLeft": {
 	    "English": "No Space Left!",
-	    "Spanish": "Razón: ¡No hay espacio!",
+	    "Spanish": "Razó: ¡o hay espacio!",
 	    "French": "Raison : Plus de place!",
 	    "Slovenian": "Razlog: Ni več prostora!",
 	    "Romanian": "Motivul: Nu mai ai spaţiu!",
 	    "German": "Grund: Kein Platz mehr!",
-	    "Luxembourgish": "Grond: Keng Plaz méi!",
+	    "Luxembourgish": "Grond: Keng Plaz mé!",
 	    "Dutch": "Reden: Geen ruimte over!",
-	    "Danish": "Grund: Løbet tør for plads!",
+	    "Danish": "Grund: Løet tø for plads!",
 	    "Polish": "Przyczyna: Koniec miejsca!",
 	    "Swedish": "Anledning: Ingen plats kvar!",
-		"Korean": "이유: 공간 부족!"
+		"Korean": "이유: 공간 부족!",
+		"Portugese": "PlaceholderPortugese"
 	  },
 	  "ReasonManualReset": {
 	    "English": "Manual Reset!",
-	    "Spanish": "Razón: Reinciar",
-	    "French": "Raison : Réinitialisation manuelle!",
+	    "Spanish": "Razó: Reinciar",
+	    "French": "Raison : Rénitialisation manuelle!",
 	    "Slovenian": "Razlog: Ročna ponastavitev!",
 	    "Romanian": "Motivul: Resetare manuală!",
 	    "German": "Grund: Manueller Neustart!",
@@ -68,7 +71,8 @@
 	    "Danish": "Grund: Manuel genstart!",
 	    "Polish": "Przyczyna: Reset ręczny!",
 	    "Swedish": "Anledning: Manuell reset!",
-		"Korean": "이유: 수동 복귀!"
+		"Korean": "이유: 수동 복귀!",
+		"Portugese": "PlaceholderPortugese"
 	  },
 	  "HowToPlay": {
 	  	"English": "How to Play",
@@ -79,15 +83,16 @@
 	    "German": "Spielanleitung",
 	    "Luxembourgish": "Spilluleedung",
 	    "Dutch": "Spelregels",
-	    "Danish": "Sådan spiller du",
+	    "Danish": "Såan spiller du",
 	    "Polish": "Jak grać",
 	    "Swedish": "Hur du spelar",
-		"Korean": "게임 방법"
+		"Korean": "게임 방법",
+		"Portugese": "PlaceholderPortugese"
 	  },
 	  "Credits": {
 	    "English": "Credits",
-	    "Spanish": "Crédito",
-	    "French": "Crédits",
+	    "Spanish": "Créito",
+	    "French": "Créits",
 	    "Slovenian": "Krediti",
 	    "Romanian": "Generic",
 	    "German": "Kredite",
@@ -96,12 +101,13 @@
 	    "Danish": "Kreditter",
 	    "Polish": "Podziękowania",
 	    "Swedish": "Eftertexter",
-		"Korean": "스태프롤"
+		"Korean": "스태프롤",
+		"Portugese": "PlaceholderPortugese"
 	  },
 	  "PlayAgain": {
 	    "English": "Play Again",
 	    "Spanish": "Volver a Jugar",
-	    "French": "Jouer à nouveau",
+	    "French": "Jouer àouveau",
 	    "Slovenian": "Igraj ponovno",
 	    "Romanian": "Joacă din nou",
 	    "German": "Wieder spielen",
@@ -110,7 +116,8 @@
 	    "Danish": "Spil igen",
 	    "Polish": "Zagraj jeszcze raz",
 	    "Swedish": "Spela igen",
-		"Korean": "재도전"
+		"Korean": "재도전",
+		"Portugese": "Jogar de Novo"
 	  },
 	  "MainMenu": {
 	    "English": "Main Menu",
@@ -122,9 +129,10 @@
 	    "Luxembourgish": "Haaptmenü",
 	    "Dutch": "Hoofdmenu",
 	    "Danish": "Start menu",
-	    "Polish": "Menu główne",
+	    "Polish": "Menu głóne",
 	    "Swedish": "Huvudmeny",
-		"Korean": "메인 메뉴"
+		"Korean": "메인 메뉴",
+		"Portugese": "PlaceholderPortugese"
 	  },
 	  "Resume" : {
 		"English": "Resume",
@@ -139,23 +147,23 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "돌아가기",
-		"Portuguese": "Continuar"
-
+		"Portugese": "PlaceholderPortugese"
 	  },
 	  "Tip": {
 	    "English": "Tip: Don’t lest wastes stick around too long",
 	    "Spanish": "Tip: No dejes que restos se quede por mucho tiempo",
 	    "French": "Astuce : Ne laissez pas les vestiges trainer trop longtemps dans les parages",
 	    "Slovenian": "Namig: Ne pusti ostanke predolgo časa",
-	    "Romanian": "Sugestie: Nu lăsa vestigiile să rămână prin preajmă prea mult timp",
-	    "German": "Ratschlag: Lassen Sie die Überreste nicht zu lange dableiben",
+	    "Romanian": "Sugestie: Nu lăsa vestigiile să rămâă prin preajmă prea mult timp",
+	    "German": "Ratschlag: Lassen Sie die Üerreste nicht zu lange dableiben",
 	    "Luxembourgish": "Rotschlo: Loosst d’Iwwerreschter net ze laang dobleiwen",
 	    "Dutch": "Tip: Laat de overblijfsels niet te lang rondhangen",
-	    "Danish": "Hint: Lad ikke levn blive for længe",
-	    "Polish": "Wskazówka: Nie pozwól pozostałościom pozostawać zbyt długo",
+	    "Danish": "Hint: Lad ikke levn blive for læge",
+	    "Polish": "Wskazóka: Nie pozwó pozostałościom pozostawać zbyt długo",
 	    "Swedish": "Rotschlo: Loosst d’Iwwerreschter net ze laang dobleiwen",
-		"Korean": "힌트: 남은 퍼즐 조각들을 너무 오랫동안 내버려두지 말자"
-	},
+		"Korean": "힌트: 남은 퍼즐 조각들을 너무 오랫동안 내버려두지 말자",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	
 	"HighScore1": {
 		"English": "high score",
@@ -170,8 +178,8 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean",
-		"Portuguese": "Pontuação Máxima"
-	},
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"Score": {
 		"English": "Score: ",
 	    "Spanish": "PlaceholderSpanish",
@@ -184,9 +192,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-      "Portuguese": "Pontuação"
-      "Korean": "스코어"
-	},
+		"Korean": "스코어",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"YourScore" : {
 		"English": "YOUR SCORE",
 	    "Spanish": "PlaceholderSpanish",
@@ -200,8 +208,8 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "내 스코어",
-		"Portuguese": "Sua Pontuação"
-	},
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"HighScore" : {
 		"English": "HIGH SCORE",
 	    "Spanish": "PlaceholderSpanish",
@@ -215,8 +223,8 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "최고 스코어",
-		"Portuguese": "Pontuação Máxima"
-	},
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"Settings": {
 		"English": "Settings",
 		"Spanish": "PlaceholderSpanish",
@@ -230,8 +238,8 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "옵션",
-		"Portuguese": "Configurações"
-	},
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"SelectLanguage": {
 		"English": "Select Language:",
 		"Spanish": "PlaceholderSpanish",
@@ -245,8 +253,8 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "언어 선택",
-		"Portuguese": "Pontuação Máxima"
-	},
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"PlayZenMode": {
 		"English": "Play Zen Mode",
 		"Spanish": "PlaceholderSpanish",
@@ -260,8 +268,8 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean",
-		"Portuguese": "Pontuação Máxima"
-	},
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"Reset": {
 		"English": "Play Again",
 		"Spanish": "PlaceholderSpanish",
@@ -274,9 +282,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-      "Portuguese": "Pontuação Máxima"
-      "Korean": "재시작"
-	},
+		"Korean": "재시작",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"StartOver": {
 		"English": "Start Over",
 		"Spanish": "PlaceholderSpanish",
@@ -289,8 +297,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "재시작"
-	},
+		"Korean": "재시작",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"NormalMode": {
 		"English": "Normal Mode",
 		"Spanish": "PlaceholderSpanish",
@@ -303,8 +312,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"ZenMode": {
 		"English": "Zen Mode",
 		"Spanish": "PlaceholderSpanish",
@@ -317,8 +327,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"You Reached": {
 		"English": "You Reached",
 		"Spanish": "PlaceholderSpanish",
@@ -331,8 +342,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "도달"
-	},
+		"Korean": "도달",
+		"Portugese": "Vocêlcançu"
+	} ,
 	"CRISIS AVERTED: REACTOR RESTORED": {
 		"English": "CRISIS AVERTED: REACTOR RESTORED",
 		"Spanish": "PlaceholderSpanish",
@@ -345,8 +357,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "위기 모면: 원자로 복원"
-	},
+		"Korean": "위기 모면: 원자로 복원",
+		"Portugese": "CRISE EVITADA: REATOR RESTAURADO"
+	} ,
 	"PauseMenu": {
 		"English": "Pause Menu",
 	    "Spanish": "PlaceholderSpanish",
@@ -359,8 +372,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "정지 메뉴"
-	},
+		"Korean": "정지 메뉴",
+		"Portugese": "Menu de Pausa"
+	} ,
 	"Tip1": {
 		"English": "Try making more than one square at a time",
 		"Spanish": "PlaceholderSpanish",
@@ -373,8 +387,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "한 번에 여러 개의 정사각형들을 만들어 보세요"
-	},
+		"Korean": "한 번에 여러 개의 정사각형들을 만들어 보세요",
+		"Portugese": "Tenta fazer mais do que um quadrado de uma vez"
+	} ,
 	"Tip2": {
 		"English": "Some blocks are more compatible than others",
 		"Spanish": "PlaceholderSpanish",
@@ -387,8 +402,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "특정 블록들은 다른 블록들보다 호환성이 더 높습니다."
-	},
+		"Korean": "특정 블록들은 다른 블록들보다 호환성이 더 높습니다.",
+		"Portugese": "Alguns blocos sã mais compatíeis do que outros"
+	} ,
 	"Tip3": {
 		"English" :"Don’t place blocks in the center of the board, it gives you less space to work in",
 		"Spanish": "PlaceholderSpanish",
@@ -401,8 +417,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "블록을 중앙에 놓지 마십시오. 여유 공간이 줄어듭니다."
-	},
+		"Korean": "블록을 중앙에 놓지 마십시오. 여유 공간이 줄어듭니다.",
+		"Portugese": "Nã coloque blocos no centro do tabuleiro, isso lhe dáenos espaç com qual trabalhar "
+	} ,
 	"Tip4": {
 		"English" : "Remember that cells diagonally adjacent to a cleared square don't become wastes",
 		"Spanish": "PlaceholderSpanish",
@@ -415,8 +432,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "치워진 정사각형들과 대각선으로 맟닿은 셀들은 남은 퍼즐 조각들이 되지 않습니다."
-	},
+		"Korean": "치워진 정사각형들과 대각선으로 맟닿은 셀들은 남은 퍼즐 조각들이 되지 않습니다.",
+		"Portugese": "Lembre-se de que céulas diagonalmente ao lado a um quadrado desobstruido nã se tornan vestíios"
+	} ,
 	"Tip5" : {
 		"English": "Remove wastes from the board as quickly as you can, especially if they are level two or three",
 		"Spanish": "PlaceholderSpanish",
@@ -429,8 +447,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오."
-	},
+		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
+	} ,
 	"Nothing" : {
 		"English": "Nothing",
 		"Spanish": "PlaceholderSpanish",
@@ -443,8 +462,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "무"
-	},
+		"Korean": "무",
+		"Portugese": "Nada"
+	} ,
 	"Unrefined Uranium" : {
 		"English": "Unrefined Uranium",
 		"Spanish": "PlaceholderSpanish",
@@ -457,8 +477,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "우라늄 원석"
-	},
+		"Korean": "우라늄 원석",
+		"Portugese": "Uranium Nã Refinado"
+	} ,
 	"Waste Contamination": {
 		"English": "Waste Contamination",
 		"Spanish": "PlaceholderSpanish",
@@ -471,8 +492,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "폐기물 오염"
-	},
+		"Korean": "폐기물 오염",
+		"Portugese": "Contaminaçã de Resíuos"
+	} ,
 	"Reactor Breach": {
 		"English": "Reactor Breach",
 		"Spanish": "PlaceholderSpanish",
@@ -485,8 +507,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "원자로 균열"
-	}, 
+		"Korean": "원자로 균열",
+		"Portugese": "Violação de Reator"
+	} , 
 	"Reactor Meltdown": {
 		"English": "Reactor Meltdown",
 		"Spanish": "PlaceholderSpanish",
@@ -499,8 +522,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "노심 융해"
-	},
+		"Korean": "노심 융해",
+		"Portugese": "Fusão do Reator"
+	} ,
 	"Reactor Overload": {
 		"English": "Reactor Overload",
 		"Spanish": "PlaceholderSpanish",
@@ -513,8 +537,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "원자로 폭주"
-	},
+		"Korean": "원자로 폭주",
+		"Portugese": "Sobrecarga do Reator"
+	} ,
 	" begin!": {
 		"English": " begin!",
 		"Spanish": "PlaceholderSpanish",
@@ -527,8 +552,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "시작"
-	}, 
+		"Korean": "시작",
+		"Portugese": " começar"
+	} , 
 	"YOUREACHED" : {
 		"English": "YOU REACHED: ",
 		"Spanish": "PlaceholderSpanishx",
@@ -541,8 +567,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "도달"
-	}, 
+		"Korean": "도달",
+		"Portugese": "VOCÊ ALCANÇOU: "
+	} , 
 	"Instruction(0)" : {
 		"English": "-Place blocks on the board to make squares and generate energy.
 
@@ -557,8 +584,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"Instruction(1)" : {
 		"English": "-Any cells adjacent to the square that is cleared becomes waste.
 
@@ -573,8 +601,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"Instruction(2)" : {
 		"English": "-If a square is cleared next to a waste, that waste levels up.
 		Level 1 Waste : -1 energy per turn
@@ -592,8 +621,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"Instruction(3)" : {
 		"English": "-There are three different events that occur during the game at certain thresholds throughout the game.
 
@@ -608,8 +638,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"Instruction(4)" : {
 		"English": "-There are three events: Breach, Unrefined Uranium, and Contamination.
 
@@ -626,8 +657,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"CS327": {
 		"English": "This game was created by Hampshire College class CS-327 during the fall of 2017.",
 		"Spanish": "PlaceholderSpanish",
@@ -640,8 +672,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "이 게임은 햄프셔 대학 CS-327 학생들이 2017년 가을에 만들었습니다."
-	},
+		"Korean": "이 게임은 햄프셔 대학 CS-327 학생들이 2017년 가을에 만들었습니다.",
+		"Portugese": "Este jogo foi criado pela clase CS-327 do Hampshire College durante o outono de 2017."
+	} ,
 	"Website": {
 		"English": "Checkout our website",
 		"Spanish": "PlaceholderSpanish",
@@ -654,8 +687,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "홈페이지를 둘러봐주세요"
-	},
+		"Korean": "홈페이지를 둘러봐주세요",
+		"Portugese": "Confira nosso site"
+	} ,
 	"Music" : {
 		"English": "Music",
 		"Spanish": "PlaceholderSpanish",
@@ -668,8 +702,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "Música"
+	} ,
 	"SFX" : {
 		"English": "SFX",
 		"Spanish": "PlaceholderSpanish",
@@ -682,8 +717,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "Efeitos Especiais"
+	} ,
 	"YouWin" : {
 		"English": "YOU WIN!",
 		"Spanish": "PlaceholderSpanish",
@@ -696,7 +732,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
 	}
 	"Continue" : {
 		"English": "Continue",
@@ -710,8 +747,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "Continuar"
+	} ,
 	"TutorialComplete" : {
 		"English": "Tutorial complete! Now let's play the REAL game!",
 		"Spanish": "PlaceholderSpanish",
@@ -724,8 +762,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"OK" : {
 		"English": "OK",
 		"Spanish": "PlaceholderSpanish",
@@ -738,8 +777,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"LoseProgress": {
 		"English": "You will lose all progress on your current game. Are you sure?",
 		"Spanish": "PlaceholderSpanish",
@@ -752,8 +792,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
+	} ,
 	"Yes": {
 		"English": "Yes",
 		"Spanish": "PlaceholderSpanish",
@@ -766,8 +807,9 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
-	},
+		"Korean": "PlaceholderKorean",
+		"Portugese": "Sim"
+	} ,
 	"Cancel": {
 		"English": "Cancel",
 		"Spanish": "PlaceholderSpanish",
@@ -780,7 +822,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "PlaceholderKorean",
+		"Portugese": "Não"
 	},
 	"Restart": {
 		"English": "Restart",
@@ -822,6 +865,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "PlaceholderKorean",
+		"Portugese": "PlaceholderPortugese"
 	}
 }
