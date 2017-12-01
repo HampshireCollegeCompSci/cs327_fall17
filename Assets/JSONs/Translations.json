@@ -229,7 +229,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "옵션"
+		"Korean": "옵션",
+		"Portuguese": "Configurações"
 	},
 	"SelectLanguage": {
 		"English": "Select Language:",
@@ -243,7 +244,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "언어 선택"
+		"Korean": "언어 선택",
+		"Portuguese": "Pontuação Máxima"
 	},
 	"PlayZenMode": {
 		"English": "Play Zen Mode",
@@ -257,7 +259,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "PlaceholderKorean",
+		"Portuguese": "Pontuação Máxima"
 	},
 	"Reset": {
 		"English": "Play Again",
@@ -271,7 +274,8 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "PlaceholderKorean",
+		"Portuguese": "Pontuação Máxima"
 	},
 	"StartOver": {
 		"English": "Start Over",
