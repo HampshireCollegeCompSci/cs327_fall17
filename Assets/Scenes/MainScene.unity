@@ -430,6 +430,11 @@ Prefab:
       propertyPath: blockSpawner
       value: 
       objectReference: {fileID: 1142477333}
+    - target: {fileID: 114216091868015752, guid: a476f5f4ec97b1b459353d01e22dbeb5,
+        type: 2}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1069704021}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a476f5f4ec97b1b459353d01e22dbeb5, type: 2}
   m_IsPrefabParent: 0
@@ -878,6 +883,11 @@ Prefab:
       propertyPath: blockSpawner
       value: 
       objectReference: {fileID: 1142477333}
+    - target: {fileID: 114332765752625928, guid: 84ddfe121c967492d946d5ed9871193a,
+        type: 2}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1069704021}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 84ddfe121c967492d946d5ed9871193a, type: 2}
   m_IsPrefabParent: 0
@@ -3242,6 +3252,11 @@ Prefab:
       propertyPath: blockSpawner
       value: 
       objectReference: {fileID: 1142477333}
+    - target: {fileID: 114795228561636690, guid: 5ca71dbbd343b254eb5749922c4c999a,
+        type: 2}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1069704021}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5ca71dbbd343b254eb5749922c4c999a, type: 2}
   m_IsPrefabParent: 0
@@ -3872,6 +3887,11 @@ Prefab:
       propertyPath: blockSpawner
       value: 
       objectReference: {fileID: 1142477333}
+    - target: {fileID: 114457937383422706, guid: 6191c1394d5020144ae33257583f2a26,
+        type: 2}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1069704021}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6191c1394d5020144ae33257583f2a26, type: 2}
   m_IsPrefabParent: 0
@@ -4260,19 +4280,14 @@ Prefab:
       propertyPath: blockSpawner
       value: 
       objectReference: {fileID: 1142477333}
+    - target: {fileID: 114216091868015752, guid: a476f5f4ec97b1b459353d01e22dbeb5,
+        type: 2}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1069704021}
     - target: {fileID: 1726128729412560, guid: a476f5f4ec97b1b459353d01e22dbeb5, type: 2}
       propertyPath: m_Name
       value: SpawningOneTileBlock
-      objectReference: {fileID: 0}
-    - target: {fileID: 114728264210913986, guid: a476f5f4ec97b1b459353d01e22dbeb5,
-        type: 2}
-      propertyPath: m_Text
-      value: Spawn One Tile Block
-      objectReference: {fileID: 0}
-    - target: {fileID: 114308574007141158, guid: a476f5f4ec97b1b459353d01e22dbeb5,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SpawnOneTileBlock
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a476f5f4ec97b1b459353d01e22dbeb5, type: 2}
@@ -4394,6 +4409,11 @@ Prefab:
       propertyPath: blockSpawner
       value: 
       objectReference: {fileID: 1142477333}
+    - target: {fileID: 114167625336757238, guid: 107022f30410f6e499d720f53801baa4,
+        type: 2}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 1069704021}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 107022f30410f6e499d720f53801baa4, type: 2}
   m_IsPrefabParent: 0
