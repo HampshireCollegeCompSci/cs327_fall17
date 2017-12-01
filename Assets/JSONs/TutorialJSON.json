@@ -16,7 +16,7 @@
 		"Info" : 
 		[
 			{
-				"TextInfo" : "3x3 squares will be cleared from the board and generate energy.",
+				"TextInfo" : "3x3 squares will clear and generate energy.",
 				"Panel" : "Grid"
 			}
 		]
@@ -28,7 +28,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Blocks adjacent to cleared squares become Waste, each draining 1 energy per move.",
+				"TextInfo" : "Blocks adjacent to cleared squares become Waste, draining 1 energy per move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -39,7 +39,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Waste that is adjacent to cleared squares levels up. Level 2 Waste drains 3 energy each move.",
+				"TextInfo" : "Waste adjacent to cleared squares levels up. Level 2 Waste drains 3 energy per move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -50,7 +50,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "This Waste block has become level 3 and will drain 5 energy each move.",
+				"TextInfo" : "This Waste block has become level 3 and drains 5 energy per move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -61,7 +61,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "You’re running out of energy! Make a square this turn or you’ll lose!",
+				"TextInfo" : "You're low on energy! Make a square this turn to gain energy!",
 				"Panel" : "Reactor"
 			}
 		]
@@ -83,7 +83,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Breach: Spaces are taken up by blocks that cannot be used to clear squares.",
+				"TextInfo" : "Reactor Breach: Some spaces are blocked off.",
 				"Panel" : "Grid"
 			}
 		]
@@ -94,7 +94,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Unrefined Uranium: Some blocks you are recieving have been replaced by ones that are more difficult to use.",
+				"TextInfo" : "Unrefined Uranium: Some blocks have been replaced by difficult ones.",
 				"Panel" : "Grid"
 			}
 		]
@@ -105,7 +105,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Contamination: Blocks you recieve will have Waste in them.",
+				"TextInfo" : "Contamination: Blocks come with Waste.",
 				"Panel" : "Grid"
 			}
 		]
@@ -116,7 +116,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Meltdown: The reactor is melting down! Be prepared for two events at once",
+				"TextInfo" : "Reactor Meltdown: The reactor is melting down! Be prepared for two events at once.",
 				"Panel" : "Grid"
 			}
 		]
@@ -149,7 +149,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Use the Waste to complete this 3x3 square. Use the buttons to rotate and flip it.",
+				"TextInfo" : "Use the Waste to complete a 3x3 square. Use red flip and blue rotate buttons.",
 				"Panel" : "Grid"
 			}
 		]
@@ -161,7 +161,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "This bar tracks cleared squares and shows when events will start and end. ",
+				"TextInfo" : "This bar tracks cleared squares and shows when events will start and end.",
 				"Panel" : "ScoreBar"
 			}
 		]
