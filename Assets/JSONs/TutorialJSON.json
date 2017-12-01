@@ -83,7 +83,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Breach: A breach has occurred in the reactor and foreign material is taking up space.",
+				"TextInfo" : "Reactor Breach: Spaces are taken up by blocks that cannot be used to clear squares.",
 				"Panel" : "Grid"
 			}
 		]
@@ -94,7 +94,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Unrefined Uranium: Some budget cuts mean you have to place some less than perfect blocks on the board.",
+				"TextInfo" : "Unrefined Uranium: Some blocks you are recieving have been replaced by ones that are more difficult to use.",
 				"Panel" : "Grid"
 			}
 		]
@@ -105,7 +105,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Contamination: Your material has become contaminated and now blocks will spawn with wastes in them.",
+				"TextInfo" : "Contamination: Blocks you recieve will have Waste in them.",
 				"Panel" : "Grid"
 			}
 		]
@@ -116,7 +116,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Meltdown: The reactor is melting down! Be prepared for multiple events at once!",
+				"TextInfo" : "Reactor Meltdown: The reactor is melting down! Be prepared for two events at once",
 				"Panel" : "Grid"
 			}
 		]
@@ -127,7 +127,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Overload: The reactor has completely overloaded! All the events are occurring at once! This is your final challenge!",
+				"TextInfo" : "Reactor Overload: All the events are occurring at once! This is your final challenge!",
 				"Panel" : "Grid"
 			}
 		]
@@ -161,7 +161,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "This bar tracks cleared sqaures and shows when events will start and end. ",
+				"TextInfo" : "This bar tracks cleared squares and shows when events will start and end. ",
 				"Panel" : "ScoreBar"
 			}
 		]
