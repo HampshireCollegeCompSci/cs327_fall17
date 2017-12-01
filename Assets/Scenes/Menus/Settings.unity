@@ -2716,7 +2716,7 @@ GameObject:
   - component: {fileID: 1759810170}
   - component: {fileID: 1759810173}
   m_Layer: 5
-  m_Name: Dropdown
+  m_Name: Language Dropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2808,6 +2808,8 @@ MonoBehaviour:
     - m_Text: Polszczyzna
       m_Image: {fileID: 0}
     - m_Text: "\uD55C\uAD6D\uC5B4"
+      m_Image: {fileID: 0}
+    - m_Text: "Portugu\xEAs"
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
