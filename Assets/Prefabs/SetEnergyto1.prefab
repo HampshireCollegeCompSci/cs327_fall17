@@ -141,6 +141,7 @@ MonoBehaviour:
   energyCounter: {fileID: 0}
   blockSpawner: {fileID: 0}
   text: {fileID: 114624542555805356}
+  grid: {fileID: 0}
 --- !u!114 &114624542555805356
 MonoBehaviour:
   m_ObjectHideFlags: 1

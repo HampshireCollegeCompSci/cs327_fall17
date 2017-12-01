@@ -10,15 +10,15 @@
 		},
 		{
 			"tier" : 2,
-			"radiation vestige count" : 2,
-			"radiation vestige level" : 1,
+			"radiation vestige count" : 1,
+			"radiation vestige level" : 2,
 			"radiation base energy decay rate bonus" : 0,
 			"asteroid count" : 5
 		},
 		{
 			"tier" : 3,
-			"radiation vestige count" : 3,
-			"radiation vestige level" : 1,
+			"radiation vestige count" : 1,
+			"radiation vestige level" : 3,
 			"radiation base energy decay rate bonus" : 0,
 			"asteroid count" : 7
 		}
