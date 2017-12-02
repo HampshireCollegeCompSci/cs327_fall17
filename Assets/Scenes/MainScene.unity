@@ -1500,6 +1500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabScreenTapping: {fileID: 1648235365134136, guid: a5d88d28aa9c5d0489d5a9b220cc64b1,
     type: 2}
+  canvas: {fileID: 501203755}
 --- !u!1 &505774686
 GameObject:
   m_ObjectHideFlags: 0
@@ -2486,6 +2487,11 @@ Prefab:
       propertyPath: scoreBlocks
       value: 
       objectReference: {fileID: 2086623352}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 501203751}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0

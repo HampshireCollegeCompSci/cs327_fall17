@@ -16,7 +16,7 @@
 		"Info" : 
 		[
 			{
-				"TextInfo" : "3x3 squares will be cleared from the board and generate energy.",
+				"TextInfo" : "3x3 squares will clear and generate energy.",
 				"Panel" : "Grid"
 			}
 		]
@@ -28,7 +28,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Blocks adjacent to cleared squares become Waste, each draining 1 energy per move.",
+				"TextInfo" : "Blocks adjacent to cleared squares become Waste, draining 1 energy per move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -39,7 +39,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Waste that is adjacent to cleared squares levels up. Level 2 Waste drains 3 energy each move.",
+				"TextInfo" : "Waste adjacent to cleared squares levels up. Level 2 Waste drains 3 energy per move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -50,7 +50,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "This Waste block has become level 3 and will drain 5 energy each move.",
+				"TextInfo" : "This Waste block has become level 3 and drains 5 energy per move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -61,7 +61,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "You’re running out of energy! Make a square this turn or you’ll lose!",
+				"TextInfo" : "You're low on energy! Make a square this turn to gain energy!",
 				"Panel" : "Reactor"
 			}
 		]
@@ -72,7 +72,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "For every 5 cleared squares an event begins that will make the game harder. Each event continues until you clear another 5 squares.",
+				"TextInfo" : "An event has begun! Each event continues until you clear 5 squares.",
 				"Panel" : "Grid"
 			}
 		]
@@ -83,7 +83,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Breach: A breach has occurred in the reactor and foreign material is taking up space.",
+				"TextInfo" : "Reactor Breach: Some spaces are blocked off.",
 				"Panel" : "Grid"
 			}
 		]
@@ -94,7 +94,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Unrefined Uranium: Some budget cuts mean you have to place some less than perfect blocks on the board.",
+				"TextInfo" : "Unrefined Uranium: Some blocks have been replaced by difficult ones.",
 				"Panel" : "Grid"
 			}
 		]
@@ -105,7 +105,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Contamination: Your material has become contaminated and now blocks will spawn with wastes in them.",
+				"TextInfo" : "Contamination: Blocks come with Waste.",
 				"Panel" : "Grid"
 			}
 		]
@@ -116,7 +116,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Meltdown: The reactor is melting down! Be prepared for multiple events at once!",
+				"TextInfo" : "Reactor Meltdown: The reactor is melting down! Be prepared for two events at once.",
 				"Panel" : "Grid"
 			}
 		]
@@ -127,7 +127,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Overload: The reactor has completely overloaded! All the events are occurring at once! This is your final challenge!",
+				"TextInfo" : "Reactor Overload: All the events are occurring at once! This is your final challenge!",
 				"Panel" : "Grid"
 			}
 		]
@@ -149,12 +149,24 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Use the Waste to complete this 3x3 square. Use the buttons to rotate and flip it.",
+				"TextInfo" : "Use the red flip and blue rotate buttons, and make 3x3 square with the Waste.",
 				"Panel" : "Grid"
 			}
 		]
 	
-	}, 
+	},
+	"FIRST_SQUARE_NOT_TUTORIAL" : 
+	{
+		"TriggerName" : "FIRST_SQUARE_NOT_TUTORIAL",
+		"Info" :
+		[
+			{
+				"TextInfo" : "This bar tracks cleared squares and shows when events will start and end.",
+				"Panel" : "ScoreBar"
+			}
+		]
+	
+	},
 	"TUTORIAL_BAG_TRIGGER_3" : 
 	{
 		"TriggerName" : "TUTORIAL_BAG_TRIGGER_3",
