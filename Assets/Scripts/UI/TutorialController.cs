@@ -20,6 +20,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         //FIRST_OPEN_2,
         FIRST_BLOCK,
         FIRST_SQUARE,
+        FIRST_SQUARE_NOT_TUTORIAL,
         FIRST_WASTE,
         FIRST_WASTE_2,
         FIRST_WASTE_3,
@@ -386,7 +387,14 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
     private void OnSquare()
     {
-        TriggerEvent(Triggers.FIRST_SQUARE);
+        if (Settings.Instance.IsTutorialModeEnabled())
+        {
+            TriggerEvent(Triggers.FIRST_SQUARE);
+        }
+        else
+        {
+            TriggerEvent(Triggers.FIRST_SQUARE_NOT_TUTORIAL);
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
