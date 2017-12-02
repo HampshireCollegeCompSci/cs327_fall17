@@ -178,9 +178,11 @@ public class BlockSpawner : MonoBehaviour
     [SerializeField]
     [Tooltip("The vestige level to use.")]
     int vestigeLevel = 1;
+    /*
     [SerializeField]
     [Tooltip("Reference to ScreenTapping.")]
     ScreenTapping screenTapping;
+    */
     [SerializeField]
     [Tooltip("Reference to the ScoreCounter.")]
     ScoreCounter scoreCounter;
@@ -555,7 +557,7 @@ public class BlockSpawner : MonoBehaviour
             //newDraggable.Init(toSpawn, grid, canvas);
             newDraggable.Init(toSpawn, grid, GetComponent<RectTransform>(), consoleGrid);
 
-            newDraggable.SetScreenTapping(screenTapping);//Pass screenTapping to DraggableObject
+            //newDraggable.SetScreenTapping(screenTapping);//Pass screenTapping to DraggableObject
 
             currentBlock = new Block(newDraggable.GetBlock());
 

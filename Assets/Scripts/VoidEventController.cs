@@ -274,29 +274,29 @@ public class VoidEventController : MonoBehaviour
         //scoreCounter.ScoreChanged += ScoreCounter_ScoreChanged;
         grid.SquaresCleared += CheckScore;
 
-        // Randomize letter bindings.
-        List<char> letters = new List<char>(3);
-        letters.Add('a');
-        letters.Add('b');
-        letters.Add('c');
-        List<VoidEvent.EventType> types = new List<VoidEvent.EventType>();
-        types.Add(VoidEvent.EventType.Junkyard);
-        types.Add(VoidEvent.EventType.Radiation);
-        types.Add(VoidEvent.EventType.Asteroids);
-        for (int i = 0; i < 3; ++i)
-        {
-            int index = Random.Range(0, letters.Count);
-            char letter = letters[index];
-            letters.RemoveAt(index);
-            letterBindings.Add(letter, types[i]);
-        }
-
-        PrintLetterBindings();
-
         // Don't do event stuff in Zen Mode.
         if (!Settings.Instance.IsZenModeEnabled() &&
             !Settings.Instance.IsTutorialModeEnabled())
         {
+            // Randomize letter bindings.
+            List<char> letters = new List<char>(3);
+            letters.Add('a');
+            letters.Add('b');
+            letters.Add('c');
+            List<VoidEvent.EventType> types = new List<VoidEvent.EventType>();
+            types.Add(VoidEvent.EventType.Junkyard);
+            types.Add(VoidEvent.EventType.Radiation);
+            types.Add(VoidEvent.EventType.Asteroids);
+            for (int i = 0; i < 3; ++i)
+            {
+                int index = Random.Range(0, letters.Count);
+                char letter = letters[index];
+                letters.RemoveAt(index);
+                letterBindings.Add(letter, types[i]);
+            }
+
+            PrintLetterBindings();
+
             // Read from tuning data and populate event groups.
             Tune();
         }

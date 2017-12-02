@@ -1431,6 +1431,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabScreenTapping: {fileID: 1648235365134136, guid: a5d88d28aa9c5d0489d5a9b220cc64b1,
     type: 2}
+  canvas: {fileID: 501203755}
 --- !u!1001 &518423280
 Prefab:
   m_ObjectHideFlags: 0

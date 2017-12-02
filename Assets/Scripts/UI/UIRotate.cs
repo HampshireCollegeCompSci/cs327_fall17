@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class UIRotate : MonoBehaviour, IDragHandler
+public class UIRotate : MonoBehaviour
 {
     [SerializeField]
     BlockSpawner spawner;
@@ -23,10 +23,5 @@ public class UIRotate : MonoBehaviour, IDragHandler
     public void Flip()
     {
         spawner.FlipCurrentBlock();
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        //Do nothing
     }
 }
