@@ -40,9 +40,9 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     [SerializeField]
     [Tooltip("The spped of scale lerping.")]
     float lerpSpeed;
-    [SerializeField]
-    [Tooltip("Reference to ScreenTapping.")]
-    ScreenTapping screenTapping;
+    //[SerializeField]
+    //[Tooltip("Reference to ScreenTapping.")]
+    //ScreenTapping screenTapping;
 
     protected static Vector2 piecePlacementOffset = new Vector2(80, 80);
 
@@ -64,7 +64,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         {
             startTime = Time.time;
             isDragging = true;
-            screenTapping.TappingEffect(eventData); //Play screenTapping animation
+            ///screenTapping.TappingEffect(eventData); //Play screenTapping animation
 
             RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform.parent.parent.GetComponent<RectTransform>(), eventData.position, eventData.pressEventCamera, out _pointerOffset);
 
@@ -79,7 +79,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
     {
         if (isDraggable)
         {
-            screenTapping.TappingEffect(eventData); //Play screenTapping animation
+            ///screenTapping.TappingEffect(eventData); //Play screenTapping animation
             Vector2 localPointerPosition;
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasTransform, eventData.position, eventData.pressEventCamera, out localPointerPosition))
             {
@@ -115,7 +115,7 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         {
             startTime = Time.time;
             isDragging = false;
-            screenTapping.TappingEffect(eventData); //Play screenTapping animation
+            ///screenTapping.TappingEffect(eventData); //Play screenTapping animation
 
             SnapLocation locationToGoTo = GetClosestSnapLocation();
 
@@ -213,10 +213,12 @@ public class DraggableObject : MonoBehaviour, IDragHandler, IBeginDragHandler, I
         isDraggable = draggable;
     }
 
+    /*
     public void SetScreenTapping(ScreenTapping tapping)
     {
         screenTapping = tapping;
     }
+    */
 
     public void SetDraggingScale(Vector3 scale)
     {
