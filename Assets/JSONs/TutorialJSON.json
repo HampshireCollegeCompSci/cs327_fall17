@@ -66,17 +66,6 @@
 			}
 		]
 	},
-	"FIRST_EVENT" : 
-	{
-		"TriggerName" : "FIRST_EVENT",
-		"Info" :
-		[
-			{
-				"TextInfo" : "An event has begun! Each event continues until you clear 5 squares.",
-				"Panel" : "Grid"
-			}
-		]
-	},
 	"FIRST_BREACH" : 
 	{
 		"TriggerName" : "FIRST_BREACH",
@@ -94,7 +83,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Unrefined Uranium: Some blocks have been replaced by difficult ones.",
+				"TextInfo" : "An event has begun, and lasts until you clear 5 squares. In this event, some blocks are harder.",
 				"Panel" : "Grid"
 			}
 		]
@@ -149,7 +138,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Use the red flip and blue rotate buttons, and make 3x3 square with the Waste.",
+				"TextInfo" : "Use the blue rotate and red flip buttons to make 3x3 square with the Waste.",
 				"Panel" : "Grid"
 			}
 		]
@@ -161,7 +150,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "This bar tracks cleared squares and shows when events will start and end.",
+				"TextInfo" : "The bar above tracks cleared squares and shows when events will start and end.",
 				"Panel" : "ScoreBar"
 			}
 		]
