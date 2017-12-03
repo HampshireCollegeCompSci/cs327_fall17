@@ -39,7 +39,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Waste adjacent to cleared squares levels up. Level 2 Waste drains 3 energy per move.",
+				"TextInfo" : "Waste levels up when adjacent to cleared squares. Level 2 Waste drains 3 energy per move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -138,7 +138,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Use the blue rotate and red flip buttons to make 3x3 square with the Waste.",
+				"TextInfo" : "Use the blue rotate and red flip buttons to make a 3x3 square using the Waste.",
 				"Panel" : "Console"
 			}
 		]
