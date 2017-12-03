@@ -5,7 +5,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Drag blocks onto the board.",
+				"TextInfo" : "Drag green blocks onto the board.",
 				"Panel" : "Console"
 			}
 		]
@@ -28,7 +28,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Blocks adjacent to cleared squares become Waste, draining 1 energy per move.",
+				"TextInfo" : "Individual blocks adjacent to cleared squares become Waste, draining 1 energy per move.",
 				"Panel" : "Waste"
 			}
 		]
@@ -162,7 +162,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Blocks diagonal to completed squares won’t become Waste!",
+				"TextInfo" : "Individual blocks diagonal to completed squares won’t become Waste!",
 				"Panel" : "Grid"
 			}
 		]
