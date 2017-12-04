@@ -136,7 +136,7 @@
 	  },
 	  "Resume" : {
 		"English": "Resume",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Continua",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -167,7 +167,7 @@
 	
 	"HighScore1": {
 		"English": "high score",
-	    "Spanish": "PlaceholderSpanish",
+	    "Spanish": "Puntuación Alta",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -182,7 +182,7 @@
 	} ,
 	"Score": {
 		"English": "Score: ",
-	    "Spanish": "PlaceholderSpanish",
+	    "Spanish": "Puntuación",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -197,7 +197,7 @@
 	} ,
 	"YourScore" : {
 		"English": "YOUR SCORE",
-	    "Spanish": "PlaceholderSpanish",
+	    "Spanish": "Tu Puntuación",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -212,7 +212,7 @@
 	} ,
 	"HighScore" : {
 		"English": "HIGH SCORE",
-	    "Spanish": "PlaceholderSpanish",
+	    "Spanish": "Puntuación Alta",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -227,7 +227,7 @@
 	} ,
 	"Settings": {
 		"English": "Settings",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Adjustes",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -272,7 +272,7 @@
 	} ,
 	"Reset": {
 		"English": "Play Again",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Juega de nuevo",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -287,7 +287,7 @@
 	} ,
 	"StartOver": {
 		"English": "Start Over",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Juega de nuevo",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -332,7 +332,7 @@
 	} ,
 	"You Reached": {
 		"English": "You Reached",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Alcanzaste",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -347,7 +347,7 @@
 	} ,
 	"CRISIS AVERTED: REACTOR RESTORED": {
 		"English": "CRISIS AVERTED: REACTOR RESTORED",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Crisis evitada: Reactor Restaurado",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -362,7 +362,7 @@
 	} ,
 	"PauseMenu": {
 		"English": "Pause Menu",
-	    "Spanish": "PlaceholderSpanish",
+	    "Spanish": "Pausa menú",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -377,7 +377,7 @@
 	} ,
 	"Tip1": {
 		"English": "Try making more than one square at a time",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Trata de hacer más de un cuadro a la vez",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -392,7 +392,7 @@
 	} ,
 	"Tip2": {
 		"English": "Some blocks are more compatible than others",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Algunos bloques son más compatibles que otros",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -407,7 +407,7 @@
 	} ,
 	"Tip3": {
 		"English" :"Don’t place blocks in the center of the board, it gives you less space to work in",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "No pongas bloques en el centro del tablero, te da menos esepacio para trabajar",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -422,7 +422,7 @@
 	} ,
 	"Tip4": {
 		"English" : "Remember that cells diagonally adjacent to a cleared square don't become wastes",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Recuerda que las células diagonales adyacente a un cuadro despejado no se conviertenen desechos",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
