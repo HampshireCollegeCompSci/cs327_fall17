@@ -278,25 +278,6 @@ public class VoidEventController : MonoBehaviour
         if (!Settings.Instance.IsZenModeEnabled() &&
             !Settings.Instance.IsTutorialModeEnabled())
         {
-            // Randomize letter bindings.
-            List<char> letters = new List<char>(3);
-            letters.Add('a');
-            letters.Add('b');
-            letters.Add('c');
-            List<VoidEvent.EventType> types = new List<VoidEvent.EventType>();
-            types.Add(VoidEvent.EventType.Junkyard);
-            types.Add(VoidEvent.EventType.Radiation);
-            types.Add(VoidEvent.EventType.Asteroids);
-            for (int i = 0; i < 3; ++i)
-            {
-                int index = Random.Range(0, letters.Count);
-                char letter = letters[index];
-                letters.RemoveAt(index);
-                letterBindings.Add(letter, types[i]);
-            }
-
-            PrintLetterBindings();
-
             // Read from tuning data and populate event groups.
             Tune();
         }
@@ -332,6 +313,43 @@ public class VoidEventController : MonoBehaviour
     private void Tune()
     {
         JSONNode json = JSON.Parse(voidEventsJSON.ToString());
+
+        bool randomizeEventOrder = json["event order is randomized"].AsBool;
+
+        if (randomizeEventOrder)
+        {
+            // Randomize letter bindings.
+            List<char> letters = new List<char>(3);
+            letters.Add('a');
+            letters.Add('b');
+            letters.Add('c');
+            List<VoidEvent.EventType> types = new List<VoidEvent.EventType>();
+            types.Add(VoidEvent.EventType.Junkyard);
+            types.Add(VoidEvent.EventType.Radiation);
+            types.Add(VoidEvent.EventType.Asteroids);
+            for (int i = 0; i < 3; ++i)
+            {
+                int index = Random.Range(0, letters.Count);
+                char letter = letters[index];
+                letters.RemoveAt(index);
+                letterBindings.Add(letter, types[i]);
+            }
+        }
+        else
+        {
+            JSONNode orderedEvents = json["event order"];
+            string strJunkyard = orderedEvents["junkyard"];
+            string strAsteroids = orderedEvents["asteroids"];
+            string strRadiation = orderedEvents["radiation"];
+            char letterJunkyard = strJunkyard[0];
+            char letterAsteroids = strAsteroids[0];
+            char letterRadiation = strRadiation[0];
+            letterBindings.Add(letterJunkyard, VoidEvent.EventType.Junkyard);
+            letterBindings.Add(letterAsteroids, VoidEvent.EventType.Asteroids);
+            letterBindings.Add(letterRadiation, VoidEvent.EventType.Radiation);
+        }
+
+        PrintLetterBindings();
 
         // Read JSON data for tier-specific data.
         JSONNode nodeTierData = json["tier-specific data"];
