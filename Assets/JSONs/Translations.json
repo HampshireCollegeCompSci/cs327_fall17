@@ -106,7 +106,7 @@
 	  },
 	  "PlayAgain": {
 	    "English": "Play Again",
-	    "Spanish": "Volver a Jugar",
+	    "Spanish": "Juega de nuevo",
 	    "French": "Jouer àouveau",
 	    "Slovenian": "Igraj ponovno",
 	    "Romanian": "Joacă din nou",
@@ -136,7 +136,7 @@
 	  },
 	  "Resume" : {
 		"English": "Resume",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Continua",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -167,7 +167,7 @@
 	
 	"HighScore1": {
 		"English": "high score",
-	    "Spanish": "PlaceholderSpanish",
+	    "Spanish": "Puntuación Alta",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -182,7 +182,7 @@
 	} ,
 	"Score": {
 		"English": "Score: ",
-	    "Spanish": "PlaceholderSpanish",
+	    "Spanish": "Puntuación",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -197,7 +197,7 @@
 	} ,
 	"YourScore" : {
 		"English": "YOUR SCORE",
-	    "Spanish": "PlaceholderSpanish",
+	    "Spanish": "Tu Puntuación",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -212,7 +212,7 @@
 	} ,
 	"HighScore" : {
 		"English": "HIGH SCORE",
-	    "Spanish": "PlaceholderSpanish",
+	    "Spanish": "Puntuación Alta",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -227,7 +227,7 @@
 	} ,
 	"Settings": {
 		"English": "Settings",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Adjustes",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -272,7 +272,7 @@
 	} ,
 	"Reset": {
 		"English": "Play Again",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Juega de nuevo",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -287,7 +287,7 @@
 	} ,
 	"StartOver": {
 		"English": "Start Over",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Juega de nuevo",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -332,7 +332,7 @@
 	} ,
 	"You Reached": {
 		"English": "You Reached",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Alcanzaste",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -347,7 +347,7 @@
 	} ,
 	"CRISIS AVERTED: REACTOR RESTORED": {
 		"English": "CRISIS AVERTED: REACTOR RESTORED",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Crisis evitada: Reactor Restaurado",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -362,7 +362,7 @@
 	} ,
 	"PauseMenu": {
 		"English": "Pause Menu",
-	    "Spanish": "PlaceholderSpanish",
+	    "Spanish": "Pausa menú",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -377,7 +377,7 @@
 	} ,
 	"Tip1": {
 		"English": "Try making more than one square at a time",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Trata de hacer más de un cuadro a la vez",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -390,7 +390,8 @@
 		"Korean": "한 번에 여러 개의 정사각형들을 만들어 보세요",
 		"Portugese": "Tenta fazer mais do que um quadrado de uma vez"
 	} ,
-	"Tip2": {
+	"Tip2":
+  {
 		"English": "Try starting to make squares in the corner of the board to save space",
 		"Spanish": "PlaceholderSpanish",
 	    "French": "PlaceholderFrench",
@@ -587,7 +588,7 @@
 	} ,
 	"Nothing" : {
 		"English": "Nothing",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Nada",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -602,7 +603,7 @@
 	} ,
 	"Unrefined Uranium" : {
 		"English": "Unrefined Uranium",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Uranio sin reginar",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -617,7 +618,7 @@
 	} ,
 	"Waste Contamination": {
 		"English": "Waste Contamination",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Contaminación de residuos",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -632,7 +633,7 @@
 	} ,
 	"Reactor Breach": {
 		"English": "Reactor Breach",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Brecha del reactor",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -647,7 +648,7 @@
 	} , 
 	"Reactor Meltdown": {
 		"English": "Reactor Meltdown",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Fusión del reactor",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -662,7 +663,7 @@
 	} ,
 	"Reactor Overload": {
 		"English": "Reactor Overload",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Spnrecarga del reactor",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -677,7 +678,7 @@
 	} ,
 	" begin!": {
 		"English": " begin!",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": " comienza",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -692,7 +693,7 @@
 	} , 
 	"YOUREACHED" : {
 		"English": "YOU REACHED: ",
-		"Spanish": "PlaceholderSpanishx",
+		"Spanish": "Alcanzaste: ",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -797,7 +798,7 @@
 	} ,
 	"CS327": {
 		"English": "This game was created by Hampshire College class CS-327 during the fall of 2017.",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Este juego fue creado por Hampshire College en la clase CS327en el otoño de 2017",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -812,7 +813,7 @@
 	} ,
 	"Website": {
 		"English": "Checkout our website",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Mira nuestra página de web",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -827,7 +828,7 @@
 	} ,
 	"Music" : {
 		"English": "Music",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Música",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -842,7 +843,7 @@
 	} ,
 	"SFX" : {
 		"English": "SFX",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Efectos especiales",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -872,7 +873,7 @@
 	}
 	"Continue" : {
 		"English": "Continue",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Continua",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -902,7 +903,7 @@
 	} ,
 	"OK" : {
 		"English": "OK",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Sí",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -932,7 +933,7 @@
 	} ,
 	"Yes": {
 		"English": "Yes",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Sí",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -947,7 +948,7 @@
 	} ,
 	"Cancel": {
 		"English": "Cancel",
-		"Spanish": "PlaceholderSpanish",
+		"Spanish": "Cancelar",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -961,8 +962,8 @@
 		"Portugese": "Não"
 	},
 	"Restart": {
-		"English": "Restart",
-		"Spanish": "PlaceholderSpanish",
+		"English": "Play Again",
+		"Spanish": "Juega de nuevo",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -972,21 +973,22 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean"
+		"Korean": "재시작",
+		"Portugese": "PlaceholderPortugese"
 	},
 	"TapContinue": {
-    "English": "(Tap to Continue)",
-    "Spanish": "(Tap to Continue)",
-    "French": "(Tap to Continue)",
-    "Slovenian": "(Tap to Continue)",
-    "Romanian": "(Tap to Continue)",
-    "German": "(Tap to Continue)",
-    "Luxembourgish": "(Tap to Continue)",
-    "Dutch": "(Tap to Continue)",
-    "Danish": "(Tap to Continue)",
-    "Polish": "(Tap to Continue)",
-    "Swedish": "(Tap to Continue)",
-    "Korean": "(Tap to Continue)"
+	    "English": "(Tap to Continue)",
+	    "Spanish": "(Tap to Continue)",
+	    "French": "(Tap to Continue)",
+	    "Slovenian": "(Tap to Continue)",
+	    "Romanian": "(Tap to Continue)",
+	    "German": "(Tap to Continue)",
+	    "Luxembourgish": "(Tap to Continue)",
+	    "Dutch": "(Tap to Continue)",
+	    "Danish": "(Tap to Continue)",
+	    "Polish": "(Tap to Continue)",
+	    "Swedish": "(Tap to Continue)",
+	    "Korean": "(Tap to Continue)"
 	},
 	"PossibleBlocks": {
 		"English": "Possible Blocks",
