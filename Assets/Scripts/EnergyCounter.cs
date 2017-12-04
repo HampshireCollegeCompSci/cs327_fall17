@@ -35,7 +35,7 @@ public class EnergyCounter : MonoBehaviour
     [Tooltip("Reference to the Grid.")]
     Grid grid;
     [SerializeField]
-    [Tooltip("Reference to energy gain animator.")]
+    [Tooltip("Reference to energy gain animator controller.")]
     Animator energyGainController;
     [SerializeField]
     [Tooltip("The color that the rising text should have when energy is gained.")]
@@ -47,7 +47,7 @@ public class EnergyCounter : MonoBehaviour
     [Tooltip("Reference to the UI canvas transform.")]
     Transform canvas;
     [SerializeField]
-    [Tooltip("Reference to energy transfer ball animator.")]
+    [Tooltip("Reference to energy transfer ball animator controller.")]
     Animator energyTransferBallController;
     [SerializeField]
     [Tooltip("Reference to the BufferedValue component for buffering the energy.")]
@@ -79,6 +79,8 @@ public class EnergyCounter : MonoBehaviour
 
     // The reference to block transform.
     Transform blockTransform;
+
+    static int hashActivate = Animator.StringToHash("activate");
 
     void Tune()
     {
@@ -173,7 +175,7 @@ public class EnergyCounter : MonoBehaviour
         if (amount > 0)
         {
             // Activate the energy transfer ball animation.
-            energyTransferBallController.SetBool("active", true);
+            energyTransferBallController.SetTrigger(hashActivate);
         }
     }
 
@@ -187,6 +189,8 @@ public class EnergyCounter : MonoBehaviour
         AddEnergy(newEnergy - energy, updateBufferedEnergyTarget);
     }
 
+    // Creates a text popup.
+    // popUpPos should be world position, not local position.
     public void PopUp(int amount, Vector3 popUpPos, Vector3? destinationPos = null)
     {
         GameObject risingTextObj = Instantiate(risingTextPrefab, canvas, false);

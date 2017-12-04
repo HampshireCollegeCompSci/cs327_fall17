@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿// Author(s): Yixiang Xu, Paul Calande
+// Class that controls the score blocks at the top of the screen.
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScoreBlocks : MonoBehaviour {
+public class ScoreBlocks : MonoBehaviour
+{
     [SerializeField]
     [Tooltip("The array of blocks.")]
     Image[] blocks;
@@ -24,17 +28,16 @@ public class ScoreBlocks : MonoBehaviour {
 
     public void BlockAdded()
     {
-        if(blockCount == blocks.Length)
+        blocks[blockCount].sprite = fullScoreBlock;
+        blockCount++;
+
+        if (blockCount == blocks.Length)
         {
-            blockCount = 0;
+            blockCount -= blocks.Length;
             foreach (Image i in blocks)
             {
                 i.sprite = emptyScoreBlock;
             }
-
         }
-
-        blocks[blockCount].sprite = fullScoreBlock;
-        blockCount++;
     }
 }
