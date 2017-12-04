@@ -1,4 +1,11 @@
 {
+	"event order is randomized" : false,
+	"event order" :
+	{
+		"junkyard" : "a",
+		"asteroids" : "b",
+		"radiation" : "c"
+	},
 	"tier-specific data" :
 	[
 		{

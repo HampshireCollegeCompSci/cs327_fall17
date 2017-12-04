@@ -118,6 +118,9 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the game over controller.")]
     UIGameOver gameOver;
+    [SerializeField]
+    [Tooltip("Reference to score blocks.")]
+    ScoreBlocks scoreBlocks;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -648,6 +651,8 @@ public class Grid : MonoBehaviour
             int energyGain = energyPerSquare;
             energyCounter.AddEnergy(energyGain, false);
             energyCounter.PopUp(energyGain, textPosAbsolute, reactorPos);
+
+            scoreBlocks.BlockAdded();
 
             yield return new WaitForSeconds(secondsBetweenSquareAnimations);
 
