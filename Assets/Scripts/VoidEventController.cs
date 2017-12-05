@@ -229,6 +229,9 @@ public class VoidEventController : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the event slider.")]
     EventSlider eventSlider;
+    [SerializeField]
+    [Tooltip("Reference to event blocks.")]
+    ScoreBlocks eventBlocks;
 
     /*
     [SerializeField]
@@ -436,6 +439,8 @@ public class VoidEventController : MonoBehaviour
                 grid.AddAsteroids(tierToAsteroidCount[tier]);
                 break;
         }
+
+        eventBlocks.EventBlockAdded(); //Fill a event icon on the top bar
     }
 
     private void VoidEvent_Finished(VoidEvent.EventType eventType, int tier)

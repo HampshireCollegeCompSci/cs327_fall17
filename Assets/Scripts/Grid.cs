@@ -652,7 +652,7 @@ public class Grid : MonoBehaviour
             energyCounter.AddEnergy(energyGain, false);
             energyCounter.PopUp(energyGain, textPosAbsolute, reactorPos);
 
-            scoreBlocks.BlockAdded();
+            scoreBlocks.ScoreBlockAdded(); //Fill a score block on the top bar
 
             yield return new WaitForSeconds(secondsBetweenSquareAnimations);
 
