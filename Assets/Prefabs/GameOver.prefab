@@ -61,7 +61,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1139495737981970
 GameObject:
   m_ObjectHideFlags: 1
@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 224738787403966718}
   - component: {fileID: 222681483111989812}
   - component: {fileID: 114402211693119844}
+  - component: {fileID: 114551559664195290}
   m_Layer: 0
   m_Name: ProgressBarBottom
   m_TagString: Untagged
@@ -570,7 +571,7 @@ MonoBehaviour:
   textGameOverLabel: {fileID: 114230764441667554}
   textYouReached: {fileID: 114089338938984636}
   voidEventController: {fileID: 0}
-  progressBarTop: {fileID: 224549071322884934}
+  progressBar: {fileID: 114551559664195290}
   musicGameOver: {fileID: 8300000, guid: f2e6e684bd6413c488fbd0e1f0833cdd, type: 3}
   maskConsole: {fileID: 0}
   maskReactor: {fileID: 0}
@@ -883,6 +884,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FallbackFont: {fileID: 12800000, guid: f3e8e24dc2fee4aeb98019a9d9248dab, type: 3}
+--- !u!114 &114551559664195290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1139495737981970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f2e231c03ec3bc4299b32c19c37b77f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabProgressBarDot: {fileID: 1855381310629840, guid: 71efbc5100c8c6d4688af4a4644fa7e2,
+    type: 2}
+  dotAnchorY: 0.6
 --- !u!114 &114554321668924718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1215,7 +1230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  translationKey: Reset
+  translationKey: PlayAgain
 --- !u!222 &222148112583143352
 CanvasRenderer:
   m_ObjectHideFlags: 1

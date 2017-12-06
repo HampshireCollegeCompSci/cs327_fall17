@@ -222,9 +222,10 @@ public class UIGameOver : MonoBehaviour
 			textYourScoreLabel.trueTypeFont = translator.Font ();
 		}
 		*/
-        float progress = voidEventController.GetProgress();
-        progressBar.InstantiateEvents(voidEventController.GetVoidEventGroups());
-        progressBar.SetProgress(progress);
-        //Debug.Log(progressBarTop.anchorMax);
+        //float progress = voidEventController.GetProgress();
+        //progressBar.InstantiateEvents(voidEventController.GetVoidEventGroups(), progress);
+        //progressBar.SetProgress(progress);
+        progressBar.InstantiateEvents(voidEventController.GetVoidEventGroups(), score.GetScore(),
+            voidEventController);
     }
 }

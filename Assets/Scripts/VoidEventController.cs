@@ -584,7 +584,11 @@ public class VoidEventController : MonoBehaviour
     // Get how close the player is to reaching the end of the game, as a percentage.
     public float GetProgress()
     {
-        float percentage = (float)scoreCounter.GetScore() / endScore;
+        return GetProgress(scoreCounter.GetScore());
+    }
+    public float GetProgress(int score)
+    {
+        float percentage = (float)score / endScore;
         if (percentage > 1.0f)
         {
             percentage = 1.0f;
