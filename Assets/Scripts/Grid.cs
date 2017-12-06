@@ -1,5 +1,5 @@
 ﻿// Author(s): Paul Calande, Yifeng Shi, Yixiang Xu, Wm. Josiah Erikson
-// A 2-dimensional collections of Tiles
+// A 2-dimensional collections of Tiles.
 
 using System;
 using System.Collections;
@@ -115,12 +115,17 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Seconds between each vestige energy loss animation. Populated by JSON.")]
     float secondsBetweenVestigeEnergyLossAnimations;
+    /*
     [SerializeField]
     [Tooltip("Reference to the game over controller.")]
     UIGameOver gameOver;
+    */
     [SerializeField]
     [Tooltip("Reference to score blocks.")]
     ScoreBlocks scoreBlocks;
+    [SerializeField]
+    [Tooltip("Reference to accumulator Transform.")]
+    Transform transformAccumulator;
 
     // The width of one Tile, calculated compared to the Grid's dimensions.
     private float tileWidth;
@@ -1179,12 +1184,14 @@ public class Grid : MonoBehaviour
             Tile theTile = vm.GetTile();
             Vector3 vestigePos = theTile.transform.position;
             int energyChange = decayRates[theTile.GetVestigeLevel() - 1];
-            energyCounter.PopUp(-energyChange, vestigePos, reactor.transform.position);
+            //Vector3 targetPos = reactor.transform.position;
+            Vector3 targetPos = transformAccumulator.position;
+            energyCounter.PopUp(-energyChange, vestigePos, targetPos);
 
-            gameOver.ResetGameOverWaitTime();
+            //gameOver.ResetGameOverWaitTime();
             yield return new WaitForSeconds(secondsBetweenVestigeEnergyLossAnimations);
         }
-        gameOver.TryStartGameOverWaitTimer();
+        //gameOver.TryStartGameOverWaitTimer();
     }
 
     // Instantiate the energy loss animation for all vestiges on the Grid.

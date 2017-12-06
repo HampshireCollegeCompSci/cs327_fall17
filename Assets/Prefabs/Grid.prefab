@@ -74,6 +74,7 @@ MonoBehaviour:
   energyPerSquare: 0
   scorePerSquare: 0
   rectTransform: {fileID: 224804674211477668}
+  canvas: {fileID: 0}
   asteroidsCanSpawnInFilledCells: 0
   outLinePrefab: {fileID: 1232262177716418, guid: 591aa46e960fcb24ab1b2e2b0ee1088c,
     type: 2}
@@ -91,6 +92,8 @@ MonoBehaviour:
     type: 2}
   secondsBetweenVestigeEnergyLossAnimations: 0
   gameOver: {fileID: 0}
+  scoreBlocks: {fileID: 0}
+  transformAccumulator: {fileID: 0}
 --- !u!114 &114265381854382034
 MonoBehaviour:
   m_ObjectHideFlags: 1

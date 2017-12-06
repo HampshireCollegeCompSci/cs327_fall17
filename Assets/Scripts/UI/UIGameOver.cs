@@ -115,6 +115,7 @@ public class UIGameOver : MonoBehaviour
 
     public void StartGameOverWaitTimer()
     {
+        //Debug.Log("Game over wait timer started.");
         waitingForGameOver = true;
     }
 
