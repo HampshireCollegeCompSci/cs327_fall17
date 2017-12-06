@@ -183,6 +183,16 @@ public class VoidEventGroup
         return tier;
     }
 
+    public int GetEventGroupBegin()
+    {
+        return begin;
+    }
+
+    public int GetEventGroupEnd()
+    {
+        return end;
+    }
+
     private void OnStarted()
     {
         if (Started != null)
@@ -580,5 +590,10 @@ public class VoidEventController : MonoBehaviour
             percentage = 1.0f;
         }
         return percentage;
+    }
+
+    public List<VoidEventGroup> GetVoidEventGroups()
+    {
+        return voidEventGroups;
     }
 }
