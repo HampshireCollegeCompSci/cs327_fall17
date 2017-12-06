@@ -178,6 +178,11 @@ public class VoidEventGroup
         return type;
     }
 
+    public int GetEventGroupTier()
+    {
+        return tier;
+    }
+
     private void OnStarted()
     {
         if (Started != null)
