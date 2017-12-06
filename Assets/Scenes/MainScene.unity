@@ -1594,6 +1594,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114709252200992596, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1590728483}
     - target: {fileID: 114017712063440150, guid: d6b51dab45ec74b068a7b535ef93d7c6,
         type: 2}
       propertyPath: gameFlow
@@ -1624,11 +1629,6 @@ Prefab:
       propertyPath: clearedSquares
       value: 
       objectReference: {fileID: 60084325}
-    - target: {fileID: 114709252200992596, guid: d6b51dab45ec74b068a7b535ef93d7c6,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1590728483}
     - target: {fileID: 114202807859211042, guid: d6b51dab45ec74b068a7b535ef93d7c6,
         type: 2}
       propertyPath: gameFlow
