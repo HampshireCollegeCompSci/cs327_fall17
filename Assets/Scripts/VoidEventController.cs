@@ -448,7 +448,7 @@ public class VoidEventController : MonoBehaviour
                 break;
 
             case VoidEvent.EventType.Asteroids:
-                grid.AddAsteroids(tierToAsteroidCount[tier]);
+                grid.AddAsteroids(tierToAsteroidCount[tier], tier);
                 break;
         }
     }
