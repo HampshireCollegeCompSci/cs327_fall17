@@ -41,27 +41,28 @@ public class ScoreBlocks : MonoBehaviour
 
     public void ScoreBlockAdded()
     {
-        scoreBlocks[scoreBlockCount].sprite = fullScoreBlock;
-        scoreBlockCount++;
+        if (scoreBlockCount < scoreBlocks.Length)
+        {
+            scoreBlocks[scoreBlockCount].sprite = fullScoreBlock;
+            scoreBlockCount++;
+        }
+        else
+        {
+            eventBlocks[eventBlockCount].sprite = fullEventBlock;
+            eventBlockCount++;
+        }
+        
 
-        if (scoreBlockCount == scoreBlocks.Length)
+        if (eventBlockCount == eventBlocks.Length)
         {
             scoreBlockCount -= scoreBlocks.Length;
+            eventBlockCount -= eventBlocks.Length;
+
             foreach (Image i in scoreBlocks)
             {
                 i.sprite = emptyScoreBlock;
             }
-        }
-    }
 
-    public void EventBlockAdded()
-    {
-        eventBlocks[eventBlockCount].sprite = fullEventBlock;
-        eventBlockCount++;
-
-        if (eventBlockCount == eventBlocks.Length)
-        {
-            eventBlockCount -= eventBlocks.Length;
             foreach (Image i in eventBlocks)
             {
                 i.sprite = emptyEventBlock;
