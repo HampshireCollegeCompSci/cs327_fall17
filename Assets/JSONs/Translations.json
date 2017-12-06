@@ -388,7 +388,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "특정 블록들은 다른 블록들보다 호환성이 더 높습니다.",
+		"Korean": "공간을 절약하려면 보드의 모서리부터 시작해보십시오.",
 		"Portugese": "Alguns blocos sã mais compatíeis do que outros"
 	} ,
 	"Tip3": {
@@ -403,7 +403,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "블록을 중앙에 놓지 마십시오. 여유 공간이 줄어듭니다.",
+		"Korean": "어떤 블록들은 다른 블록들보다 효과적입니다. 다양한 조합을 시도해보십시오.",
 		"Portugese": "Nã coloque blocos no centro do tabuleiro, isso lhe dáenos espaç com qual trabalhar "
 	} ,
 	"Tip4": {
@@ -418,7 +418,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "치워진 정사각형들과 대각선으로 맟닿은 셀들은 남은 퍼즐 조각들이 되지 않습니다.",
+		"Korean": "이벤트를 빨리 끝내려면 이벤트 전에 사각형들을 먼저 셋팅하세요.",
 		"Portugese": "Lembre-se de que céulas diagonalmente ao lado a um quadrado desobstruido nã se tornan vestíios"
 	} ,
 	"Tip5" : {
@@ -433,7 +433,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Korean": "큰 사각형들과 겹치는 사각형들은 더 효과적입니다.",
 		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
 	} ,
 	"Tip6" : {
@@ -448,7 +448,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Korean": "폐기물이 초과하기 전에 빨리 블록으로 만들어버리세요.",
 		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
 	} ,
 	"Tip7" : {
@@ -463,7 +463,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Korean": "블록을 회전시키거나 뒤집을 수 있는 걸 잊지 마세요.",
 		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
 	} ,
 	"Tip8" : {
@@ -478,7 +478,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Korean": "수집 가능한 블록은 정지 메뉴를 확인해주세요.",
 		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
 	} ,
 	"Tip9" : {
@@ -493,7 +493,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Korean": "원자로 균열 블록들로부터 멀리 지으세요. 균열 블록들은 큰 사각형들을 막습니다.",
 		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
 	} ,
 	"Tip10" : {
@@ -508,7 +508,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Korean": "멀리 갈수록 이벤트들이 어려워집니다.",
 		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
 	} ,
 	"Tip11" : {
@@ -523,7 +523,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Korean": "우라늄 원석 이벤트 동안은 블록들을 조합해보세요.",
 		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
 	} ,
 	"Tip12" : {
@@ -538,7 +538,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Korean": "진행될수록 다수의 이벤트가 한 번에 발생할 수 있습니다.",
 		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
 	} ,
 	"Tip13" : {
@@ -553,7 +553,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Korean": "폐기물 오염은 블록들에세 폐기물이 있다는 신호입니다. 폐기물을 바로 치워주세요.",
 		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
 	} ,
 	"Tip14" : {
@@ -568,7 +568,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "남은 퍼즐 조각들 특히 레벨 2나 3인 것들은 최대한 빨리 치우십시오.",
+		"Korean": "이벤트들이 무섭겠지만 침착하세요!",
 		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
 	} ,
 	"Nothing" : {
@@ -853,7 +853,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
+		"Korean": "승리!",
 		"Portugese": "PlaceholderPortugese"
 	}
 	"Continue" : {
@@ -883,7 +883,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
+		"Korean": "튜토리얼 성공! 이제 좀 진지해져 볼까요?",
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"OK" : {
@@ -913,7 +913,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
+		"Korean": "현 게임의 모든 기록이 사라집니다. 계속하시겠습니까?",
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"Yes": {
@@ -973,7 +973,7 @@
 	    "Danish": "(Tap to Continue)",
 	    "Polish": "(Tap to Continue)",
 	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(Tap to Continue)"
+	    "Korean": "(넘어가기)"
 	},
 	"PossibleBlocks": {
 		"English": "Possible Blocks",
@@ -987,7 +987,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
+		"Korean": "가능한 블록들",
 		"Portugese": "PlaceholderPortugese"
 	}
 }
