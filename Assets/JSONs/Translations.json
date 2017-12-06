@@ -196,7 +196,7 @@
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"YourScore" : {
-		"English": "YOUR SCORE",
+		"English": "SQUARES CLEARED",
 	    "Spanish": "Tu Puntuación",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
@@ -211,7 +211,7 @@
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"HighScore" : {
-		"English": "HIGH SCORE",
+		"English": "MOST SQUARES CLEARED",
 	    "Spanish": "Puntuación Alta",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
@@ -269,22 +269,7 @@
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean",
 		"Portugese": "PlaceholderPortugese"
-	} ,
-	"Reset": {
-		"English": "Play Again",
-		"Spanish": "Juega de nuevo",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
-		"Korean": "재시작",
-		"Portugese": "PlaceholderPortugese"
-	} ,
+	},
 	"StartOver": {
 		"English": "Start Over",
 		"Spanish": "Juega de nuevo",
@@ -962,7 +947,7 @@
 		"Portugese": "Não"
 	},
 	"Restart": {
-		"English": "Play Again",
+		"English": "Restart",
 		"Spanish": "Juega de nuevo",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",

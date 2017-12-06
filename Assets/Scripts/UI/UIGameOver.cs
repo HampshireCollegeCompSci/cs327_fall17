@@ -51,8 +51,8 @@ public class UIGameOver : MonoBehaviour
     [Tooltip("Reference to the VoidEventController.")]
     VoidEventController voidEventController;
     [SerializeField]
-    [Tooltip("Reference to the progress bar overlay.")]
-    RectTransform progressBarTop;
+    [Tooltip("Reference to the progress bar.")]
+    ProgressBar progressBar;
     [SerializeField]
     [Tooltip("The game over music to play.")]
     AudioClip musicGameOver;
@@ -222,8 +222,10 @@ public class UIGameOver : MonoBehaviour
 			textYourScoreLabel.trueTypeFont = translator.Font ();
 		}
 		*/
-        float progress = voidEventController.GetProgress();
-        progressBarTop.anchorMax = new Vector2(progress, progressBarTop.anchorMax.y);
-        //Debug.Log(progressBarTop.anchorMax);
+        //float progress = voidEventController.GetProgress();
+        //progressBar.InstantiateEvents(voidEventController.GetVoidEventGroups(), progress);
+        //progressBar.SetProgress(progress);
+        progressBar.InstantiateEvents(voidEventController.GetVoidEventGroups(), score.GetScore(),
+            voidEventController);
     }
 }
