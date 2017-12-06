@@ -162,9 +162,17 @@ public class Grid : MonoBehaviour
     private void Start()
     {
         Tune();
+
+        float originalY = rectTransform.rect.height * 1.1f;
         float size = canvas.GetComponent<RectTransform>().rect.width / 1.1f;
-        if (rectTransform.rect.width > size)         
+        if (rectTransform.rect.width > size)
+        {
             rectTransform.sizeDelta = new Vector2(size, size);
+            float newY = rectTransform.rect.height * 1.1f;
+            Vector3 down = new Vector3(0, (newY - originalY) / 2, 0);
+            rectTransform.anchoredPosition = down;
+        } 
+            
         
 
         tileWidth = rectTransform.rect.width / width;

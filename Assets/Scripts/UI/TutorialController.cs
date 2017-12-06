@@ -313,9 +313,9 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             xPos = offset;
         }
 
-        if (col <= grid.GetHeight() / 2 - 1)
+        if (col > grid.GetHeight() / 2)
         {
-            yPos = offset * 2.5f;
+            yPos = offset * 3.5f;
         }
         else
         {
