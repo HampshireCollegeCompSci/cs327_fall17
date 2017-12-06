@@ -73,12 +73,27 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("The text color to use for the energy counter when the player is at the lowest energy threshold.")]
     Color energyTextColorDanger;
+    [SerializeField]
+    [Tooltip("Prefab for the rising text accumulator.")]
+    GameObject prefabRisingTextAccumulator;
+    [SerializeField]
+    [Tooltip("The accumulator's desired transform.")]
+    Transform accumulatorTransform;
+    [SerializeField]
+    [Tooltip("Transform corresponding to the reactor center.")]
+    Transform reactorCenterTransform;
 
     // The highest amount of energy achieved over the course of the game.
     int peakEnergy;
 
     // The reference to block transform.
     Transform blockTransform;
+
+    // Reference to the accumulation text.
+    RisingTextAccumulator accumulator = null;
+
+    float accumulationSecondsToWait;
+    float accumulationSecondsToTravel;
 
     static int hashActivate = Animator.StringToHash("activate");
 
@@ -89,6 +104,8 @@ public class EnergyCounter : MonoBehaviour
         //maxEnergyInMeter = json["max energy in meter"].AsInt;
         energyThreshold = json["energy level animation turns remaining"].AsArray;
         textSecondsBeforeHeadingToDestination = json["seconds for rising text to rise"].AsFloat;
+        accumulationSecondsToWait = json["accumulation seconds to wait"].AsFloat;
+        accumulationSecondsToTravel = json["accumulation seconds to travel"].AsFloat;
     }
 
     void Start()
@@ -98,7 +115,6 @@ public class EnergyCounter : MonoBehaviour
         energyTextColorNormal = energyTextColorGain;
         energyTextColorDanger = energyTextColorLoss;
 
-        bufferedValueEnergy.ValueUpdated += BufferedValueEnergy_ValueUpdated;
         bufferedValueEnergy.ForceSetBufferedValue(energy);
         //SetEnergyLevel();
         UpdateEnergy();
@@ -225,9 +241,17 @@ public class EnergyCounter : MonoBehaviour
             // Prepare to move to the given destination.
             risingText.SetDestination((Vector3)destinationPos);
             risingText.SetSecondsBeforeHeadingToDestination(textSecondsBeforeHeadingToDestination);
-            //risingTextObj.GetComponent<LerpTo>().Completed += RisingTextEnergyPenaltyCallback;
-            risingTextObj.GetComponent<LerpTo>().Completed +=
-                (() => RisingTextEnergyPenaltyCallback(amount));
+
+            if (amount > 0)
+            {
+                risingTextObj.GetComponent<LerpTo>().Completed +=
+                    (() => RisingTextEnergyPenaltyCallback(amount));
+            }
+            else
+            {
+                risingTextObj.GetComponent<LerpTo>().Completed +=
+                    (() => RisingTextEnergyPenaltyAccumulateCallback(amount));
+            }
         }
     }
 
@@ -288,16 +312,46 @@ public class EnergyCounter : MonoBehaviour
     {
         //Debug.Log("EnergyCounter.RisingTextEnergyPenaltyCallback");
         AddToBufferedEnergyTarget(amount);
+        /*
         if (amount < 0)
         {
             grid.AnimateReactorEnergyLoss();
             gameOver.ResetGameOverWaitTime();
         }
+        */
     }
 
-    private void BufferedValueEnergy_ValueUpdated(int newValue, int difference)
+    private void RisingTextEnergyPenaltyAccumulateCallback(int amount)
     {
-        //Debug.Log("EnergyCounter.BufferedValueEnergy_ValueUpdated.newValue: " + newValue);
-        textEnergy.text = newValue.ToString();
+        // If the accumulator doesn't exist, instantiate it.
+        if (accumulator == null)
+        {
+            GameObject acc = Instantiate(prefabRisingTextAccumulator, canvas, false);
+            acc.transform.position = accumulatorTransform.position;
+
+            accumulator = acc.GetComponent<RisingTextAccumulator>();
+            accumulator.Init();
+            accumulator.SetReactorCenter(reactorCenterTransform);
+            accumulator.SetColor(energyTextColorLoss);
+            accumulator.SetSecondsToWait(accumulationSecondsToWait);
+            accumulator.SetSecondsToTravel(accumulationSecondsToTravel);
+            accumulator.MoveStarted += RisingTextAccumulator_MoveStarted;
+            accumulator.Completed += RisingTextAccumulator_Completed;
+        }
+        accumulator.Add(amount);
+        accumulator.ResetTimer();
+    }
+
+    private void RisingTextAccumulator_MoveStarted()
+    {
+        accumulator = null;
+    }
+
+    private void RisingTextAccumulator_Completed(int amount)
+    {
+        AddToBufferedEnergyTarget(amount);
+        grid.AnimateReactorEnergyLoss();
+        //gameOver.ResetGameOverWaitTime();
+        gameOver.TryStartGameOverWaitTimer();
     }
 }
