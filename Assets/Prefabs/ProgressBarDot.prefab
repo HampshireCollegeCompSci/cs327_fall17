@@ -86,6 +86,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageDot: {fileID: 114547703826505864}
   imageEventIcon: {fileID: 114197081781585292}
+  rectTransformEventIcon: {fileID: 224674050601371776}
   spriteDotOff: {fileID: 21300000, guid: 7d31f0f3da033d04eb555eecc0325fba, type: 3}
   spriteDotOn: {fileID: 21300000, guid: ceca58ec67317994d9c26ce6dbe49350, type: 3}
   spriteJunkyard:
@@ -175,6 +176,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 75}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 0, y: 85}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

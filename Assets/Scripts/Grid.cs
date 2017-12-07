@@ -71,6 +71,24 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Referebce to the canvas object")]
     GameObject canvas;
+    [SerializeField]
+    [Tooltip("Reference to the top bar object")]
+    GameObject topBar;
+    [SerializeField]
+    [Tooltip("Reference to the energy container object")]
+    GameObject energyContainer;
+    [SerializeField]
+    [Tooltip("Reference to the console object")]
+    GameObject console;
+    [SerializeField]
+    [Tooltip("Reference to the background pipes object")]
+    GameObject pipes;
+    [SerializeField]
+    [Tooltip("Reference to the background image object")]
+    GameObject background;
+    [SerializeField]
+    [Tooltip("Reference to the black bar prefab")]
+    GameObject blackBarPrefab;
     /*
     [SerializeField]
     [Tooltip("Reference to energy gain animator.")]
@@ -131,8 +149,8 @@ public class Grid : MonoBehaviour
     private float tileWidth;
     // The height of one Tile, calculated compared to the Grid's dimensions.
     private float tileHeight;
-    // The mask of asteroids, populated by JSON.
-    private int[,] asteroidMask;
+    // The masks of asteroids, populated by JSON. Tier mapped to 1s and 0s.
+    private Dictionary<int, int[,]> asteroidMasks = new Dictionary<int, int[,]>();
 
     Dictionary<Vector2, List<Space>> spaces = new Dictionary<Vector2, List<Space>>();
 
@@ -152,33 +170,87 @@ public class Grid : MonoBehaviour
         asteroidsCanSpawnInFilledCells = json["asteroids can spawn in filled cells"].AsBool;
         secondsBetweenVestigeEnergyLossAnimations = json["seconds between vestige energy loss animations"].AsFloat;
 
-        asteroidMask = new int[height, width];
-        JSONArray asteroidMaskJSON = json["asteroid area denial"].AsArray;
+        ReadAsteroidMask(json, 1);
+        ReadAsteroidMask(json, 2);
+        ReadAsteroidMask(json, 3);
+    }
+
+    private void ReadAsteroidMask(JSONNode json, int tier)
+    {
+        string jsonEntryName = "asteroid area denial " + tier;
+        int[,] newMask = new int[height, width];
+        JSONArray asteroidMaskJSON = json[jsonEntryName].AsArray;
         int asteroidMaskCount = asteroidMaskJSON.Count;
         for (int i = 0; i < asteroidMaskCount; ++i)
         {
             int val = asteroidMaskJSON[i].AsInt;
             int col = i % width;
             int row = i / width;
-            asteroidMask[row, col] = val;
+            newMask[row, col] = val;
         }
+        asteroidMasks.Add(tier, newMask);
+    }
+
+    private void WideScreenSupport(){
+        //Super wide screen (such as iPhone X, Galaxy S8) suport.
+        float originalY = rectTransform.rect.height * 1.1f;
+        float size = canvas.GetComponent<RectTransform>().rect.width / 1.1f;
+        if (rectTransform.rect.width > size)
+        {
+            //Adjust Grid size
+            rectTransform.sizeDelta = new Vector2(size, size);
+            float newY = rectTransform.rect.height * 1.1f;
+
+            Vector3 down = new Vector3(0, (newY - originalY) / 2, 0);
+            float diff = Mathf.Abs(down.y);
+            float diffRatio = diff / canvas.GetComponent<RectTransform>().rect.height;
+
+            //Move top bar down
+            RectTransform topbarRT = topBar.GetComponent<RectTransform>();
+            topbarRT.anchorMax = new Vector2(topbarRT.anchorMax.x, topbarRT.anchorMax.y - diffRatio);
+            topbarRT.anchorMin = new Vector2(topbarRT.anchorMin.x, topbarRT.anchorMin.y - diffRatio);
+
+            //Move energy container, console and background pipes up
+            RectTransform ecRT = energyContainer.GetComponent<RectTransform>();
+            ecRT.anchoredPosition = new Vector2(ecRT.anchoredPosition.x, ecRT.anchoredPosition.y + diff);
+
+            RectTransform consoleRT = console.GetComponent<RectTransform>();
+            consoleRT.anchorMax = new Vector2(consoleRT.anchorMax.x, consoleRT.anchorMax.y + diffRatio);
+            consoleRT.anchorMin = new Vector2(consoleRT.anchorMin.x, consoleRT.anchorMin.y + diffRatio);
+
+            RectTransform pipeRT = pipes.GetComponent<RectTransform>();
+            pipeRT.anchoredPosition = new Vector2(pipeRT.anchoredPosition.x, pipeRT.anchoredPosition.y + diff);
+
+            //Stretch background image
+            RectTransform bgRT = background.GetComponent<RectTransform>();
+            bgRT.anchorMax = new Vector2(bgRT.anchorMax.x, bgRT.anchorMax.y - diffRatio);
+            bgRT.anchorMin = new Vector2(bgRT.anchorMin.x, bgRT.anchorMin.y + diffRatio);
+
+            //Add black bars to cover the screen top and bottom
+            GameObject blackBarObjTop = Instantiate(blackBarPrefab);
+            blackBarObjTop.transform.SetParent(canvas.transform);
+            RectTransform btRT = blackBarObjTop.GetComponent<RectTransform>();
+            btRT.localScale = new Vector3(1, 1, 1);
+            btRT.anchorMin = new Vector2(0, 0);
+            btRT.anchorMax = new Vector2(1, diffRatio);
+            btRT.offsetMin = new Vector2(0, 0);
+            btRT.offsetMax = new Vector2(0, 0);
+
+            GameObject blackBarObjBottom = Instantiate(blackBarPrefab);
+            blackBarObjBottom.transform.SetParent(canvas.transform);
+            RectTransform bbRT = blackBarObjBottom.GetComponent<RectTransform>();
+            bbRT.localScale = new Vector3(1, 1, 1);
+            bbRT.anchorMin = new Vector2(0, 1 - diffRatio);
+            bbRT.anchorMax = new Vector2(1, 1);
+            bbRT.offsetMin = new Vector2(0, 0);
+            bbRT.offsetMax = new Vector2(0, 0);
+        } 
     }
 
     private void Start()
     {
         Tune();
-
-        float originalY = rectTransform.rect.height * 1.1f;
-        float size = canvas.GetComponent<RectTransform>().rect.width / 1.1f;
-        if (rectTransform.rect.width > size)
-        {
-            rectTransform.sizeDelta = new Vector2(size, size);
-            float newY = rectTransform.rect.height * 1.1f;
-            Vector3 down = new Vector3(0, (newY - originalY) / 2, 0);
-            rectTransform.anchoredPosition = down;
-        } 
-            
-        
+        WideScreenSupport();
 
         tileWidth = rectTransform.rect.width / width;
         tileHeight = rectTransform.rect.height / height;
@@ -1281,8 +1353,9 @@ public class Grid : MonoBehaviour
     }
 
     // Randomly adds a given number of asteroids to the Grid.
-    public void AddAsteroids(int asteroidCount)
+    public void AddAsteroids(int asteroidCount, int tier)
     {
+        int[,] asteroidMask = asteroidMasks[tier];
         int asteroidsAdded = 0;
         List<Tile> refs = GetReferencesToTiles((Tile t) => t.GetIsOccupied() == false, asteroidMask);
         // If asteroids can spawn in filled cells, add the occupied Tiles to the refs List.
