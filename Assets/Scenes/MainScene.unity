@@ -1976,11 +1976,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 972460582}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
---- !u!1 &682244627 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1828566952389966, guid: 3b9b05c71874df847abc9bda8da2e645,
-    type: 2}
-  m_PrefabInternal: {fileID: 712640148}
 --- !u!1001 &712640148
 Prefab:
   m_ObjectHideFlags: 0
@@ -2123,6 +2118,26 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Cancel
       objectReference: {fileID: 0}
+    - target: {fileID: 114512160524741814, guid: 3b9b05c71874df847abc9bda8da2e645,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1590728483}
+    - target: {fileID: 114512160524741814, guid: 3b9b05c71874df847abc9bda8da2e645,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToTitle
+      objectReference: {fileID: 0}
+    - target: {fileID: 114832234775300024, guid: 3b9b05c71874df847abc9bda8da2e645,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1590728479}
+    - target: {fileID: 114832234775300024, guid: 3b9b05c71874df847abc9bda8da2e645,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CancelExit
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3b9b05c71874df847abc9bda8da2e645, type: 2}
   m_IsPrefabParent: 0
@@ -2132,6 +2147,11 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 712640148}
   m_Script: {fileID: 11500000, guid: 92544b2910a65c14c9559dffac87b6dd, type: 3}
+--- !u!1 &712640150 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1548263907408070, guid: 3b9b05c71874df847abc9bda8da2e645,
+    type: 2}
+  m_PrefabInternal: {fileID: 712640148}
 --- !u!1001 &725389380
 Prefab:
   m_ObjectHideFlags: 0
@@ -4660,7 +4680,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 1306943243}
   screenTapping: {fileID: 501203756}
   blocksInBagPanel: {fileID: 1270505905}
-  LoseProgressWarning: {fileID: 682244627}
+  LoseProgressWarning: {fileID: 712640150}
 --- !u!114 &1590728480
 MonoBehaviour:
   m_ObjectHideFlags: 0
