@@ -74,14 +74,7 @@ MonoBehaviour:
   energyPerSquare: 0
   scorePerSquare: 0
   rectTransform: {fileID: 224804674211477668}
-  canvas: {fileID: 0}
-  topBar: {fileID: 0}
-  energyContainer: {fileID: 0}
-  console: {fileID: 0}
-  pipes: {fileID: 0}
-  background: {fileID: 0}
-  blackBarPrefab: {fileID: 1149584626668908, guid: 9ac52c0ba119155449993b9e9498fe99,
-    type: 2}
+  subCanvas: {fileID: 0}
   asteroidsCanSpawnInFilledCells: 0
   outLinePrefab: {fileID: 1232262177716418, guid: 591aa46e960fcb24ab1b2e2b0ee1088c,
     type: 2}
