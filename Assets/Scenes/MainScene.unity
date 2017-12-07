@@ -2854,9 +2854,9 @@ Prefab:
       objectReference: {fileID: 2051938916}
     - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
         type: 2}
-      propertyPath: canvas
+      propertyPath: subCanvas
       value: 
-      objectReference: {fileID: 501203751}
+      objectReference: {fileID: 1887950759}
     - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
         type: 2}
       propertyPath: consoleGrid
@@ -2869,11 +2869,6 @@ Prefab:
       objectReference: {fileID: 642454970}
     - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
         type: 2}
-      propertyPath: gameOver
-      value: 
-      objectReference: {fileID: 1095900781}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
       propertyPath: scoreBlocks
       value: 
       objectReference: {fileID: 2086623352}
@@ -2882,42 +2877,6 @@ Prefab:
       propertyPath: transformAccumulator
       value: 
       objectReference: {fileID: 1601431994}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: topBar
-      value: 
-      objectReference: {fileID: 465470036}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: background
-      value: 
-      objectReference: {fileID: 77510613}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: energyContainer
-      value: 
-      objectReference: {fileID: 2113759124}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: console
-      value: 
-      objectReference: {fileID: 1155208512}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: pipes
-      value: 
-      objectReference: {fileID: 1407091993}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: blackBarPrefab
-      value: 
-      objectReference: {fileID: 1149584626668908, guid: 9ac52c0ba119155449993b9e9498fe99,
-        type: 2}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: subCanvas
-      value: 
-      objectReference: {fileID: 1887950759}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0

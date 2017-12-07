@@ -107,8 +107,8 @@ public class Grid : MonoBehaviour
     [Tooltip("How many square clearings have occurred so far. Incremented by 1 every time the player forms any number of squares in a single turn.")]
     int squareClearingsCount = 0;
     [SerializeField]
-    [Tooltip("Prefab to instantiate for vestige energy loss animation.")]
-    GameObject prefabEnergyLossVestige;
+    [Tooltip("Prefabs to instantiate for vestige energy loss animations (from lowest level to highest level).")]
+    GameObject[] prefabEnergyLossVestige;
     [SerializeField]
     [Tooltip("Prefab to instantiate for reactor energy loss animation.")]
     GameObject prefabEnergyLossReactor;
@@ -662,7 +662,7 @@ public class Grid : MonoBehaviour
 
             int energyGain = energyPerSquare;
             energyCounter.AddEnergy(energyGain, false);
-            energyCounter.PopUp(energyGain, textPosAbsolute, reactorPos);
+            energyCounter.PopUp(energyGain, textPosAbsolute, EnergyCounter.TextColor.Gain, reactorPos);
 
             scoreBlocks.ScoreBlockAdded(); //Fill a score block on the top bar
 
@@ -1182,10 +1182,17 @@ public class Grid : MonoBehaviour
             AnimateVestigeEnergyLoss(vm);
             Tile theTile = vm.GetTile();
             Vector3 vestigePos = theTile.transform.position;
-            int energyChange = decayRates[theTile.GetVestigeLevel() - 1];
-            //Vector3 targetPos = reactor.transform.position;
+            int levelIndex = theTile.GetVestigeLevel() - 1;
+            int energyChange = decayRates[levelIndex];
             Vector3 targetPos = transformAccumulator.position;
-            energyCounter.PopUp(-energyChange, vestigePos, targetPos);
+
+            EnergyCounter.TextColor[] colors = {
+                EnergyCounter.TextColor.Vestige1,
+                EnergyCounter.TextColor.Vestige2,
+                EnergyCounter.TextColor.Vestige3
+            };
+
+            energyCounter.PopUp(-energyChange, vestigePos, colors[levelIndex], targetPos);
 
             //gameOver.ResetGameOverWaitTime();
             yield return new WaitForSeconds(secondsBetweenVestigeEnergyLossAnimations);
@@ -1212,7 +1219,8 @@ public class Grid : MonoBehaviour
     public void AnimateVestigeEnergyLoss(int row, int col)
     {
         Vector3 pos = GetTilePosition(row, col);
-        GameObject obj = Instantiate(prefabEnergyLossVestige, transform, false);
+        int levelIndex = tiles[row, col].GetVestigeLevel() - 1;
+        GameObject obj = Instantiate(prefabEnergyLossVestige[levelIndex], transform, false);
         obj.transform.localPosition = pos;
     }
 
@@ -1334,6 +1342,11 @@ public class Grid : MonoBehaviour
     public int GetSquareClearingsCount()
     {
         return squareClearingsCount;
+    }
+
+    public int GetScorePerSquare()
+    {
+        return scorePerSquare;
     }
 
     private void OnSquareFormed(int scorePerSquare, Vector3 textPos)

@@ -839,6 +839,9 @@ MonoBehaviour:
   energyGainController: {fileID: 95769553267905262}
   energyTextColorGain: {r: 0, g: 0.68235296, b: 0.03137255, a: 1}
   energyTextColorLoss: {r: 1, g: 0, b: 0, a: 1}
+  energyTextColorVestige1: {r: 1, g: 0.6300202, b: 0.16176468, a: 0}
+  energyTextColorVestige2: {r: 1, g: 0, b: 0, a: 0}
+  energyTextColorVestige3: {r: 1, g: 0, b: 0.972414, a: 0}
   canvas: {fileID: 0}
   energyTransferBallController: {fileID: 95014424890742646}
   bufferedValueEnergy: {fileID: 114904137661992072}
@@ -849,8 +852,6 @@ MonoBehaviour:
   imageConsoleGrid: {fileID: 0}
   gameOver: {fileID: 0}
   textSecondsBeforeHeadingToDestination: 0
-  energyTextColorNormal: {r: 0, g: 0, b: 0, a: 0}
-  energyTextColorDanger: {r: 0, g: 0, b: 0, a: 0}
   prefabRisingTextAccumulator: {fileID: 1614510917576326, guid: 61f604e378a7fde4b9c94ae3fbfdc8a9,
     type: 2}
   accumulatorTransform: {fileID: 224388668930585422}
