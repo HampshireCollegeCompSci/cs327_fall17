@@ -5981,6 +5981,7 @@ GameObject:
   - component: {fileID: 2086623351}
   - component: {fileID: 2086623350}
   - component: {fileID: 2086623352}
+  - component: {fileID: 2086623353}
   m_Layer: 5
   m_Name: Blocks
   m_TagString: Untagged
@@ -6068,6 +6069,18 @@ MonoBehaviour:
   fullScoreBlock: {fileID: 21300000, guid: f59ebae2fe7a15d44a7daabdfa974ee4, type: 3}
   emptyEventBlock: {fileID: 21300000, guid: f3185d182de686b4396b60811853e3a5, type: 3}
   fullEventBlock: {fileID: 21300000, guid: 6ea837d50975aeb438c1f281e01a18b8, type: 3}
+--- !u!114 &2086623353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2086623348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef6d2985e1dcef439eb706202d0c3cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enabledInTutorial: 0
 --- !u!1 &2109081923
 GameObject:
   m_ObjectHideFlags: 0
