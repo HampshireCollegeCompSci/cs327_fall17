@@ -43,11 +43,13 @@ public class ScoreBlocks : MonoBehaviour
     {
         if (scoreBlockCount < scoreBlocks.Length)
         {
+            scoreBlocks[scoreBlockCount].GetComponent<Animator>().enabled = true;
             scoreBlocks[scoreBlockCount].sprite = fullScoreBlock;
             scoreBlockCount++;
         }
         else
         {
+            eventBlocks[eventBlockCount].GetComponent<Animator>().enabled = true;
             eventBlocks[eventBlockCount].sprite = fullEventBlock;
             eventBlockCount++;
         }
