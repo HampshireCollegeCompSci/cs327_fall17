@@ -39,6 +39,11 @@ public class ScoreCounter : MonoBehaviour
         return score;
     }
 
+    public int GetSquaresCleared()
+    {
+        return score / grid.GetScorePerSquare();
+    }
+
     private void OnDestroy()
     {
         grid.SquareOutlined -= Grid_SquareCleared;

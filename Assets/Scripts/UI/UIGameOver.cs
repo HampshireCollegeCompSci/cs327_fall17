@@ -198,7 +198,7 @@ public class UIGameOver : MonoBehaviour
         }
 
         int highScore = Settings.Instance.GetHighScore();
-        int finalScore = score.GetScore();
+        int finalScore = score.GetSquaresCleared();
         if (finalScore > highScore)
         {
             highScore = finalScore;
@@ -209,7 +209,7 @@ public class UIGameOver : MonoBehaviour
 
         textGameOverReason.text = translator.Translate(reason);
         textHighScore.text = highScore.ToString();
-        textScore.text = score.GetScore().ToString();
+        textScore.text = finalScore.ToString();
         // For Maia - leaving this in here as a template
         //textGameOverLabel.text = translator.Translate("GameOver");
         //textHighScoreLabel.text = translator.Translate("HighScore1");

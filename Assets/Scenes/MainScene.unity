@@ -2869,39 +2869,9 @@ Prefab:
       objectReference: {fileID: 501203751}
     - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
         type: 2}
-      propertyPath: consoleGrid
-      value: 
-      objectReference: {fileID: 1125939173}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: reactor
-      value: 
-      objectReference: {fileID: 642454970}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: gameOver
-      value: 
-      objectReference: {fileID: 1095900781}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: scoreBlocks
-      value: 
-      objectReference: {fileID: 2086623352}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: transformAccumulator
-      value: 
-      objectReference: {fileID: 1601431994}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
       propertyPath: topBar
       value: 
       objectReference: {fileID: 465470036}
-    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
-        type: 2}
-      propertyPath: background
-      value: 
-      objectReference: {fileID: 77510613}
     - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
         type: 2}
       propertyPath: energyContainer
@@ -2919,10 +2889,29 @@ Prefab:
       objectReference: {fileID: 1407091993}
     - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
         type: 2}
-      propertyPath: blackBarPrefab
+      propertyPath: background
       value: 
-      objectReference: {fileID: 1149584626668908, guid: 9ac52c0ba119155449993b9e9498fe99,
+      objectReference: {fileID: 77510613}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
         type: 2}
+      propertyPath: consoleGrid
+      value: 
+      objectReference: {fileID: 1125939173}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: reactor
+      value: 
+      objectReference: {fileID: 642454970}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: scoreBlocks
+      value: 
+      objectReference: {fileID: 2086623352}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: transformAccumulator
+      value: 
+      objectReference: {fileID: 1601431994}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0

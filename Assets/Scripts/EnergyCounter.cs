@@ -10,6 +10,14 @@ using SimpleJSON;
 
 public class EnergyCounter : MonoBehaviour
 {
+    public enum TextColor
+    {
+        Gain,
+        Vestige1,
+        Vestige2,
+        Vestige3
+    }
+
     [SerializeField]
     [Tooltip("The amount of energy the player currently has. The initial amount is populated by JSON.")]
     int energy = 10;
@@ -44,6 +52,15 @@ public class EnergyCounter : MonoBehaviour
     [Tooltip("The color that the rising text should have when energy is lost.")]
     Color energyTextColorLoss;
     [SerializeField]
+    [Tooltip("The color that the rising text should have when energy is lost from a level 1 vestige.")]
+    Color energyTextColorVestige1;
+    [SerializeField]
+    [Tooltip("The color that the rising text should have when energy is lost from a level 2 vestige.")]
+    Color energyTextColorVestige2;
+    [SerializeField]
+    [Tooltip("The color that the rising text should have when energy is lost from a level 3 vestige.")]
+    Color energyTextColorVestige3;
+    [SerializeField]
     [Tooltip("Reference to the UI canvas transform.")]
     Transform canvas;
     [SerializeField]
@@ -67,12 +84,14 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("How many seconds the rising text will wait before heading to its destination. Populated by JSON.")]
     float textSecondsBeforeHeadingToDestination;
+    /*
     [SerializeField]
     [Tooltip("The text color to use for the energy counter when the player isn't at the lowest energy threshold.")]
     Color energyTextColorNormal;
     [SerializeField]
     [Tooltip("The text color to use for the energy counter when the player is at the lowest energy threshold.")]
     Color energyTextColorDanger;
+    */
     [SerializeField]
     [Tooltip("Prefab for the rising text accumulator.")]
     GameObject prefabRisingTextAccumulator;
@@ -112,8 +131,8 @@ public class EnergyCounter : MonoBehaviour
     {
         Tune();
 
-        energyTextColorNormal = energyTextColorGain;
-        energyTextColorDanger = energyTextColorLoss;
+        //energyTextColorNormal = energyTextColorGain;
+        //energyTextColorDanger = energyTextColorLoss;
 
         bufferedValueEnergy.ForceSetBufferedValue(energy);
         //SetEnergyLevel();
@@ -131,7 +150,7 @@ public class EnergyCounter : MonoBehaviour
         if (turnsRemaining <= energyThreshold[0])
         {
             imageConsoleGrid.sprite = spriteConsoleGridDanger;
-            textEnergy.color = energyTextColorDanger;
+            textEnergy.color = energyTextColorLoss;
 
             EnterEnergyLevel(0);
             return;
@@ -139,7 +158,7 @@ public class EnergyCounter : MonoBehaviour
         else
         {
             imageConsoleGrid.sprite = spriteConsoleGridNormal;
-            textEnergy.color = energyTextColorNormal;
+            textEnergy.color = energyTextColorGain;
         }
 
         if (turnsRemaining <= energyThreshold[1])
@@ -207,7 +226,7 @@ public class EnergyCounter : MonoBehaviour
 
     // Creates a text popup.
     // popUpPos should be world position, not local position.
-    public void PopUp(int amount, Vector3 popUpPos, Vector3? destinationPos = null)
+    public void PopUp(int amount, Vector3 popUpPos, TextColor colIn, Vector3? destinationPos = null)
     {
         GameObject risingTextObj = Instantiate(risingTextPrefab, canvas, false);
 
@@ -219,18 +238,33 @@ public class EnergyCounter : MonoBehaviour
         */
 
         string pref;
-        Color col;
         if (amount < 0)
         {
             // The number is negative already, so we don't need a prefix.
             pref = "";
-            col = energyTextColorLoss;
         }
         else
         {
             pref = "+";
-            col = energyTextColorGain;
         }
+        Color col;
+        switch (colIn)
+        {
+            default:
+            case TextColor.Gain:
+                col = energyTextColorGain;
+                break;
+            case TextColor.Vestige1:
+                col = energyTextColorVestige1;
+                break;
+            case TextColor.Vestige2:
+                col = energyTextColorVestige2;
+                break;
+            case TextColor.Vestige3:
+                col = energyTextColorVestige3;
+                break;
+        }
+
         RisingText risingText = risingTextObj.GetComponent<RisingText>();
         risingText.SetText(pref + amount.ToString());
         risingText.SetColor(col);
