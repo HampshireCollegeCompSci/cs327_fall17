@@ -75,8 +75,20 @@ public class Grid : MonoBehaviour
     [Tooltip("Reference to the top bar object")]
     GameObject topBar;
     [SerializeField]
+    [Tooltip("Reference to the energy container object")]
+    GameObject energyContainer;
+    [SerializeField]
+    [Tooltip("Reference to the console object")]
+    GameObject console;
+    [SerializeField]
+    [Tooltip("Reference to the background pipes object")]
+    GameObject pipes;
+    [SerializeField]
     [Tooltip("Reference to the background image object")]
     GameObject background;
+    [SerializeField]
+    [Tooltip("Reference to the black bar prefab")]
+    GameObject blackBarPrefab;
     /*
     [SerializeField]
     [Tooltip("Reference to energy gain animator.")]
@@ -179,7 +191,7 @@ public class Grid : MonoBehaviour
         asteroidMasks.Add(tier, newMask);
     }
 
-    private void WideScreenSuppot(){
+    private void WideScreenSupport(){
         //Super wide screen (such as iPhone X, Galaxy S8) suport.
         float originalY = rectTransform.rect.height * 1.1f;
         float size = canvas.GetComponent<RectTransform>().rect.width / 1.1f;
@@ -188,31 +200,57 @@ public class Grid : MonoBehaviour
             //Adjust Grid size
             rectTransform.sizeDelta = new Vector2(size, size);
             float newY = rectTransform.rect.height * 1.1f;
+
             Vector3 down = new Vector3(0, (newY - originalY) / 2, 0);
-            rectTransform.anchoredPosition = down;
+            float diff = Mathf.Abs(down.y);
+            float diffRatio = diff / canvas.GetComponent<RectTransform>().rect.height;
 
             //Move top bar down
             RectTransform topbarRT = topBar.GetComponent<RectTransform>();
-            float diff = Mathf.Abs(down.y * 2);
-            float diffRatio = diff / canvas.GetComponent<RectTransform>().rect.height;
-            topbarRT.anchorMax = new Vector2(1, 1 - diffRatio);
-            topbarRT.anchorMin = new Vector2(0, (1 - diffRatio - 0.07f));
-            topbarRT.offsetMax = new Vector2(0, 0);
-            topbarRT.offsetMin = new Vector2(0, 0);
+            topbarRT.anchorMax = new Vector2(topbarRT.anchorMax.x, topbarRT.anchorMax.y - diffRatio);
+            topbarRT.anchorMin = new Vector2(topbarRT.anchorMin.x, topbarRT.anchorMin.y - diffRatio);
+
+            //Move energy container, console and background pipes up
+            RectTransform ecRT = energyContainer.GetComponent<RectTransform>();
+            ecRT.anchoredPosition = new Vector2(ecRT.anchoredPosition.x, ecRT.anchoredPosition.y + diff);
+
+            RectTransform consoleRT = console.GetComponent<RectTransform>();
+            consoleRT.anchorMax = new Vector2(consoleRT.anchorMax.x, consoleRT.anchorMax.y + diffRatio);
+            consoleRT.anchorMin = new Vector2(consoleRT.anchorMin.x, consoleRT.anchorMin.y + diffRatio);
+
+            RectTransform pipeRT = pipes.GetComponent<RectTransform>();
+            pipeRT.anchoredPosition = new Vector2(pipeRT.anchoredPosition.x, pipeRT.anchoredPosition.y + diff);
 
             //Stretch background image
             RectTransform bgRT = background.GetComponent<RectTransform>();
-            bgRT.anchorMax = new Vector2(1, 1 - diffRatio);
-            bgRT.anchorMin = new Vector2(0, 0);
-            bgRT.offsetMax = new Vector2(0, 0);
-            bgRT.offsetMin = new Vector2(0, 0);
+            bgRT.anchorMax = new Vector2(bgRT.anchorMax.x, bgRT.anchorMax.y - diffRatio);
+            bgRT.anchorMin = new Vector2(bgRT.anchorMin.x, bgRT.anchorMin.y + diffRatio);
+
+            //Add black bars to cover the screen top and bottom
+            GameObject blackBarObjTop = Instantiate(blackBarPrefab);
+            blackBarObjTop.transform.SetParent(canvas.transform);
+            RectTransform btRT = blackBarObjTop.GetComponent<RectTransform>();
+            btRT.localScale = new Vector3(1, 1, 1);
+            btRT.anchorMin = new Vector2(0, 0);
+            btRT.anchorMax = new Vector2(1, diffRatio);
+            btRT.offsetMin = new Vector2(0, 0);
+            btRT.offsetMax = new Vector2(0, 0);
+
+            GameObject blackBarObjBottom = Instantiate(blackBarPrefab);
+            blackBarObjBottom.transform.SetParent(canvas.transform);
+            RectTransform bbRT = blackBarObjBottom.GetComponent<RectTransform>();
+            bbRT.localScale = new Vector3(1, 1, 1);
+            bbRT.anchorMin = new Vector2(0, 1 - diffRatio);
+            bbRT.anchorMax = new Vector2(1, 1);
+            bbRT.offsetMin = new Vector2(0, 0);
+            bbRT.offsetMax = new Vector2(0, 0);
         } 
     }
 
     private void Start()
     {
         Tune();
-        WideScreenSuppot();
+        WideScreenSupport();
 
         tileWidth = rectTransform.rect.width / width;
         tileHeight = rectTransform.rect.height / height;
