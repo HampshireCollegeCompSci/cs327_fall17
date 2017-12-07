@@ -21,12 +21,20 @@ public class ProgressBar : MonoBehaviour
         VoidEventController vec)
     {
         voidEventGroups = voidEventGroupsIn;
+        bool above = true;
         foreach (VoidEventGroup veg in voidEventGroups)
         {
             // Instantiate prefab instance.
             GameObject newObj = Instantiate(prefabProgressBarDot, transform, false);
             // Get component and pass the VoidEventGroup.
-            newObj.GetComponent<ProgressBarDot>().SetEvent(veg, score);
+            ProgressBarDot dot = newObj.GetComponent<ProgressBarDot>();
+            dot.SetEvent(veg, score);
+            if (!above)
+            {
+                dot.MoveIcon();
+            }
+            above = !above;
+
             // Move the object to the appropriate place on the progress meter.
             RectTransform rt = newObj.GetComponent<RectTransform>();
             float progress = vec.GetProgress(veg.GetEventGroupBegin());

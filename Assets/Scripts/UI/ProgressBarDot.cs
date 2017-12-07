@@ -15,6 +15,9 @@ public class ProgressBarDot : MonoBehaviour
     [Tooltip("Reference to the event icon image.")]
     Image imageEventIcon;
     [SerializeField]
+    [Tooltip("Reference to the event icon transform.")]
+    RectTransform rectTransformEventIcon;
+    [SerializeField]
     [Tooltip("Sprite for the dot if the player didn't reach the event.")]
     Sprite spriteDotOff;
     [SerializeField]
@@ -66,5 +69,12 @@ public class ProgressBarDot : MonoBehaviour
                 imageEventIcon.sprite = spriteOverload;
                 break;
         }
+    }
+
+    // Move the event icon vertically to the other side of the dot.
+    public void MoveIcon()
+    {
+        Vector2 anchorPos = rectTransformEventIcon.anchoredPosition;
+        rectTransformEventIcon.anchoredPosition = -anchorPos;
     }
 }

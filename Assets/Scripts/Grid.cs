@@ -131,8 +131,8 @@ public class Grid : MonoBehaviour
     private float tileWidth;
     // The height of one Tile, calculated compared to the Grid's dimensions.
     private float tileHeight;
-    // The mask of asteroids, populated by JSON.
-    private int[,] asteroidMask;
+    // The masks of asteroids, populated by JSON. Tier mapped to 1s and 0s.
+    private Dictionary<int, int[,]> asteroidMasks = new Dictionary<int, int[,]>();
 
     Dictionary<Vector2, List<Space>> spaces = new Dictionary<Vector2, List<Space>>();
 
@@ -152,16 +152,25 @@ public class Grid : MonoBehaviour
         asteroidsCanSpawnInFilledCells = json["asteroids can spawn in filled cells"].AsBool;
         secondsBetweenVestigeEnergyLossAnimations = json["seconds between vestige energy loss animations"].AsFloat;
 
-        asteroidMask = new int[height, width];
-        JSONArray asteroidMaskJSON = json["asteroid area denial"].AsArray;
+        ReadAsteroidMask(json, 1);
+        ReadAsteroidMask(json, 2);
+        ReadAsteroidMask(json, 3);
+    }
+
+    private void ReadAsteroidMask(JSONNode json, int tier)
+    {
+        string jsonEntryName = "asteroid area denial " + tier;
+        int[,] newMask = new int[height, width];
+        JSONArray asteroidMaskJSON = json[jsonEntryName].AsArray;
         int asteroidMaskCount = asteroidMaskJSON.Count;
         for (int i = 0; i < asteroidMaskCount; ++i)
         {
             int val = asteroidMaskJSON[i].AsInt;
             int col = i % width;
             int row = i / width;
-            asteroidMask[row, col] = val;
+            newMask[row, col] = val;
         }
+        asteroidMasks.Add(tier, newMask);
     }
 
     private void Start()
@@ -1281,8 +1290,9 @@ public class Grid : MonoBehaviour
     }
 
     // Randomly adds a given number of asteroids to the Grid.
-    public void AddAsteroids(int asteroidCount)
+    public void AddAsteroids(int asteroidCount, int tier)
     {
+        int[,] asteroidMask = asteroidMasks[tier];
         int asteroidsAdded = 0;
         List<Tile> refs = GetReferencesToTiles((Tile t) => t.GetIsOccupied() == false, asteroidMask);
         // If asteroids can spawn in filled cells, add the occupied Tiles to the refs List.
