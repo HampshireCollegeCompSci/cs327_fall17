@@ -71,6 +71,12 @@ public class Grid : MonoBehaviour
     [SerializeField]
     [Tooltip("Referebce to the canvas object")]
     GameObject canvas;
+    [SerializeField]
+    [Tooltip("Reference to the top bar object")]
+    GameObject topBar;
+    [SerializeField]
+    [Tooltip("Reference to the background image object")]
+    GameObject background;
     /*
     [SerializeField]
     [Tooltip("Reference to energy gain animator.")]
@@ -173,21 +179,40 @@ public class Grid : MonoBehaviour
         asteroidMasks.Add(tier, newMask);
     }
 
-    private void Start()
-    {
-        Tune();
-
+    private void WideScreenSuppot(){
+        //Super wide screen (such as iPhone X, Galaxy S8) suport.
         float originalY = rectTransform.rect.height * 1.1f;
         float size = canvas.GetComponent<RectTransform>().rect.width / 1.1f;
         if (rectTransform.rect.width > size)
         {
+            //Adjust Grid size
             rectTransform.sizeDelta = new Vector2(size, size);
             float newY = rectTransform.rect.height * 1.1f;
             Vector3 down = new Vector3(0, (newY - originalY) / 2, 0);
             rectTransform.anchoredPosition = down;
+
+            //Move top bar down
+            RectTransform topbarRT = topBar.GetComponent<RectTransform>();
+            float diff = Mathf.Abs(down.y * 2);
+            float diffRatio = diff / canvas.GetComponent<RectTransform>().rect.height;
+            topbarRT.anchorMax = new Vector2(1, 1 - diffRatio);
+            topbarRT.anchorMin = new Vector2(0, (1 - diffRatio - 0.07f));
+            topbarRT.offsetMax = new Vector2(0, 0);
+            topbarRT.offsetMin = new Vector2(0, 0);
+
+            //Stretch background image
+            RectTransform bgRT = background.GetComponent<RectTransform>();
+            bgRT.anchorMax = new Vector2(1, 1 - diffRatio);
+            bgRT.anchorMin = new Vector2(0, 0);
+            bgRT.offsetMax = new Vector2(0, 0);
+            bgRT.offsetMin = new Vector2(0, 0);
         } 
-            
-        
+    }
+
+    private void Start()
+    {
+        Tune();
+        WideScreenSuppot();
 
         tileWidth = rectTransform.rect.width / width;
         tileHeight = rectTransform.rect.height / height;
