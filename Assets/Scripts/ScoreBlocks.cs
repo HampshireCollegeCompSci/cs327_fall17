@@ -32,11 +32,13 @@ public class ScoreBlocks : MonoBehaviour
 
     private int scoreBlockCount;
     private int eventBlockCount;
+    private bool blocksCleared;
 
     private void Start()
     {
         scoreBlockCount = 0;
         eventBlockCount = 0;
+        blocksCleared = true;
     }
 
     public void ScoreBlockAdded()
@@ -53,22 +55,32 @@ public class ScoreBlocks : MonoBehaviour
             eventBlocks[eventBlockCount].sprite = fullEventBlock;
             eventBlockCount++;
         }
-        
 
         if (eventBlockCount == eventBlocks.Length)
         {
+            blocksCleared = false;
             scoreBlockCount -= scoreBlocks.Length;
             eventBlockCount -= eventBlocks.Length;
-
-            foreach (Image i in scoreBlocks)
-            {
-                i.sprite = emptyScoreBlock;
-            }
-
-            foreach (Image i in eventBlocks)
-            {
-                i.sprite = emptyEventBlock;
-            }
+            StartCoroutine(ClearingFullBlocks());
         }
+        
+    }
+
+    private IEnumerator ClearingFullBlocks()
+    {
+        yield return new WaitUntil(() => eventBlocks[eventBlocks.Length - 1].GetComponent<Animator>().enabled == false || scoreBlocks[0].GetComponent<Animator>().enabled == true);
+        
+        foreach (Image i in scoreBlocks)
+        {
+            i.sprite = emptyScoreBlock;
+        }
+
+        foreach (Image i in eventBlocks)
+        {
+            i.GetComponent<Animator>().enabled = false;
+            i.sprite = emptyEventBlock;
+        }
+
+        blocksCleared = true;
     }
 }
