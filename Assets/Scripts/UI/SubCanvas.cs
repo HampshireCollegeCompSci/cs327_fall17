@@ -31,12 +31,6 @@ public class SubCanvas : MonoBehaviour {
 
     RectTransform rectTransform;
 
-    void Start()
-    {
-        
-       // WideScreenSupport();
-    }
-
     public void WideScreenSupport()
     {
         rectTransform = GetComponent<RectTransform>();
