@@ -1078,7 +1078,7 @@ Prefab:
     - target: {fileID: 224106449231437458, guid: 99d1dc03aaa887043adfc3dcbe1dd720,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 1.7
+      value: 2.7000122
       objectReference: {fileID: 0}
     - target: {fileID: 224106449231437458, guid: 99d1dc03aaa887043adfc3dcbe1dd720,
         type: 2}
@@ -1088,7 +1088,7 @@ Prefab:
     - target: {fileID: 224106449231437458, guid: 99d1dc03aaa887043adfc3dcbe1dd720,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 3.7
+      value: 1.6999512
       objectReference: {fileID: 0}
     - target: {fileID: 224106449231437458, guid: 99d1dc03aaa887043adfc3dcbe1dd720,
         type: 2}
@@ -2892,6 +2892,37 @@ Prefab:
       propertyPath: transformAccumulator
       value: 
       objectReference: {fileID: 1601431994}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: topBar
+      value: 
+      objectReference: {fileID: 465470036}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: background
+      value: 
+      objectReference: {fileID: 77510613}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: energyContainer
+      value: 
+      objectReference: {fileID: 2113759124}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: console
+      value: 
+      objectReference: {fileID: 1155208512}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: pipes
+      value: 
+      objectReference: {fileID: 1407091993}
+    - target: {fileID: 114185976160417868, guid: cb21f09757ec2044a92d76ac406761cd,
+        type: 2}
+      propertyPath: blackBarPrefab
+      value: 
+      objectReference: {fileID: 1149584626668908, guid: 9ac52c0ba119155449993b9e9498fe99,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb21f09757ec2044a92d76ac406761cd, type: 2}
   m_IsPrefabParent: 0
@@ -3946,6 +3977,11 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!1 &1407091993 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1112196604456050, guid: 99d1dc03aaa887043adfc3dcbe1dd720,
+    type: 2}
+  m_PrefabInternal: {fileID: 293700728}
 --- !u!1001 &1429074703
 Prefab:
   m_ObjectHideFlags: 0
@@ -5054,7 +5090,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -5980,6 +6016,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2109081923}
+--- !u!1 &2113759124 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1815005718009280, guid: 5770730666c9c411c9ed1aea87e1a9f6,
+    type: 2}
+  m_PrefabInternal: {fileID: 181955866}
 --- !u!114 &2124589074
 MonoBehaviour:
   m_ObjectHideFlags: 0
