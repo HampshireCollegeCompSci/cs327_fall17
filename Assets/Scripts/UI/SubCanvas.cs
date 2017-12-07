@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SubCanvas : MonoBehaviour {
 
@@ -38,6 +36,11 @@ public class SubCanvas : MonoBehaviour {
         RectTransform gridRT = grid.GetComponent<RectTransform>();
         float originalY = gridRT.rect.height * 1.1f;
         float size = canvas.GetComponent<RectTransform>().rect.width / 1.1f;
+
+        //Adjust top bar
+        RectTransform topbarRT = topBar.GetComponent<RectTransform>();
+        topbarRT.sizeDelta = new Vector2(rectTransform.rect.width, topbarRT.rect.height);
+
         if (gridRT.rect.width > size)
         {
             //Adjust Grid size 
@@ -55,9 +58,8 @@ public class SubCanvas : MonoBehaviour {
             //Move grid up
             gridRT.anchoredPosition = new Vector2(gridRT.anchoredPosition.x, gridRT.anchoredPosition.y + diff * (1 - gridRT.anchorMax.y) / 1.1f);
 
-            //Move top bar down
-            RectTransform topbarRT = topBar.GetComponent<RectTransform>();
-            topbarRT.anchoredPosition = new Vector2(topbarRT.anchoredPosition.x, topbarRT.anchoredPosition.y - diff);
+            //topbarRT.anchorMax = new Vector2(topbarRT.anchorMax.x, topbarRT.anchorMax.y - diffRatio);
+            //topbarRT.anchorMin = new Vector2(topbarRT.anchorMin.x, topbarRT.anchorMin.y - diffRatio);
 
             //Move energy container, console and background pipes up
             RectTransform ecRT = energyContainer.GetComponent<RectTransform>();
