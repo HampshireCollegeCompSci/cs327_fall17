@@ -153,17 +153,32 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         }
 		translator = FindObjectOfType<UILanguages>();
 
+        StartingTutorialStuff();
     }
 
-    private void Start()
+    private void StartingTutorialStuff()
     {
-        if (Settings.Instance.IsTutorialModeEnabled())
+        //Debug.Log(Settings.Instance.GetTutorialComplete());
+        if (Settings.Instance.GetTutorialComplete())
         {
+            if (Settings.Instance.IsTutorialModeEnabled())
+            {
+                TemporarilyEnableTriggers();
+            }
+        }
+        else
+        {
+            Settings.Instance.SetTutorialModeEnabled(true);
             TemporarilyEnableTriggers();
         }
 
         TriggerEvent(Triggers.FIRST_OPEN);
         //TriggerEvent(Triggers.FIRST_OPEN_2);
+    }
+
+    private void Start()
+    {
+        //StartingTutorialStuff();
 
         grid.SquaresCleared += OnSquare;
 
@@ -377,17 +392,26 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     // Disable the temporarily re-enabled triggers.
     public void DisableTemporaryTriggers()
     {
+        //Debug.Log("TutorialController.DisableTemporaryTriggers");
         foreach (Triggers trig in triggersTemporarilyEnabled)
         {
+            //Debug.Log("Disabling trigger: " + trig);
             triggerRecord[trig] = true;
         }
         triggersTemporarilyEnabled.Clear();
+        /*
+        if (Settings.Instance.GetTutorialComplete())
+        {
+            Settings.Instance.SetTutorialComplete();
+        }
+        */
     }
 
     private void OnDestroy()
     {
         DisableTemporaryTriggers();
         grid.SquaresCleared -= OnSquare;
+        Settings.Instance.SetTutorialModeEnabled(false);
     }
 
     private void OnSquare()
