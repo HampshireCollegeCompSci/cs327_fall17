@@ -68,7 +68,9 @@ public class EventSlider : MonoBehaviour
                 SetTargetX(0.72f);
                 break;
 
-            case VoidEventGroup.EventGroupType.Meltdown:
+            case VoidEventGroup.EventGroupType.MeltdownJA:
+            case VoidEventGroup.EventGroupType.MeltdownJR:
+            case VoidEventGroup.EventGroupType.MeltdownAR:
             case VoidEventGroup.EventGroupType.Overload:
                 SetTargetX(0.9f);
                 break;

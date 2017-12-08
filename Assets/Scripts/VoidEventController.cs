@@ -49,6 +49,11 @@ public class VoidEvent
         return eventType;
     }
 
+    public bool IsEventType(EventType type)
+    {
+        return type == eventType;
+    }
+
     public int GetTier()
     {
         return tier;
@@ -86,7 +91,9 @@ public class VoidEventGroup
         Asteroids,
         Junkyard,
         Radiation,
-        Meltdown,
+        MeltdownJR, // Junkyard, Radiation
+        MeltdownJA, // Junkyard, Asteroids
+        MeltdownAR, // Asteroids, Radiation
         Overload
     }
 
@@ -101,7 +108,7 @@ public class VoidEventGroup
     int begin;
     // The score at which the event group ends. Use -1 for endless.
     int end;
-    // The list of void events.
+    // The collection of void events.
     List<VoidEvent> voidEvents;
     // The current status of the event group.
     Status status = Status.Waiting;
@@ -111,12 +118,13 @@ public class VoidEventGroup
     int tier;
 
     // Constructor.
-    public VoidEventGroup(List<VoidEvent> voidEventsIn, int beginIn, int endIn)
+    public VoidEventGroup(List<VoidEvent> voidEventsIn, int tierIn, int beginIn, int endIn)
     {
         voidEvents = voidEventsIn;
         begin = beginIn;
         end = endIn;
-        tier = voidEventsIn[0].GetTier();
+        //tier = voidEventsIn[0].GetTier();
+        tier = tierIn;
 
         switch (voidEventsIn.Count)
         {
@@ -136,7 +144,32 @@ public class VoidEventGroup
                 break;
 
             case 2:
-                type = EventGroupType.Meltdown;
+                //type = EventGroupType.Meltdown;
+
+                List<VoidEvent.EventType> types = new List<VoidEvent.EventType>();
+                foreach (VoidEvent ve in voidEvents)
+                {
+                    types.Add(ve.GetEventType());
+                }
+
+                if (types.Contains(VoidEvent.EventType.Asteroids))
+                {
+                    if (types.Contains(VoidEvent.EventType.Radiation))
+                    {
+                        type = EventGroupType.MeltdownAR;
+                    }
+                    else if (types.Contains(VoidEvent.EventType.Junkyard))
+                    {
+                        type = EventGroupType.MeltdownJA;
+                    }
+                }
+                else if (types.Contains(VoidEvent.EventType.Radiation))
+                {
+                    if (types.Contains(VoidEvent.EventType.Junkyard))
+                    {
+                        type = EventGroupType.MeltdownJR;
+                    }
+                }
                 break;
 
             case 3:
@@ -397,6 +430,7 @@ public class VoidEventController : MonoBehaviour
             }
 
             List<VoidEvent> myEvents = new List<VoidEvent>();
+            int tier = 0;
             for (int j = 0; j < types.Count; ++j)
             {
                 string typeString = types[j];
@@ -404,7 +438,7 @@ public class VoidEventController : MonoBehaviour
                 char typeLetter = typeString[1];
 
                 VoidEvent.EventType theType = letterBindings[typeLetter];
-                int tier = (int)char.GetNumericValue(tierLetter);
+                tier = (int)char.GetNumericValue(tierLetter);
 
                 VoidEvent newEvent = new VoidEvent(theType, tier);
                 newEvent.Started += VoidEvent_Started;
@@ -412,7 +446,7 @@ public class VoidEventController : MonoBehaviour
                 myEvents.Add(newEvent);
             }
 
-            VoidEventGroup newEventGroup = new VoidEventGroup(myEvents, begin, end);
+            VoidEventGroup newEventGroup = new VoidEventGroup(myEvents, tier, begin, end);
             newEventGroup.Started += VoidEventGroup_Started;
             newEventGroup.Finished += VoidEventGroup_Finished;
             voidEventGroups.Add(newEventGroup);
@@ -489,30 +523,48 @@ public class VoidEventController : MonoBehaviour
 
         AudioController.Instance.StartEventGroup(type);
         eventSlider.SetCurrentState(type);
-		EventPopupWindow(GetEventName(type, tier) + translator.Translate(" begin!"));
+        //EventPopupWindow(GetEventName(type, tier) + translator.Translate(" begin!"));
+        string eventName = GetEventName(type, tier);
+        string eventDescription = "";
         switch (type)
         {
             case VoidEventGroup.EventGroupType.Junkyard:
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_URANIUM);
+                eventDescription = translator.Translate("Junkyard" + tier);
                 break;
 
             case VoidEventGroup.EventGroupType.Radiation:
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_CONTAMINATION);
+                eventDescription = translator.Translate("Radiation" + tier);
                 break;
 
             case VoidEventGroup.EventGroupType.Asteroids:
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_BREACH);
+                eventDescription = translator.Translate("Asteroids" + tier);
                 break;
 
-            case VoidEventGroup.EventGroupType.Meltdown:
+            case VoidEventGroup.EventGroupType.MeltdownJA:
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_MELTDOWN);
+                eventDescription = translator.Translate("Meltdown1");
+                break;
+
+            case VoidEventGroup.EventGroupType.MeltdownJR:
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_MELTDOWN);
+                eventDescription = translator.Translate("Meltdown2");
+                break;
+
+            case VoidEventGroup.EventGroupType.MeltdownAR:
+                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_MELTDOWN);
+                eventDescription = translator.Translate("Meltdown3");
                 break;
 
             case VoidEventGroup.EventGroupType.Overload:
                 eventsNeverEnd = true;
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_OVERLOAD);
+                eventDescription = translator.Translate("Overload");
                 break;
         }
+        EventPopupWindow(eventName, eventDescription, tier);
     }
 
     private void VoidEventGroup_Finished(VoidEventGroup.EventGroupType type, int tier)
@@ -530,10 +582,11 @@ public class VoidEventController : MonoBehaviour
         }
     }
 
-    private void EventPopupWindow(string eventText)
+    private void EventPopupWindow(string eventText, string eventDescription, int tier)
     {
         GameObject eventPopupWindow = Instantiate(eventPopup, canvas.transform, false);
-        StartCoroutine(eventPopupWindow.GetComponent<EventPopup>().Translation(eventText, canvas, secondsToStay));
+        EventPopup ep = eventPopupWindow.GetComponent<EventPopup>();
+        ep.Init(eventText, eventDescription, canvas, tier, secondsToStay);
     }
 
     private string GetEventName(VoidEventGroup.EventGroupType type, int tier)
@@ -559,7 +612,9 @@ public class VoidEventController : MonoBehaviour
 				result += translator.Translate ("Reactor Breach");
                 break;
 
-            case VoidEventGroup.EventGroupType.Meltdown:
+            case VoidEventGroup.EventGroupType.MeltdownJA:
+            case VoidEventGroup.EventGroupType.MeltdownJR:
+            case VoidEventGroup.EventGroupType.MeltdownAR:
 				result += translator.Translate ("Reactor Meltdown");
                 levelsImportant = false;
                 break;

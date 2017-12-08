@@ -62,7 +62,9 @@ public class ProgressBarDot : MonoBehaviour
             case VoidEventGroup.EventGroupType.Radiation:
                 imageEventIcon.sprite = spriteRadiation[arrayIndex];
                 break;
-            case VoidEventGroup.EventGroupType.Meltdown:
+            case VoidEventGroup.EventGroupType.MeltdownJA:
+            case VoidEventGroup.EventGroupType.MeltdownJR:
+            case VoidEventGroup.EventGroupType.MeltdownAR:
                 imageEventIcon.sprite = spriteMeltdown;
                 break;
             case VoidEventGroup.EventGroupType.Overload:
