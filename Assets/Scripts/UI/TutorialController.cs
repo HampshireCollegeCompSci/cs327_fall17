@@ -85,6 +85,8 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
     public TextAsset tutorialJSON;
 
+	UILanguages translator;
+
     List<Triggers> nextTriggers = new List<Triggers>();
 
     private static TutorialController instance = null;
@@ -149,6 +151,8 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
                 triggerRecord.Add(trigger, false);
             }
         }
+		translator = FindObjectOfType<UILanguages>();
+
     }
 
     private void Start()
@@ -235,11 +239,10 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
         for (int i = 0; i < infoBites.Count; ++i)
         {
+			//M M M M M M M
             TriggerData.InfoBite infoBite = infoBites[i];
-            string text = infoBite.textInfo;
+			string text = translator.Translate (infoBite.textInfo);
             int panel = infoBite.panelNumber;
-
-			//tutorial translator here?
 		
             ActivatePanel(panel, text);
 

@@ -5,7 +5,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Drag green blocks onto the board.",
+				"TextInfo" : "Tutorial0",
 				"Panel" : "Console"
 			}
 		]
@@ -16,7 +16,7 @@
 		"Info" : 
 		[
 			{
-				"TextInfo" : "3x3 squares will clear and generate energy.",
+				"TextInfo" : "Tutorial1",
 				"Panel" : "Grid"
 			}
 		]
@@ -28,7 +28,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Individual blocks adjacent to cleared squares become Waste, draining 1 energy per move.",
+				"TextInfo" : "Tutorial2",
 				"Panel" : "Waste"
 			}
 		]
@@ -39,7 +39,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Waste levels up when adjacent to cleared squares. Level 2 Waste drains 3 energy per move.",
+				"TextInfo" : "Tutorial3",
 				"Panel" : "Waste"
 			}
 		]
@@ -50,7 +50,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "This Waste block has become level 3 and drains 5 energy per move.",
+				"TextInfo" : "Tutorial4",
 				"Panel" : "Waste"
 			}
 		]
@@ -61,7 +61,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "You're low on energy! Make a square this turn to gain energy!",
+				"TextInfo" : "Tutorial5",
 				"Panel" : "Reactor"
 			}
 		]
@@ -72,7 +72,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Breach: Some spaces are blocked off.",
+				"TextInfo" : "Tutorial6",
 				"Panel" : "Grid"
 			}
 		]
@@ -83,7 +83,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "An event has begun, and lasts until you clear 5 squares. In this event, some blocks are harder.",
+				"TextInfo" : "Tutorial7",
 				"Panel" : "Grid"
 			}
 		]
@@ -94,7 +94,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Contamination: Blocks come with Waste.",
+				"TextInfo" : "Tutorial8",
 				"Panel" : "Grid"
 			}
 		]
@@ -105,7 +105,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Meltdown: The reactor is melting down! Be prepared for two events at once.",
+				"TextInfo" : "Tutorial9",
 				"Panel" : "Grid"
 			}
 		]
@@ -116,7 +116,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Reactor Overload: All the events are occurring at once! This is your final challenge!",
+				"TextInfo" : "Tutorial10",
 				"Panel" : "Grid"
 			}
 		]
@@ -127,7 +127,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Multiple overlapping 3x3 squares can be cleared at once.",
+				"TextInfo" : "Tutorial11",
 				"Panel" : "Grid"
 			}
 		]	
@@ -138,7 +138,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Use the blue rotate and red flip buttons to make a 3x3 square using the Waste.",
+				"TextInfo" : "Tutorial12",
 				"Panel" : "Console"
 			}
 		]
@@ -150,7 +150,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "The bar above tracks cleared squares and shows when events will start and end.",
+				"TextInfo" : "Tutorial13",
 				"Panel" : "ScoreBar"
 			}
 		]
@@ -162,7 +162,7 @@
 		"Info" :
 		[
 			{
-				"TextInfo" : "Individual blocks diagonal to completed squares won’t become Waste!",
+				"TextInfo" : "Tutorial14",
 				"Panel" : "Grid"
 			}
 		]
