@@ -12,6 +12,7 @@
 	    "Polish": "Przegrałeś",
 	    "Swedish": "Du Fölorade",
 	    "Korean" : "게임 오버",
+		"MSA": "انتهت اللعبة",
 		"Portugese": "PlaceholderPortugese"
 	  },
 	  "ReasonNoEnergy": {
@@ -87,6 +88,7 @@
 	    "Polish": "Jak grać",
 	    "Swedish": "Hur du spelar",
 		"Korean": "게임 방법",
+		"MSA": "كيف ألعب",
 		"Portugese": "Como jogar"
 	  },
 	  "Credits": {
@@ -102,6 +104,7 @@
 	    "Polish": "Podziękowania",
 	    "Swedish": "Eftertexter",
 		"Korean": "스태프롤",
+		"MSA": "اءتمانات",
 		"Portugese": "Créditos"
 	  },
 	  "PlayAgain": {
@@ -133,6 +136,7 @@
 	    "Polish": "Menu głóne",
 	    "Swedish": "Huvudmeny",
 		"Korean": "메인 메뉴",
+		"MSA": "القاءمة الرءيسية",
 		"Portugese": "Menu principal"
 	  },
 	  "Resume" : {
@@ -164,6 +168,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean",
+		"MSA": "درجة عالية",
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"Score": {
@@ -179,6 +184,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "스코어",
+		"MSA": "درجتك",
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"YourScore" : {
@@ -273,6 +279,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "재시작",
+		"MSA": "لعب مرة أخرى",
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"NormalMode": {
@@ -809,6 +816,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "승리!",
+		"MSA": "فزت!",
 		"Portugese": "VOCÊ GANHOU!"
 	}
 	"Continue" : {
@@ -854,6 +862,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean",
+		"MSA": "نعام",
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"LoseProgress": {
@@ -885,6 +894,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean",
+		"MSA": "نعام",
 		"Portugese": "Sim"
 	} ,
 	"Cancel": {
@@ -900,6 +910,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean",
+		"MSA": "",
 		"Portugese": "Não"
 	},
 	"Restart": {
@@ -950,185 +961,94 @@
 	},
 	"Junkyard1": {
 		"English": "One block has a new shape",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Junkyard2": {
 		"English": "Two blocks have a new shape",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Junkyard3": {
 		"English": "Three blocks have a new shape",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Asteroids1": {
 		"English": "Three spaces are unusable",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Asteroids2": {
 		"English": "Five spaces are unusable",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Asteroids3": {
 		"English": "Seven spaces are unusable",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Radiation1": {
 		"English": "Blocks have level 1 Waste",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Radiation2": {
 		"English": "Blocks have level 2 Waste",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Radiation3": {
 		"English": "Blocks have level 3 Waste",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Meltdown1": {
 		"English": "New blocks & unusable spaces",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Meltdown2": {
 		"English": "Blocks have waste & new blocks",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Meltdown3": {
 		"English": "Unusable spaces & blocks have Waste",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Overload": {
 		"English": "All events combined",
-	    "Spanish": "(Tap to Continue)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
-	    "Korean": "(넘어가기)"
+	    "Spanish": "",
+	    "Korean": "",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Tutorial0": {
 		"English": "Drag green blocks onto the board.",
