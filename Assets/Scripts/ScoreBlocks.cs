@@ -61,7 +61,10 @@ public class ScoreBlocks : MonoBehaviour
             ///blocksCleared = false;
             scoreBlockCount -= scoreBlocks.Length;
             eventBlockCount -= eventBlocks.Length;
-            StartCoroutine(ClearingFullBlocks());
+            if (isActiveAndEnabled)
+            {
+                StartCoroutine(ClearingFullBlocks());
+            }
         }
         
     }

@@ -774,6 +774,11 @@ Prefab:
       propertyPath: scoreCounter
       value: 
       objectReference: {fileID: 1623308074}
+    - target: {fileID: 114113887046981802, guid: 6c3607a99caa3f74fb7d1cb080db2e73,
+        type: 2}
+      propertyPath: scoreBlocks
+      value: 
+      objectReference: {fileID: 2086623348}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c3607a99caa3f74fb7d1cb080db2e73, type: 2}
   m_IsPrefabParent: 0
@@ -6088,6 +6093,7 @@ MonoBehaviour:
   highScore: {fileID: 0}
   yourScore: {fileID: 0}
   scoreCounter: {fileID: 1623308074}
+  scoreBlocks: {fileID: 0}
 --- !u!1 &2144681518
 GameObject:
   m_ObjectHideFlags: 0

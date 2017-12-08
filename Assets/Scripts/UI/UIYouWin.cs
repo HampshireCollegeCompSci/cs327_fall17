@@ -15,23 +15,23 @@ public class UIYouWin : MonoBehaviour {
     [SerializeField]
     [Tooltip("Reference to the score counter.")]
     ScoreCounter scoreCounter;
+    [SerializeField]
+    [Tooltip("Reference to the score blocks parent, which will be disabled.")]
+    GameObject scoreBlocks;
 
     public void Init()
     {
-        yourScore.text = scoreCounter.GetScore().ToString();
-
-        string prefsEntry;
-
-        if (Settings.Instance.IsZenModeEnabled())
+        int theScore = scoreCounter.GetSquaresCleared();
+        yourScore.text = theScore.ToString();
+        int theHighScore = Settings.Instance.GetHighScore();
+        if (theScore > theHighScore)
         {
-            prefsEntry = "HighScoreZen";
+            highScore.text = theScore.ToString();
         }
         else
         {
-            prefsEntry = "HighScore";
+            highScore.text = theHighScore.ToString();
         }
-
-        highScore.text = PlayerPrefs.GetInt(prefsEntry).ToString();
     }
 
     public void Resume()
@@ -43,5 +43,6 @@ public class UIYouWin : MonoBehaviour {
     private void OnEnable()
     {
         AudioController.Instance.WinGame();
+        scoreBlocks.SetActive(false);
     }
 }
