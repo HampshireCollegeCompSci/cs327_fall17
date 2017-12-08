@@ -27,7 +27,7 @@
 	    "Polish": "Przyczyna: Nie masz energii!",
 	    "Swedish": "Anledning: slut pånergi!",
 		"Korean": "이유: 에너지 고갈!",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Sem energia!"
 	  },
 	  "ReasonHesitation": {
 	    "English": "You hesitated for too long!",
@@ -42,7 +42,7 @@
 	    "Polish": "Przyczyna: Za długo czekałeś!",
 	    "Swedish": "Anledning: du tvekade fö läge!",
 		"Korean": "이유: 너무 오래 망설였음!",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Você hesitou por muito tempo!"
 	  },
 	  "ReasonNoSpaceLeft": {
 	    "English": "No Space Left!",
@@ -57,7 +57,7 @@
 	    "Polish": "Przyczyna: Koniec miejsca!",
 	    "Swedish": "Anledning: Ingen plats kvar!",
 		"Korean": "이유: 공간 부족!",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Não há mais espaço!"
 	  },
 	  "ReasonManualReset": {
 	    "English": "Manual Reset!",
@@ -72,7 +72,7 @@
 	    "Polish": "Przyczyna: Reset ręczny!",
 	    "Swedish": "Anledning: Manuell reset!",
 		"Korean": "이유: 수동 복귀!",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Reinicialização manual!"
 	  },
 	  "HowToPlay": {
 	  	"English": "How to Play",
@@ -133,7 +133,7 @@
 	    "Polish": "Menu głóne",
 	    "Swedish": "Huvudmeny",
 		"Korean": "메인 메뉴",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Menu principal"
 	  },
 	  "Resume" : {
 		"English": "Resume",
@@ -151,22 +151,6 @@
 		"MSA": "استنناف اللعب",
 		"Portugese": "PlaceholderPortugese"
 	  },
-	  "Tip": {
-	    "English": "Tip: Don’t let wastes stick around too long",
-	    "Spanish": "Tip: No dejes que restos se quede por mucho tiempo",
-	    "French": "Astuce : Ne laissez pas les vestiges trainer trop longtemps dans les parages",
-	    "Slovenian": "Namig: Ne pusti ostanke predolgo časa",
-	    "Romanian": "Sugestie: Nu lăsa vestigiile să rămâă prin preajmă prea mult timp",
-	    "German": "Ratschlag: Lassen Sie die Üerreste nicht zu lange dableiben",
-	    "Luxembourgish": "Rotschlo: Loosst d’Iwwerreschter net ze laang dobleiwen",
-	    "Dutch": "Tip: Laat de overblijfsels niet te lang rondhangen",
-	    "Danish": "Hint: Lad ikke levn blive for læge",
-	    "Polish": "Wskazóka: Nie pozwó pozostałościom pozostawać zbyt długo",
-	    "Swedish": "Rotschlo: Loosst d’Iwwerreschter net ze laang dobleiwen",
-		"Korean": "힌트: 남은 퍼즐 조각들을 너무 오랫동안 내버려두지 말자",
-		"Portugese": "PlaceholderPortugese"
-	} ,
-	
 	"HighScore1": {
 		"English": "high score",
 	    "Spanish": "Puntuación Alta",
@@ -874,7 +858,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "승리!",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "VOCÊ GANHOU!"
 	}
 	"Continue" : {
 		"English": "Continue",
@@ -934,7 +918,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "현 게임의 모든 기록이 사라집니다. 계속하시겠습니까?",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Você vai perder todo o progresso no seu jogo atual. Você tem certeza?"
 	} ,
 	"Yes": {
 		"English": "Yes",
