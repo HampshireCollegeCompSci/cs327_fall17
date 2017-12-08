@@ -353,12 +353,166 @@
 		"Portugese": "Menu de Pausa"
 	} ,
 	"Tip1" : {
-		"English" : "",
-		"Spanish: "",
-		"Korean" : "",
+		"English": "Try making overlapping squares.",
+		"Spanish": "",
+		"Korean": "",
 		"MSA": "",
 		"Portugese": ""
 	},
+	"Tip2" : {
+		"English": "Try making squares in the corner of the board to save space.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip3" : {
+		"English": "Try to avoid making squares that generate Waste.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip4" : {
+		"English": "Try and set up squares before events to get through them faster.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip5" : {
+		"English": "Bigger squares are better! Making overlapping squares is more efficient.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip6" : {
+		"English": "Use Waste to make squares before it gets out of control.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip7" : {
+		"English": "Don’t forget you can rotate and flip blocks.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip8" : {
+		"English": "The Pause menu shows your available blocks.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip9" : {
+		"English": "If you make a square, you won't lose any energy from Waste that turn.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip10" : {
+		"English": "The events get harder later in the game.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip11" : {
+		"English": "During the Unrefined Uranium event, look in the Pause menu to see your blocks.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip12" : {
+		"English": "If you get far enough, multiple events can happen at the same time.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip13" : {
+		"English": "Carefully watch your energy level in the reactor.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip14" : {
+		"English": "Events can be scary, but keep your cool, there’s no rush!",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip15" : {
+		"English": "Congratulations, you burnt the coffee.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip16" : {
+		"English": "You ripped a hole in space-time.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip17" : {
+		"English": "You tripped over the power cord.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip18" : {
+		"English": "The energy you made powered an electric toothbrush.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip19" : {
+		"English": "You made some radioactive lemons.",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip20" : {
+		"English": "",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip21" : {
+		"English": "",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip22" : {
+		"English": "",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	},
+	"Tip23" : {
+		"English": "",
+		"Spanish": "",
+		"Korean": "",
+		"MSA": "",
+		"Portugese": ""
+	}
 	"Nothing" : {
 		"English": "Nothing",
 		"Spanish": "Nada",
