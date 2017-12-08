@@ -22,12 +22,12 @@ public class ConsoleGrid : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     [Tooltip("The height of the Grid. Populated by JSON.")]
     int height;
     [SerializeField]
-    [Tooltip("The underlying array of Tiles.")]
-    Tile[,] tiles;
-    [SerializeField]
     [Tooltip("Reference to the main grid.")]
     Grid grid;
     /*
+    [SerializeField]
+    [Tooltip("The underlying array of Tiles.")]
+    Tile[,] tiles;
     [SerializeField]
     [Tooltip("Reference to the current draggableBlock in the grid.")]
     DraggableBlock draggableBlock;
@@ -47,12 +47,14 @@ public class ConsoleGrid : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     // The height of one Tile, calculated compared to the Grid's dimensions.
     float tileHeight;
 
+    // Reference to the underlying block.
+    Block block;
+
     void Tune()
     {
         var json = JSON.Parse(tuningJSON.ToString());
         width = json["console grid width"].AsInt;
         height = json["console grid height"].AsInt;
-        //Debug.Log(width);
     }
 
     public void Init()
@@ -62,13 +64,14 @@ public class ConsoleGrid : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         tileHeight = rt.rect.height / (float)height;
     }
 
-    public void SetDraggableBlock(DraggableBlock block)
+    public void SetDraggableBlock(DraggableBlock blockIn)
     {
         //draggableBlock = block;
-        if (block != null)
+        if (blockIn != null)
         {
-            draggableObject = block.GetComponent<DraggableObject>();
+            draggableObject = blockIn.GetComponent<DraggableObject>();
             enabled = true;
+            block = blockIn.GetBlock();
         }
         else
         {
@@ -97,10 +100,24 @@ public class ConsoleGrid : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
         return height;
     }
 
+    public List<TileData> GetVestiges()
+    {
+        if (draggableObject == null)
+        {
+            return null;
+        }
+        else
+        {
+            return block.GetReferencesToType(TileData.TileType.Vestige);
+        }
+    }
+
+    /*
     public Tile[,] GetTiles()
     {
         return tiles;
     }
+    */
 
     public void OnDrag(PointerEventData eventData)
     {

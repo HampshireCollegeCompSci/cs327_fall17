@@ -22,6 +22,9 @@ public class CheatsGameplay : MonoBehaviour
     [SerializeField]
     [Tooltip("Reference to the Grid.")]
     Grid grid;
+    [SerializeField]
+    [Tooltip("Reference to the ScoreBlocks instance.")]
+    ScoreBlocks scoreBlocks;
 
     Settings settings;
 
@@ -29,7 +32,7 @@ public class CheatsGameplay : MonoBehaviour
 
     bool isSpawningOneTileEnabled;
 
-    private void Awake()
+    private void Start()
     {
         // Can't pass in a reference because it won't necessarily exist until the scene loads.
         settings = FindObjectOfType<Settings>();
@@ -39,22 +42,42 @@ public class CheatsGameplay : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            AddScore(1000);
+            AddScoreFromSquares(4);
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            AddScore(999);
+            AddScoreFromSquares(1);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            energyCounter.AddEnergy(100);
-            settings.SetCheatsEnabled();
+            AddEnergy(100);
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            AddEnergy(1);
         }
     }
 
     public void AddScore()
     {
-        AddScore(1000);
+        AddScoreFromSquares(4);
+    }
+
+    void AddScore(int amount)
+    {
+        scoreCounter.AddScore(amount);
+        settings.SetCheatsEnabled();
+        // Force event status to update.
+        grid.ForceOnSquaresCleared();
+    }
+
+    void AddScoreFromSquares(int amount)
+    {
+        AddScore(grid.GetScorePerSquare() * amount);
+        for (int i = 0; i < amount; ++i)
+        {
+            scoreBlocks.ScoreBlockAdded();
+        }
     }
 
     public void SetEnergyTo1()
@@ -66,8 +89,13 @@ public class CheatsGameplay : MonoBehaviour
 
     public void AddEnergy()
     {
-        energyCounter.AddEnergy(100);
-        settings.SetCheatsEnabled();       
+        AddEnergy(100);
+    }
+
+    public void AddEnergy(int amount)
+    {
+        energyCounter.AddEnergy(amount);
+        settings.SetCheatsEnabled();
     }
 
     public void WipeSavedData()
@@ -115,13 +143,5 @@ public class CheatsGameplay : MonoBehaviour
             settings.SetCheatsEnabled();
             isSpawningOneTileEnabled = true;
         }
-    }
-    
-    void AddScore(int amount)
-    {
-        scoreCounter.AddScore(amount);
-        settings.SetCheatsEnabled();
-        // Force event status to update.
-        grid.ForceOnSquaresCleared();
     }
 }

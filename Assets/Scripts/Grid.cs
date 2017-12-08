@@ -173,6 +173,11 @@ public class Grid : MonoBehaviour
         asteroidMasks.Add(tier, newMask);
     }
 
+    private void Awake()
+    {
+        consoleGrid.Init();
+    }
+
     private void Start()
     {
         subCanvas.WideScreenSupport();
@@ -323,7 +328,25 @@ public class Grid : MonoBehaviour
         return true;
     }
 
+    private void CheckBlockForTutorial(int row, int col, Block block)
+    {
+        int width = block.GetWidth();
+        int height = block.GetHeight();
+        for (int r = 0; r < height; ++r)
+        {
+            for (int c = 0; c < width; ++c)
+            {
+                if (block.GetTileType(r, c) == TileData.TileType.Vestige)
+                {
+                    Tile v = tiles[row + r, col + c];
+                    CheckVestigeForTutorial(v, row + r, col + c);
+                }
+            }
+        }
+    }
+
     // IMPORTANT: Don't forget about the additional WriteBlock overload below!
+    // row and col correspond to the block's top-left corner on the Grid.
     public GridBlock WriteBlock(int row, int col, Block block)
     {
         //List<Coordinate> coords = new List<Coordinate>();
@@ -348,6 +371,8 @@ public class Grid : MonoBehaviour
         //call LShapeCheck after each insertion
         //LShapeCheck(coords);
 
+        CheckBlockForTutorial(row, col, block);
+
         return gb;
     }
     public GridBlock WriteBlock(int row, int col, DraggableBlock block)
@@ -370,11 +395,14 @@ public class Grid : MonoBehaviour
                 }
             }
         }
-        GridBlock gb = new GridBlock(row, col, block.GetBlock(), this);
+        Block myBlock = block.GetBlock();
+        GridBlock gb = new GridBlock(row, col, myBlock, this);
         gridBlocks.Add(gb);
 
         //call LShapeCheck after each insertion
         //LShapeCheck(coords);
+
+        CheckBlockForTutorial(row, col, myBlock);
 
         return gb;
     }
@@ -603,6 +631,23 @@ public class Grid : MonoBehaviour
         }
     }
 
+    private void CheckVestigeForTutorial(Tile v, int row, int col)
+    {
+        TutorialController.Instance.MovePanelToBlockLocation(4, row, col);
+        if (v.GetVestigeLevel() == 1)
+        {
+            TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE);
+        }
+        else if (v.GetVestigeLevel() == 2)
+        {
+            TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE_2);
+        }
+        else if (v.GetVestigeLevel() == 3)
+        {
+            TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE_3);
+        }
+    }
+
     private void TurnTilesIntoVestiges(List<VestigeMarker> newVestiges)
     {
         //Turning and upgrading vestiges
@@ -622,23 +667,9 @@ public class Grid : MonoBehaviour
 
             int row = vm.GetRow();
             int col = vm.GetCol();
-            TutorialController.Instance.MovePanelToBlockLocation(4, row, col);
-            if (v.GetVestigeLevel() == 1)
-            {
-                //TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE);
-                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE);
-            }
-            else if (v.GetVestigeLevel() == 2)
-            {
-                //TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_2);
-                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE_2);
-            }
-            else if (v.GetVestigeLevel() == 3)
-            {
-                //TutorialController.Instance.PanelToBlockLocation(row, col, TutorialController.Triggers.FIRST_WASTE_3);
-                TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE_3);
-            }
+            CheckVestigeForTutorial(v, row, col);
         }
+        energyCounter.UpdateEnergy();
     }
 
     private IEnumerator ClearingOutlineEffect(List<int[]> squaresFormed, List<Tile> duplicatesRemoved,
@@ -725,6 +756,8 @@ public class Grid : MonoBehaviour
 
         float angle = (90 - Mathf.Atan((tilePos.y - energyTransferBallPos.y) / (tilePos.x - energyTransferBallPos.x)) * 180f / Mathf.PI);
         lighting.transform.rotation = Quaternion.Euler(0, 0, -angle);
+
+        energyCounter.DoEnergyTransferBallAnimation();
     }
 
     private void CheckForSquares(int r, int c, int length, ref List<Tile> toRemove, ref List<int[]> squaresFormed, TileData.TileType[,] copy)
@@ -1137,6 +1170,12 @@ public class Grid : MonoBehaviour
         vestigeCounter.SetCurrentVestiges(CountVestiges());
     }
 
+    // Get the energy drain of the tile at (row, col).
+    public int GetVestigeEnergyDrain(int row, int col)
+    {
+        return decayRates[tiles[row, col].GetVestigeLevel() - 1];
+    }
+
     // Get the current level of energy drain on the Grid.
     public int GetEnergyDrain()
     {
@@ -1150,6 +1189,32 @@ public class Grid : MonoBehaviour
                 {
                     energyChange += decayRates[tiles[r, c].GetVestigeLevel() - 1];
                 }
+            }
+        }
+
+        /*
+        int w = consoleGrid.GetWidth();
+        int h = consoleGrid.GetHeight();
+        Tile[,] consoleTiles = consoleGrid.GetTiles();
+        Debug.Log(consoleTiles);
+        for (int r = 0; r < h; r++)
+        {
+            for (int c = 0; c < w; c++)
+            {
+                if (consoleTiles[r, c].GetTileType() == TileData.TileType.Vestige)
+                {
+                    energyChange += decayRates[consoleTiles[r, c].GetVestigeLevel() - 1];
+                }
+            }
+        }
+        */
+
+        List<TileData> consoleVestiges = consoleGrid.GetVestiges();
+        if (consoleVestiges != null)
+        {
+            foreach (TileData t in consoleVestiges)
+            {
+                energyChange += decayRates[t.GetVestigeLevel() - 1];
             }
         }
 

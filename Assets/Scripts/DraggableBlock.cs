@@ -39,7 +39,7 @@ public class DraggableBlock : MonoBehaviour
     {
         grid = newGrid;
         consoleGrid = newConsoleGrid;
-        consoleGrid.Init();
+        //consoleGrid.Init();
         draggableObject.SetCanvasTransform(canvas);
 
         //nonDraggingScale = new Vector3(0.75f, 0.75f, 0.75f);
@@ -144,15 +144,7 @@ public class DraggableBlock : MonoBehaviour
         int width = block.GetWidth();
 
         // Re-initialize the tiles array.
-        //tiles = new Tile[height, width];
-        // Instantiate all Tiles.
-        // The center is Vector3.zero because all of the Tiles will be positioned relative to this parent.
-        //tiles = grid.CreateTileArray(prefabTile, transform, Vector3.zero, height, width);
-
         tiles = CreateTileArrayForConsole(Vector3.zero, height, width);
-
-        //int rowStart = height / consoleGrid.GetHeight() - 1;
-        //int colStart = width / consoleGrid.GetWidth() - 1;
 
         // Fill in all of the Tiles according to the Block.
         for (int r = 0; r < height; r++)
@@ -160,6 +152,7 @@ public class DraggableBlock : MonoBehaviour
             for (int c = 0; c < width; c++)
             {
                 tiles[r, c].Duplicate(block.GetTileData(r, c));
+                tiles[r, c].SetSpriteToTrueSprite();
                 //tiles[r, c].Fill(block.GetTileType(r, c));
                 //tiles[r, c].SetVestigeLevel(block.GetVestigeLevel(r, c));
                 /*
