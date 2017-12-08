@@ -153,8 +153,8 @@ public class Tile : MonoBehaviour
             case TileData.TileType.Asteroid:
                 newSprite = spriteUnoccupied;
                 asteroidObj = Instantiate(animationAsteroid, transform);
-                asteroidObj.transform.localPosition = new Vector2(0, GetComponent<RectTransform>().rect.height * 0.18f);
-                asteroidObj.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().rect.width * 1 / 0.63f, GetComponent<RectTransform>().rect.height * 1 / 0.63f);
+                asteroidObj.transform.localPosition = new Vector2(GetComponent<RectTransform>().rect.width * 0.37f, GetComponent<RectTransform>().rect.height * 0.34f);
+                asteroidObj.GetComponent<RectTransform>().sizeDelta = new Vector2(GetComponent<RectTransform>().rect.width * 2.24f, GetComponent<RectTransform>().rect.height * 2.24f);
                 ReactorBreachBehavior rbb = asteroidObj.GetComponent<ReactorBreachBehavior>();
                 rbb.ReferenceTile(this, spriteAsteroid);
                 break;
