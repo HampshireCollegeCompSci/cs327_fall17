@@ -26,6 +26,9 @@ public class SubCanvas : MonoBehaviour {
     [SerializeField]
     [Tooltip("Reference to the black bar prefab")]
     GameObject blackBarPrefab;
+    [SerializeField]
+    [Tooltip("Reference to score blocks")]
+    GameObject[] scoreBlocks;
 
     RectTransform rectTransform;
 
@@ -90,6 +93,13 @@ public class SubCanvas : MonoBehaviour {
             bbRT.offsetMin = new Vector2(0, 0);
             bbRT.offsetMax = new Vector2(0, 0);
             
+        }
+
+        //Adjust the size of score blocks
+        foreach (GameObject block in scoreBlocks)
+        {
+            float scale = (topbarRT.sizeDelta.x / (block.GetComponent<RectTransform>().sizeDelta.x * 0.77f)) / 18f;
+            block.transform.localScale = new Vector3(scale, scale, 1f);
         }
     }
 }
