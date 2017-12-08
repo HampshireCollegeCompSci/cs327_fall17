@@ -419,7 +419,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "이벤트를 빨리 끝내려면 이벤트 전에 사각형들을 먼저 셋팅하세요.",
-		"Portugese": "Lembre-se de que céulas diagonalmente ao lado a um quadrado desobstruido nã se tornan vestíios"
+		"Portugese": "Tente e configure quadrados antes de eventos para passar por eles mais rápido"
 	} ,
 	"Tip5" : {
 		"English": "Bigger squares are better! Making overlapping squares is more efficient",
@@ -434,7 +434,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "큰 사각형들과 겹치는 사각형들은 더 효과적입니다.",
-		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
+		"Portugese": "Quadrados maiores são melhores! Fazer quadrados sobrepostos é mais eficiente"
 	} ,
 	"Tip6" : {
 		"English": "Prioritize using waste to make squares before it gets out of control",
@@ -449,8 +449,8 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "폐기물이 초과하기 전에 빨리 블록으로 만들어버리세요.",
-		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
-	} ,
+		"Portugese": "Priorize o uso de resíduos para fazer quadrados antes que perca controle"
+	},
 	"Tip7" : {
 		"English": "Don’t forget you can rotate and flip blocks",
 		"Spanish": "PlaceholderSpanish",
@@ -464,7 +464,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "블록을 회전시키거나 뒤집을 수 있는 걸 잊지 마세요.",
-		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
+		"Portugese": "Não se esqueça de que você pode girar e virar blocos"
 	} ,
 	"Tip8" : {
 		"English": "Check the pause menu to see all the blocks you can get",
@@ -479,7 +479,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "수집 가능한 블록은 정지 메뉴를 확인해주세요.",
-		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
+		"Portugese": "Verifique o menu de pausa para ver todos os blocos que você pode obter"
 	} ,
 	"Tip9" : {
 		"English": "Try building far away from Reactor Breach blocks, they get in the way of bigger squares",
@@ -494,7 +494,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "원자로 균열 블록들로부터 멀리 지으세요. 균열 블록들은 큰 사각형들을 막습니다.",
-		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
+		"Portugese": "Tente contruir longe dos blocos de Violação do Reator, eles ficam no caminho de quadrados maiores"
 	} ,
 	"Tip10" : {
 		"English": "The further you go, the harder the events you encounter become",
@@ -509,7 +509,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "멀리 갈수록 이벤트들이 어려워집니다.",
-		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
+		"Portugese": "Quanto mais longe você vai, mais difícel ficam os eventos que você encontra "
 	} ,
 	"Tip11" : {
 		"English": "During the Unrefined Uranium event, try combining the new blocks with each other",
@@ -524,7 +524,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "우라늄 원석 이벤트 동안은 블록들을 조합해보세요.",
-		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
+		"Portugese": "Durante o evento do Urânio Não-Refinado, tente combinar os novos blocos um com o outro."
 	} ,
 	"Tip12" : {
 		"English": "If you get far enough, multiple events can happen at the same time.",
@@ -539,7 +539,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "진행될수록 다수의 이벤트가 한 번에 발생할 수 있습니다.",
-		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
+		"Portugese": "Se você chegar longe suficiente, múltiplos eventos podem ocorrer ao mesmo tempo."
 	} ,
 	"Tip13" : {
 		"English": "Waste contamination means your blocks already have wastes in them, try and clear them right away",
@@ -554,7 +554,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "폐기물 오염은 블록들에세 폐기물이 있다는 신호입니다. 폐기물을 바로 치워주세요.",
-		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
+		"Portugese": "Contaminação de resíduos significa que seus blocos tem resíduos neles, tente e limpá-los imediatamente."
 	} ,
 	"Tip14" : {
 		"English": "Events can be scary, but keep your cool, there’s no rush!",
@@ -569,7 +569,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "이벤트들이 무섭겠지만 침착하세요!",
-		"Portugese": "Remova vestíios do tabuleiro o mais ráido que puder, especialmente se forem de níel dois ou trê"
+		"Portugese": "Eventos podem ser assustadores, mas mantenha sua calma, não há pressa!"
 	} ,
 	"Nothing" : {
 		"English": "Nothing",
