@@ -239,6 +239,8 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             string text = infoBite.textInfo;
             int panel = infoBite.panelNumber;
 
+			//tutorial translator here?
+		
             ActivatePanel(panel, text);
 
             while (currentlyPlaying)
