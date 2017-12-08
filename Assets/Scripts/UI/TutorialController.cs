@@ -239,7 +239,6 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
         for (int i = 0; i < infoBites.Count; ++i)
         {
-			//M M M M M M M
             TriggerData.InfoBite infoBite = infoBites[i];
 			string text = translator.Translate (infoBite.textInfo);
             int panel = infoBite.panelNumber;
