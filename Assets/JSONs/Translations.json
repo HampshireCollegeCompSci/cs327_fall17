@@ -389,7 +389,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "공간을 절약하려면 보드의 모서리부터 시작해보십시오.",
-		"Portugese": "Alguns blocos sã mais compatíeis do que outros"
+		"Portugese": "Tente começar a fazer quadrados no canto do tabuleiro para salvar espaço"
 	} ,
 	"Tip3": {
 		"English" :"Some blocks work better together than others, try different combinations",
@@ -404,7 +404,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "어떤 블록들은 다른 블록들보다 효과적입니다. 다양한 조합을 시도해보십시오.",
-		"Portugese": "Nã coloque blocos no centro do tabuleiro, isso lhe dáenos espaç com qual trabalhar "
+		"Portugese": "Alguns blocos funciona melhor junto do que outros, tente combinações diferentes"
 	} ,
 	"Tip4": {
 		"English" : "Try and set up squares before events to get through them faster",
