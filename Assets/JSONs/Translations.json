@@ -117,6 +117,7 @@
 	    "Polish": "Zagraj jeszcze raz",
 	    "Swedish": "Spela igen",
 		"Korean": "재도전",
+		"MSA": "لعب مرة أخرى",
 		"Portugese": "Jogar de Novo"
 	  },
 	  "MainMenu": {
@@ -147,6 +148,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "돌아가기",
+		"MSA": "استنناف اللعب",
 		"Portugese": "PlaceholderPortugese"
 	  },
 	  "Tip": {
@@ -208,6 +210,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "내 스코어",
+		"MSA": "درجتك",
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"HighScore" : {
@@ -223,6 +226,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "최고 스코어",
+		"MSA": "درجة عالية",
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"Settings": {
@@ -238,6 +242,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "옵션",
+		"MSA": "إعدادات",
 		"Portugese": "PlaceholderPortugese"
 	} ,
 	"SelectLanguage": {
@@ -328,6 +333,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "도달",
+		"MSA": "أنت وصلت",
 		"Portugese": "Vocêlcançu"
 	} ,
 	"CRISIS AVERTED: REACTOR RESTORED": {
@@ -343,6 +349,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "위기 모면: 원자로 복원",
+		"MSA": "تجنب الأزمة : استعادة المفاعل",
 		"Portugese": "CRISE EVITADA: REATOR RESTAURADO"
 	} ,
 	"PauseMenu": {
@@ -358,6 +365,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "정지 메뉴",
+		"MSA": "وقفة قاءمة",
 		"Portugese": "Menu de Pausa"
 	} ,
 	"Tip1": {
@@ -584,6 +592,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "무",
+		"MSA": "لا شىئ",
 		"Portugese": "Nada"
 	} ,
 	"Unrefined Uranium" : {
@@ -599,6 +608,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "우라늄 원석",
+		"MSA": "اليورانيوم  غير المكرر",
 		"Portugese": "Uranium Nã Refinado"
 	} ,
 	"Waste Contamination": {
@@ -614,6 +624,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "폐기물 오염",
+		"MSA": "ثلوث النفايات",
 		"Portugese": "Contaminaçã de Resíuos"
 	} ,
 	"Reactor Breach": {
@@ -629,6 +640,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "원자로 균열",
+		"MSA": "خرق المفاعل",
 		"Portugese": "Violação de Reator"
 	} , 
 	"Reactor Meltdown": {
@@ -644,6 +656,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "노심 융해",
+		"MSA": "مفاعل الانهيار",
 		"Portugese": "Fusão do Reator"
 	} ,
 	"Reactor Overload": {
@@ -659,6 +672,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "원자로 폭주",
+		"MSA": "مفاعل الزاءد",
 		"Portugese": "Sobrecarga do Reator"
 	} ,
 	" begin!": {
@@ -674,6 +688,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "시작",
+		"MSA" : "ابدأ!",
 		"Portugese": " começar"
 	} , 
 	"YOUREACHED" : {
@@ -689,6 +704,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "도달",
+		"MSA": "أنت وصلت",
 		"Portugese": "VOCÊ ALCANÇOU: "
 	} , 
 	"Instruction(0)" : {
@@ -794,6 +810,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "이 게임은 햄프셔 대학 CS-327 학생들이 2017년 가을에 만들었습니다.",
+		"MSA": "هذه اللعبة خلقت من صف CS-327 في كلية هامبشور في فصل الخريف سنة 2017",
 		"Portugese": "Este jogo foi criado pela clase CS-327 do Hampshire College durante o outono de 2017."
 	} ,
 	"Website": {
@@ -809,6 +826,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "홈페이지를 둘러봐주세요",
+		"MSA": "ننظر في موقعنا",
 		"Portugese": "Confira nosso site"
 	} ,
 	"Music" : {
@@ -824,6 +842,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean",
+		"MSA": "الموسيقى",
 		"Portugese": "Música"
 	} ,
 	"SFX" : {
@@ -839,6 +858,7 @@
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
 		"Korean": "PlaceholderKorean",
+		"MSA": "مؤثرات خاصة",
 		"Portugese": "Efeitos Especiais"
 	} ,
 	"YouWin" : {
