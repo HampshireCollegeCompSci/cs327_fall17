@@ -39,7 +39,7 @@ public class DraggableBlock : MonoBehaviour
     {
         grid = newGrid;
         consoleGrid = newConsoleGrid;
-        consoleGrid.Init();
+        //consoleGrid.Init();
         draggableObject.SetCanvasTransform(canvas);
 
         //nonDraggingScale = new Vector3(0.75f, 0.75f, 0.75f);

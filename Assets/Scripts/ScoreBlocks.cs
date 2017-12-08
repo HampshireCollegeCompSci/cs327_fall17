@@ -32,13 +32,13 @@ public class ScoreBlocks : MonoBehaviour
 
     private int scoreBlockCount;
     private int eventBlockCount;
-    private bool blocksCleared;
+    ///private bool blocksCleared;
 
     private void Start()
     {
         scoreBlockCount = 0;
         eventBlockCount = 0;
-        blocksCleared = true;
+        ///blocksCleared = true;
     }
 
     public void ScoreBlockAdded()
@@ -58,7 +58,7 @@ public class ScoreBlocks : MonoBehaviour
 
         if (eventBlockCount == eventBlocks.Length)
         {
-            blocksCleared = false;
+            ///blocksCleared = false;
             scoreBlockCount -= scoreBlocks.Length;
             eventBlockCount -= eventBlocks.Length;
             StartCoroutine(ClearingFullBlocks());
@@ -81,6 +81,6 @@ public class ScoreBlocks : MonoBehaviour
             i.sprite = emptyEventBlock;
         }
 
-        blocksCleared = true;
+        ///blocksCleared = true;
     }
 }

@@ -173,6 +173,11 @@ public class Grid : MonoBehaviour
         asteroidMasks.Add(tier, newMask);
     }
 
+    private void Awake()
+    {
+        consoleGrid.Init();
+    }
+
     private void Start()
     {
         subCanvas.WideScreenSupport();
@@ -639,6 +644,7 @@ public class Grid : MonoBehaviour
                 TutorialController.Instance.TriggerEvent(TutorialController.Triggers.FIRST_WASTE_3);
             }
         }
+        energyCounter.UpdateEnergy();
     }
 
     private IEnumerator ClearingOutlineEffect(List<int[]> squaresFormed, List<Tile> duplicatesRemoved,
@@ -725,6 +731,8 @@ public class Grid : MonoBehaviour
 
         float angle = (90 - Mathf.Atan((tilePos.y - energyTransferBallPos.y) / (tilePos.x - energyTransferBallPos.x)) * 180f / Mathf.PI);
         lighting.transform.rotation = Quaternion.Euler(0, 0, -angle);
+
+        energyCounter.DoEnergyTransferBallAnimation();
     }
 
     private void CheckForSquares(int r, int c, int length, ref List<Tile> toRemove, ref List<int[]> squaresFormed, TileData.TileType[,] copy)
@@ -1137,6 +1145,12 @@ public class Grid : MonoBehaviour
         vestigeCounter.SetCurrentVestiges(CountVestiges());
     }
 
+    // Get the energy drain of the tile at (row, col).
+    public int GetVestigeEnergyDrain(int row, int col)
+    {
+        return decayRates[tiles[row, col].GetVestigeLevel() - 1];
+    }
+
     // Get the current level of energy drain on the Grid.
     public int GetEnergyDrain()
     {
@@ -1150,6 +1164,32 @@ public class Grid : MonoBehaviour
                 {
                     energyChange += decayRates[tiles[r, c].GetVestigeLevel() - 1];
                 }
+            }
+        }
+
+        /*
+        int w = consoleGrid.GetWidth();
+        int h = consoleGrid.GetHeight();
+        Tile[,] consoleTiles = consoleGrid.GetTiles();
+        Debug.Log(consoleTiles);
+        for (int r = 0; r < h; r++)
+        {
+            for (int c = 0; c < w; c++)
+            {
+                if (consoleTiles[r, c].GetTileType() == TileData.TileType.Vestige)
+                {
+                    energyChange += decayRates[consoleTiles[r, c].GetVestigeLevel() - 1];
+                }
+            }
+        }
+        */
+
+        List<TileData> consoleVestiges = consoleGrid.GetVestiges();
+        if (consoleVestiges != null)
+        {
+            foreach (TileData t in consoleVestiges)
+            {
+                energyChange += decayRates[t.GetVestigeLevel() - 1];
             }
         }
 

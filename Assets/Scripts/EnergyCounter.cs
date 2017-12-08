@@ -61,6 +61,9 @@ public class EnergyCounter : MonoBehaviour
     [Tooltip("The color that the rising text should have when energy is lost from a level 3 vestige.")]
     Color energyTextColorVestige3;
     [SerializeField]
+    [Tooltip("The color that the reactor text should have when the player is almost in danger.")]
+    Color energyTextColorAlmostDanger;
+    [SerializeField]
     [Tooltip("Reference to the UI canvas transform.")]
     Transform canvas;
     [SerializeField]
@@ -75,6 +78,9 @@ public class EnergyCounter : MonoBehaviour
     [SerializeField]
     [Tooltip("Console Grid sprite to use when the player is at the lowest energy threshold.")]
     Sprite spriteConsoleGridDanger;
+    [SerializeField]
+    [Tooltip("Console Grid sprite to use when the player is at the second lowest energy threshold.")]
+    Sprite spriteConsoleGridAlmostDanger;
     [SerializeField]
     [Tooltip("Reference to the console grid image.")]
     Image imageConsoleGrid;
@@ -155,17 +161,18 @@ public class EnergyCounter : MonoBehaviour
             EnterEnergyLevel(0);
             return;
         }
-        else
-        {
-            imageConsoleGrid.sprite = spriteConsoleGridNormal;
-            textEnergy.color = energyTextColorGain;
-        }
 
         if (turnsRemaining <= energyThreshold[1])
         {
+            imageConsoleGrid.sprite = spriteConsoleGridAlmostDanger;
+            textEnergy.color = energyTextColorAlmostDanger;
+
             EnterEnergyLevel(1);
             return;
         }
+
+        imageConsoleGrid.sprite = spriteConsoleGridNormal;
+        textEnergy.color = energyTextColorGain;
 
         if (turnsRemaining <= energyThreshold[2])
         {
@@ -207,11 +214,12 @@ public class EnergyCounter : MonoBehaviour
 
         UpdateEnergy();
 
+        /*
         if (amount > 0)
         {
-            // Activate the energy transfer ball animation.
-            energyTransferBallController.SetTrigger(hashActivate);
+            DoEnergyTransferBallAnimation();
         }
+        */
     }
 
     public void RemoveEnergy(int amount, bool updateBufferedEnergyTarget = true)
@@ -222,6 +230,12 @@ public class EnergyCounter : MonoBehaviour
     public void SetEnergy(int newEnergy, bool updateBufferedEnergyTarget = true)
     {
         AddEnergy(newEnergy - energy, updateBufferedEnergyTarget);
+    }
+
+    // Activate the energy transfer ball animation.
+    public void DoEnergyTransferBallAnimation()
+    {
+        energyTransferBallController.SetTrigger(hashActivate);
     }
 
     // Creates a text popup.
@@ -289,7 +303,7 @@ public class EnergyCounter : MonoBehaviour
         }
     }
 
-    private void UpdateEnergy()
+    public void UpdateEnergy()
     {
         // Keep track of peak energy for Analytics.
         if (energy > peakEnergy)
@@ -299,6 +313,8 @@ public class EnergyCounter : MonoBehaviour
 
         // Check if the player is about to lose.
         int energyDrain = grid.GetEnergyDrain();
+        //Debug.Log("EnergyCounter.UpdateEnergy: energyDrain: " + energyDrain);
+
         if (energyDrain <= 0)
         {
             SetIsAboutToLose(false);
@@ -374,6 +390,7 @@ public class EnergyCounter : MonoBehaviour
         }
         accumulator.Add(amount);
         accumulator.ResetTimer();
+        gameOver.ResetGameOverWaitTime();
     }
 
     private void RisingTextAccumulator_MoveStarted()

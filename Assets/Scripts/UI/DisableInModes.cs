@@ -11,7 +11,7 @@ public class DisableInModes : MonoBehaviour
     [Tooltip("Whether this object is enabled in the tutorial.")]
     bool enabledInTutorial;
 
-    private void Awake()
+    private void Start()
     {
         if (!enabledInTutorial && Settings.Instance.IsTutorialModeEnabled())
         {

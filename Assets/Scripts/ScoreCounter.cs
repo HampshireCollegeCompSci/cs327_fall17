@@ -55,6 +55,16 @@ public class ScoreCounter : MonoBehaviour
         UpdateScore();
     }
 
+    public void AddScoreFromSquare()
+    {
+        AddScore(grid.GetScorePerSquare());
+    }
+
+    public void AddScoreFromSquares(int count)
+    {
+        AddScore(grid.GetScorePerSquare() * count);
+    }
+
     public void RemoveScore(int amount)
     {
         score -= amount;
