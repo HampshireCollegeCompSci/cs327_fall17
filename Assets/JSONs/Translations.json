@@ -1223,7 +1223,7 @@
 	    "Swedish": "(Tap to Continue)",
 	    "Korean": "사각형들은 정리되고 에너지를 만듭니다",
 		"MSA": "",
-		"Potugese": "Quadrados 3x3 irão limpar e gerar energia."
+		"Portugese": "Quadrados 3x3 irão limpar e gerar energia."
 	},
 	"Tutorial2": {
 		"English": "Individual blocks adjacent to cleared squares become Waste, draining 1 energy per move.",
