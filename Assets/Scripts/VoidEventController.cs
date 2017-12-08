@@ -397,7 +397,7 @@ public class VoidEventController : MonoBehaviour
             letterBindings.Add(letterRadiation, VoidEvent.EventType.Radiation);
         }
 
-        PrintLetterBindings();
+        //PrintLetterBindings();
 
         // Read JSON data for tier-specific data.
         JSONNode nodeTierData = json["tier-specific data"];
