@@ -141,7 +141,10 @@ public class Tile : MonoBehaviour
             case TileData.TileType.Regular:
                 //int randomInt = Random.Range(0, tiles.Length);
                 //newSprite = tiles[randomInt];
-                newSprite = tiles[data.GetSpriteIndex()];
+                int theIndex = data.GetSpriteIndex();
+                //Debug.Log(theIndex);
+                newSprite = tiles[theIndex];
+                trueSprite = newSprite;
                 break;
             case TileData.TileType.Vestige:
                 newSprite = spriteVestigeList[0];
