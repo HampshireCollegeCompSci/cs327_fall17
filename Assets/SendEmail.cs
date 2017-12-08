@@ -3,11 +3,12 @@ using System.Collections;
 
 public class SendEmail : MonoBehaviour
 {
+    [SerializeField]
+    [Tooltip("email Id to send the mail to")]
+    string email = "cs327feedback@lists.hampshire.edu";
 
     public void EmailUs()
     {
-        //email Id to send the mail to
-        string email = "cs327feedback@lists.hampshire.edu";
         //subject of the mail
         string subject = MyEscapeURL("Feedback/Suggestion");
         //body of the mail which consists of Device Model and its Operating System
