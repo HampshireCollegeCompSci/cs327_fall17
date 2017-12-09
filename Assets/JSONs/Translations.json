@@ -151,7 +151,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "돌아가기",
+		"Korean": "이어서",
 		"MSA": "استنناف اللعب",
 		"Portugese": "PlaceholderPortugese"
 	  },
@@ -648,7 +648,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
+		"Korean": "뮤직",
 		"MSA": "الموسيقى",
 		"Portugese": "Música"
 	} ,
@@ -664,7 +664,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
+		"Korean": "사운드 이펙트",
 		"MSA": "مؤثرات خاصة",
 		"Portugese": "Efeitos Especiais"
 	} ,
@@ -696,7 +696,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
+		"Korean": "이어서",
 		"Portugese": "Continuar"
 	} ,
 	"TutorialComplete" : {
@@ -715,7 +715,7 @@
 		"Portugese": "Tutorial encerrado! Agora vamos jogar o jogo VERDADEIRO!"
 	} ,
 	"OK" : {
-		"English": "OK",
+		"English": "Okay",
 		"Spanish": "Sí",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
@@ -726,7 +726,7 @@
 	    "Danish": "PlaceholderDanish",
 	    "Polish": "PlaceholderPolish",
 	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
+		"Korean": "좋아",
 		"MSA": "نعام",
 		"Portugese": "PlaceholderPortugese"
 	} ,
@@ -823,6 +823,13 @@
 		"Korean": "가능한 블록들",
 		"MSA": "كتل الممكنة",
 		"Portugese": "Possível Blocos"
+	},
+	"ContactUs": {
+		"English": "CONTACT US",
+		"Spanish": "",
+		"Korean": "연락처",
+		"MSA": "",
+		"Portugese": ""
 	},
 	"Junkyard1": {
 		"English": "One block has a new shape",
@@ -981,7 +988,7 @@
 	"Tutorial9": {
 		"English": "Reactor Meltdown: The reactor is melting down! Be prepared for two events at once.",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "노심 융해: 원자로가 녹고 있습니다! 두 이벤트를 동시에 해결해보세요.",
 		"MSA": "",
 		"Portugese": ""
 	},
