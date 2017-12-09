@@ -3001,22 +3001,6 @@ MonoBehaviour:
       m_Image: {fileID: 0}
     - m_Text: "Espa\xF1ol"
       m_Image: {fileID: 0}
-    - m_Text: "Fran\xE7ais"
-      m_Image: {fileID: 0}
-    - m_Text: "Sloven\u0161\u010Dina"
-      m_Image: {fileID: 0}
-    - m_Text: "Rom\xE2n\u0103"
-      m_Image: {fileID: 0}
-    - m_Text: Deutsch
-      m_Image: {fileID: 0}
-    - m_Text: "L\xEBtzebuergesch"
-      m_Image: {fileID: 0}
-    - m_Text: Nederlands
-      m_Image: {fileID: 0}
-    - m_Text: Dansk
-      m_Image: {fileID: 0}
-    - m_Text: Polszczyzna
-      m_Image: {fileID: 0}
     - m_Text: "\uD55C\uAD6D\uC5B4"
       m_Image: {fileID: 0}
     - m_Text: "Portugu\xEAs"
