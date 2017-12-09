@@ -35,17 +35,9 @@ public class LanguagesDropdown : MonoBehaviour
         */
         languageList.Add("English");
         languageList.Add("Spanish");
-        languageList.Add("French");
-        languageList.Add("Slovenian");
-        languageList.Add("Romanian");
-        languageList.Add("German");
-        languageList.Add("Luxembourgish");
-        languageList.Add("Dutch");
-        languageList.Add("Danish");
-        languageList.Add("Polish");
         languageList.Add("Korean");
 		languageList.Add("Portugese");
-		languageList.Add ("MSA");
+		languageList.Add("MSA");
     }
 
     void Start()
