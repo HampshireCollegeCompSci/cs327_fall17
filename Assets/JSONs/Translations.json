@@ -267,36 +267,6 @@
 		"MSA": "لعب مرة أخرى",
 		"Portugese": "PlaceholderPortugese"
 	} ,
-	"NormalMode": {
-		"English": "Normal Mode",
-		"Spanish": "PlaceholderSpanish",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
-		"Portugese": "PlaceholderPortugese"
-	} ,
-	"ZenMode": {
-		"English": "Zen Mode",
-		"Spanish": "PlaceholderSpanish",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
-		"Portugese": "PlaceholderPortugese"
-	} ,
 	"You Reached": {
 		"English": "You Reached",
 		"Spanish": "Alcanzaste",
@@ -348,161 +318,161 @@
 	"Tip1" : {
 		"English": "Try making overlapping squares.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "겹치는 사각형을 만들어보십시오.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip2" : {
 		"English": "Try making squares in the corner of the board to save space.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "사각형을 보드의 구석에 만들어서 공간을 아껴보세요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip3" : {
 		"English": "Try to avoid making squares that generate Waste.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "폐기물을 만드는 사각형은 피하세요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip4" : {
 		"English": "Try and set up squares before events to get through them faster.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "이벤트를 빨리 끝내려면 미리 사각형들을 셋팅해보세요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip5" : {
 		"English": "Bigger squares are better! Making overlapping squares is more efficient.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "큰 사각형들이 더 낫고 겹치는 사각형들은 더 효율적입니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip6" : {
 		"English": "Use Waste to make squares before it gets out of control.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "넘치기 전에 폐기물로 사각형을 만드세요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip7" : {
 		"English": "Don’t forget you can rotate and flip blocks.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "블럭을 회전하고 뒤집을 수 있는 걸 잊지 마세요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip8" : {
 		"English": "The Pause menu shows your available blocks.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "정지 메뉴는 가능한 블럭들을 보여줍니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip9" : {
 		"English": "If you make a square, you won't lose any energy from Waste that turn.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "사각형을 만들면 그 턴에서 폐기물에게 에너지를 빼앗기지 않습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip10" : {
 		"English": "The events get harder later in the game.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "게임이 진행될수록 이벤트들이 어려워집니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip11" : {
 		"English": "During the Unrefined Uranium event, look in the Pause menu to see your blocks.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "우라늄 원석 이벤트 동안에는 정지 메뉴에서 자신의 블럭들을 봐주세요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip12" : {
 		"English": "If you get far enough, multiple events can happen at the same time.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "특정 구간에선 여러 이벤트가 한 번에 일어납니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip13" : {
 		"English": "Carefully watch your energy level in the reactor.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "원자로의 에너지 레벨을 주의해주세요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip14" : {
 		"English": "Events can be scary, but keep your cool, there’s no rush!",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "이벤트들이 무서울 수도 있겠지만 진정하시고 천천히 풀어가 보세요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip15" : {
 		"English": "Congratulations, you burnt the coffee.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "축하드립니다. 이 커피는 다 탔군요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip16" : {
 		"English": "You ripped a hole in space-time.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "우주에 구멍을 냈습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip17" : {
 		"English": "You tripped over the power cord.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "전원 코드에 걸려 넘어졌습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip18" : {
 		"English": "The energy you made powered an electric toothbrush.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "당신이 만든 에너지가 전동 칫솔을 작동시켰군요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip19" : {
 		"English": "You made some radioactive lemons.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "방사능 레몬을 만드셨군요.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip20" : {
 		"English": "You created wormholes allowing interplanetary travel.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "이제 웜홀로 행성간 여행이 가능해졌습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip21" : {
 		"English": "This game was made by 27 students in one semester.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "이 게임은 27 학생들이 한 학기에 만들었습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip22" : {
 		"English": "This game is open source and available for free.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "이 게임은 오픈 소스이며 공짜로 즐기실 수 있습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Tip23" : {
 		"English": "Check out our website, http://projectiona.net.",
 		"Spanish": "",
-		"Korean": "",
+		"Korean": "웹사이트 확인하기, http://projectiona.net.",
 		"MSA": "",
 		"Portugese": ""
 	}
@@ -588,7 +558,7 @@
 	} ,
 	"Reactor Overload": {
 		"English": "Reactor Overload",
-		"Spanish": "Spnrecarga del reactor",
+		"Spanish": "Sobrecarga del reactor",
 	    "French": "PlaceholderFrench",
 	    "Slovenian": "PlaceholderSlovenian",
 	    "Romanian": "PlacehoderRomanian",
@@ -857,91 +827,91 @@
 	"Junkyard1": {
 		"English": "One block has a new shape",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "한 블럭이 새 모양을 가셨습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Junkyard2": {
 		"English": "Two blocks have a new shape",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "두 블럭이 새 모양을 가졌습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Junkyard3": {
 		"English": "Three blocks have a new shape",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "세 블럭이 새 모양을 가졌습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Asteroids1": {
 		"English": "Three spaces are unusable",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "세 공간이 쓸 수 없게 되었습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Asteroids2": {
 		"English": "Five spaces are unusable",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "다섯 공간이 쓸 수 없게 되었습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Asteroids3": {
 		"English": "Seven spaces are unusable",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "일곱 공간이 쓸 수 없게 되었습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Radiation1": {
 		"English": "Blocks have level 1 Waste",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "레벨 1 폐기물이 있습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Radiation2": {
 		"English": "Blocks have level 2 Waste",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "레벨 2 폐기물이 있습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Radiation3": {
 		"English": "Blocks have level 3 Waste",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "레벨 3 폐기물이 있습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Meltdown1": {
 		"English": "New blocks & unusable spaces",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "새 블럭 & 쓸 수 없는 공간",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Meltdown2": {
 		"English": "Blocks have waste & new blocks",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "폐기물이 있습니다 & 새 블럭",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Meltdown3": {
 		"English": "Unusable spaces & blocks have Waste",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "쓸 수 없는 공간 & 폐기물이 있습니다.",
 		"MSA": "",
 		"Portugese": ""
 	},
 	"Overload": {
 		"English": "All events combined",
 	    "Spanish": "",
-	    "Korean": "",
+	    "Korean": "모든 이벤트를 합쳐서",
 		"MSA": "",
 		"Portugese": ""
 	},
@@ -1039,15 +1009,6 @@
 	"Tutorial13": {
 		"English": "The bar above tracks cleared squares and shows when events will start and end.",
 	    "Spanish": "La barra de arriba sigue a los cuadros claros y enseña cuando los eventos empiezan y terminan.",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
 	    "Korean": "위의 카운터는 정리된 사각형과 이벤트의 시작하는 시간과 끝나는 시간을 알려줍니다.",
 		"MSA": "الشريط فوق هذه الجملة يتتبع مربعات التي كانت مسح ويظهر عندها الأحداث سوف تبدأ و نهاية.",
 		"Portugese": "A barra acima das pistas limpou quadrados e mosta quando os eventos vão começar e terminar."
