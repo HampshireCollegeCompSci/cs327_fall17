@@ -945,6 +945,8 @@ GameObject:
   - component: {fileID: 635766374}
   - component: {fileID: 635766376}
   - component: {fileID: 635766375}
+  - component: {fileID: 635766378}
+  - component: {fileID: 635766377}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -1009,6 +1011,30 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 635766373}
+--- !u!114 &635766377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 635766373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: ContactUs
+--- !u!114 &635766378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 635766373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
 --- !u!1 &641950057
 GameObject:
   m_ObjectHideFlags: 0
@@ -3000,22 +3026,6 @@ MonoBehaviour:
     - m_Text: English
       m_Image: {fileID: 0}
     - m_Text: "Espa\xF1ol"
-      m_Image: {fileID: 0}
-    - m_Text: "Fran\xE7ais"
-      m_Image: {fileID: 0}
-    - m_Text: "Sloven\u0161\u010Dina"
-      m_Image: {fileID: 0}
-    - m_Text: "Rom\xE2n\u0103"
-      m_Image: {fileID: 0}
-    - m_Text: Deutsch
-      m_Image: {fileID: 0}
-    - m_Text: "L\xEBtzebuergesch"
-      m_Image: {fileID: 0}
-    - m_Text: Nederlands
-      m_Image: {fileID: 0}
-    - m_Text: Dansk
-      m_Image: {fileID: 0}
-    - m_Text: Polszczyzna
       m_Image: {fileID: 0}
     - m_Text: "\uD55C\uAD6D\uC5B4"
       m_Image: {fileID: 0}
