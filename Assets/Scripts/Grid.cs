@@ -11,6 +11,7 @@ using SimpleJSON;
 
 public class Grid : MonoBehaviour
 {
+    // Invoked once when any number of squares is formed, before the clearing animation begins.
     public delegate void SquareFormedHandler(int scorePerSquare, Vector3 textPos);
     public event SquareFormedHandler SquareFormed;
     // Invoked when a square is outlined during the clearing animation,
@@ -514,6 +515,48 @@ public class Grid : MonoBehaviour
         }
     }
 
+    IEnumerator BeginClearingSquares(List<int[]> squaresFormed, List<Tile> toRemove)
+    {
+        yield return new WaitUntil(() => !TutorialController.Instance.IsPanelOpen());
+
+        //Turn vestiges when isPlaced is true
+        List<VestigeMarker> newVestiges = new List<VestigeMarker>();
+        foreach (int[] s in squaresFormed)
+        {
+            //Spawn a text indicating scores at the center of the cleared square
+            /*
+            Vector3 textPos = new Vector3();
+            if (s[2] % 2 == 1)
+            {
+                textPos = GetTilePosition(s[0] + (s[2] - 1) / 2, s[1] + (s[2] - 1) / 2);
+            }
+            else
+            {
+                Vector3 rightPos = GetTilePosition(s[0] + (s[2] - 1) / 2 + 1, s[1] + (s[2] - 1) / 2 + 1);
+                Vector3 leftPos = GetTilePosition(s[0] + (s[2] - 1) / 2, s[1] + (s[2] - 1) / 2);
+                textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
+            }
+
+            // If a legal square is formed, tell the event handler.
+            // This doesn't actually give points.
+            OnSquareFormed(scorePerSquare, textPos);
+            */
+
+            FormVestiges(s[0], s[1], s[2], toRemove, null, ref newVestiges);
+        }
+
+        //energyCounter.PopUp("+", squaresFormed.Count * energyPerSquare);
+
+        List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
+
+        StartCoroutine(ClearingOutlineEffect(squaresFormed, duplicatesRemoved, newVestiges));
+
+        if (squaresFormed.Count != 0)
+        {
+            squareClearingsCount += 1;
+        }
+    }
+
     public bool CheckForMatches()
     {
         bool squareFormed = false;
@@ -547,44 +590,11 @@ public class Grid : MonoBehaviour
         {
             squareFormed = true;
 
-            //Turn vestiges when isPlaced is true
-            List<VestigeMarker> newVestiges = new List<VestigeMarker>();
-            foreach (int[] s in squaresFormed)
-            {
-                //Spawn a text indicating scores at the center of the cleared square
-                /*
-                Vector3 textPos = new Vector3();
-                if (s[2] % 2 == 1)
-                {
-                    textPos = GetTilePosition(s[0] + (s[2] - 1) / 2, s[1] + (s[2] - 1) / 2);
-                }
-                else
-                {
-                    Vector3 rightPos = GetTilePosition(s[0] + (s[2] - 1) / 2 + 1, s[1] + (s[2] - 1) / 2 + 1);
-                    Vector3 leftPos = GetTilePosition(s[0] + (s[2] - 1) / 2, s[1] + (s[2] - 1) / 2);
-                    textPos = new Vector3((leftPos.x + rightPos.x) / 2, (leftPos.y + rightPos.y) / 2, (leftPos.z + rightPos.z) / 2);
-                }
+            TutorialController.Instance.FormedSquare();
 
-                // If a legal square is formed, tell the event handler.
-                // This doesn't actually give points.
-                OnSquareFormed(scorePerSquare, textPos);
-                */
+            OnSquareFormed(scorePerSquare, Vector3.zero);
 
-                FormVestiges(s[0], s[1], s[2], toRemove, null, ref newVestiges);
-            }
-
-            //energyCounter.PopUp("+", squaresFormed.Count * energyPerSquare);
-
-
-
-            List<Tile> duplicatesRemoved = toRemove.Distinct().ToList();
-
-            StartCoroutine(ClearingOutlineEffect(squaresFormed, duplicatesRemoved, newVestiges));
-
-            if (squaresFormed.Count != 0)
-            {
-                squareClearingsCount += 1;
-            }
+            StartCoroutine(BeginClearingSquares(squaresFormed, toRemove));
         }
 
         gridBlocks.Sort((y, x) => x.GetRow().CompareTo(y.GetRow()));

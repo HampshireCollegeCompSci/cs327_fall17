@@ -37,6 +37,9 @@ public class Tile : MonoBehaviour
     [SerializeField]
     [Tooltip("The underlying TileData.")]
     TileData data = new TileData();
+    [SerializeField]
+    [Tooltip("Reference to the RectTransform component of this Tile.")]
+    RectTransform rectTransform;
 
     // The current asteroid object animator.
     Animator asteroidObj = null;
@@ -98,6 +101,7 @@ public class Tile : MonoBehaviour
         Transform thisFadingTilePrefab = Instantiate(fadingTilePrefab, grid.transform.position, grid.transform.rotation);
         thisFadingTilePrefab.SetParent(grid, false);
         thisFadingTilePrefab.transform.localPosition = gameObject.transform.localPosition;
+        thisFadingTilePrefab.GetComponent<RectTransform>().sizeDelta = rectTransform.sizeDelta;
         // Copy the sprite to the instantiated prefab so that it fades out the same sprite that was cleared.
         thisFadingTilePrefab.GetComponent<Image>().sprite = trueSprite;
         //thisFadingTilePrefab.GetComponent<Image>().sprite = spriteRenderer.sprite;
