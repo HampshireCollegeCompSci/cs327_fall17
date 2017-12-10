@@ -49,6 +49,8 @@ public class Tile : MonoBehaviour
     public void Fill(TileData.TileType newType)
     {
         TileData.TileType previousType = GetTileType();
+        //Debug.Log("Tile.Fill: previousType / newType: " + previousType + " / " + newType);
+        //Debug.Log("Tile.Fill: trueSprite: " + trueSprite);
         if (previousType != newType)
         {
             // Before we actually change the tile type, check and handle special cases.
@@ -83,17 +85,23 @@ public class Tile : MonoBehaviour
     }
 
     // Called when the Tile is occupied and gets cleared.
-    private void CreateVanishVisualEffects()
+    public void CreateVanishVisualEffects()
     {
-        GameObject gridObject = transform.parent.gameObject; //Get a handle on the grid
-        Transform grid = gridObject.transform; //For readability, get its Transform
-                                               //Make a new prefab instance to fade out
+        //Debug.Log("Tile.CreateVanishVisualEffects: Tile type: " + GetTileType());
+        //Debug.Log("Tile.CreateVanishVisualEffects: trueSprite: " + trueSprite);
+
+        // Get a handle on the grid.
+        GameObject gridObject = transform.parent.gameObject;
+        // For readability, get its Transform.
+        Transform grid = gridObject.transform;
+        // Make a new prefab instance to fade out.
         Transform thisFadingTilePrefab = Instantiate(fadingTilePrefab, grid.transform.position, grid.transform.rotation);
         thisFadingTilePrefab.SetParent(grid, false);
         thisFadingTilePrefab.transform.localPosition = gameObject.transform.localPosition;
-        //Copy the sprite to the instantiated prefab so that it fades out the same sprite that was cleared
+        // Copy the sprite to the instantiated prefab so that it fades out the same sprite that was cleared.
         thisFadingTilePrefab.GetComponent<Image>().sprite = trueSprite;
-        //Get the fade component
+        //thisFadingTilePrefab.GetComponent<Image>().sprite = spriteRenderer.sprite;
+        // Get the fade component.
         TileFade tileToFade = thisFadingTilePrefab.GetComponent<TileFade>();
         tileToFade.Fade(); //And fade the image out, which will destroy it as well
         gridObject.GetComponent<ClearedSquaresCounter>().ClearedSquare(); //increment the total number of cleared squares, for analytics

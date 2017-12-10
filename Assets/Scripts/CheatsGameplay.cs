@@ -48,6 +48,10 @@ public class CheatsGameplay : MonoBehaviour
         {
             AddScoreFromSquares(1);
         }
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            AddScoreFromSquares(11);
+        }
         if (Input.GetKeyDown(KeyCode.E))
         {
             AddEnergy(100);
@@ -78,6 +82,21 @@ public class CheatsGameplay : MonoBehaviour
         {
             scoreBlocks.ScoreBlockAdded();
         }
+
+        /*
+        float timeBetweenSquares = 0.05f;
+        for (int i = 0; i < amount; ++i)
+        {
+            StartCoroutine(AddScoreFromSquareBitByBit(timeBetweenSquares * i));
+        }
+        */
+    }
+
+    IEnumerator AddScoreFromSquareBitByBit(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        AddScore(grid.GetScorePerSquare());
+        scoreBlocks.ScoreBlockAdded();
     }
 
     public void SetEnergyTo1()
