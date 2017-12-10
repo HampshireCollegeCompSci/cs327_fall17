@@ -1881,9 +1881,30 @@ Prefab:
       propertyPath: maskReactor
       value: 
       objectReference: {fileID: 1963392371}
+    - target: {fileID: 1065589403178500, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d6b51dab45ec74b068a7b535ef93d7c6, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &518423281 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1379590387461630, guid: d6b51dab45ec74b068a7b535ef93d7c6,
+    type: 2}
+  m_PrefabInternal: {fileID: 518423280}
+--- !u!114 &518423282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 518423281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationKey: YOUREACHED
 --- !u!224 &560937244 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224368481258837754, guid: 5ca71dbbd343b254eb5749922c4c999a,
