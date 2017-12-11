@@ -644,11 +644,11 @@
 		"Portugese": "Quadrados 3x3 irão limpar e gerar energia."
 	},
 	"Tutorial2": {
-		"English": "Individual blocks adjacent to cleared squares become Waste, draining 1 energy per move.",
+		"English": "Individual blocks adjacent to cleared squares become Waste.",
 	    "Spanish": "Bloques individuales adyacente a bloques claros se convertirán en residuo una (1) energía por movimiento",
 	    "Korean": "정리된 사각형 주위에 있는 블록들은 폐기물이 됩니다. 그리고 이 블록들은 움직일 때마다 에너지를 소비합니다.",
 		"MSA": "كتل فردية بجانب المربعات مسح تصبح النفايات، استنزاف ١ طاقة لكل خطوة.",
-		"Portugese": "Blocos individuais ao lade de quadrados limpos tornan-se Resíduo, drenando 1 energia por movimento."
+		"Portugese": "Blocos individuais ao lade de quadrados limpos tornan-se Resíduo."
 	},
 	"Tutorial3": {
 		"English": "Waste levels up when adjacent to cleared squares. Level 2 Waste drains 3 energy per move.",
@@ -670,41 +670,6 @@
 	    "Korean": "에너지 부족! 이번 턴에 사각형을 만들어서 에너지를 얻으십시오.",
 		"MSA": "أنت منخفضة على الطاقة! خلق مربعة في هذه خطوة للحصول على الطاقة.",
 		"Portugese": "Você está com pouca energia! Faça este quadrado girar para ganhar energia!"
-	},
-	"Tutorial6": {
-		"English": "Reactor Breach: Some spaces are blocked off.",
-	    "Spanish": "Brecha de Reactor: Algunos espacios están bloqueados. ",
-	    "Korean": "원자로 균열: 특정 공간을 쓸 수 없게 됩니다.",
-		"MSA": "خرق المفاعل - بعض مناطق منعت!",
-		"Portugese": "Violação do Reator: Alguns espaços estão bloqueados."
-	},
-	"Tutorial7": {
-		"English": "An event has begun, and lasts until you clear 5 squares. In this event, some blocks are harder.",
-	    "Spanish": "Un evento ha comenzado, y dura hasta que despejes cinco (5) cuadros. En este evento algunos bloques son difíciles",
-	    "Korean": "특수 블록들이 어려워집니다. 5 사각형들을 치우세요.",
-		"MSA": "بدأ حدث ويستم حتى يمكنك مسح 5 مربعات في هذا الحدث، بعض الكتل أصعب.",
-		"Portugese": "Um evento começou, e dura até você limpar 5 quadrados. Neste evento, alguns blocos são mais dificéis."
-	},
-	"Tutorial8": {
-		"English": "Contamination: Blocks come with Waste.",
-	    "Spanish": "Contaminación: Bloques vienen con residuos",
-	    "Korean": "오염: 블록들이 폐기물이 있는 채로 시작합니다.",
-		"MSA": "ثلوث! كتل تأتي مع النفايات",
-		"Portugese": "Contaminação: Blocos vêm com Resíduos."
-	},
-	"Tutorial9": {
-		"English": "Reactor Meltdown: The reactor is melting down! Be prepared for two events at once.",
-	    "Spanish": "Fusión del reactor: ¡El reactor se está derritiendo! Prepárate para dos eventos a la vez.",
-	    "Korean": "노심 융해: 원자로가 녹고 있습니다! 두 이벤트를 동시에 해결해보세요.",
-		"MSA": "مفاعل الانهيار:  المفاعل ذوبان أسفل، تكون مستعدة الاثنين من الأحداث في نفس الوقت",
-		"Portugese": "Melhora do Reator: o reator está derretendo! Esteja preparado para dois eventos ao mesmo tempo."
-	},
-	"Tutorial10": {
-		"English": "Reactor Overload: All the events are occurring at once! This is your final challenge!",
-	    "Spanish": "Sobrecarga del Reactor: Todos los eventos están ocurriendo a la vez!  Este es tu desafío final!",
-	    "Korean": "원자로 폭주: 모든 이벤트가 한 번에 일어납니다. 힘내세요!",
-		"MSA": "مفاعل الزاءد: كل الأحداث حدث في نفس الوقت! هذا هو التحدى النهاءي.",
-		"Portugese": "Sobrecarga de Reator: Todos os eventos estão ocorrendo ao mesmo tempo! Este é o seu desafio final!"
 	},
 	"Tutorial11": {
 		"English": "Multiple overlapping 3x3 squares can be cleared at once.",
