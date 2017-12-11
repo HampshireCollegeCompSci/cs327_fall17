@@ -66,61 +66,6 @@
 			}
 		]
 	},
-	"FIRST_BREACH" : 
-	{
-		"TriggerName" : "FIRST_BREACH",
-		"Info" :
-		[
-			{
-				"TextInfo" : "Tutorial6",
-				"Panel" : "Grid"
-			}
-		]
-	},
-	"FIRST_URANIUM" : 
-	{
-		"TriggerName" : "FIRST_URANIUM",
-		"Info" :
-		[
-			{
-				"TextInfo" : "Tutorial7",
-				"Panel" : "Grid"
-			}
-		]
-	},
-	"FIRST_CONTAMINATION" : 
-	{
-		"TriggerName" : "FIRST_CONTAMINATION",
-		"Info" :
-		[
-			{
-				"TextInfo" : "Tutorial8",
-				"Panel" : "Grid"
-			}
-		]
-	},
-	"FIRST_MELTDOWN" : 
-	{
-		"TriggerName" : "FIRST_MELTDOWN",
-		"Info" :
-		[
-			{
-				"TextInfo" : "Tutorial9",
-				"Panel" : "Grid"
-			}
-		]
-	},
-	"FIRST_OVERLOAD" : 
-	{
-		"TriggerName" : "FIRST_OVERLOAD",
-		"Info" :
-		[
-			{
-				"TextInfo" : "Tutorial10",
-				"Panel" : "Grid"
-			}
-		]
-	},
 	"TUTORIAL_BAG_TRIGGER_1" :
 	{
 		"TriggerName" : "TUTORIAL_BAG_TRIGGER_1",
