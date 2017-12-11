@@ -149,7 +149,7 @@
 	"HighScore1": {
 		"English": "High Score",
 	    "Spanish": "Puntuación Alta",
-		"Korean": "",
+		"Korean": "최고 스코어",
 		"MSA": "درجة عالية",
 		"Portugese": "Pontuação Máxima"
 	} ,
@@ -218,164 +218,164 @@
 	} ,
 	"Tip1" : {
 		"English": "Try making overlapping squares.",
-		"Spanish": "",
+		"Spanish": "Intenta hacer cuadrados superpuestos.",
 		"Korean": "겹치는 사각형을 만들어보십시오.",
 		"MSA": "حاول أن خلق مربعات متداخلة ",
-		"Portugese": ""
+		"Portugese": "Tente fazer quadrados sobrepostos."
 	},
 	"Tip2" : {
 		"English": "Try making squares in the corner of the board to save space.",
-		"Spanish": "",
+		"Spanish": "Intenta hacer cuadrados en la esquina del tablero para ahorrar espacio.",
 		"Korean": "사각형을 보드의 구석에 만들어서 공간을 아껴보세요.",
 		"MSA": "حاول أن خلق مربعات في ركن اللوحة لتوفير المساحة",
-		"Portugese": ""
+		"Portugese": "Tente começar a fazer quadrados no canto do tabuleiro para salvar espaço."
 	},
 	"Tip3" : {
 		"English": "Try to avoid making squares that generate Waste.",
-		"Spanish": "",
+		"Spanish": "Intenta evitar hacer cuadrados que generen los desechos.",
 		"Korean": "폐기물을 만드는 사각형은 피하세요.",
 		"MSA": "حاول تجنب الخلق مربعات التي توليد النفايات",
-		"Portugese": ""
+		"Portugese": "Tente evitar fazer quadrados que geram desperdício."
 	},
 	"Tip4" : {
 		"English": "Try and set up squares before events to get through them faster.",
-		"Spanish": "",
+		"Spanish": "Intenta configurar los cuadrados antes de los eventos para pasarlos más rápido.",
 		"Korean": "이벤트를 빨리 끝내려면 미리 사각형들을 셋팅해보세요.",
 		"MSA": "حاول أن نصب مربعات قبل أحداث لإكمالها بسرعة",
-		"Portugese": ""
+		"Portugese": "Tente e configure quadrados antes de eventos para passar por eles mais rápido."
 	},
 	"Tip5" : {
 		"English": "Bigger squares are better! Making overlapping squares is more efficient.",
-		"Spanish": "",
+		"Spanish": "Cuadrados más grandes son mejores! Hacer cuadrados superpuestos es más eficiente.",
 		"Korean": "큰 사각형들이 더 낫고 겹치는 사각형들은 더 효율적입니다.",
 		"MSA": "أكبر مربعات هى أحسن! خلق المربعات المتداخلة هي أكثر كفاءة",
-		"Portugese": ""
+		"Portugese": "Quadrados maiores são melhores! Fazer quadrados sobrepostos é mais eficiente."
 	},
 	"Tip6" : {
 		"English": "Use Waste to make squares before it gets out of control.",
-		"Spanish": "",
+		"Spanish": "Use los desechos para hacer cuadrados antes de que se salga de control.",
 		"Korean": "넘치기 전에 폐기물로 사각형을 만드세요.",
 		"MSA": "يستخدم النفايات لخلق مربعات قبل أن يخرج عن نطاق السيترة",
-		"Portugese": ""
+		"Portugese": "Use Resíduos para fazer quadrados antes que ele fique fora de controle."
 	},
 	"Tip7" : {
 		"English": "Don’t forget you can rotate and flip blocks.",
-		"Spanish": "",
+		"Spanish": "No olvides que puedes rotar y voltear bloques.",
 		"Korean": "블럭을 회전하고 뒤집을 수 있는 걸 잊지 마세요.",
 		"MSA": "لا ننسى يمكنك تدوير والوجه كتل",
-		"Portugese": ""
+		"Portugese": "Não se esqueça de que você pode girar e virar blocos."
 	},
 	"Tip8" : {
 		"English": "The Pause menu shows your available blocks.",
-		"Spanish": "",
+		"Spanish": "El menú Pausa muestra tus bloques disponibles.",
 		"Korean": "정지 메뉴는 가능한 블럭들을 보여줍니다.",
 		"MSA": "تحقق الوقة القاءمة لترى كل الكتل متاح لك",
-		"Portugese": ""
+		"Portugese": "O menu de pausa mostra seus blocos disponíveis."
 	},
 	"Tip9" : {
 		"English": "If you make a square, you won't lose any energy from Waste that turn.",
-		"Spanish": "",
+		"Spanish": "Si haces un cuadrado, no perderás energía de los desechos en ese turno.",
 		"Korean": "사각형을 만들면 그 턴에서 폐기물에게 에너지를 빼앗기지 않습니다.",
-		"MSA": "",
-		"Portugese": ""
+		"MSA": "إذا قمت بإجراء مربع، فلن تفقد أي طاقة من النفايات التي تتحول.",
+		"Portugese": "Se você fizer um quadrado, você não perderá energia de Resíduos naquela rodada."
 	},
 	"Tip10" : {
 		"English": "The events get harder later in the game.",
-		"Spanish": "",
+		"Spanish": "Los eventos se vuelven más difíciles más adelante en el juego.",
 		"Korean": "게임이 진행될수록 이벤트들이 어려워집니다.",
 		"MSA": "الأحداث التي تواجهها تصبح أصعب عندما تذهب أكثر في اللعبة.",
-		"Portugese": ""
+		"Portugese": "Os eventos ficam mais difíceis mais tarde no jogo."
 	},
 	"Tip11" : {
 		"English": "During the Unrefined Uranium event, look in the Pause menu to see your blocks.",
-		"Spanish": "",
+		"Spanish": "Durante el evento de Uranio no refinado, mira en el menú Pausa para ver tus bloques.",
 		"Korean": "우라늄 원석 이벤트 동안에는 정지 메뉴에서 자신의 블럭들을 봐주세요.",
 		"MSA": "خلال حدث 'يورانيوم غير المكرر،' ة في وقفة القاءمة لترى كتلك",
-		"Portugese": ""
+		"Portugese": "Durante o evento do Urânio Não-Refinado, tente combinar os novos blocos um com o outro."
 	},
 	"Tip12" : {
 		"English": "If you get far enough, multiple events can happen at the same time.",
-		"Spanish": "",
+		"Spanish": "Si llega lo suficientemente lejos, pueden ocurrir múltiples eventos al mismo tiempo.",
 		"Korean": "특정 구간에선 여러 이벤트가 한 번에 일어납니다.",
 		"MSA": "إذا يذهب لفترة كافية، يمكن أن يحدث أحداث متعددة في نفس الوقت",
-		"Portugese": ""
+		"Portugese": "Se você chegar longe suficiente, múltiplos eventos podem ocorrer ao mesmo tempo."
 	},
 	"Tip13" : {
 		"English": "Carefully watch your energy level in the reactor.",
-		"Spanish": "",
+		"Spanish": "Vigila cuidadosamente tu nivel de energía en el reactor.",
 		"Korean": "원자로의 에너지 레벨을 주의해주세요.",
 		"MSA": "في المفاعل، انتبه إلى مستوى الطاقة",
-		"Portugese": ""
+		"Portugese": "Observe cuidadosamente seu nível de energia no reator."
 	},
 	"Tip14" : {
 		"English": "Events can be scary, but keep your cool, there’s no rush!",
-		"Spanish": "",
+		"Spanish": "Los eventos pueden dar miedo, pero mantén la calma, ¡no hay prisa!",
 		"Korean": "이벤트들이 무서울 수도 있겠지만 진정하시고 천천히 풀어가 보세요.",
 		"MSA": "يمكن أن تكون الأحداث مخيفة ولكن انتقل ببطء.",
-		"Portugese": ""
+		"Portugese": "Eventos podem ser assustadores, mas mantenha sua calma, não há pressa!"
 	},
 	"Tip15" : {
 		"English": "Congratulations, you burnt the coffee.",
-		"Spanish": "",
+		"Spanish": "Felicidades, quemaste el café.",
 		"Korean": "축하드립니다. 이 커피는 다 탔군요.",
 		"MSA": "مبروك! أحرقت القهوة",
-		"Portugese": ""
+		"Portugese": "Parabéns, você queimou o café."
 	},
 	"Tip16" : {
 		"English": "You ripped a hole in space-time.",
-		"Spanish": "",
+		"Spanish": "Has abierto un agujero en el espacio-tiempo.",
 		"Korean": "우주에 구멍을 냈습니다.",
 		"MSA": "كنت ممزق حفرة في الزمكان",
-		"Portugese": ""
+		"Portugese": "Você rasgou um buraco em espaço-tempo."
 	},
 	"Tip17" : {
 		"English": "You tripped over the power cord.",
-		"Spanish": "",
+		"Spanish": "Tropezó con el cable de alimentación.",
 		"Korean": "전원 코드에 걸려 넘어졌습니다.",
 		"MSA": "تعثرت على سلك الطاقة",
-		"Portugese": ""
+		"Portugese": "Você tropeçou no cabo de energia."
 	},
 	"Tip18" : {
 		"English": "The energy you made powered an electric toothbrush.",
-		"Spanish": "",
+		"Spanish": "La energía que hiciste impulsó un cepillo de dientes eléctrico.",
 		"Korean": "당신이 만든 에너지가 전동 칫솔을 작동시켰군요.",
 		"MSA": "الطاقة التي خلقت شحنت فرشاة أسنان كهرباءية",
-		"Portugese": ""
+		"Portugese": "A energia que você fez alimentou uma escova de dentes elétrica."
 	},
 	"Tip19" : {
 		"English": "You made some radioactive lemons.",
-		"Spanish": "",
+		"Spanish": "Hiciste algunos limones radiactivos.",
 		"Korean": "방사능 레몬을 만드셨군요.",
 		"MSA": "جعلت ببعض الليمون التي إشعاعى النشاط",
-		"Portugese": ""
+		"Portugese": "Você fez alguns limões radioativos. "
 	},
 	"Tip20" : {
 		"English": "You created wormholes allowing interplanetary travel.",
-		"Spanish": "",
+		"Spanish": "Has creado agujeros de gusano que permiten el viaje interplanetario.",
 		"Korean": "이제 웜홀로 행성간 여행이 가능해졌습니다.",
 		"MSA": "خلقت ثقوب الذي يسمح السفر بين الكواكب",
-		"Portugese": ""
+		"Portugese": "Você criou buracos negros permitindo viagem interplanetária."
 	},
 	"Tip21" : {
 		"English": "This game was made by 27 students in one semester.",
-		"Spanish": "",
+		"Spanish": "Este juego fue realizado por 27 estudiantes en un semestre.",
 		"Korean": "이 게임은 27 학생들이 한 학기에 만들었습니다.",
 		"MSA": "هذه اللعبة إنشاء من 27 طالبا في فصل دراسي واحد",
-		"Portugese": ""
+		"Portugese": "Este jogo foi criado por 27 estudantes em um semestre."
 	},
 	"Tip22" : {
 		"English": "This game is open source and available for free.",
-		"Spanish": "",
+		"Spanish": "Este juego es de código abierto y está disponible de forma gratuita.",
 		"Korean": "이 게임은 오픈 소스이며 공짜로 즐기실 수 있습니다.",
 		"MSA": "هذه اللعبة هي المصدر المفتوح و مجانا للاستخدام",
-		"Portugese": ""
+		"Portugese": "Este jogo é código aberto e disponível gratuitamente."
 	},
 	"Tip23" : {
 		"English": "Check out our website, http://projectiona.net.",
-		"Spanish": "",
+		"Spanish": "Visite nuestro sitio web, http://projectiona.net.",
 		"Korean": "웹사이트 확인하기, http://projectiona.net.",
 		"MSA": "ننظر في موقعنا http://projectiona.net.",
-		"Portugese": ""
+		"Portugese": "Confira nosso site, http://projectiona.net."
 	}
 	"Nothing" : {
 		"English": "Nothing",
@@ -478,7 +478,7 @@
 	"TutorialComplete" : {
 		"English": "Tutorial complete! Now let's play the REAL game!",
 		"Spanish": "Tutorial completo! Ahora vamos a jugar el juego REAL!  Juego terminado",
-	    "MSA": " لعبة البرنامج التعليمي كاملة! الآن يمكننا أن نلعب لعبة حقيقية",
+	    "MSA": "لعبة البرنامج التعليمي كاملة! الآن يمكننا أن نلعب لعبة حقيقية",
 		"Korean": "튜토리얼 성공! 이제 좀 진지해져 볼까요?",
 		"Portugese": "Tutorial encerrado! Agora vamos jogar o jogo VERDADEIRO!"
 	} ,
@@ -499,14 +499,14 @@
 	"Yes": {
 		"English": "Yes",
 		"Spanish": "Sí",
-		"Korean": "",
+		"Korean": "예",
 		"MSA": "نعام",
 		"Portugese": "Sim"
 	} ,
 	"Cancel": {
 		"English": "Cancel",
 		"Spanish": "Cancelar",
-		"Korean": "",
+		"Korean": "취소",
 		"MSA": "إلغاء",
 		"Portugese": "Não"
 	},
@@ -533,101 +533,101 @@
 	},
 	"ContactUs": {
 		"English": "CONTACT US",
-		"Spanish": "",
+		"Spanish": "Contáctenos",
 		"Korean": "연락처",
 		"MSA": "اتصل بنا",
-		"Portugese": ""
+		"Portugese": "Contate-Nos"
 	},
 	"Junkyard1": {
 		"English": "One block has a new shape",
-	    "Spanish": "",
+	    "Spanish": "Uno bloques tienen una nueva forma",
 	    "Korean": "한 블럭이 새 모양을 가셨습니다.",
 		"MSA": "كتلة واحدة لديها شكل جديدة",
-		"Portugese": ""
+		"Portugese": "Um bloco tem uma nova forma"
 	},
 	"Junkyard2": {
 		"English": "Two blocks have a new shape",
-	    "Spanish": "",
+	    "Spanish": "Dos bloques tienen una nueva forma",
 	    "Korean": "두 블럭이 새 모양을 가졌습니다.",
 		"MSA": "كتلتين لها شكل جديدة",
-		"Portugese": ""
+		"Portugese": "Dois blocos têm uma nova forma"
 	},
 	"Junkyard3": {
 		"English": "Three blocks have a new shape",
-	    "Spanish": "",
+	    "Spanish": "Tres bloques tienen una nueva forma",
 	    "Korean": "세 블럭이 새 모양을 가졌습니다.",
 		"MSA": "ثلاث كتل لها شكل جديدة",
-		"Portugese": ""
+		"Portugese": "Três blocos têm uma nova forma"
 	},
 	"Asteroids1": {
 		"English": "Three spaces are unusable",
-	    "Spanish": "",
+	    "Spanish": "Tres espacios son inutilizables",
 	    "Korean": "세 공간이 쓸 수 없게 되었습니다.",
 		"MSA": "ثلاث مسافات غير صالحة للاستعمال",
-		"Portugese": ""
+		"Portugese": "Três espaços são inutilizáveis"
 	},
 	"Asteroids2": {
 		"English": "Five spaces are unusable",
-	    "Spanish": "",
+	    "Spanish": "Cinco espacios son inutilizables",
 	    "Korean": "다섯 공간이 쓸 수 없게 되었습니다.",
 		"MSA": "خمسة مسافات غير صالحة للاستعمال",
-		"Portugese": ""
+		"Portugese": "Cinco espaços são inutilizáveis"
 	},
 	"Asteroids3": {
 		"English": "Seven spaces are unusable",
-	    "Spanish": "",
+	    "Spanish": "Siete espacios son inutilizables",
 	    "Korean": "일곱 공간이 쓸 수 없게 되었습니다.",
 		"MSA": "سبعة  مسافات غير صالحة للاستعمال",
-		"Portugese": ""
+		"Portugese": "Sete espaços são inutilizáveis"
 	},
 	"Radiation1": {
 		"English": "Blocks have level 1 Waste",
-	    "Spanish": "",
+	    "Spanish": "Los bloques tienen nivel 1 de desechos",
 	    "Korean": "레벨 1 폐기물이 있습니다.",
 		"MSA": "الكتل لها النفايات في مستوى 1",
-		"Portugese": ""
+		"Portugese": "Os blocos têm resíduos de nível 1"
 	},
 	"Radiation2": {
 		"English": "Blocks have level 2 Waste",
-	    "Spanish": "",
+	    "Spanish": "Los bloques tienen nivel 2 de desechos",
 	    "Korean": "레벨 2 폐기물이 있습니다.",
 		"MSA": "2 الكتل لها النفايات في مستوى",
-		"Portugese": ""
+		"Portugese": "Os blocos têm resíduos de nível 2"
 	},
 	"Radiation3": {
 		"English": "Blocks have level 3 Waste",
-	    "Spanish": "",
+	    "Spanish": "Los bloques tienen nivel 3 de desechos",
 	    "Korean": "레벨 3 폐기물이 있습니다.",
 		"MSA": "3 الكتل لها النفايات في مستوى",
-		"Portugese": ""
+		"Portugese": "Os blocos têm resíduos de nível 3"
 	},
 	"Meltdown1": {
 		"English": "New blocks & unusable spaces",
-	    "Spanish": "",
+	    "Spanish": "Nuevos bloques y espacios inutilizables",
 	    "Korean": "새 블럭 & 쓸 수 없는 공간",
 		"MSA": "كتل جديدة و مساحة غير صالحة للاستعمال",
-		"Portugese": ""
+		"Portugese": "Novos blocos e espaços inutilizáveis"
 	},
 	"Meltdown2": {
 		"English": "Blocks have waste & new blocks",
-	    "Spanish": "",
+	    "Spanish": "Los bloques tienen desperdicio y nuevos bloques",
 	    "Korean": "폐기물이 있습니다 & 새 블럭",
 		"MSA": "الكتل لها نفايات و كتل جديدة",
-		"Portugese": ""
+		"Portugese": "Blocos têm resíduos e blocos novos"
 	},
 	"Meltdown3": {
 		"English": "Unusable spaces & blocks have Waste",
-	    "Spanish": "",
+	    "Spanish": "Espacios y bloques inutilizables tienen desperdicio",
 	    "Korean": "쓸 수 없는 공간 & 폐기물이 있습니다.",
 		"MSA": "مساحة و كتل غير للاستعمال لها النفايات",
-		"Portugese": ""
+		"Portugese": "Espaços e blocos inutilizáveis ​​têm resíduos"
 	},
 	"Overload": {
 		"English": "All events combined",
-	    "Spanish": "",
+	    "Spanish": "Todos los eventos combinados",
 	    "Korean": "모든 이벤트를 합쳐서",
 		"MSA": "كل الأحداث مجتمعة",
-		"Portugese": ""
+		"Portugese": "Todos os eventos combinados"
 	},
 	"Tutorial0": {
 		"English": "Drag green blocks onto the board.",
@@ -694,10 +694,10 @@
 	},
 	"Tutorial9": {
 		"English": "Reactor Meltdown: The reactor is melting down! Be prepared for two events at once.",
-	    "Spanish": "",
+	    "Spanish": "Fusión del reactor: ¡El reactor se está derritiendo! Prepárate para dos eventos a la vez.",
 	    "Korean": "노심 융해: 원자로가 녹고 있습니다! 두 이벤트를 동시에 해결해보세요.",
 		"MSA": "مفاعل الانهيار:  المفاعل ذوبان أسفل، تكون مستعدة الاثنين من الأحداث في نفس الوقت",
-		"Portugese": ""
+		"Portugese": "Melhora do Reator: o reator está derretendo! Esteja preparado para dois eventos ao mesmo tempo."
 	},
 	"Tutorial10": {
 		"English": "Reactor Overload: All the events are occurring at once! This is your final challenge!",
@@ -715,7 +715,7 @@
 	},
 	"Tutorial12": {
 		"English": "Use the blue rotate and red flip buttons to make a 3x3 square using the Waste.",
-	    "Spanish": "",
+	    "Spanish": "Use los botones rotar azul y rojo para hacer un cuadrado de 3x3 usando el desecho.",
 	    "Korean": "파란 회전과 빨간 뒤집기 버튼으로 폐기물로 3x3 사각형을 만들 수 있습니다.",
 		"MSA": "استخدم الزر التدوير الأزرق والزر الوجه الأحمر بخلق 3x3 مربع استخدام النفايات.",
 		"Portugese": "Use o botão de rotação azul e botões vermelhos para fazer um quadrado 3x3 usando o Resíduo."
