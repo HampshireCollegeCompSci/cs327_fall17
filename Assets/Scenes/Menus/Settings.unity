@@ -2999,7 +2999,7 @@ GameObject:
   - component: {fileID: 1759810170}
   - component: {fileID: 1759810173}
   m_Layer: 5
-  m_Name: Language Dropdown
+  m_Name: LanguageDropdown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿// Author(s): Paul Calande, Maia Doerner
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,11 +10,26 @@ public class TranslationKey : MonoBehaviour
     [SerializeField]
     string translationKey;
 
-    UILanguages translator;
+    UILanguages translator = null;
+
+    Text text = null;
 
     void Start()
     {
-        translator = FindObjectOfType<UILanguages>();
-        GetComponent<Text>().text = translator.Translate(translationKey);
+        Translate();
+    }
+
+    public void Translate()
+    {
+        if (text == null)
+        {
+            text = GetComponent<Text>();
+        }
+        if (translator == null)
+        {
+            translator = FindObjectOfType<UILanguages>();
+        }
+
+        text.text = translator.Translate(translationKey);
     }
 }

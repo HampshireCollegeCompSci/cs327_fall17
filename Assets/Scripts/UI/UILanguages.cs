@@ -1,4 +1,5 @@
 ﻿// Author(s): Paul Calande, Maia Doerner
+// Translation and language-tracking script for the Translator singleton object.
 
 using System;
 using System.Collections;
@@ -41,13 +42,13 @@ public class UILanguages : MonoBehaviour
         JSONNode textToTranslate = json[descriptor];
         string translation = textToTranslate[gameLanguage];
         //Debug.Log("descriptor / gameLanguage: " + descriptor + " / " + gameLanguage);
+        /*
 		if (gameLanguage == "Polish" || gameLanguage == "Romanian" || gameLanguage == "Slovenian") 
 		{
-			/*
 			textMesh.font = fontBackUp;
 			textMesh.renderer.sharedMaterial = ArialFont.material;
-			*/
 		}
+        */
 		return translation;
     }
 
@@ -55,6 +56,13 @@ public class UILanguages : MonoBehaviour
     {
         gameLanguage = language;
         PlayerPrefs.SetString("Language", gameLanguage);
+
+        // Update the text meshes in the scene.
+        TranslationKey[] keys = FindObjectsOfType<TranslationKey>();
+        foreach (TranslationKey key in keys)
+        {
+            key.Translate();
+        }
     }
 	/*
 	public bool IsLanguageThatNeedsNewFont () {
