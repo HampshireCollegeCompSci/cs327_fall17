@@ -214,7 +214,7 @@ public class UIGameOver : MonoBehaviour
         //textGameOverLabel.text = translator.Translate("GameOver");
         //textHighScoreLabel.text = translator.Translate("HighScore1");
         //textYourScoreLabel.text = translator.Translate("YourScore");
-        textYouReached.text = "YOU REACHED:\n" + voidEventController.GetLatestEventName();
+		textYouReached.text = translator.Translate("YOUREACHED") + voidEventController.GetLatestEventName();
 		/*
 		if (translator.IsLanguageThatNeedsNewFont == true) {
 			textGameOverReason.trueTypeFont = translator.Font ();

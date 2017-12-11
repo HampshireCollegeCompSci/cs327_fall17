@@ -28,6 +28,7 @@
 	    "Polish": "Przyczyna: Nie masz energii!",
 	    "Swedish": "Anledning: slut pånergi!",
 		"Korean": "이유: 에너지 고갈!",
+		"MSA": "السبب: ليس هناك الطاقة",
 		"Portugese": "Sem energia!"
 	  },
 	  "ReasonHesitation": {
@@ -43,6 +44,7 @@
 	    "Polish": "Przyczyna: Za długo czekałeś!",
 	    "Swedish": "Anledning: du tvekade fö läge!",
 		"Korean": "이유: 너무 오래 망설였음!",
+		"MSA": "السبب: انتظرت وقتا طويل",
 		"Portugese": "Você hesitou por muito tempo!"
 	  },
 	  "ReasonNoSpaceLeft": {
@@ -58,6 +60,7 @@
 	    "Polish": "Przyczyna: Koniec miejsca!",
 	    "Swedish": "Anledning: Ingen plats kvar!",
 		"Korean": "이유: 공간 부족!",
+		"MSA": "السبب:لا مساحة المتبقية",
 		"Portugese": "Não há mais espaço!"
 	  },
 	  "ReasonManualReset": {
@@ -73,6 +76,7 @@
 	    "Polish": "Przyczyna: Reset ręczny!",
 	    "Swedish": "Anledning: Manuell reset!",
 		"Korean": "이유: 수동 복귀!",
+		"MSA": "السبب: دليل إعادة تعيين",
 		"Portugese": "Reinicialização manual!"
 	  },
 	  "HowToPlay": {
@@ -196,11 +200,11 @@
 		"Portugese": "Jogar de Novo"
 	} ,
 	"You Reached": {
-		"English": "You Reached",
-		"Spanish": "Alcanzaste",
-		"Korean": "도달",
-		"MSA": "أنت وصلت",
-		"Portugese": "Você Alcançou"
+		"English": "You Reached: ",
+		"Spanish": "Alcanzaste: ",
+		"Korean": "도달: ",
+		"MSA": "أنت وصلت: ",
+		"Portugese": "Você Alcançou: "
 	} ,
 	"CRISIS AVERTED: REACTOR RESTORED": {
 		"English": "CRISIS AVERTED: REACTOR RESTORED",
@@ -429,8 +433,8 @@
 	"YOUREACHED" : {
 		"English": "YOU REACHED: ",
 		"Spanish": "Alcanzaste: ",
-		"Korean": "도달",
-		"MSA": "أنت وصلت",
+		"Korean": "도달: ",
+		"MSA": "أنت وصلت: ",
 		"Portugese": "VOCÊ ALCANÇOU: "
 	} , 
 	"CS327": {
