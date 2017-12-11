@@ -142,15 +142,6 @@
 	  "Resume" : {
 		"English": "Resume",
 		"Spanish": "Continua",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "이어서",
 		"MSA": "استنناف اللعب",
 		"Portugese": "Continuar"
@@ -158,31 +149,13 @@
 	"HighScore1": {
 		"English": "High Score",
 	    "Spanish": "Puntuación Alta",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
+		"Korean": "",
 		"MSA": "درجة عالية",
 		"Portugese": "Pontuação Máxima"
 	} ,
 	"Score": {
 		"English": "Score: ",
 	    "Spanish": "Puntuación: ",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "스코어 ",
 		"MSA": "درجتك ",
 		"Portugese": "Pontuação: "
@@ -190,15 +163,6 @@
 	"YourScore" : {
 		"English": "SQUARES CLEARED",
 	    "Spanish": "Tu Puntuación",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "내 스코어",
 		"MSA": "درجتك",
 		"Portugese": "Sua Pontuação"
@@ -206,15 +170,6 @@
 	"HighScore" : {
 		"English": "MOST SQUARES CLEARED",
 	    "Spanish": "Puntuación Alta",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "최고 스코어",
 		"MSA": "درجة عالية",
 		"Portugese": "Pontuação Máxima"
@@ -222,31 +177,13 @@
 	"Settings": {
 		"English": "Settings",
 		"Spanish": "Adjustes",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "옵션",
 		"MSA": "إعدادات",
 		"Portugese": "Configurações"
 	} ,
 	"SelectLanguage": {
 		"English": "Select Language:",
-		"Spanish": "Selecciona el idioma:",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
+		"Spanish": "Selecciona el idioma",
 		"Korean": "언어 선택",
 		"MSA": "اختر لغة",
 		"Portugese": "Selecione Idioma:"
@@ -254,31 +191,13 @@
 	"StartOver": {
 		"English": "Start Over",
 		"Spanish": "Juega de nuevo",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "재시작",
 		"MSA": "لعب مرة أخرى",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Jogar de Novo"
 	} ,
 	"You Reached": {
 		"English": "You Reached",
 		"Spanish": "Alcanzaste",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "도달",
 		"MSA": "أنت وصلت",
 		"Portugese": "Você Alcançou"
@@ -286,15 +205,6 @@
 	"CRISIS AVERTED: REACTOR RESTORED": {
 		"English": "CRISIS AVERTED: REACTOR RESTORED",
 		"Spanish": "Crisis evitada: Reactor Restaurado",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "위기 모면: 원자로 복원",
 		"MSA": "تجنب الأزمة : استعادة المفاعل",
 		"Portugese": "CRISE EVITADA: REATOR RESTAURADO"
@@ -302,15 +212,6 @@
 	"PauseMenu": {
 		"English": "Pause Menu",
 	    "Spanish": "Pausa menú",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "정지 메뉴",
 		"MSA": "وقفة قاءمة",
 		"Portugese": "Menu de Pausa"
@@ -319,56 +220,56 @@
 		"English": "Try making overlapping squares.",
 		"Spanish": "",
 		"Korean": "겹치는 사각형을 만들어보십시오.",
-		"MSA": "",
+		"MSA": "حاول أن خلق مربعات متداخلة ",
 		"Portugese": "Tente fazer quadrados sobrepostos."
 	},
 	"Tip2" : {
 		"English": "Try making squares in the corner of the board to save space.",
 		"Spanish": "",
 		"Korean": "사각형을 보드의 구석에 만들어서 공간을 아껴보세요.",
-		"MSA": "",
+		"MSA": "حاول أن خلق مربعات في ركن اللوحة لتوفير المساحة",
 		"Portugese": "Tente começar a fazer quadrados no canto do tabuleiro para salvar espaço"
 	},
 	"Tip3" : {
 		"English": "Try to avoid making squares that generate Waste.",
 		"Spanish": "",
 		"Korean": "폐기물을 만드는 사각형은 피하세요.",
-		"MSA": "",
+		"MSA": "حاول تجنب الخلق مربعات التي توليد النفايات",
 		"Portugese": "Tente evitar fazer quadrados que geram desperdício."
 	},
 	"Tip4" : {
 		"English": "Try and set up squares before events to get through them faster.",
 		"Spanish": "",
 		"Korean": "이벤트를 빨리 끝내려면 미리 사각형들을 셋팅해보세요.",
-		"MSA": "",
+		"MSA": "حاول أن نصب مربعات قبل أحداث لإكمالها بسرعة",
 		"Portugese": "Tente e configure quadrados antes de eventos para passar por eles mais rápido."
 	},
 	"Tip5" : {
 		"English": "Bigger squares are better! Making overlapping squares is more efficient.",
 		"Spanish": "",
 		"Korean": "큰 사각형들이 더 낫고 겹치는 사각형들은 더 효율적입니다.",
-		"MSA": "",
+		"MSA": "أكبر مربعات هى أحسن! خلق المربعات المتداخلة هي أكثر كفاءة",
 		"Portugese": "Quadrados maiores são melhores! Fazer quadrados sobrepostos é mais eficiente."
 	},
 	"Tip6" : {
 		"English": "Use Waste to make squares before it gets out of control.",
 		"Spanish": "",
 		"Korean": "넘치기 전에 폐기물로 사각형을 만드세요.",
-		"MSA": "",
+		"MSA": "يستخدم النفايات لخلق مربعات قبل أن يخرج عن نطاق السيترة",
 		"Portugese": "Use Resíduos para fazer quadrados antes que ele fique fora de controle."
 	},
 	"Tip7" : {
 		"English": "Don’t forget you can rotate and flip blocks.",
 		"Spanish": "",
 		"Korean": "블럭을 회전하고 뒤집을 수 있는 걸 잊지 마세요.",
-		"MSA": "",
+		"MSA": "لا ننسى يمكنك تدوير والوجه كتل",
 		"Portugese": "Não se esqueça de que você pode girar e virar blocos."
 	},
 	"Tip8" : {
 		"English": "The Pause menu shows your available blocks.",
 		"Spanish": "",
 		"Korean": "정지 메뉴는 가능한 블럭들을 보여줍니다.",
-		"MSA": "",
+		"MSA": "تحقق الوقة القاءمة لترى كل الكتل متاح لك",
 		"Portugese": "O menu de pausa mostra seus blocos disponíveis."
 	},
 	"Tip9" : {
@@ -382,113 +283,103 @@
 		"English": "The events get harder later in the game.",
 		"Spanish": "",
 		"Korean": "게임이 진행될수록 이벤트들이 어려워집니다.",
-		"MSA": "",
+		"MSA": "الأحداث التي تواجهها تصبح أصعب عندما تذهب أكثر في اللعبة.",
 		"Portugese": "Os eventos ficam mais difíceis mais tarde no jogo. "
 	},
 	"Tip11" : {
 		"English": "During the Unrefined Uranium event, look in the Pause menu to see your blocks.",
 		"Spanish": "",
 		"Korean": "우라늄 원석 이벤트 동안에는 정지 메뉴에서 자신의 블럭들을 봐주세요.",
-		"MSA": "",
+		"MSA": "خلال حدث 'يورانيوم غير المكرر،' ة في وقفة القاءمة لترى كتلك",
 		"Portugese": "Durante o evento do Urânio Não-Refinado, tente combinar os novos blocos um com o outro."
 	},
 	"Tip12" : {
 		"English": "If you get far enough, multiple events can happen at the same time.",
 		"Spanish": "",
 		"Korean": "특정 구간에선 여러 이벤트가 한 번에 일어납니다.",
-		"MSA": "",
+		"MSA": "إذا يذهب لفترة كافية، يمكن أن يحدث أحداث متعددة في نفس الوقت",
 		"Portugese": "Se você chegar longe suficiente, múltiplos eventos podem ocorrer ao mesmo tempo."
 	},
 	"Tip13" : {
 		"English": "Carefully watch your energy level in the reactor.",
 		"Spanish": "",
 		"Korean": "원자로의 에너지 레벨을 주의해주세요.",
-		"MSA": "",
+		"MSA": "في المفاعل، انتبه إلى مستوى الطاقة",
 		"Portugese": "Observe cuidadosamente seu nível de energia no reator."
 	},
 	"Tip14" : {
 		"English": "Events can be scary, but keep your cool, there’s no rush!",
 		"Spanish": "",
 		"Korean": "이벤트들이 무서울 수도 있겠지만 진정하시고 천천히 풀어가 보세요.",
-		"MSA": "",
+		"MSA": "يمكن أن تكون الأحداث مخيفة ولكن انتقل ببطء.",
 		"Portugese": "Eventos podem ser assustadores, mas mantenha sua calma, não há pressa!"
 	},
 	"Tip15" : {
 		"English": "Congratulations, you burnt the coffee.",
 		"Spanish": "",
 		"Korean": "축하드립니다. 이 커피는 다 탔군요.",
-		"MSA": "",
+		"MSA": "مبروك! أحرقت القهوة",
 		"Portugese": "Parabéns, você queimou o café."
 	},
 	"Tip16" : {
 		"English": "You ripped a hole in space-time.",
 		"Spanish": "",
 		"Korean": "우주에 구멍을 냈습니다.",
-		"MSA": "",
+		"MSA": "كنت ممزق حفرة في الزمكان",
 		"Portugese": "Você rasgou um buraco em espaço-tempo."
 	},
 	"Tip17" : {
 		"English": "You tripped over the power cord.",
 		"Spanish": "",
 		"Korean": "전원 코드에 걸려 넘어졌습니다.",
-		"MSA": "",
+		"MSA": "تعثرت على سلك الطاقة",
 		"Portugese": "Você tropeçou no cabo de energia."
 	},
 	"Tip18" : {
 		"English": "The energy you made powered an electric toothbrush.",
 		"Spanish": "",
 		"Korean": "당신이 만든 에너지가 전동 칫솔을 작동시켰군요.",
-		"MSA": "",
+		"MSA": "الطاقة التي خلقت شحنت فرشاة أسنان كهرباءية",
 		"Portugese": "A energia que você fez alimentou uma escova de dentes elétrica."
 	},
 	"Tip19" : {
 		"English": "You made some radioactive lemons.",
 		"Spanish": "",
 		"Korean": "방사능 레몬을 만드셨군요.",
-		"MSA": "",
+		"MSA": "جعلت ببعض الليمون التي إشعاعى النشاط",
 		"Portugese": "Você fez alguns limões radioativos. "
 	},
 	"Tip20" : {
 		"English": "You created wormholes allowing interplanetary travel.",
 		"Spanish": "",
 		"Korean": "이제 웜홀로 행성간 여행이 가능해졌습니다.",
-		"MSA": "",
+		"MSA": "خلقت ثقوب الذي يسمح السفر بين الكواكب",
 		"Portugese": "Você criou buracos negros permitindo viagem interplanetária."
 	},
 	"Tip21" : {
 		"English": "This game was made by 27 students in one semester.",
 		"Spanish": "",
 		"Korean": "이 게임은 27 학생들이 한 학기에 만들었습니다.",
-		"MSA": "",
+		"MSA": "هذه اللعبة إنشاء من 27 طالبا في فصل دراسي واحد",
 		"Portugese": "Este jogo foi criado por 27 estudantes em um semestre."
 	},
 	"Tip22" : {
 		"English": "This game is open source and available for free.",
 		"Spanish": "",
 		"Korean": "이 게임은 오픈 소스이며 공짜로 즐기실 수 있습니다.",
-		"MSA": "",
+		"MSA": "هذه اللعبة هي المصدر المفتوح و مجانا للاستخدام",
 		"Portugese": "Este jogo é código aberto e disponível gratuitamente."
 	},
 	"Tip23" : {
 		"English": "Check out our website, http://projectiona.net.",
 		"Spanish": "",
 		"Korean": "웹사이트 확인하기, http://projectiona.net.",
-		"MSA": "",
-		"Portugese": "Confira nosso site, http://projectiona.net. 
-"
+		"MSA": "ننظر في موقعنا http://projectiona.net.",
+		"Portugese": "Confira nosso site, http://projectiona.net."
 	}
 	"Nothing" : {
 		"English": "Nothing",
 		"Spanish": "Nada",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "무",
 		"MSA": "لا شىئ",
 		"Portugese": "Nada"
@@ -496,15 +387,6 @@
 	"Unrefined Uranium" : {
 		"English": "Unrefined Uranium",
 		"Spanish": "Uranio sin reginar",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "우라늄 원석",
 		"MSA": "اليورانيوم  غير المكرر",
 		"Portugese": "Uranium Nã Refinado"
@@ -512,15 +394,6 @@
 	"Waste Contamination": {
 		"English": "Waste Contamination",
 		"Spanish": "Contaminación de residuos",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "폐기물 오염",
 		"MSA": "ثلوث النفايات",
 		"Portugese": "Contaminaçã de Resíuos"
@@ -528,15 +401,6 @@
 	"Reactor Breach": {
 		"English": "Reactor Breach",
 		"Spanish": "Brecha del reactor",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "원자로 균열",
 		"MSA": "خرق المفاعل",
 		"Portugese": "Violação de Reator"
@@ -544,15 +408,6 @@
 	"Reactor Meltdown": {
 		"English": "Reactor Meltdown",
 		"Spanish": "Fusión del reactor",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "노심 융해",
 		"MSA": "مفاعل الانهيار",
 		"Portugese": "Fusão do Reator"
@@ -560,15 +415,6 @@
 	"Reactor Overload": {
 		"English": "Reactor Overload",
 		"Spanish": "Sobrecarga del reactor",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "원자로 폭주",
 		"MSA": "مفاعل الزاءد",
 		"Portugese": "Sobrecarga do Reator"
@@ -576,15 +422,6 @@
 	" begin!": {
 		"English": " begin!",
 		"Spanish": " comienza",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "시작",
 		"MSA" : "ابدأ!",
 		"Portugese": " começar"
@@ -592,15 +429,6 @@
 	"YOUREACHED" : {
 		"English": "YOU REACHED: ",
 		"Spanish": "Alcanzaste: ",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "도달",
 		"MSA": "أنت وصلت",
 		"Portugese": "VOCÊ ALCANÇOU: "
@@ -608,15 +436,6 @@
 	"CS327": {
 		"English": "This game was created by Hampshire College class CS-327 during the fall of 2017.",
 		"Spanish": "Este juego fue creado por Hampshire College en la clase CS327en el otoño de 2017",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "이 게임은 햄프셔 대학 CS-327 학생들이 2017년 가을에 만들었습니다.",
 		"MSA": "هذه اللعبة خلقت من صف CS-327 في كلية هامبشور في فصل الخريف سنة 2017",
 		"Portugese": "Este jogo foi criado pela clase CS-327 do Hampshire College durante o outono de 2017."
@@ -624,15 +443,6 @@
 	"Website": {
 		"English": "Check out our website",
 		"Spanish": "Mira nuestra página de web",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "홈페이지를 둘러봐주세요",
 		"MSA": "ننظر في موقعنا",
 		"Portugese": "Confira nosso site"
@@ -640,15 +450,6 @@
 	"Music" : {
 		"English": "Music",
 		"Spanish": "Música",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "뮤직",
 		"MSA": "الموسيقى",
 		"Portugese": "Música"
@@ -656,15 +457,6 @@
 	"SFX" : {
 		"English": "SFX",
 		"Spanish": "Efectos especiales",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "사운드 이펙트",
 		"MSA": "مؤثرات خاصة",
 		"Portugese": "Efeitos Especiais"
@@ -672,15 +464,6 @@
 	"YouWin" : {
 		"English": "YOU WIN!",
 		"Spanish": "Ganaste!",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "승리!",
 		"MSA": "فزت!",
 		"Portugese": "VOCÊ GANHOU!"
@@ -688,45 +471,20 @@
 	"Continue" : {
 		"English": "Continue",
 		"Spanish": "Continua",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
+		"MSA": "استمرار",
 		"Korean": "이어서",
 		"Portugese": "Continuar"
 	} ,
 	"TutorialComplete" : {
 		"English": "Tutorial complete! Now let's play the REAL game!",
 		"Spanish": "Tutorial completo! Ahora vamos a jugar el juego REAL!  Juego terminado",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
+	    "MSA": " لعبة البرنامج التعليمي كاملة! الآن يمكننا أن نلعب لعبة حقيقية",
 		"Korean": "튜토리얼 성공! 이제 좀 진지해져 볼까요?",
 		"Portugese": "Tutorial encerrado! Agora vamos jogar o jogo VERDADEIRO!"
 	} ,
 	"OK" : {
 		"English": "Okay",
 		"Spanish": "Sí",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "좋아",
 		"MSA": "نعام",
 		"Portugese": "Sim"
@@ -734,15 +492,6 @@
 	"LoseProgress": {
 		"English": "You will lose all progress on your current game. Are you sure?",
 		"Spanish": "Perderás todo el progreso en el juego actual. ¿Estás seguro?",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "현 게임의 모든 기록이 사라집니다. 계속하시겠습니까?",
 		"MSA": "سوف تفقد كل التقدم على اللعبة الحالية. هل انت واثق؟",
 		"Portugese": "Você vai perder todo o progresso no seu jogo atual. Você tem certeza?"
@@ -750,77 +499,34 @@
 	"Yes": {
 		"English": "Yes",
 		"Spanish": "Sí",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
+		"Korean": "",
 		"MSA": "نعام",
 		"Portugese": "Sim"
 	} ,
 	"Cancel": {
 		"English": "Cancel",
 		"Spanish": "Cancelar",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
-		"Korean": "PlaceholderKorean",
-		"MSA": "",
+		"Korean": "",
+		"MSA": "إلغاء",
 		"Portugese": "Não"
 	},
 	"Restart": {
 		"English": "Restart",
 		"Spanish": "Juega de nuevo",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
+		"MSA": "إعادة بدء",
 		"Korean": "재시작",
 		"Portugese": "Jogar de novo"
 	},
 	"TapContinue": {
 	    "English": "(Tap to Continue)",
 	    "Spanish": "(Pulsa para continuar)",
-	    "French": "(Tap to Continue)",
-	    "Slovenian": "(Tap to Continue)",
-	    "Romanian": "(Tap to Continue)",
-	    "German": "(Tap to Continue)",
-	    "Luxembourgish": "(Tap to Continue)",
-	    "Dutch": "(Tap to Continue)",
-	    "Danish": "(Tap to Continue)",
-	    "Polish": "(Tap to Continue)",
-	    "Swedish": "(Tap to Continue)",
+		"MSA": "(لمس الاستمرار)",
 	    "Korean": "(넘어가기)",
 		"Portugese": "(Pressione para Continuar)"
 	},
 	"PossibleBlocks": {
 		"English": "Possible Blocks",
 		"Spanish": "Bloques posibles",
-	    "French": "PlaceholderFrench",
-	    "Slovenian": "PlaceholderSlovenian",
-	    "Romanian": "PlacehoderRomanian",
-	    "German": "PlaceholderGerman",
-	    "Luxembourgish": "PlaceholderLuxembourgish",
-	    "Dutch": "PlaceholderDutch",
-	    "Danish": "PlaceholderDanish",
-	    "Polish": "PlaceholderPolish",
-	    "Swedish": "PlaceholderSwedish",
 		"Korean": "가능한 블록들",
 		"MSA": "كتل الممكنة",
 		"Portugese": "Possível Blocos"
@@ -829,98 +535,98 @@
 		"English": "CONTACT US",
 		"Spanish": "",
 		"Korean": "연락처",
-		"MSA": "",
+		"MSA": "اتصل بنا",
 		"Portugese": ""
 	},
 	"Junkyard1": {
 		"English": "One block has a new shape",
 	    "Spanish": "",
 	    "Korean": "한 블럭이 새 모양을 가셨습니다.",
-		"MSA": "",
+		"MSA": "كتلة واحدة لديها شكل جديدة",
 		"Portugese": ""
 	},
 	"Junkyard2": {
 		"English": "Two blocks have a new shape",
 	    "Spanish": "",
 	    "Korean": "두 블럭이 새 모양을 가졌습니다.",
-		"MSA": "",
+		"MSA": "كتلتين لها شكل جديدة",
 		"Portugese": ""
 	},
 	"Junkyard3": {
 		"English": "Three blocks have a new shape",
 	    "Spanish": "",
 	    "Korean": "세 블럭이 새 모양을 가졌습니다.",
-		"MSA": "",
+		"MSA": "ثلاث كتل لها شكل جديدة",
 		"Portugese": ""
 	},
 	"Asteroids1": {
 		"English": "Three spaces are unusable",
 	    "Spanish": "",
 	    "Korean": "세 공간이 쓸 수 없게 되었습니다.",
-		"MSA": "",
+		"MSA": "ثلاث مسافات غير صالحة للاستعمال",
 		"Portugese": ""
 	},
 	"Asteroids2": {
 		"English": "Five spaces are unusable",
 	    "Spanish": "",
 	    "Korean": "다섯 공간이 쓸 수 없게 되었습니다.",
-		"MSA": "",
+		"MSA": "خمسة مسافات غير صالحة للاستعمال",
 		"Portugese": ""
 	},
 	"Asteroids3": {
 		"English": "Seven spaces are unusable",
 	    "Spanish": "",
 	    "Korean": "일곱 공간이 쓸 수 없게 되었습니다.",
-		"MSA": "",
+		"MSA": "سبعة  مسافات غير صالحة للاستعمال",
 		"Portugese": ""
 	},
 	"Radiation1": {
 		"English": "Blocks have level 1 Waste",
 	    "Spanish": "",
 	    "Korean": "레벨 1 폐기물이 있습니다.",
-		"MSA": "",
+		"MSA": "الكتل لها النفايات في مستوى 1",
 		"Portugese": ""
 	},
 	"Radiation2": {
 		"English": "Blocks have level 2 Waste",
 	    "Spanish": "",
 	    "Korean": "레벨 2 폐기물이 있습니다.",
-		"MSA": "",
+		"MSA": "2 الكتل لها النفايات في مستوى",
 		"Portugese": ""
 	},
 	"Radiation3": {
 		"English": "Blocks have level 3 Waste",
 	    "Spanish": "",
 	    "Korean": "레벨 3 폐기물이 있습니다.",
-		"MSA": "",
+		"MSA": "3 الكتل لها النفايات في مستوى",
 		"Portugese": ""
 	},
 	"Meltdown1": {
 		"English": "New blocks & unusable spaces",
 	    "Spanish": "",
 	    "Korean": "새 블럭 & 쓸 수 없는 공간",
-		"MSA": "",
+		"MSA": "كتل جديدة و مساحة غير صالحة للاستعمال",
 		"Portugese": ""
 	},
 	"Meltdown2": {
 		"English": "Blocks have waste & new blocks",
 	    "Spanish": "",
 	    "Korean": "폐기물이 있습니다 & 새 블럭",
-		"MSA": "",
+		"MSA": "الكتل لها نفايات و كتل جديدة",
 		"Portugese": ""
 	},
 	"Meltdown3": {
 		"English": "Unusable spaces & blocks have Waste",
 	    "Spanish": "",
 	    "Korean": "쓸 수 없는 공간 & 폐기물이 있습니다.",
-		"MSA": "",
+		"MSA": "مساحة و كتل غير للاستعمال لها النفايات",
 		"Portugese": ""
 	},
 	"Overload": {
 		"English": "All events combined",
 	    "Spanish": "",
 	    "Korean": "모든 이벤트를 합쳐서",
-		"MSA": "",
+		"MSA": "كل الأحداث مجتمعة",
 		"Portugese": ""
 	},
 	"Tutorial0": {
@@ -990,7 +696,7 @@
 		"English": "Reactor Meltdown: The reactor is melting down! Be prepared for two events at once.",
 	    "Spanish": "",
 	    "Korean": "노심 융해: 원자로가 녹고 있습니다! 두 이벤트를 동시에 해결해보세요.",
-		"MSA": "",
+		"MSA": "مفاعل الانهيار:  المفاعل ذوبان أسفل، تكون مستعدة الاثنين من الأحداث في نفس الوقت",
 		"Portugese": ""
 	},
 	"Tutorial10": {
