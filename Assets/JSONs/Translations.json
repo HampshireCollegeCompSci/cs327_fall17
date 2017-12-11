@@ -645,8 +645,8 @@
 	},
 	"Tutorial2": {
 		"English": "Individual blocks adjacent to cleared squares become Waste.",
-	    "Spanish": "Bloques individuales adyacente a bloques claros se convertirán en residuo una (1) energía por movimiento",
-	    "Korean": "정리된 사각형 주위에 있는 블록들은 폐기물이 됩니다. 그리고 이 블록들은 움직일 때마다 에너지를 소비합니다.",
+	    "Spanish": "Bloques individuales adyacente alos bloques claros se convertiran en residuo.",
+	    "Korean": "정리된 사각형 주위에 있는 블록들은 폐기물이 됩니다.",
 		"MSA": "كتل فردية بجانب المربعات مسح تصبح النفايات، استنزاف ١ طاقة لكل خطوة.",
 		"Portugese": "Blocos individuais ao lade de quadrados limpos tornan-se Resíduo."
 	},
