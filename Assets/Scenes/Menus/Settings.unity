@@ -1583,8 +1583,6 @@ GameObject:
   - component: {fileID: 809385317}
   - component: {fileID: 809385316}
   - component: {fileID: 809385319}
-  - component: {fileID: 809385321}
-  - component: {fileID: 809385320}
   m_Layer: 5
   m_Name: ButtonContactUs
   m_TagString: Untagged
@@ -1708,30 +1706,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   email: cs327feedback@lists.hampshire.edu
---- !u!114 &809385320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 809385314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f25ce2338d78248b2b14db2c3e80e895, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  translationKey: ContactUs
---- !u!114 &809385321
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 809385314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f806d983a5d8c46da8a89203452df60e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FallbackFont: {fileID: 12800000, guid: 3ac6750a27b694c3d90e23f4c985abd0, type: 3}
 --- !u!1001 &812095217
 Prefab:
   m_ObjectHideFlags: 0
