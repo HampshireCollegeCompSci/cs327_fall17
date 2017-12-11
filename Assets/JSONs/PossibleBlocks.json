@@ -11,6 +11,7 @@
 		},
 		{
 			"name" : "tutorial 2",
+			"trigger when forming square" : "TUTORIAL_BAG_TRIGGER_1",
 			"preconditions" :
 			{
 				"tutorial is active" : true,
@@ -19,7 +20,7 @@
 		},
 		{
 			"name" : "tutorial 3",
-			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_1",
+			"trigger when forming square" : "FIRST_WASTE",
 			"preconditions" :
 			{
 				"tutorial is active" : true,
@@ -37,7 +38,7 @@
 		},
 		{
 			"name" : "tutorial 5",
-			"trigger when starting" : "TUTORIAL_BAG_TRIGGER_3",
+			"trigger when forming square" : "TUTORIAL_BAG_TRIGGER_3",
 			"preconditions" :
 			{
 				"tutorial is active" : true,

@@ -186,7 +186,7 @@
 		"Spanish": "Selecciona el idioma",
 		"Korean": "언어 선택",
 		"MSA": "اختر لغة",
-		"Portugese": "Selecione Idioma"
+		"Portugese": "Selecione Idioma:"
 	} ,
 	"StartOver": {
 		"English": "Start Over",
@@ -200,7 +200,7 @@
 		"Spanish": "Alcanzaste",
 		"Korean": "도달",
 		"MSA": "أنت وصلت",
-		"Portugese": "Vocêlcançu"
+		"Portugese": "Você Alcançou"
 	} ,
 	"CRISIS AVERTED: REACTOR RESTORED": {
 		"English": "CRISIS AVERTED: REACTOR RESTORED",
@@ -221,161 +221,161 @@
 		"Spanish": "",
 		"Korean": "겹치는 사각형을 만들어보십시오.",
 		"MSA": "حاول أن خلق مربعات متداخلة ",
-		"Portugese": ""
+		"Portugese": "Tente fazer quadrados sobrepostos."
 	},
 	"Tip2" : {
 		"English": "Try making squares in the corner of the board to save space.",
 		"Spanish": "",
 		"Korean": "사각형을 보드의 구석에 만들어서 공간을 아껴보세요.",
 		"MSA": "حاول أن خلق مربعات في ركن اللوحة لتوفير المساحة",
-		"Portugese": ""
+		"Portugese": "Tente começar a fazer quadrados no canto do tabuleiro para salvar espaço"
 	},
 	"Tip3" : {
 		"English": "Try to avoid making squares that generate Waste.",
 		"Spanish": "",
 		"Korean": "폐기물을 만드는 사각형은 피하세요.",
 		"MSA": "حاول تجنب الخلق مربعات التي توليد النفايات",
-		"Portugese": ""
+		"Portugese": "Tente evitar fazer quadrados que geram desperdício."
 	},
 	"Tip4" : {
 		"English": "Try and set up squares before events to get through them faster.",
 		"Spanish": "",
 		"Korean": "이벤트를 빨리 끝내려면 미리 사각형들을 셋팅해보세요.",
 		"MSA": "حاول أن نصب مربعات قبل أحداث لإكمالها بسرعة",
-		"Portugese": ""
+		"Portugese": "Tente e configure quadrados antes de eventos para passar por eles mais rápido."
 	},
 	"Tip5" : {
 		"English": "Bigger squares are better! Making overlapping squares is more efficient.",
 		"Spanish": "",
 		"Korean": "큰 사각형들이 더 낫고 겹치는 사각형들은 더 효율적입니다.",
 		"MSA": "أكبر مربعات هى أحسن! خلق المربعات المتداخلة هي أكثر كفاءة",
-		"Portugese": ""
+		"Portugese": "Quadrados maiores são melhores! Fazer quadrados sobrepostos é mais eficiente."
 	},
 	"Tip6" : {
 		"English": "Use Waste to make squares before it gets out of control.",
 		"Spanish": "",
 		"Korean": "넘치기 전에 폐기물로 사각형을 만드세요.",
 		"MSA": "يستخدم النفايات لخلق مربعات قبل أن يخرج عن نطاق السيترة",
-		"Portugese": ""
+		"Portugese": "Use Resíduos para fazer quadrados antes que ele fique fora de controle."
 	},
 	"Tip7" : {
 		"English": "Don’t forget you can rotate and flip blocks.",
 		"Spanish": "",
 		"Korean": "블럭을 회전하고 뒤집을 수 있는 걸 잊지 마세요.",
 		"MSA": "لا ننسى يمكنك تدوير والوجه كتل",
-		"Portugese": ""
+		"Portugese": "Não se esqueça de que você pode girar e virar blocos."
 	},
 	"Tip8" : {
 		"English": "The Pause menu shows your available blocks.",
 		"Spanish": "",
 		"Korean": "정지 메뉴는 가능한 블럭들을 보여줍니다.",
 		"MSA": "تحقق الوقة القاءمة لترى كل الكتل متاح لك",
-		"Portugese": ""
+		"Portugese": "O menu de pausa mostra seus blocos disponíveis."
 	},
 	"Tip9" : {
 		"English": "If you make a square, you won't lose any energy from Waste that turn.",
 		"Spanish": "",
 		"Korean": "사각형을 만들면 그 턴에서 폐기물에게 에너지를 빼앗기지 않습니다.",
 		"MSA": "",
-		"Portugese": ""
+		"Portugese": "Se você fizer um quadrado, você não perderá energia de Resíduos naquela rodada."
 	},
 	"Tip10" : {
 		"English": "The events get harder later in the game.",
 		"Spanish": "",
 		"Korean": "게임이 진행될수록 이벤트들이 어려워집니다.",
 		"MSA": "الأحداث التي تواجهها تصبح أصعب عندما تذهب أكثر في اللعبة.",
-		"Portugese": ""
+		"Portugese": "Os eventos ficam mais difíceis mais tarde no jogo. "
 	},
 	"Tip11" : {
 		"English": "During the Unrefined Uranium event, look in the Pause menu to see your blocks.",
 		"Spanish": "",
 		"Korean": "우라늄 원석 이벤트 동안에는 정지 메뉴에서 자신의 블럭들을 봐주세요.",
 		"MSA": "خلال حدث 'يورانيوم غير المكرر،' ة في وقفة القاءمة لترى كتلك",
-		"Portugese": ""
+		"Portugese": "Durante o evento do Urânio Não-Refinado, tente combinar os novos blocos um com o outro."
 	},
 	"Tip12" : {
 		"English": "If you get far enough, multiple events can happen at the same time.",
 		"Spanish": "",
 		"Korean": "특정 구간에선 여러 이벤트가 한 번에 일어납니다.",
 		"MSA": "إذا يذهب لفترة كافية، يمكن أن يحدث أحداث متعددة في نفس الوقت",
-		"Portugese": ""
+		"Portugese": "Se você chegar longe suficiente, múltiplos eventos podem ocorrer ao mesmo tempo."
 	},
 	"Tip13" : {
 		"English": "Carefully watch your energy level in the reactor.",
 		"Spanish": "",
 		"Korean": "원자로의 에너지 레벨을 주의해주세요.",
 		"MSA": "في المفاعل، انتبه إلى مستوى الطاقة",
-		"Portugese": ""
+		"Portugese": "Observe cuidadosamente seu nível de energia no reator."
 	},
 	"Tip14" : {
 		"English": "Events can be scary, but keep your cool, there’s no rush!",
 		"Spanish": "",
 		"Korean": "이벤트들이 무서울 수도 있겠지만 진정하시고 천천히 풀어가 보세요.",
 		"MSA": "يمكن أن تكون الأحداث مخيفة ولكن انتقل ببطء.",
-		"Portugese": ""
+		"Portugese": "Eventos podem ser assustadores, mas mantenha sua calma, não há pressa!"
 	},
 	"Tip15" : {
 		"English": "Congratulations, you burnt the coffee.",
 		"Spanish": "",
 		"Korean": "축하드립니다. 이 커피는 다 탔군요.",
 		"MSA": "مبروك! أحرقت القهوة",
-		"Portugese": ""
+		"Portugese": "Parabéns, você queimou o café."
 	},
 	"Tip16" : {
 		"English": "You ripped a hole in space-time.",
 		"Spanish": "",
 		"Korean": "우주에 구멍을 냈습니다.",
 		"MSA": "كنت ممزق حفرة في الزمكان",
-		"Portugese": ""
+		"Portugese": "Você rasgou um buraco em espaço-tempo."
 	},
 	"Tip17" : {
 		"English": "You tripped over the power cord.",
 		"Spanish": "",
 		"Korean": "전원 코드에 걸려 넘어졌습니다.",
 		"MSA": "تعثرت على سلك الطاقة",
-		"Portugese": ""
+		"Portugese": "Você tropeçou no cabo de energia."
 	},
 	"Tip18" : {
 		"English": "The energy you made powered an electric toothbrush.",
 		"Spanish": "",
 		"Korean": "당신이 만든 에너지가 전동 칫솔을 작동시켰군요.",
 		"MSA": "الطاقة التي خلقت شحنت فرشاة أسنان كهرباءية",
-		"Portugese": ""
+		"Portugese": "A energia que você fez alimentou uma escova de dentes elétrica."
 	},
 	"Tip19" : {
 		"English": "You made some radioactive lemons.",
 		"Spanish": "",
 		"Korean": "방사능 레몬을 만드셨군요.",
 		"MSA": "جعلت ببعض الليمون التي إشعاعى النشاط",
-		"Portugese": ""
+		"Portugese": "Você fez alguns limões radioativos. "
 	},
 	"Tip20" : {
 		"English": "You created wormholes allowing interplanetary travel.",
 		"Spanish": "",
 		"Korean": "이제 웜홀로 행성간 여행이 가능해졌습니다.",
 		"MSA": "خلقت ثقوب الذي يسمح السفر بين الكواكب",
-		"Portugese": ""
+		"Portugese": "Você criou buracos negros permitindo viagem interplanetária."
 	},
 	"Tip21" : {
 		"English": "This game was made by 27 students in one semester.",
 		"Spanish": "",
 		"Korean": "이 게임은 27 학생들이 한 학기에 만들었습니다.",
 		"MSA": "هذه اللعبة إنشاء من 27 طالبا في فصل دراسي واحد",
-		"Portugese": ""
+		"Portugese": "Este jogo foi criado por 27 estudantes em um semestre."
 	},
 	"Tip22" : {
 		"English": "This game is open source and available for free.",
 		"Spanish": "",
 		"Korean": "이 게임은 오픈 소스이며 공짜로 즐기실 수 있습니다.",
 		"MSA": "هذه اللعبة هي المصدر المفتوح و مجانا للاستخدام",
-		"Portugese": ""
+		"Portugese": "Este jogo é código aberto e disponível gratuitamente."
 	},
 	"Tip23" : {
 		"English": "Check out our website, http://projectiona.net.",
 		"Spanish": "",
 		"Korean": "웹사이트 확인하기, http://projectiona.net.",
 		"MSA": "ننظر في موقعنا http://projectiona.net.",
-		"Portugese": ""
+		"Portugese": "Confira nosso site, http://projectiona.net."
 	}
 	"Nothing" : {
 		"English": "Nothing",
