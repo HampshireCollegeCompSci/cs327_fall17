@@ -180,7 +180,7 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     {
         //StartingTutorialStuff();
 
-        grid.SquaresCleared += OnSquare;
+        //grid.SquaresCleared += OnSquare;
 
         endTutorialWindow.SetActive(false);
     }
@@ -204,12 +204,8 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
             if (!nextTriggers.Contains(trigger))
             {
                 nextTriggers.Add(trigger);
-                return;
             }
-            else
-            {
-                return;
-            }
+            return;
         }
 
         //if already played do not trigger
@@ -366,6 +362,12 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
 
     public void EndTutorialMode()
     {
+        StartCoroutine(TutorialWindowAppear());
+    }
+
+    IEnumerator TutorialWindowAppear()
+    {
+        yield return new WaitForSeconds(1.5f);
         endTutorialWindow.SetActive(true);
         DisableTemporaryTriggers();
         Settings.Instance.SetTutorialComplete();
@@ -409,11 +411,31 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
     private void OnDestroy()
     {
         DisableTemporaryTriggers();
-        grid.SquaresCleared -= OnSquare;
+        //grid.SquaresCleared -= OnSquare;
         Settings.Instance.SetTutorialModeEnabled(false);
     }
 
+    /*
     private void OnSquare()
+    {
+        FormedSquare();
+    }
+    */
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        if (tapCountdown >= tapOffset)
+        {
+            overlayDone = true;
+        }
+    }
+
+    public bool IsPanelOpen()
+    {
+        return currentlyPlaying;
+    }
+
+    public void FormedSquare()
     {
         if (Settings.Instance.IsTutorialModeEnabled())
         {
@@ -422,14 +444,6 @@ public class TutorialController : MonoBehaviour, IPointerDownHandler {
         else
         {
             TriggerEvent(Triggers.FIRST_SQUARE_NOT_TUTORIAL);
-        }
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (tapCountdown >= tapOffset)
-        {
-            overlayDone = true;
         }
     }
 }

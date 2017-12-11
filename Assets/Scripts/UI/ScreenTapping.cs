@@ -51,7 +51,7 @@ public class ScreenTapping : MonoBehaviour//, IDragHandler, IPointerDownHandler
         //GameObject tappingAnim = Instantiate(prefabScreenTapping, position, Quaternion.identity);
 
         Vector2 localPoint = canvas.InverseTransformPoint(position);
-        GameObject tappingAnim = Instantiate(prefabScreenTapping, transform, false);
+        GameObject tappingAnim = Instantiate(prefabScreenTapping, canvas.transform, false);
         tappingAnim.transform.localPosition = localPoint;
     }
 }

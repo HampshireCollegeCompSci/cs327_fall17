@@ -287,6 +287,39 @@ public class VoidEventController : MonoBehaviour
     // The list of VoidEventGroups to keep track of.
     List<VoidEventGroup> voidEventGroups = new List<VoidEventGroup>();
 
+    class VoidEventGroupData
+    {
+        VoidEventGroup.EventGroupType type;
+        int tier;
+        bool isStart;
+
+        public VoidEventGroupData(VoidEventGroup.EventGroupType type, int tier, bool isStart)
+        {
+            this.type = type;
+            this.tier = tier;
+            this.isStart = isStart;
+        }
+
+        public VoidEventGroup.EventGroupType GetEventGroupType()
+        {
+            return type;
+        }
+
+        public int GetTier()
+        {
+            return tier;
+        }
+
+        public bool GetIsStart()
+        {
+            return isStart;
+        }
+    }
+
+    // A stack for keeping track of the latest void event group start/finish.
+    //Stack<VoidEventGroupData> voidEventGroupBookends;
+    VoidEventGroupData voidEventGroupLatest = null;
+
     // The bindings of letters to event types.
     Dictionary<char, VoidEvent.EventType> letterBindings
         = new Dictionary<char, VoidEvent.EventType>();
@@ -463,6 +496,25 @@ public class VoidEventController : MonoBehaviour
         {
             eventGroup.UpdateProgressFromScore(newScore);
         }
+
+        // Only execute the latest void event group.
+        if (voidEventGroupLatest != null)
+        {
+            VoidEventGroup.EventGroupType type = voidEventGroupLatest.GetEventGroupType();
+            int tier = voidEventGroupLatest.GetTier();
+            bool isStart = voidEventGroupLatest.GetIsStart();
+
+            if (isStart)
+            {
+                StartVoidEventGroup(type, tier);
+            }
+            else
+            {
+                FinishVoidEventGroup(type, tier);
+            }
+
+            voidEventGroupLatest = null;
+        }
     }
 
     private void VoidEvent_Started(VoidEvent.EventType eventType, int tier)
@@ -518,6 +570,20 @@ public class VoidEventController : MonoBehaviour
 
     private void VoidEventGroup_Started(VoidEventGroup.EventGroupType type, int tier)
     {
+        VoidEventGroupData data = new VoidEventGroupData(type, tier, true);
+        //voidEventGroupBookends.Push(data);
+        voidEventGroupLatest = data;
+    }
+
+    private void VoidEventGroup_Finished(VoidEventGroup.EventGroupType type, int tier)
+    {
+        VoidEventGroupData data = new VoidEventGroupData(type, tier, false);
+        //voidEventGroupBookends.Push(data);
+        voidEventGroupLatest = data;
+    }
+
+    private void StartVoidEventGroup(VoidEventGroup.EventGroupType type, int tier)
+    {
         latestGroupType = type;
         latestTier = tier;
 
@@ -567,7 +633,7 @@ public class VoidEventController : MonoBehaviour
         EventPopupWindow(eventName, eventDescription, tier);
     }
 
-    private void VoidEventGroup_Finished(VoidEventGroup.EventGroupType type, int tier)
+    private void FinishVoidEventGroup(VoidEventGroup.EventGroupType type, int tier)
     {
         if (type == VoidEventGroup.EventGroupType.Overload)
         {

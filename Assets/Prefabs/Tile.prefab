@@ -91,6 +91,7 @@ MonoBehaviour:
     type: 0
     spriteIndex: 0
     vestigeLevel: 0
+  rectTransform: {fileID: 224965267752668918}
 --- !u!222 &222653728882889582
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -77,6 +77,8 @@ public class BlockSpawner : MonoBehaviour
 
         // The trigger to run when the bag becomes active.
         string trigger = "";
+        // The trigger to run when a square is formed.
+        string triggerSquareFormed = "";
 
         // Whether or not the block ends the tutorial.
         //bool endsTutorial = false;
@@ -127,6 +129,19 @@ public class BlockSpawner : MonoBehaviour
         public void SetTrigger(string newTrigger)
         {
             trigger = newTrigger;
+        }
+
+        public void SetTriggerSquareFormed(string newTrigger)
+        {
+            triggerSquareFormed = newTrigger;
+        }
+
+        public void TriggerSquareFormed()
+        {
+            if (triggerSquareFormed != "")
+            {
+                TutorialController.Instance.TriggerEvent(triggerSquareFormed);
+            }
         }
 
         /*
@@ -199,6 +214,8 @@ public class BlockSpawner : MonoBehaviour
 
     // List of bags that end the tutorial.
     List<Bag> tutorialEnders = new List<Bag>();
+    // List of bags that are active.
+    List<Bag> activeBags = new List<Bag>();
 
     Queue<DraggableBlock> blocksQueue = new Queue<DraggableBlock>();
 
@@ -227,6 +244,8 @@ public class BlockSpawner : MonoBehaviour
     {
         gameFlow.GameLost += GameFlow_GameLost;
         //scoreCounter.ScoreChanged += ScoreCounter_ScoreChanged;
+
+        grid.SquareFormed += Grid_SquareFormed;
 
         // Make sure that we can't have more DraggableBlocks in the queue
         // than there are block positions!
@@ -264,6 +283,11 @@ public class BlockSpawner : MonoBehaviour
             if (aNode != null)
             {
                 newBag.SetTrigger(aNode);
+            }
+            aNode = bagNode["trigger when forming square"];
+            if (aNode != null)
+            {
+                newBag.SetTriggerSquareFormed(aNode);
             }
 
             JSONNode condsNode = bagNode["preconditions"];
@@ -458,6 +482,9 @@ public class BlockSpawner : MonoBehaviour
             }
             else
             {
+                // Update the list of active bags.
+                activeBags = allBags.FindAll(x => x.AreConditionsSatisfied());
+
                 // The index of the block to choose from the bag.
                 int indexInBagToChoose = -1;
 
@@ -766,4 +793,12 @@ public class BlockSpawner : MonoBehaviour
         }
     }
     */
+
+    private void Grid_SquareFormed(int score, Vector3 textPos)
+    {
+        foreach (Bag bag in activeBags)
+        {
+            bag.TriggerSquareFormed();
+        }
+    }
 }
