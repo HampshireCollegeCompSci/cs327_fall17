@@ -144,42 +144,42 @@
 		"Spanish": "Continua",
 		"Korean": "이어서",
 		"MSA": "استنناف اللعب",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Continuar"
 	  },
 	"HighScore1": {
 		"English": "High Score",
 	    "Spanish": "Puntuación Alta",
 		"Korean": "",
 		"MSA": "درجة عالية",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Pontuação Máxima"
 	} ,
 	"Score": {
 		"English": "Score: ",
 	    "Spanish": "Puntuación: ",
 		"Korean": "스코어 ",
 		"MSA": "درجتك ",
-		"Portugese": ""
+		"Portugese": "Pontuação: "
 	} ,
 	"YourScore" : {
 		"English": "SQUARES CLEARED",
 	    "Spanish": "Tu Puntuación",
 		"Korean": "내 스코어",
 		"MSA": "درجتك",
-		"Portugese": ""
+		"Portugese": "Sua Pontuação"
 	} ,
 	"HighScore" : {
 		"English": "MOST SQUARES CLEARED",
 	    "Spanish": "Puntuación Alta",
 		"Korean": "최고 스코어",
 		"MSA": "درجة عالية",
-		"Portugese": ""
+		"Portugese": "Pontuação Máxima"
 	} ,
 	"Settings": {
 		"English": "Settings",
 		"Spanish": "Adjustes",
 		"Korean": "옵션",
 		"MSA": "إعدادات",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Configurações"
 	} ,
 	"SelectLanguage": {
 		"English": "Select Language:",
@@ -193,7 +193,7 @@
 		"Spanish": "Juega de nuevo",
 		"Korean": "재시작",
 		"MSA": "لعب مرة أخرى",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Jogar de Novo"
 	} ,
 	"You Reached": {
 		"English": "You Reached",
@@ -487,7 +487,7 @@
 		"Spanish": "Sí",
 		"Korean": "좋아",
 		"MSA": "نعام",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Sim"
 	} ,
 	"LoseProgress": {
 		"English": "You will lose all progress on your current game. Are you sure?",
