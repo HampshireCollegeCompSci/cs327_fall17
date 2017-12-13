@@ -37,7 +37,7 @@ public class LanguagesDropdown : MonoBehaviour
         languageList.Add("Spanish");
         languageList.Add("Korean");
 		languageList.Add("Portugese");
-		languageList.Add("MSA");
+		//languageList.Add("MSA");
     }
 
     void Start()
