@@ -13,7 +13,7 @@
 	    "Swedish": "Du Fölorade",
 	    "Korean" : "게임 오버",
 		"MSA": "انتهت اللعبة",
-		"Portugese": "PlaceholderPortugese"
+		"Portugese": "Fim de jogo"
 	  },
 	  "ReasonNoEnergy": {
 	    "English": "Out of Energy!",
@@ -397,7 +397,7 @@
 	} ,
 	"Waste Contamination": {
 		"English": "Waste Contamination",
-		"Spanish": "Contaminación de residuos",
+		"Spanish": "Contaminación de desechos",
 		"Korean": "폐기물 오염",
 		"MSA": "ثلوث النفايات",
 		"Portugese": "Contaminaçã de Resíuos"
@@ -656,7 +656,7 @@
 	},
 	"Tutorial3": {
 		"English": "Waste levels up when adjacent to cleared squares. Level 2 Waste drains 3 energy per move.",
-	    "Spanish": "Los niveles de residuos suben cuando están adyacentes a bloques claros. Residuos nivel dos (2) drena tres (3) energía por movimiento",
+	    "Spanish": "Los niveles de desechos suben cuando están adyacentes a bloques claros. Desechos nivel dos (2) drena tres (3) energía por movimiento",
 	    "Korean": "폐기물은 정리된 사각형 주위에 있을 때 레벨업합니다. 레벨업한 폐기물은 3 에너지를 소비합니다.",
 		"MSA": "النفايات ترفع مستوى عندما بجانب مربعات مسح. النفايات التي مستوى 2 تستنزف 3 طاقات كل خطوة.",
 		"Portugese": "Os níveis de Resíduo aumentam quando ao lado de quadrados limpos. Nível 2 de Resíduo drena 3 de energia por movimento. "
@@ -698,7 +698,7 @@
 	},
 	"Tutorial14": {
 		"English": "Individual blocks diagonal to completed squares won’t become Waste!",
-	    "Spanish": "Individuales bloques diagonal a cuadros completados no serán residuos",
+	    "Spanish": "Individuales bloques diagonal a cuadros completados no serán desechos",
 	    "Korean": "완성된 사각형과 대각선으로 닿는 블록들은 폐기물이 되지 않습니다.",
 		"MSA": "كتل فردية قطرة إلى مربعات انتهاءية لن تصبح على النفايات.",
 		"Portugese": "Blocos individuais diagonais a quadrados completos não vão se tornarão Resíduo!"
