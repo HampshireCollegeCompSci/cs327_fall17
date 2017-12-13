@@ -460,13 +460,13 @@
  "English": "Unusable spaces & blocks have Waste",
  "Spanish": "Espacios y bloques inutilizables tienen desecho",
  "Korean": "쓸 수 없는 공간들 & 블럭안에 폐기물",
- "Portuguese": "Espaços e blocos inutilizáveis ​​têm resíduos"
+ "Portuguese": "Espaços inutilizáveis e blocos ​​têm resíduos"
 },
 "Overload": {
  "English": "All events combined",
  "Spanish": "Todos los eventos combinados",
  "Korean": "모든 이벤트를 합쳐서",
- "Portuguese": "Todos os eventos combinados"
+ "Portuguese": "Todos eventos combinados"
 },
 "Tutorial0": {
  "English": "Drag green blocks onto the board.",
