@@ -388,7 +388,7 @@
  "English": "CONTACT US",
  "Spanish": "Contáctenos",
  "Korean": "연락처",
- "Portuguese": "Contate-Nos"
+ "Portuguese": "Nos Contante"
 },
 "Junkyard1": {
  "English": "One block has a new shape",
@@ -430,19 +430,19 @@
  "English": "Blocks have level 1 Waste",
  "Spanish": "Los bloques tienen nivel 1 de desechos",
  "Korean": "블럭안에 레벨 1 폐기물이 있습니다",
- "Portuguese": "Os blocos têm resíduos de nível 1"
+ "Portuguese": "Blocos têm resíduos de nível 1"
 },
 "Radiation2": {
  "English": "Blocks have level 2 Waste",
  "Spanish": "Los bloques tienen nivel 2 de desechos",
  "Korean": "블럭안에 레벨 2 폐기물이 있습니다",
- "Portuguese": "Os blocos têm resíduos de nível 2"
+ "Portuguese": "Blocos têm resíduos de nível 2"
 },
 "Radiation3": {
  "English": "Blocks have level 3 Waste",
  "Spanish": "Los bloques tienen nivel 3 de desechos",
  "Korean": "블럭안에 레벨 3 폐기물이 있습니다",
- "Portuguese": "Os blocos têm resíduos de nível 3"
+ "Portuguese": "Blocos têm resíduos de nível 3"
 },
 "Meltdown1": {
  "English": "New blocks & unusable spaces",
@@ -454,7 +454,7 @@
  "English": "Blocks have waste & new blocks",
  "Spanish": "Los bloques tienen desecho y nuevos bloques",
  "Korean": "블럭안에 폐기물 & 새 블럭들",
- "Portuguese": "Blocos têm resíduos e blocos novos"
+ "Portuguese": "Blocos têm resíduos e novos blocos"
 },
 "Meltdown3": {
  "English": "Unusable spaces & blocks have Waste",
