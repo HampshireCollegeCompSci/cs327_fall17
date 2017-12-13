@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 114658774543830622}
   - component: {fileID: 114106388075393328}
   - component: {fileID: 114045859779374532}
+  - component: {fileID: 114068103659527830}
   m_Layer: 5
   m_Name: CheatMenu
   m_TagString: Untagged
@@ -582,6 +583,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cheatMenu: {fileID: 0}
+--- !u!114 &114068103659527830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1502779862562066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f51f3e853c04b4792942707ddd22ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114083174953834982
 MonoBehaviour:
   m_ObjectHideFlags: 1
