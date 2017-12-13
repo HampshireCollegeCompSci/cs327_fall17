@@ -182,10 +182,10 @@ RectTransform:
   m_Father: {fileID: 2116163810}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -550}
-  m_SizeDelta: {x: 1080, y: 147.9}
+  m_AnchorMin: {x: 0, y: 0.15312505}
+  m_AnchorMax: {x: 1, y: 0.22864585}
+  m_AnchoredPosition: {x: 0, y: -0.5}
+  m_SizeDelta: {x: 0, y: 2.9000244}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &166205188
 MonoBehaviour:
@@ -281,10 +281,10 @@ RectTransform:
   m_Father: {fileID: 2116163810}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -234.20001, y: -5.375}
-  m_SizeDelta: {x: -468.4, y: -498.75}
+  m_AnchorMin: {x: 0, y: 0.18958338}
+  m_AnchorMax: {x: 0.5, y: 0.7991667}
+  m_AnchoredPosition: {x: 0, y: 8.024872}
+  m_SizeDelta: {x: 0, y: 15.599976}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &167356384
 MonoBehaviour:
@@ -352,7 +352,14 @@ MonoBehaviour:
 
     Brandon Pray
 
-    Gustavo Rodriguez'
+    Gustavo Rodriguez
+
+
+    Audio
+
+    Brian Brody (Lead)
+
+'
 --- !u!222 &167356385
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -391,10 +398,10 @@ RectTransform:
   m_Father: {fileID: 745171807}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015259, y: -671.9}
-  m_SizeDelta: {x: -540.2, y: -1440.9}
+  m_AnchorMin: {x: 0.22774076, y: 0}
+  m_AnchorMax: {x: 0.7538148, y: 0.051833343}
+  m_AnchoredPosition: {x: -14.1, y: -10.5}
+  m_SizeDelta: {x: -28.200012, y: 37.30005}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &360619615
 MonoBehaviour:
@@ -756,8 +763,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00056463, y: 0.024872}
-  m_SizeDelta: {x: 1080, y: 1535.9}
+  m_AnchoredPosition: {x: 0.00030714, y: 23.987}
+  m_SizeDelta: {x: 1080, y: 1488}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &745171808
 MonoBehaviour:
@@ -884,10 +891,10 @@ RectTransform:
   m_Father: {fileID: 2116163810}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -234.20001, y: 504.25}
-  m_SizeDelta: {x: 611.6, y: 143.5}
+  m_AnchorMin: {x: 0, y: 0.7991667}
+  m_AnchorMax: {x: 0.5, y: 0.9}
+  m_AnchoredPosition: {x: 0, y: -2.7999878}
+  m_SizeDelta: {x: 0, y: 5.699997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1553039931
 GameObject:
@@ -921,7 +928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.1}
   m_AnchorMax: {x: 1, y: 0.9}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0.024891}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1553039933
@@ -957,80 +964,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1553039931}
---- !u!1 &1714880973
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1714880974}
-  - component: {fileID: 1714880976}
-  - component: {fileID: 1714880975}
-  m_Layer: 5
-  m_Name: Text
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1714880974
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1714880973}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2116163810}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.961426, y: -367.3}
-  m_SizeDelta: {x: 160, y: 54.4}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1714880975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1714880973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: New Text
---- !u!222 &1714880976
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1714880973}
 --- !u!1001 &1780869993
 Prefab:
   m_ObjectHideFlags: 0
@@ -1108,10 +1041,10 @@ RectTransform:
   m_Father: {fileID: 2116163810}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 305.8, y: 49.999992}
-  m_SizeDelta: {x: 468.4, y: 1052}
+  m_AnchorMin: {x: 0.5, y: 0.25589585}
+  m_AnchorMax: {x: 1, y: 0.9}
+  m_AnchoredPosition: {x: 0, y: -3.751999}
+  m_SizeDelta: {x: 0, y: 6.649994}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1815901875
 MonoBehaviour:
@@ -1145,44 +1078,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Audio
-
-    Brian Brody (Lead)
-
-    Gabe Beresin
-
-    Mia Muscarella
-
-
-    Programming
-
-    Paul Calande (Lead)
-
-    Joel Esquilin
-
-    Josiah Erikson
-
-    Maia Doerner
-
-    Yifeng Shi
-
-    Yixiang Xu
-
-
-    QA
-
-    Corrin Offenholley
-
-
-    Production
-
-    Allegra Chandra Hughes (Lead)
-
-    Theresa Juliani (Art)
-
-    Courtney Mackenzie (Programming)
-
-    Matt Spring (Design)'
+  m_Text: "Gabe Beresin\nMia Muscarella \n\nProgramming\nPaul Calande (Lead)\nJoel
+    Esquilin\nJosiah Erikson\nMaia Doerner\nYifeng Shi\nYixiang Xu\n\nQA\nCorrin Offenholley\n\nProduction\nAllegra
+    Chandra Hughes (Lead)\nTheresa Juliani (Art)\nCourtney Mackenzie (Programming)\nMatt
+    Spring (Design)\n\nTranslators\nSimon \"Bogdasha\" Park\nSheron McCallum\nCasey
+    Chon\nOlivia Tavares Paes\n"
 --- !u!222 &1815901876
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1344,7 +1244,6 @@ RectTransform:
   - {fileID: 1255719168}
   - {fileID: 166205187}
   - {fileID: 745171807}
-  - {fileID: 1714880974}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
